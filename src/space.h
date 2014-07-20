@@ -135,6 +135,7 @@ typedef struct Planet_ {
 
    /* Misc. */
    unsigned int flags; /**< flags for planet properties */
+   char* luaData;
 } Planet;
 
 
@@ -268,6 +269,7 @@ struct StarSystem_ {
 
    /* Misc. */
    unsigned int flags; /**< flags for system properties */
+    char* luaData;
 };
 
 

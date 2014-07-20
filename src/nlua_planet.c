@@ -54,6 +54,8 @@ static int planetL_outfitsSold( lua_State *L );
 static int planetL_commoditiesSold( lua_State *L );
 static int planetL_isKnown( lua_State *L );
 static int planetL_setKnown( lua_State *L );
+static int planetL_getLuaData( lua_State *L );
+static int planetL_setLuaData( lua_State *L );
 static const luaL_reg planet_methods[] = {
    { "cur", planetL_cur },
    { "get", planetL_get },
@@ -77,6 +79,8 @@ static const luaL_reg planet_methods[] = {
    { "commoditiesSold", planetL_commoditiesSold },
    { "known", planetL_isKnown },
    { "setKnown", planetL_setKnown },
+   { "getLuaData", planetL_getLuaData },
+   { "setLuaData", planetL_setLuaData },
    {0,0}
 }; /**< Planet metatable methods. */
 static const luaL_reg planet_cond_methods[] = {
@@ -101,6 +105,8 @@ static const luaL_reg planet_cond_methods[] = {
    { "outfitsSold", planetL_outfitsSold },
    { "commoditiesSold", planetL_commoditiesSold },
    { "known", planetL_isKnown },
+   { "getLuaData", planetL_getLuaData },
+   { "setLuaData", planetL_setLuaData },
    {0,0}
 }; /**< Read only planet metatable methods. */
 
@@ -850,5 +856,42 @@ static int planetL_setKnown( lua_State *L )
       planet_setKnown( p );
    else
       planet_rmFlag( p, PLANET_KNOWN );
+   return 0;
+}
+/**
+ * @brief Gets the lua data
+ *
+ * @uasge gfx = p:getLuaData()
+ *    @luaparam p Planet to get lua data of.
+ *    @luareturn The lua data of the planet.
+ * @luafunc getLuaData( p )
+ */
+static int planetL_getLuaData( lua_State *L )
+{
+   Planet *p;
+   p        = luaL_validplanet(L,1);
+   if (p->luaData == NULL)
+	   lua_pushstring(L,"{}");
+   else
+	   lua_pushstring(L,p->luaData);
+   return 1;
+}
+
+
+/**
+ * @brief Sets a planets's lua data.
+ *
+ * @usage p:setLuaData( luaData ) sets lua data
+ *    @luaparam p Planet to set lua data for.
+ *    @luaparam b lua data
+ * @luafunc setLuaData( p, b )
+ */
+static int planetL_setLuaData( lua_State *L )
+{
+   Planet *p;
+
+   p = luaL_validplanet(L,1);
+   p->luaData=strdup(lua_tostring(L, 2));
+
    return 0;
 }

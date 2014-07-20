@@ -1797,12 +1797,46 @@ static int planet_parse( Planet *planet, const xmlNodePtr parent )
          } while (xml_nextNode(cur));
          continue;
       }
+      else if (xml_isNode(node, "extraPresences")) {
+    	  cur = node->children;
+    	  do {
+    		  if (xml_isNode(cur, "presence")) {
+    			  ccur = cur->children;
+
+    			  planet->nextrapresences++;
+    			  if (planet->nextrapresences>planet->mem_extrapresences) {
+    				  if (planet->mem_extrapresences==0)
+    					  planet->mem_extrapresences=CHUNK_SIZE_SMALL;
+    				  else
+    					  planet->mem_extrapresences*=2;
+
+    				  planet->extraPresenceAmounts  = realloc( planet->extraPresenceAmounts, sizeof(double) * planet->mem_extrapresences );
+    				  planet->extraPresenceFactions  = realloc( planet->extraPresenceFactions, sizeof(int) * planet->mem_extrapresences );
+    				  planet->extraPresenceRanges  = realloc( planet->extraPresenceRanges, sizeof(int) * planet->mem_extrapresences );
+    			  }
+
+    			  do {
+    				  xmlr_float(ccur, "value", planet->extraPresenceAmounts[planet->nextrapresences-1]);
+    				  xmlr_int(ccur, "range", planet->extraPresenceRanges[planet->nextrapresences-1]);
+    				  if (xml_isNode(ccur,"faction")) {
+    					  planet->extraPresenceFactions[planet->nextrapresences-1] = faction_get( xml_get(ccur) );
+    					  continue;
+    				  }
+    			  } while (xml_nextNode(ccur));
+    			  continue;
+    		  }
+    	  } while (xml_nextNode(cur));
+    	  continue;
+	   }
       else if (xml_isNode(node,"general")) {
          cur = node->children;
          do {
             /* Direct reads. */
             xmlr_strd(cur, "bar", planet->bar_description);
             xmlr_strd(cur, "description", planet->description );
+            xmlr_strd(cur, "settlements_description", planet->settlements_description );
+            xmlr_strd(cur, "history_description", planet->history_description );
+            xmlr_strd(cur, "luadata", planet->luaData );
             xmlr_ulong(cur, "population", planet->population );
             xmlr_float(cur, "hide", planet->hide );
 
@@ -2372,6 +2406,7 @@ static StarSystem* system_parse( StarSystem *sys, const xmlNodePtr parent )
       /* Only handle nodes. */
       xml_onlyNodes(node);
 
+      xmlr_strd( node, "luadata", sys->luaData );
       if (xml_isNode(node,"pos")) {
          cur = node->children;
          do {

@@ -409,3 +409,63 @@ void var_cleanup (void)
    var_mstack  = 0;
 }
 
+
+/**
+ * @brief Return the str value of a variable if it exists and is of str type.
+ */
+char* var_read_str( const char* name )
+{
+   int i;
+   char *str=NULL;
+
+   for (i=0; i<var_nstack; i++)
+      if (strcmp(name,var_stack[i].name)==0) {
+          if (var_stack[i].type==MISN_VAR_STR) {
+        	 str=strdup(var_stack[i].d.str);
+             return str;
+          } else {
+         	 return NULL;
+          }
+      }
+
+   return NULL;
+}
+
+/**
+ * @brief Return the double value of a variable if it exists and is of number type.
+ */
+double* var_read_num( const char* name )
+{
+   int i;
+
+   for (i=0; i<var_nstack; i++)
+      if (strcmp(name,var_stack[i].name)==0) {
+          if (var_stack[i].type==MISN_VAR_NUM) {
+             return &var_stack[i].d.num;
+          } else {
+         	 return NULL;
+          }
+      }
+
+   return NULL;
+}
+
+/**
+ * @brief Return the boolean value of a variable if it exists and is of boolean type.
+ */
+int* var_read_bool( const char* name )
+{
+   int i;
+
+   for (i=0; i<var_nstack; i++)
+      if (strcmp(name,var_stack[i].name)==0) {
+         if (var_stack[i].type==MISN_VAR_BOOL) {
+            return &var_stack[i].d.b;
+         } else {
+        	 return NULL;
+         }
+      }
+
+   return NULL;
+}
+

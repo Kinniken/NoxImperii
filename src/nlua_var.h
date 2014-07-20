@@ -16,5 +16,8 @@ void var_cleanup (void);
 /* individual library stuff */
 int nlua_loadVar( lua_State *L, int readonly );
 
+char* var_read_str( const char* name );
+double* var_read_num( const char* name );
+int* var_read_bool( const char* name );
 
 #endif /* NLUA_VAR */

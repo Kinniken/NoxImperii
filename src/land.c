@@ -1375,7 +1375,7 @@ void land( Planet* p, int load )
 static void land_createMainTab( unsigned int wid )
 {
    glTexture *logo;
-   int offset;
+   int offset,planetDescHeight;
    int w,h;
 
    /* Get window dimensions. */
@@ -1384,13 +1384,15 @@ static void land_createMainTab( unsigned int wid )
    /*
     * Faction logo.
     */
-   offset = 20;
+   offset=20;
+   planetDescHeight = 400;
    if (land_planet->faction != -1) {
       logo = faction_logoSmall(land_planet->faction);
       if (logo != NULL) {
          window_addImage( wid, 440 + (w-460-logo->w)/2, -20,
                0, 0, "imgFaction", logo, 0 );
-         offset = 84;
+         planetDescHeight = 350;
+         offset=80;
       }
    }
 
@@ -1398,9 +1400,20 @@ static void land_createMainTab( unsigned int wid )
     * Pretty display.
     */
    window_addImage( wid, 20, -40, 0, 0, "imgPlanet", gfx_exterior, 1 );
-   window_addText( wid, 440, -20-offset,
-         w-460, h-20-offset-60-LAND_BUTTON_HEIGHT*2, 0,
-         "txtPlanetDesc", &gl_smallFont, &cBlack, land_planet->description);
+
+
+   if (strlen(land_planet->description)<1500) {
+	   window_addText( wid, 440, -20-offset,
+	         w-460, planetDescHeight, 0,
+	         "txtPlanetDesc", &gl_smallFont, &cBlack, land_planet->description);
+   } else {
+	   window_addText( wid, 440, -20-offset,
+	         w-460, planetDescHeight, 0,
+	         "txtPlanetDesc", &gl_tinyFont, &cBlack, land_planet->description);
+   }
+
+
+
 
    /*
     * buttons
@@ -1413,7 +1426,7 @@ static void land_createMainTab( unsigned int wid )
    /*
     * Checkboxes.
     */
-   window_addCheckbox( wid, -20, 20 + 2*(LAND_BUTTON_HEIGHT + 20) + 40,
+   window_addCheckbox( wid, -230, 25,
          175, 20, "chkRefuel", "Automatic Refuel",
          land_toggleRefuel, conf.autorefuel );
    land_toggleRefuel( wid, "chkRefuel" );

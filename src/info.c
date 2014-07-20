@@ -29,6 +29,7 @@
 #include "equipment.h"
 #include "gui.h"
 #include "player_gui.h"
+#include "nlua_var.h"
 #include "tk/toolkit_priv.h"
 
 
@@ -41,7 +42,7 @@
 #define menu_Open(f)    (menu_open |= (f)) /**< Marks a menu as opened. */
 #define menu_Close(f)   (menu_open &= ~(f)) /**< Marks a menu as closed. */
 
-#define INFO_WINDOWS      6 /**< Amount of windows in the tab. */
+#define INFO_WINDOWS      7 /**< Amount of windows in the tab. */
 
 #define INFO_WIN_MAIN      0
 #define INFO_WIN_SHIP      1
@@ -49,13 +50,15 @@
 #define INFO_WIN_CARGO     3
 #define INFO_WIN_MISN      4
 #define INFO_WIN_STAND     5
+#define INFO_WIN_UNIVERSE  6
 static const char *info_names[INFO_WINDOWS] = {
    "Main",
    "Ship",
    "Weapons",
    "Cargo",
    "Missions",
-   "Standings"
+   "Standings",
+   "Universe"
 }; /**< Name of the tab windows. */
 
 
@@ -80,6 +83,7 @@ static void info_openShip( unsigned int wid );
 static void info_openWeapons( unsigned int wid );
 static void info_openCargo( unsigned int wid );
 static void info_openMissions( unsigned int wid );
+static void info_openUniverse( unsigned int wid );
 static void info_getDim( unsigned int wid, int *w, int *h, int *lw );
 static void standings_close( unsigned int wid, char *str );
 static void ship_update( unsigned int wid );
@@ -135,6 +139,7 @@ void menu_info( int window )
    info_openCargo(      info_windows[ INFO_WIN_CARGO ] );
    info_openMissions(   info_windows[ INFO_WIN_MISN ] );
    info_openStandings(  info_windows[ INFO_WIN_STAND ] );
+   info_openUniverse(  info_windows[ INFO_WIN_UNIVERSE ] );
 
    menu_Open(MENU_INFO);
 
@@ -944,6 +949,37 @@ static void standings_update( unsigned int wid, char* str )
    window_moveWidget( wid, "txtStanding", lw+40, y );
 }
 
+
+/**
+ * @brief Displays the status of the universe.
+ */
+static void info_openUniverse( unsigned int wid )
+{
+   char *str;
+   int w, h, lw;
+
+   /* Get dimensions. */
+   info_getDim( wid, &w, &h, &lw );
+
+   /* On close. */
+   window_onClose( wid, standings_close );
+
+   /* Buttons */
+   window_addButton( wid, -20, 20, BUTTON_WIDTH, BUTTON_HEIGHT,
+         "closeMissions", "Close", info_close );
+
+   /* Graphics. */
+   window_addImage( wid, 0, 0, 0, 0, "imgLogo", NULL, 0 );
+
+   /* Text. */
+   window_addText( wid, 40, -30 , 250, 20, 0, "txtStatusTitle",
+         &gl_defFont, &cDConsole, "Status of the universe" );
+
+   str=var_read_str("universe_status");
+
+   window_addText( wid, 40, -60, (w-80), h-110-BUTTON_HEIGHT, 0, "txtStatus",
+         &gl_smallFont, &cBlack, str );
+}
 
 /**
  * @brief Shows the player's active missions.

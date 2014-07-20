@@ -317,6 +317,8 @@ struct StarSystem_ {
 
     int transient; /** whether the planet is transient (specific to the current player) **/
     char* luaData;
+
+    char* zone; /** name of zone the system is in **/
 };
 
 

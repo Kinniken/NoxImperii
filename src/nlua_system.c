@@ -58,6 +58,8 @@ static int systemL_exists( lua_State *L );
 static int systemL_createPlanet( lua_State *L );
 static int systemL_getLuaData( lua_State *L );
 static int systemL_setLuaData( lua_State *L );
+static int systemL_getZone( lua_State *L );
+static int systemL_setZone( lua_State *L );
 
 ;
 static const luaL_reg system_methods[] = {
@@ -91,6 +93,8 @@ static const luaL_reg system_methods[] = {
     { "createPlanet", systemL_createPlanet },
     { "getLuaData", systemL_getLuaData },
     { "setLuaData", systemL_setLuaData },
+    { "getZone", systemL_getZone },
+    { "setZone", systemL_setZone },
 {0,0}
 }; /**< System metatable methods. */
 static const luaL_reg system_cond_methods[] = {
@@ -120,6 +124,8 @@ static const luaL_reg system_cond_methods[] = {
     { "createPlanet", systemL_createPlanet },
     { "getLuaData", systemL_getLuaData },
     { "setLuaData", systemL_setLuaData },
+    { "getZone", systemL_getZone },
+    { "setZone", systemL_setZone },
    {0,0}
 }; /**< Read only system metatable methods. */
 
@@ -976,6 +982,7 @@ static int systemL_createSystem( lua_State *L )
     int stars;
     double radius;
     const char* background;
+    const char* zone;
     int known;
     
     /* Handle parameters. */
@@ -985,7 +992,8 @@ static int systemL_createSystem( lua_State *L )
     stars = luaL_checknumber(L, 4);
     radius = luaL_checknumber(L, 5);
     background = luaL_checkstring(L, 6);
-    known = lua_toboolean(L, 7);
+    zone = luaL_checkstring(L, 7);
+    known = lua_toboolean(L, 8);
     
     
     sys = system_createNewSystem(name);
@@ -1003,6 +1011,9 @@ static int systemL_createSystem( lua_State *L )
     if (background!=NULL)
         sys->gfx_BackgroundSpaceName=strdup(background);
     
+    if (zone!=NULL)
+        sys->zone=strdup(zone);
+
     if (known)
         sys_setFlag( sys, SYSTEM_KNOWN );
     
@@ -1174,6 +1185,38 @@ static int systemL_setLuaData( lua_State *L )
 {
    StarSystem *sys = luaL_validsystem(L, 1);
    sys->luaData=strdup(lua_tostring(L, 2));
+
+   return 0;
+}
+
+/**
+ * @brief Gets the zone
+ *
+ * @usage gfx = sys:getZone()
+ *    @luaparam sys System to get zone of.
+ *    @luareturn The zone of the system.
+ * @luafunc getZone( p )
+ */
+static int systemL_getZone( lua_State *L )
+{
+	StarSystem *sys = luaL_validsystem(L, 1);
+   lua_pushstring(L,sys->zone);
+   return 1;
+}
+
+
+/**
+ * @brief Sets a system's zone.
+ *
+ * @usage p:setZone( zone ) sets zone
+ *    @luaparam p System to set zone for.
+ *    @luaparam b zone
+ * @luafunc setZone( s, b )
+ */
+static int systemL_setZone( lua_State *L )
+{
+   StarSystem *sys = luaL_validsystem(L, 1);
+   sys->zone=strdup(lua_tostring(L, 2));
 
    return 0;
 }

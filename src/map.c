@@ -234,6 +234,14 @@ void map_open (void)
          &gl_smallFont, &cDConsole, "Services:" );
    window_addText( wid, x + 50, y-gl_smallFont.h-5, rw, 100, 0, "txtServices",
          &gl_smallFont, &cBlack, NULL );
+   y -= 2 * gl_smallFont.h + 5 + 15;
+
+   /* Zone */
+   window_addText( wid, x, y, 90, 20, 0, "txtSZone",
+         &gl_smallFont, &cDConsole, "Zone:" );
+   window_addText( wid, x + 50, y-gl_smallFont.h-5, rw, 100, 0, "txtZone",
+         &gl_smallFont, &cBlack, NULL );
+   y -= 2 * gl_smallFont.h + 5 + 15;
 
    /* Close button */
    window_addButton( wid, -20, 20, BUTTON_WIDTH, BUTTON_HEIGHT,
@@ -353,6 +361,13 @@ static void map_update( unsigned int wid )
       window_moveWidget( wid, "txtSServices", x, y );
       window_moveWidget( wid, "txtServices", x + 50, y -gl_smallFont.h - 5 );
       window_modifyText( wid, "txtServices", "Unknown" );
+      y -= 2 * gl_smallFont.h + 5 + 15;
+
+      /* Zone */
+      window_moveWidget( wid, "txtSZone", x, y);
+		window_moveWidget( wid, "txtZone", x + 50, y - gl_smallFont.h - 5 );
+		window_modifyText( wid, "txtZone", "Unknown" );
+		y -= 2 * gl_smallFont.h + 5 + 15;
 
       /*
        * Bottom Text
@@ -363,6 +378,7 @@ static void map_update( unsigned int wid )
 
    /* System is known */
    window_modifyText( wid, "txtSysname", sys->name );
+   window_modifyText( wid, "txtZone", sys->zone );
 
    standing  = 0.;
    nstanding = 0.;
@@ -507,6 +523,12 @@ static void map_update( unsigned int wid )
       p += nsnprintf( &buf[p], PATH_MAX-p, "None");
    window_modifyText( wid, "txtServices", buf );
 
+   /* Scroll down. */
+   h  = gl_printHeightRaw( &gl_smallFont, w, buf );
+   y -= 40 + (h - gl_smallFont.h);
+
+   window_moveWidget( wid, "txtSZone", x, y );
+   window_moveWidget( wid, "txtZone", x + 50, y-gl_smallFont.h-5 );
 
    /*
     * System Status

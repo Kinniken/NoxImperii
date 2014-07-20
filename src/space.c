@@ -3195,6 +3195,7 @@ static StarSystem* system_parse( StarSystem *sys, const xmlNodePtr parent )
 
       xmlr_strd( node, "backgroundSpaceName", sys->gfx_BackgroundSpaceName );
       xmlr_strd( node, "luadata", sys->luaData );
+      xmlr_strd( node, "zone", sys->zone );
 
       if (xml_isNode(node,"pos")) {
          cur = node->children;
@@ -3287,6 +3288,7 @@ static StarSystem* system_parseCustom( StarSystem *sys, const xmlNodePtr parent 
       xml_onlyNodes(node);
 
       xmlr_strd( node, "luadata", sys->luaData );
+      xmlr_strd( node, "zone", sys->zone );
    } while (xml_nextNode(node));
 
    return 0;
@@ -4963,6 +4965,9 @@ int system_saveSystem( xmlTextWriterPtr writer, StarSystem *sys, int customDataO
 
    if (sys->luaData!=NULL)
            xmlw_elem( writer, "luadata", "%s", sys->luaData );
+
+   if (sys->zone!=NULL)
+           xmlw_elem( writer, "zone", "%s", sys->zone );
 
    xmlw_endElem( writer ); /** "ssys" */
 

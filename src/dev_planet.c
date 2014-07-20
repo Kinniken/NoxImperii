@@ -19,6 +19,7 @@
 #include "physics.h"
 #include "nfile.h"
 #include "nstring.h"
+#include "space.h"
 
 
 /**
@@ -33,7 +34,7 @@ int dpl_savePlanet( const Planet *p )
    xmlDocPtr doc;
    xmlTextWriterPtr writer;
    char *file, *cleanName;
-   int i, len;
+   int len;
 
    /* Create the writer. */
    writer = xmlNewTextWriterDoc(&doc, 0);
@@ -47,83 +48,9 @@ int dpl_savePlanet( const Planet *p )
 
    /* Start writer. */
    xmlw_start(writer);
-   xmlw_startElem( writer, "asset" );
 
-   /* Attributes. */
-   xmlw_attr( writer, "name", "%s", p->name );
+   planet_savePlanet(writer,p,0);
 
-   /* Explicit virtualness. */
-   if (p->real == ASSET_VIRTUAL)
-      xmlw_elemEmpty( writer, "virtual" );
-
-   /* Position. */
-   if (p->real == ASSET_REAL) {
-      xmlw_startElem( writer, "pos" );
-      xmlw_elem( writer, "x", "%f", p->pos.x );
-      xmlw_elem( writer, "y", "%f", p->pos.y );
-      xmlw_endElem( writer ); /* "pos" */
-   }
-
-   /* GFX. */
-   if (p->real == ASSET_REAL) {
-      xmlw_startElem( writer, "GFX" );
-      xmlw_elem( writer, "space", "%s", p->gfx_spacePath );
-      xmlw_elem( writer, "exterior", "%s", p->gfx_exteriorPath );
-      xmlw_endElem( writer ); /* "GFX" */
-   }
-
-   /* Presence. */
-   if (p->faction >= 0) {
-      xmlw_startElem( writer, "presence" );
-      xmlw_elem( writer, "faction", "%s", faction_name( p->faction ) );
-      xmlw_elem( writer, "value", "%f", p->presenceAmount );
-      xmlw_elem( writer, "range", "%d", p->presenceRange );
-      xmlw_endElem( writer );
-   }
-
-   /* General. */
-   if (p->real == ASSET_REAL) {
-      xmlw_startElem( writer, "general" );
-      xmlw_elem( writer, "class", "%c", planet_getClass( p ) );
-      xmlw_elem( writer, "population", "%"PRIu64, p->population );
-      xmlw_elem( writer, "hide", "%f", sqrt(p->hide) );
-      xmlw_startElem( writer, "services" );
-      if (planet_hasService( p, PLANET_SERVICE_LAND )) {
-         if (p->land_func == NULL)
-            xmlw_elemEmpty( writer, "land" );
-         else
-            xmlw_elem( writer, "land", "%s", p->land_func );
-      }
-      if (planet_hasService( p, PLANET_SERVICE_REFUEL ))
-         xmlw_elemEmpty( writer, "refuel" );
-      if (planet_hasService( p, PLANET_SERVICE_BAR ))
-         xmlw_elemEmpty( writer, "bar" );
-      if (planet_hasService( p, PLANET_SERVICE_MISSIONS ))
-         xmlw_elemEmpty( writer, "missions" );
-      if (planet_hasService( p, PLANET_SERVICE_COMMODITY ))
-         xmlw_elemEmpty( writer, "commodity" );
-      if (planet_hasService( p, PLANET_SERVICE_OUTFITS ))
-         xmlw_elemEmpty( writer, "outfits" );
-      if (planet_hasService( p, PLANET_SERVICE_SHIPYARD ))
-         xmlw_elemEmpty( writer, "shipyard" );
-      xmlw_endElem( writer ); /* "services" */
-      if (planet_hasService( p, PLANET_SERVICE_LAND )) {
-         xmlw_startElem( writer, "commodities" );
-         for (i=0; i<p->ncommodities; i++)
-            xmlw_elem( writer, "commodity", "%s", p->commodities[i]->name );
-         xmlw_endElem( writer ); /* "commodities" */
-         xmlw_elem( writer, "description", "%s", p->description );
-         if (planet_hasService( p, PLANET_SERVICE_BAR ))
-            xmlw_elem( writer, "bar", "%s", p->bar_description );
-      }
-      xmlw_endElem( writer ); /* "general" */
-   }
-
-   /* Tech. */
-   if (planet_hasService( p, PLANET_SERVICE_LAND ))
-      tech_groupWrite( writer, p->tech );
-
-   xmlw_endElem( writer ); /** "planet" */
    xmlw_done( writer );
 
    /* No need for writer anymore. */
@@ -132,7 +59,7 @@ int dpl_savePlanet( const Planet *p )
    /* Write data. */
    cleanName = uniedit_nameFilter( p->name );
    len       = strlen(cleanName)+16;
-   file      = malloc( len );
+   file      = malloc( len*sizeof(char) );
    nsnprintf( file, len, "dat/assets/%s.xml", cleanName );
    xmlSaveFileEnc( file, doc, "UTF-8" );
    free( file );

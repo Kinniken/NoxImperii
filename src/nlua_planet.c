@@ -30,11 +30,14 @@
 #include "map.h"
 #include "nmath.h"
 #include "nstring.h"
+#include "tech.h"
+#include "space.h"
 
 
 /* Planet metatable methods */
 static int planetL_cur( lua_State *L );
 static int planetL_get( lua_State *L );
+static int planetL_exists( lua_State *L );
 static int planetL_getLandable( lua_State *L );
 static int planetL_getAll( lua_State *L );
 static int planetL_system( lua_State *L );
@@ -56,9 +59,24 @@ static int planetL_isKnown( lua_State *L );
 static int planetL_setKnown( lua_State *L );
 static int planetL_getLuaData( lua_State *L );
 static int planetL_setLuaData( lua_State *L );
+static int planetL_addService( lua_State *L );
+static int planetL_removeService( lua_State *L );
+static int planetL_addTechGroup( lua_State *L );
+static int planetL_removeTechGroup( lua_State *L );
+static int planetL_desc( lua_State *L );
+static int planetL_setDesc( lua_State *L );
+static int planetL_descSettlements( lua_State *L );
+static int planetL_setDescSettlements( lua_State *L );
+static int planetL_descHistory( lua_State *L );
+static int planetL_setDescHistory( lua_State *L );
+static int planetL_setFactionPresence( lua_State *L );
+static int planetL_addOrUpdateTradeData( lua_State *L );
+static int planetL_setTradeBuySellRation( lua_State *L );
+static int planetL_setFactionExtraPresence( lua_State *L );
 static const luaL_reg planet_methods[] = {
    { "cur", planetL_cur },
    { "get", planetL_get },
+   { "exists", planetL_exists },
    { "getLandable", planetL_getLandable },
    { "getAll", planetL_getAll },
    { "system", planetL_system },
@@ -81,11 +99,27 @@ static const luaL_reg planet_methods[] = {
    { "setKnown", planetL_setKnown },
    { "getLuaData", planetL_getLuaData },
    { "setLuaData", planetL_setLuaData },
+   { "addService", planetL_addService },
+   { "removeService", planetL_removeService },
+   { "addTechGroup", planetL_addTechGroup },
+   { "removeTechGroup", planetL_removeTechGroup },
+   { "setFactionPresence", planetL_setFactionPresence },
+   { "desc", planetL_desc },
+   { "setDesc", planetL_setDesc },
+   { "descSettlements", planetL_descSettlements },
+   { "setDescSettlements", planetL_setDescSettlements },
+   { "descHistory", planetL_descHistory },
+   { "setDescHistory", planetL_setDescHistory },
+   { "addOrUpdateTradeData", planetL_addOrUpdateTradeData },
+   { "setTradeBuySellRation", planetL_setTradeBuySellRation },
+   { "setFactionExtraPresence", planetL_setFactionExtraPresence },
+
    {0,0}
 }; /**< Planet metatable methods. */
 static const luaL_reg planet_cond_methods[] = {
    { "cur", planetL_cur },
    { "get", planetL_get },
+   { "exists", planetL_exists },
    { "getLandable", planetL_getLandable },
    { "getAll", planetL_getAll },
    { "system", planetL_system },
@@ -107,6 +141,19 @@ static const luaL_reg planet_cond_methods[] = {
    { "known", planetL_isKnown },
    { "getLuaData", planetL_getLuaData },
    { "setLuaData", planetL_setLuaData },
+   { "addService", planetL_addService },
+   { "removeService", planetL_removeService },
+   { "addTechGroup", planetL_addTechGroup },
+   { "removeTechGroup", planetL_removeTechGroup },
+   { "setFactionPresence", planetL_setFactionPresence },
+   { "desc", planetL_desc },
+   { "setDesc", planetL_setDesc },
+   { "descSettlements", planetL_descSettlements },
+   { "setDescSettlements", planetL_setDescSettlements },
+   { "descHistory", planetL_descHistory },
+   { "setDescHistory", planetL_setDescHistory },
+   { "addOrUpdateTradeData", planetL_addOrUpdateTradeData },
+   { "setTradeBuySellRation", planetL_setTradeBuySellRation },
    {0,0}
 }; /**< Read only planet metatable methods. */
 
@@ -519,6 +566,134 @@ static int planetL_name( lua_State *L )
    return 1;
 }
 
+
+
+/**
+ * @brief Gets the planet's desc.
+ *
+ * @usage desc = p:desc()
+ *    @luaparam p Planet to get the desc of.
+ *    @luareturn The desc of the planet.
+ * @luafunc desc( p )
+ */
+static int planetL_desc( lua_State *L )
+{
+   Planet *p;
+   p = luaL_validplanet(L,1);
+   lua_pushstring(L,p->description);
+   return 1;
+}
+
+/**
+ * @brief Sets a planets's desc.
+ *
+ * @usage p:setDesc( desc )
+ *    @luaparam p Planet to set desc.
+ *    @luaparam desc The desc
+ * @luafunc setKnown( p, desc )
+ */
+static int planetL_setDesc( lua_State *L )
+{
+   const char* desc;
+   Planet *p;
+
+   p = luaL_validplanet(L,1);
+   desc = lua_tostring(L, 2);
+
+   if (p->description!=NULL)
+	   free(p->description);
+
+   p->description=strdup(desc);
+
+   planet_setSaveFlag(p,PLANET_DESC_SAVE);//desc is now custom and must be saved
+
+   return 0;
+}
+
+/**
+ * @brief Gets the planet's settlements desc.
+ *
+ * @usage desc = p:descSettlements()
+ *    @luaparam p Planet to get the settlements desc of.
+ *    @luareturn The settlements desc of the planet.
+ * @luafunc desc( p )
+ */
+static int planetL_descSettlements( lua_State *L )
+{
+   Planet *p;
+   p = luaL_validplanet(L,1);
+   lua_pushstring(L,p->settlements_description);
+   return 1;
+}
+
+/**
+ * @brief Sets a planets's settlements desc.
+ *
+ * @usage p:setDescSettlements( desc )
+ *    @luaparam p Planet to set settlements desc.
+ *    @luaparam desc The desc
+ * @luafunc setKnown( p, desc )
+ */
+static int planetL_setDescSettlements( lua_State *L )
+{
+   const char* desc;
+   Planet *p;
+
+   p = luaL_validplanet(L,1);
+   desc = lua_tostring(L, 2);
+
+   if (p->settlements_description!=NULL)
+	   free(p->settlements_description);
+
+   p->settlements_description=strdup(desc);
+
+   planet_setSaveFlag(p,PLANET_DESC_SAVE);//desc is now custom and must be saved
+
+   return 0;
+}
+
+/**
+ * @brief Gets the planet's history desc.
+ *
+ * @usage desc = p:descHistory()
+ *    @luaparam p Planet to get the history desc of.
+ *    @luareturn The history desc of the planet.
+ * @luafunc desc( p )
+ */
+static int planetL_descHistory( lua_State *L )
+{
+   Planet *p;
+   p = luaL_validplanet(L,1);
+   lua_pushstring(L,p->history_description);
+   return 1;
+}
+
+/**
+ * @brief Sets a planets's history desc.
+ *
+ * @usage p:setDescHistory( desc )
+ *    @luaparam p Planet to set history desc.
+ *    @luaparam desc The desc
+ * @luafunc setKnown( p, desc )
+ */
+static int planetL_setDescHistory( lua_State *L )
+{
+   const char* desc;
+   Planet *p;
+
+   p = luaL_validplanet(L,1);
+   desc = lua_tostring(L, 2);
+
+   if (p->history_description!=NULL)
+	   free(p->history_description);
+
+   p->history_description=strdup(desc);
+
+   planet_setSaveFlag(p,PLANET_DESC_SAVE);//desc is now custom and must be saved
+
+   return 0;
+}
+
 /**
  * @brief Gets the planet's faction.
  *
@@ -858,6 +1033,26 @@ static int planetL_setKnown( lua_State *L )
       planet_rmFlag( p, PLANET_KNOWN );
    return 0;
 }
+
+/**
+ * @brief checks if a planet or asset exists
+ *
+ *    @luaparam param Name of the planet
+ *    @luareturn boolean
+ * @luafunc get( param )
+ */
+static int planetL_exists( lua_State *L )
+{
+
+        if (planet_exists( lua_tostring(L,1) )) {
+            lua_pushboolean(L,1);
+        } else {
+            lua_pushboolean(L,0);
+        }
+
+       return 1;
+}
+
 /**
  * @brief Gets the lua data
  *
@@ -894,4 +1089,260 @@ static int planetL_setLuaData( lua_State *L )
    p->luaData=strdup(lua_tostring(L, 2));
 
    return 0;
+}
+
+/**
+ * @brief Add a service to the planet
+ *
+ * Service codes:
+ * r : refuel
+ * b : bar
+ * c : commodities
+ * o : outfits
+ * s : shipyards
+ *
+ * @usage p:addService( s )
+ *    @luaparam p Planet to add service to
+ *    @luaparam s code for service
+ * @luafunc addService( p, s )
+ */
+static int planetL_addService( lua_State *L )
+{
+   Planet *p;
+
+   p = luaL_validplanet(L,1);
+   const char* servicestr=lua_tostring(L, 2);
+
+   if (strlen(servicestr)==1) {
+	   char service=servicestr[0];
+
+	   if (service=='r')
+		   p->services |= PLANET_SERVICE_REFUEL | PLANET_SERVICE_INHABITED;
+	   else if (service=='b')
+		   p->services |= PLANET_SERVICE_BAR | PLANET_SERVICE_INHABITED;
+	   else if (service=='m')
+		   p->services |= PLANET_SERVICE_MISSIONS | PLANET_SERVICE_INHABITED;
+	   else if (service=='c')
+		   p->services |= PLANET_SERVICE_COMMODITY | PLANET_SERVICE_INHABITED;
+	   else if (service=='o')
+		   p->services |= PLANET_SERVICE_OUTFITS | PLANET_SERVICE_INHABITED;
+	   else if (service=='s')
+		   p->services |= PLANET_SERVICE_SHIPYARD | PLANET_SERVICE_INHABITED;
+
+	   planet_setSaveFlag(p,PLANET_SERVICES_SAVE);//services are now custom and must be saved
+   }
+
+   return 0;
+}
+
+/**
+ * @brief Removes a service to the planet
+ *
+ * Service codes:
+ * r : refuel
+ * b : bar
+ * c : commodities
+ * o : outfits
+ * s : shipyards
+ *
+ * @usage p:removeService(s )
+ *    @luaparam p Planet to remove service to
+ *    @luaparam s code for service
+ * @luafunc removeService( p, s )
+ */
+static int planetL_removeService( lua_State *L )
+{
+   Planet *p;
+
+   p = luaL_validplanet(L,1);
+   const char* servicestr=lua_tostring(L, 2);
+
+   if (strlen(servicestr)==1) {
+	   char service=servicestr[0];
+
+	   if (service=='r')
+		   p->services &= ~ PLANET_SERVICE_REFUEL;
+	   else if (service=='b')
+		   p->services &= ~ PLANET_SERVICE_BAR;
+	   else if (service=='m')
+		   p->services &= ~ PLANET_SERVICE_MISSIONS;
+	   else if (service=='c')
+		   p->services &= ~ PLANET_SERVICE_COMMODITY;
+	   else if (service=='o')
+		   p->services &= ~ PLANET_SERVICE_OUTFITS;
+	   else if (service=='s')
+		   p->services &= ~ PLANET_SERVICE_SHIPYARD;
+
+	   planet_setSaveFlag(p,PLANET_SERVICES_SAVE);//services are now custom and must be saved
+   }
+
+   return 0;
+}
+
+/**
+ * @brief Add a tech group to the planet
+ *
+ * @usage p:addTechGroup( groupName )
+ *    @luaparam p Planet to add tech group to
+ *    @luaparam groupName name of the tech group
+ * @luafunc addTechGroup( p, groupName )
+ */
+static int planetL_addTechGroup( lua_State *L )
+{
+   Planet *p;
+
+   p = luaL_validplanet(L,1);
+   const char* techGroupName=lua_tostring(L, 2);
+
+   if (p->tech==NULL)
+	   p->tech= tech_groupCreate();
+
+   tech_addItemTech(p->tech,techGroupName);
+
+   planet_setSaveFlag(p,PLANET_TECH_SAVE);//techs are now custom and must be saved
+
+   return 0;
+}
+
+/**
+ * @brief Removes a tech group from the planet
+ *
+ * @usage p:removeTechGroup( groupName )
+ *    @luaparam p Planet to remove tech group from
+ *    @luaparam groupName name of the tech group
+ * @luafunc addTechGroup( p, groupName )
+ */
+static int planetL_removeTechGroup( lua_State *L )
+{
+   Planet *p;
+
+   p = luaL_validplanet(L,1);
+   const char* techGroupName=lua_tostring(L, 2);
+
+   if (p->tech==NULL)
+	   return 0;
+
+   if (tech_hasItem(p->tech,strdup(techGroupName)))
+	   tech_rmItemTech(p->tech,techGroupName);
+
+   planet_setSaveFlag(p,PLANET_TECH_SAVE);//techs are now custom and must be saved
+
+   return 0;
+}
+
+/**
+ * @brief Sets a planet's faction & presence
+ *
+ * @usage p:setFactionPresence( factionName, factionValue, factionRange)
+ *    @luaparam p Planet to set faction & presence for
+ *    @luaparam factionName name of the faction. Empty string for none.
+ *    @luaparam factionValue strength of the presence.
+ *    @luaparam factionRange range the presence extends too.
+ * @luafunc setFactionPresence(p, factionName, factionValue, factionRange)
+ */
+static int planetL_setFactionPresence( lua_State *L )
+{
+   Planet *p;
+
+   p = luaL_validplanet(L,1);
+   const char* factionName=lua_tostring(L, 2);
+
+   if (strlen(factionName)==0) {
+	   p->faction=0;
+	   p->presenceAmount=0;
+	   p->presenceRange=0;
+   } else {
+	   p->faction=faction_get(factionName);
+	   p->presenceAmount=luaL_checknumber(L,3);
+	   p->presenceRange=luaL_checknumber(L,4);
+   }
+
+   planet_setSaveFlag(p,PLANET_PRESENCE_SAVE);//faction & presence are now custom and must be saved
+
+   space_reconstructPresences();
+
+   return 0;
+}
+
+/**
+ * @brief Sets a planet's extra presence for a faction
+ *
+ * @usage p:setFactionPresence( factionName, factionValue, factionRange)
+ *    @luaparam p Planet to set extra presence for
+ *    @luaparam factionName name of the faction.
+ *    @luaparam factionValue strength of the presence.
+ *    @luaparam factionRange range the presence extends too.
+ * @luafunc setFactionPresence(p, factionName, factionValue, factionRange)
+ */
+static int planetL_setFactionExtraPresence( lua_State *L )
+{
+   Planet *p;
+
+   p = luaL_validplanet(L,1);
+   const char* factionName=lua_tostring(L, 2);
+   int factionId=faction_get(factionName);
+   double amount=luaL_checknumber(L,3);
+   int range=luaL_checknumber(L,4);
+
+   planet_addOrUpdateExtraPresence(p,factionId,amount,range);
+
+   space_reconstructPresences();
+
+   return 0;
+}
+
+/**
+ * @brief Adds or update a trade data for a planet
+ *
+ * @usage p:addOrUpdateTradeData( buyingPriceFactor, sellingPriceFactor, buyingQuantity, sellingQuantity)
+ *    @luaparam p Planet to add or update trade data for
+ *    @luaparam commodity Commodity the trade data is for
+ *    @luaparam buyingPriceFactor Multiplier for the base price when buying
+ *    @luaparam sellingPriceFactor Multiplier of the base price when selling
+ *    @luaparam buyingQuantity Max quantity the world will buy from the player
+ *    @luaparam sellingQuantity Max quantity the world will sell to the player
+ * @luafunc addOrUpdateTradeData( p, buyingPriceFactor, sellingPriceFactor, buyingQuantity, sellingQuantity)
+ */
+static int planetL_addOrUpdateTradeData( lua_State *L )
+{
+   Planet *p;
+   Commodity *c;
+
+   p = luaL_validplanet(L,1);
+   c  = luaL_validcommodity(L,2);
+	float priceFactor=luaL_checknumber(L,3);
+	int buyingQuantity=luaL_checknumber(L,4);
+	int sellingQuantity=luaL_checknumber(L,5);
+
+	planet_addOrUpdateTradeData(p,c,priceFactor,buyingQuantity,sellingQuantity);
+
+   planet_setSaveFlag(p,PLANET_COMMODITIES_SAVE);//trade datas are now custom and must be saved
+
+   //space_refresh();
+
+   return 0;
+}
+
+/**
+ * @brief Sets the buy-sell ratio for a planet (the difference in buying and selling prices compared to base price)
+ *
+ * @usage p:setTradeBuySellRation( priceFactor)
+ *    @luaparam p Planet to add or update trade data for
+ *    @luaparam buy-sell ratio
+ * @luafunc setTradeBuySellRation( p, priceFactor)
+ */
+static int planetL_setTradeBuySellRation( lua_State *L )
+{
+	Planet *p;
+
+	p = luaL_validplanet(L,1);
+	float ratio=luaL_checknumber(L,2);
+
+	p->buySellGap=ratio;
+
+	planet_setSaveFlag(p,PLANET_COMMODITIES_SAVE);//trade datas are now custom and must be saved
+
+	//space_refresh();
+
+	return 0;
 }

@@ -52,6 +52,8 @@
 #include "damagetype.h"
 #include "hook.h"
 #include "dev_uniedit.h"
+#include "land.h"
+#include "array.h"
 
 
 #define XML_PLANET_TAG        "asset" /**< Individual planet xml tag. */
@@ -60,7 +62,7 @@
 #define PLANET_GFX_EXTERIOR_PATH_W 400 /**< Planet exterior graphic width. */
 #define PLANET_GFX_EXTERIOR_PATH_H 400 /**< Planet exterior graphic height. */
 
-#define CHUNK_SIZE            32 /**< Size to allocate by. */
+#define CHUNK_SIZE            32  /**< Size to allocate by. */
 #define CHUNK_SIZE_SMALL       8 /**< Smaller size to allocate chunks by. */
 
 /* used to overcome warnings due to 0 values */
@@ -127,14 +129,19 @@ static double interference_timer  = 0.; /**< Interference timer. */
  */
 /* planet load */
 static int planet_parse( Planet* planet, const xmlNodePtr parent );
+static int planet_parseCustom( Planet* planet, const xmlNodePtr parent ); //for custom data in saved games
 static int space_parseAssets( xmlNodePtr parent, StarSystem* sys );
+/* planet eco */
+static void planet_refreshPlanetPriceFactors_handleSystem(Planet* p,float* factorTotals,float* weightTotals,
+		StarSystem** sysStack,int* sysDepth,int* pos,int* nstack);
 /* system load */
 static void system_init( StarSystem *sys );
 static int systems_load (void);
 static StarSystem* system_parse( StarSystem *system, const xmlNodePtr parent );
-static int system_parseJumpPoint( const xmlNodePtr node, StarSystem *sys );
+static StarSystem* system_parseCustom( StarSystem *system, const xmlNodePtr parent );
+static int system_parseJumpPoint( const xmlNodePtr node, StarSystem *sys, int transient );
 static int system_parseJumpPointDiff( const xmlNodePtr node, StarSystem *sys );
-static void system_parseJumps( const xmlNodePtr parent );
+static void system_parseJumps( const xmlNodePtr parent , int transient);
 /* misc */
 static int getPresenceIndex( StarSystem *sys, int faction );
 static void presenceCleanup( StarSystem *sys );
@@ -147,12 +154,10 @@ static void space_renderPlanet( Planet *p );
  */
 int space_sysSave( xmlTextWriterPtr writer );
 int space_sysLoad( xmlNodePtr parent );
-/*
- * External prototypes.
- */
-extern credits_t economy_getPrice( const Commodity *com,
-      const StarSystem *sys, const Planet *p ); /**< from economy.c */
 
+
+static int system_compPlanet( const void *planet1, const void *planet2 );
+static int system_compJump( const void *jmp1, const void *jmp2 );
 
 /**
  * @brief Basically returns a PlanetClass integer from a char
@@ -281,20 +286,156 @@ int planet_getService( char *name )
 
 
 /**
- * @brief Gets the price of a commodity at a planet.
+ * @brief Gets the price of a commodity at a planet for purchase.
  *
  *    @param p Planet to get price at.
  *    @param c Commodity to get price of.
  */
-credits_t planet_commodityPrice( const Planet *p, const Commodity *c )
+credits_t planet_commodityPriceBuying( const Planet *p, const Commodity *c )
 {
-   char *sysname;
-   StarSystem *sys;
+	int i;
 
-   sysname = planet_getSystem( p->name );
-   sys = system_get( sysname );
+	for (i=0; i<p->ntradedatas; i++) {
+		if (p->tradedatas[i].commodity==c) {
+			return (credits_t)(c->price*p->tradedatas[i].adjustedPriceFactor*(1+p->buySellGap));
+		}
+	}
 
-   return economy_getPrice( c, sys, p );
+	//Base price is the default if not in trade data list:
+   return (credits_t) c->price;
+}
+
+/**
+ * @brief Gets the price ratio of a commodity at a planet for purchase.
+ *
+ *    @param p Planet to get price ratio at.
+ *    @param c Commodity to get price ratio of.
+ */
+float planet_commodityPriceBuyingRatio( const Planet *p, const Commodity *c )
+{
+	int i;
+
+	for (i=0; i<p->ntradedatas; i++) {
+		if (p->tradedatas[i].commodity==c) {
+			return (p->tradedatas[i].adjustedPriceFactor*(1+p->buySellGap));
+		}
+	}
+
+   return (float) 1;
+}
+
+/**
+ * @brief Gets the price of a commodity at a planet for selling.
+ *
+ *    @param p Planet to get price at.
+ *    @param c Commodity to get price of.
+ */
+credits_t planet_commodityPriceSelling( const Planet *p, const Commodity *c )
+{
+	int i;
+
+	for (i=0; i<p->ntradedatas; i++) {
+		if (p->tradedatas[i].commodity==c) {
+			return (credits_t)(c->price*p->tradedatas[i].adjustedPriceFactor*(1-p->buySellGap));
+		}
+	}
+
+	//Base price is the default if not in trade data list:
+   return (credits_t) c->price;
+}
+
+/**
+ * @brief Gets the price ratio of a commodity at a planet for selling.
+ *
+ *    @param p Planet to get price ratio at.
+ *    @param c Commodity to get price ratio of.
+ */
+float planet_commodityPriceSellingRatio( const Planet *p, const Commodity *c )
+{
+	int i;
+
+	for (i=0; i<p->ntradedatas; i++) {
+		if (p->tradedatas[i].commodity==c) {
+			return p->tradedatas[i].adjustedPriceFactor*(1-p->buySellGap);
+		}
+	}
+
+	return 1;
+}
+
+void planet_addOrUpdateTradeData(Planet *p, const Commodity *c,float priceFactor,
+		int buyingQuantity,int sellingQuantity) {
+
+	//space_debugCheckDataIntegrity();
+	int i;
+
+	for (i=0;i<p->ntradedatas;i++) {
+		if (p->tradedatas[i].commodity==c) {
+			p->tradedatas[i].priceFactor=priceFactor;
+			p->tradedatas[i].buyingQuantity=buyingQuantity;
+			p->tradedatas[i].sellingQuantity=sellingQuantity;
+			return;
+		}
+	}
+
+	p->ntradedatas++;
+	if (p->ntradedatas>p->mem_tradedatas) {
+		if (p->mem_tradedatas==0)
+			p->mem_tradedatas=CHUNK_SIZE_SMALL;
+		else
+			p->mem_tradedatas*=2;
+
+		p->tradedatas     = realloc( p->tradedatas, sizeof(TradeData) * p->mem_tradedatas );
+	}
+
+	p->tradedatas[p->ntradedatas-1].commodity=c;
+	p->tradedatas[p->ntradedatas-1].priceFactor=priceFactor;
+	p->tradedatas[p->ntradedatas-1].buyingQuantity=buyingQuantity;
+	p->tradedatas[p->ntradedatas-1].sellingQuantity=sellingQuantity;
+	p->tradedatas[p->ntradedatas-1].buyingQuantityRemaining=buyingQuantity;
+	p->tradedatas[p->ntradedatas-1].sellingQuantityRemaining=sellingQuantity;
+
+	//space_debugCheckDataIntegrity();
+}
+
+void planet_addOrUpdateExtraPresence(Planet *p,int factionId,double amount,int range) {
+
+	//space_debugCheckDataIntegrity();
+
+	int i,handled=0;
+
+	for (i=0;i<p->nextrapresences && !handled;i++) {
+		if (p->extraPresenceFactions[i]==factionId) {
+			p->extraPresenceAmounts[i]=amount;
+			p->extraPresenceRanges[i]=range;
+			handled=1;
+		}
+	}
+
+	if (handled) {
+		planet_setSaveFlag(p,PLANET_PRESENCE_SAVE);//faction & presence are now custom and must be saved
+		return;
+	}
+
+	p->nextrapresences++;
+	if (p->nextrapresences>p->mem_extrapresences) {
+		if (p->mem_extrapresences==0)
+			p->mem_extrapresences=CHUNK_SIZE_SMALL;
+		else
+			p->mem_extrapresences*=2;
+
+		p->extraPresenceAmounts  = realloc( p->extraPresenceAmounts, sizeof(double) * p->mem_extrapresences );
+		p->extraPresenceFactions  = realloc( p->extraPresenceFactions, sizeof(int) * p->mem_extrapresences );
+		p->extraPresenceRanges  = realloc( p->extraPresenceRanges, sizeof(int) * p->mem_extrapresences );
+	}
+
+	p->extraPresenceFactions[p->nextrapresences-1]=factionId;
+	p->extraPresenceAmounts[p->nextrapresences-1]=amount;
+	p->extraPresenceRanges[p->nextrapresences-1]=range;
+
+	planet_setSaveFlag(p,PLANET_PRESENCE_SAVE);//faction & presence are now custom and must be saved
+
+	//space_debugCheckDataIntegrity();
 }
 
 
@@ -1444,14 +1585,24 @@ Planet *planet_new (void)
 {
    Planet *p;
    int realloced;
+   char* currentPlanetName=NULL;
 
    /* See if stack must grow. */
    planet_nstack++;
    realloced = 0;
    if (planet_nstack > planet_mstack) {
+
+	   if (land_planet!=NULL) {
+		   currentPlanetName=strdup(land_planet->name);
+	   }
+
       planet_mstack *= 2;
       planet_stack   = realloc( planet_stack, sizeof(Planet) * planet_mstack );
       realloced      = 1;
+
+      if (currentPlanetName!=NULL) {
+    	  land_planet=planet_get(currentPlanetName);
+      }
    }
 
    /* Clean up memory. */
@@ -1460,10 +1611,15 @@ Planet *planet_new (void)
    p->id       = planet_nstack-1;
    p->faction  = -1;
    p->class    = PLANET_CLASS_A;
+   p->transient=0;
+   p->nextrapresences=0;
+   p->ntradedatas=0;
 
    /* Reconstruct the jumps. */
    if (!systems_loading && realloced)
       systems_reconstructPlanets();
+
+   //space_debugCheckDataIntegrity();
 
    return p;
 }
@@ -1730,10 +1886,12 @@ void space_gfxUnload( StarSystem *sys )
  */
 static int planet_parse( Planet *planet, const xmlNodePtr parent )
 {
-   int mem;
+	//space_debugCheckDataIntegrity();
+
    char str[PATH_MAX], *tmp;
-   xmlNodePtr node, cur, ccur;
+   xmlNodePtr node, cur, ccur, cccur;
    unsigned int flags;
+   int i;
 
    /* Clear up memory for sane defaults. */
    flags          = 0;
@@ -1888,28 +2046,91 @@ static int planet_parse( Planet *planet, const xmlNodePtr parent )
                } while (xml_nextNode(ccur));
             }
 
-            else if (xml_isNode(cur, "commodities")) {
-               ccur = cur->children;
-               mem = 0;
-               do {
-                  if (xml_isNode(ccur,"commodity")) {
-                     planet->ncommodities++;
-                     /* Memory must grow. */
-                     if (planet->ncommodities > mem) {
-                        if (mem == 0)
-                           mem = CHUNK_SIZE_SMALL;
-                        else
-                           mem *= 2;
-                        planet->commodities = realloc(planet->commodities,
-                              mem * sizeof(Commodity*));
-                     }
-                     planet->commodities[planet->ncommodities-1] =
-                        commodity_get( xml_get(ccur) );
-                  }
-               } while (xml_nextNode(ccur));
-               /* Shrink to minimum size. */
-               planet->commodities = realloc(planet->commodities,
-                     planet->ncommodities * sizeof(Commodity*));
+            else if (xml_isNode(cur, "tradedatas")) {
+            	ccur = cur->children;
+
+            	planet->buySellGap=0.05;//default value
+
+            	do {
+            		if (xml_isNode(ccur,"buySellGap")) {
+            			planet->buySellGap=xml_getFloat(ccur);
+            		} else if (xml_isNode(ccur,"tradedata")) {
+            			cccur = ccur->children;
+
+            			planet->ntradedatas++;
+            			if (planet->ntradedatas>planet->mem_tradedatas) {
+            				if (planet->mem_tradedatas==0)
+            					planet->mem_tradedatas=CHUNK_SIZE_SMALL;
+            				else
+            					planet->mem_tradedatas*=2;
+
+            				planet->tradedatas     = realloc( planet->tradedatas, sizeof(TradeData) * planet->mem_tradedatas );
+            			}
+
+            			/* default values */
+            			planet->tradedatas[planet->ntradedatas-1].buyingQuantity=1000;
+            			planet->tradedatas[planet->ntradedatas-1].sellingQuantity=1000;
+            			planet->tradedatas[planet->ntradedatas-1].buyingQuantityRemaining=1000;
+            			planet->tradedatas[planet->ntradedatas-1].sellingQuantityRemaining=1000;
+            			planet->tradedatas[planet->ntradedatas-1].priceFactor=1;
+
+            			do {
+            				xml_onlyNodes(cccur);
+
+            				if (xml_isNode(cccur,"commodity")) {
+            					planet->tradedatas[planet->ntradedatas-1].commodity =
+            					            						commodity_get( xml_get(cccur) );
+            				} else if (xml_isNode(cccur,"priceFactor")) {
+            					planet->tradedatas[planet->ntradedatas-1].priceFactor=xml_getFloat(cccur);
+            				} else if (xml_isNode(cccur,"buyingQuantity")) {
+            					planet->tradedatas[planet->ntradedatas-1].buyingQuantity=xml_getInt(cccur);
+            					//At start the remaining is equal to the starting value
+            					planet->tradedatas[planet->ntradedatas-1].buyingQuantityRemaining=xml_getInt(cccur);
+            				} else if (xml_isNode(cccur,"sellingQuantity")) {
+            					planet->tradedatas[planet->ntradedatas-1].sellingQuantity=xml_getInt(cccur);
+            					//At start the remaining is equal to the starting value
+            					planet->tradedatas[planet->ntradedatas-1].sellingQuantityRemaining=xml_getInt(cccur);
+            				}
+            			} while (xml_nextNode(cccur));
+            		}
+            	} while (xml_nextNode(ccur));
+            } else if (xml_isNode(cur, "tradeStatus")) {
+            	ccur = cur->children;
+            	do {
+            		if (xml_isNode(ccur,"lastRefresh")) {
+            			int scu = 0;
+            			int stp = 0;
+            			int stu = 0;
+            			do {
+            				xmlr_int(ccur,"SCU",scu);
+            				xmlr_int(ccur,"STP",stp);
+            				xmlr_int(ccur,"STU",stu);
+            			} while (xml_nextNode(ccur));
+            			planet->lastRefresh = ntime_create( scu, stp, stu );
+            		} else if (xml_isNode(ccur,"tradedata")) {
+            			cccur = ccur->children;
+
+            			Commodity* com=NULL;
+            			TradeData* tradeData=NULL;
+
+            			do {
+            				xml_onlyNodes(cccur);
+
+            				if (xml_isNode(cccur,"commodity")) {
+            					com = commodity_get( xml_get(cccur) );
+            					for (i=0;i<planet->ntradedatas && tradeData==NULL;i++) {
+            						if (planet->tradedatas[i].commodity==com) {
+            							tradeData=&(planet->tradedatas[i]);
+            						}
+            					}
+            				} else if (tradeData!=NULL && xml_isNode(cccur,"buyingQuantityRemaining")) {
+            					tradeData->buyingQuantityRemaining=xml_getInt(cccur);
+            				} else if (tradeData!=NULL && xml_isNode(cccur,"sellingQuantityRemaining")) {
+            					tradeData->sellingQuantityRemaining=xml_getInt(cccur);
+            				}
+            			} while (xml_nextNode(cccur));
+            		}
+            	} while (xml_nextNode(ccur));
             }
          } while (xml_nextNode(cur));
          continue;
@@ -1956,8 +2177,404 @@ static int planet_parse( Planet *planet, const xmlNodePtr parent )
    /* Square to allow for linear multiplication with squared distances. */
    planet->hide = pow2(planet->hide);
 
+	//space_debugCheckDataIntegrity();
+
    return 0;
 }
+
+
+
+/**
+ * @brief Parses a planet's custom data from an xml node from a saved game
+ *
+ *    @param planet Planet to fill up.
+ *    @param parent Node that contains planet data.
+ *    @return 0 on success.
+ */
+static int planet_parseCustom( Planet *planet, const xmlNodePtr parent )
+{
+	char *tmp;
+	xmlNodePtr node, cur, ccur, cccur;
+	unsigned int flags;
+	int i;
+
+	node = parent->xmlChildrenNode;
+	do {
+
+		if (xml_isNode(node, "presence")) {
+			cur = node->children;
+			do {
+				xmlr_float(cur, "value", planet->presenceAmount);
+				xmlr_int(cur, "range", planet->presenceRange);
+				if (xml_isNode(cur,"faction")) {
+					flags |= FLAG_FACTIONSET;
+					planet->faction = faction_get( xml_get(cur) );
+					continue;
+				}
+				planet_setSaveFlag(planet,PLANET_PRESENCE_SAVE);
+			} while (xml_nextNode(cur));
+			continue;
+		}
+		 else if (xml_isNode(node, "extraPresences")) {
+			 planet_setSaveFlag(planet,PLANET_PRESENCE_SAVE);
+		  cur = node->children;
+		  if (xml_isNode(node, "presence")) {
+			  ccur = cur->children;
+
+			  planet->nextrapresences++;
+			  if (planet->nextrapresences>planet->mem_extrapresences) {
+				  if (planet->mem_extrapresences==0)
+					  planet->mem_extrapresences=CHUNK_SIZE_SMALL;
+				  else
+					  planet->mem_extrapresences*=2;
+
+				  planet->extraPresenceAmounts  = realloc( planet->extraPresenceAmounts, sizeof(double) * planet->mem_extrapresences );
+				  planet->extraPresenceFactions  = realloc( planet->extraPresenceFactions, sizeof(int) * planet->mem_extrapresences );
+				  planet->extraPresenceRanges  = realloc( planet->extraPresenceRanges, sizeof(int) * planet->mem_extrapresences );
+			  }
+
+			  do {
+				  xmlr_float(ccur, "value", planet->extraPresenceAmounts[planet->nextrapresences-1]);
+				  xmlr_int(ccur, "range", planet->extraPresenceRanges[planet->nextrapresences-1]);
+				  if (xml_isNode(cur,"faction")) {
+					  planet->extraPresenceFactions[planet->nextrapresences-1] = faction_get( xml_get(ccur) );
+					  continue;
+				  }
+			  } while (xml_nextNode(cur));
+			   continue;
+		}
+	   }
+		else if (xml_isNode(node,"general")) {
+			cur = node->children;
+			do {
+				if (xml_isNode(cur, "description")) {
+					tmp=xml_getStrd(cur);
+					if (tmp!=NULL) {
+						planet->description=strdup(tmp);
+						planet_setSaveFlag(planet,PLANET_DESC_SAVE);
+						free(tmp);
+						tmp=NULL;
+					}
+				}
+
+				if (xml_isNode(cur, "settlements_description")) {
+					tmp=xml_getStrd(cur);
+					if (tmp!=NULL) {
+						planet->settlements_description=strdup(tmp);
+						planet_setSaveFlag(planet,PLANET_DESC_SAVE);
+						free(tmp);
+						tmp=NULL;
+					}
+				}
+
+				if (xml_isNode(cur, "history_description")) {
+					tmp=xml_getStrd(cur);
+					if (tmp!=NULL) {
+						planet->history_description=strdup(tmp);
+						planet_setSaveFlag(planet,PLANET_DESC_SAVE);
+						free(tmp);
+						tmp=NULL;
+					}
+				}
+
+				if (xml_isNode(cur, "luadata")) {
+					tmp=xml_getStrd(cur);
+					if (tmp!=NULL) {
+						planet->luaData=strdup(tmp);
+						free(tmp);
+						tmp=NULL;
+					}
+				}
+
+
+				if (xml_isNode(cur, "services")) {
+					flags |= FLAG_SERVICESSET;
+					planet_setSaveFlag(planet,PLANET_SERVICES_SAVE);
+					ccur = cur->children;
+					planet->services = 0;
+					do {
+						xml_onlyNodes(ccur);
+
+						if (xml_isNode(ccur, "land")) {
+							planet->services |= PLANET_SERVICE_LAND;
+						}
+						else if (xml_isNode(ccur, "refuel"))
+							planet->services |= PLANET_SERVICE_REFUEL | PLANET_SERVICE_INHABITED;
+						else if (xml_isNode(ccur, "bar"))
+							planet->services |= PLANET_SERVICE_BAR | PLANET_SERVICE_INHABITED;
+						else if (xml_isNode(ccur, "missions"))
+							planet->services |= PLANET_SERVICE_MISSIONS | PLANET_SERVICE_INHABITED;
+						else if (xml_isNode(ccur, "commodity"))
+							planet->services |= PLANET_SERVICE_COMMODITY | PLANET_SERVICE_INHABITED;
+						else if (xml_isNode(ccur, "outfits"))
+							planet->services |= PLANET_SERVICE_OUTFITS | PLANET_SERVICE_INHABITED;
+						else if (xml_isNode(ccur, "shipyard"))
+							planet->services |= PLANET_SERVICE_SHIPYARD | PLANET_SERVICE_INHABITED;
+						else
+							WARN("Planet '%s' has unknown services tag '%s'", planet->name, ccur->name);
+
+					} while (xml_nextNode(ccur));
+				} else if (xml_isNode(cur, "tradedatas")) {
+					planet_setSaveFlag(planet,PLANET_COMMODITIES_SAVE);
+					ccur = cur->children;
+
+					if (planet->tradedatas!=NULL) {
+						planet->ntradedatas=0;
+					}
+
+					planet->buySellGap=0.05;//default value
+
+					do {
+						if (xml_isNode(ccur,"buySellGap")) {
+							planet->buySellGap=xml_getFloat(ccur);
+						} else if (xml_isNode(ccur,"tradedata")) {
+							cccur = ccur->children;
+
+							planet->ntradedatas++;
+							if (planet->ntradedatas>planet->mem_tradedatas) {
+								if (planet->mem_tradedatas==0)
+									planet->mem_tradedatas=CHUNK_SIZE_SMALL;
+								else
+									planet->mem_tradedatas*=2;
+
+								planet->tradedatas     = realloc( planet->tradedatas, sizeof(TradeData) * planet->mem_tradedatas );
+							}
+
+							/* default values */
+							planet->tradedatas[planet->ntradedatas-1].priceFactor=1;
+							planet->tradedatas[planet->ntradedatas-1].buyingQuantity=1000;
+							planet->tradedatas[planet->ntradedatas-1].sellingQuantity=1000;
+							planet->tradedatas[planet->ntradedatas-1].buyingQuantityRemaining=1000;
+							planet->tradedatas[planet->ntradedatas-1].sellingQuantityRemaining=1000;
+
+							do {
+								xml_onlyNodes(cccur);
+
+								if (xml_isNode(cccur,"commodity")) {
+									planet->tradedatas[planet->ntradedatas-1].commodity =
+											commodity_get( xml_get(cccur) );
+	            				} else if (xml_isNode(cccur,"priceFactor")) {
+	            					planet->tradedatas[planet->ntradedatas-1].priceFactor=xml_getFloat(cccur);
+								} else if (xml_isNode(cccur,"buyingQuantity")) {
+									planet->tradedatas[planet->ntradedatas-1].buyingQuantity=xml_getInt(cccur);
+									//At start the remaining is equal to the starting value
+									planet->tradedatas[planet->ntradedatas-1].buyingQuantityRemaining=xml_getInt(cccur);
+								} else if (xml_isNode(cccur,"sellingQuantity")) {
+									planet->tradedatas[planet->ntradedatas-1].sellingQuantity=xml_getInt(cccur);
+									//At start the remaining is equal to the starting value
+									planet->tradedatas[planet->ntradedatas-1].sellingQuantityRemaining=xml_getInt(cccur);
+								}
+							} while (xml_nextNode(cccur));
+						}
+					} while (xml_nextNode(ccur));
+				} else if (xml_isNode(cur, "tradeStatus")) {
+					ccur = cur->children;
+					do {
+						if (xml_isNode(ccur,"lastRefresh")) {
+							cccur = ccur->children;
+							int scu = 0;
+							int stp = 0;
+							int stu = 0;
+							do {
+								xmlr_int(cccur,"SCU",scu);
+								xmlr_int(cccur,"STP",stp);
+								xmlr_int(cccur,"STU",stu);
+							} while (xml_nextNode(cccur));
+							planet->lastRefresh = ntime_create( scu, stp, stu );
+						} else if (xml_isNode(ccur,"tradedata")) {
+							cccur = ccur->children;
+
+							Commodity* com=NULL;
+							TradeData* tradeData=NULL;
+
+							do {
+								xml_onlyNodes(cccur);
+
+								if (xml_isNode(cccur,"commodity")) {
+									com = commodity_get( xml_get(cccur) );
+									for (i=0;i<planet->ntradedatas && tradeData==NULL;i++) {
+										if (planet->tradedatas[i].commodity==com) {
+											tradeData=&(planet->tradedatas[i]);
+										}
+									}
+								} else if (tradeData!=NULL && xml_isNode(cccur,"buyingQuantityRemaining")) {
+									tradeData->buyingQuantityRemaining=xml_getInt(cccur);
+								} else if (tradeData!=NULL && xml_isNode(cccur,"sellingQuantityRemaining")) {
+									tradeData->sellingQuantityRemaining=xml_getInt(cccur);
+								}
+							} while (xml_nextNode(cccur));
+						}
+					} while (xml_nextNode(ccur));
+				}
+
+			} while (xml_nextNode(cur));
+			continue;
+		}
+		else if (xml_isNode(node, "tech")) {
+			planet_setSaveFlag(planet,PLANET_TECH_SAVE);
+			planet->tech = tech_groupCreateXML( node );
+			continue;
+		}
+
+		DEBUG("Unknown node '%s' in planet '%s'",node->name,planet->name);
+	} while (xml_nextNode(node));
+
+	return 0;
+}
+
+
+
+
+/**
+ * @brief Parses a planet from an xml node.
+ *
+ *    @param planet Planet to fill up.
+ *    @param parent Node that contains planet data.
+ *    @return 0 on success.
+ */
+Planet *planet_createNewPlanet( const char* name ,int isVirtual,const char* spaceGraphic,const char* exteriorGraphic,
+                                double posX,double posY,double presenceAmount,int presenceRange,const char* factionName
+                                  ,const char* description,const char* settlements_description,const char* history_description,const char* descriptionBar,long population,double hide,char class,
+                                  int serviceLand,const char* landingFunc,int refuel,int bar,int missions,int commodity,int outfits,int shipyard)
+{
+    
+    Planet* planet = planet_new();
+    
+    unsigned int flags;
+    char str[PATH_MAX];
+    
+    /* Clear up memory for sane defaults. */
+    flags          = 0;
+    planet->real   = ASSET_REAL;
+    planet->hide   = 0.01;
+    
+    /* Get the name. */
+    planet->name=strdup(name);
+    
+    
+    
+	if (isVirtual) {
+		planet->real   = ASSET_VIRTUAL;
+	}
+
+	if (spaceGraphic!=NULL) {
+		nsnprintf( str, PATH_MAX, PLANET_GFX_SPACE_PATH"%s", spaceGraphic);
+		planet->gfx_spaceName = strdup(str);
+		planet->gfx_spacePath = strdup(spaceGraphic);
+		planet_setRadiusFromGFX(planet);
+	}
+	if (exteriorGraphic!=NULL) {
+		nsnprintf( str, PATH_MAX, PLANET_GFX_EXTERIOR_PATH"%s", exteriorGraphic);
+		planet->gfx_exterior = strdup(str);
+		planet->gfx_exteriorPath = strdup(exteriorGraphic);
+	}
+	planet->pos.x=posX;
+	planet->pos.y=posY;
+
+	planet->presenceAmount=presenceAmount;
+	planet->presenceRange=presenceRange;
+	if (factionName!=NULL) {
+		planet->faction = faction_get( factionName );
+		planet->flags |= FLAG_FACTIONSET;
+	}
+
+	if (description!=NULL)
+		planet->description=strdup(description);
+	else
+		planet->description="";
+
+	if (settlements_description!=NULL)
+		planet->settlements_description=strdup(settlements_description);
+	else
+		planet->settlements_description=NULL;
+
+	if (history_description!=NULL)
+		planet->history_description=strdup(history_description);
+	else
+		planet->history_description=NULL;
+
+	if (descriptionBar!=NULL)
+		planet->bar_description=strdup(descriptionBar);
+	else
+		planet->bar_description="";
+
+	planet->population=population;
+	planet->hide=hide;
+
+	planet->class = planetclass_get( class );
+
+	planet->services = 0;
+
+	if (serviceLand) {
+		planet->services |= PLANET_SERVICE_LAND;
+
+		if (landingFunc != NULL) {
+			planet->land_func = strdup(landingFunc);
+#ifdef DEBUGGING
+			if (landing_lua != NULL) {
+				lua_getglobal( landing_lua, landingFunc );
+				if (lua_isnil(landing_lua,-1))
+					WARN("Planet '%s' has landing function '%s' which is not found in '%s'.",
+						 planet->name, landingFunc, LANDING_DATA_PATH);
+				lua_pop(landing_lua,1);
+			}
+#endif /* DEBUGGING */
+		}
+	}
+    
+    
+    if (refuel)
+        planet->services |= PLANET_SERVICE_REFUEL | PLANET_SERVICE_INHABITED;
+    if (bar)
+        planet->services |= PLANET_SERVICE_BAR | PLANET_SERVICE_INHABITED;
+    if (missions)
+        planet->services |= PLANET_SERVICE_MISSIONS | PLANET_SERVICE_INHABITED;
+    if (commodity)
+        planet->services |= PLANET_SERVICE_COMMODITY | PLANET_SERVICE_INHABITED;
+    if (outfits)
+        planet->services |= PLANET_SERVICE_OUTFITS | PLANET_SERVICE_INHABITED;
+    if (shipyard)
+        planet->services |= PLANET_SERVICE_SHIPYARD | PLANET_SERVICE_INHABITED;
+    
+    
+    /*
+     * verification
+     */
+#define MELEMENT(o,s)   if (o) WARN("Planet '%s' missing '"s"' element", planet->name)
+    /* Issue warnings on missing items only it the asset is real. */
+    if (planet->real == ASSET_REAL) {
+        MELEMENT(planet->gfx_spaceName==NULL,"GFX space");
+        MELEMENT( planet_hasService(planet,PLANET_SERVICE_LAND) &&
+                 planet->gfx_exterior==NULL,"GFX exterior");
+        /* MELEMENT( planet_hasService(planet,PLANET_SERVICE_INHABITED) &&
+         (planet->population==0), "population"); */
+        MELEMENT(planet->class==PLANET_CLASS_NULL,"class");
+        MELEMENT( planet_hasService(planet,PLANET_SERVICE_LAND) &&
+                 planet->description==NULL,"description");
+        MELEMENT( planet_hasService(planet,PLANET_SERVICE_BAR) &&
+                 planet->bar_description==NULL,"bar");
+        MELEMENT( planet_hasService(planet,PLANET_SERVICE_INHABITED) &&
+                 (flags&FLAG_FACTIONSET)==0,"faction");
+        MELEMENT( (planet_hasService(planet,PLANET_SERVICE_OUTFITS) ||
+                   planet_hasService(planet,PLANET_SERVICE_SHIPYARD)) &&
+                 (planet->tech==NULL), "tech" );
+        /*MELEMENT( planet_hasService(planet,PLANET_SERVICE_COMMODITY) &&
+         (planet->ncommodities==0),"commodity" );*/
+        MELEMENT( (flags&FLAG_FACTIONSET) && (planet->presenceAmount == 0.),
+                 "presence" );
+    }
+#undef MELEMENT
+    
+    /* Square to allow for linear multiplication with squared distances. */
+    planet->hide = pow2(planet->hide);
+    
+    space_reconstructPresences();
+
+    return planet;
+}
+
+
+
 
 
 /**
@@ -2011,6 +2628,9 @@ int planet_setRadiusFromGFX(Planet* planet)
  */
 int system_addPlanet( StarSystem *sys, const char *planetname )
 {
+
+	//space_debugCheckDataIntegrity();
+
    Planet *planet;
 
    if (sys == NULL)
@@ -2049,9 +2669,6 @@ int system_addPlanet( StarSystem *sys, const char *planetname )
    planetname_stack[spacename_nstack-1] = planet->name;
    systemname_stack[spacename_nstack-1] = sys->name;
 
-   /* Regenerate the economy stuff. */
-   economy_refresh();
-
    /* Add the presence. */
    if (!systems_loading) {
       system_addPresence( sys, planet->faction, planet->presenceAmount, planet->presenceRange );
@@ -2061,6 +2678,8 @@ int system_addPlanet( StarSystem *sys, const char *planetname )
    /* Reload graphics if necessary. */
    if (cur_system != NULL)
       space_gfxLoad( cur_system );
+
+	//space_debugCheckDataIntegrity();
 
    return 0;
 }
@@ -2121,8 +2740,6 @@ int system_rmPlanet( StarSystem *sys, const char *planetname )
 
    system_setFaction(sys);
 
-   /* Regenerate the economy stuff. */
-   economy_refresh();
 
    return 0;
 }
@@ -2139,7 +2756,6 @@ int system_addJumpDiff( StarSystem *sys, xmlNodePtr node )
    if (system_parseJumpPointDiff(node, sys) <= -1)
       return 0;
    systems_reconstructJumps();
-   economy_refresh();
 
    return 1;
 }
@@ -2154,10 +2770,9 @@ int system_addJumpDiff( StarSystem *sys, xmlNodePtr node )
  */
 int system_addJump( StarSystem *sys, xmlNodePtr node )
 {
-   if (system_parseJumpPoint(node, sys) <= -1)
+   if (system_parseJumpPoint(node, sys, 0) <= -1)
       return 0;
    systems_reconstructJumps();
-   economy_refresh();
 
    return 1;
 }
@@ -2198,11 +2813,68 @@ int system_rmJump( StarSystem *sys, const char *jumpname )
    /* Refresh presence */
    system_setFaction(sys);
 
-   /* Regenerate the economy stuff. */
-   economy_refresh();
-
    return 0;
 }
+
+/**
+ * @brief Adds a star graphic to a star system.
+ *
+ *    @param sys Star System to add jump point to.
+ *    @param jumpname Name of the jump point to add.
+ *    @return 0 on success.
+ */
+int system_addStar( StarSystem *sys, char *starname )
+{
+    if (sys == NULL)
+        return -1;
+    
+    /* Check if need to grow the star system planet stack. */
+    sys->ngfx_SunSpaceNames++;
+    if (sys->gfx_SunSpaceNames == NULL) {
+        sys->gfx_SunSpaceNames   = malloc( sizeof(char*) * CHUNK_SIZE_SMALL );    }
+    else if (sys->ngfx_SunSpaceNames > CHUNK_SIZE_SMALL) {
+        sys->gfx_SunSpaceNames   = realloc( sys->gfx_SunSpaceNames, sizeof(char*) * sys->ngfx_SunSpaceNames );
+    }
+    
+    sys->gfx_SunSpaceNames[sys->ngfx_SunSpaceNames-1]    = starname;
+    
+    /* Reload graphics if necessary. */
+    if (cur_system != NULL)
+        space_gfxLoad( cur_system );
+    
+    return 0;
+}
+
+
+/**
+ * @brief Removes a star graphics from a star system.
+ *
+ *    @param sys Star System to remove star graphics from.
+ *    @param pos Id of the star to remove
+ *    @return 0 on success.
+ */
+int system_rmStar( StarSystem *sys, int pos )
+{
+    
+    if (sys == NULL) {
+        WARN("Unable to remove star '%i' from NULL system.", pos);
+        return -1;
+    }
+    
+    if (pos>=sys->ngfx_SunSpaceNames) {
+        WARN("Cannot remove star %i from system '%s' with %i stars.", pos,sys->name,sys->ngfx_SunSpaceNames);
+        return -1;
+    }
+    
+    /* Remove star from system. */
+    sys->ngfx_SunSpaceNames--;
+    memmove( &sys->gfx_SunSpaceNames[pos], &sys->gfx_SunSpaceNames[pos+1], sizeof(char*) * (sys->ngfx_SunSpaceNames-pos) );
+    
+    return 0;
+}
+
+
+
 
 
 /**
@@ -2280,35 +2952,147 @@ static void system_init( StarSystem *sys )
 StarSystem *system_new (void)
 {
    StarSystem *sys;
-   int realloced, id;
-
-   /* Protect current system in case of realloc. */
-   if (cur_system != NULL)
-      id = system_index( cur_system );
+   int realloced;
+   char* curSystemName=NULL;
 
    /* Check if memory needs to grow. */
    systems_nstack++;
    realloced = 0;
    if (systems_nstack > systems_mstack) {
+
+	   /* Protect current system in case of realloc by name (id don't work when universe changes). */
+	   if (cur_system!=NULL) {
+		   curSystemName=strdup(cur_system->name);
+	   }
+
       systems_mstack   *= 2;
       systems_stack     = realloc( systems_stack, sizeof(StarSystem) * systems_mstack );
       realloced         = 1;
+
+
+      if (curSystemName!=NULL) {
+    	  cur_system=system_get(curSystemName);
+      }
+
    }
    sys = &systems_stack[ systems_nstack-1 ];
-
-   /* Reset cur_system. */
-   if (cur_system != NULL)
-      cur_system = system_getIndex( id );
 
    /* Initialize system and id. */
    system_init( sys );
    sys->id = systems_nstack-1;
 
+   sys->transient=0;
+
    /* Reconstruct the jumps. */
-   if (!systems_loading && realloced)
+   if (!systems_loading && realloced) {
       systems_reconstructJumps();
 
+   }
+    
    return sys;
+}
+
+/**
+ * @brief Creates a new system with a given name, if not already taken. Intended mainly for use via lua.
+ */
+StarSystem* system_createNewSystem (const char* name) {
+    StarSystem *sys;
+    if (system_exists(name)) {
+        WARN("Attempted to create a system of name '%s', but one already exists.", name);
+        return NULL;
+    }
+    
+    sys=system_new();
+    
+    /* Sane defaults */
+    sys->flags          = 0;
+    sys->presence  = NULL;
+    sys->npresence = 0;
+    sys->systemFleets  = NULL;
+    sys->nsystemFleets = 0;
+    sys->ownerpresence = 0.;
+    sys->ngfx_SunSpaceNames=0;
+    
+    sys->name=strdup( name );
+    
+    return sys;
+}
+
+/**
+ * @brief Add a single jump point for a system.
+ *
+ *    @param sys System to which the jump point belongs.
+ *    @param target System to which the jump lead to.
+ *    @param x X coord of the jump. Ignored if autopos true.
+ *    @param y Y coord of the jump. Ignored if autopos true.
+ *    @param radius Radius of the jump, or -1 for default value.
+ *    @param hide Hide radius of the jump, or -1 for default value.
+ *    @param autopos Whether to autoplace the jump.
+ *    @param hidden Whether the jump is hidden.
+ *    @param exitonly Whether this jump is one-way.
+ *    @param known whether the jump should be known to the player
+ *    @return 0 on success.
+ */
+int system_addJumpPoint( StarSystem *sys,StarSystem *target,double x, double y,double radius,double hide,int autopos,int hidden,int exitonly,int transient,
+		int known)
+{
+    JumpPoint *j;
+#ifdef DEBUGGING
+    int i;
+    for (i=0; i<sys->njumps; i++) {
+        j = &sys->jumps[i];
+        if (j->targetid != target->id)
+            continue;
+        
+        WARN("Star System '%s' has duplicate jump point to '%s'.",
+             sys->name, target->name );
+        break;
+    }
+#endif /* DEBUGGING */
+    
+    /* Allocate more space. */
+    sys->jumps = realloc( sys->jumps, (sys->njumps+1)*sizeof(JumpPoint) );
+    j = &sys->jumps[ sys->njumps ];
+    memset( j, 0, sizeof(JumpPoint) );
+    
+    /* Set some stuff. */
+    j->target = target;
+    j->targetid = j->target->id;
+    j->radius = 200.;
+    
+    if (radius>-1)
+        j->radius=radius;
+    
+    if (hide>-1)
+        j->hide=hide;
+    
+    if (autopos==1) {
+        jp_setFlag(j,JP_AUTOPOS);
+    } else {
+        /* Set position. */
+        vect_cset( &j->pos, x, y );
+    }
+    
+    if (hidden==1)
+        jp_setFlag(j,JP_HIDDEN);
+    else if (exitonly==1)
+        jp_setFlag(j,JP_EXITONLY);
+    
+    /* Square to allow for linear multiplication with squared distances. */
+    j->hide = pow2(j->hide);
+    
+    if (transient)
+    	j->transient = 1;
+    else
+    	j->transient = 0;
+
+    if (known)
+    	jp_setFlag(j, JP_KNOWN );
+
+    /* Added jump. */
+    sys->njumps++;
+    
+    return 0;
 }
 
 /**
@@ -2397,16 +3181,21 @@ static StarSystem* system_parse( StarSystem *sys, const xmlNodePtr parent )
    sys->systemFleets  = NULL;
    sys->nsystemFleets = 0;
    sys->ownerpresence = 0.;
+   sys->ngfx_SunSpaceNames=0;
 
    sys->name = xml_nodeProp(parent,"name"); /* already mallocs */
 
+
+    
    node  = parent->xmlChildrenNode;
    do { /* load all the data */
 
       /* Only handle nodes. */
       xml_onlyNodes(node);
 
+      xmlr_strd( node, "backgroundSpaceName", sys->gfx_BackgroundSpaceName );
       xmlr_strd( node, "luadata", sys->luaData );
+
       if (xml_isNode(node,"pos")) {
          cur = node->children;
          do {
@@ -2450,6 +3239,14 @@ static StarSystem* system_parse( StarSystem *sys, const xmlNodePtr parent )
                system_addPlanet( sys, xml_get(cur) );
          } while (xml_nextNode(cur));
          continue;
+    
+      } else if (xml_isNode(node,"starGraphics")) {
+          cur = node->children;
+          do {
+              if (xml_isNode(cur,"star"))
+                  system_addStar( sys, xml_nodeProp(cur,"name") );
+          } while (xml_nextNode(cur));
+          continue;
       }
 
       /* Avoid warning. */
@@ -2467,6 +3264,30 @@ static StarSystem* system_parse( StarSystem *sys, const xmlNodePtr parent )
    MELEMENT(sys->radius==0.,"radius");
    MELEMENT((flags&FLAG_INTERFERENCESET)==0,"inteference");
 #undef MELEMENT
+
+   return 0;
+}
+
+
+/**
+ * @brief Loads player-specific data from XML node.
+ *
+ *    @param parent XML node to get system from.
+ *    @return System matching parent data.
+ */
+static StarSystem* system_parseCustom( StarSystem *sys, const xmlNodePtr parent )
+{
+
+   xmlNodePtr  node;
+
+   node  = parent->xmlChildrenNode;
+   do { /* load all the data */
+
+      /* Only handle nodes. */
+      xml_onlyNodes(node);
+
+      xmlr_strd( node, "luadata", sys->luaData );
+   } while (xml_nextNode(node));
 
    return 0;
 }
@@ -2605,6 +3426,7 @@ static int system_parseJumpPointDiff( const xmlNodePtr node, StarSystem *sys )
    free(buf);
    j->targetid = j->target->id;
    j->radius = 200.;
+   j->transient = 0;
 
    if (!jp_isFlag(j,JP_AUTOPOS))
       vect_cset( &j->pos, x, y );
@@ -2624,9 +3446,10 @@ static int system_parseJumpPointDiff( const xmlNodePtr node, StarSystem *sys )
  *
  *    @param node Parent node containing jump point information.
  *    @param sys System to which the jump point belongs.
+ *    @param transient Whether this jump is transient (player-specific)
  *    @return 0 on success.
  */
-static int system_parseJumpPoint( const xmlNodePtr node, StarSystem *sys )
+static int system_parseJumpPoint( const xmlNodePtr node, StarSystem *sys, int transient )
 {
    JumpPoint *j;
    char *buf;
@@ -2671,6 +3494,10 @@ static int system_parseJumpPoint( const xmlNodePtr node, StarSystem *sys )
    free(buf);
    j->targetid = j->target->id;
    j->radius = 200.;
+   if (transient)
+	   j->transient = 1;
+   else
+	   j->transient = 0;
 
    pos = 0;
 
@@ -2728,12 +3555,16 @@ static int system_parseJumpPoint( const xmlNodePtr node, StarSystem *sys )
 }
 
 
+
+
+
 /**
  * @brief Loads the jumps into a system.
  *
  *    @param parent System parent node.
+ *    @param whether the jump is transient (player-specific)
  */
-static void system_parseJumps( const xmlNodePtr parent )
+static void system_parseJumps( const xmlNodePtr parent,int transient )
 {
    int i;
    StarSystem *sys;
@@ -2761,7 +3592,7 @@ static void system_parseJumps( const xmlNodePtr parent )
          cur = node->children;
          do {
             if (xml_isNode(cur,"jump"))
-               system_parseJumpPoint( cur, sys );
+               system_parseJumpPoint( cur, sys, transient );
          } while (xml_nextNode(cur));
       }
    } while (xml_nextNode(node));
@@ -2775,9 +3606,7 @@ static void system_parseJumps( const xmlNodePtr parent )
  */
 int space_load (void)
 {
-   int i, j;
    int ret;
-   StarSystem *sys;
 
    /* Loading. */
    systems_loading = 1;
@@ -2799,17 +3628,32 @@ int space_load (void)
    /* Done loading. */
    systems_loading = 0;
 
-   /* Apply all the presences. */
-   for (i=0; i<systems_nstack; i++)
-      system_addAllPlanetsPresence(&systems_stack[i]);
+   space_refresh();
 
-   /* Determine dominant faction. */
-   for (i=0; i<systems_nstack; i++)
-      system_setFaction( &systems_stack[i] );
+   return 0;
+}
+
+/**
+ * @brief Refresh all that's needed after loading systems (from dat or saved game)
+ *
+ *    @return 0 on success.
+ */
+int space_refresh (void)
+{
+   int i, j;
+   StarSystem *sys;
+
+
 
    /* Reconstruction. */
    systems_reconstructJumps();
    systems_reconstructPlanets();
+
+   space_reconstructPresences();
+
+   /* Determine dominant faction. */
+   for (i=0; i<systems_nstack; i++)
+      system_setFaction( &systems_stack[i] );
 
    /* Fine tuning. */
    for (i=0; i<systems_nstack; i++) {
@@ -2912,7 +3756,7 @@ static int systems_load (void)
          continue;
       }
 
-      system_parseJumps(node); /* will automatically load the jumps into the system */
+      system_parseJumps(node,0); /* will automatically load the jumps into the system */
 
       /* Clean up. */
       xmlFreeDoc(doc);
@@ -3054,7 +3898,12 @@ void space_exit (void)
       free(pnt->name);
 
       free(pnt->description);
-      free(pnt->bar_description);
+      if (pnt->settlements_description!=NULL)
+    	  free(pnt->settlements_description);
+      if (pnt->history_description!=NULL)
+    	  free(pnt->history_description);
+      if (pnt->bar_description!=NULL)
+    	  free(pnt->bar_description);
 
       /* graphics */
       if (pnt->gfx_spaceName != NULL) {
@@ -3077,8 +3926,8 @@ void space_exit (void)
       if (pnt->tech != NULL)
          tech_groupDestroy( pnt->tech );
 
-      /* commodities */
-      free(pnt->commodities);
+      /* tradedatas */
+      free(pnt->tradedatas);
    }
    free(planet_stack);
    planet_stack = NULL;
@@ -3252,7 +4101,7 @@ int space_rmMarker( int sys, SysMarker type )
 
 
 /**
- * @brief Saves what is needed to be saved for space.
+ * @brief Saves known status of systems/worlds/jumps
  *
  *    @param writer XML writer to use.
  *    @return 0 on success.
@@ -3289,6 +4138,75 @@ int space_sysSave( xmlTextWriterPtr writer )
    }
 
    xmlw_endElem(writer); /* "space" */
+
+   return 0;
+}
+
+/**
+ * @brief Saves transient assets
+ *
+ *    @param writer XML writer to use.
+ *    @return 0 on success.
+ */
+int space_transientAssetsSave( xmlTextWriterPtr writer )
+{
+   int i;
+
+   xmlw_startElem(writer,"transientAssets");
+
+   for (i=0; i<planet_nstack; i++) {
+
+      if (!(planet_stack[i].transient)) continue; /* not transient */
+
+      planet_savePlanet(writer,&planet_stack[i],0);
+   }
+
+   xmlw_endElem(writer); /* "transientAssets" */
+
+   return 0;
+}
+
+/**
+ * @brief Saves transient systems
+ *
+ *    @param writer XML writer to use.
+ *    @return 0 on success.
+ */
+int space_transientSystemsSave( xmlTextWriterPtr writer )
+{
+   int i;
+
+   xmlw_startElem(writer,"transientSystems");
+
+   for (i=0; i<systems_nstack; i++) {
+
+      if (!(systems_stack[i].transient)) continue; /* not transient */
+
+      system_saveSystem(writer,&systems_stack[i],0);
+   }
+
+   xmlw_endElem(writer); /* "transientSystems" */
+
+   return 0;
+}
+
+/**
+ * @brief Saves transient jumps
+ *
+ *    @param writer XML writer to use.
+ *    @return 0 on success.
+ */
+int space_transientJumpsSave( xmlTextWriterPtr writer )
+{
+   int i;
+
+   xmlw_startElem(writer,"transientJumps");
+
+   for (i=0; i<systems_nstack; i++) {
+	   system_saveSystemTransientJumps(writer,&systems_stack[i]);
+   }
+
+   xmlw_endElem(writer); /* "transientJumps" */
 
    return 0;
 }
@@ -3444,6 +4362,41 @@ static void presenceCleanup( StarSystem *sys )
    }
 }
 
+/**
+ * @brief Saves custom properties of assets
+ *
+ *    @param writer XML writer to use.
+ *    @return 0 on success.
+ */
+int space_customData( xmlTextWriterPtr writer )
+{
+   int i;
+
+   xmlw_startElem(writer,"customAssetData");
+
+   for (i=0; i<planet_nstack; i++) {
+
+      if ((planet_stack[i].transient)) continue; /* transient assets are saved elsewhere */
+
+      planet_savePlanet(writer,&planet_stack[i],1);
+   }
+
+   xmlw_endElem(writer); /* "customAssetData" */
+
+   xmlw_startElem(writer,"customSysData");
+
+   for (i=0; i<systems_nstack; i++) {
+
+      if ((systems_stack[i].transient)) continue; /* transient sys are saved elsewhere */
+
+      system_saveSystem(writer,&systems_stack[i],1);
+   }
+
+   xmlw_endElem(writer); /* "customSysData" */
+
+   return 0;
+}
+
 
 /**
  * @brief Sloppily sanitize invalid presences across all systems.
@@ -3596,7 +4549,7 @@ double system_getPresence( StarSystem *sys, int faction )
  */
 void system_addAllPlanetsPresence( StarSystem *sys )
 {
-   int i;
+   int i,j;
 
    /* Check for NULL and display a warning. */
    if(sys == NULL) {
@@ -3604,8 +4557,13 @@ void system_addAllPlanetsPresence( StarSystem *sys )
       return;
    }
 
-   for(i=0; i<sys->nplanets; i++)
+   for(i=0; i<sys->nplanets; i++) {
       system_addPresence(sys, sys->planets[i]->faction, sys->planets[i]->presenceAmount, sys->planets[i]->presenceRange);
+      for (j=0;j<sys->planets[i]->nextrapresences;j++) {
+    	  system_addPresence(sys, sys->planets[i]->extraPresenceFactions[j],
+    			  sys->planets[i]->extraPresenceAmounts[j], sys->planets[i]->extraPresenceRanges[j]);
+      }
+   }
 }
 
 
@@ -3735,4 +4693,760 @@ void system_rmCurrentPresence( StarSystem *sys, int faction, double amount )
 }
 
 
+/**
+ * @brief Saves a planet.
+ *
+ *    @param writer Write to use for saving the star planet.
+ *    @param p Planet to save.
+ *    @return 0 on success.
+ */
+int planet_savePlanet( xmlTextWriterPtr writer, const Planet *p, int customDataOnly )
+{
 
+   int i;
+
+   /* if custom data only and no custom data, we exit */
+   if (customDataOnly && !planet_isSaveFlag(p,PLANET_DESC_SAVE) && !planet_isSaveFlag(p,PLANET_SERVICES_SAVE)
+		   && !planet_isSaveFlag(p,PLANET_TECH_SAVE) && !planet_isSaveFlag(p,PLANET_PRESENCE_SAVE)
+		   && !planet_isSaveFlag(p,PLANET_COMMODITIES_SAVE) && p->luaData==NULL && p->ntradedatas==0)
+	   return 0;
+
+   xmlw_startElem( writer, "asset" );
+
+   /* Attributes. */
+   xmlw_attr( writer, "name", "%s", p->name );
+
+   /* Explicit virtualness. */
+   if (!customDataOnly)
+	   if (p->real == ASSET_VIRTUAL)
+		  xmlw_elemEmpty( writer, "virtual" );
+
+   /* Position. */
+   if (!customDataOnly && p->real == ASSET_REAL) {
+      xmlw_startElem( writer, "pos" );
+      xmlw_elem( writer, "x", "%f", p->pos.x );
+      xmlw_elem( writer, "y", "%f", p->pos.y );
+      xmlw_endElem( writer ); /* "pos" */
+   }
+
+   /* GFX. */
+   if (!customDataOnly && p->real == ASSET_REAL) {
+      xmlw_startElem( writer, "GFX" );
+      xmlw_elem( writer, "space", "%s", p->gfx_spacePath );
+      xmlw_elem( writer, "exterior", "%s", p->gfx_exteriorPath );
+      xmlw_endElem( writer ); /* "GFX" */
+   }
+
+   /* Presence. */
+   if ((!customDataOnly || planet_isSaveFlag(p,PLANET_PRESENCE_SAVE)) && p->faction >= 0) {
+      xmlw_startElem( writer, "presence" );
+      xmlw_elem( writer, "faction", "%s", faction_name( p->faction ) );
+      xmlw_elem( writer, "value", "%f", p->presenceAmount );
+      xmlw_elem( writer, "range", "%d", p->presenceRange );
+      xmlw_endElem( writer );
+   }
+
+   if ((!customDataOnly || planet_isSaveFlag(p,PLANET_PRESENCE_SAVE)) && p->nextrapresences>0) {
+   			 xmlw_startElem( writer, "extraPresences" );
+   			 for (i=0; i<p->nextrapresences; i++) {
+   				 xmlw_startElem( writer, "presence" );
+   				 xmlw_elem( writer, "value", "%f", p->extraPresenceAmounts[i] );
+   				 xmlw_elem( writer, "range", "%d", p->extraPresenceRanges[i] );
+   				 xmlw_elem( writer, "faction", "%s", faction_name( p->extraPresenceFactions[i] ) );
+   				 xmlw_endElem( writer ); /* "presence" */
+   			 }
+
+   			 xmlw_endElem( writer ); /* "extraPresences" */
+       	 }
+
+   /* General. */
+   if (p->real == ASSET_REAL && (!customDataOnly || planet_isSaveFlag(p,PLANET_DESC_SAVE)
+		   || planet_isSaveFlag(p,PLANET_SERVICES_SAVE || p->luaData!=NULL)) ) {
+      xmlw_startElem( writer, "general" );
+      if (!customDataOnly) {
+		  xmlw_elem( writer, "class", "%c", planet_getClass( p ) );
+		  xmlw_elem( writer, "population", "%"PRIu64, p->population );
+		  xmlw_elem( writer, "hide", "%f", sqrt(p->hide) );
+      }
+      if (!customDataOnly || planet_isSaveFlag(p,PLANET_SERVICES_SAVE)) {
+		  xmlw_startElem( writer, "services" );
+		  if (planet_hasService( p, PLANET_SERVICE_LAND )) {
+			 if (p->land_func == NULL)
+				xmlw_elemEmpty( writer, "land" );
+			 else
+				xmlw_elem( writer, "land", "%s", p->land_func );
+		  }
+		  if (planet_hasService( p, PLANET_SERVICE_REFUEL ))
+			 xmlw_elemEmpty( writer, "refuel" );
+		  if (planet_hasService( p, PLANET_SERVICE_BAR ))
+			 xmlw_elemEmpty( writer, "bar" );
+		  if (planet_hasService( p, PLANET_SERVICE_MISSIONS ))
+			 xmlw_elemEmpty( writer, "missions" );
+		  if (planet_hasService( p, PLANET_SERVICE_COMMODITY ))
+			 xmlw_elemEmpty( writer, "commodity" );
+		  if (planet_hasService( p, PLANET_SERVICE_OUTFITS ))
+			 xmlw_elemEmpty( writer, "outfits" );
+		  if (planet_hasService( p, PLANET_SERVICE_SHIPYARD ))
+			 xmlw_elemEmpty( writer, "shipyard" );
+		  xmlw_endElem( writer ); /* "services" */
+      }
+      if (planet_hasService( p, PLANET_SERVICE_LAND )) {
+    	  if ((!customDataOnly || planet_isSaveFlag(p,PLANET_COMMODITIES_SAVE)) && p->ntradedatas>0) {
+			 xmlw_startElem( writer, "tradedatas" );
+			 xmlw_elem( writer, "buySellGap", "%f", p->buySellGap );
+			 for (i=0; i<p->ntradedatas; i++) {
+				 xmlw_startElem( writer, "tradedata" );
+				 xmlw_elem( writer, "commodity", "%s", p->tradedatas[i].commodity->name );
+				 xmlw_elem( writer, "priceFactor", "%f", p->tradedatas[i].priceFactor );
+				 xmlw_elem( writer, "buyingQuantity", "%i", p->tradedatas[i].buyingQuantity );
+				 xmlw_elem( writer, "sellingQuantity", "%i", p->tradedatas[i].sellingQuantity );
+				 xmlw_endElem( writer ); /* "tradedata" */
+			 }
+
+			 xmlw_endElem( writer ); /* "tradedatas" */
+    	 }
+
+    	 if (p->ntradedatas>0 && p->lastRefresh>0) {
+    		 xmlw_startElem( writer, "tradeStatus" );
+
+    		 int scu, stp, stu;
+    		 double rem;
+
+    		 /* Time. */
+    		 xmlw_startElem(writer,"lastRefresh");
+    		 ntime_getR( &scu, &stp, &stu, &rem );
+    		 xmlw_elem(writer,"SCU","%d", scu);
+    		 xmlw_elem(writer,"STP","%d", stp);
+    		 xmlw_elem(writer,"STU","%d", stu);
+    		 xmlw_elem(writer,"Remainder","%lf", rem);
+    		 xmlw_endElem(writer); /* "time" */
+
+    		 for (i=0; i<p->ntradedatas; i++) {
+    			 xmlw_startElem( writer, "tradedata" );
+    			 xmlw_elem( writer, "commodity", "%s", p->tradedatas[i].commodity->name );
+    			 xmlw_elem( writer, "buyingQuantityRemaining", "%i", p->tradedatas[i].buyingQuantityRemaining );
+    			 xmlw_elem( writer, "sellingQuantityRemaining", "%i", p->tradedatas[i].sellingQuantityRemaining );
+    			 xmlw_endElem( writer ); /* "tradedata" */
+    		 }
+
+    		 xmlw_endElem( writer ); /* "tradedatas" */
+    	 }
+
+    	 if (!customDataOnly || planet_isSaveFlag(p,PLANET_DESC_SAVE)) {
+    		  xmlw_elem( writer, "description", "%s", p->description );
+    		  if (p->settlements_description!=NULL)
+    			  xmlw_elem( writer, "settlements_description", "%s", p->settlements_description );
+    		  if (p->history_description!=NULL)
+    		     			  xmlw_elem( writer, "history_description", "%s", p->history_description );
+    	 }
+
+
+    	 if (!customDataOnly && p->bar_description!=NULL)
+            xmlw_elem( writer, "bar", "%s", p->bar_description );
+
+
+         if (p->luaData!=NULL)
+            xmlw_elem( writer, "luadata", "%s", p->luaData );
+      }
+      xmlw_endElem( writer ); /* "general" */
+   }
+
+   /* Tech. */
+   if (planet_hasService( p, PLANET_SERVICE_LAND ))
+      tech_groupWrite( writer, p->tech );
+
+   xmlw_endElem( writer ); /** "planet" */
+
+   return 0;
+}
+
+/**
+ * @brief Saves a star system.
+ *
+ *    @param writer Write to use for saving the star system.
+ *    @param sys Star system to save.
+ *    @return 0 on success.
+ */
+int system_saveSystem( xmlTextWriterPtr writer, StarSystem *sys, int customDataOnly )
+{
+   int i;
+   const Planet **sorted_planets;
+   const JumpPoint **sorted_jumps, *jp;
+
+
+   /* Reconstruct jumps so jump pos are updated. */
+   system_reconstructJumps(sys);
+
+   xmlw_startElem( writer, "ssys" );
+
+   /* Attributes. */
+   xmlw_attr( writer, "name", "%s", sys->name );
+
+   if (!customDataOnly) {
+		xmlw_startElem( writer, "starGraphics" );
+		for (i=0; i<sys->ngfx_SunSpaceNames; i++) {
+			xmlw_startElem( writer, "star" );
+			xmlw_attr( writer, "name", "%s",sys->gfx_SunSpaceNames[i] );
+			xmlw_endElem( writer );
+		}
+		xmlw_endElem( writer ); /* "starGraphics" */
+
+		if (sys->gfx_BackgroundSpaceName != NULL)
+			xmlw_elem( writer, "gfx_BackgroundSpaceName", "%s", sys->gfx_BackgroundSpaceName );
+
+
+
+	   /* General. */
+	   xmlw_startElem( writer, "general" );
+	   if (sys->background != NULL)
+		  xmlw_elem( writer, "background", "%s", sys->background );
+	   xmlw_elem( writer, "radius", "%f", sys->radius );
+	   xmlw_elem( writer, "stars", "%d", sys->stars );
+	   xmlw_elem( writer, "interference", "%f", sys->interference );
+	   xmlw_startElem( writer, "nebula" );
+	   xmlw_attr( writer, "volatility", "%f", sys->nebu_volatility );
+	   xmlw_str( writer, "%f", sys->nebu_density );
+	   xmlw_endElem( writer ); /* "nebula" */
+	   xmlw_endElem( writer ); /* "general" */
+
+	   /* Position. */
+	   xmlw_startElem( writer, "pos" );
+	   xmlw_elem( writer, "x", "%f", sys->pos.x );
+	   xmlw_elem( writer, "y", "%f", sys->pos.y );
+	   xmlw_endElem( writer ); /* "pos" */
+
+	   /* Planets. */
+	   sorted_planets = malloc( sizeof(Planet*) * sys->nplanets);
+	   memcpy( sorted_planets, sys->planets, sizeof(Planet*) * sys->nplanets );
+	   qsort( sorted_planets, sys->nplanets, sizeof(Planet*), system_compPlanet );
+	   xmlw_startElem( writer, "assets" );
+	   for (i=0; i<sys->nplanets; i++)
+		  xmlw_elem( writer, "asset", "%s", sorted_planets[i]->name );
+	   xmlw_endElem( writer ); /* "assets" */
+	   free(sorted_planets);
+
+	   /* Jumps. */
+	   sorted_jumps = malloc( sizeof(JumpPoint*) * sys->njumps );
+	   for (i=0; i<sys->njumps; i++)
+		  sorted_jumps[i] = &sys->jumps[i];
+	   qsort( sorted_jumps, sys->njumps, sizeof(JumpPoint*), system_compJump );
+	   xmlw_startElem( writer, "jumps" );
+	   for (i=0; i<sys->njumps; i++) {
+		  jp = sorted_jumps[i];
+		  if (!(jp->transient)) { /* transient jumps are saved separately */
+			  xmlw_startElem( writer, "jump" );
+			  xmlw_attr( writer, "target", "%s", jp->target->name );
+			  /* Position. */
+			  if (!jp_isFlag( jp, JP_AUTOPOS )) {
+				 xmlw_startElem( writer, "pos" );
+				 xmlw_attr( writer, "x", "%f", jp->pos.x );
+				 xmlw_attr( writer, "y", "%f", jp->pos.y );
+				 xmlw_endElem( writer ); /* "pos" */
+			  }
+			  else
+				 xmlw_elemEmpty( writer, "autopos" );
+			  /* Radius and misc properties. */
+			  if (jp->radius != 200.)
+				 xmlw_elem( writer, "radius", "%f", jp->radius );
+			  /* More flags. */
+			  if (jp_isFlag( jp, JP_HIDDEN ))
+				 xmlw_elemEmpty( writer, "hidden" );
+			  if (jp_isFlag( jp, JP_EXITONLY ))
+				 xmlw_elemEmpty( writer, "exitonly" );
+			  xmlw_elem( writer, "hide", "%f", sqrt(jp->hide) );
+			  xmlw_endElem( writer ); /* "jump" */
+		  }
+	   }
+	   xmlw_endElem( writer ); /* "jumps" */
+	   free(sorted_jumps);
+	}
+
+   if (sys->luaData!=NULL)
+           xmlw_elem( writer, "luadata", "%s", sys->luaData );
+
+   xmlw_endElem( writer ); /** "ssys" */
+
+   return 0;
+}
+
+/**
+ * @brief Saves the transient jumps in a star system.
+ *
+ *    @param writer Write to use for saving the star system.
+ *    @param sys Star system to save.
+ *    @return 0 on success.
+ */
+int system_saveSystemTransientJumps( xmlTextWriterPtr writer, StarSystem *sys )
+{
+   int i;
+   const JumpPoint **sorted_jumps, *jp;
+
+
+   /* Reconstruct jumps so jump pos are updated. */
+   system_reconstructJumps(sys);
+
+   xmlw_startElem( writer, "ssys" );
+
+   /* Attributes. */
+   xmlw_attr( writer, "name", "%s", sys->name );
+
+   /* Jumps. */
+   sorted_jumps = malloc( sizeof(JumpPoint*) * sys->njumps );
+   for (i=0; i<sys->njumps; i++)
+      sorted_jumps[i] = &sys->jumps[i];
+   qsort( sorted_jumps, sys->njumps, sizeof(JumpPoint*), system_compJump );
+   xmlw_startElem( writer, "jumps" );
+   for (i=0; i<sys->njumps; i++) {
+      jp = sorted_jumps[i];
+      if (jp->transient) { /* only transient jumps */
+		  xmlw_startElem( writer, "jump" );
+		  xmlw_attr( writer, "target", "%s", jp->target->name );
+		  /* Position. */
+		  if (!jp_isFlag( jp, JP_AUTOPOS )) {
+			 xmlw_startElem( writer, "pos" );
+			 xmlw_attr( writer, "x", "%f", jp->pos.x );
+			 xmlw_attr( writer, "y", "%f", jp->pos.y );
+			 xmlw_endElem( writer ); /* "pos" */
+		  }
+		  else
+			 xmlw_elemEmpty( writer, "autopos" );
+		  /* Radius and misc properties. */
+		  if (jp->radius != 200.)
+			 xmlw_elem( writer, "radius", "%f", jp->radius );
+		  /* More flags. */
+		  if (jp_isFlag( jp, JP_HIDDEN ))
+			 xmlw_elemEmpty( writer, "hidden" );
+		  if (jp_isFlag( jp, JP_EXITONLY ))
+			 xmlw_elemEmpty( writer, "exitonly" );
+		  xmlw_elem( writer, "hide", "%f", sqrt(jp->hide) );
+		  xmlw_endElem( writer ); /* "jump" */
+      }
+   }
+   xmlw_endElem( writer ); /* "jumps" */
+   free(sorted_jumps);
+
+   xmlw_endElem( writer ); /** "ssys" */
+
+   return 0;
+}
+
+/**
+ * @brief Compare function for planet qsort.
+ *
+ *    @param planet1 Planet 1 to sort.
+ *    @param planet2 Planet 2 to sort.
+ *    @return Order to sort.
+ */
+static int system_compPlanet( const void *planet1, const void *planet2 )
+{
+   const Planet *p1, *p2;
+
+   p1 = * (const Planet**) planet1;
+   p2 = * (const Planet**) planet2;
+
+   return strcmp( p1->name, p2->name );
+}
+
+
+/**
+ * @brief Function for qsorting jumppoints.
+ *
+ *    @param jmp1 Jump Point 1 to sort.
+ *    @param jmp2 Jump Point 2 to sort.
+ *    @return Order to sort.
+ */
+static int system_compJump( const void *jmp1, const void *jmp2 )
+{
+   const JumpPoint *jp1, *jp2;
+
+   jp1 = * (const JumpPoint**) jmp1;
+   jp2 = * (const JumpPoint**) jmp2;
+
+   return strcmp( jp1->target->name, jp2->target->name );
+}
+
+
+/**
+ * @brief Loads player's transient systems from an XML node.
+ *
+ *    @param parent Parent node for space.
+ *    @return 0 on success.
+ */
+int space_transientSysLoad( xmlNodePtr parent )
+{
+   xmlNodePtr node, cur;
+   StarSystem *sys;
+
+   systems_loading = 1;
+
+   node = parent->xmlChildrenNode;
+   do {
+      if (xml_isNode(node,"transientSystems")) {
+         cur = node->xmlChildrenNode;
+
+         do {
+            if (xml_isNode(cur,"ssys")) {
+            	sys = system_new();
+            	system_parse( sys, cur );
+            	sys->transient=1;
+            }
+         } while (xml_nextNode(cur));
+      }
+   } while (xml_nextNode(node));
+
+   systems_loading = 0;
+
+   return 0;
+}
+
+/**
+ * @brief Loads player's transient assets from an XML node.
+ *
+ *    @param parent Parent node for space.
+ *    @return 0 on success.
+ */
+int space_transientAssetsLoad( xmlNodePtr parent )
+{
+   xmlNodePtr node, cur;
+   Planet *p;
+
+   systems_loading = 1;
+
+   node = parent->xmlChildrenNode;
+   do {
+      if (xml_isNode(node,"transientAssets")) {
+         cur = node->xmlChildrenNode;
+
+         do {
+            if (xml_isNode(cur,"asset")) {
+            	p = planet_new();
+            	planet_parse( p, cur );
+            	p->transient=1;
+            	//WARN("Loaded planet: %s, checking 1st planet: %s",p->name,planet_stack[0].name);
+            }
+         } while (xml_nextNode(cur));
+      }
+   } while (xml_nextNode(node));
+
+   systems_loading = 0;
+
+   return 0;
+}
+
+
+/**
+ * @brief Loads player's transient jumps from an XML node.
+ *
+ *    @param parent Parent node for space.
+ *    @return 0 on success.
+ */
+int space_transientJumpsLoad( xmlNodePtr parent )
+{
+   xmlNodePtr node, cur;
+
+   node = parent->xmlChildrenNode;
+   do {
+      if (xml_isNode(node,"transientJumps")) {
+         cur = node->xmlChildrenNode;
+
+         do {
+            if (xml_isNode(cur,"ssys")) {
+            	system_parseJumps(cur,1);
+            }
+         } while (xml_nextNode(cur));
+      }
+   } while (xml_nextNode(node));
+
+   return 0;
+}
+
+/**
+ * @brief Loads player's transient assets from an XML node.
+ *
+ *    @param parent Parent node for space.
+ *    @return 0 on success.
+ */
+int space_planetCustomLoad( xmlNodePtr parent )
+{
+   xmlNodePtr node, cur;
+   Planet *p;
+   char* planetName;
+   node = parent->xmlChildrenNode;
+   do {
+      if (xml_isNode(node,"customAssetData")) {
+         cur = node->xmlChildrenNode;
+
+         do {
+            if (xml_isNode(cur,"asset")) {
+            	xmlr_attr(cur,"name",planetName);
+            	if (planetName!=NULL) {
+            		p = planet_get(planetName);
+            		planet_parseCustom(p,cur);
+            	}
+            }
+         } while (xml_nextNode(cur));
+      }
+   } while (xml_nextNode(node));
+
+   return 0;
+}
+
+/**
+ * @brief Loads player's transient sys from an XML node.
+ *
+ *    @param parent Parent node for space.
+ *    @return 0 on success.
+ */
+int space_systemCustomLoad( xmlNodePtr parent )
+{
+   xmlNodePtr node, cur;
+   StarSystem *sys;
+   char* sysName;
+   node = parent->xmlChildrenNode;
+   do {
+      if (xml_isNode(node,"customSysData")) {
+         cur = node->xmlChildrenNode;
+
+         do {
+            if (xml_isNode(cur,"ssys")) {
+            	xmlr_attr(cur,"name",sysName);
+            	if (sysName!=NULL) {
+            		sys = system_get(sysName);
+            		system_parseCustom(sys,cur);
+            	}
+            }
+         } while (xml_nextNode(cur));
+      }
+   } while (xml_nextNode(node));
+
+   return 0;
+}
+
+/**
+ * @brief Erase all data from a loaded universe. For use before loading a new game.
+ *
+ */
+void space_reset() {
+   space_exit();
+   cur_system=NULL;
+   planetname_stack = NULL;
+   systemname_stack = NULL;
+   spacename_mstack=0;
+   spacename_nstack=0;
+   systems_nstack=0;
+   systems_mstack=0;
+   planet_nstack=0;
+   planet_mstack=0;
+}
+
+/**
+ * @brief Fetches the trade data associated with a currency and a planet
+ *
+ *    @param p A planet
+ *    @param com A commodity
+ *    @return The associated TradeData or NULL if not present
+ */
+TradeData* planet_getTradeData(Planet* p,Commodity* com) {
+	int i;
+
+	for (i=0;i<p->ntradedatas;i++) {
+		if (p->tradedatas[i].commodity==com) {
+			return &(p->tradedatas[i]);
+		}
+	}
+
+	return NULL;
+}
+
+/**
+ * @brief Updates buyable/sellable quantities based on last time the planet was visited
+ *
+ *    @param p A planet
+ *    @return
+ */
+void planet_updateQuantities(Planet* p) {
+	ntime_t timeDiff;
+	float ratio;
+	int i;
+
+	//If never refreshed, initialize to max
+	if (p->lastRefresh==0) {
+		for (i=0;i<p->ntradedatas;i++) {
+			p->tradedatas[i].buyingQuantityRemaining=p->tradedatas[i].buyingQuantity;
+			p->tradedatas[i].sellingQuantityRemaining=p->tradedatas[i].sellingQuantity;
+		}
+	} else {
+		timeDiff=ntime_get()-p->lastRefresh;
+		ratio = timeDiff / TRADE_REFILL_DURATION;
+
+		for (i=0;i<p->ntradedatas;i++) {
+			p->tradedatas[i].buyingQuantityRemaining+=p->tradedatas[i].buyingQuantity*ratio;
+
+			if (p->tradedatas[i].buyingQuantityRemaining>p->tradedatas[i].buyingQuantity)
+				p->tradedatas[i].buyingQuantityRemaining=p->tradedatas[i].buyingQuantity;
+
+
+			p->tradedatas[i].sellingQuantityRemaining+=p->tradedatas[i].sellingQuantity*ratio;
+			if (p->tradedatas[i].sellingQuantityRemaining>p->tradedatas[i].sellingQuantity)
+				p->tradedatas[i].sellingQuantityRemaining=p->tradedatas[i].sellingQuantity;
+		}
+	}
+	p->lastRefresh=ntime_get();
+}
+
+/**
+ * @brief Calculates the adjusted prices on a planet taking into account nearby systems.
+ *
+ * Intended to run when the player lands for now. Could also be run whenever underlying data changes,
+ * but that would be costlier.
+ *
+ *    @param p A planet
+ *    @return
+ */
+void planet_refreshPlanetPriceFactors(Planet* p) {
+	int nbcom=p->ntradedatas;
+	int i;
+
+	//Will contain the weighted total prices on all nearby worlds
+	float* factorTotals=malloc(nbcom*sizeof(float));
+	//Will contain the weights
+	float* weightTotals=malloc(nbcom*sizeof(float));
+
+	for (i=0;i<nbcom;i++) {
+		factorTotals[i]=0;
+		weightTotals[i]=0;
+	}
+
+	//Stack of systems we are working on. Anything after pos is not yet handled.
+	StarSystem** sysStack=malloc(1024*sizeof(StarSystem*));//1024 is wild over-estimate but that memory will be freed anyway
+	int* sysDepth=malloc(1024*sizeof(int));
+	int pos;
+	int nstack;
+
+	const char* sysName=planet_getSystem(p->name);
+
+	if (sysName==NULL)//Planet not part of any system
+		return;
+
+	//Start with planet's system
+	sysStack[0]=system_get(sysName);
+	sysDepth[0]=0;
+	pos=0;
+	nstack=1;
+
+	//While there are systems in the stack, continue
+	while (pos<nstack) {
+		planet_refreshPlanetPriceFactors_handleSystem(p,factorTotals,weightTotals,
+				sysStack,sysDepth,&pos,&nstack);
+	}
+
+	//Now simple to get adjusted price: just a factor to compute
+	for (i=0;i<nbcom;i++) {
+		p->tradedatas[i].adjustedPriceFactor=factorTotals[i]/weightTotals[i];
+	}
+
+	free(factorTotals);
+	free(weightTotals);
+	free(sysStack);
+	free(sysDepth);
+
+}
+
+
+/**
+ * @brief Internal method to compute a system's contribution to prices on a planet
+ *
+ *    @return
+ */
+static void planet_refreshPlanetPriceFactors_handleSystem(Planet* p,float* factorTotals,float* weightTotals,
+		StarSystem** sysStack,int* sysDepth,int* pos,int* nstack) {
+
+	int i,j,k;
+	int level=sysDepth[*pos];
+	StarSystem* sys=sysStack[*pos];
+
+	//Loop through all planets
+	for (i=0;i<sys->nplanets;i++) {
+		//lopp through all trade datas
+		for (j=0;j<sys->planets[i]->ntradedatas;j++) {
+			//check whether the commodity is also in the targeted planet
+			for (k=0;k<p->ntradedatas;k++) {
+				if (sys->planets[i]->tradedatas[j].commodity==p->tradedatas[k].commodity) {
+					//Weight of the world for that commodity is buying+selling quantity:
+					float weight=sys->planets[i]->tradedatas[j].buyingQuantity+sys->planets[i]->tradedatas[j].sellingQuantity;
+
+					//Then adjusted based on how far we are from target world:
+					if (level==0 && p!=sys->planets[i]) {
+						weight*=0.9;//same system but different world
+					} else if (level==1) {
+						weight*=0.5;
+					} else if (level==2) {
+						weight*=0.25;
+					}
+
+					factorTotals[k]+=(weight*sys->planets[i]->tradedatas[j].priceFactor);
+					weightTotals[k]+=weight;
+				}
+			}
+		}
+	}
+
+	//We only look at systems within two jumps
+	if (level<2) {
+		for (i=0;i<sys->njumps;i++) {
+			int alreadyDone=0;
+			//Check whether we've already added a system to the stack:
+			for (j=0;j<*nstack;j++) {
+				if (sysStack[j]==sys->jumps[i].target) {
+					alreadyDone=1;
+				}
+			}
+			//if not, add it with an increased depth (distance from original)
+			if (!alreadyDone) {
+				(*nstack)++;
+				sysStack[(*nstack)-1]=sys->jumps[i].target;
+				sysDepth[(*nstack)-1]=level+1;
+			}
+		}
+	}
+
+	(*pos)++;
+}
+
+/**
+ * @brief Refresh adjusted prices for all planets in the world
+ *
+ * Currently not used (it's done per-planet on landing instead)
+ * @return
+ */
+void planet_refreshAllPlanetAdjustedPrices() {
+	int i;
+	for (i=0;i<planet_nstack;i++) {
+		planet_refreshPlanetPriceFactors(&planet_stack[i]);
+	}
+}
+
+/**
+ * @brief Debug method to test data integrity
+ *
+ * Method used to check data integrity by triggering SIGSEV if any corruption occurred
+ * in the system/planet stacks
+ * @return
+ */
+void space_debugCheckDataIntegrity() {
+	int i,j,k;
+	int total=0;
+	for (i=0;i<systems_nstack;i++) {
+		total+=strlen(systems_stack[i].name);
+		for (j=0;j<systems_stack[i].nplanets;j++) {
+			total+=strlen(systems_stack[i].planets[j]->name);
+			for (k=0;k<systems_stack[i].planets[j]->nextrapresences;k++) {
+				total+=systems_stack[i].planets[j]->extraPresenceFactions[k];
+			}
+			for (k=0;k<systems_stack[i].planets[j]->ntradedatas;k++) {
+				total+=strlen(systems_stack[i].planets[j]->tradedatas[k].commodity->name);
+			}
+		}
+	}
+	WARN("Checked data integrity, value: %i",total);
+}

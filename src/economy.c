@@ -37,6 +37,7 @@
 #include "ntime.h"
 
 
+
 #define XML_COMMODITY_ID      "Commodities" /**< XML document identifier */
 #define XML_COMMODITY_TAG     "commodity" /**< XML commodity identifier. */
 
@@ -49,7 +50,6 @@
 #define ECON_FACTION_MOD   0.1 /**< Modifier on Base for faction standings. */
 #define ECON_PROD_MODIFIER 500000. /**< Production modifier, divide production by this amount. */
 #define ECON_PROD_VAR      0.01 /**< Defines the variability of production. */
-
 
 /* commodity stack */
 static Commodity* commodity_stack = NULL; /**< Contains all the commodities. */
@@ -64,24 +64,16 @@ extern int systems_nstack; /**< Number of star systems. */
 /*
  * Nodal analysis simulation for dynamic economies.
  */
-static int econ_initialized   = 0; /**< Is economy system initialized? */
+
 static int *econ_comm         = NULL; /**< Commodities to calculate. */
 static int econ_nprices       = 0; /**< Number of prices to calculate. */
-static cs *econ_G             = NULL; /**< Admittance matrix. */
 
 
 /*
  * Prototypes.
  */
 /* Commodity. */
-static void commodity_freeOne( Commodity* com );
 static int commodity_parse( Commodity *temp, xmlNodePtr parent );
-/* Economy. */
-static double econ_calcJumpR( StarSystem *A, StarSystem *B );
-static int econ_createGMatrix (void);
-credits_t economy_getPrice( const Commodity *com,
-      const StarSystem *sys, const Planet *p ); /* externed in land.c */
-
 
 /**
  * @brief Converts credits to a usable string for displaying.
@@ -143,22 +135,6 @@ Commodity* commodity_getW( const char* name )
    return NULL;
 }
 
-
-/**
- * @brief Frees a commodity.
- *
- *    @param com Commodity to free.
- */
-static void commodity_freeOne( Commodity* com )
-{
-   if (com->name)
-      free(com->name);
-   if (com->description)
-      free(com->description);
-
-   /* Clear the memory. */
-   memset(com, 0, sizeof(Commodity));
-}
 
 
 /**
@@ -329,358 +305,10 @@ int commodity_load (void)
    DEBUG("Loaded %d Commodit%s", commodity_nstack, (commodity_nstack==1) ? "y" : "ies" );
 
    return 0;
-
-
 }
 
 
-/**
- * @brief Frees all the loaded commodities.
- */
-void commodity_free (void)
-{
-   int i;
-   for (i=0; i<commodity_nstack; i++)
-      commodity_freeOne( &commodity_stack[i] );
-   free( commodity_stack );
-   commodity_stack = NULL;
-   commodity_nstack = 0;
-
-   /* More clean up. */
-   free( econ_comm );
-}
 
 
-/**
- * @brief Gets the price of a good on a planet in a system.
- *
- *    @param com Commodity to get price of.
- *    @param sys System to get price of commodity.
- *    @param p Planet to get price of commodity.
- *    @return The price of the commodity.
- */
-credits_t economy_getPrice( const Commodity *com,
-      const StarSystem *sys, const Planet *p )
-{
-   (void) p;
-   int i, k;
-   double price;
-
-   /* Get position in stack. */
-   k = com - commodity_stack;
-
-   /* Find what commodity that is. */
-   for (i=0; i<econ_nprices; i++)
-      if (econ_comm[i] == k)
-         break;
-
-   /* Check if found. */
-   if (i >= econ_nprices) {
-      WARN("Price for commodity '%s' not known.", com->name);
-      return 0;
-   }
-
-   /* Calculate price. */
-   price  = (double) com->price;
-   price *= sys->prices[i];
-   return (credits_t) price;
-}
 
 
-/**
- * @brief Calculates the resistance between two star systems.
- *
- *    @param A Star system to calculate the resistance between.
- *    @param B Star system to calculate the resistance between.
- *    @return Resistance between A and B.
- */
-static double econ_calcJumpR( StarSystem *A, StarSystem *B )
-{
-   double R;
-
-   /* Set to base to ensure price change. */
-   R = ECON_BASE_RES;
-
-   /* Modify based on system conditions. */
-   R += (A->nebu_density + B->nebu_density) / 1000.; /* Density shouldn't affect much. */
-   R += (A->nebu_volatility + B->nebu_volatility) / 100.; /* Volatility should. */
-
-   /* Modify based on global faction. */
-   if ((A->faction != -1) && (B->faction != -1)) {
-      if (areEnemies(A->faction, B->faction))
-         R += ECON_FACTION_MOD * ECON_BASE_RES;
-      else if (areAllies(A->faction, B->faction))
-         R -= ECON_FACTION_MOD * ECON_BASE_RES;
-   }
-
-   /* @todo Modify based on fleets. */
-
-   return R;
-}
-
-
-/**
- * @brief Calculates the intensity in a system node.
- *
- * @todo Make it time/item dependent.
- */
-static double econ_calcSysI( unsigned int dt, StarSystem *sys, int price )
-{
-   (void) dt;
-   (void) sys;
-   (void) price;
-   return 0.;
-#if 0
-   int i;
-   double I;
-   double prodfactor, p;
-   double ddt;
-   Planet *planet;
-
-   ddt = (double)(dt / NTIME_UNIT_LENGTH);
-
-   /* Calculate production level. */
-   p = 0.;
-   for (i=0; i<sys->nplanets; i++) {
-      planet = sys->planets[i];
-      if (planet_hasService(planet, PLANET_SERVICE_INHABITED)) {
-         /*
-          * Calculate production.
-          */
-         /* We base off the current production. */
-         prodfactor  = planet->cur_prodfactor;
-         /* Add a variability factor based on the Gaussian distribution. */
-         prodfactor += ECON_PROD_VAR * RNG_2SIGMA() * ddt;
-         /* Add a tendency to return to the planet's base production. */
-         prodfactor -= ECON_PROD_VAR *
-               (planet->cur_prodfactor - prodfactor)*ddt;
-         /* Save for next iteration. */
-         planet->cur_prodfactor = prodfactor;
-         /* We base off the sqrt of the population otherwise it changes too fast. */
-         p += prodfactor * sqrt(planet->population);
-      }
-   }
-
-   /* The intensity is basically the modified production. */
-   I = p / ECON_PROD_MODIFIER;
-
-   return I;
-#endif
-}
-
-
-/**
- * @brief Creates the admittance matrix.
- *
- *    @return 0 on success.
- */
-static int econ_createGMatrix (void)
-{
-   int ret;
-   int i, j;
-   double R, Rsum;
-   cs *M;
-   StarSystem *sys;
-
-   /* Create the matrix. */
-   M = cs_spalloc( systems_nstack, systems_nstack, 1, 1, 1 );
-   if (M == NULL)
-      ERR("Unable to create CSparse Matrix.");
-
-   /* Fill the matrix. */
-   for (i=0; i < systems_nstack; i++) {
-      sys   = &systems_stack[i];
-      Rsum = 0.;
-
-      /* Set some values. */
-      for (j=0; j < sys->njumps; j++) {
-
-         /* Get the resistances. */
-         R     = econ_calcJumpR( sys, sys->jumps[j].target );
-         R     = 1./R; /* Must be inverted. */
-         Rsum += R;
-
-         /* Matrix is symmetrical and non-diagonal is negative. */
-         ret = cs_entry( M, i, sys->jumps[j].target->id, -R );
-         if (ret != 1)
-            WARN("Unable to enter CSparse Matrix Cell.");
-         ret = cs_entry( M, sys->jumps[j].target->id, i, -R );
-         if (ret != 1)
-            WARN("Unable to enter CSparse Matrix Cell.");
-      }
-
-      /* Set the diagonal. */
-      Rsum += 1./ECON_SELF_RES; /* We add a resistance for dampening. */
-      cs_entry( M, i, i, Rsum );
-   }
-
-   /* Compress M matrix and put into G. */
-   if (econ_G != NULL)
-      cs_spfree( econ_G );
-   econ_G = cs_compress( M );
-   if (econ_G == NULL)
-      ERR("Unable to create economy G Matrix.");
-
-   /* Clean up. */
-   cs_spfree(M);
-
-   return 0;
-}
-
-
-/**
- * @brief Initializes the economy.
- *
- *    @return 0 on success.
- */
-int economy_init (void)
-{
-   int i;
-
-   /* Must not be initialized. */
-   if (econ_initialized)
-      return 0;
-
-   /* Allocate price space. */
-   for (i=0; i<systems_nstack; i++) {
-      if (systems_stack[i].prices != NULL)
-         free(systems_stack[i].prices);
-      systems_stack[i].prices = calloc(econ_nprices, sizeof(double));
-   }
-
-   /* Mark economy as initialized. */
-   econ_initialized = 1;
-
-   /* Refresh economy. */
-   economy_refresh();
-
-   return 0;
-}
-
-
-/**
- * @brief Regenerates the economy matrix.  Should be used if the universe
- *  changes in any permanent way.
- */
-int economy_refresh (void)
-{
-   /* Economy must be initialized. */
-   if (econ_initialized == 0)
-      return 0;
-
-   /* Create the resistance matrix. */
-   if (econ_createGMatrix())
-      return -1;
-
-   /* Initialize the prices. */
-   economy_update( 0 );
-
-   return 0;
-}
-
-
-/**
- * @brief Updates the economy.
- *
- *    @param dt Deltatick in NTIME.
- */
-int economy_update( unsigned int dt )
-{
-   int ret;
-   int i, j;
-   double *X;
-   double scale, offset;
-   /*double min, max;*/
-
-   /* Economy must be initialized. */
-   if (econ_initialized == 0)
-      return 0;
-
-   /* Create the vector to solve the system. */
-   X = malloc(sizeof(double)*systems_nstack);
-   if (X == NULL) {
-      WARN("Out of Memory!");
-      return -1;
-   }
-
-   /* Calculate the results for each price set. */
-   for (j=0; j<econ_nprices; j++) {
-
-      /* First we must load the vector with intensities. */
-      for (i=0; i<systems_nstack; i++)
-         X[i] = econ_calcSysI( dt, &systems_stack[i], j );
-
-      /* Solve the system. */
-      /** @TODO This should be improved to try to use better factorizations (LU/Cholesky)
-       * if possible or just outright try to use some other library that does fancy stuff
-       * like UMFPACK. Would be also interesting to see if it could be optimized so we
-       * store the factorization or update that instead of handling it individually. Another
-       * point of interest would be to split loops out to make the solving faster, however,
-       * this may be trickier to do (although it would surely let us use cholesky always if we
-       * enforce that condition). */
-      ret = cs_qrsol( 3, econ_G, X );
-      if (ret != 1)
-         WARN("Failed to solve the Economy System.");
-
-      /*
-       * Get the minimum and maximum to scale.
-       */
-      /*
-      min = +HUGE_VALF;
-      max = -HUGE_VALF;
-      for (i=0; i<systems_nstack; i++) {
-         if (X[i] < min)
-            min = X[i];
-         if (X[i] > max)
-            max = X[i];
-      }
-      scale = 1. / (max - min);
-      offset = 0.5 - min * scale;
-      */
-
-      /*
-       * I'm not sure I like the filtering of the results, but it would take
-       * much more work to get a sane system working without the need of post
-       * filtering.
-       */
-      scale    = 1.;
-      offset   = 1.;
-      for (i=0; i<systems_nstack; i++)
-         systems_stack[i].prices[j] = X[i] * scale + offset;
-   }
-
-   /* Clean up. */
-   free(X);
-
-   return 0;
-}
-
-
-/**
- * @brief Destroys the economy.
- */
-void economy_destroy (void)
-{
-   int i;
-
-   /* Must be initialized. */
-   if (!econ_initialized)
-      return;
-
-   /* Clean up the prices in the systems stack. */
-   for (i=0; i<systems_nstack; i++) {
-      if (systems_stack[i].prices != NULL) {
-         free(systems_stack[i].prices);
-         systems_stack[i].prices = NULL;
-      }
-   }
-
-   /* Destroy the economy matrix. */
-   if (econ_G != NULL) {
-      cs_spfree( econ_G );
-      econ_G = NULL;
-   }
-
-   /* Economy is now deinitialized. */
-   econ_initialized = 0;
-}

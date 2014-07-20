@@ -4,12 +4,53 @@ include('universe/settlements/human_settlements.lua')
 include('universe/settlements/merseian_settlements.lua')
 include('universe/settlements/barbarian_settlements.lua')
 include('universe/objects/class_settlements.lua')
+include("universe/live/universe_status.lua")
 
 base_populations= {} --public interface
 
-local earth_pos={x=0,y=0}
-local merseia_pos={x=1200,y=-100}
-local betelgeuse_pos={x=736,y=425}
+local function imperial_sector_names(star)
+
+	local sector=nil
+	local bestdist=nil
+
+	for _,v in pairs(imperial_sectors) do
+		if not sector then
+			sector=v.name
+			bestdist=gh.calculateDistance(v.center,star)
+		else
+			if (gh.calculateDistance(v.center,star)<bestdist) then
+				sector=v.name
+				bestdist=gh.calculateDistance(v.center,star)
+			end
+		end
+	end
+
+	return sector
+end
+
+local function imperial_fringes_names(star)
+
+	local dx=star.x-earth_pos.x
+	local dy=star.y-earth_pos.y
+
+	if math.abs(dx)>math.abs(dy) then
+		if (dx>0) then
+			return "Spinward Fringes"
+		else
+			return "Anti-spinward Fringes"
+		end
+	else
+		if (dy>0) then
+			return "Coreward Fringes"
+		else
+			return "Rimward Fringes"
+		end
+	end
+end
+
+local function barbarian_fringes_names(star)
+	return get_nearest_barbarian_zone(star).name
+end
 
 local function outer_zone_generate(star)
 
@@ -27,7 +68,7 @@ local function empire_merseia_border_priority(star,priority)
 	local distanceEarth=gh.calculateDistance(earth_pos,star)
 	local distanceMerseia=gh.calculateDistance(merseia_pos,star)
 
-	if (distanceEarth<1000 and distanceMerseia<900) then
+	if (distanceEarth<1000 and distanceMerseia<1200) then
 		return priority
 	end
 
@@ -146,7 +187,7 @@ local function empire_outer_generate(star)
 end
 
 local function empire_fringe_generate(star)
-	if (math.random()<0.5) then
+	if (math.random()<0.8) then
 		for k,planet in pairs(star.planets) do
 			generate_human_population(star,planet,0.5,0.7,{50000,20000000},0.8,0.7,0.5,3,0.3,"Empire of Terra");
 		end
@@ -213,27 +254,32 @@ end
 
 
 
-local outer_zone={name="outer_zone",priority=function() return 1 end,generate=function(star) end,nativeCivilization=0}
+local outer_zone={name="outer_zone",priority=function() return 1 end,generate=function(star) end,nativeCivilization=0,zoneName=function(star) return "Great Beyond" end}
 local empire_inner={name="empire_inner",priority=function(star) return priority_distance(earth_pos,star,250,100) end,
 	generate=empire_inner_generate,
-	specialSettlement=settlement_generator.coreHumanSettlements,nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1},nativeFaction="Empire of Terra"}
-local empire_outer={name="empire_outer",priority=function(star) return priority_distance(earth_pos,star,500,50) end,generate=empire_outer_generate,specialSettlement=settlement_generator.outerHumanSettlements,nativeCivilization=0.9,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.7},nativeFaction="Empire of Terra"}
+	specialSettlement=settlement_generator.coreHumanSettlements,nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1},nativeFaction="Empire of Terra",zoneName=function(star) return "Sector Sol" end}
+local empire_outer={name="empire_outer",priority=function(star) return priority_distance(earth_pos,star,600,50) end,generate=empire_outer_generate,specialSettlement=settlement_generator.outerHumanSettlements,nativeCivilization=0.9,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.7},nativeFaction="Empire of Terra",zoneName=imperial_sector_names}
 
-local empire_fringe={name="empire_fringe",priority=function(star) return priority_distance(earth_pos,star,750,20) end,generate=empire_fringe_generate,
+local empire_border={name="empire_border",priority=function(star) return priority_distance(earth_pos,star,900,20) end,generate=empire_fringe_generate,
 specialSettlement=gh.concatLists({settlement_generator.fringeEmpireSettlements,settlement_generator.fringeHumanIndependentSettlements}),
-nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.5},nativeFaction="Independent"}
+nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.5},nativeFaction="Independent",zoneName=imperial_sector_names}
 
 local empire_merseia_border={name="empire_merseia_border",priority=function(star) return empire_merseia_border_priority(star,25) end,generate=empire_merseia_border_generate,
 specialSettlement=settlement_generator.fringeEmpireSettlements,
-nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction="Empire of Terra"}
+nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction="Empire of Terra",zoneName=imperial_sector_names}
 
-local empire_outer_fringe={name="empire_outer_fringe",priority=function(star) return priority_distance(earth_pos,star,1000,10) end,generate=empire_outer_fringe_generate,
+local empire_fringe={name="empire_fringe",priority=function(star) return priority_distance(earth_pos,star,1200,10) end,generate=empire_outer_fringe_generate,
 specialSettlement=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),
-nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction="Independent"}
-local barbarian_fringe={name="barbarian_fringe",priority=function(star) return barbarian_priority(star) end,generate=barbarian_fringe_generate,specialSettlement=settlement_generator.barbarianSettlements,nativeCivilization=0,nativeFactors={agriculture=0.5,industry=0.3,services=0.1,technology=0.2,military=1.2,stability=0.3},nativeFaction="Independent"}
-local merseia_inner={name="merseia_inner",priority=function(star) return priority_distance(merseia_pos,star,250,100) end,generate=merseia_inner_generate,specialSettlement=settlement_generator.coreMerseianSettlements,nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1.2},nativeFaction="Roidhunate of Merseia"}
-local merseia_outer={name="merseia_outer",priority=function(star) return priority_distance(merseia_pos,star,500,45) end,generate=merseia_outer_generate,nativeCivilization=0.5,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.9},nativeFaction="Roidhunate of Merseia"}
-local merseia_fringe={name="merseia_fringe",priority=function(star) return priority_distance(merseia_pos,star,700,18) end,generate=merseia_fringe_generate,nativeCivilization=0.3,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction="Independent"}
-local betelgeuse={name="betelgeuse",priority=function(star) return priority_distance(betelgeuse_pos,star,200,100) end,generate=betelgeuse_generate,nativeCivilization=0.8,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.8,stability=0.8},nativeFaction="Sartaza of Betelgeuse"}
+nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction="Independent",zoneName=imperial_fringes_names}
 
-base_populations.templates={outer_zone,barbarian_fringe,empire_inner,empire_outer,empire_fringe,empire_merseia_border,empire_outer_fringe,merseia_inner,merseia_outer,merseia_fringe,betelgeuse}
+local barbarian_fringe={name="barbarian_fringe",priority=function(star) return barbarian_priority(star) end,generate=barbarian_fringe_generate,specialSettlement=settlement_generator.barbarianSettlements,nativeCivilization=0,nativeFactors={agriculture=0.5,industry=0.3,services=0.1,technology=0.2,military=1.2,stability=0.3},nativeFaction="Independent",zoneName=barbarian_fringes_names}
+
+local merseia_inner={name="merseia_inner",priority=function(star) return priority_distance(merseia_pos,star,250,100) end,generate=merseia_inner_generate,specialSettlement=settlement_generator.coreMerseianSettlements,nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1.2},nativeFaction="Roidhunate of Merseia",zoneName=function(star) return "Inner Roidhunate" end}
+
+local merseia_outer={name="merseia_outer",priority=function(star) return priority_distance(merseia_pos,star,500,45) end,generate=merseia_outer_generate,nativeCivilization=0.5,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.9},nativeFaction="Roidhunate of Merseia",zoneName=function(star) return "Outer Roidhunate" end}
+
+local merseia_fringe={name="merseia_fringe",priority=function(star) return priority_distance(merseia_pos,star,700,18) end,generate=merseia_fringe_generate,nativeCivilization=0.3,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction="Independent",zoneName=function(star) return "Roidhunate Fringes" end}
+
+local betelgeuse={name="betelgeuse",priority=function(star) return priority_distance(betelgeuse_pos,star,200,100) end,generate=betelgeuse_generate,nativeCivilization=0.8,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.8,stability=0.8},nativeFaction="Sartaza of Betelgeuse",zoneName=function(star) return "Betelgeuse" end}
+
+base_populations.templates={outer_zone,barbarian_fringe,empire_inner,empire_outer,empire_border,empire_merseia_border,empire_fringe,merseia_inner,merseia_outer,merseia_fringe,betelgeuse}

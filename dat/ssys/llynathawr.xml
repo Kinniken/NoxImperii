@@ -8,10 +8,11 @@
   <nebula volatility="0.000000">0.000000</nebula>
  </general>
  <pos>
-  <x>-674.659200</x>
-  <y>62.348160</y>
+  <x>-464.659200</x>
+  <y>90.348160</y>
  </pos>
  <assets>
   <asset>Llynathawr</asset>
  </assets>
+ <jumps/>
 </ssys>

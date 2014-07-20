@@ -1,6 +1,7 @@
 include('universe/generate_helper.lua')
 include('universe/live/live_desc.lua')
 include('universe/objects/class_planets.lua')
+--include('universe/live/universe_status.lua')
 
 --Const copy-pasted for auto-completion. Not best design but avoids mistakes
 EXOTIC_FOOD="Exotic Food"
@@ -408,12 +409,12 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 	end
 end
 
-local function generateExtraPresences(planet)
+local function generateExtraPresences(planet,sectorStability)
 
 	if (planet.lua.settlements.humans) then
 		local settlement=planet.lua.settlements.humans
 
-		local amount=100*(settlement.services+settlement.industry+settlement.agriculture/2)
+		local amount=100*(settlement.services+settlement.industry+settlement.agriculture/2)*sectorStability
 		local range=1
 		if (settlement.technology>0.8) then
 			range=2
@@ -425,7 +426,7 @@ local function generateExtraPresences(planet)
 		planet.c:setFactionExtraPresence("Human Trader",amount,range)
 
 		if (settlement.stability<0.5) then
-			local amount=100*(1-settlement.stability*2)
+			local amount=100*(1-settlement.stability*2)/sectorStability
 			local range=2
 			planet.c:setFactionExtraPresence("Pirate",amount,range)
 		end
@@ -435,7 +436,7 @@ local function generateExtraPresences(planet)
 	if (planet.lua.settlements.merseians) then
 		local settlement=planet.lua.settlements.merseians
 
-		local amount=100*(settlement.services+settlement.industry+settlement.agriculture/2)
+		local amount=100*(settlement.services+settlement.industry+settlement.agriculture/2)*sectorStability
 		local range=1
 		if (settlement.technology>0.8) then
 			range=2
@@ -447,7 +448,7 @@ local function generateExtraPresences(planet)
 		planet.c:setFactionExtraPresence("Merseian Trader",amount,range)
 
 		if (settlement.stability<0.3) then
-			local amount=30*(1-settlement.stability*3)
+			local amount=30*(1-settlement.stability*3)/sectorStability
 			local range=2
 			planet.c:setFactionExtraPresence("Pirate",amount,range)
 		end
@@ -456,7 +457,7 @@ local function generateExtraPresences(planet)
 	if (planet.lua.settlements.betelgeuseans) then
 		local settlement=planet.lua.settlements.betelgeuseans
 
-		local amount=100*(settlement.services+settlement.industry+settlement.agriculture/2)
+		local amount=100*(settlement.services+settlement.industry+settlement.agriculture/2)*sectorStability
 		local range=1
 		if (settlement.technology>0.8) then
 			range=2
@@ -468,7 +469,7 @@ local function generateExtraPresences(planet)
 		planet.c:setFactionExtraPresence("Betelgeusean Trader",amount,range)
 
 		if (settlement.stability<0.3) then
-			local amount=40*(1-settlement.stability*3)
+			local amount=40*(1-settlement.stability*3)/sectorStability
 			local range=2
 			planet.c:setFactionExtraPresence("Pirate",amount,range)
 		end
@@ -593,6 +594,16 @@ local function generateCivilizedPlanetServices(planet)
 		end
 	end
 
+	local sectorName=planet.c:system():getZone()
+	local sectorStability=getSectorStability(sectorName)
+
+	if not sectorStability then
+		sectorStability=1
+	end
+
+	bestIndustry=bestIndustry*sectorStability
+	bestTechnology=bestTechnology*sectorStability
+
 	planet.c:addService("r")
 
 	if (bestPop>1000) then
@@ -641,7 +652,7 @@ local function generateCivilizedPlanetServices(planet)
 		end
 
 
-		presence=math.pow(bestPop/10,1/3.4)*bestTechnology
+		
 		if (bestTechnology<0.5) then
 			range=1
 		elseif (bestTechnology<1) then
@@ -652,12 +663,15 @@ local function generateCivilizedPlanetServices(planet)
 
 		if (factionName=="Barbarians") then
 			range=range*3
+			presence=math.pow(bestPop/10,1/3.4)*bestTechnology/sectorStability
+		else
+			presence=math.pow(bestPop/10,1/3.4)*bestTechnology*sectorStability
 		end
 		
 		planet.c:setFactionPresence(factionName,presence,range)
 	end
 	
-	generateExtraPresences(planet)
+	generateExtraPresences(planet,sectorStability)
 end
 
 local function handleSettlementExtraDemandAndSupply(settlement,commodities)

@@ -8,10 +8,11 @@
   <nebula volatility="0.000000">0.000000</nebula>
  </general>
  <pos>
-  <x>750.000000</x>
-  <y>58.000000</y>
+  <x>979.000000</x>
+  <y>-240.000000</y>
  </pos>
  <assets>
   <asset>Starkad</asset>
  </assets>
+ <jumps/>
 </ssys>

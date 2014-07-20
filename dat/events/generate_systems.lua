@@ -14,7 +14,9 @@ local function nameTakenPlanet(name)
 	return (planet.exists(name))
 end
 
-local function createAroundStar(c_sys,nextlevel,level)
+local function createAroundStar(c_sys,nextlevel,level,visited)
+
+	visited[c_sys:name()]=true
 
 	local known=(debug and true or false)
 
@@ -37,7 +39,7 @@ local function createAroundStar(c_sys,nextlevel,level)
 
 				local star=starGenerator.generateStar(targetx,targety,nameTakenSystem,nameTakenPlanet)
 
-				system.createSystem(star.name,targetx,targety,500,star.template.radius,"",known)
+				system.createSystem(star.name,targetx,targety,500,star.template.radius,"",star.zone,known)
 
 				local newsys=system.get(star.name)
 
@@ -77,23 +79,26 @@ local function createAroundStar(c_sys,nextlevel,level)
 		for k,nearbySysC in pairs(sys.c:adjacentSystems(true)) do
 			nearbySys=system_class.load(nearbySysC)
 
-			nextlevel[#nextlevel+1]=nearbySysC
+			if not visited[nearbySysC:name()] then
+				nextlevel[#nextlevel+1]=nearbySysC
+			end
 		end
 	end
 end
 
 function create()
 	
-	local stepNumber=(debug and 6 or 3)
+	local stepNumber=(debug and 10 or 3)
 	
 	math.randomseed(os.time())
 	
 	local currentlevel={system.cur()}
 	local nextlevel={}
+	local visited={}
 
 	for level=0,stepNumber do
 		for k,sys in pairs(currentlevel) do
-			createAroundStar(sys,nextlevel,level)
+			createAroundStar(sys,nextlevel,level,visited)
 		end
 		currentlevel=nextlevel
 		nextlevel={}

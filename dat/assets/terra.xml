@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Terra">
+ <pos>
+  <x>-6094.758285</x>
+  <y>-3768.739423</y>
+ </pos>
+ <GFX>
+  <space>earth.png</space>
+  <exterior>oceanic.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Empire of Terra</faction>
+  <value>500.000000</value>
+  <range>0</range>
+ </presence>
+ <extraPresences>
+	 <presence>
+	  <faction>Human Trader</faction>
+	  <value>500.000000</value>
+	  <range>3</range>
+	 </presence>
+ </extraPresences>
+ <general>
+  <class>A</class>
+  <population>900000</population>
+  <hide>0.250000</hide>
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+  </services>
+  <tradedatas>
+  </tradedatas>
+  <description>Once the only home of the human race, Terra is now the center of the largest Empire in known space, only rivaled by the fast-rising Merseian Rodhunate. Fully recovered from its two sacks during the Troubles, the Imperial capital is a world of luxury and decadence, whose rich population is practiced at ignoring the increasing signs of decay throughout the Empire and the gradual collapse of Imperial civilization in the outer fringes. Like the Viennese before the Great War, the Terrans and the Imperial Court seem to believe that if only they can dance with enough abandon, war and collapse can be avoided a little longer, and the Long Night pushed back for an other generation or two.
+
+"Except for the court, which still felt bound to follow daylight around the globe for one exhausting ceremony after another, [the Emperor's Birthday] had become simply an occasion to hold carnival. As his aircar hummed over great dusking waters, Lord Markus Hauksberg saw the east blaze with sky luminosity, multi-colored moving curtains where fireworks exploded meteoric. Tonight, while the planet turned, its dark side was so radiant as to drown the very metro-centers seen from Luna. Had he tuned his vid to almost any station, he could have watched crowds filling pleasure houses and coming near riot among festively decorated towers." ("Ensign Flandry")</description>
+  <bar>Spread over an entire wing of the spaceport, the "Sunburst" is a complex of vast rooms decorated in the styles of human and non-human palaces. The most magnificent is inspired by the Imperial Coral Palace, with an airy vault held by pillars of marble from a dozen worlds, with walls covered in multicolored frescoes assembled from precious stones from all over the Empire.. A much smaller one, with walls of plain stone covered with simple tapestries, stands in for Castle Afon on Merseia - the official residence of the Roidhun.</bar>
+      <luadata>{
+	humanFertility = 1,
+	minerals = 0.5,
+	nativeFertility = 1,
+	settlements = {
+		humans = {
+			agriculture = 1.2,
+			industry = 1.0,
+			population = 8554635785,
+			technology = 1.5,
+			services = 2,
+			military = 1,
+			stability = 1,
+			extraGoodsSupply = { {type="Bordeaux Grands Crus",supply=20,price=0.1} },
+			suppressGoodDemand = { {type="Bordeaux Grands Crus"} }
+		},
+	},
+}</luadata>
+ </general>
+</asset>

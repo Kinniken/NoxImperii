@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Mars">
+ <pos>
+  <x>9110.853947</x>
+  <y>-9221.266235</y>
+ </pos>
+ <GFX>
+  <space>G03.png</space>
+  <exterior>desertic3.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Empire of Terra</faction>
+  <value>50.000000</value>
+  <range>0</range>
+ </presence>
+ <general>
+  <class>A</class>
+  <population>0</population>
+  <hide>0.250000</hide>
+  <services>
+   <land/>
+   <bar/>
+  </services>
+  <commodities/>
+  <description>Mars was colonized in the 21st century, with ambitious terraformation plans. Alas for the planet, the discovery of faster-than-light travel doomed it to irrelevance - why spend time terraforming an unpromising world when the universe is full of Earth-like planets ready for the taking?
+  
+Today, the planet is mostly used as a training base for the Imperial Navy - close to Earth, but with near-unlimited land available. Soldiers and marines of thousands of worlds and hundred of species train in its arid plains.</description>
+  <bar>The "Blue Mars" bar is decorated with 3D simulations of a Mars where the terraformation project was completed. The contrast between the lush images of coastlines and red mountains covered with pines and the harsh, rocky plains outside is stark.</bar>
+    <luadata>{
+	humanFertility = 0.3,
+	minerals = 0.8,
+	nativeFertility = 0.3,
+	settlements = {
+		humans = {
+			agriculture = 0.3,
+			industry = 0.8,
+			military = 1.2,
+			population = 845968,
+			services = 0.7,
+			stability = 1.1,
+			technology = 1.1,
+			activeEffects = { },
+			lesserGoodsDemand = { },
+			lesserGoodsSupply = { },
+			suppressGoodSupply = { },
+			extraGoodsDemand = {
+			},
+			extraGoodsSupply = {
+			},
+			suppressGoodDemand = {
+			},
+		},
+	},
+}</luadata>
+ </general>
+</asset>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Luna">
+ <pos>
+  <x>-6859.906008</x>
+  <y>-3466.452949</y>
+ </pos>
+ <GFX>
+  <space>moon-C01.png</space>
+  <exterior>traderoom.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Empire of Terra</faction>
+  <value>50.000000</value>
+  <range>0</range>
+ </presence>
+ <general>
+  <class>A</class>
+  <population>10000</population>
+  <hide>0.250000</hide>
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+   <missions/>
+  </services>
+  <commodities/>
+  <description>Earliest body colonized by humans beyond Terra itself, Luna is the trade gateway to the imperial capital. Its luxurious domed cities are legendary, and while its importance has declined since the collapse of the Polytechnic League, it remains one of the most prosperous worlds in the Empire.
+  
+"In Lunar gravity, trees soared through heights and arcs no less fantastic than the splashing fountains; and people walked with that same marvelous bounding lightness. Behind the crowds, towers and colonnades lifted in fanciful filigree multitudinously hued. Birds and elevated streets flew between them. Perfumes, laughter, a drift of music, a pervasive murmur of engines wove through the warm air. But beyond and above stood Luna. Clocks ran on GMT; a thousand small suns hanging from bronze vines created morning. Yet the true hour neared midnight. Splendid and terrible, darkness struck through. At zenith, the sky was black, stars icily visible. South swelled the cloudy-bright-blue shield of Earth. A close observer could see twinkles on its unlit quarter, the megalopolises, dwarfed to sparks by that least astronomical distance. The Avenue of Sphinxes gave a clear westward view to the edge of air, an ashen crater floor, Plato's ringwall bulking brutally over the near horizon." ("David Falkyn, Star Trader")</description>
+  <bar>Luxury of luxury, this bar is inside a serie of mock huts made entirely out of wood, in the middle of one of the largest park. Beyond the trees and the reassuring dome, the barren Lunar landscape is visible in the distance.</bar>
+    <luadata>{
+	humanFertility = 0.1,
+	minerals = 0.5,
+	nativeFertility = 0,
+	settlements = {
+		humans = {
+			agriculture = 0,
+			industry = 0.8,
+			military = 0.8,
+			population = 120545968,
+			services = 1.4,
+			stability = 1.1,
+			technology = 1.2,
+			activeEffects = { },
+			lesserGoodsDemand = { },
+			lesserGoodsSupply = { },
+			suppressGoodSupply = { },
+			extraGoodsDemand = {
+			},
+			extraGoodsSupply = {
+			},
+			suppressGoodDemand = {
+			},
+		},
+	},
+}</luadata>
+ </general>
+</asset>

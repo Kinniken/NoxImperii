@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Irumclaw">
+ <pos>
+  <x>6028.510913</x>
+  <y>4041.089733</y>
+ </pos>
+ <GFX>
+  <space>M08.png</space>
+  <exterior>forest.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Empire of Terra</faction>
+  <value>30.000000</value>
+  <range>0</range>
+ </presence>
+ <general>
+  <class>A</class>
+  <population>100000</population>
+  <hide>0.250000</hide>
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+   <missions/>
+   <commodity/>
+  </services>
+  <description>Like many worlds on the Empire's border, Irumclaw has seen better days. A small naval base protects the planet and keeps a wary eye over the nearby Roidhunate. This planet and the suns around it might not be in the Empire in a generation or two.
+  
+"Beyond the compound walls of the Terran base, the homes of the wealthy loomed amidst grandly downsweeping private parks. In a way, they epitomized man's trajectory. Once the settlement had been sufficiently large and prosperous, and sufficiently within the Imperial sphere, to attract not only merchants but aristocrats. Old Town had bustled with culture as well as commerce--provincial, no doubt, this far from Terra; nevertheless, live and genuine, worthy of the respectful emulation of the autochthons.
+
+Tonight Irumclaw lay like a piece of wreckage at the edge of the receding tide of empire. What mansions were not standing hollow had become the property of oafs, and showed it. Outside the treaty port boundaries, barbarism rolled forward as the natives abandoned civilization with a perhaps justifiable contempt." ("Circus of Hell")</description>
+  <bar>This seedy bar is popular with cadets from the naval base.</bar>
+ </general>
+</asset>

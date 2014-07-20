@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Factions>
  <faction name="Dummy">
   <static />
@@ -32,46 +32,56 @@
    <enemy>Pirate</enemy>
   </enemies>
  </faction>
- <faction name="Proteron">
-  <logo>proteron</logo>
-  <longname>Proteron</longname>
-  <player>3</player>
-  <colour>purple</colour>
-  <spawn>proteron</spawn>
-  <standing>proteron</standing>
-  <equip>empire</equip>
-  <allies>
-  </allies>
-  <enemies>
-   <enemy>Pirate</enemy>
-  </enemies>
- </faction>
- <faction name="Frontier">
-  <known/>
-  <logo>frontier</logo>
-  <longname>Frontier Alliance</longname>
-  <player>3</player>
-  <colour>yellow</colour>
-  <spawn>frontier</spawn>
-  <standing>independent</standing>
-  <allies>
-  </allies>
-  <enemies>
-   <enemy>Pirate</enemy>
-  </enemies>
- </faction>
- <faction name="Trader">
+  <faction name="Trader">
   <known/>
   <logo>trader</logo>
-  <longname>Space Traders Guild</longname>
+  <longname>Trader</longname>
   <player>3</player>
-  <spawn>trader</spawn>
-  <standing>trader</standing>
+  <spawn>human_trader</spawn>
+  <standing>human_trader</standing>
   <allies>
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
-   <enemy>Raider</enemy>
+  </enemies>
+ </faction>
+ <faction name="Human Trader">
+  <known/>
+  <logo>trader</logo>
+  <longname>Human Trader</longname>
+  <player>3</player>
+  <spawn>human_trader</spawn>
+  <standing>human_trader</standing>
+  <allies>
+  </allies>
+  <enemies>
+   <enemy>Pirate</enemy>
+  </enemies>
+ </faction>
+  <faction name="Merseian Trader">
+  <known/>
+  <logo>trader</logo>
+  <longname>Merseian Trader</longname>
+  <player>0</player>
+  <spawn>merseian_trader</spawn>
+  <standing>merseian_trader</standing>
+  <allies>
+  </allies>
+  <enemies>
+   <enemy>Pirate</enemy>
+  </enemies>
+ </faction>
+  <faction name="Betelgeusean Trader">
+  <known/>
+  <logo>trader</logo>
+  <longname>Betelgeusean Trader</longname>
+  <player>3</player>
+  <spawn>betelgeusean_trader</spawn>
+  <standing>betelgeusean_trader</standing>
+  <allies>
+  </allies>
+  <enemies>
+   <enemy>Pirate</enemy>
   </enemies>
  </faction>
  <faction name="Pirate">
@@ -79,280 +89,120 @@
   <logo>pirate</logo>
   <longname>Galactic Pirates</longname>
   <player>-20</player>
-  <colour>red</colour>
+  <colour>darkred</colour>
   <spawn>pirate</spawn>
   <standing>pirate</standing>
   <equip>pirate</equip>
   <enemies>
    <enemy>Civilian</enemy>
-   <enemy>Empire</enemy>
-   <enemy>Soromid</enemy>
-   <enemy>Dvaered</enemy>
-   <enemy>Za'lek</enemy>
-   <enemy>Collective</enemy>
-   <enemy>Sirius</enemy>
-   <enemy>Frontier</enemy>
+   <enemy>Empire of Terra</enemy>
    <enemy>Trader</enemy>
    <enemy>Independent</enemy>
-   <enemy>Goddard</enemy>
-   <enemy>Proteron</enemy>
-   <enemy>Thurion</enemy>
-   <enemy>Nasin</enemy>
   </enemies>
  </faction>
- <faction name="Empire">
+ <faction name="Empire of Terra">
   <known/>
   <logo>empire</logo>
-  <colour>green</colour>
-  <player>1</player>
+  <colour>Yellow</colour>
+  <player>5</player>
   <spawn>empire</spawn>
   <standing>empire</standing>
   <equip>empire</equip>
   <allies>
-   <ally>Dvaered</ally>
-   <ally>Goddard</ally>
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
-   <enemy>Collective</enemy>
   </enemies>
  </faction>
- <faction name="Soromid">
+  <faction name="Roidhunate of Merseia">
   <known/>
-  <logo>soromid</logo>
-  <colour>orange</colour>
+  <logo>roidhunate</logo>
+  <colour>green</colour>
   <player>0</player>
-  <spawn>soromid</spawn>
-  <standing>soromid</standing>
-  <allies/>
-  <enemies>
-   <enemy>Pirate</enemy>
-  </enemies>
- </faction>
- <faction name="Thurion">
-  <logo>empire</logo>
-  <colour>grey50</colour>
-  <player>1</player>
-  <spawn>thurion</spawn>
-  <standing>thurion</standing>
-  <equip>empire</equip>
-  <enemies>
-   <enemy>Pirate</enemy>
-  </enemies>
- </faction>
- <faction name="Collective">
-  <static />
-  <known/>
-  <logo>collective</logo>
-  <player>-100</player>
-  <colour>silver</colour>
-  <spawn>collective</spawn>
-  <equip>collective</equip>
-  <enemies>
-   <enemy>Empire</enemy>
-   <enemy>Pirate</enemy>
-  </enemies>
- </faction>
- <faction name="FLF">
-  <known/>
-  <logo>flf</logo>
-  <longname>Frontier Liberation Front</longname>
-  <player>0</player>
-  <colour>orange</colour>
-  <spawn>flf</spawn>
-  <standing>flf</standing>
-  <equip>pirate</equip>
-  <enemies>
-   <enemy>Dvaered</enemy>
-  </enemies>
- </faction>
- <faction name="Dvaered">
-  <known/>
-  <logo>dvaered</logo>
-  <colour>brown</colour>
-  <longname>House Dvaered</longname>
-  <player>1</player>
-  <spawn>dvaered</spawn>
-  <standing>dvaered</standing>
-  <equip>dvaered</equip>
+  <spawn>roidhunate</spawn>
+  <standing>roidhunate</standing>
+  <equip>roidhunate</equip>
   <allies>
-   <ally>Empire</ally>
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
-   <enemy>FLF</enemy>
   </enemies>
  </faction>
- <faction name="Za'lek">
+<faction name="Sartaza of Betelgeuse">
   <known/>
-  <logo>zalek</logo>
+  <logo>betelgeuse</logo>
   <colour>purple</colour>
-  <longname>House Za'lek</longname>
-  <player>2</player>
-  <spawn>zalek</spawn>
-  <standing>zalek</standing>
-  <equip>zalek</equip>
+  <player>1</player>
+  <spawn>betelgeuse</spawn>
+  <standing>betelgeuse</standing>
+  <equip>betelgeuse</equip>
   <allies>
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
   </enemies>
  </faction>
- <faction name="Sirius">
+ <faction name="Dispersal of Ymir">
   <known/>
-  <logo>sirius</logo>
-  <colour>aqua</colour>
-  <longname>House Sirius</longname>
-  <player>3</player>
-  <spawn>sirius</spawn>
-  <standing>sirius</standing>
-  <equip>sirius</equip>
+  <logo>ymir</logo>
+  <colour>Grey80</colour>
+  <player>0</player>
+  <spawn>ymir</spawn>
+  <standing>ymir</standing>
+  <equip>ymir</equip>
   <allies>
   </allies>
   <enemies>
-   <enemy>Pirate</enemy>
-   <enemy>Nasin</enemy>
   </enemies>
  </faction>
- <faction name="Goddard">
+  <faction name="Barbarians">
   <known/>
-  <logo>goddard</logo>
-  <colour>blue</colour>
-  <longname>House Goddard</longname>
-  <player>2</player>
-  <spawn>goddard</spawn>
-  <standing>independent</standing>
-  <equip>empire</equip>
-  <allies>
-   <ally>Empire</ally>
-  </allies>
-  <enemies>
-   <enemy>Pirate</enemy>
-  </enemies>
- </faction>
- <faction name="Mercenary">
-  <invisible />
-  <static />
-  <player>0</player>
-  <allies />
-  <enemies />
- </faction>
- <faction name="Raider">
-  <invisible />
-  <static />
-  <longname>Galactic Pirates</longname>
-  <player>-100</player>
-  <colour>red</colour>
-  <enemies>
-   <enemy>Trader</enemy>
-  </enemies>
- </faction>
- <faction name="Derelict">
-  <invisible />
-  <static />
-  <player>0</player>
-  <allies />
-  <enemies />
- </faction>
- <faction name="Four Winds">
-  <invisible />
-  <static />
-  <player>0</player>
-  <allies />
-  <enemies>
-   <enemy>Shadow_pirates</enemy>
-   <enemy>Rogue Four Winds</enemy>
-  </enemies>
- </faction>
- <faction name="Rogue Four Winds">
-  <display>Four Winds</display>
-  <invisible />
-  <static />
-  <player>0</player>
-  <allies />
-  <enemies>
-   <enemy>Four Winds</enemy>
-  </enemies>
- </faction>
- <faction name="Shadow_pirates">
-  <display>Pirate</display>
-  <invisible />
-  <static />
-  <allies />
-  <player>-100</player>
-  <enemies>
-   <enemy>Four Winds</enemy>
-   <enemy>Diplomatic</enemy>
-  </enemies>
- </faction>
- <faction name="Diplomatic">
-  <invisible />
-  <static />
-  <player>0</player>
-  <colour>blue</colour>
-  <allies>
-  </allies>
-  <enemies>
-   <enemy>Shadow_pirates</enemy>
-  </enemies>
- </faction>
- <faction name="Associates">
-  <invisible />
-  <static />
-  <allies />
-  <player>0</player>
-  <enemies>
-   <enemy>Thugs</enemy>
-  </enemies>
- </faction>
- <faction name="Thugs">
-  <invisible />
-  <static />
-  <allies />
-  <player>0</player>
-  <enemies>
-   <enemy>Associates</enemy>
-  </enemies>
- </faction>
- <faction name="Achack_sirius">
-  <display>Sirius</display>
-  <invisible />
-  <static />
-  <allies />
-  <player>0</player>
-  <enemies>
-   <enemy>Achack_thugs</enemy>
-  </enemies>
- </faction>
- <faction name="Achack_thugs">
-  <display>Thugs</display>
-  <invisible />
-  <static />
-  <allies />
-  <player>0</player>
-  <enemies>
-   <enemy>Achack_sirius</enemy>
-  </enemies>
- </faction>
- <faction name="Kidnappers">
-  <display>Pirate</display>
-  <invisible />
-  <static />
   <logo>pirate</logo>
-  <colour>red</colour>
-  <allies />
-  <player>0</player>
-  <enemies />
- </faction>
- <faction name="Nasin">
-  <invisible />
-  <logo>sirius</logo>
-  <standing>nasin</standing>
-  <allies />
-  <player>0</player>
+  <longname>Barbarians</longname>
+  <player>-20</player>
+  <colour>DarkRed</colour>
+  <spawn>barbarian</spawn>
+  <standing>barbarian</standing>
+  <equip>barbarian</equip>
   <enemies>
-   <enemy>Sirius</enemy>
-   <enemy>Pirate</enemy>
+   <enemy>Civilian</enemy>
+   <enemy>Roidhunate of Merseia</enemy>
+   <enemy>Empire of Terra</enemy>
+   <enemy>Trader</enemy>
+   <enemy>Independent</enemy>
   </enemies>
- </faction>
+  </faction>
+  <faction name="Scothanian Kingdom">
+  <known/>
+  <logo>pirate</logo>
+  <longname>Scothanian Kingdom</longname>
+  <player>-20</player>
+  <colour>DarkRed</colour>
+  <spawn>barbarian</spawn>
+  <standing>barbarian</standing>
+  <equip>barbarian</equip>
+  <enemies>
+   <enemy>Civilian</enemy>
+   <enemy>Roidhunate of Merseia</enemy>
+   <enemy>Empire of Terra</enemy>
+   <enemy>Trader</enemy>
+   <enemy>Independent</enemy>
+  </enemies>
+  </faction>
+    <faction name="Orbekh of Ardazir">
+  <known/>
+  <logo>pirate</logo>
+  <longname>Orbekh of Ardazir</longname>
+  <player>-20</player>
+  <colour>DarkRed</colour>
+  <spawn>barbarian</spawn>
+  <standing>barbarian</standing>
+  <equip>barbarian</equip>
+  <enemies>
+   <enemy>Civilian</enemy>
+   <enemy>Empire of Terra</enemy>
+   <enemy>Trader</enemy>
+   <enemy>Independent</enemy>
+  </enemies>
+  </faction>
 </Factions>

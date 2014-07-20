@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Vor">
+ <pos>
+  <x>3577.358124</x>
+  <y>-4637.316087</y>
+ </pos>
+ <GFX>
+  <space>M02.png</space>
+  <exterior>oceanic2.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Empire of Terra</faction>
+  <value>300.000000</value>
+  <range>0</range>
+ </presence>
+ <general>
+  <class>A</class>
+  <population>0</population>
+  <hide>0.250000</hide>
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+  </services>
+  <commodities/>
+  <description>"Vor had been settled early in the days of Imperial expansion, and had become a rich world, the natural choice of capital for the duke who governed the Taurian Sector. It was like another Terra -- less grandiose, more bustling and businesslike -- and the Sector itself was almost an empire within the Empire, a powerful realm of many stars whose ruler sat high in the councils of the Imperium. » ("Warriors from nowhere")</description>
+  <bar>The "Ducal Crown" is a lively bar, filled with distant traders, officers from the local forces, rich merchants and minor nobles on pleasure trips. Throughout the human crowd, sophonts of multiple Imperial races can be seen.</bar>
+ </general>
+</asset>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Venus">
+ <pos>
+  <x>4582.109943</x>
+  <y>2642.534088</y>
+ </pos>
+ <GFX>
+  <space>K00.png</space>
+  <exterior>gas.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Empire of Terra</faction>
+  <value>10.000000</value>
+  <range>0</range>
+ </presence>
+ <general>
+  <class>A</class>
+  <population>0</population>
+  <hide>0.250000</hide>
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+   <missions/>
+  </services>
+  <commodities/>
+  <description>Like Mars, Venus was settled before the invention of faster-than-life travel. Today, this unforgiving world is home to the underclass of the Solar System, sheltering from the harsh surface conditions in underground cities.</description>
+  <bar>The "Amtor" bar is filled with nervous-looking bourgeois from Terra and Luna looking for an "adventure". Luckily for them, the "Amtor" is as safe as it goes on Venus.</bar>
+ </general>
+</asset>

@@ -7,12 +7,12 @@ function spawn_patrol ()
    local r = rnd.rnd()
 
    if r < 0.5 then
-      scom.addPilot( pilots, "Empire Lancelot", 25 );
+      scom.addPilot( pilots, "Empire Comet", 25 );
    elseif r < 0.8 then
-      scom.addPilot( pilots, "Empire Shark", 20 );
-      scom.addPilot( pilots, "Empire Lancelot", 25 );
+      scom.addPilot( pilots, "Empire Meteor", 20 );
+      scom.addPilot( pilots, "Empire Comet", 25 );
    else
-      scom.addPilot( pilots, "Empire Pacifier", 75 );
+      scom.addPilot( pilots, "Empire Continent", 75 );
    end
 
    return pilots
@@ -25,16 +25,16 @@ function spawn_squad ()
    local r = rnd.rnd()
 
    if r < 0.5 then
-      scom.addPilot( pilots, "Empire Shark", 20 );
-      scom.addPilot( pilots, "Empire Lancelot", 25 );
-      scom.addPilot( pilots, "Empire Admonisher", 45 );
+      scom.addPilot( pilots, "Empire Meteor", 20 );
+      scom.addPilot( pilots, "Empire Comet", 25 );
+      scom.addPilot( pilots, "Empire Continent", 45 );
    elseif r < 0.8 then
-      scom.addPilot( pilots, "Empire Lancelot", 25 );
-      scom.addPilot( pilots, "Empire Admonisher", 45 );
+      scom.addPilot( pilots, "Empire Comet", 25 );
+      scom.addPilot( pilots, "Empire Continent", 45 );
    else
-      scom.addPilot( pilots, "Empire Shark", 20 );
-      scom.addPilot( pilots, "Empire Lancelot", 25 );
-      scom.addPilot( pilots, "Empire Pacifier", 75 );
+      scom.addPilot( pilots, "Empire Meteor", 20 );
+      scom.addPilot( pilots, "Empire Comet", 25 );
+      scom.addPilot( pilots, "Empire Continent", 75 );
    end
 
    return pilots
@@ -47,24 +47,24 @@ function spawn_capship ()
    local r = rnd.rnd()
 
    -- Generate the capship
-   if r < 0.7 then
-      scom.addPilot( pilots, "Empire Hawking", 140 )
-   else
-      scom.addPilot( pilots, "Empire Peacemaker", 165 )
-   end
+    if r < 0.3 then
+      scom.addPilot( pilots, "Empire Nova", 140 )
+    else
+    	 scom.addPilot( pilots, "Empire Planet", 140 )
+    end
 
    -- Generate the escorts
    r = rnd.rnd()
    if r < 0.5 then
-      scom.addPilot( pilots, "Empire Shark", 20 );
-      scom.addPilot( pilots, "Empire Lancelot", 25 );
-      scom.addPilot( pilots, "Empire Lancelot", 25 );
+      scom.addPilot( pilots, "Empire Meteor", 20 );
+      scom.addPilot( pilots, "Empire Comet", 25 );
+      scom.addPilot( pilots, "Empire Comet", 25 );
    elseif r < 0.8 then
-      scom.addPilot( pilots, "Empire Lancelot", 25 );
-      scom.addPilot( pilots, "Empire Admonisher", 45 );
+      scom.addPilot( pilots, "Empire Comet", 25 );
+      scom.addPilot( pilots, "Empire Continent", 45 );
    else
-      scom.addPilot( pilots, "Empire Lancelot", 25 );
-      scom.addPilot( pilots, "Empire Pacifier", 75 );
+      scom.addPilot( pilots, "Empire Comet", 25 );
+      scom.addPilot( pilots, "Empire Continent", 75 );
    end
 
    return pilots

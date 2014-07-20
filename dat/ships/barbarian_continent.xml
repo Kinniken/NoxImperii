@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Barbarian Looter">
+ <base_type>Barbarian Looter</base_type>
+ <GFX sx="12" sy="12">barbarian_continent</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Destroyer</class>
+ <price>1000000</price>
+ <fabricator>Various barbarian shipyards</fabricator>
+ <description>Slow and with inferior technology and engines, this barbarian ship is only technically a Continent-class destroyer. But in numbers and against weak targets, it is more than able to plunder enough to fill its large cargo hauls.
+ 
+The striking steel spikes often added to its hull are mostly intended for effect, though there are stories in worlds on the fringe of barbarian capitaines wild enough to attempt ramming manoeuvres.</description>
+ <movement>
+  <thrust>120</thrust>
+  <turn>70</turn>
+  <speed>120</speed>
+ </movement>
+ <health>
+  <absorb>35</absorb>
+  <shield>320</shield>
+  <armour>1020</armour>
+  <energy>1250</energy>
+  <shield_regen>7</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>47.2</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>55</cpu>
+  <crew>35</crew>
+  <mass>950</mass>
+  <fuel>500</fuel>
+  <cargo>200</cargo>
+ </characteristics>
+ <slots>
+  <weapon x="-15" y="-10" h="-10" size="heavy"/>
+  <weapon x="-15" y="10" h="-10" size="heavy"/>
+  <weapon x="20" y="0" h="-10"/>
+  <weapon x="4" y="-5" h="-10"/>
+  <weapon x="4" y="5" h="-10"/>
+  <utility size="heavy"/>
+  <utility size="heavy"/>
+  <utility/>
+  <structure/>
+  <structure/>
+  <structure/>
+ </slots>
+ <stats>
+ </stats>
+</ship>

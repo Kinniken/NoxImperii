@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Merseian Vach Rueth">
+ <base_type>Merseian Vach Rueth</base_type>
+ <GFX sx="12" sy="12">merseia_comet</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Destroyer</class>
+ <price>800000</price>
+ <fabricator>Roidhunate Shipyards</fabricator>
+ <description>Comet-class frigates by Terran standards, Vach Rueth ships are used more as support vessels by the Merseians. As such, they have lesser range and speed than their Imperial equivalents, but are somewhat better armed.</description>
+ <movement>
+  <thrust>250</thrust>
+  <turn>200</turn>
+  <speed>270</speed>
+ </movement>
+ <health>
+  <absorb>14</absorb>
+  <shield>350</shield>
+  <armour>130</armour>
+  <energy>750</energy>
+  <shield_regen>8</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>34.7</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>45</cpu>
+  <crew>6</crew>
+  <mass>210</mass>
+  <fuel>500</fuel>
+  <cargo>30</cargo>
+ </characteristics>
+ <slots>
+  <weapon x="12" y="0" h="0"/>
+  <weapon x="12" y="0" h="0"/>
+  <weapon x="-3" y="0" h="2"/>
+  <weapon x="-3" y="0" h="2"/>
+  <utility/>
+  <utility/>
+  <structure/>
+  <structure/>
+ </slots>
+ <stats>
+  <fwd_firerate>3</fwd_firerate>
+ </stats>
+</ship>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Empire Asieneuve">
+ <base_type>Empire Asieneuve</base_type>
+ <GFX sx="12" sy="12">empire_continent</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Destroyer</class>
+ <price>1500000</price>
+ <fabricator>Imperial Shipyards</fabricator>
+ <license>Medium Combat Vessel License</license>
+ <description>Like all Terran Continent-class ship, the Asieneuve destroyer is named after a continent - in this case the main landmass of the Ardeche planet. This powerful destroyer is effective against most Imperial enemies. Pirates and barbarian races would rarely challenge one.</description>
+ <movement>
+  <thrust>140</thrust>
+  <turn>95</turn>
+  <speed>150</speed>
+ </movement>
+ <health>
+  <absorb>42</absorb>
+  <shield>500</shield>
+  <armour>950</armour>
+  <energy>1410</energy>
+  <shield_regen>10</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>55.2</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>83</cpu>
+  <crew>17</crew>
+  <mass>730</mass>
+  <fuel>500</fuel>
+  <cargo>95</cargo>
+ </characteristics>
+ <slots>
+  <weapon x="-15" y="-10" h="-10"/>
+  <weapon x="-15" y="10" h="-10"/>
+  <weapon x="20" y="0" h="-10"/>
+  <weapon x="4" y="-5" h="-10"/>
+  <weapon x="4" y="5" h="-10"/>
+  <utility/>
+  <utility/>
+  <utility/>
+  <utility/>
+  <structure/>
+  <structure/>
+  <structure/>
+ </slots>
+ <stats>
+  <tur_energy>-5</tur_energy>
+ </stats>
+</ship>

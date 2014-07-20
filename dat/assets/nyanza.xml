@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Nyanza">
+ <pos>
+  <x>-5697.274050</x>
+  <y>-5829.768795</y>
+ </pos>
+ <GFX>
+  <space>O00.png</space>
+  <exterior>oceanic.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Empire of Terra</faction>
+  <value>100.000000</value>
+  <range>0</range>
+ </presence>
+ <general>
+  <class>A</class>
+  <population>0</population>
+  <hide>0.250000</hide>
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+  </services>
+  <commodities/>
+  <description>"The planet was five parsecs from Brae. It was the third of an otherwise uninteresting F5 dwarf, its official name was Nyanza, it had been colonized some 500 years back during the breakup of the Commonwealth. It had been made an Imperial client about a century ago, a few abortive revolts were crushed, now there was only a resident-which meant a trouble-free but unimportant and little visited world. The population was estimated at I07. That was all the microfiles had to say about Nyanza." ("Game of Glory")
+
+A water-world with only small islands, Nyanza was settled mainly by colons of African descents who successfully adapted to the maritime environment. Children learn to swim before they can walk here, and no adult travels without his aqualungs.</description>
+  <bar>From the windows of the "Black Pearl", a seemingly endless ocean stretches toward the horizon. In the distance, sails are visible, powered by a strong gale. The bar's collection of alga-based alcohol is less inspiring.</bar>
+ </general>
+</asset>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Argosy">
+ <base_type>Argosy</base_type>
+ <GFX sx="12" sy="12">argosy</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Freighter</class>
+ <price>900000</price>
+ <fabricator>Melendez Corp.</fabricator>
+ <license>Large Civilian Vessel License</license>
+ <description>A heavy freighter specialized in transporting cargo throughout the galaxy. Also has sufficient accommodations for passengers depending on the model, allowing for enjoyable cruises. The Mule was a favorite target of pirates until they added defensive capabilities to the new models which have proved highly effective against ill-prepared pirates.</description>
+ <movement>
+  <thrust>150</thrust>
+  <turn>90</turn>
+  <speed>200</speed>
+ </movement>
+ <health>
+  <absorb>50</absorb>
+  <shield>300</shield>
+  <armour>1200</armour>
+  <energy>1200</energy>
+  <shield_regen>6</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>26.7</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>43</cpu>
+  <crew>13</crew>
+  <mass>1250</mass>
+  <fuel>500</fuel>
+  <cargo>200</cargo>
+ </characteristics>
+ <slots>
+  <weapon x="25" y="0" h="0"/>
+  <weapon x="-15" y="0" h="4"/>
+  <weapon x="15" y="0" h="4"/>
+  <utility/>
+  <utility/>
+  <utility/>
+  <structure/>
+  <structure/>
+  <structure/>
+  <structure/>
+  <structure/>
+  <structure/>
+ </slots>
+ <stats>
+  <cargo_inertia>-20</cargo_inertia>
+ </stats>
+</ship>
+<!-- Fighters -->

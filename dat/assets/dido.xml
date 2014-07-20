@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Dido">
+ <pos>
+  <x>-4239.831851</x>
+  <y>4571.068714</y>
+ </pos>
+ <GFX>
+  <space>M06.png</space>
+  <exterior>forest.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Empire of Terra</faction>
+  <value>10.000000</value>
+  <range>0</range>
+ </presence>
+ <general>
+  <class>A</class>
+  <population>0</population>
+  <hide>0.250000</hide>
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+  </services>
+  <commodities/>
+  <description>Hot and humid Dido would be just one more sub-optimal terrestoid world to be buried in the Imperium's data reels if it was not for the presence on it of one of the most unique race known to men: Didonians are sentient beings made of the temporary union of three different species, whose digestive and nervous system can connect in one of the most extreme form of symbiosis ever documented.
+  
+A small permanent base of Aeneans scientists is dedicated to the study of those remarkable creatures.
+
+"A new animal dropped from a tree and scampered over the furrows. It was less analogous to an ape than the noga was to a rhinoceros or the krippo to a bird. However, a Terran was bound to think of it in such terms. About a meter tall if it stood erect, it must use its short, bowed legs arboreally by choice, for it ran on all fours and either foot terminated in three well-developed grasping digits. The tail was prehensile. The chest, shoulders, and arms were enormous in proportion, greater than a man's; and besides three fingers, each hand possessed a true thumb. The head was similarly massive, round, with bowl-shaped ears and luminous brown eyes. Like the krippo, this creature had no nose or mouth, simply a nostrilled tube. Black hair covered it, except where ears, extremities, and a throat pouch showed blue skin. It -- he -- was male. He wore a belt supporting a purse and an iron dagger." ("The Rebel Worlds")</description>
+  <bar>The researchers' cantine serves only very basic drinks, but the scientists heatedly discussing Didonian culture and physiology seem to busy to notice.</bar>
+ </general>
+</asset>

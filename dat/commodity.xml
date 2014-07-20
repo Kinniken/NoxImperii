@@ -1,58 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Commodities>
- <commodity name="Food">
-  <description>Evolving from the military rations of centuries past, modern packaged meals are rich in nutrients and able to last decades in their vacuum-sealed packaging.</description>
-  <price>140</price>
- </commodity>
- <commodity name="Ore">
-  <description>Ore is a key material in many industries. Smelted into metals, without ore, the ship-building industry and many others would grind to a halt.</description>
-  <price>210</price>
- </commodity>
- <commodity name="Industrial Goods">
-  <description>An assortment of industrial goods, ranging from cutting lasers to processed metals.</description>
-  <price>340</price>
- </commodity>
- <commodity name="Medicine">
-  <description>An assortment of medicines suitable for curing all sorts of ailments.</description>
-  <price>750</price>
- </commodity>
- <commodity name="Luxury Goods">
-  <description>All sorts of high quality luxury goods.</description>
-  <price>630</price>
- </commodity>
- <commodity name="Parcels"/>
- <commodity name="Colonists"/>
- <commodity name="Civilians"/>
- <commodity name="Tourists"/>
- <commodity name="Pilgrims"/>
- <commodity name="Datapad"/>
- <commodity name="Satellite"/>
- <commodity name="Prisoners"/>
- <commodity name="Refugees"/>
- <commodity name="Packages"/>
- <commodity name="VIP"/>
- <commodity name="The Baron's holopainting"/>
- <commodity name="Artefact? A"/>
- <commodity name="Artefact? B"/>
- <commodity name="Artefact? C"/>
- <commodity name="Ancient Artefact"/>
- <commodity name="Gregar"/>
- <commodity name="Dvaered ship crew"/>
- <commodity name="FLF IFF Transponder"/>
- <commodity name="Jorek"/>
- <commodity name="Four Winds Informant"/>
- <commodity name="Goods"/>
- <commodity name="Group of Nerds"/>
- <commodity name="Box"/>
- <commodity name="Teenagers"/>
- <commodity name="The Rescued Children"/>
- <commodity name="Waste Containers"/>
- <commodity name="Person"/>
- <commodity name="Unmarked Boxes"/>
- <commodity name="Weapons"/>
- <commodity name="Drugs"/>
- <commodity name="Exotic Animals"/>
- <commodity name="Radioactive Materials"/>
- <commodity name="Small Arms"/>
- <commodity name="Message"/>
+	<!-- Food -->
+	<commodity name="Food">
+		<description>While food can be produced cheaply on almost any world with modern techniques, Imperials citizens typically demand "real" food, produced via agriculture and cattle breeding in countless ways across the Empire. Worlds unable to produce enough themselves depend on trade for it - an extravagance typical of the Late Empire.
+		
+The major oxygen-breathing races in the sector have broadly compatible dietary requirements, and this food will be edible by them with only minor treatment.</description>
+		<price>50</price>
+	</commodity>
+	<commodity name="Gourmet Food">
+		<description>The Imperial upper classes are notorious for their finicky tastes, and will pay dearly for the highest-quality food brought from as many worlds as possible - Terran or alien in origin, the rarer and more sophisticated the better.
+
+The major oxygen-breathing races in the sector have broadly compatible dietary requirements, and this food will be edible by them with only minor treatment.</description>
+		<price>350</price>
+	</commodity>
+	<commodity name="Exotic Food">
+		<description>While most gourmet food in the Empire is produced on sophisticated worlds with long histories of producing fine food for the Empire's court, more experimental chefs and daring gastronomes swear by more exotic products from primitive civilizations.
+		
+The major oxygen-breathing races in the sector have broadly compatible dietary requirements, and this food will be edible by them with only minor treatment.</description>
+		<price>800</price>
+	</commodity>
+	<commodity name="Bordeaux Grands Crus">
+		<description>Except for a brief interruption during the Troubles, the Bordeaux region of what is now again the Duchy of Aquitaine has been producing fine wines for centuries. There is no finer drink with which to toast the Emperor!</description>
+		<price>2000</price>
+	</commodity> 
+	<commodity name="Roidhun Fine Telloch">
+		<description>This fiery Merseian liqueur is widely popular in the Rhoidunate as well as amoung worldly humans. This particular brand is sourced from Merseia itself and renowned among connoisseurs.</description>
+		<price>1500</price>
+	</commodity> 
+	
+	<!-- Consumer goods -->
+	<commodity name="Primitive Consumer Goods">
+		<description>Consumer goods of multiple kinds are regularly traded across star systems - those are cheap, mass-produced items intended for the lower classes of less advanced worlds, or even for primitive civilizations.</description>
+		<price>50</price>
+	</commodity>
+	<commodity name="Consumer Goods">
+		<description>Everything from entertainment systems to clothes to private ground vehicles get traded from world to world. Not the most glamorous commodities, but central to the Imperial economy.</description>
+		<price>120</price>
+	</commodity>
+	<commodity name="Luxury Goods">
+		<description>In the upper spheres of the Empire, luxury goods of various kinds are almost a staple. In the Rhoidunate, people are less showy, but not always as spartan in private as they try to project.</description>
+		<price>630</price>
+	</commodity>
+	
+	<!-- Art & crafts -->
+	<commodity name="Exotic Furs">
+		<description>Furs, feathers, shiny scales or more exotic materials are often all the rage in the Empire's fashionable circles.</description>
+		<price>700</price>
+	</commodity>
+	<commodity name="Native Artworks">
+		<description>Art in the Empire is often terribly abstract, and that of the Rhoidunate too focused on promoting Merseian virtues. "Primitive" art of various origin is thus prized by discerning collectors, eager to hang mosaics made of reptilian scales or paintings of alien rituals alongside holograms of the latest Imperial school.</description>
+		<price>800</price>
+	</commodity>
+	<commodity name="Native Sculptures">
+		<description>Ranging from totems carved in massive bones to tiny sculptures of methane ice, native sculptures are much appreciated by universities, museums, and most lucratively, aristocratic private collectors.</description>
+		<price>700</price>
+	</commodity>
+	
+	<!-- Ores -->
+	<commodity name="Ore">
+		<description>Ore is a key material in many industries. Smelted into metals, without ore, the ship-building industry and many others would grind to a halt.</description>
+		<price>210</price>
+	</commodity>
+ 
+	<!-- Industrial goods -->
+	<commodity name="Non-Industrial Tools">
+		<description>Primitive tools intended for use by hand are of little use on advanced worlds. They are normally produced for trade with backward civilizations, who will trade them for valuable goods.</description>
+		<price>75</price>
+	</commodity> 
+	<commodity name="Primitive Industrial Goods">
+		<description>Those simple but durable industrial goods are cheap, easy to use and maintain, and produced with technologies distributed far and wide. They see little use on advanced worlds however.</description>
+		<price>200</price>
+	</commodity>
+	<commodity name="Industrial Goods">
+		<description>Modern civilizations depend on all sort of industrial goods, often produced on specialized worlds. Those are not top-of-the-line goods, but they are still of use on hundreds of Imperial and Merseian worlds.</description>
+		<price>400</price>
+	</commodity>
+	<commodity name="Modern Industrial Goods">
+		<description>Despite the general decline in the Empire, considerable efforts still go into the developments of new industrial technologies. Goods like these can only be produced in the most advanced planets, and even their use is limited to modern economies.</description>
+		<price>800</price>
+	</commodity>
+ 
+	<!-- Biology & medicine -->
+	<commodity name="Exotic Organic Components">
+		<description>In theory, modern chemistry can synthesize any organic components. Many are however difficult and expensive to produce. Biological components from non-Terran ecologies can sometime be a cost-effective alternative.</description>
+		<price>1200</price>
+	</commodity> 
+	<commodity name="Human Medicine">
+		<description>Few things are more specie-specific than medicine. The following products include both a varied range of common medicines and diverse automated diagnostic and surgery units, all intended for human use.</description>
+		<price>750</price>
+	</commodity>
+ 
+	<!-- Weapons -->
+	<commodity name="Native Weapons">
+		<description>Modern weapons are of extraordinary effectiveness yet few people would hand a blaster on their wall. More primitive weapons are thus in high demands among aristocrats and officers, on human and Merseian worlds: spears that only a four-arm, three-meter centaur could yield, elegant assegais designed for use by tree-dwellers, nameless weapons with more blades than seem usable - if they look deadly, they will find a buyer.</description>
+		<price>600</price>
+	</commodity>
+	<commodity name="Non-Industrial Weapons">
+		<description>Mass-produced on industrial worlds, those bladed weapons or primitive firearms are valued by many less developed species. Sometime for use on the very traders who provided them.</description>
+		<price>85</price>
+	</commodity> 
+	<commodity name="Primitive Armament">
+		<description>Based on old designs, these weapons will not equip modern ships or foot soldiers. But they are rugged and effective against other low-tech opponents, and many frontier worlds depend on them.</description>
+		<price>250</price>
+	</commodity> 
+	<commodity name="Armament">
+		<description>Ranging from hand-blasters for infantry to large guns for spaceships, those weapons are the bread-and-butter of civilized fighting forces in this part of the galaxy.</description>
+		<price>500</price>
+	</commodity> 
+	<commodity name="Modern Armament">
+		<description>Only the most modern navies use weapons like these, expensive to purchase and more expensive still to maintain. By far the two biggest users for them are the Imperial and Rhoidunate navies, though the private fleets of very wealthy individuals sometime use similar equipments.</description>
+		<price>1000</price>
+	</commodity>
+	
+	<!-- Other -->
+	<commodity name="Native Technology">
+		<description>It is rare that non-spacefaring races produce technological items of more than scholarly interest. And yet there is a market for ingenious alien contraptions - there are valuable ideas everywhere, and what seemed like a simple curiosity might prove the spark of a technological revolution. Sadly, human scientists are often too rigid to properly value such inputs.</description>
+		<price>900</price>
+	</commodity>
+	
+	
+	
+	
+	<!-- Missions -->
+		<commodity name="Latest Fashion">
+		</commodity>
+		<commodity name="Student">
+		</commodity>
 </Commodities>

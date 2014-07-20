@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Empire Halley">
+ <base_type>Empire Halley</base_type>
+ <GFX sx="10" sy="10">empire_comet</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Destroyer</class>
+ <price>800000</price>
+ <fabricator>Imperial Shipyards</fabricator>
+ <license>Light Combat Vessel License</license>
+ <description>This Comet-class light frigate is one of the workhorse of the Terran Navy. It is used mainly as an interceptor and as a frontier scout ship, and is provided with the engines and fuel capacity needed for those roles.</description>
+ <movement>
+  <thrust>300</thrust>
+  <turn>220</turn>
+  <speed>310</speed>
+ </movement>
+ <health>
+  <absorb>12</absorb>
+  <shield>280</shield>
+  <armour>110</armour>
+  <energy>730</energy>
+  <shield_regen>7</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>32.7</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>40</cpu>
+  <crew>4</crew>
+  <mass>180</mass>
+  <fuel>700</fuel>
+  <cargo>40</cargo>
+ </characteristics>
+ <slots>
+  <weapon x="12" y="0" h="0"/>
+  <weapon x="12" y="0" h="0"/>
+  <weapon x="-3" y="0" h="2"/>
+  <weapon x="-3" y="0" h="2"/>
+  <utility/>
+  <utility/>
+  <utility/>
+  <structure/>
+  <structure/>
+ </slots>
+ <stats>
+  <fwd_firerate>3</fwd_firerate>
+ </stats>
+</ship>

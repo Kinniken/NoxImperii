@@ -82,7 +82,7 @@ function cargo_calculateRoute ()
     
     -- We now know where. But we don't know what yet. Randomly choose a commodity type.
     -- TODO: I'm using the standard cargo types for now, but this should be changed to custom cargo once local-defined commodities are implemented.
-    local cargoes = {"Food", "Industrial Goods", "Medicine", "Luxury Goods", "Ore"}
+    local cargoes = {"Food", "Industrial Goods", "Consumer Goods", "Luxury Goods", "Ore"}
     local cargo = cargoes[rnd.rnd(1, #cargoes)]
 
     -- Return lots of stuff

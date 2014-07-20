@@ -66,7 +66,12 @@ end
 function background_nebula ()
    -- Set up parameters
    local path  = "dat/gfx/bkg/"
-   local nebula = nebulae[ prng.range(1,#nebulae) ]
+   local nebula
+   if (cur_sys:backgroundSpaceName() == nil or cur_sys:backgroundSpaceName() == '') then
+   	nebula = nebulae[ prng.range(1,#nebulae) ]
+   else
+   	nebula = cur_sys:backgroundSpaceName();
+   end
    local img   = tex.open( path .. nebula )
    local w,h   = img:dim()
    local r     = prng.num() * cur_sys:radius()/2
@@ -81,34 +86,50 @@ end
 
 
 function background_stars ()
+
+
+
    -- Chose number to generate
    local n
-   local r = prng.num()
-   if r > 0.97 then
-      n = 3
-   elseif r > 0.94 then
-      n = 2
-   elseif r > 0.1 then
-      n = 1
-   end
-
-   -- If there is an inhabited planet we'll need at least one star
-   if not n then
-      for k,v in ipairs( cur_sys:planets() ) do
-         if v:services().land then
-            n = 1
-            break
-         end
-      end
-   end
-
-   -- Generate the stars
-   local i = 0
-   local added = {}
-   while n and i < n do
-      num = star_add( added, i )
-      added[ num ] = true
-      i = i + 1
+   
+   
+   if (#(cur_sys:sunSpaceNames()) == 0) then
+		local r = prng.num()
+	   if r > 0.97 then
+		  n = 3
+	   elseif r > 0.94 then
+		  n = 2
+	   elseif r > 0.1 then
+		  n = 1
+	   end
+   
+		  -- If there is an inhabited planet we'll need at least one star
+	   if not n then
+		  for k,v in ipairs( cur_sys:planets() ) do
+			 if v:services().land then
+				n = 1
+				break
+			 end
+		  end
+	   end
+   
+	   -- Generate the stars
+	   local i = 0
+	   local added = {}
+	   while n and i < n do
+		  num = star_add( added, i )
+		  added[ num ] = true
+		  i = i + 1
+	   end
+   
+   else 
+		n = #(cur_sys:sunSpaceNames())
+		
+	   local i = 0
+	   while n and i < n do
+		  num = star_add( nil, i ) --no check for already added in manual mode
+		  i = i + 1
+	   end
    end
 end
 
@@ -117,13 +138,28 @@ function star_add( added, num_added )
    -- Set up parameters
    local path  = "dat/gfx/bkg/star/"
    -- Avoid repeating stars
-   local num   = prng.range(1,#stars)
-   local i     = 0
-   while added[num] and i < 10 do
-      num = prng.range(1,#stars)
-      i   = i + 1
+   
+   local star
+   local num
+   
+   if (#(cur_sys:sunSpaceNames())==0) then 
+   
+	   num   = prng.range(1,#stars)
+	   local i     = 0
+	   while added[num] and i < 10 do
+		  num = prng.range(1,#stars)
+		  i   = i + 1
+	   end
+   
+		star  = stars[ num ]
+   
+   else
+       
+     star  = cur_sys:sunSpaceNames()[num_added+1]
+   
    end
-   local star  = stars[ num ]
+   
+   
    -- Load and set stuff
    local img   = tex.open( path .. star )
    local w,h   = img:dim()

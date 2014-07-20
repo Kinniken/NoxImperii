@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Jupiter">
+ <pos>
+  <x>7750.942602</x>
+  <y>8413.416329</y>
+ </pos>
+ <GFX>
+  <space>J01.png</space>
+  <exterior>methane.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Dispersal of Ymir</faction>
+  <value>50.000000</value>
+  <range>0</range>
+ </presence>
+ <general>
+  <class>A</class>
+  <population>0</population>
+  <hide>0.250000</hide>
+  <services>
+   <land/>
+  </services>
+  <commodities/>
+  <description>The largest planet in the solar system, Jupiter was only barely explored by humans when the Dispersal of Ymir asked to settle it in exchange for terrestoid worlds they controlled. Now the mysterious race - or alliance of races, no human really knows - of hydrogen-breathers occupy it. They will receive the occasional human visitor, but otherwise their activities on the planet are unknown, and so is the extent of their realm. All the Terran Empire knows is that it spreads far beyond human borders, including within the Roidhunate.
+
+"Jupiter, already big in the screen, became half of heaven. Flandry saw blots march across its glowing many-colored face, darknesses which were storms that could have swallowed all Terra. Then the sight was lost; he was dropping through the atmosphere. Still thee step-up screens tried loyally to show him something: he saw clouds of ammonia crystals, a thousand kilometers long, streaked with strange blues and greens that were free-radicals; he saw lightning leap across a purple sky, and the distant yellow flare of sodium explosions. As he descended, he could even feel, very dimly, the quiver of the ship under enormous winds, and hear the muffled shriek and thunder of the air.
+
+They circled the night side, still descending, and Flandry saw a methane ocean, beating waves flattened by pressure and gravity against a cliff of black allotropic ice, which crumbled and was lifted again even as he watched. He saw an endless plain where things half trees and half animals -- except that they were neither, in any Terrestrial sense -- lashed snaky fronds after ribbon-shaped flyers a hundred meters in length. He saw bubbles stream past on a red wind, and they were lovely in their myriad colors and they sang in thin crystal voices which somehow penetrated the ship. But they couldn't be true bubbles at this pressure. Could they?
+
+A city came into view, just beyond the dawn line. If it was a city. It was, at least, a unified structure of immense extent, intricate with grottos and arabesques, built low throughout but somehow graceful and gracious. On Flandry's screen its color was polished blue. Here and there sparks and threads of white energy would briefly flash. They hurt his eyes. There were many Ymirites about, flying on their own wings or riding in shell-shaped power gliders. You wouldn't think of Jupiter as a planet where anything could fly, until you remembered the air density; then you realized it was more a case of swimming." ("Hunters of the Sky Cave")</description>
+ </general>
+</asset>

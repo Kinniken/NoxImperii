@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Mercury">
+ <pos>
+  <x>-3709.852869</x>
+  <y>-3378.616006</y>
+ </pos>
+ <GFX>
+  <space>moon-C01.png</space>
+  <exterior>snow.png</exterior>
+ </GFX>
+ <general>
+  <class>A</class>
+  <population>0</population>
+  <hide>0.250000</hide>
+  <services>
+   <land/>
+  </services>
+  <commodities/>
+  <description>Today, Mercury is home only to a small scientific base and some automated mining operations. But at the height of the Troubles, after the Commonwealth had collapsed and Terra itself had been sacked by the Gorzuni barbarians, it was here that the remains of the human forces rallied to the man that would become Emperor Manuel I, founder of the Argoid dynasty and of the Terran Empire.</description>
+ </general>
+</asset>

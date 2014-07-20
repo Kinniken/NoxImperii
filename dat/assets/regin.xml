@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Regin">
+ <pos>
+  <x>-11773.577750</x>
+  <y>-7091.889441</y>
+ </pos>
+ <GFX>
+  <space>I06.png</space>
+  <exterior>methane.png</exterior>
+ </GFX>
+ <general>
+  <class>A</class>
+  <population>0</population>
+  <hide>0.250000</hide>
+  <services/>
+ </general>
+</asset>

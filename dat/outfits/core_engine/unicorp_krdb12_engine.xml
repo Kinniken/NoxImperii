@@ -14,7 +14,7 @@
   <turn>130</turn>
   <speed>240</speed>
   <fuel>300</fuel>
-  <energy_usage>8</energy_usage>
+  <energy_regen>-8</energy_regen>
   <engine_limit>75</engine_limit>
  </specific>
 </outfit>

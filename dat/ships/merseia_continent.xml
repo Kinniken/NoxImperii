@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Merseian Brythioch">
+ <base_type>Merseian Brythioch</base_type>
+ <GFX sx="12" sy="12">merseia_continent</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Destroyer</class>
+ <price>1800000</price>
+ <fabricator>Roidhunate Shipyards</fabricator>
+ <description>While classified by the Imperial Navy as Continent-class, the Brythioch destroyer is significantly more capable than the Terran Asieneuve in all but armor. Small fleets of Brythiochs frequently probe Imperial borders, mapping potential weaknesses.
+</description>
+ <movement>
+  <thrust>160</thrust>
+  <turn>105</turn>
+  <speed>170</speed>
+ </movement>
+ <health>
+  <absorb>48</absorb>
+  <shield>700</shield>
+  <armour>850</armour>
+  <energy>1500</energy>
+  <shield_regen>11</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>58.2</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>90</cpu>
+  <crew>20</crew>
+  <mass>820</mass>
+  <fuel>500</fuel>
+  <cargo>120</cargo>
+ </characteristics>
+ <slots>
+  <weapon x="-15" y="-10" h="-10"/>
+  <weapon x="-15" y="10" h="-10"/>
+  <weapon x="20" y="0" h="-10"/>
+  <weapon x="4" y="-5" h="-10"/>
+  <weapon x="4" y="5" h="-10"/>
+  <weapon x="4" y="5" h="-10"/>
+  <utility>heavy</utility>
+  <utility>heavy</utility>
+  <utility/>
+  <utility/>
+  <structure>heavy</structure>
+  <structure/>
+  <structure/>
+ </slots>
+ <stats>
+  <tur_energy>-5</tur_energy>
+ </stats>
+</ship>

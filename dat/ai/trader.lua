@@ -55,7 +55,7 @@ function create ()
    elseif num < 12 then
       cargo = "Luxury Goods"
    else
-      cargo = "Medicine"
+      cargo = "Human Medicine"
    end
    ai.setcargo( cargo, rnd.int(0, ai.cargofree() ) )
 

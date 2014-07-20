@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Iapetus">
+ <pos>
+  <x>-11636.664242</x>
+  <y>14083.455064</y>
+ </pos>
+ <GFX>
+  <space>moon-K00.png</space>
+  <exterior>mining6.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Empire of Terra</faction>
+  <value>10.000000</value>
+  <range>0</range>
+ </presence>
+ <general>
+  <class>A</class>
+  <population>0</population>
+  <hide>0.250000</hide>
+  <services>
+   <land/>
+   <refuel/>
+  </services>
+  <commodities/>
+  <description>An uninhabited moon of Saturn, Iapetus is mostly remembered for the ill-fated 21st century scientific expedition that met disaster there.
+  
+"The spacecraft rotated while orbiting the moon, to maintain a steady optical field. It had crossed the dawn line, presently at the middle of the inward-facing hemisphere. Thus it had left bare, crater-pocked land behind it in the dark, and was passing above sunlit glacier country. Whiteness dazzled, glittered in sparks and shards of color, reached fantastic shapes heavenward; cirques, crevasses, caverns brimmed with blue." ("The Saturn Game")</description>
+ </general>
+</asset>

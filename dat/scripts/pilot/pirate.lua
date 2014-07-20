@@ -86,7 +86,7 @@ function pirate_createKestrel( pirate_create )
    low            = equip_lowHig()
 
    -- FInally add outfits
-   equip_ship( p, true, weapons, medium, low,
+   equip_ship( p, true, weapons, medium, low,nil,
                use_medium, use_low, olist )
 
    return p,olist
@@ -128,7 +128,7 @@ function pirate_createAdmonisher( pirate_create )
    low            = equip_lowMed()
 
    -- Finally add outfits
-      equip_ship( p, true, weapons, medium, low,
+      equip_ship( p, true, weapons, medium, low,nil,
                use_medium, use_low, olist )
 
    return p,olist
@@ -170,7 +170,7 @@ function pirate_createAncestor( pirate_create )
    low            = equip_lowMed()
 
    -- Finally add outfits
-   equip_ship( p, true, weapons, medium, low,
+   equip_ship( p, true, weapons, medium, low,nil,
                use_medium, use_low, olist )
 
    return p,olist
@@ -179,6 +179,10 @@ end
 
 -- Ceates a pirate flying a "Pirate Vendetta"
 function pirate_createVendetta( pirate_create )
+
+
+   print("pirate_createVendetta:")
+
    -- Create by default
    if pirate_create == nil then
       pirate_create = true
@@ -212,7 +216,7 @@ function pirate_createVendetta( pirate_create )
    low            = equip_lowLow()
 
    -- Finally add outfits
-   equip_ship( p, true, weapons, medium, low,
+   equip_ship( p, true, weapons, medium, low,nil,
                use_medium, use_low, olist )
 
    return p,olist

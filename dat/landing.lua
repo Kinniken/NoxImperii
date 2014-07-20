@@ -1,3 +1,5 @@
+include('universe/objects/class_planets.lua')
+
 --[[
    Prototype function:
 
@@ -206,7 +208,13 @@ end
 -- Expects the planet, the lowest standing at which landing is allowed, and the lowest standing at which bribing is allowed.
 function land_civilian( pnt, land_floor, bribe_floor )
    local fct = pnt:faction()
-   local can_land = fct:playerStanding() >= land_floor
+   
+   local can_land = true
+
+   if (fct) then
+      can_land = fct:playerStanding() >= land_floor
+   end
+
 
    -- Get land message
    local land_msg
@@ -218,7 +226,10 @@ function land_civilian( pnt, land_floor, bribe_floor )
 
    local bribe_msg, bribe_ack_msg
    -- Calculate bribe price. Note: Assumes bribe floor < land_floor.
-   local bribe_price = getcost(fct, land_floor, bribe_floor, 1000) -- TODO: different rates for different factions.
+   local bribe_price = 0
+   if (fct) then
+      bribe_price = getcost(fct, land_floor, bribe_floor, 1000) -- TODO: different rates for different factions.
+   end
    if not can_land and type(bribe_price) == "number" then
        local str      = numstring( bribe_price )
        bribe_msg      = string.format("\"I'll let you land for the modest price of %s credits.\"\n\nPay %s credits?", str, str )

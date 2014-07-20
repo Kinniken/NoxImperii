@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Altai">
+ <pos>
+  <x>-9680.243981</x>
+  <y>5239.471990</y>
+ </pos>
+ <GFX>
+  <space>P02.png</space>
+  <exterior>snow.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Independent</faction>
+  <value>50.000000</value>
+  <range>0</range>
+ </presence>
+ <general>
+  <class>A</class>
+  <population>0</population>
+  <hide>0.250000</hide>
+  <description>"Seen on approach, against crystal darkness and stars crowded into foreign constellations, Altai was beautiful. More than half the northern hemisphere, somewhat less in the south, was polar cap. Snowfields were tinged rosy by the sun Krasna; naked ice shimmered blue and cold green. The tropical belt, steppe and tundra, which covered the remainder, shaded from bronze to tarnished gold, here and there the quicksilver flash of a big lake. Altai was ringed like Saturn, a tawny hoop with subtle rainbow iridescence flung spinning around the equator, three radii out in space. And beyond were two copper-coin moons." ("A message in secret")
+
+Far beyond the borders of the Empire, Altai is a cold and harsh world, thinly populated several centuries ago by settlers from central Asia fleeing the Troubles. Away from the rest of humanity, visited only by the occasional Betelgian trader, it is an inward-looking world of nomad herders dedicated to the word of the Prophet Subotai and the Moslem-Buddhist syncretic religion he founded.</description>
+  <bar>The spaceport on Altai is little more than a concrete landing zone. Inside a tent close-by, an old man serves powerfully alcoholic herb tea, to help against the ambient cold.</bar>
+    <luadata>{
+	humanFertility = 0.4,
+	minerals = 0.4,
+	nativeFertility = 0.6,
+	settlements = {
+		humans = {
+			agriculture = 0.3,
+			industry = 0.3,
+			military = 0.4,
+			population = 545968,
+			services = 0.2,
+			stability = 0.4,
+			technology = 0.4,
+			activeEffects = { },
+			lesserGoodsDemand = { },
+			lesserGoodsSupply = { },
+			suppressGoodSupply = { },
+			extraGoodsDemand = {
+			},
+			extraGoodsSupply = {
+			},
+			suppressGoodDemand = {
+			},
+		},
+	},
+}</luadata>
+ </general>
+</asset>

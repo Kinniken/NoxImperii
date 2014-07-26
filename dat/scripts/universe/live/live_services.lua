@@ -632,7 +632,7 @@ local function generateCivilizedPlanetServices(planet)
 
 	faction=planet.c:faction()
 
-	if (faction) then
+	if (faction and not faction==faction.get("Natives")) then
 		factionName=faction:name()
 
 		if (factionName=="Empire of Terra") then

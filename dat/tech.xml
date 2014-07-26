@@ -542,150 +542,137 @@
 		<item>Empire Tunguska</item>
 		<item>Laser Cannon MK1</item>
 		<item>Laser Turret MK1</item>
-		<item>Ripper Cannon</item>
+		<item>Plasma Blaster MK1</item>
+		<item>Razor Turret MK1</item>
+		<item>Turreted Gauss Gun</item>
 	</tech>
 	<tech name="Empire Military 2">
 		<item>Empire Halley</item>
-		<item>Laser Cannon MK2</item>
-		<item>Laser Cannon MK3</item>
-		<item>Laser Turret MK2</item>
-		<item>Laser Turret MK3</item>
-		<item>Heavy Ripper Cannon</item>
+		<item>BioPlasma Organ Stage 1</item>
 		<item>Gauss Gun</item>
-		<item>Turreted Gauss Gun</item>
+		<item>Ion Cannon</item>
+		<item>Laser Cannon MK2</item>
+		<item>Laser Turret MK2</item>
 		<item>Mass Driver MK1</item>
+		<item>Orion Beam</item>
+		<item>Plasma Cluster Cannon MK1</item>
+		<item>Plasma Turret MK1</item>
+		<item>Razor MK1</item>
+		<item>Razor Turret MK2</item>
+		<item>Ripper Cannon</item>
 	</tech>
 	<tech name="Empire Military 3">
 		<item>Empire Asieneuve</item>
-		<item>Heavy Laser</item>
-		<item>Turbolaser</item>
-		<item>Vulcan Gun</item>
-		<item>Turreted Vulcan Gun</item>
-		<item>Shredder</item>
+		<item>BioPlasma Organ Stage 2</item>
+		<item>Heavy Ion Cannon</item>
+		<item>Heavy Ion Turret</item>
+		<item>Laser Cannon MK3</item>
+		<item>Laser Turret MK3</item>
 		<item>Mass Driver MK2</item>
-		<item>Mass Driver MK3</item>
-		<item>Unicorp Banshee Launcher</item>
-		<item>Banshee Rocket</item>
-		<item>Unicorp Fury Launcher</item>
-		<item>Fury Missile</item>
-		<item>Unicorp Medusa Launcher</item>
-		<item>Medusa Missile</item>
+		<item>Plasma Blaster MK2</item>
+		<item>Plasma Cluster Cannon MK2</item>
+		<item>Plasma Turret MK2</item>
+		<item>Razor MK2</item>
+		<item>Vulcan Gun</item>
 	</tech>
 	<tech name="Empire Military 4">
 		<item>Empire Jupiter</item>
+		<item>Heavy Ripper Cannon</item>
+		<item>Mass Driver MK3</item>
+		<item>Plasma Cluster Cannon MK3</item>
 		<item>Railgun</item>
-		<item>Repeating Railgun</item>
-		<item>Railgun Turret</item>
+		<item>Turbolaser</item>
 	</tech>
 	<tech name="Empire Military 5">
 		<item>Empire Valenderay</item>
-		<item>Unicorp Headhunter Launcher</item>
-		<item>Headhunter Missile</item>
-		<item>Unicorp Mace Launcher</item>
-		<item>Mace Rocket</item>
-		<item>Unicorp Caesar IV Launcher</item>
-		<item>Caesar IV Torpedo</item>
-		<item>Enygma Systems Spearhead Launcher</item>
-		<item>Spearhead Missile</item>
-		<item>TeraCom Medusa Launcher</item>
-		<item>Medusa Missile</item>
-		<item>Enygma Systems Turreted Fury Launcher</item>
+		<item>Ragnarok Beam</item>
+		<item>Turreted Vulcan Gun</item>
 	</tech>
 	
 	
 	<tech name="Independent Military 1">
 		<item>Laser Cannon MK1</item>
-		<item>Laser Turret MK1</item>
-		<item>Ripper Cannon</item>
-	</tech>
-	<tech name="Independent Military 2">
-		<item>Laser Cannon MK2</item>
-		<item>Laser Cannon MK3</item>
-		<item>Laser Turret MK2</item>
-		<item>Laser Turret MK3</item>
-		<item>Heavy Ripper Cannon</item>
+		<item>BioPlasma Organ Stage 1</item>
 		<item>Gauss Gun</item>
-		<item>Turreted Gauss Gun</item>
 		<item>Mass Driver MK1</item>
 	</tech>
-	<tech name="Independent Military 3">
-		<item>Heavy Laser</item>
-		<item>Turbolaser</item>
-		<item>Vulcan Gun</item>
-		<item>Turreted Vulcan Gun</item>
-		<item>Shredder</item>
+	<tech name="Independent Military 2">
+		<item>Laser Turret MK1</item>
+		<item>Plasma Blaster MK1</item>
+		<item>Turreted Gauss Gun</item>
+		<item>Ion Cannon</item>
+		<item>Laser Cannon MK2</item>
+		<item>Plasma Cluster Cannon MK1</item>
+		<item>Plasma Turret MK1</item>
+		<item>BioPlasma Organ Stage 2</item>
 		<item>Mass Driver MK2</item>
-		<item>Mass Driver MK3</item>
-		<item>Unicorp Banshee Launcher</item>
-		<item>Banshee Rocket</item>
-		<item>Unicorp Fury Launcher</item>
-		<item>Fury Missile</item>
-		<item>Unicorp Medusa Launcher</item>
-		<item>Medusa Missile</item>
+		<item>Plasma Blaster MK2</item>
+		<item>Plasma Cluster Cannon MK2</item>
+		<item>Shredder</item>
+	</tech>
+	<tech name="Independent Military 3">
+		<item>Laser Turret MK2</item>
+		<item>Orion Beam</item>
+		<item>Laser Cannon MK3</item>
+		<item>Plasma Turret MK2</item>
+		<item>Plasma Cluster Cannon MK3</item>
 	</tech>
 	<tech name="Independent Military 4">
-		<item>Railgun</item>
-		<item>Repeating Railgun</item>
-		<item>Railgun Turret</item>
+
 	</tech>
 	<tech name="Independent Military 5">
-		<item>Unicorp Headhunter Launcher</item>
-		<item>Headhunter Missile</item>
-		<item>Unicorp Mace Launcher</item>
-		<item>Mace Rocket</item>
-		<item>Unicorp Caesar IV Launcher</item>
-		<item>Caesar IV Torpedo</item>
-		<item>Enygma Systems Spearhead Launcher</item>
-		<item>Spearhead Missile</item>
-		<item>TeraCom Medusa Launcher</item>
-		<item>Medusa Missile</item>
-		<item>Enygma Systems Turreted Fury Launcher</item>
+
 	</tech>
  
  
  
 	<tech name="Roidhunate Military 1">
-		<item>Ion Cannon</item>
-		<item>Razor MK1</item>
+		<item>Laser Cannon MK1</item>
+		<item>Laser Turret MK1</item>
+		<item>Plasma Blaster MK1</item>
 		<item>Razor Turret MK1</item>
+		<item>Turreted Gauss Gun</item>
 	</tech>
 	<tech name="Roidhunate Military 2">
 		<item>Merseian Vach Rueth</item>
-		<item>Heavy Ion Cannon</item>
-		<item>Razor MK2</item>
-		<item>Razor MK3</item>
-		<item>Razor Turret MK2</item>
-		<item>Razor Turret MK3</item>
-		<item>Plasma Blaster MK1</item>
+		<item>BioPlasma Organ Stage 1</item>
+		<item>Gauss Gun</item>
+		<item>Ion Cannon</item>
+		<item>Laser Cannon MK2</item>
+		<item>Laser Turret MK2</item>
+		<item>Mass Driver MK1</item>
+		<item>Orion Beam</item>
+		<item>Plasma Cluster Cannon MK1</item>
 		<item>Plasma Turret MK1</item>
+		<item>Razor MK1</item>
+		<item>Razor Turret MK2</item>
+		<item>Ripper Cannon</item>
 	</tech>
 	<tech name="Roidhunate Military 3">
 		<item>Merseian Brythioch</item>
-		<item>Heavy Ion Turret</item>
+		<item>BioPlasma Organ Stage 2</item>
+		<item>Laser Cannon MK3</item>
+		<item>Laser Turret MK3</item>
+		<item>Mass Driver MK2</item>
 		<item>Plasma Blaster MK2</item>
-		<item>Plasma Blaster MK3</item>
-		<item>Unicorp Banshee Launcher</item>
-		<item>Banshee Rocket</item>
-		<item>Unicorp Fury Launcher</item>
-		<item>Fury Missile</item>
-		<item>Unicorp Medusa Launcher</item>
-		<item>Medusa Missile</item>
+		<item>Plasma Cluster Cannon MK2</item>
+		<item>Plasma Turret MK2</item>
+		<item>Razor MK2</item>
+		<item>Vulcan Gun</item>
+		<item>Mass Driver MK3</item>
+		<item>Railgun</item>
 	</tech>
 	<tech name="Roidhunate Military 4">
-		<item>Plasma Turret MK2</item>
+		<item>Heavy Ripper Cannon</item>
+		<item>Plasma Cluster Cannon MK3</item>
+		<item>Heavy Laser</item>
+		<item>Railgun Turret</item>
+		<item>Razor MK3</item>
 	</tech>
 	<tech name="Roidhunate Military 5">
-		<item>Unicorp Headhunter Launcher</item>
-		<item>Headhunter Missile</item>
-		<item>Unicorp Mace Launcher</item>
-		<item>Mace Rocket</item>
-		<item>Unicorp Caesar IV Launcher</item>
-		<item>Caesar IV Torpedo</item>
-		<item>Enygma Systems Spearhead Launcher</item>
-		<item>Spearhead Missile</item>
-		<item>TeraCom Medusa Launcher</item>
-		<item>Medusa Missile</item>
-		<item>Enygma Systems Turreted Fury Launcher</item>
+		<item>Turreted Vulcan Gun</item>
+		<item>Neutron Disruptor</item>
+		<item>Razor Turret MK3</item>
 	</tech>
  
  

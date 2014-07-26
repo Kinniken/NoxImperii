@@ -5,47 +5,48 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Destroyer</class>
- <price>1800000</price>
+ <price>2200000</price>
  <fabricator>Roidhunate Shipyards</fabricator>
  <description>While classified by the Imperial Navy as Continent-class, the Brythioch destroyer is significantly more capable than the Terran Asieneuve in all but armor. Small fleets of Brythiochs frequently probe Imperial borders, mapping potential weaknesses.
 </description>
  <movement>
-  <thrust>160</thrust>
-  <turn>105</turn>
-  <speed>170</speed>
+  <thrust>190</thrust>
+  <turn>120</turn>
+  <speed>180</speed>
  </movement>
  <health>
-  <absorb>48</absorb>
-  <shield>700</shield>
-  <armour>850</armour>
-  <energy>1500</energy>
-  <shield_regen>11</shield_regen>
+  <absorb>50</absorb>
+  <shield>500</shield>
+  <armour>900</armour>
+  <energy>1600</energy>
+  <shield_regen>10</shield_regen>
   <armour_regen>0</armour_regen>
-  <energy_regen>58.2</energy_regen>
+  <energy_regen>60</energy_regen>
  </health>
  <characteristics>
-  <cpu>90</cpu>
+  <cpu>96</cpu>
   <crew>20</crew>
-  <mass>820</mass>
-  <fuel>500</fuel>
-  <cargo>120</cargo>
+  <mass>1350</mass>
+  <fuel>800</fuel>
+  <cargo>100</cargo>
  </characteristics>
  <slots>
-  <weapon x="-15" y="-10" h="-10"/>
-  <weapon x="-15" y="10" h="-10"/>
-  <weapon x="20" y="0" h="-10"/>
-  <weapon x="4" y="-5" h="-10"/>
-  <weapon x="4" y="5" h="-10"/>
-  <weapon x="4" y="5" h="-10"/>
-  <utility>heavy</utility>
-  <utility>heavy</utility>
-  <utility/>
-  <utility/>
-  <structure>heavy</structure>
-  <structure/>
-  <structure/>
+  <weapon x="-15" y="-10" h="-10" size="large"/>
+  <weapon x="-15" y="10" h="-10" size="large"/>
+  <weapon x="20" y="0" h="-10" size="large"/>
+  <weapon x="4" y="-5" h="-10" size="large"/>
+  <weapon x="4" y="5" h="-10" size="large"/>
+  <weapon x="4" y="5" h="-10" size="medium"/>
+  <weapon x="4" y="5" h="-10" size="medium"/>
+  <utility size="large"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <structure size="large"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
  </slots>
  <stats>
-  <tur_energy>-5</tur_energy>
  </stats>
 </ship>

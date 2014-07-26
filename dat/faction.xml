@@ -19,6 +19,18 @@
    <enemy>Pirate</enemy>
   </enemies>
  </faction>
+ <faction name="Natives">
+  <known/>
+  <player>0</player>
+  <colour>grey</colour>
+  <spawn>natives</spawn>
+  <standing>natives</standing>
+  <allies>
+  </allies>
+  <enemies>
+   <enemy>Pirate</enemy>
+  </enemies>
+ </faction>
  <faction name="Civilian">
   <invisible />
   <static />

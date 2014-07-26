@@ -17,7 +17,7 @@ imperial_sectors={{center=sol_sector,name="Sector Sol",key="sol"},
 	{center=acturus_sector,name="Sector Acturus",key="acturus"},
 	{center=taurus_sector,name="Sector Taurus",key="taurus"},
 	{center=antares_sector,name="Sector Antares",key="antares"},
-	{center=alphacrusis_sector,name="Sector Alpha Crucis",key="alphacrusis"},
+	{center=alphacrusis_sector,name="Sector Alpha Crucis",key="alphacrucis"},
 	{center=leo_sector,name="Sector Leo",key="leo"}}
 
 imperial_barbarian_zones={	coreward_barb={name="Coreward Barbarian Wastes",key="coreward_barb"},
@@ -37,18 +37,26 @@ roidhunate_barbarian_zones_array={roidhunate_barbarian_zones.coreward_barb,roidh
 
 function initStatusVar()
 
+	var.push("universe_emperor","Georgios Manuel Krishna Murasaki")
+
 	for _,v in pairs(imperial_sectors) do
 		var.push("universe_stability_"..v.key,0.9)
+		var.push("universe_stability_min_"..v.key,0.8)
+		var.push("universe_stability_max_"..v.key,1)
 	end
 	var.push("universe_stability_sol",1)
 
 	for _,v in pairs(imperial_barbarian_zones_array) do
 		var.push("universe_barbarian_activity_"..v.key,0.5)
+		var.push("universe_barbarian_activity_min_"..v.key,0.4)
+		var.push("universe_barbarian_activity_max_"..v.key,0.6)
 	end
 end
 
 function updateUniverseDesc()
 	local desc=[[The Empire is weak - damaged by corruption, hounded by barbarians, locked in a deadly rivalry with the Roidhunate.
+
+Current Emperor: His Imperial Majesty, High Emperor ]]..var.peek("universe_emperor")..[[
 
 Current stability of the Imperial Sectors:
 
@@ -76,14 +84,13 @@ Current barbarian activity:
 end
 
 function getSectorStability(sectorName)
-
-	for _,v in ipairs(imperial_sectors) do
+	for _,v in pairs(imperial_sectors) do
 		if sectorName==v.name then
-			return var.peek("universe_stability_"..v.key)
+			return var.peek("universe_stability_"..v.key),var.peek("universe_stability_min_"..v.key),var.peek("universe_stability_max_"..v.key)
 		end
 	end
 
-	return nil
+	return nil,nil,nil
 end
 
 function setSectorStability(sectorName,stability)
@@ -103,29 +110,37 @@ function setSectorStability(sectorName,stability)
 end
 
 function adjustSectorStability(sectorName,change)
-	local stability=getSectorStability(sectorName)
+	local stability,min,max=getSectorStability(sectorName)
 
 	if not stability then
 		print("No stability for zone: ")
 		print(sectorName)
 	else
+
+		if change<1 and stability*change<min then
+			return
+		elseif change>1 and stability*change>max then
+			return
+		end
+
 		setSectorStability(sectorName,stability*change)
 	end
 end
 
 function getBarbarianActivity(sectorName)
 
-	for _,v in ipairs(imperial_barbarian_zones) do
+	for _,v in pairs(imperial_barbarian_zones) do
+		print("comparing "..sectorName.." with "..v.name)
 		if sectorName==v.name then
-			return var.peek("universe_barbarian_activity_"..v.key)
+			return var.peek("universe_barbarian_activity_"..v.key),var.peek("universe_barbarian_activity_min_"..v.key),var.peek("universe_barbarian_activity_max_"..v.key)
 		end
 	end
 
-	return nil
+	return nil,nil,nil
 end
 
 function setBarbarianActivity(sectorName,activity)
-	for _,v in pairs(barbarian_zones) do
+	for _,v in pairs(imperial_barbarian_zones) do
 		if sectorName==v.name then
 			var.push("universe_barbarian_activity_"..v.key,activity)
 		end
@@ -141,12 +156,19 @@ function setBarbarianActivity(sectorName,activity)
 end
 
 function adjustBarbarianActivity(sectorName,change)
-	local activity=getBarbarianActivity(sectorName)
+	local activity,min,max=getBarbarianActivity(sectorName)
 
 	if not activity then
 		print("No activity for zone: ")
 		print(sectorName)
 	else
+
+		if change<1 and activity*change<min then
+			return
+		elseif change>1 and activity*change>max then
+			return
+		end
+		
 		print("Adjusting to: "..activity*change)
 		setBarbarianActivity(sectorName,activity*change)
 	end

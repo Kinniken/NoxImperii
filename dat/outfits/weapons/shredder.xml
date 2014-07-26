@@ -5,7 +5,7 @@
   <size>small</size>
   <mass>10</mass>
   <price>22000</price>
-  <description>The Shredder quite lives up to the name its Dvaered manufacturers gave it. The sheer damage dealing capacity of this weapon makes Dvaered fighters dangerous to engage by ships that aren't substantially larger than they are.</description>
+  <description>The Shredder quite lives up to its nickname. The sheer damage dealing capacity of this weapon makes fighters equipped with it dangerous to engage by ships that aren't substantially larger than they are. A favorite of the better-equipped barbarian navies.</description>
   <gfx_store>shredder</gfx_store>
   <cpu>-8</cpu>
  </general>

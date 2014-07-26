@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Daedelus">
+ <pos>
+  <x>4200.758285</x>
+  <y>-3215.739423</y>
+ </pos>
+ <GFX>
+  <space>M02.png</space>
+  <exterior>oceanic2.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Empire of Terra</faction>
+  <value>100.000000</value>
+  <range>0</range>
+ </presence>
+ <extraPresences>
+
+ </extraPresences>
+ <general>
+  <class>A</class>
+  <population>900000</population>
+  <hide>0.250000</hide>
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+  </services>
+  <tradedatas>
+  </tradedatas>
+  <description>Though lightly populated and not fully explored, Daedelus is home to a large navy base. The Merseian border is close, and should war break out, the HQ on the planet would be tasked with coordinating the defense of the entire region.
+
+ "Descending, he followed a lane along a cliff. On his left were walls time-gnawed, unpretentious, reminiscent of those in the Old Town of Olga's Landing. On his right were a guard rail, empty air, and a tremendous view. The river glimmered silver, grandly curved, through hundreds of kilometers of its valley, sunset bound. That land lay in shades of dark, metallic green, save where softer tones showed that farmsteads or plantations had been wrested out of it. The northern mountains and the ice fields beyond them, the southward sweep of plains, faded out of sight, lost in sheer distance. Closer by, the headwaters of the river rushed downward in cataracts. The mountainside was covered with native growth. Although air was cool at this altitude, Targovi caught a harsh pungency. Raindrops that were cars flitted to and fro through heaven. A spaceship lifted, her gravs driving her in silence, but the hull carving out muted thunder." ("Game of Empire")</description>
+  <bar>The nearest bar is so filled with soldiers and Navy personnel it feels like an extension of the base' mess hall.</bar>
+      <luadata>{
+	humanFertility = 0.7,
+	minerals = 0.5,
+	nativeFertility = 1,
+	settlements = {
+		humans = {
+			agriculture = 0.3,
+			industry = 0.4,
+			population = 125248,
+			technology = 0.9,
+			services = 0.4,
+			military = 1.2,
+			stability = 0.9
+		},
+	},
+}</luadata>
+ </general>
+</asset>

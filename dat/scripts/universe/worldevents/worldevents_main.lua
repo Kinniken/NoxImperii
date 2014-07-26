@@ -47,6 +47,8 @@ event.applyOnWorldCustom=function(self,planet)
 	local effectId=planet.lua.settlements.humans:addActiveEffect("Urgent medical help is needed following the barbarian attack.",
 		(time.get() + time.create( 0, 5, 0 )):tonumber() )
 	planet.lua.settlements.humans:addGoodDemand(HUMAN_MEDICINE,20,3,effectId)
+
+	adjustBarbarianActivity(get_nearest_barbarian_zone(system_class.load(planet.c:system())).name,1.01)
 end
 event.getEventMessage=function(self,planet)
 	return "NEWS ALERT: An major barbarian raid on "..planet.c:name().." has decimated the main cities! Urgent help is required by the civilian population."
@@ -119,8 +121,7 @@ event.applyOnWorldCustom=function(self,planet)
 	planet.lua.settlements.humans:reduceGoodSupply(INDUSTRIAL,20,3,effectId)
 	planet.lua.settlements.humans:reduceGoodSupply(CONSUMER_GOODS,20,3,effectId)
 	
-	adjustBarbarianActivity(get_nearest_barbarian_zone(system_class.load(planet.c:system())),1.01)
-
+	adjustSectorStability(planet.c:system():getZone(),0.99)
 end
 event.getEventMessage=function(self,planet)
 	return "NEWS ALERT: Increased pirate attacks on "..planet.c:name().." is hampering local trade."

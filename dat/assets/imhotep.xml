@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Imhotep">
+ <pos>
+  <x>-6094.758285</x>
+  <y>-3768.739423</y>
+ </pos>
+ <GFX>
+  <space>M01.png</space>
+  <exterior>oceanic.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Empire of Terra</faction>
+  <value>100.000000</value>
+  <range>0</range>
+ </presence>
+ <extraPresences>
+
+ </extraPresences>
+ <general>
+  <class>A</class>
+  <population>900000</population>
+  <hide>0.250000</hide>
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+  </services>
+  <tradedatas>
+  </tradedatas>
+  <description>Imhotep is a big world, whose size and surface gravity places it at the limit of human hability. Imperial presence started as a research colony but has developped as something of a transport hub for the local sector. Still, it is a remote Imperial world, and the local economy is rather backward.
+
+ "Folk were mainly human, but it was unlikely that many had seen Mother Terra. The planets where they were born and bred had marked them. Residents of Imhotep were necessarily muscular and never fat. Those whose families had lived here for generations, since Olga's Landing was a scientific base, and had thus melded into a type, tended to be dark-skinned and aquiline-featured. Men usually wore loose tunic and trousers, short hair, beards; women favored blouses, skirts, and braids; in this district, clothes might be threadbare but were raffishly bright. Members of the armed services on leave--a few from the local garrison, the majority from Daedalus--mingled with them, uniforms a stiff contrast no matter how bent on pleasure the person was. They were in good enough physical condition to walk fairly easily under a gravity thirty percent greater than Terra's, but crew-people from civilian freighters frequently showed weariness and an exaggerated fear of falling." ("Game of Empire")</description>
+  <bar>The local bar is nothing spectacular, but the crowd is very mixed, even for a border world.</bar>
+      <luadata>{
+	humanFertility = 0.5,
+	minerals = 0.5,
+	nativeFertility = 1,
+	settlements = {
+		humans = {
+			agriculture = 0.5,
+			industry = 0.6,
+			population = 4512686,
+			technology = 0.9,
+			services = 0.6,
+			military = 0.5,
+			stability = 0.7
+		},
+	},
+}</luadata>
+ </general>
+</asset>

@@ -13,7 +13,7 @@ include("dat/factions/equip/outfits.lua")
 --           name of the ship of the pirate and a table containing the outfits,
 --           otherwise it'll return the pirate itself and the outfit table.
 --]]
-function barbarian_create( barbarian_create )
+function barbarian_create(  )
    -- Create by default
    if barbarian_create == nil then
       barbarian_create = true
@@ -23,11 +23,11 @@ function barbarian_create( barbarian_create )
    local z = rnd.rnd()
    local p, o
    if z < 0.25 then
-      p,o = barbarian_createPlanet( barbarian_create )
+      p,o = barbarian_createPlanet(  )
    elseif z < 0.5 then
-      p,o = barbarian_createContinent( barbarian_create )
+      p,o = barbarian_createContinent(  )
    else
-      p,o = barbarian_createComet( barbarian_create )
+      p,o = barbarian_createComet(  )
    end
 
    -- Set name
@@ -38,36 +38,15 @@ function barbarian_create( barbarian_create )
 end
 
 
--- Creates an empty ship for the pirate
-function barbarian_createEmpty( ship )
-   -- Create the pilot
-   local pilots   = pilot.add( ship )
-   local p        = pilots[1]
+function barbarian_createPlanet(  )
 
-   -- Remove outfits
-   p:rmOutfit( "all" )
-
-   return p
-end
-
--- Creates a pirate flying a "Pirate Kestrel"
-function barbarian_createPlanet( barbarian_create )
-   -- Create by default
-   if barbarian_create == nil then
-      barbarian_create = true
-   end
 
    -- Create the pirate ship
    local p, s, olist
-   if barbarian_create then
-      p     = barbarian_createEmpty( "Barbarian Slaver" )
-      s     = p:ship()
-      olist = nil
-   else
+  
       p     = "Barbarian Slaver"
       s     = ship.get(p)
       olist = { }
-   end
 
    -- Equipment vars
    local primary, secondary, medium, low
@@ -94,23 +73,15 @@ end
 
 
 -- Creates a pirate flying a "Pirate Ancestor"
-function barbarian_createContinent( barbarian_create )
-   -- Create by default
-   if barbarian_create == nil then
-      barbarian_create = true
-   end
+function barbarian_createContinent(  )
+
 
    -- Create the pirate ship
    local p, s, olist
-   if barbarian_create then
-      p     = barbarian_createEmpty( "Barbarian Looter" )
-      s     = p:ship()
-      olist = nil
-   else
+
       p     = "Barbarian Looter"
       s     = ship.get(p)
       olist = { }
-   end
 
    -- Equipment vars
    local primary, secondary, medium, low
@@ -136,24 +107,14 @@ end
 
 
 -- Ceates a pirate flying a "Pirate Vendetta"
-function barbarian_createComet( barbarian_create )
+function barbarian_createComet(  )
 
-   -- Create by default
-   if barbarian_create == nil then
-      barbarian_create = true
-   end
 
    -- Create the pirate ship
    local p, s, olist
-   if barbarian_create then
-      p     = barbarian_createEmpty( "Barbarian Raider" )
-      s     = p:ship()
-      olist = nil
-   else
-      p     = "Barbarian Raider"
+    = "Barbarian Raider"
       s     = ship.get(p)
       olist = { } 
-   end
 
    -- Equipment vars
    local primary, secondary, medium, low

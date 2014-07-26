@@ -136,7 +136,20 @@
   </pilots>
  </fleet>
  
- 
+ <fleet name="Koala">
+  <ai>trader</ai>
+  <faction>Independent</faction>
+  <pilots>
+   <pilot name="Koala" ship="Koala"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Mule">
+  <ai>trader</ai>
+  <faction>Independent</faction>
+  <pilots>
+   <pilot name="Mule" ship="Mule"></pilot>
+  </pilots>
+ </fleet>
  
  <fleet name="Betelgeusean Trader Llama">
   <ai>trader</ai>

@@ -576,11 +576,7 @@ int load_game( const char* file, int version_diff )
 
 
    /* Load more stuff. */
-   var_load(node);
-   missions_loadActive(node);
-   events_loadActive(node);
-   news_loadArticles( node );
-   hook_load(node);
+
    //WARN("Landing planet before transient load: %s",pnt->name);
    space_transientAssetsLoad(node);
    systems_reconstructPlanets();
@@ -601,6 +597,12 @@ int load_game( const char* file, int version_diff )
    space_sysLoad(node);
 
    space_refresh();
+
+   var_load(node);
+   missions_loadActive(node);
+   events_loadActive(node);
+   news_loadArticles( node );
+   hook_load(node);
 
    pnt = player_load(node);
 

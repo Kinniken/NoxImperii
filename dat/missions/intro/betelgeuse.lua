@@ -1,5 +1,5 @@
 
-
+include "universe/generate_helper.lua"
 include "jumpdist.lua"
 include "numstring.lua"
 
@@ -75,7 +75,7 @@ function accept ()
 
       carg_id = misn.cargoAdd( carg_type, 0 )
 
-      misn.osdCreate(misn_title, osd_msg)
+      misn.osdCreate(OSDtitle, {OSDdesc})
 
       -- hooks
       landhook = hook.land ("land")

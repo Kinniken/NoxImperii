@@ -79,12 +79,8 @@ static int save_data( xmlTextWriterPtr writer )
    if (var_save(writer) < 0) return -1;
    if (pfaction_save(writer) < 0) return -1;
    if (hook_save(writer) < 0) return -1;
-
-   if (space_transientAssetsSave(writer) < 0) return -1;
-   if (space_transientSystemsSave(writer) < 0) return -1;
-   if (space_transientJumpsSave(writer) < 0) return -1;
-   if (space_customData(writer) < 0) return -1;
    if (space_sysSave(writer) < 0) return -1;
+
    return 0;
 }
 

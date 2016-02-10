@@ -32,7 +32,7 @@ include("pilot/barbarians.lua")
 function create ()
    -- Note: this mission does not make any system claims.
    -- Create the target pirate
-   target_ship_name, target_ship, target_ship_outfits,target_ship_ai,target_ship_faction = barbarian_lord_generate()
+   target_ship_name, target_ship, target_ship_outfits = barbarian_lord_generate()
 
    -- Get target system
    target_planet,target_system = get_barbarian_planet( system.cur() )

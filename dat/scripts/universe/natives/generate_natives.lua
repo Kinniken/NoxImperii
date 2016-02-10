@@ -68,10 +68,6 @@ local function setNativeDemands(planet,basicWeapons,basicTools,primitiveWeapons,
 	if (primativeConsumption>0) then
 		planet.lua.natives:addGoodDemand(PRIMITIVE_CONSUMER,primativeConsumption,1)
 	end
-
-	planet.faction="Natives"
-	planet.factionPresence=0
-	planet.factionRange=0
 end
 
 local function genericSpecieName()

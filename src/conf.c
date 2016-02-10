@@ -149,7 +149,6 @@ void conf_setDefaults (void)
    conf.font_size_intro   = 18;
    conf.font_size_def     = 12;
    conf.font_size_small   = 10;
-   conf.font_size_tiny   = 9;
 
    /* Misc. */
    conf.nosave       = 0;
@@ -395,7 +394,6 @@ int conf_loadConfig ( const char* file )
       conf_loadInt("font_size_intro",conf.font_size_intro);
       conf_loadInt("font_size_def",conf.font_size_def);
       conf_loadInt("font_size_small",conf.font_size_small);
-      conf_loadInt("font_size_tiny",conf.font_size_tiny);
 
       /* Misc. */
       conf_loadFloat("compression_velocity",conf.compression_velocity);
@@ -1012,8 +1010,6 @@ int conf_saveConfig ( const char* file )
    conf_saveInt("font_size_def",conf.font_size_def);
    conf_saveComment("Small size: 10");
    conf_saveInt("font_size_small",conf.font_size_small);
-   conf_saveComment("Tiny size: 8");
-   conf_saveInt("font_size_tiny",conf.font_size_tiny);
    conf_saveEmptyLine();
 
    /* Misc. */

@@ -296,7 +296,7 @@ static int commodityL_priceAt( lua_State *L )
       return 0;
    }
 
-   lua_pushnumber( L, planet_commodityPriceBuying( p, c ) );
+   lua_pushnumber( L, planet_commodityPrice( p, c ) );
    return 1;
 }
 

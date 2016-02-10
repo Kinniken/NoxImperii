@@ -1,5 +1,4 @@
 include "jumpdist.lua"
-include "pilot/pirate.lua"
 
 -- Gets a system with strong pirate influence
 function get_nearby_pirate_system( sys, sysTaken )
@@ -48,25 +47,25 @@ function pir_generate ()
    -- Make sure to save the outfits.
    pir_outfits["__save"] = true
 
-   return pir_name, pir_ship, pir_outfits,"pirate","Pirate"
+   return pir_name, pir_ship, pir_outfits
 end
 function pir_easy ()
    if rnd.rnd() < 0.5 then
-      return pirate_createAncestor()
+      return pirate_createAncestor(false)
    else
-      return pirate_createVendetta()
+      return pirate_createVendetta(false)
    end
 end
 function pir_medium ()
    if rnd.rnd() < 0.5 then
-      return pirate_createAdmonisher()
+      return pirate_createAdmonisher(false)
    else
       return pir_easy()
    end
 end
 function pir_hard ()
    if rnd.rnd() < 0.5 then
-      return pirate_createKestrel()
+      return pirate_createKestrel(false)
    else
       return pir_medium()
    end

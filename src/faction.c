@@ -492,6 +492,7 @@ void faction_modPlayer( int f, double mod, const char *source )
    Faction *faction;
 
    if (!faction_isFaction(f)) {
+      WARN("%d is an invalid faction", f);
       return;
    }
    faction = &faction_stack[f];
@@ -523,6 +524,7 @@ void faction_modPlayer( int f, double mod, const char *source )
 void faction_modPlayerSingle( int f, double mod, const char *source )
 {
    if (!faction_isFaction(f)) {
+      WARN("%d is an invalid faction", f);
       return;
    }
 
@@ -546,6 +548,7 @@ void faction_modPlayerRaw( int f, double mod )
    HookParam hparam[3];
 
    if (!faction_isFaction(f)) {
+      WARN("%d is an invalid faction", f);
       return;
    }
 
@@ -578,6 +581,7 @@ double faction_getPlayer( int f )
    if (faction_isFaction(f))
       return faction_stack[f].player;
    else {
+      WARN("%d is an invalid faction", f);
       return -1000;
    }
 }
@@ -594,6 +598,7 @@ double faction_getPlayerDef( int f )
    if (faction_isFaction(f))
       return faction_stack[f].player_def;
    else {
+      WARN("%d is an invalid faction", f);
       return -1000;
    }
 }
@@ -688,6 +693,7 @@ int areEnemies( int a, int b)
    if (faction_isFaction(a))
       fa = &faction_stack[a];
    else { /* a is invalid */
+      WARN("areEnemies: %d is an invalid faction", a);
       return 0;
    }
 
@@ -695,6 +701,7 @@ int areEnemies( int a, int b)
    if (faction_isFaction(b))
       fb = &faction_stack[b];
    else { /* b is invalid */
+      WARN("areEnemies: %d is an invalid faction", b);
       return 0;
    }
 
@@ -740,6 +747,7 @@ int areAllies( int a, int b )
    if (faction_isFaction(a))
       fa = &faction_stack[a];
    else { /* a is invalid */
+      WARN("%d is an invalid faction", a);
       return 0;
    }
 
@@ -747,6 +755,7 @@ int areAllies( int a, int b )
    if (faction_isFaction(b))
       fb = &faction_stack[b];
    else { /* b is invalid */
+      WARN("%d is an invalid faction", b);
       return 0;
    }
 

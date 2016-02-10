@@ -1,5 +1,5 @@
 
-include("universe/live/universe_status.lua")
+include("universe/live/universe_desc.lua")
 
 function name()
    local names = {
@@ -36,9 +36,6 @@ end
 function create()
    player.pilot():rename( name() ) -- Assign a random name to the player's ship.
    player.pilot():addOutfit( "Laser Cannon MK1", 2 )
-
-   
-   initStatusVar()
-   updateUniverseDesc()
+   var.push("universe_status",generateUniverseDesc())
    evt.finish( true )
 end

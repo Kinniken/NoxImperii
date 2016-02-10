@@ -37,7 +37,7 @@ include("pilot/pirate.lua")
 function create ()
    -- Note: this mission does not make any system claims.
    -- Create the target pirate
-   target_ship_name, target_ship, target_ship_outfits,target_ship_ai,target_ship_faction = pir_generate()
+   target_ship_name, target_ship, target_ship_outfits = pir_generate()
 
    -- Get target system
    target_system = get_suitable_system( system.cur() )

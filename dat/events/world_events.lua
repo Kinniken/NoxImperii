@@ -3,6 +3,9 @@ include("universe/worldevents/worldevents_main.lua")
 include("universe/generate_helper.lua")
 
 function create()
+		
+	math.randomseed(os.time())
+
 	c_sys=system.cur()
 
 	possibleTargets={}

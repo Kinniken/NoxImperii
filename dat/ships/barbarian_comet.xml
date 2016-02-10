@@ -1,47 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ship name="Barbarian Raider">
  <base_type>Barbarian Raider</base_type>
- <GFX sx="10" sy="10">barbarian_comet</GFX>
+ <GFX sx="12" sy="12">barbarian_comet</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Destroyer</class>
- <price>750000</price>
+ <price>700000</price>
  <fabricator>Various barbarian shipyards</fabricator>
  <description>Comet-class frigates are the smallest ships in widespread use in barbarian navies - fighters require proportionally more skilled pilots, and who would want to crew a ship without the cargo capacity to bring back loot from civilized worlds?
  
  This raider model is simple but effective. Slower and with lesser shields than the equivalent Terran ships, it makes up with a heavier armor, and the usual ample cargo hold.</description>
  <movement>
-  <thrust>150</thrust>
-  <turn>100</turn>
-  <speed>180</speed>
+  <thrust>250</thrust>
+  <turn>180</turn>
+  <speed>250</speed>
  </movement>
  <health>
-  <absorb>20</absorb>
-  <shield>250</shield>
-  <armour>500</armour>
-  <energy>700</energy>
+  <absorb>8</absorb>
+  <shield>200</shield>
+  <armour>150</armour>
+  <energy>650</energy>
   <shield_regen>6</shield_regen>
   <armour_regen>0</armour_regen>
-  <energy_regen>30</energy_regen>
+  <energy_regen>28.7</energy_regen>
  </health>
  <characteristics>
-  <cpu>32</cpu>
-  <crew>20</crew>
-  <mass>420</mass>
-  <fuel>800</fuel>
-  <cargo>80</cargo>
+  <cpu>30</cpu>
+  <crew>8</crew>
+  <mass>280</mass>
+  <fuel>500</fuel>
+  <cargo>100</cargo>
  </characteristics>
  <slots>
-  <weapon x="12" y="0" h="0" size="medium"/>
-  <weapon x="12" y="0" h="0" size="medium"/>
-  <weapon x="-3" y="0" h="2" size="medium"/>
-  <weapon x="-3" y="0" h="2" size="medium"/>
-  <weapon x="-3" y="0" h="2" size="small"/>
-  <weapon x="-3" y="0" h="2" size="small"/>
-  <utility size="medium"/>
-  <utility size="small"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
+  <weapon x="12" y="0" h="0"/>
+  <weapon x="12" y="0" h="0"/>
+  <weapon x="-3" y="0" h="2"/>
+  <weapon x="-3" y="0" h="2"/>
+  <utility/>
+  <utility/>
+  <structure/>
+  <structure/>
  </slots>
  <stats>
  </stats>

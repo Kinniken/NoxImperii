@@ -106,12 +106,6 @@ static glTexture *mission_portrait = NULL; /**< Mission portrait. */
 static int last_window = 0; /**< Default window. */
 static int commodity_mod = 10;
 
-/*
- * List of trade goods (actual names, not with B/S tags)
- */
-static int ngoods;
-static char **goods;
-
 
 /*
  * Error handling.
@@ -183,8 +177,8 @@ int land_doneLoading (void)
  */
 static void commodity_exchange_open( unsigned int wid )
 {
-   int i;
-   char **goodsLabel;
+   int i, ngoods;
+   char **goods;
    int w, h;
 
    /* Get window dimensions. */
@@ -206,55 +200,33 @@ static void commodity_exchange_open( unsigned int wid )
          (LAND_BUTTON_WIDTH-20)/2, LAND_BUTTON_HEIGHT, "cstMod", 0, commodity_renderMod, NULL, NULL );
 
    /* text */
-   window_addText( wid, -20, -40, LAND_BUTTON_WIDTH, 120, 0,
+   window_addText( wid, -20, -40, LAND_BUTTON_WIDTH, 60, 0,
          "txtSInfo", &gl_smallFont, &cDConsole,
          "You have:\n"
-         "Buying Price:\n"
+         "Market Price:\n"
          "\n"
-         "Buyable:\n"
-         "Selling Price:\n"
-         "\n"
-         "Sellable:\n"
          "Free Space:\n" );
-   window_addText( wid, -20, -40, LAND_BUTTON_WIDTH/2, 120, 0,
+   window_addText( wid, -20, -40, LAND_BUTTON_WIDTH/2, 60, 0,
          "txtDInfo", &gl_smallFont, &cBlack, NULL );
-   window_addText( wid, -40, -180, LAND_BUTTON_WIDTH-20,
+   window_addText( wid, -40, -120, LAND_BUTTON_WIDTH-20,
          h-140-LAND_BUTTON_HEIGHT, 0,
          "txtDesc", &gl_smallFont, &cBlack, NULL );
 
    /* goods list */
-   if (land_planet->ntradedatas > 0) {
-
-	   if (goods!=NULL) {
-		   free(goods);
-	   }
-
-      goods = malloc(sizeof(char*) * land_planet->ntradedatas);
-      goodsLabel = malloc(sizeof(char*) * land_planet->ntradedatas);
-      for (i=0; i<land_planet->ntradedatas; i++) {
-    	  char str[strlen(land_planet->tradedatas[i].commodity->name)+10];
-    	  strcpy (str,land_planet->tradedatas[i].commodity->name);
-    	  if (land_planet->tradedatas[i].buyingQuantity==0) {
-    		  strcat(str," (Selling only)");
-    	  } else  if (land_planet->tradedatas[i].sellingQuantity==0) {
-    		  strcat(str," (Buying only)");
-    	  }
-    	  goodsLabel[i]=strdup(str);
-    	  goods[i]=strdup(land_planet->tradedatas[i].commodity->name);
-      }
-
-      ngoods = land_planet->ntradedatas;
+   if (land_planet->ncommodities > 0) {
+      goods = malloc(sizeof(char*) * land_planet->ncommodities);
+      for (i=0; i<land_planet->ncommodities; i++)
+         goods[i] = strdup(land_planet->commodities[i]->name);
+      ngoods = land_planet->ncommodities;
    }
    else {
-	   goods    = malloc( sizeof(char*) );
-	   goods[0] = strdup("None");
-	  goodsLabel    = malloc( sizeof(char*) );
-	  goodsLabel[0] = strdup("None");
+      goods    = malloc( sizeof(char*) );
+      goods[0] = strdup("None");
       ngoods   = 1;
    }
    window_addList( wid, 20, -40,
          w-LAND_BUTTON_WIDTH-60, h-80-LAND_BUTTON_HEIGHT,
-         "lstGoods", goodsLabel, ngoods, 0, commodity_update );
+         "lstGoods", goods, ngoods, 0, commodity_update );
    /* Set default keyboard focuse to the list */
    window_setFocus( wid , "lstGoods" );
 }
@@ -269,14 +241,8 @@ static void commodity_update( unsigned int wid, char* str )
    char buf[PATH_MAX];
    char *comname;
    Commodity *com;
-   TradeData *tradeData;
 
-   int pos= toolkit_getListPos(wid, "lstGoods" );
-   if (pos==-1) {
-	   comname=NULL;
-   } else {
-	   comname=goods[pos];
-   }
+   comname = toolkit_getList( wid, "lstGoods" );
    if ((comname==NULL) || (strcmp( comname, "None" )==0)) {
       nsnprintf( buf, PATH_MAX,
          "NA Tons\n"
@@ -290,65 +256,16 @@ static void commodity_update( unsigned int wid, char* str )
       return;
    }
    com = commodity_get( comname );
-   tradeData = planet_getTradeData(land_planet,com);
 
    /* modify text */
-   if (tradeData->buyingQuantity==0) {//just selling
-	   nsnprintf( buf, PATH_MAX,
-	         "%d Tons\n"
-	         "\n"
-	         "\n"
-			 "\n"
-	         "%"CREDITS_PRI" cr/t\n"
-	         "(%+g%%)\n"
-	         "%d/%d t\n"
-	         "\n"
-	         "%d Tons\n",
-	         pilot_cargoOwned( player.p, comname ),
-	         planet_commodityPriceSelling( land_planet, com ),
-	         round((planet_commodityPriceSellingRatio( land_planet, com)-1.0)*100),
-	         tradeData->sellingQuantityRemaining,
-	         tradeData->sellingQuantity,
-	         pilot_cargoFree(player.p));
-   } else if (tradeData->sellingQuantity==0) {//just buying
-	   nsnprintf( buf, PATH_MAX,
-	   	         "%d Tons\n"
-	   	         "%"CREDITS_PRI" cr/t\n"
-	   	         "(%+g%%)\n"
-	   	         "%d/%d t\n"
-	   	         "\n"
-	   	         "\n"
-	   	         "\n"
-	   	         "%d Tons\n",
-	   	         pilot_cargoOwned( player.p, comname ),
-	   	         planet_commodityPriceBuying( land_planet, com ),
-	   	         round((planet_commodityPriceBuyingRatio( land_planet, com )-1.0)*100),
-	   	         tradeData->buyingQuantityRemaining,
-	   	         tradeData->buyingQuantity,
-	   	         pilot_cargoFree(player.p));
-   } else {//both
-	   nsnprintf( buf, PATH_MAX,
-	   	         "%d Tons\n"
-	   	         "%"CREDITS_PRI" cr/t\n"
-	   	         "(%+g%%)\n"
-	   	         "%d/%d t\n"
-	   	         "%"CREDITS_PRI" cr/t\n"
-	   	         "(%+g%%)\n"
-	   	         "%d/%d t\n"
-	   	         "\n"
-	   	         "%d Tons\n",
-	   	         pilot_cargoOwned( player.p, comname ),
-	   	         planet_commodityPriceBuying( land_planet, com ),
-	   	         round((planet_commodityPriceBuyingRatio( land_planet, com )-1.0)*100),
-	   	         tradeData->buyingQuantityRemaining,
-	   	         tradeData->buyingQuantity,
-	   	         planet_commodityPriceSelling( land_planet, com ),
-	   	         round((planet_commodityPriceSellingRatio( land_planet, com )-1.0)*100),
-	   	         tradeData->sellingQuantityRemaining,
-	   	         tradeData->sellingQuantity,
-	   	         pilot_cargoFree(player.p));
-   }
-
+   nsnprintf( buf, PATH_MAX,
+         "%d Tons\n"
+         "%"CREDITS_PRI" Credits/Ton\n"
+         "\n"
+         "%d Tons\n",
+         pilot_cargoOwned( player.p, comname ),
+         planet_commodityPrice( land_planet, com ),
+         pilot_cargoFree(player.p));
    window_modifyText( wid, "txtDInfo", buf );
    window_modifyText( wid, "txtDesc", com->description );
 
@@ -370,14 +287,12 @@ static int commodity_canBuy( char *name )
    int failure;
    unsigned int q, price;
    Commodity *com;
-   TradeData* tradeData;
    char buf[ECON_CRED_STRLEN];
 
    failure = 0;
    q = commodity_getMod();
    com = commodity_get( name );
-   tradeData = planet_getTradeData(land_planet,com);
-   price = planet_commodityPriceBuying( land_planet, com ) * q;
+   price = planet_commodityPrice( land_planet, com ) * q;
 
    if (!player_hasCredits( price )) {
       credits2str( buf, price - player.p->credits, 2 );
@@ -388,10 +303,6 @@ static int commodity_canBuy( char *name )
       land_errDialogueBuild("No cargo space available!");
       failure = 1;
    }
-   if (tradeData->buyingQuantityRemaining<1) {
-      land_errDialogueBuild("No goods available here!");
-      failure = 1;
-   }
 
    return !failure;
 }
@@ -400,19 +311,11 @@ static int commodity_canBuy( char *name )
 static int commodity_canSell( char *name )
 {
    int failure;
-   Commodity *com;
-   TradeData* tradeData;
 
    failure = 0;
-   com = commodity_get( name );
-   tradeData = planet_getTradeData(land_planet,com);
 
    if (pilot_cargoOwned( player.p, name ) == 0) {
       land_errDialogueBuild("You can't sell something you don't have!");
-      failure = 1;
-   }
-   if (tradeData->sellingQuantityRemaining<1) {
-      land_errDialogueBuild("No more buyers for this good!");
       failure = 1;
    }
 
@@ -433,24 +336,12 @@ static void commodity_buy( unsigned int wid, char* str )
    unsigned int q;
    credits_t price;
    HookParam hparam[3];
-   TradeData* tradeData;
 
    /* Get selected. */
    q     = commodity_getMod();
-
-   int pos= toolkit_getListPos(wid, "lstGoods" );
-   if (pos==-1) {
-	   comname=NULL;
-   } else {
-	   comname=goods[pos];
-   }
+   comname = toolkit_getList( wid, "lstGoods" );
    com   = commodity_get( comname );
-   tradeData = planet_getTradeData(land_planet,com);
-   price = planet_commodityPriceBuying( land_planet, com );
-
-   if (q> (unsigned int)(tradeData->buyingQuantityRemaining)) {
-	   q=tradeData->buyingQuantityRemaining;
-   }
+   price = planet_commodityPrice( land_planet, com );
 
    /* Check stuff. */
    if (land_errDialogue( comname, "buyCommodity" ))
@@ -458,14 +349,6 @@ static void commodity_buy( unsigned int wid, char* str )
 
    /* Make the buy. */
    q = pilot_cargoAdd( player.p, com, q );
-   tradeData->buyingQuantityRemaining-=q;
-   tradeData->sellingQuantityRemaining+=q;
-
-   if (tradeData->sellingQuantityRemaining>tradeData->sellingQuantity) {
-	   tradeData->sellingQuantityRemaining=tradeData->sellingQuantity;
-   }
-
-
    price *= q;
    player_modCredits( -price );
    land_checkAddRefuel();
@@ -494,23 +377,12 @@ static void commodity_sell( unsigned int wid, char* str )
    unsigned int q;
    credits_t price;
    HookParam hparam[3];
-   TradeData* tradeData;
 
    /* Get parameters. */
    q     = commodity_getMod();
-   int pos= toolkit_getListPos(wid, "lstGoods" );
-   if (pos==-1) {
-	   comname=NULL;
-   } else {
-	   comname=goods[pos];
-   }
+   comname = toolkit_getList( wid, "lstGoods" );
    com   = commodity_get( comname );
-   tradeData = planet_getTradeData(land_planet,com);
-   price = planet_commodityPriceSelling( land_planet, com );
-
-   if (q> (unsigned int)(tradeData->sellingQuantityRemaining)) {
-	   q=tradeData->sellingQuantityRemaining;
-   }
+   price = planet_commodityPrice( land_planet, com );
 
    /* Check stuff. */
    if (land_errDialogue( comname, "sellCommodity" ))
@@ -518,13 +390,6 @@ static void commodity_sell( unsigned int wid, char* str )
 
    /* Remove commodity. */
    q = pilot_cargoRm( player.p, com, q );
-   tradeData->sellingQuantityRemaining-=q;
-   tradeData->buyingQuantityRemaining+=q;
-
-   if (tradeData->buyingQuantityRemaining>tradeData->buyingQuantity) {
-	   tradeData->buyingQuantityRemaining=tradeData->buyingQuantity;
-   }
-
    price = price * (credits_t)q;
    player_modCredits( price );
    land_checkAddRefuel();
@@ -1465,13 +1330,9 @@ int land_setWindow( int window )
  */
 void land( Planet* p, int load )
 {
-
    /* Do not land twice. */
    if (landed)
       return;
-
-   /* refresh planet's prices */
-   planet_refreshPlanetPriceFactors(p);
 
    /* Resets the player's heat. */
    pilot_heatReset( player.p );
@@ -1492,9 +1353,6 @@ void land( Planet* p, int load )
 
    /* Clear the NPC. */
    npc_clear();
-
-   /* Update the available trade goods */
-   planet_updateQuantities(land_planet);
 
    /* Create all the windows. */
    land_genWindows( load, 0 );
@@ -1517,7 +1375,7 @@ void land( Planet* p, int load )
 static void land_createMainTab( unsigned int wid )
 {
    glTexture *logo;
-   int offset,planetDescHeight;
+   int offset;
    int w,h;
 
    /* Get window dimensions. */
@@ -1526,15 +1384,13 @@ static void land_createMainTab( unsigned int wid )
    /*
     * Faction logo.
     */
-   offset=20;
-   planetDescHeight = 400;
+   offset = 20;
    if (land_planet->faction != -1) {
       logo = faction_logoSmall(land_planet->faction);
       if (logo != NULL) {
          window_addImage( wid, 440 + (w-460-logo->w)/2, -20,
                0, 0, "imgFaction", logo, 0 );
-         planetDescHeight = 350;
-         offset=80;
+         offset = 84;
       }
    }
 
@@ -1542,42 +1398,9 @@ static void land_createMainTab( unsigned int wid )
     * Pretty display.
     */
    window_addImage( wid, 20, -40, 0, 0, "imgPlanet", gfx_exterior, 1 );
-
-
-   if (strlen(land_planet->description)<1500) {
-	   window_addText( wid, 440, -20-offset,
-	         w-460, planetDescHeight, 0,
-	         "txtPlanetDesc", &gl_smallFont, &cBlack, land_planet->description);
-   } else {
-	   window_addText( wid, 440, -20-offset,
-	         w-460, planetDescHeight, 0,
-	         "txtPlanetDesc", &gl_tinyFont, &cBlack, land_planet->description);
-   }
-
-
-
-   if (land_planet->settlements_description != NULL)
-	   window_addText( wid, 20, -460,
-				400, 40, 0,
-				"txtPlanetSettlements", &gl_smallFont, &cGreen, "Settlements:");
-
-
-   if (land_planet->settlements_description != NULL)
-	   window_addText( wid, 20, -480,
-				490, 300, 0,
-				"txtPlanetDescSettlements", &gl_smallFont, &cBlack, land_planet->settlements_description);
-
-   if (land_planet->history_description != NULL)
-	   window_addText( wid, 530, -460,
-				400, 40, 0,
-				"txtPlanetHistory", &gl_smallFont, &cGreen, "History of the world:");
-
-
-   if (land_planet->history_description != NULL)
-	   window_addText( wid, 530, -480,
-				490, 300, 0,
-				"txtPlanetDescHistory", &gl_smallFont, &cBlack, land_planet->history_description);
-
+   window_addText( wid, 440, -20-offset,
+         w-460, h-20-offset-60-LAND_BUTTON_HEIGHT*2, 0,
+         "txtPlanetDesc", &gl_smallFont, &cBlack, land_planet->description);
 
    /*
     * buttons
@@ -1590,7 +1413,7 @@ static void land_createMainTab( unsigned int wid )
    /*
     * Checkboxes.
     */
-   window_addCheckbox( wid, -230, 25,
+   window_addCheckbox( wid, -20, 20 + 2*(LAND_BUTTON_HEIGHT + 20) + 40,
          175, 20, "chkRefuel", "Automatic Refuel",
          land_toggleRefuel, conf.autorefuel );
    land_toggleRefuel( wid, "chkRefuel" );

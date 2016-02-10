@@ -120,7 +120,6 @@ typedef struct PlayerConf_s {
    int font_size_intro;   /**< Intro text font size. */
    int font_size_def;     /**< Default large font size. */
    int font_size_small;   /**< Default small font size. */
-   int font_size_tiny;   /**< Default small font size. */
 
    /* Misc. */
    double compression_velocity; /**< Velocity to compress to. */

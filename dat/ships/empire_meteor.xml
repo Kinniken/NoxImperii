@@ -27,16 +27,16 @@
   <cpu>32</cpu>
   <crew>2</crew>
   <mass>86</mass>
-  <fuel>600</fuel>
+  <fuel>300</fuel>
   <cargo>15</cargo>
  </characteristics>
  <slots>
-  <weapon x="12" y="0" h="0" size="small"/>
-  <weapon x="-3" y="0" h="2" size="small"/>
-  <weapon x="3" y="0" h="2" size="small"/>
-  <utility size="small"/>
-  <utility size="small"/>
-  <structure size="small"/>
-  <structure size="small"/>
+  <weapon x="12" y="0" h="0"/>
+  <weapon x="-3" y="0" h="2"/>
+  <weapon x="3" y="0" h="2"/>
+  <utility/>
+  <utility/>
+  <structure/>
+  <structure/>
  </slots>
 </ship>

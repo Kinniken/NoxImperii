@@ -135,7 +135,7 @@ void shipyard_open( unsigned int wid )
          w-(40+iw+20+100)-20, th, 0, "txtDDesc", &gl_smallFont, &cBlack, NULL );
    y -= th;
    window_addText( wid, 20+iw+40, y,
-         w-(20+iw+40) - 180, 250, 0, "txtDescription",
+         w-(20+iw+40) - 180, 185, 0, "txtDescription",
          &gl_smallFont, NULL, NULL );
 
    /* set up the ships to buy/sell */

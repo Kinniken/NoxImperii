@@ -32,12 +32,6 @@ function starGenerator.generateStar(x,y,nameTakenSystem,nameTakenPlanet)
 
 	handleNames(star,nameTakenSystem,nameTakenPlanet)
 
-	if star.populationTemplate.zoneName then
-		star.zone=star.populationTemplate.zoneName(star)
-	else
-		star.zone=""
-	end
-
 	return star
 end
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Merseian Roeth">
+ <base_type>Merseian Roeth</base_type>
+ <GFX sx="10" sy="10">merseia_meteor</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Fighter</class>
+ <price>250000</price>
+ <fabricator>Roidhunate Shipyards</fabricator>
+ <description>Merseian Roeths are the most common fighters in the Roidhunate's navy. Smaller and lighter than the typical Terran meteor-class vessel, they are unusually fast and maneuverable.</description>
+ <movement>
+  <thrust>280</thrust>
+  <turn>155</turn>
+  <speed>310</speed>
+ </movement>
+ <health>
+  <absorb>7</absorb>
+  <shield>190</shield>
+  <armour>40</armour>
+  <energy>500</energy>
+  <shield_regen>6</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>20</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>28</cpu>
+  <crew>2</crew>
+  <mass>75</mass>
+  <fuel>600</fuel>
+  <cargo>10</cargo>
+ </characteristics>
+ <slots>
+  <weapon x="-3" y="0" h="2" size="small"/>
+  <weapon x="-3" y="0" h="2" size="small"/>
+  <weapon x="-3" y="0" h="2" size="small"/>
+  <utility size="small"/>
+  <utility size="small"/>
+  <structure size="small"/>
+  <structure size="small"/>
+ </slots>
+ <stats>
+  <fwd_firerate>5</fwd_firerate>
+ </stats>
+</ship>

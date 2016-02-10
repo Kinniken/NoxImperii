@@ -1,6 +1,4 @@
 include('universe/objects/class_worldevents.lua')
-include('universe/objects/class_systems.lua')
-include('universe/live/universe_status.lua')
 
 --Const copy-pasted for auto-completion. Not best design but avoids mistakes
 EXOTIC_FOOD="Exotic Food"
@@ -47,8 +45,6 @@ event.applyOnWorldCustom=function(self,planet)
 	local effectId=planet.lua.settlements.humans:addActiveEffect("Urgent medical help is needed following the barbarian attack.",
 		(time.get() + time.create( 0, 5, 0 )):tonumber() )
 	planet.lua.settlements.humans:addGoodDemand(HUMAN_MEDICINE,20,3,effectId)
-
-	adjustBarbarianActivity(get_nearest_barbarian_zone(system_class.load(planet.c:system())).name,1.01)
 end
 event.getEventMessage=function(self,planet)
 	return "NEWS ALERT: An major barbarian raid on "..planet.c:name().." has decimated the main cities! Urgent help is required by the civilian population."
@@ -74,8 +70,6 @@ event.applyOnWorldCustom=function(self,planet)
 		(time.get() + time.create( 0, 5, 0 )):tonumber() )
 	planet.lua.settlements.humans:reduceGoodDemand(INDUSTRIAL,effectId,30,2)
 	planet.lua.settlements.humans:reduceGoodDemand(MODERN_INDUSTRIAL,effectId,30,2)
-
-	adjustSectorStability(planet.c:system():getZone(),0.99)
 end
 event.getEventMessage=function(self,planet)
 	return "NEWS ALERT: The Industrial Bank of "..planet.c:name().." has collapsed amidst allegations of corruption of officials to hide massive losses."
@@ -97,8 +91,6 @@ event.applyOnWorldCustom=function(self,planet)
 	planet.lua.settlements.humans:addGoodDemand(GOURMET_FOOD,20,3,effectId)
 	planet.lua.settlements.humans:addGoodDemand(EXOTIC_FOOD,10,4,effectId)
 	planet.lua.settlements.humans:addGoodDemand(EXOTIC_FURS,10,4,effectId)
-
-	adjustSectorStability(planet.c:system():getZone(),0.99)
 end
 event.getEventMessage=function(self,planet)
 	return "NEWS ALERT: The governor of "..planet.c:name().." has been arrested on charges of corruption. New governor throwing massive inauguration party."
@@ -120,8 +112,6 @@ event.applyOnWorldCustom=function(self,planet)
 		(time.get() + time.create( 0, 5, 0 )):tonumber() )
 	planet.lua.settlements.humans:reduceGoodSupply(INDUSTRIAL,20,3,effectId)
 	planet.lua.settlements.humans:reduceGoodSupply(CONSUMER_GOODS,20,3,effectId)
-	
-	adjustSectorStability(planet.c:system():getZone(),0.99)
 end
 event.getEventMessage=function(self,planet)
 	return "NEWS ALERT: Increased pirate attacks on "..planet.c:name().." is hampering local trade."

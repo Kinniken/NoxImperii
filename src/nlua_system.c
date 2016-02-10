@@ -33,14 +33,10 @@ static int systemL_cur( lua_State *L );
 static int systemL_get( lua_State *L );
 static int systemL_eq( lua_State *L );
 static int systemL_name( lua_State *L );
-static int systemL_coords( lua_State *L );
-static int systemL_sunSpaceNames( lua_State *L );
-static int systemL_backgroundSpaceName( lua_State *L );
 static int systemL_faction( lua_State *L );
 static int systemL_nebula( lua_State *L );
 static int systemL_jumpdistance( lua_State *L );
 static int systemL_adjacent( lua_State *L );
-static int systemL_withinradius( lua_State *L );
 static int systemL_jumps( lua_State *L );
 static int systemL_presences( lua_State *L );
 static int systemL_planets( lua_State *L );
@@ -51,31 +47,16 @@ static int systemL_setknown( lua_State *L );
 static int systemL_mrkClear( lua_State *L );
 static int systemL_mrkAdd( lua_State *L );
 static int systemL_mrkRm( lua_State *L );
-static int systemL_createSystem( lua_State *L );
-static int systemL_createJump( lua_State *L );
-static int systemL_addStar( lua_State *L );
-static int systemL_exists( lua_State *L );
-static int systemL_createPlanet( lua_State *L );
-static int systemL_getLuaData( lua_State *L );
-static int systemL_setLuaData( lua_State *L );
-static int systemL_getZone( lua_State *L );
-static int systemL_setZone( lua_State *L );
-
-;
 static const luaL_reg system_methods[] = {
    { "cur", systemL_cur },
    { "get", systemL_get },
    { "__eq", systemL_eq },
    { "__tostring", systemL_name },
    { "name", systemL_name },
-   { "coords", systemL_coords },
-    { "sunSpaceNames", systemL_sunSpaceNames },
-    { "backgroundSpaceName", systemL_backgroundSpaceName },
    { "faction", systemL_faction },
    { "nebula", systemL_nebula },
    { "jumpDist", systemL_jumpdistance },
    { "adjacentSystems", systemL_adjacent },
-    { "withinRadius", systemL_withinradius },
    { "jumps", systemL_jumps },
    { "presences", systemL_presences },
    { "planets", systemL_planets },
@@ -86,16 +67,7 @@ static const luaL_reg system_methods[] = {
    { "mrkClear", systemL_mrkClear },
    { "mrkAdd", systemL_mrkAdd },
    { "mrkRm", systemL_mrkRm },
-   { "createSystem", systemL_createSystem },
-   { "createJump", systemL_createJump },
-    { "addStar", systemL_addStar },
-    { "exists", systemL_exists },
-    { "createPlanet", systemL_createPlanet },
-    { "getLuaData", systemL_getLuaData },
-    { "setLuaData", systemL_setLuaData },
-    { "getZone", systemL_getZone },
-    { "setZone", systemL_setZone },
-{0,0}
+   {0,0}
 }; /**< System metatable methods. */
 static const luaL_reg system_cond_methods[] = {
    { "cur", systemL_cur },
@@ -103,29 +75,16 @@ static const luaL_reg system_cond_methods[] = {
    { "__eq", systemL_eq },
    { "__tostring", systemL_name },
    { "name", systemL_name },
-   { "coords", systemL_coords },
-   { "sunSpaceNames", systemL_sunSpaceNames },
-   { "backgroundSpaceName", systemL_backgroundSpaceName },
    { "faction", systemL_faction },
    { "nebula", systemL_nebula },
    { "jumpDist", systemL_jumpdistance },
    { "adjacentSystems", systemL_adjacent },
-    { "withinRadius", systemL_withinradius },
    { "jumps", systemL_jumps },
    { "presences", systemL_presences },
    { "planets", systemL_planets },
    { "presence", systemL_presence },
    { "radius", systemL_radius },
    { "known", systemL_isknown },
-    { "createSystem", systemL_createSystem },
-    { "createJump", systemL_createJump },
-    { "addStar", systemL_addStar },
-    { "exists", systemL_exists },
-    { "createPlanet", systemL_createPlanet },
-    { "getLuaData", systemL_getLuaData },
-    { "setLuaData", systemL_setLuaData },
-    { "getZone", systemL_getZone },
-    { "setZone", systemL_setZone },
    {0,0}
 }; /**< Read only system metatable methods. */
 
@@ -337,25 +296,6 @@ static int systemL_get( lua_State *L )
 }
 
 /**
- * @brief checks if a system exists
- *
- *    @luaparam param Name of the system
- *    @luareturn boolean
- * @luafunc get( param )
- */
-static int systemL_exists( lua_State *L )
-{
-    
-        if (system_exists( lua_tostring(L,1) )) {
-            lua_pushboolean(L,1);
-        } else {
-            lua_pushboolean(L,0);
-        }
-    
-       return 1;
-}
-
-/**
  * @brief Check systems for equality.
  *
  * Allows you to use the '=' operator in Lua with systems.
@@ -394,72 +334,6 @@ static int systemL_name( lua_State *L )
    sys = luaL_validsystem(L,1);
    lua_pushstring(L, sys->name);
    return 1;
-}
-
-/**
- * @brief Returns the system's coordinates.
- *
- * @usage x,y = sys:coords()
- *
- *    @luaparam s System to get coords of.
- *    @luareturn The coords of the system.
- * @luafunc name( s )
- */
-static int systemL_coords( lua_State *L )
-{
-    StarSystem *sys;
-    sys = luaL_validsystem(L,1);
-    lua_pushnumber(L,sys->pos.x);
-    lua_pushnumber(L,sys->pos.y);
-    return 2;
-}
-
-/**
- * @brief Returns the system's gfx_SunSpaceName.
- *
- * @usage name = sys:sunSpaceNames()
- *
- *    @luaparam s System to get gfx_SunSpaceName of.
- *    @luareturn The name of the system.
- * @luafunc name( s )
- */
-static int systemL_sunSpaceNames( lua_State *L )
-{
-    StarSystem *s;
-    int i;
-
-    s = luaL_validsystem(L,1);
-    
-    /* Push all stars. */
-    lua_newtable(L);
-    for (i=0; i<s->ngfx_SunSpaceNames; i++) {
-        lua_pushnumber(L,i+1); /* key, 1-based as normal in lua */
-        lua_pushstring(L,s->gfx_SunSpaceNames[i]); /* value */
-        lua_rawset(L,-3);
-    }
-    
-    return 1;
-}
-
-/**
- * @brief Returns the system's gfx_BackgroundSpaceName.
- *
- * @usage name = sys:backgroundSpaceName()
- *
- *    @luaparam s System to get gfx_BackgroundSpaceName of.
- *    @luareturn The name of the system.
- * @luafunc name( s )
- */
-static int systemL_backgroundSpaceName( lua_State *L )
-{
-    
-    StarSystem *s;
-    
-    s = luaL_validsystem(L,1);
-    
-    lua_pushstring(L, s->gfx_BackgroundSpaceName);
-    
-    return 1;
 }
 
 /**
@@ -594,48 +468,6 @@ static int systemL_adjacent( lua_State *L )
    }
 
    return 1;
-}
-
-/**
- * @brief Gets all the systems within a radius
- *
- * @usage for _,s in ipairs( withinRadius() ) do -- Iterate over found systems.
- *
- *    @luaparam x coord of search centre
- *    @luaparam y coord of search centre
- *    @luaparam radius of the search
- *    @luareturn An ordered table with all the found systems.
- * @luafunc withinRadius( x,y,radius )
- */
-static int systemL_withinradius( lua_State *L )
-{
-    int i, id = 1;
-    LuaSystem sysp;
-    int systems_nstack ;
-    StarSystem *systems_stack= system_getAll( &systems_nstack );
-    
-    double centreX = luaL_checknumber(L,1);
-    double centreY = luaL_checknumber(L,2);
-    int radius = luaL_checknumber(L,3);
-
-    int distX,distY;
-    
-    /* Push all adjacent systems. */
-    lua_newtable(L);
-    
-    for (i=0; i<systems_nstack; i++) {
-        distX=systems_stack[i].pos.x-centreX;
-        distY=systems_stack[i].pos.y-centreY;
-        if (distX*distX+distY*distY<radius*radius) {
-            sysp.id = system_index(&systems_stack[i]);
-            lua_pushnumber(L,id); /* key. */
-            lua_pushsystem(L,sysp); /* value. */
-            lua_rawset(L,-3);
-            id++;
-        }
-    }
-    
-    return 1;
 }
 
 
@@ -956,268 +788,6 @@ static int systemL_mrkRm( lua_State *L )
    unsigned int id;
    id = luaL_checklong( L, 1 );
    ovr_mrkRm( id );
-   return 0;
-}
-
-/**
- * @brief Adds a system.
- *
- * @usage system.createSystem( "name", posX, posY, stars,radius,"gfx_BackgroundSpaceName",known) -- Creates a system.
- *
- *    @luaparam name Name of the system. Must not be already taken.
- *    @luaparam posX X coordinate on the map
- *    @luaparam posY Y coordinate on the map
- *    @luaparam stars Star density
- *    @luaparam radius Radius of the system
- *    @luaparam gfx_BackgroundSpaceName Optional background picture to use
- *    @luaparam known Whether the system is known to the player
- *    @luareturn The ID of the NPC to pass to npcRm.
- * @luafunc createSystem( name, posX, posY, stars,radius,gfx_BackgroundSpaceName,known )
- */
-static int systemL_createSystem( lua_State *L )
-{
-    StarSystem *sys;
-    const char* name;
-    double posX,posY;
-    int stars;
-    double radius;
-    const char* background;
-    const char* zone;
-    int known;
-    
-    /* Handle parameters. */
-    name = luaL_checkstring(L, 1);
-    posX  = luaL_checknumber(L, 2);
-    posY = luaL_checknumber(L, 3);
-    stars = luaL_checknumber(L, 4);
-    radius = luaL_checknumber(L, 5);
-    background = luaL_checkstring(L, 6);
-    zone = luaL_checkstring(L, 7);
-    known = lua_toboolean(L, 8);
-    
-    
-    sys = system_createNewSystem(name);
-    
-    if (sys==NULL) {
-        return -1;
-    }
-    
-
-    
-    sys->pos.x=posX;
-    sys->pos.y=posY;
-    sys->stars=stars;
-    sys->radius=radius;
-    if (background!=NULL)
-        sys->gfx_BackgroundSpaceName=strdup(background);
-    
-    if (zone!=NULL)
-        sys->zone=strdup(zone);
-
-    if (known)
-        sys_setFlag( sys, SYSTEM_KNOWN );
-    
-    sys->transient=1;
-
-    return 0;
-}
-
-static int systemL_createPlanet( lua_State *L )
-{
-	int pos=0;
-
-    StarSystem *sys = luaL_validsystem(L, ++pos);
-    const char* name = luaL_checkstring(L, ++pos);
-    double posX = luaL_checknumber(L, ++pos);
-    double posY = luaL_checknumber(L, ++pos);
-    const char* spaceGraphic = luaL_checkstring(L, ++pos);
-    const char* exteriorGraphic = luaL_checkstring(L, ++pos);
-    double presenceAmount = luaL_checknumber(L, ++pos);
-    int presenceRange = luaL_checknumber(L, ++pos);
-    const char* factionName = luaL_checkstring(L, ++pos);
-    const char* description = luaL_checkstring(L, ++pos);
-    const char* descriptionSettlements = luaL_checkstring(L, ++pos);
-    const char* descriptionHistory = luaL_checkstring(L, ++pos);
-    const char* descriptionBar = luaL_checkstring(L, ++pos);
-    long population = luaL_checknumber(L, ++pos);
-    double hide = luaL_checknumber(L, ++pos);
-    char class = luaL_checkstring(L, ++pos)[0];
-    int serviceLand = luaL_checknumber(L, ++pos);
-    const char* landingFunc = luaL_checkstring(L, ++pos);
-    int refuel = luaL_checknumber(L, ++pos);
-    int bar = luaL_checknumber(L, ++pos);
-    int missions = luaL_checknumber(L, ++pos);
-    int commodity = luaL_checknumber(L, ++pos);
-    int outfits = luaL_checknumber(L, ++pos);
-    int shipyard = luaL_checknumber(L, ++pos);
-    int known = lua_toboolean(L, ++pos);
-    
-    if (strlen(factionName)==0)
-        factionName=NULL;
-    if (strlen(exteriorGraphic)==0)
-        exteriorGraphic=NULL;
-    if (strlen(description)==0)
-        description=NULL;
-    if (strlen(descriptionSettlements)==0)
-    	descriptionSettlements=NULL;
-    if (strlen(descriptionHistory)==0)
-    	descriptionHistory=NULL;
-    if (strlen(descriptionBar)==0)
-        descriptionBar=NULL;
-    if (strlen(landingFunc)==0)
-        landingFunc=NULL;
-
-    Planet* planet=planet_createNewPlanet( name ,0,spaceGraphic,exteriorGraphic,
-                                          posX,posY,presenceAmount,presenceRange,factionName
-                                          ,description,descriptionSettlements,descriptionHistory,descriptionBar,population,hide,class,
-                                          serviceLand,landingFunc,refuel,bar,missions,commodity,outfits,shipyard);
-    
-    
-    
-    if (planet==NULL) {
-        return -1;
-    }
-    
-    planet->transient=1;
-
-    system_addPlanet( sys, name );
-    
-    if (known)
-    	planet_setKnown(planet);
-
-    //space_refresh();
-
-    return 0;
-}
-
-/**
- * @brief Adds a jump.
- *
- * @usage system.createJump( "sys", "target", bothway) -- Creates a regular jump.
- *
- *    @luaparam name Name of the system in which to create the jump.
- *    @luaparam target Name of the targeted system.
- *    @luaparam bothway If true, create the return jump in the target system.
- *    @luaparam known Whether the player should known the jump
- * @luafunc createJump( "sys", "target", bothway)
- */
-static int systemL_createJump( lua_State *L )
-{
-    StarSystem *sys = luaL_validsystem(L, 1);
-    StarSystem *target = luaL_validsystem(L, 2);
-    int bothway = lua_toboolean(L, 3);
-    int known = lua_toboolean(L, 4);
-    int alreadyExists=0;
-    int i;
-    
-    for (i=0;i<sys->njumps;i++) {
-    	if (sys->jumps[i].target==target)
-    		alreadyExists=1;
-    }
-
-    if (!alreadyExists)
-    	system_addJumpPoint(sys,target,0,0,-1,-1,1,0,0,1,known);
-
-    if (bothway==1) {
-    	alreadyExists=0;
-
-    	for (i=0;i<target->njumps;i++) {
-			if (target->jumps[i].target==sys)
-				alreadyExists=1;
-		}
-
-    	if (!alreadyExists)
-    		system_addJumpPoint(target,sys,0,0,-1,-1,1,0,0,1,known);
-    }
-    
-    systems_reconstructJumps();
-    
-    return 0;
-}
-
-/**
- * @brief Adds a star graphic to the system.
- *
- * @usage system.addStar( "sys", "star") -- Adds a star graphic to the system.
- *
- *    @luaparam name Name of the system in which to create the star.
- *    @luaparam target Name of the star graphic (the PNG file).
- * @luafunc addStar( "sys", "star")
- */
-static int systemL_addStar( lua_State *L )
-{
-    StarSystem *sys = luaL_validsystem(L, 1);
-    const char* name = luaL_checkstring(L, 2);
-
-    system_addStar(sys,strdup(name));
-    
-    return 0;
-}
-
-/**
- * @brief Gets the lua data
- *
- * @uasge gfx = sys:getLuaData()
- *    @luaparam sys System to get lua data of.
- *    @luareturn The lua data of the system.
- * @luafunc getLuaData( p )
- */
-static int systemL_getLuaData( lua_State *L )
-{
-	StarSystem *sys = luaL_validsystem(L, 1);
-   if (sys->luaData == NULL)
-	   lua_pushstring(L,"{}");
-   else
-	   lua_pushstring(L,sys->luaData);
-   return 1;
-}
-
-
-/**
- * @brief Sets a system's lua data.
- *
- * @usage p:setLuaData( luaData ) sets lua data
- *    @luaparam p System to set lua data for.
- *    @luaparam b lua data
- * @luafunc setLuaData( s, b )
- */
-static int systemL_setLuaData( lua_State *L )
-{
-   StarSystem *sys = luaL_validsystem(L, 1);
-   sys->luaData=strdup(lua_tostring(L, 2));
-
-   return 0;
-}
-
-/**
- * @brief Gets the zone
- *
- * @usage gfx = sys:getZone()
- *    @luaparam sys System to get zone of.
- *    @luareturn The zone of the system.
- * @luafunc getZone( p )
- */
-static int systemL_getZone( lua_State *L )
-{
-	StarSystem *sys = luaL_validsystem(L, 1);
-   lua_pushstring(L,sys->zone);
-   return 1;
-}
-
-
-/**
- * @brief Sets a system's zone.
- *
- * @usage p:setZone( zone ) sets zone
- *    @luaparam p System to set zone for.
- *    @luaparam b zone
- * @luafunc setZone( s, b )
- */
-static int systemL_setZone( lua_State *L )
-{
-   StarSystem *sys = luaL_validsystem(L, 1);
-   sys->zone=strdup(lua_tostring(L, 2));
-
    return 0;
 }
 

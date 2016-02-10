@@ -34,14 +34,14 @@ space_success_text = ""
 
 -- Messages
 msg      = {}
-msg[1]   = "MISSION SUCCESS! Go back to ${endPlanet}."
+msg[1]   = "MISSION SUCCESS! Go back to ${startPlanet}."
 msg[2]   = "Pursue %s!"
 msg[3]   = "MISSION FAILURE! Somebody else eliminated ${targetShipName}."
 
 osd_msg = {}
 osd_msg[1] = "Fly to the ${targetSystem} system"
 osd_msg[2] = "Kill ${targetShipName}"
-osd_msg[3] = "Return to ${endPlanet}"
+osd_msg[3] = "Return to ${startPlanet}"
 osd_msg["__save"] = true
 
 
@@ -53,8 +53,6 @@ function template_getStringData()
   stringData.credits=credits
   stringData.targetSystem=target_system and target_system:name() or ""
   stringData.targetPlanet=target_planet and target_planet:name() or ""
-  stringData.endSystem=end_planet and end_planet:system():name() or ""
-  stringData.endPlanet=end_planet and end_planet:name() or ""
   stringData.targetShipName=target_ship_name
   stringData.targetShipType=target_ship
 
@@ -63,7 +61,6 @@ end
 
 function template_create ()
    start_planet=planet.cur()
-   end_planet=start_planet--default
 
    -- Handle edge cases where no suitable neighbours exist.
    if not target_system then
@@ -106,7 +103,7 @@ function template_accept ()
       tk.msg(gh.format( bar_accept_title,stringData),gh.format( bar_accept_text_extra,stringData))
      end
 
-     target_system_marker=misn.markerAdd( target_system, "high" )
+     target_system_marker=misn.markerAdd( target_system, "low" )
    end
 
    misn.setDesc(gh.format(misn_desc,stringData))
@@ -137,14 +134,17 @@ end
 
 -- Entering a system
 function sys_enter()
-
    cur_sys = system.cur()
    -- Check to see if reaching target system
    if cur_sys == target_system then
 
       -- Choose position
-      local pos = player.pilot():pos()
-
+      local pos
+      if cur_sys == last_sys then
+         pos = player.pilot():pos()
+      else
+         pos = jump.pos(cur_sys, last_sys)
+      end
       local x,y = pos:get()
       local d = rnd.rnd( 1500, 2500 )
       local a = math.atan2( y, x ) + math.pi
@@ -153,8 +153,7 @@ function sys_enter()
       pos = pos + offset
 
       -- Create the badass enemy
-      p     = pilot.addRaw( target_ship, target_ship_ai, pos, target_ship_faction )
-
+      p     = pilot.add(target_ship, nil, pos)
       ship   = p[1]
       ship:rename(target_ship_name)
       ship:setHostile()
@@ -168,7 +167,7 @@ function sys_enter()
    else
       misn.osdActive(1)
    end
-   
+   last_sys = cur_sys
 end
 
 -- Ship is dead
@@ -202,7 +201,7 @@ function ship_jump ()
 end
 
 function sys_enter_reward()
-  if (end_planet:system()==system.cur()) then
+  if (start_planet:system()==system.cur()) then
     local stringData=template_getStringData()
       player.msg(gh.format(space_success_text,template_getStringData()) )
       give_rewards()
@@ -210,7 +209,7 @@ function sys_enter_reward()
 end
 
 function land_reward()
-   if (end_planet==planet.cur()) then
+   if (start_planet==planet.cur()) then
       local stringData=template_getStringData()
       tk.msg(gh.format(bar_success_title,stringData),gh.format(bar_success_text,stringData))
       give_rewards()

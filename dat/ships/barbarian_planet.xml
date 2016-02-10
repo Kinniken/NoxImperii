@@ -5,53 +5,48 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Cruiser</class>
- <price>7000000</price>
+ <price>6000000</price>
  <fabricator>Various barbarian shipyards</fabricator>
  <description>As any anthropologist safely residing in one of the inner worlds will tell you, Barbarian cruisers are a fascinating mixture of technologies - steel or even iron frames riveted by hand by slaves with 19th century technology on which engines, shields and weapons scavenged from civilized ships are fitted by a few qualified technicians from more advanced races.
  
  The results are bulky, ill-designed ships far from the sleek ships of modern navies. But in the border worlds of the Terran and Merseian empires, those ships can often over-power limited local defenses and leave with their holds full of loots and slaves.</description>
  <movement>
-  <thrust>100</thrust>
-  <turn>65</turn>
-  <speed>100</speed>
+  <thrust>50</thrust>
+  <turn>40</turn>
+  <speed>50</speed>
  </movement>
  <health>
   <absorb>50</absorb>
-  <shield>450</shield>
-  <armour>4500</armour>
+  <shield>420</shield>
+  <armour>2500</armour>
   <energy>1800</energy>
-  <shield_regen>9</shield_regen>
+  <shield_regen>7</shield_regen>
   <armour_regen>0</armour_regen>
-  <energy_regen>70</energy_regen>
+  <energy_regen>60.3</energy_regen>
  </health>
  <characteristics>
-  <cpu>96</cpu>
-  <crew>105</crew>
-  <mass>4800</mass>
-  <fuel>600</fuel>
-  <cargo>550</cargo>
+  <cpu>90</cpu>
+  <crew>80</crew>
+  <mass>5200</mass>
+  <fuel>300</fuel>
+  <cargo>900</cargo>
  </characteristics>
  <slots>
-  <weapon x="40" y="0" h="2" size="large"/>
-  <weapon x="25" y="0" h="2" size="large"/>
-  <weapon x="12" y="-6" h="0" size="large"/>
-  <weapon x="12" y="6" h="0" size="large"/>
-  <weapon x="0" y="0" h="7" size="large"/>
-  <weapon x="-15" y="0" h="7" size="large"/>
-  <weapon x="-33" y="0" h="7" size="medium"/>
-  <weapon x="0" y="0" h="7" size="medium"/>
-  <weapon x="-15" y="0" h="7" size="medium"/>
-  <weapon x="-33" y="0" h="7" size="medium"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
+  <weapon x="40" y="0" h="2"/>
+  <weapon x="25" y="0" h="2"/>
+  <weapon x="12" y="-6" h="0"/>
+  <weapon x="12" y="6" h="0"/>
+  <weapon x="0" y="0" h="7"/>
+  <weapon x="-15" y="0" h="7"/>
+  <weapon x="-33" y="0" h="7"/>
+  <utility/>
+  <utility/>
+  <utility/>
+  <utility/>
+  <structure/>
+  <structure/>
+  <structure/>
+  <structure/>
  </slots>
  <stats>
  </stats>

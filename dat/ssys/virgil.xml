@@ -8,12 +8,11 @@
   <nebula volatility="0.000000">0.000000</nebula>
  </general>
  <pos>
-  <x>-685.406720</x>
-  <y>131.462720</y>
+  <x>-515.406720</x>
+  <y>144.462720</y>
  </pos>
  <assets>
   <asset>Aenas</asset>
   <asset>Dido</asset>
  </assets>
- <jumps/>
 </ssys>

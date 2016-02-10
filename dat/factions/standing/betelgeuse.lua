@@ -8,7 +8,7 @@ _fdelta_distress = {-1, 0} -- Maximum change constraints
 _fdelta_kill     = {-5, 1} -- Maximum change constraints
 _fcap_misn     = 10 -- Starting mission cap, gets overwritten
 _fcap_misn_var = "_fcap_betelgeuse"
-_fthis         = faction.get("Sartaza of Betelgeuse")
+_fthis         = faction.get("Oligarchy of Betelgeuse")
 
 
 function faction_hit( current, amount, source, secondary )

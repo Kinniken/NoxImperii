@@ -4,7 +4,9 @@ include('luadata.lua')
 system_class = {}
 
 local system_c_debug_prototype = {
-	
+	getZone=function(self)
+		return "debug"
+	end,
 }
 
 system_c_debug_prototype.__index = system_c_debug_prototype
@@ -29,9 +31,10 @@ function system_class.createNew()
 end
 
 function system_class.load(c_system)
-	local system=system_class.createNew()
-	system.c=c_system
-	system.lua=getSystemLuaData(system.c)
+	local sys=system_class.createNew()
+	sys.c=c_system
+	sys.lua=getSystemLuaData(sys.c)
+	sys.x,sys.y=sys.c:coords()
 
-	return system
+	return sys
 end

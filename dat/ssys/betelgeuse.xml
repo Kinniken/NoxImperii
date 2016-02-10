@@ -8,10 +8,11 @@
   <nebula volatility="0.000000">0.000000</nebula>
  </general>
  <pos>
-  <x>736.218240</x>
-  <y>425.642880</y>
+  <x>1000.218240</x>
+  <y>460.642880</y>
  </pos>
  <assets>
-  <asset>Alfzar</asset>
+  <asset>Dandalo</asset>
+  <asset>Margiorre</asset>
  </assets>
 </ssys>

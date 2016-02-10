@@ -19,6 +19,18 @@
    <enemy>Pirate</enemy>
   </enemies>
  </faction>
+ <faction name="Natives">
+  <known/>
+  <player>0</player>
+  <colour>grey</colour>
+  <spawn>natives</spawn>
+  <standing>natives</standing>
+  <allies>
+  </allies>
+  <enemies>
+   <enemy>Pirate</enemy>
+  </enemies>
+ </faction>
  <faction name="Civilian">
   <invisible />
   <static />
@@ -128,7 +140,7 @@
    <enemy>Pirate</enemy>
   </enemies>
  </faction>
-<faction name="Sartaza of Betelgeuse">
+<faction name="Oligarchy of Betelgeuse">
   <known/>
   <logo>betelgeuse</logo>
   <colour>purple</colour>
@@ -172,37 +184,5 @@
    <enemy>Independent</enemy>
   </enemies>
   </faction>
-  <faction name="Scothanian Kingdom">
-  <known/>
-  <logo>pirate</logo>
-  <longname>Scothanian Kingdom</longname>
-  <player>-20</player>
-  <colour>DarkRed</colour>
-  <spawn>barbarian</spawn>
-  <standing>barbarian</standing>
-  <equip>barbarian</equip>
-  <enemies>
-   <enemy>Civilian</enemy>
-   <enemy>Roidhunate of Merseia</enemy>
-   <enemy>Empire of Terra</enemy>
-   <enemy>Trader</enemy>
-   <enemy>Independent</enemy>
-  </enemies>
-  </faction>
-    <faction name="Orbekh of Ardazir">
-  <known/>
-  <logo>pirate</logo>
-  <longname>Orbekh of Ardazir</longname>
-  <player>-20</player>
-  <colour>DarkRed</colour>
-  <spawn>barbarian</spawn>
-  <standing>barbarian</standing>
-  <equip>barbarian</equip>
-  <enemies>
-   <enemy>Civilian</enemy>
-   <enemy>Empire of Terra</enemy>
-   <enemy>Trader</enemy>
-   <enemy>Independent</enemy>
-  </enemies>
-  </faction>
+  
 </Factions>

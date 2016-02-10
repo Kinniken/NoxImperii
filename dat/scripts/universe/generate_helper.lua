@@ -111,6 +111,12 @@ function gh.pickWeightedObject(table)
   return nil
 end
 
+function gh.randomObject(table)
+  local id=math.random(#table)
+
+  return table[id]
+end
+
 function gh.calculateDistance(coord1,coord2)
   return math.sqrt((coord1.x-coord2.x)^2 + (coord1.y-coord2.y)^2)
 end

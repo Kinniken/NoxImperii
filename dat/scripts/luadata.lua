@@ -1,6 +1,9 @@
 include('dump.lua')
 
 function getPlanetLuaData(c_planet)
+	if c_planet:getLuaData()==nil then
+			return "{}"
+	end
 	return loadstring("return "..c_planet:getLuaData())()
 end
 

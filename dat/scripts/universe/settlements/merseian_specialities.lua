@@ -101,7 +101,7 @@ merseian_specialities.specialityLuxuryResort={
 	end
 }
 
-merseian_specialities.specialityCraftBeer={
+merseian_specialities.specialityGourmetFood={
 	weight=5,
 	weightValidity=function(planet)
 		return (planet.lua.settlements.merseians.agriculture>1)

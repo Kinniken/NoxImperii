@@ -12,29 +12,21 @@ include("dat/factions/equip/outfits.lua")
 --           name of the ship of the pirate and a table containing the outfits,
 --           otherwise it'll return the pirate itself and the outfit table.
 --]]
-function pirate_create( pirate_create )
-   -- Create by default
-   if pirate_create == nil then
-      pirate_create = true
-   end
+function pirate_create( )
 
    -- Choose pirate type
    local z = rnd.rnd()
    local p, o
    if z < 0.25 then
-      p,o = pirate_createKestrel( pirate_create )
+      p,o = pirate_createKestrel( )
    elseif z < 0.5 then
-      p,o = pirate_createAdmonisher( pirate_create )
+      p,o = pirate_createAdmonisher( )
    elseif z < 0.75 then
-      p,o = pirate_createAncestor( pirate_create )
+      p,o = pirate_createAncestor( )
    else
-      p,o = pirate_createVendetta( pirate_create )
+      p,o = pirate_createVendetta( )
    end
 
-   -- Set name
-   if pirate_create then
-      p:rename( pirate_name() )
-   end
    return p,o
 end
 
@@ -52,23 +44,16 @@ function pirate_createEmpty( ship )
 end
 
 -- Creates a pirate flying a "Pirate Kestrel"
-function pirate_createKestrel( pirate_create )
-   -- Create by default
-   if pirate_create == nil then
-      pirate_create = true
-   end
+function pirate_createKestrel(  )
+
 
    -- Create the pirate ship
    local p, s, olist
-   if pirate_create then
-      p     = pirate_createEmpty( "Pirate Kestrel" )
-      s     = p:ship()
-      olist = nil
-   else
+
       p     = "Pirate Kestrel"
       s     = ship.get(p)
       olist = { }
-   end
+   
 
    -- Equipment vars
    local primary, secondary, medium, low
@@ -95,22 +80,14 @@ end
 
 -- Creates a pirate flying a "Pirate Admonisher"
 function pirate_createAdmonisher( pirate_create )
-   -- Create by default
-   if pirate_create == nil then
-      pirate_create = true
-   end
 
    -- Create the pirate ship
    local p, s, olist
-   if pirate_create then
-      p     = pirate_createEmpty( "Pirate Admonisher" )
-      s     = p:ship()
-      olist = nil
-   else
+
       p     = "Pirate Admonisher"
       s     = ship.get(p)
       olist = { }
-   end
+   
 
    -- Equipment vars
    local primary, secondary, medium, low
@@ -137,22 +114,13 @@ end
 
 -- Creates a pirate flying a "Pirate Ancestor"
 function pirate_createAncestor( pirate_create )
-   -- Create by default
-   if pirate_create == nil then
-      pirate_create = true
-   end
-
    -- Create the pirate ship
    local p, s, olist
-   if pirate_create then
-      p     = pirate_createEmpty( "Pirate Ancestor" )
-      s     = p:ship()
-      olist = nil
-   else
+
       p     = "Pirate Ancestor"
       s     = ship.get(p)
       olist = { }
-   end
+   
 
    -- Equipment vars
    local primary, secondary, medium, low
@@ -181,24 +149,12 @@ end
 function pirate_createVendetta( pirate_create )
 
 
-   print("pirate_createVendetta:")
-
-   -- Create by default
-   if pirate_create == nil then
-      pirate_create = true
-   end
-
    -- Create the pirate ship
    local p, s, olist
-   if pirate_create then
-      p     = pirate_createEmpty( "Pirate Vendetta" )
-      s     = p:ship()
-      olist = nil
-   else
+
       p     = "Pirate Vendetta"
       s     = ship.get(p)
       olist = { } 
-   end
 
    -- Equipment vars
    local primary, secondary, medium, low

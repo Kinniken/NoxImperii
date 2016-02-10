@@ -1,5 +1,21 @@
 nameGenerator={}
 
+function nameGenerator.generateNameBetelgeuse()
+
+	nameStart={"ve","sal","pra","por","fos","chio","co","mi","mua","cam","do","con"}
+	nameMiddle={"ra","var","ni","tel","val","pa","po"}
+	nameEnd={"zia","ria","za","zio","sto","giore","pia","mia","no","zer","zoggio"}
+
+
+		name=nameStart[ math.random(#nameStart)]..nameMiddle[ math.random(#nameMiddle)]..nameEnd[ math.random(#nameEnd)]
+
+
+	name=name:gsub("^%l", string.upper)
+	return name
+end
+
+
+
 function nameGenerator.generateNameMerseia()
 
 	nameStart={"mer","bry","roi","brech","y","da","mo","khrai","qan","ur","tach","tel","chydh","gel","fo","mor"}

@@ -9,9 +9,9 @@
   <exterior>oceanic.png</exterior>
  </GFX>
  <presence>
-  <faction>Empire of Terra</faction>
-  <value>10.000000</value>
-  <range>0</range>
+ 	<faction>Natives</faction>
+  <value>0</value>
+  <range>1</range>
  </presence>
  <general>
   <class>A</class>
@@ -26,5 +26,50 @@
   <description>"Starkad was a big world, whose gravity and atmosphere gnawed land masses away between tectonic epochs. Thus, a world of shallow ocean, made turbulent by wind and the moons; a world of many islands large and small, but no real continents." ("Ensign Flandry")
 
 And there, two sapient species were locked in endless conflicts: the land-dwelling Toborkos, generally called Tigeries by humans, and the maritime Sea Folks. For reasons unclear to the public, Terra and the Roidhunate had progressively involved themselves in the rivalries between species. Since then, incidents between the Tigeries supported by their Terran allies and the Sea Folks and their Merseian backers have become increasingly frequent, and Starkad was fast becoming yet an other flash-point in the long border between the two rivals.</description>
+ 	<bar>The Empire's military base might be small, but it has a small mess. The view over Starkad's oceans is spectacular.</bar>
+    <luadata>{
+	humanFertility = 0.5,
+	minerals = 1.0508896145512,
+	nativeFertility = 1.1,
+	natives = {
+		agriculture = 1,
+		civilized = false,
+		industry = 1,
+		military = 1,
+		name = "Toborkos",
+		population = 156893431,
+		services = 1,
+		stability = 1,
+		technology = 1,
+		activeEffects = { },
+		goodsDemand = { },
+		lesserGoodsDemand = { },
+		lesserGoodsSupply = { },
+		suppressGoodDemand = { },
+		suppressGoodSupply = { },
+		tags = { },
+		extraGoodsDemand = {
+			{
+				demand = 1,
+				price = 1.5,
+				type = "Non-Industrial Weapons",
+			},
+			{
+				demand = 1,
+				price = 1.5,
+				type = "Primitive Armament",
+			},
+		},
+		extraGoodsSupply = {
+			{
+				price = 0.3,
+				supply = 5.9510610364508,
+				type = "Native Weapons",
+			},
+		},
+	},
+	settlements = { },
+	worldHistory = { },
+}</luadata>
  </general>
 </asset>

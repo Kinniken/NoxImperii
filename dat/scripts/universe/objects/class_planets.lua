@@ -19,6 +19,9 @@ local planet_c_debug_prototype = {
 	end,
 	addTechGroup=function(self)
 
+  end,
+  removeTechGroup=function(self)
+
 	end,
 	setFactionExtraPresence=function(self)
 

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Margiorre">
+ <pos>
+  <x>-5005.825609</x>
+  <y>-3920.358790</y>
+ </pos>
+ <GFX>
+  <space>H03.png</space>
+  <exterior>desertic.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Oligarchy of Betelgeuse</faction>
+  <value>100.000000</value>
+  <range>2</range>
+ </presence>
+ <general>
+  <class>A</class>
+  <population>3450000</population>
+  <hide>0.250000</hide>
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+   <missions/>
+  </services>
+  <description>Margiorre is cooler and drier than Dandalo, almost desertic beyond the coastline of the central ocean. It is native to a fairly unremarkable humanoid race, the Nizares, whose sole claim to fame is to have become the first subjects of the Betelgians.
+
+Today Betelgians and Nizares live in close proximity and general harmony, with many Nizares achieving success in Betelgian trading organisations or the world's limited industries.
+</description>
+<bar>The Doge of Betelgeuse's position is mostly honorific, but his court is famed for its glorious exuberance, a débauche of luxuries to rival Terra. This bar caters to Betelgian nobles passing through and reflects it - decorated in multicolor pelts of exotic faunas and pillars of glittering stones, it looks more like the palace of a minor duke.</bar>
+    <luadata>{
+	humanFertility = 0.7,
+	minerals = 1,
+	nativeFertility = 1.9,
+	settlements = {
+		betelgeuse = {
+			agriculture = 0.7,
+			industry = 1.2,
+			military = 1.2,
+			population = 1250000000,
+			services = 0.7,
+			stability = 0.9,
+			technology = 0.7,
+			activeEffects = { },
+			lesserGoodsDemand = { },
+			lesserGoodsSupply = { },
+			suppressGoodSupply = { },
+			extraGoodsDemand = {
+				{
+							demand = 20,
+							price = 1.5,
+							type = "Armament",
+						},
+			},
+			extraGoodsSupply = {
+			},
+			suppressGoodDemand = {
+			},
+		},
+    ,
+		natives = {
+			agriculture = 0.6510044498715,
+			civilized = true,
+			industry = 0.58274091534552,
+			military = 0.57292997758085,
+			name = "Nizares",
+			population = 280503870.365809,
+			services = 0.6,
+			stability = 0.9,
+			technology = 0.6,
+			activeEffects = { },
+			extraGoodsDemand = { },
+			lesserGoodsDemand = { },
+			lesserGoodsSupply = { },
+			suppressGoodDemand = { },
+			suppressGoodSupply = { },
+			tags = { },
+			extraGoodsSupply = {	},
+		},
+	},
+}</luadata>
+  
+ </general>
+</asset>

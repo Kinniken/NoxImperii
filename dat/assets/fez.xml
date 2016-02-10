@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Fez">
+ <pos>
+  <x>-5167.295068</x>
+  <y>-7949.684720</y>
+ </pos>
+ <GFX>
+  <space>O03.png</space>
+  <exterior>snow.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Empire of Terra</faction>
+  <value>300.000000</value>
+  <range>2</range>
+ </presence>
+ <general>
+  <class>A</class>
+  <population>0</population>
+  <hide>0.250000</hide>
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+  </services>
+  <commodities/>
+  <description>Fez' eccentric orbit drives its wild seasons, though its native life is widespread and edible by humans. Though the initial human community was of North African origin, via one of the Inner Worlds, the current population is very mixed - human and non-human both. In fact, Fez is known for the unusual presence of Merseian colons, whose settlement on the world predates tensions between the Empire and the Rodhunate. They are believed loyal to the Emperor, though the Imperial secret police is thought to discreetly monitor their communications with Merseia.
+  
+Its strategic position close to the border has made it the capital of the Taurus sector, leading to a heavy presence of Terran bureaucrats and naval personnels.</description>
+  <bar>This could be any bar in any old-fashioned world, save for its unique cocktails based on local vodka mixed with traditional Merseian liqueurs.</bar>
+    <luadata>{
+	humanFertility = 0.8,
+	minerals = 0.8,
+	nativeFertility = 1.2,
+	settlements = {
+		humans = {
+			agriculture = 0.8,
+			industry = 0.5,
+			military = 0.9,
+			population = 812545968,
+			services = 0.6,
+			stability = 0.8,
+			technology = 0.6,
+			activeEffects = { },
+			lesserGoodsDemand = { },
+			lesserGoodsSupply = { },
+			suppressGoodSupply = { },
+			extraGoodsDemand = {
+			},
+			extraGoodsSupply = {
+			},
+			suppressGoodDemand = {
+			},
+		},
+	},
+}</luadata>
+ </general>
+</asset>

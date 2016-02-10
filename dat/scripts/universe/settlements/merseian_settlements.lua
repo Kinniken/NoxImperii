@@ -22,7 +22,7 @@ settlement_generator.coreMerseianSettlements[#settlement_generator.coreMerseianS
 	getDesc=function(planet)
 		return "#planetname# was one of the first system colonized by the Roidhunate beyond their home system. Its inhabitants are particularly proud of the fact, and tend to look down on Merseians from more recent colonies. "
 	end,
-	specialities={},
+	specialities={merseian_specialities.specialityUniversity,merseian_specialities.specialityNavalBase,merseian_specialities.specialityHeavyIndustry,merseian_specialities.specialityLuxuryResort,merseian_specialities.specialityGourmetFood,merseian_specialities.specialityWeaponLab},
 	weight=10
 }
 

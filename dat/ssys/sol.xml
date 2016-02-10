@@ -4,6 +4,7 @@
      <star name="orange05.png"/>
     </starGraphics>
     <backgroundSpaceName>nebula33.png</backgroundSpaceName>
+    <zone>Sector Sol</zone>
  <general>
   <radius>20000.000000</radius>
   <stars>500</stars>
@@ -22,5 +23,6 @@
   <asset>Saturn</asset>
   <asset>Terra</asset>
   <asset>Venus</asset>
+  <asset>Mercury</asset>
  </assets>
 </ssys>

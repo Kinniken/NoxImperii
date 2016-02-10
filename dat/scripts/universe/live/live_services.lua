@@ -593,9 +593,14 @@ local function generateCivilizedPlanetServices(planet)
 			bestMilitary=settlement.military
 		end
 	end
-
-	local sectorName=planet.c:system():getZone()
-	local sectorStability=getSectorStability(sectorName)
+  
+  --test to allow this to run in LUA editor
+  if planet.c["system"] then
+    local sectorName=planet.c:system():getZone()
+    local sectorStability=getSectorStability(sectorName)
+  else
+    local sectorStability=1
+  end
 
 	if not sectorStability then
 		sectorStability=1

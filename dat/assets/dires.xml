@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Dires">
+ <pos>
+  <x>-4239.831851</x>
+  <y>4571.068714</y>
+ </pos>
+ <GFX>
+  <space>M06.png</space>
+  <exterior>forest.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Empire of Terra</faction>
+  <value>10.000000</value>
+  <range>0</range>
+ </presence>
+ <general>
+  <class>A</class>
+  <population>0</population>
+  <hide>0.250000</hide>
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+  </services>
+  <commodities/>
+  <description>Hot and humid Dires would be just one more sub-optimal terrestoid world to be buried in the Imperium's data reels if it was not for the presence on it of one of the most unique race known to men: Diresians are sentient beings made of the temporary union of three different species, whose digestive and nervous system can connect in one of the most extreme form of symbiosis ever documented.
+  
+A small permanent base of Naerisian scientists is dedicated to the study of those remarkable creatures.</description>
+  <bar>The researchers' cantine serves only very basic drinks, but the scientists heatedly discussing Diresian culture and physiology seem too busy to notice.</bar>
+  <luadata>{
+	humanFertility = 0.5,
+	minerals = 0.5,
+	nativeFertility = 1.2,
+	settlements = {
+		humans = {
+			agriculture = 0,
+			industry = 0,
+			military = 0.1,
+			population = 250,
+			services = 0.2,
+			stability = 1,
+			technology = 1.2,
+			activeEffects = { },
+			lesserGoodsDemand = { },
+			lesserGoodsSupply = { },
+			suppressGoodSupply = { },
+			extraGoodsDemand = {
+			
+			},
+			extraGoodsSupply = {
+      			{
+            supply = 2,
+            price = 0.8,
+            type = "Native Artworks",
+          },
+			},
+			suppressGoodDemand = {
+				
+			},
+		},
+	},
+}</luadata>
+ </general>
+</asset>

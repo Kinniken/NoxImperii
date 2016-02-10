@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Kashi">
+ <pos>
+  <x>-12322.011317</x>
+  <y>-7022.221503</y>
+ </pos>
+ <GFX>
+  <space>M05.png</space>
+  <exterior>forest2.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Empire of Terra</faction>
+  <value>300.000000</value>
+  <range>2</range>
+ </presence>
+ <general>
+  <class>A</class>
+  <population>0</population>
+  <hide>0.250000</hide>
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+  </services>
+  <commodities/>
+  <description>Kashi was settled in the 23rd century by a monastic order of Shaivites monks from the northern parts of former India. Their ambitions to establish a closed community centered on the worship of Shiva was doomed to failure after the discovery of important mineral riches and the resulting colonization boom.
+  
+Capital of the Antares sector, Kashi is now one of the leading industrial centres in this part of the Empire. Its shipyards are particularly famous.</description>
+  <bar>While Hindu influence on Kashi has been much dilluted, the airport does include this unusual "bar" which serves neither alcohol nor meat but delicious lassis and tasteful vegetarian curries.</bar>
+    <luadata>{
+	humanFertility = 0.8,
+	minerals = 1.5,
+	nativeFertility = 1.2,
+	settlements = {
+		humans = {
+			agriculture = 0.8,
+			industry = 1.5,
+			military = 1.2,
+			population = 5745000,
+			services = 0.9,
+			stability = 0.9,
+			technology = 1.2,
+			activeEffects = { },
+			lesserGoodsDemand = { },
+			lesserGoodsSupply = { },
+			suppressGoodSupply = { },
+			extraGoodsDemand = {
+			},
+			extraGoodsSupply = {
+			},
+			suppressGoodDemand = {
+			},
+		},
+	},
+}</luadata>
+ </general>
+</asset>

@@ -43,16 +43,16 @@ function barbarian_lord_generate ()
    -- Make sure to save the outfits.
    barbarian_outfits["__save"] = true
 
-   return barbarian_name, barbarian_ship, barbarian_outfits
+   return barbarian_name, barbarian_ship, barbarian_outfits,"baddie","Barbarians"
 end
 function barbarian_easy ()
-   return barbarian_createComet(false)
+   return barbarian_createComet()
 end
 function barbarian_medium ()
-   return barbarian_createContinent(false)
+   return barbarian_createContinent()
 end
 function barbarian_hard ()
-    return barbarian_createContinent(false)
+    return barbarian_createContinent()
 end
 
 

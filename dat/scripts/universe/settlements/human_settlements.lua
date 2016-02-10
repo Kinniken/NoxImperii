@@ -153,6 +153,24 @@ settlement_generator.outerHumanSettlements[#settlement_generator.outerHumanSettl
 settlement_generator.outerHumanSettlements[#settlement_generator.outerHumanSettlements+1]={
 	appliesTo="humans",
 	applyOnPlanet=function(planet)
+		planet.lua.settlements.humans:addTag("serbian")
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Empire of Terra") then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "The human colony on #planetname# is dominated by the descendants of Serbian settlers, who form a tightly-bond community structured around an autonomous Orthodox Church. "
+	end,
+	specialities={settlements_specialities.specialityNavalBase,settlements_specialities.specialityHeavyIndustry,settlements_specialities.specialityWeaponLab},
+	weight=5
+}
+
+settlement_generator.outerHumanSettlements[#settlement_generator.outerHumanSettlements+1]={
+	appliesTo="humans",
+	applyOnPlanet=function(planet)
 		planet.lua.settlements.humans:addTag("chinese")
 	end,
 	weightValidity=function(planet)

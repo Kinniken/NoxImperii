@@ -43,7 +43,7 @@ static double map_xpos        = 0.; /**< Map X position. */
 static double map_ypos        = 0.; /**< Map Y position. */
 static int map_drag           = 0; /**< Is the user dragging the map? */
 static int map_selected       = -1; /**< What system is selected on the map. */
-static StarSystem **map_path  = NULL; /**< The path to current selected system. */
+static int *map_path  = NULL; /**< The path to current selected system. */
 int map_npath                 = 0; /**< Number of systems in map_path. */
 glTexture *gl_faction_disk    = NULL; /**< Texture of the disk representing factions. */
 
@@ -234,6 +234,14 @@ void map_open (void)
          &gl_smallFont, &cDConsole, "Services:" );
    window_addText( wid, x + 50, y-gl_smallFont.h-5, rw, 100, 0, "txtServices",
          &gl_smallFont, &cBlack, NULL );
+   y -= 2 * gl_smallFont.h + 5 + 15;
+
+   /* Zone */
+   window_addText( wid, x, y, 90, 20, 0, "txtSZone",
+         &gl_smallFont, &cDConsole, "Zone:" );
+   window_addText( wid, x + 50, y-gl_smallFont.h-5, rw, 100, 0, "txtZone",
+         &gl_smallFont, &cBlack, NULL );
+   y -= 2 * gl_smallFont.h + 5 + 15;
 
    /* Close button */
    window_addButton( wid, -20, 20, BUTTON_WIDTH, BUTTON_HEIGHT,
@@ -353,6 +361,13 @@ static void map_update( unsigned int wid )
       window_moveWidget( wid, "txtSServices", x, y );
       window_moveWidget( wid, "txtServices", x + 50, y -gl_smallFont.h - 5 );
       window_modifyText( wid, "txtServices", "Unknown" );
+      y -= 2 * gl_smallFont.h + 5 + 15;
+
+      /* Zone */
+      window_moveWidget( wid, "txtSZone", x, y);
+		window_moveWidget( wid, "txtZone", x + 50, y - gl_smallFont.h - 5 );
+		window_modifyText( wid, "txtZone", "Unknown" );
+		y -= 2 * gl_smallFont.h + 5 + 15;
 
       /*
        * Bottom Text
@@ -363,6 +378,7 @@ static void map_update( unsigned int wid )
 
    /* System is known */
    window_modifyText( wid, "txtSysname", sys->name );
+   window_modifyText( wid, "txtZone", sys->zone );
 
    standing  = 0.;
    nstanding = 0.;
@@ -507,6 +523,12 @@ static void map_update( unsigned int wid )
       p += nsnprintf( &buf[p], PATH_MAX-p, "None");
    window_modifyText( wid, "txtServices", buf );
 
+   /* Scroll down. */
+   h  = gl_printHeightRaw( &gl_smallFont, w, buf );
+   y -= 40 + (h - gl_smallFont.h);
+
+   window_moveWidget( wid, "txtSZone", x, y );
+   window_moveWidget( wid, "txtZone", x + 50, y-gl_smallFont.h-5 );
 
    /*
     * System Status
@@ -881,7 +903,7 @@ static void map_renderPath( double x, double y )
       fuel = player.p->fuel;
 
       for (j=0; j<map_npath; j++) {
-         jsys = map_path[j];
+         jsys = &systems_stack[map_path[j]];
          if (fuel == player.p->fuel && fuel > 100.)
             col = &cGreen;
          else if (fuel < player.p->fuel_consumption)
@@ -1214,7 +1236,7 @@ StarSystem* map_getDestination (void)
 {
    if (map_path == NULL)
       return NULL;
-   return map_path[ map_npath-1 ];
+   return &systems_stack[map_path[ map_npath-1 ]];
 }
 
 
@@ -1240,11 +1262,11 @@ void map_jump (void)
          player_targetHyperspaceSet( -1 );
       }
       else { /* get rid of bottom of the path */
-         memmove( &map_path[0], &map_path[1], sizeof(StarSystem*) * map_npath );
+         memmove( &map_path[0], &map_path[1], sizeof(int) * map_npath );
 
          /* set the next jump to be to the next in path */
          for (j=0; j<cur_system->njumps; j++) {
-            if (map_path[0] == cur_system->jumps[j].target) {
+            if (&systems_stack[map_path[0]] == cur_system->jumps[j].target) {
                player_targetHyperspaceSet( j );
                break;
             }
@@ -1290,23 +1312,38 @@ void map_select( StarSystem *sys, char shifted )
 
       /* Try to make path if is reachable. */
       if (space_sysReachable(sys)) {
+
+    	 StarSystem** new_path;
+
          if (!shifted)
-            map_path = map_getJumpPath( &map_npath,
+        	 new_path= map_getJumpPath( &map_npath,
                   cur_system->name, sys->name, 0, 1, NULL );
-         else
-            map_path = map_getJumpPath( &map_npath,
-                  cur_system->name, sys->name, 0, 1, map_path );
+         else {
+        	 new_path=malloc(map_npath*sizeof(StarSystem*));
+
+        	 for (i=0;i<map_npath;i++)
+        		 new_path[i]=&systems_stack[map_path[i]];
+
+        	 new_path = map_getJumpPath( &map_npath,
+                  cur_system->name, sys->name, 0, 1, new_path );
+         }
 
          if (map_npath==0) {
+        	map_path  = NULL;
             player_hyperspacePreempt(0);
             player_targetHyperspaceSet( -1 );
             player_autonavAbortJump(NULL);
             window_disableButton( wid, "btnAutonav" );
          }
          else  {
+        	 map_path=malloc(map_npath*sizeof(int));
+
+        	 for (i=0;i<map_npath;i++)
+        		 map_path[i]=new_path[i]->id;
+
             /* see if it is a valid hyperspace target */
             for (i=0; i<cur_system->njumps; i++) {
-               if (map_path[0] == cur_system->jumps[i].target) {
+               if (&systems_stack[map_path[0]] == cur_system->jumps[i].target) {
                   player_hyperspacePreempt(1);
                   player_targetHyperspaceSet( i );
                   break;
@@ -1765,6 +1802,9 @@ void map_show( int wid, int x, int y, int w, int h, double zoom )
    /* Set zoom. */
    map_setZoom(zoom);
 
+   if (map_selected==-1)
+	   map_selected=cur_system->id;
+
    /* Make sure selected is sane. */
    sys = system_getIndex( map_selected );
    if (!(sys_isFlag(sys, SYSTEM_MARKED | SYSTEM_CMARKED)) &&
@@ -1798,4 +1838,19 @@ int map_center( const char *sys )
    return 0;
 }
 
+/**
+ * @brief Clears the system selected on the map. For use when updating the system array.
+ *
+ * (Yes, the proper thing would be to update the pointer)
+ *
+ *    @return
+ */
+void map_clearSelection() {
+	map_selected=-1;
+	map_npath=0;
+	map_path=NULL;
+}
 
+void map_selectCurrentSystem() {
+	map_selected=cur_system->id;
+}

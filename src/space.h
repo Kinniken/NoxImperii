@@ -61,6 +61,19 @@ typedef enum PlanetClass_ {
    STATION_CLASS_D   /**< Robotic Station */
 } PlanetClass;
 
+
+/**
+ * @brief Represents a commodity traded on a world.
+ */
+typedef struct TradeData_ {
+	const Commodity *commodity;
+	float priceFactor;//set in XML or Lua, represents world itself
+	float adjustedPriceFactor;//takes into account nearby worlds
+	int buyingQuantity,sellingQuantity;
+	int buyingQuantityRemaining,sellingQuantityRemaining;
+} TradeData;
+
+
 /*
  * planet services
  */
@@ -86,6 +99,19 @@ typedef enum PlanetClass_ {
 #define planet_isKnown(p)     planet_isFlag(p,PLANET_KNOWN) /**< Checks if planet is known. */
 
 
+/*
+ * Planet saving flags.
+ */
+#define PLANET_DESC_SAVE       (1<<0) /**< Save planet desc. */
+#define PLANET_SERVICES_SAVE   (1<<1) /**< Save planet desc. */
+#define PLANET_TECH_SAVE       (1<<2) /**< Save planet desc. */
+#define PLANET_PRESENCE_SAVE       (1<<3) /**< Save planet desc. */
+#define PLANET_COMMODITIES_SAVE       (1<<3) /**< Save planet desc. */
+#define planet_isSaveFlag(p,f)    ((p)->saveFlags & (f)) /**< Checks planet flag. */
+#define planet_setSaveFlag(p,f)   ((p)->saveFlags |= (f)) /**< Sets a planet flag. */
+#define planet_rmSaveFlag(p,f)    ((p)->saveFlags &= ~(f)) /**< Removes a planet flag. */
+
+
 /**
  * @struct Planet
  *
@@ -100,11 +126,16 @@ typedef struct Planet_ {
    /* Planet details. */
    PlanetClass class; /**< planet type */
    int faction; /**< planet faction */
+   double presenceAmount; /**< The amount of presence this asset exerts. */
+   int presenceRange; /**< The range of presence exertion of this asset. */
    uint64_t population; /**< Population of the planet. */
 
    /* Asset details. */
-   double presenceAmount; /**< The amount of presence this asset exerts. */
-   int presenceRange; /**< The range of presence exertion of this asset. */
+   int nextrapresences;/** number of presences **/
+   int mem_extrapresences; /** allocated memory for presences **/
+   int* extraPresenceFactions;/** the name of factions with presence in this asset **/
+   double* extraPresenceAmounts; /**< The amount of presence this asset exerts. */
+   int* extraPresenceRanges; /**< The range of presence exertion of this asset. */
    int real; /**< If the asset is tangible or not. */
    double hide; /**< The ewarfare hide value for an asset. */
 
@@ -120,10 +151,15 @@ typedef struct Planet_ {
 
    /* Landed details. */
    char* description; /**< planet description */
+   char* settlements_description; /**< planet settlements description */
+   char* history_description; /**< planet history description */
    char* bar_description; /**< spaceport bar description */
    unsigned int services; /**< what services they offer */
-   Commodity **commodities; /**< what commodities they sell */
-   int ncommodities; /**< the amount they have */
+   TradeData *tradedatas; /**< what commodities they sell */
+   int ntradedatas; /**< the amount they have */
+   int mem_tradedatas; /** allocated memory for tradedatas **/
+   float buySellGap; /** difference between base price and buying or selling price **/
+   ntime_t lastRefresh; /** last time quantities were updated **/
    tech_group_t *tech; /**< Planet tech. */
 
    /* Graphics. */
@@ -135,6 +171,13 @@ typedef struct Planet_ {
 
    /* Misc. */
    unsigned int flags; /**< flags for planet properties */
+
+   /* Misc. */
+   unsigned int saveFlags; /**< flags for planet saving properties */
+
+   int transient; /** whether the planet is transient (specific to the current player) **/
+
+   char* luaData;
 } Planet;
 
 
@@ -212,6 +255,7 @@ typedef struct JumpPoint_ {
    double sina; /**< Sinus of the angle. */
    int sx; /**< X sprite to use. */
    int sy; /**< Y sprite to use. */
+   int transient;/* specific to current player */
 } JumpPoint;
 extern glTexture *jumppoint_gfx; /**< Jump point graphics. */
 
@@ -249,9 +293,6 @@ struct StarSystem_ {
    int nfleets; /**< total number of fleets */
    double avg_pilot; /**< Target amount of pilots in the system. */
 
-   /* Calculated. */
-   double *prices; /**< Handles the prices in the system. */
-
    /* Presence. */
    SystemPresence *presence; /**< Pointer to an array of presences in this system. */
    int npresence; /**< Number of elements in the presence array. */
@@ -268,6 +309,16 @@ struct StarSystem_ {
 
    /* Misc. */
    unsigned int flags; /**< flags for system properties */
+    
+    /* Sun picture & star background */
+    char** gfx_SunSpaceNames;
+    int ngfx_SunSpaceNames;
+    char* gfx_BackgroundSpaceName;
+
+    int transient; /** whether the planet is transient (specific to the current player) **/
+    char* luaData;
+
+    char* zone; /** name of zone the system is in **/
 };
 
 
@@ -299,7 +350,12 @@ char planet_getClass( const Planet *p );
 char* planet_getServiceName( int service );
 int planet_getService( char *name );
 PlanetClass planetclass_get( const char a );
-credits_t planet_commodityPrice( const Planet *p, const Commodity *c );
+credits_t planet_commodityPriceBuying( const Planet *p, const Commodity *c );
+credits_t planet_commodityPriceSelling( const Planet *p, const Commodity *c );
+float planet_commodityPriceBuyingRatio( const Planet *p, const Commodity *c );
+float planet_commodityPriceSellingRatio( const Planet *p, const Commodity *c );
+void planet_addOrUpdateTradeData(Planet *p, const Commodity *c,float priceFactor,
+		int buyingQuantity,int sellingQuantity);
 /* Misc modification. */
 int planet_setFaction( Planet *p, int faction );
 /* Land related stuff. */
@@ -307,6 +363,11 @@ char planet_getColourChar( Planet *p );
 const glColour* planet_getColour( Planet *p );
 void planet_updateLand( Planet *p );
 int planet_setRadiusFromGFX(Planet* planet);
+TradeData* planet_getTradeData(Planet* p,Commodity* com);
+void planet_updateQuantities(Planet* p);
+void planet_refreshPlanetPriceFactors(Planet* p);
+void planet_refreshAllPlanetAdjustedPrices(void);
+void planet_addOrUpdateExtraPresence(Planet *p,int factionId,double amount,int range);
 
 
 /*
@@ -326,9 +387,18 @@ int system_addPlanet( StarSystem *sys, const char *planetname );
 int system_rmPlanet( StarSystem *sys, const char *planetname );
 int system_addJump( StarSystem *sys, xmlNodePtr node );
 int system_addJumpDiff( StarSystem *sys, xmlNodePtr node );
+int system_addJumpPoint( StarSystem *sys,StarSystem *target,double x, double y,double radius,double hide,
+		int autopos,int hidden,int exitonly,int transient,int known);
 int system_rmJump( StarSystem *sys, const char *jumpname );
 int system_addFleet( StarSystem *sys, Fleet *fleet );
 int system_rmFleet( StarSystem *sys, Fleet *fleet );
+int system_addStar( StarSystem *sys, char *starname);
+int system_rmStar( StarSystem *sys, int pos);
+StarSystem *system_createNewSystem(const char* name);
+Planet *planet_createNewPlanet( const char* name ,int isVirtual,const char* spaceGraphic,const char* exteriorGraphic,
+                                  double posX,double posY,double presenceAmount,int presenceRange,const char* factionName
+                                  ,const char* description,const char* settlement_description,const char* history_description,const char* descriptionBar,long population,double hide,char class,
+                                  int serviceLand,const char* landingFunc,int refuel,int bar,int missions,int commodity,int outfits,int shipyard);
 
 /*
  * render
@@ -375,7 +445,8 @@ char** space_getFactionPlanet( int *nplanets, int *factions, int nfactions, int 
 char* space_getRndPlanet( int landable );
 double system_getClosest( const StarSystem *sys, int *pnt, int *jp, double x, double y );
 double system_getClosestAng( const StarSystem *sys, int *pnt, int *jp, double x, double y, double ang );
-
+int space_refresh (void);
+void space_reset(void);
 
 /*
  * Markers.
@@ -402,5 +473,28 @@ int space_calcJumpInPos( StarSystem *in, StarSystem *out, Vector2d *pos, Vector2
 void system_setFaction( StarSystem *sys );
 void space_factionChange (void);
 
+/*
+ * Transient saving
+ */
+int space_transientAssetsSave( xmlTextWriterPtr writer );
+int space_transientSystemsSave( xmlTextWriterPtr writer );
+int space_transientJumpsSave( xmlTextWriterPtr writer );
+int system_saveSystemTransientJumps( xmlTextWriterPtr writer, StarSystem *sys );
+int planet_savePlanet( xmlTextWriterPtr writer, const Planet *p, int customDataOnly );
+int system_saveSystem( xmlTextWriterPtr writer, StarSystem *sys, int customDataOnly );
+int space_customData( xmlTextWriterPtr writer );
+
+/*
+ * Transient loading
+ */
+
+int space_transientJumpsLoad( xmlNodePtr parent );
+int space_transientAssetsLoad( xmlNodePtr parent );
+int space_transientSysLoad( xmlNodePtr parent );
+int space_planetCustomLoad( xmlNodePtr parent );
+int space_systemCustomLoad( xmlNodePtr parent );
+
+
+void space_debugCheckDataIntegrity(void);
 
 #endif /* SPACE_H */

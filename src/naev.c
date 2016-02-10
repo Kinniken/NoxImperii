@@ -291,6 +291,7 @@ int main( int argc, char** argv )
    window_caption();
    gl_fontInit( NULL, NULL, conf.font_size_def ); /* initializes default font to size */
    gl_fontInit( &gl_smallFont, NULL, conf.font_size_small ); /* small font */
+   gl_fontInit( &gl_tinyFont, NULL, conf.font_size_tiny );
    gl_fontInit( &gl_defFontMono, "dat/mono.ttf", conf.font_size_def );
 
    /* Display the load screen. */
@@ -459,6 +460,7 @@ int main( int argc, char** argv )
    /* cleanup opengl fonts */
    gl_freeFont(NULL);
    gl_freeFont(&gl_smallFont);
+   gl_freeFont(&gl_tinyFont);
    gl_freeFont(&gl_defFontMono);
 
    /* Close data. */
@@ -529,7 +531,7 @@ void loadscreen_load (void)
    loading = gl_newImage( file_path, 0 );
 
    /* Create the stars. */
-   background_initStars( 1000 );
+   background_initStars( 0 );
 
    /* Clean up. */
    for (i=0; i<nload; i++)
@@ -561,19 +563,25 @@ void loadscreen_render( double done, const char *msg )
     * Dimensions.
     */
    /* Image. */
-   bw = 512.;
-   bh = 512.;
-   bx = (SCREEN_W-bw)/2.;
-   by = (SCREEN_H-bh)/2.;
+   bx = (SCREEN_W-1280)/2.;
+   by = (SCREEN_H-1024)/2.;
+
+   if (SCREEN_W<1280)
+	   bw=SCREEN_W;
+   else
+	   bw=1280;
+
+   if (SCREEN_H<1024)
+	   bh=SCREEN_H;
+   else
+	   bh=1024;
+
    /* Loading bar. */
    w  = gl_screen.w * 0.4;
    h  = gl_screen.h * 0.02;
    rh = h + gl_defFont.h + 4.;
    x  = (SCREEN_W-w)/2.;
-   if (SCREEN_H < 768)
-      y  = (SCREEN_H-h)/2.;
-   else
-      y  = (SCREEN_H-bw)/2 - rh - 5.;
+   y = 50;
 
    /* Draw loading screen image. */
    if (loading != NULL)
@@ -680,7 +688,6 @@ void unload_all (void)
    npc_clear(); /* In case exiting while landed. */
    background_free(); /* Destroy backgrounds. */
    load_free(); /* Clean up loading game stuff stuff. */
-   economy_destroy(); /* must be called before space_exit */
    space_exit(); /* cleans up the universe itself */
    tech_free(); /* Frees tech stuff. */
    fleet_free();
@@ -691,7 +698,6 @@ void unload_all (void)
    missions_free();
    events_cleanup(); /* Clean up events. */
    factions_free();
-   commodity_free();
    var_cleanup(); /* cleans up mission variables */
    sp_cleanup();
 }

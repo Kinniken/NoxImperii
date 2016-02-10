@@ -294,9 +294,6 @@ void player_newTutorial (void)
    /* clear the map */
    map_clear();
 
-   /* Start the economy. */
-   economy_init();
-
    /* Start the news */
    news_init();
 
@@ -358,8 +355,16 @@ void player_new (void)
       }
    }
 
-   if (player_newMake())
-      return;
+   /* recreate universe */
+   space_reset();
+  WARN("Space cleaned");
+
+  space_load();
+  WARN("Space loaded");
+  outfit_mapParse();
+
+  if (player_newMake())
+     return;
 
    /* Display the intro. */
    intro_display( "dat/intro", "intro" );
@@ -428,9 +433,6 @@ static int player_newMake (void)
 
    /* clear the map */
    map_clear();
-
-   /* Start the economy. */
-   economy_init();
 
    /* Start the news */
    news_init();

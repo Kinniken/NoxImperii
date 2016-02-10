@@ -49,6 +49,8 @@ void map_renderParams( double bx, double by, double xpos, double ypos,
 void map_renderSystems( double bx, double by, double x, double y, double w, double h, double r, int editor );
 void map_renderNames( double x, double y, int editor );
 
+void map_clearSelection(void);
+void map_selectCurrentSystem(void);
 
 #endif /* MAP_H */
 

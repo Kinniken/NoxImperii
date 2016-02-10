@@ -529,6 +529,14 @@ static void load_compatSlots (void)
  */
 int load_game( const char* file, int version_diff )
 {
+
+   space_reset();
+   WARN("Space cleaned");
+
+   space_load();
+   WARN("Space loaded");
+   outfit_mapParse();
+
    xmlNodePtr node;
    xmlDocPtr doc;
    Planet *pnt;
@@ -557,7 +565,7 @@ int load_game( const char* file, int version_diff )
    /* Now begin to load. */
    diff_load(node); /* Must load first to work properly. */
    pfaction_load(node); /* Must be loaded before player so the messages show up properly. */
-   pnt = player_load(node);
+
 
    /* Sanitize for new version. */
    if (version_diff < 0) {
@@ -565,25 +573,44 @@ int load_game( const char* file, int version_diff )
       load_compatSlots();
    }
 
+
+
    /* Load more stuff. */
+
+   //WARN("Landing planet before transient load: %s",pnt->name);
+   space_transientAssetsLoad(node);
+   systems_reconstructPlanets();
+   //WARN("Landing planet before space_transientSysLoad load:");
+   //WARN("%s",pnt->name);
+   space_transientSysLoad(node);
+   //WARN("Landing planet before space_transientJumpsLoad load: %s",pnt->name);
+   space_transientJumpsLoad(node);
+   //WARN("Landing planet after transient load:");
+   //WARN("%s",pnt->name);
+
+   space_planetCustomLoad(node);
+
+   space_systemCustomLoad(node);
+
+   systems_reconstructJumps();
+
+   space_sysLoad(node);
+
+   space_refresh();
+
    var_load(node);
    missions_loadActive(node);
    events_loadActive(node);
    news_loadArticles( node );
    hook_load(node);
-   space_sysLoad(node);
 
-   /* Initialize the economy. */
-   economy_init();
+   pnt = player_load(node);
 
    /* Check sanity. */
    event_checkSanity();
 
    /* Run the load event trigger. */
    events_trigger( EVENT_TRIGGER_LOAD );
-
-   /* Create escorts in space. */
-   player_addEscorts();
 
    /* Land the player. */
    land( pnt, 1 );

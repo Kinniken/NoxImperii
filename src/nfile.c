@@ -129,7 +129,7 @@ const char* nfile_dataPath (void)
             path = strdup(".");
         }
 
-        nsnprintf( naev_dataPath, PATH_MAX, "%s/naev/", path );
+        nsnprintf( naev_dataPath, PATH_MAX, "%s/longnight/", path );
 
         if (path != NULL) {
             free (path);
@@ -140,7 +140,7 @@ const char* nfile_dataPath (void)
          WARN("%%APPDATA%% isn't set, using current directory.");
          path = ".";
       }
-      nsnprintf( naev_dataPath, PATH_MAX, "%s/naev/", path );
+      nsnprintf( naev_dataPath, PATH_MAX, "%s/longnight/", path );
 #else
 #error "Feature needs implementation on this Operating System for Naev to work."
 #endif
@@ -173,7 +173,7 @@ const char* nfile_configPath (void)
             path = strdup(".");
         }
 
-        nsnprintf( naev_configPath, PATH_MAX, "%s/naev/", path );
+        nsnprintf( naev_configPath, PATH_MAX, "%s/longnight/", path );
 
         if (path != NULL) {
             free (path);
@@ -184,7 +184,7 @@ const char* nfile_configPath (void)
          WARN("%%APPDATA%% isn't set, using current directory.");
          path = ".";
       }
-      nsnprintf( naev_configPath, PATH_MAX, "%s/naev/", path );
+      nsnprintf( naev_configPath, PATH_MAX, "%s/longnight/", path );
 #else
 #error "Feature needs implementation on this Operating System for Naev to work."
 #endif
@@ -217,7 +217,7 @@ const char* nfile_cachePath (void)
             path = strdup(".");
         }
 
-        nsnprintf( naev_cachePath, PATH_MAX, "%s/naev/", path );
+        nsnprintf( naev_cachePath, PATH_MAX, "%s/longnight/", path );
 
         if (path != NULL) {
             free (path);
@@ -228,7 +228,7 @@ const char* nfile_cachePath (void)
          WARN("%%APPDATA%% isn't set, using current directory.");
          path = ".";
       }
-      nsnprintf( naev_cachePath, PATH_MAX, "%s/naev/", path );
+      nsnprintf( naev_cachePath, PATH_MAX, "%s/longnight/", path );
 #else
 #error "Feature needs implementation on this Operating System for Naev to work."
 #endif

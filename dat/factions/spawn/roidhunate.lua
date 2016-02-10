@@ -7,9 +7,9 @@ function spawn_patrol ()
    local r = rnd.rnd()
 
    if r < 0.5 then
-      scom.addPilot( pilots, "Merseian Comet", 25 );
+      scom.addPilot( pilots, "Merseian Meteor", 25 );
    elseif r < 0.8 then
-      scom.addPilot( pilots, "Merseian Comet", 20 );
+      scom.addPilot( pilots, "Merseian Meteor", 20 );
       scom.addPilot( pilots, "Merseian Comet", 25 );
    else
       scom.addPilot( pilots, "Merseian Comet", 75 );
@@ -25,14 +25,14 @@ function spawn_squad ()
    local r = rnd.rnd()
 
    if r < 0.5 then
-      scom.addPilot( pilots, "Merseian Comet", 20 );
-      scom.addPilot( pilots, "Merseian Comet", 25 );
+      scom.addPilot( pilots, "Merseian Meteor", 20 );
+      scom.addPilot( pilots, "Merseian Meteor", 25 );
       scom.addPilot( pilots, "Merseian Comet", 45 );
    elseif r < 0.8 then
-      scom.addPilot( pilots, "Merseian Comet", 25 );
+      scom.addPilot( pilots, "Merseian Meteor", 25 );
       scom.addPilot( pilots, "Merseian Comet", 45 );
    else
-      scom.addPilot( pilots, "Merseian Comet", 20 );
+      scom.addPilot( pilots, "Merseian Meteor", 20 );
       scom.addPilot( pilots, "Merseian Comet", 25 );
       scom.addPilot( pilots, "Merseian Continent", 75 );
    end
@@ -56,15 +56,15 @@ function spawn_capship ()
    -- Generate the escorts
    r = rnd.rnd()
    if r < 0.5 then
-      scom.addPilot( pilots, "Merseian Comet", 20 );
+      scom.addPilot( pilots, "Merseian Meteor", 20 );
       scom.addPilot( pilots, "Merseian Comet", 25 );
       scom.addPilot( pilots, "Merseian Comet", 25 );
    elseif r < 0.8 then
-      scom.addPilot( pilots, "Merseian Comet", 25 );
+      scom.addPilot( pilots, "Merseian Meteor", 25 );
       scom.addPilot( pilots, "Merseian Comet", 45 );
    else
-      scom.addPilot( pilots, "Merseian Comet", 25 );
-      scom.addPilot( pilots, "Merseian Comet", 75 );
+      scom.addPilot( pilots, "Merseian Meteor", 25 );
+      scom.addPilot( pilots, "Merseian Meteor", 75 );
    end
 
    return pilots

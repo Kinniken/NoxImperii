@@ -298,6 +298,14 @@
    <pilot name="Empire Jupiter" ship="Empire Jupiter"></pilot>
   </pilots>
  </fleet>
+ 
+<fleet name="Merseian Meteor">
+  <ai>empire</ai>
+  <faction>Roidhunate of Merseia</faction>
+  <pilots>
+   <pilot name="Merseian Roeth" ship="Merseian Roeth"></pilot>
+  </pilots>
+ </fleet>
  <fleet name="Merseian Comet">
   <ai>empire</ai>
   <faction>Roidhunate of Merseia</faction>
@@ -378,21 +386,21 @@
  </fleet>
   <fleet name="Betelgeusean Schroedinger">
   <ai>independent</ai>
-  <faction>Sartaza of Betelgeuse</faction>
+  <faction>Oligarchy of Betelgeuse</faction>
   <pilots>
    <pilot name="Betelgeusean Schroedinger" ship="Schroedinger"></pilot>
   </pilots>
  </fleet>
  <fleet name="Betelgeusean Hyena">
   <ai>independent</ai>
-  <faction>Sartaza of Betelgeuse</faction>
+  <faction>Oligarchy of Betelgeuse</faction>
   <pilots>
    <pilot name="Betelgeusean Hyena" ship="Hyena"></pilot>
   </pilots>
  </fleet>
  <fleet name="Betelgeusean Gawain">
   <ai>independent</ai>
-  <faction>Sartaza of Betelgeuse</faction>
+  <faction>Oligarchy of Betelgeuse</faction>
   <pilots>
    <pilot name="Betelgeusean Gawain" ship="Gawain"></pilot>
   </pilots>

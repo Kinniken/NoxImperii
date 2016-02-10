@@ -630,24 +630,20 @@ local function generateCivilizedPlanetServices(planet)
 
 	generateTechnologiesCivilian(planet,bestIndustry,bestTechnology)
 
-	faction=planet.c:faction()
+	local f=planet.c:faction()
 
-	if (faction and not faction==faction.get("Natives")) then
-		factionName=faction:name()
+	if (f and not (f==faction.get("Natives"))) then
+		factionName=f:name()
 
 		if (factionName=="Empire of Terra") then
 			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Empire")
-		end
-		if (factionName=="Independent") then
+		elseif (factionName=="Independent") then
 			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Independent")
-		end
-		if (factionName=="Roidhunate of Merseia") then
+		elseif (factionName=="Roidhunate of Merseia") then
 			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Roidhunate")
-		end
-		if (factionName=="Sartaza of Betelgeuse") then
+		elseif (factionName=="Sartaza of Betelgeuse") then
 			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Betelgeuse")
-		end
-		if (factionName=="Barbarians") then
+		elseif (factionName=="Barbarians") then
 			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Barbarian")
 		end
 

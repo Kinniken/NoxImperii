@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Veniera">
+ <base_type>Veniera</base_type>
+ <GFX sx="6" sy="6">keserlan</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Freighter</class>
+ <fabricator>Maggiore Shipyards</fabricator>
+ <description>Pride and glory of the Maggiore Shipyards, the Veniera is a rare bulk freighter not descended from the universal "fish bone" design: Betelgeuse has no use for such fragile ships, not when its traders ply dangerous routes far from its borders. With its strong armour, decent offensive military capacities, and huge fuel tanks, the Veniera can deliver large cargo in the most dangerous neighbourhoods.</description>
+ 
+
+<price>3800000</price>
+ <movement>
+  <thrust>180</thrust>
+  <turn>90</turn>
+  <speed>180</speed>
+ </movement>
+ <health>
+  <absorb>30</absorb>
+  <shield>400</shield>
+  <armour>1300</armour>
+  <energy>1200</energy>
+  <shield_regen>6</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>40</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>60</cpu>
+  <crew>60</crew>
+  <mass>3000</mass>
+  <fuel>900</fuel>
+  <cargo>700</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+
+ <slots>
+
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+
+  <weapon    size="medium"  x="+80"  y="+15" h="0"/>
+  <weapon    size="medium"  x="+80"  y="-15" h="0"/>
+  <weapon    size="medium"  x="-80"  y="+15" h="0"/>
+  <weapon    size="medium"  x="-80"  y="-15" h="0"/>
+  <weapon    size="medium"  x="+80"  y="-15" h="0"/>
+  <weapon    size="medium"  x="-80"  y="+15" h="0"/>
+  <weapon    size="large"  x="-80"  y="-15" h="0"/>
+ </slots>
+ 
+</ship>

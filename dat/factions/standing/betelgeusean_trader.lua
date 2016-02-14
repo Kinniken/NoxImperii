@@ -7,7 +7,7 @@ _fcap_kill     = 0 -- Kill cap
 _fdelta_distress = {-1.5, 0} -- Maximum change constraints
 _fdelta_kill     = {-7, 2} -- Maximum change constraints
 _fcap_misn     = 30 -- Starting mission cap, gets overwritten
-_fcap_misn_var = "_fcap_betelgeusean_trader"
+_fcap_misn_var = "_fcap_betelgian_trader"
 _fthis         = faction.get("Betelgeusean Trader")
 
 

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Betelgian Stella">
+ <base_type>Betelgian Stella</base_type>
+ <GFX sx="12" sy="12">divinity</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Carrier</class>
+ <price>15000000</price>
+ <fabricator>Betelgian State Shipyards</fabricator>
+ <description>Stella dreadnoughts are a rare and new sight in the Betelgian navy, a clear sign that the Merchant Princes are aware that Betelgeuse's position as a neutral trading power is under threat.
+
+Intended as command ships for large fleets, and always commanded by proeminent members of leading families, Stella dreadnoughts are not just formidable vessels but also provide luxurious accomadations worthy of the Doge himself.</description>
+ <movement>
+  <thrust>100</thrust>
+  <turn>60</turn>
+  <speed>100</speed>
+ </movement>
+ <health>
+  <absorb>50</absorb>
+  <shield>600</shield>
+  <armour>2500</armour>
+  <energy>4000</energy>
+  <shield_regen>10</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>90</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>250</cpu>
+  <crew>80</crew>
+  <mass>500</mass>
+  <fuel>1000</fuel>
+  <cargo>1200</cargo>
+ </characteristics>
+ <slots>
+  <weapon size="large" x="40" y="0" h="0"/>
+  <weapon size="large" x="20" y="0" h="0"/>
+  <weapon size="large" x="20" y="0" h="0"/>
+  <weapon size="large" x="-20" y="0" h="0"/>
+  <weapon size="large" x="-40" y="0" h="0"/>
+  <weapon size="large" x="20" y="0" h="0"/>
+  <weapon size="large" x="-20" y="0" h="0"/>
+  <weapon size="large" x="-40" y="0" h="0"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+ </slots>
+ <stats>
+
+ </stats>
+</ship>
+<!-- Note: the base is NOT a normal ship. Do not add to techs or fleets! -->

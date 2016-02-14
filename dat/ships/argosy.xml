@@ -4,48 +4,57 @@
  <GFX sx="12" sy="12">argosy</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
- <class>Freighter</class>
- <price>900000</price>
+ <class>Armoured Transport</class>
+ 
  <fabricator>Melendez Corp.</fabricator>
- <license>Large Civilian Vessel License</license>
- <description>A heavy freighter specialized in transporting cargo throughout the galaxy. Also has sufficient accommodations for passengers depending on the model, allowing for enjoyable cruises. The Mule was a favorite target of pirates until they added defensive capabilities to the new models which have proved highly effective against ill-prepared pirates.</description>
+ <description>For all its retro design, the Argosy is a modern creation - an updated take on the "rhino" concept. Somewhat faster, tougher and better armed, it justifies its higher price among more demanding customers.</description>
+ 
+
+<price>2500000</price>
  <movement>
-  <thrust>150</thrust>
-  <turn>90</turn>
-  <speed>200</speed>
+  <thrust>200</thrust>
+  <turn>120</turn>
+  <speed>180</speed>
  </movement>
  <health>
-  <absorb>50</absorb>
-  <shield>300</shield>
-  <armour>1200</armour>
-  <energy>1200</energy>
+  <absorb>30</absorb>
+  <shield>400</shield>
+  <armour>600</armour>
+  <energy>1000</energy>
   <shield_regen>6</shield_regen>
   <armour_regen>0</armour_regen>
-  <energy_regen>26.7</energy_regen>
+  <energy_regen>50</energy_regen>
  </health>
  <characteristics>
-  <cpu>43</cpu>
-  <crew>13</crew>
-  <mass>1250</mass>
-  <fuel>500</fuel>
-  <cargo>200</cargo>
+  <cpu>60</cpu>
+  <crew>40</crew>
+  <mass>1800</mass>
+  <fuel>700</fuel>
+  <cargo>250</cargo>
  </characteristics>
+<stats>
+  
+</stats>
+
  <slots>
-  <weapon x="25" y="0" h="0"/>
-  <weapon x="-15" y="0" h="4"/>
-  <weapon x="15" y="0" h="4"/>
-  <utility/>
-  <utility/>
-  <utility/>
-  <structure/>
-  <structure/>
-  <structure/>
-  <structure/>
-  <structure/>
-  <structure/>
+  <weapon size="medium" x="25" y="0" h="0"/>
+  <weapon size="medium" x="-15" y="0" h="4"/>
+  <weapon size="medium" x="15" y="0" h="4"/>
+  <weapon size="medium" x="-15" y="0" h="4"/>
+  <weapon size="large" x="15" y="0" h="4"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
  </slots>
- <stats>
-  <cargo_inertia>-20</cargo_inertia>
- </stats>
 </ship>
-<!-- Fighters -->

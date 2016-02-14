@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Hauler">
+ <base_type>Hauler</base_type>
+ <GFX sx="6" sy="6">mosquito</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Freighter</class>
+ <fabricator>Generic</fabricator>
+ <description>Less a ship that slapped-together components on a bare-bone structure, haulers are mass-produced in most of known space. They can resist minor attacks, and if some get destroyed, they are cheap to replace.</description>
+ 
+
+<price>900000</price>
+ <movement>
+  <thrust>150</thrust>
+  <turn>90</turn>
+  <speed>150</speed>
+ </movement>
+ <health>
+  <absorb>15</absorb>
+  <shield>175</shield>
+  <armour>300</armour>
+  <energy>600</energy>
+  <shield_regen>4</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>35</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>40</cpu>
+  <crew>25</crew>
+  <mass>900</mass>
+  <fuel>500</fuel>
+  <cargo>220</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+
+ <slots>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+
+  <weapon    size="medium"  x="-10"  y="0" h="0"/>
+  <weapon    size="medium"  x="-10"  y="0" h="0"/>
+ </slots>
+</ship>

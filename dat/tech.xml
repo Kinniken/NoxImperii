@@ -340,6 +340,7 @@
 
 	<!-- Ships -->
 	<tech name="Basic Civilian Ships">
+    <item>Argosy</item>
 		<item>Ancestor</item>
 		<item>Gawain</item>
 		<item>Hyena</item>
@@ -679,11 +680,13 @@
  
  
 	<tech name="Betelgeuse Military 1">
+    <item>Betelgian Alba</item>
 		<item>Ion Cannon</item>
 		<item>Razor MK1</item>
 		<item>Razor Turret MK1</item>
 	</tech>
 	<tech name="Betelgeuse Military 2">
+    <item>Betelgian Libera</item>
 		<item>Heavy Ion Cannon</item>
 		<item>Razor MK2</item>
 		<item>Razor MK3</item>
@@ -693,6 +696,7 @@
 		<item>Plasma Turret MK1</item>
 	</tech>
 	<tech name="Betelgeuse Military 3">
+    <item>Betelgian Cassandra</item>
 		<item>Heavy Ion Turret</item>
 		<item>Plasma Blaster MK2</item>
 		<item>Plasma Blaster MK3</item>
@@ -704,10 +708,10 @@
 		<item>Medusa Missile</item>
 	</tech>
 	<tech name="Betelgeuse Military 4">
+    <item>Betelgian Orsa</item>
+    <item>Betelgian Stella</item>
 		<item>Plasma Turret MK2</item>
-	</tech>
-	<tech name="Betelgeuse Military 5">
-		<item>Unicorp Headhunter Launcher</item>
+    <item>Unicorp Headhunter Launcher</item>
 		<item>Headhunter Missile</item>
 		<item>Unicorp Mace Launcher</item>
 		<item>Mace Rocket</item>
@@ -718,6 +722,10 @@
 		<item>TeraCom Medusa Launcher</item>
 		<item>Medusa Missile</item>
 		<item>Enygma Systems Turreted Fury Launcher</item>
+	</tech>
+  <!--5 is too high even for Dandalo -->
+	<tech name="Betelgeuse Military 5">  
+		
 	</tech>
  
  

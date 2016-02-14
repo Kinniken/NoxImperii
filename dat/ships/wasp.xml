@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Wasp">
+ <base_type>Wasp</base_type>
+ <GFX>gawain</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Fighter</class>
+ <fabricator>Generic</fabricator>
+ <description>Very light fighters of wasp design are mostly used for training or sport purposes, as their defensive capabilities are too limited to make them effective in serious fights. They are still known to be used for piracy against lightly-defended traders.</description>
+ 
+<price>150000</price>
+ <movement>
+  <thrust>250</thrust>
+  <turn>140</turn>
+  <speed>250</speed>
+ </movement>
+ <health>
+  <absorb>4</absorb>
+  <shield>120</shield>
+  <armour>50</armour>
+  <energy>300</energy>
+  <shield_regen>3</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>10</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>28</cpu>
+  <crew>2</crew>
+  <mass>80</mass>
+  <fuel>300</fuel>
+  <cargo>10</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+ <slots>
+  <weapon size="small" x="12" y="0" h="-2"/>
+  <weapon size="small" x="-5" y="0" h="1"/>
+  
+  <utility size="small"/>
+
+  <structure size="small"/>
+  <structure size="small"/>
+ </slots>
+ </ship>

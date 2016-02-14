@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Zheng He">
+ <base_type>Zheng He</base_type>
+ <GFX sx="6" sy="6">iserlohn</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Freighter</class>
+ <fabricator>Xiao Shipyards</fabricator>
+ <description>A higher-end variant on the common "whales" design, the Zheng He is popular in the Empire for its increased cargo capacity, greater speed and stronger shields. Its vulnerability still limits it to core Terran space.</description>
+ 
+
+<price>2500000</price>
+ <movement>
+  <thrust>150</thrust>
+  <turn>90</turn>
+  <speed>180</speed>
+ </movement>
+ <health>
+  <absorb>30</absorb>
+  <shield>500</shield>
+  <armour>500</armour>
+  <energy>800</energy>
+  <shield_regen>6</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>50</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>60</cpu>
+  <crew>40</crew>
+  <mass>2300</mass>
+  <fuel>500</fuel>
+  <cargo>550</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+ <slots>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+
+  <weapon    size="medium"  x="+50"  y="0" h="0"/>
+  <weapon    size="medium"  x="-50"  y="0" h="0"/>
+  <weapon    size="medium"  x="+50"  y="0" h="0"/>
+  <weapon    size="medium"  x="-50"  y="0" h="0"/>
+  <weapon    size="medium"  x="+50"  y="0" h="0"/>
+ </slots>
+ 
+</ship>

@@ -57,7 +57,6 @@ Today Betelgians and Nizares live in close proximity and general harmony, with m
 			suppressGoodDemand = {
 			},
 		},
-    ,
 		natives = {
 			agriculture = 0.6510044498715,
 			civilized = true,

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Pelegrina">
+ <base_type>Pelegrina</base_type>
+ <GFX sx="6" sy="6">eresslih</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+<class>Courier</class>
+ <fabricator>Paoli Shipyards</fabricator>
+ <description>Long-ranged and with a spacious cargo hold, the Pelegrina is used by Betelgian trading families for small, urgent cargo. Its decent speed is its main defense against pirates or barbarians, as its shield is weak and armour almost non-existent.</description>
+ 
+<price>300000</price>
+ <movement>
+  <thrust>220</thrust>
+  <turn>120</turn>
+  <speed>250</speed>
+ </movement>
+ <health>
+  <absorb>5</absorb>
+  <shield>100</shield>
+  <armour>50</armour>
+  <energy>300</energy>
+  <shield_regen>3</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>15</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>22</cpu>
+  <crew>3</crew>
+  <mass>120</mass>
+  <fuel>800</fuel>
+  <cargo>60</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+
+ <slots>
+  <structure size="small"/>
+  <structure size="small"/>
+  <utility size="small"/>
+  <utility size="small"/>
+  <weapon    size="small"  x="+25"  y="0" h="0"/>
+ </slots>
+ <stats>
+  
+ </stats>
+</ship>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Fish Bone">
+ <base_type>Fish Bone</base_type>
+ <GFX sx="6" sy="6">shire</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+<class>Freighter</class>
+ <fabricator>Generic</fabricator>
+ <description>Derisively nick-named fish bones, ungainly ships such as these are among the cheapest and simplest ways of shipping goods from systems to systems; no other ship in widespread use offers so much cargo capacity for so cheap a price. Of course, the downside of captaining one include terrible speed, weak shields and getting laughed out of pilots' bars.</description>
+
+
+<price>420000</price>
+ <movement>
+  <thrust>150</thrust>
+  <turn>80</turn>
+  <speed>170</speed>
+ </movement>
+ <health>
+  <absorb>6</absorb>
+  <shield>125</shield>
+  <armour>200</armour>
+  <energy>400</energy>
+  <shield_regen>4</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>25</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>32</cpu>
+  <crew>10</crew>
+  <mass>600</mass>
+  <fuel>400</fuel>
+  <cargo>180</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+
+ <slots>
+  <utility size="small"/>
+  <utility size="small"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+
+  <weapon    size="small"  x="+10"  y="0" h="0" />
+  <weapon    size="small"  x="-10"  y="0" h="0" />
+ </slots>
+
+</ship>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Merkhrioch">
+ <base_type>Merkhrioch</base_type>
+ <GFX sx="12" sy="12">hawking</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Cruiser</class>
+ <fabricator>Roidhunate Shipyards</fabricator>
+ <description>The Roidhunate restricts private access to military crafts much more than the Empire does, and thus it might seem surprising that a ship like the Merkhrioch would ever be cleared for sale outside the Merseian navy; only when the need to develop a network of client states dependent on Merseian support rose did the Roidhunate relent and accept the development of a cruiser available to its allies. The result is a powerful ship indeed, among the most powerful available outside the Imperial and Merseian navies, sales of which are closely monitored.</description>
+ 
+<price>5200000</price>
+ <movement>
+  <thrust>150</thrust>
+  <turn>100</turn>
+  <speed>160</speed>
+ </movement>
+ <health>
+  <absorb>45</absorb>
+  <shield>450</shield>
+  <armour>800</armour>
+  <energy>900</energy>
+  <shield_regen>6</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>50</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>70</cpu>
+  <crew>50</crew>
+  <mass>1900</mass>
+  <fuel>600</fuel>
+  <cargo>150</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+ <slots>
+  <weapon size="large" x="40" y="0" h="2"/>
+  <weapon size="large" x="25" y="0" h="2"/>
+  <weapon size="large" x="12" y="-6" h="0"/>
+  <weapon size="medium" x="12" y="6" h="0"/>
+  <weapon size="medium" x="0" y="0" h="7"/>
+  <weapon size="medium" x="-15" y="0" h="7"/>
+
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+ </slots>
+</ship>

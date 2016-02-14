@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Voyager Frigate">
+ <base_type>Voyager Frigate</base_type>
+ <GFX sx="6" sy="6">tkaltpatrol</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Destroyer</class>
+ <fabricator>Generic</fabricator>
+ <description>The light frigate variation of the voyager design remains a popular design, despite limited performance. It has been used both as a light combat ship and as a courier in fringe areas; its weak protection remains its chief weakness.</description>
+ 
+<price>720000</price>
+ <movement>
+  <thrust>200</thrust>
+  <turn>110</turn>
+  <speed>180</speed>
+ </movement>
+ <health>
+  <absorb>12</absorb>
+  <shield>200</shield>
+  <armour>300</armour>
+  <energy>400</energy>
+  <shield_regen>4</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>25</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>50</cpu>
+  <crew>12</crew>
+  <mass>350</mass>
+  <fuel>500</fuel>
+  <cargo>50</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+ <slots>
+
+  <utility size="medium"/>
+  <utility size="small"/>
+  <utility size="small"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="small"/>
+  <structure size="small"/>
+
+  <weapon    size="medium" x="+5"  y=" 0" h=" 0"/>
+  <weapon    size="small" x="+5"  y=" 0" h=" 0"/>
+  <weapon    size="small"  x="+10"  y="0" h="  0"/>
+  <weapon    size="small"  x="-10"  y="0" h="  0"/>
+ </slots>
+ 
+</ship>

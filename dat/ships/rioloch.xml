@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Rioloch">
+ <base_type>Rioloch</base_type>
+ <GFX sx="6" sy="6">irali</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Freighter</class>
+ <fabricator>Roidhunate Shipyards</fabricator>
+ <description>While the Rioloch's structure clearly show its "fish bone" heritage, it has been heavily adapted by the Roidhunate and now differs significantly from the original human design. Tougher and better armed than human equivalents, it is intended to follow Merseian offensives under minimal protection.</description>
+
+
+<price>2800000</price>
+ <movement>
+  <thrust>160</thrust>
+  <turn>100</turn>
+  <speed>190</speed>
+ </movement>
+ <health>
+  <absorb>40</absorb>
+  <shield>400</shield>
+  <armour>900</armour>
+  <energy>800</energy>
+  <shield_regen>6</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>60</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>60</cpu>
+  <crew>45</crew>
+  <mass>2500</mass>
+  <fuel>700</fuel>
+  <cargo>600</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+ 
+ <slots>
+
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="large"/>
+  <utility size="large"/>
+
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+
+  <weapon    size="medium"  x="+50"  y="0" h="0"/>
+  <weapon    size="medium"  x="-50"  y="0" h="0"/>
+  <weapon    size="medium"  x="0"    y="0" h="0"/>
+  <weapon    size="medium"  x="0"    y="0" h="0"/>
+  <weapon    size="large"  x="0"    y="0" h="0"/>
+ </slots>
+ 
+</ship>

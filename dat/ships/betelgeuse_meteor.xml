@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Betelgian Alba">
+ <base_type>Betelgian Alba</base_type>
+ <GFX>fidelity</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Fighter</class>
+ <price>220000</price>
+ <fabricator>Paoli Shipyards</fabricator>
+ <description>The Alba is a light fighter adapted from civilian recon crafts. Like most Betelgian ships, its fighting capacities do not match those of its nearest equivalent, the Tunguska. Its heritage however does leave it with a larger cargo hold than typical on fighters.</description>
+ <movement>
+  <thrust>220</thrust>
+  <turn>130</turn>
+  <speed>280</speed>
+ </movement>
+ <health>
+  <absorb>7</absorb>
+  <shield>150</shield>
+  <armour>70</armour>
+  <energy>500</energy>
+  <shield_regen>5</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>20</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>22</cpu>
+  <crew>3</crew>
+  <mass>80</mass>
+  <fuel>800</fuel>
+  <cargo>25</cargo>
+ </characteristics>
+ <slots>
+  <weapon size="small" x="10" y="-2" h="0"/>
+  <weapon size="small" x="10" y="2" h="0"/>
+  <weapon size="small" x="0" y="-4" h="-3"/>
+  <utility size="small"/>
+  <utility size="small"/>
+  <utility size="small"/>
+  <structure size="small"/>
+  <structure size="small"/>
+ </slots>
+</ship>

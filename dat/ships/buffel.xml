@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Buffel">
+ <base_type>Buffel</base_type>
+ <GFX sx="10" sy="10">pacifier</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Destroyer</class>
+ <fabricator>New Germania Shipyards</fabricator>
+ <description>The Buffel Heavy Destroyer was developed under Imperial patronage for the use of client states and autonomous system militias. It cannot take on its Imperial Navy equivalent, the Asieneuve destroyers, but is more than adequate as a defence against pirates or smaller barbarian incursions.</description>
+ 
+<price>3100000</price>
+ <movement>
+  <thrust>110</thrust>
+  <turn>100</turn>
+  <speed>150</speed>
+ </movement>
+ <health>
+  <absorb>40</absorb>
+  <shield>400</shield>
+  <armour>800</armour>
+  <energy>900</energy>
+  <shield_regen>6</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>45</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>70</cpu>
+  <crew>40</crew>
+  <mass>1500</mass>
+  <fuel>500</fuel>
+  <cargo>180</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+ <slots>
+  <weapon size="large" x="-15" y="-10" h="-10"/>
+  <weapon size="large" x="-15" y="10" h="-10"/>
+  <weapon size="medium" x="4" y="-5" h="-10"/>
+  <weapon size="medium" x="4" y="5" h="-10"/>
+
+  <utility size="large"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+
+
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+ </slots>
+ 
+</ship>

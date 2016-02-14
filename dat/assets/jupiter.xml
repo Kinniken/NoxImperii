@@ -9,7 +9,6 @@
   <exterior>methane.png</exterior>
  </GFX>
  <presence>
-  <faction>Dispersal of Ymir</faction>
   <value>50.000000</value>
   <range>0</range>
  </presence>

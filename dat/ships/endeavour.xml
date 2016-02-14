@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Endeavour">
+ <base_type>Endeavour</base_type>
+ <GFX>llama</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Scout</class>
+ <fabricator>Generic</fabricator>
+ <description>Generally referred to as "Endeavour shuttles", those sturdy little ships are among the cheapest and most common ships around. While this was originally a human design, it is now common in adapted forms throughout known space.</description>
+ 
+ <price>150000</price>
+ <movement>
+  <thrust>180</thrust>
+  <turn>90</turn>
+  <speed>170</speed>
+ </movement>
+ <health>
+  <absorb>5</absorb>
+  <shield>120</shield>
+  <armour>90</armour>
+  <energy>250</energy>
+  <shield_regen>4</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>15</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>16</cpu>
+  <crew>1</crew>
+  <mass>120</mass>
+  <fuel>400</fuel>
+  <cargo>20</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+ <slots>
+  <weapon size="small" x="7" y="0" h="1"/>
+  <utility size="small"/>
+  <structure size="small"/>
+ </slots>
+</ship>

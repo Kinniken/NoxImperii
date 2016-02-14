@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Geldoch">
+ <base_type>Geldoch</base_type>
+ <GFX sx="10" sy="10">kahan</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Armoured Transport</class>
+ <fabricator>Roidhunate Shipyards</fabricator>
+ <description>As often in the Roidhunate's navy, civilian and military designs overlap. The Geldoch is a good example; fast and durable, it is used by the Merseians both for civilian deliveries in dangerous space and as a first-wave army transport on major operations.</description>
+ 
+<price>2400000</price>
+ <movement>
+  <thrust>210</thrust>
+  <turn>120</turn>
+  <speed>190</speed>
+ </movement>
+ <health>
+  <absorb>25</absorb>
+  <shield>300</shield>
+  <armour>700</armour>
+  <energy>900</energy>
+  <shield_regen>5</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>40</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>55</cpu>
+  <crew>40</crew>
+  <mass>1750</mass>
+  <fuel>800</fuel>
+  <cargo>220</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+ <slots>
+  <weapon size="medium" x="28" y="0" h="5"/>
+  <weapon size="medium" x="18" y="0" h="5"/>
+  <weapon size="large" x="-30" y="-8" h="3"/>
+  <weapon size="large" x="-30" y="8" h="3"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+ </slots>
+</ship>

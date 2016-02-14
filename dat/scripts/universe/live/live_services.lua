@@ -50,8 +50,8 @@ productionFactors.merseians={
 	[NATIVE_WEAPONS]={demand=2},[BASIC_WEAPONS]={supply=1.2},[PRIMITIVE_ARMAMENT]={supply=1.2,demand=1.5},[ARMAMENT]={supply=1.2,demand=1.5},[MODERN_ARMAMENT]={supply=1.2,demand=1.5}
 }
 
---Betelgeuseans: more luxury, less high-tech
-productionFactors.betelgeuseans={
+--betelgeuse: more luxury, less high-tech
+productionFactors.betelgeuse={
 	[FOOD]={demand=1,supply=1},[EXOTIC_FOOD]={demand=1.5},[GOURMET_FOOD]={demand=1.5,supply=1},[BORDEAUX]={demand=1.5,price=3},[TELLOCH]={demand=1.5},
 	[PRIMITIVE_CONSUMER]={demand=1.5,supply=1},[CONSUMER_GOODS]={demand=1.5,supply=1},
 	[LUXURY_GOODS]={demand=1.5,supply=1},[EXOTIC_FURS]={demand=2},[NATIVE_ARTWORK]={demand=1},[NATIVE_SCULPTURES]={demand=1},
@@ -454,8 +454,8 @@ local function generateExtraPresences(planet,sectorStability)
 		end
 	end
 
-	if (planet.lua.settlements.betelgeuseans) then
-		local settlement=planet.lua.settlements.betelgeuseans
+	if (planet.lua.settlements.betelgeuse) then
+		local settlement=planet.lua.settlements.betelgeuse
 
 		local amount=100*(settlement.services+settlement.industry+settlement.agriculture/2)*sectorStability
 		local range=1
@@ -556,19 +556,19 @@ local function generateTechnologiesCivilian(planet,bestIndustry,bestTechnology)
 	end
 end
 
-local function generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,type)
-	planet.c:addTechGroup(type.." Military 1")
+local function generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,faction)
+	planet.c:addTechGroup(faction.." Military 1")
 	if (bestIndustry>0.2 and bestTechnology>0.5 and bestMilitary>0.5) then
-		planet.c:addTechGroup(type.." Military 2")
+		planet.c:addTechGroup(faction.." Military 2")
 	end
 	if (bestIndustry>0.4 and bestTechnology>0.6 and bestMilitary>0.6) then
-		planet.c:addTechGroup(type.." Military 3")
+		planet.c:addTechGroup(faction.." Military 3")
 	end
 	if (bestIndustry>0.6 and bestTechnology>0.7 and bestMilitary>0.8) then
-		planet.c:addTechGroup(type.." Military 4")
+		planet.c:addTechGroup(faction.." Military 4")
 	end
 	if (bestIndustry>0.9 and bestTechnology>1 and bestMilitary>0.8) then
-		planet.c:addTechGroup(type.." Military 5")
+		planet.c:addTechGroup(faction.." Military 5")
 	end
 end
 
@@ -646,7 +646,7 @@ local function generateCivilizedPlanetServices(planet)
 			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Independent")
 		elseif (factionName=="Roidhunate of Merseia") then
 			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Roidhunate")
-		elseif (factionName=="Sartaza of Betelgeuse") then
+		elseif (factionName=="Oligarchy of Betelgeuse") then
 			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Betelgeuse")
 		elseif (factionName=="Barbarians") then
 			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Barbarian")

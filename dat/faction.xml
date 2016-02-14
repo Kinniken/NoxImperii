@@ -72,7 +72,7 @@
  </faction>
   <faction name="Merseian Trader">
   <known/>
-  <logo>trader</logo>
+  <logo>roidhunate</logo>
   <longname>Merseian Trader</longname>
   <player>0</player>
   <spawn>merseian_trader</spawn>
@@ -85,7 +85,7 @@
  </faction>
   <faction name="Betelgeusean Trader">
   <known/>
-  <logo>trader</logo>
+  <logo>betelgeuse</logo>
   <longname>Betelgeusean Trader</longname>
   <player>3</player>
   <spawn>betelgeusean_trader</spawn>
@@ -154,19 +154,7 @@
    <enemy>Pirate</enemy>
   </enemies>
  </faction>
- <faction name="Dispersal of Ymir">
-  <known/>
-  <logo>ymir</logo>
-  <colour>Grey80</colour>
-  <player>0</player>
-  <spawn>ymir</spawn>
-  <standing>ymir</standing>
-  <equip>ymir</equip>
-  <allies>
-  </allies>
-  <enemies>
-  </enemies>
- </faction>
+ 
   <faction name="Barbarians">
   <known/>
   <logo>pirate</logo>

@@ -45,3 +45,4 @@ extras/.dirstamp
 datapath.lua
 core
 
+/autom4te.cache

@@ -1,10 +1,16 @@
 include('dump.lua')
 
 function getPlanetLuaData(c_planet)
-	if c_planet:getLuaData()==nil then
+  
+  local stringdata=c_planet:getLuaData()
+  
+	if stringdata==nil then
 			return "{}"
 	end
-	return loadstring("return "..c_planet:getLuaData())()
+    
+  local data=assert(loadstring("return "..stringdata,c_planet:name()))
+  
+	return data()
 end
 
 function setPlanetLuaData(c_planet,luaData)

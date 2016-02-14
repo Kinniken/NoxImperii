@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Carvela">
+ <base_type>Carvela</base_type>
+ <GFX sx="6" sy="6">caravelle</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+<class>Freighter</class>
+ <fabricator>Maggiore Shipyards</fabricator>
+ <description>A century ago, Betelgians traders depended heavily on generic ships of human origin, such as the Hauler or various Voyager variants. As Betelgeuse grew richer and more confident, the great trading families started investing in new designs, better suited to their needs.
+
+The carvela was one of the earliest and most successful result; tougher, faster and longer-ranged than cargo Voyagers, it has become the most common Betelgian ship on smaller routes.</description>
+ 
+<price>600000</price>
+ <movement>
+  <thrust>200</thrust>
+  <turn>120</turn>
+  <speed>200</speed>
+ </movement>
+ <health>
+  <absorb>10</absorb>
+  <shield>220</shield>
+  <armour>250</armour>
+  <energy>600</energy>
+  <shield_regen>3</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>30</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>40</cpu>
+  <crew>15</crew>
+  <mass>450</mass>
+  <fuel>1000</fuel>
+  <cargo>120</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+
+ <slots>
+<utility size="small"/>
+  <utility size="small"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+
+  <weapon    size="small"   x="+10"  y="0" h="0" />
+  <weapon    size="medium"  x="-10"  y="0" h="0" />
+ </slots> 
+</ship>

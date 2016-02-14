@@ -35,13 +35,7 @@
    <pilot name="Civilian Hyena" ship="Hyena"></pilot>
   </pilots>
  </fleet>
- <fleet name="Civilian Llama">
-  <ai>civilian</ai>
-  <faction>Civilian</faction>
-  <pilots>
-   <pilot name="Civilian Llama" ship="Llama"></pilot>
-  </pilots>
- </fleet>
+ 
  <fleet name="Civilian Gawain">
   <ai>civilian</ai>
   <faction>Civilian</faction>
@@ -49,13 +43,7 @@
    <pilot name="Civilian Gawain" ship="Gawain"></pilot>
   </pilots>
  </fleet>
- <fleet name="Human Trader Llama">
-  <ai>trader</ai>
-  <faction>Human Trader</faction>
-  <pilots>
-   <pilot name="Trader Llama" ship="Llama"></pilot>
-  </pilots>
- </fleet>
+ 
  <fleet name="Human Trader Koala">
   <ai>trader</ai>
   <faction>Human Trader</faction>
@@ -93,13 +81,7 @@
  </fleet>
  
  
- <fleet name="Merseian Trader Llama">
-  <ai>trader</ai>
-  <faction>Merseian Trader</faction>
-  <pilots>
-   <pilot name="Trader Llama" ship="Llama"></pilot>
-  </pilots>
- </fleet>
+ 
  <fleet name="Merseian Trader Koala">
   <ai>trader</ai>
   <faction>Merseian Trader</faction>
@@ -151,13 +133,7 @@
   </pilots>
  </fleet>
  
- <fleet name="Betelgeusean Trader Llama">
-  <ai>trader</ai>
-  <faction>Betelgeusean Trader</faction>
-  <pilots>
-   <pilot name="Trader Llama" ship="Llama"></pilot>
-  </pilots>
- </fleet>
+ 
  <fleet name="Betelgeusean Trader Koala">
   <ai>trader</ai>
   <faction>Betelgeusean Trader</faction>
@@ -193,6 +169,45 @@
    <pilot name="Trader Quicksilver" ship="Quicksilver"></pilot>
   </pilots>
  </fleet>
+ 
+ <fleet name="Betelgian Meteor">
+  <ai>betelgeuse</ai>
+  <faction>Oligarchy of Betelgeuse</faction>
+  <pilots>
+   <pilot name="Betelgian Alba" ship="Betelgian Alba"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Betelgian Comet">
+  <ai>betelgeuse</ai>
+  <faction>Oligarchy of Betelgeuse</faction>
+  <pilots>
+   <pilot name="Betelgian Libera" ship="Betelgian Libera"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Betelgian Continent">
+  <ai>betelgeuse</ai>
+  <faction>Oligarchy of Betelgeuse</faction>
+  <pilots>
+   <pilot name="Betelgian Cassandra" ship="Betelgian Cassandra"></pilot>
+  </pilots>
+ </fleet>
+  <fleet name="Betelgian Planet">
+  <ai>betelgeuse</ai>
+  <faction>Oligarchy of Betelgeuse</faction>
+  <pilots>
+   <pilot name="Betelgian Orsa" ship="Betelgian Orsa"></pilot>
+  </pilots>
+ </fleet>
+<fleet name="Betelgian Nova">
+  <ai>betelgeuse</ai>
+  <faction>Oligarchy of Betelgeuse</faction>
+  <pilots>
+   <pilot name="Betelgian Stella" ship="Betelgian Stella"></pilot>
+  </pilots>
+ </fleet>
+
+
+
  
  
  <fleet name="Pirate Hyena">
@@ -348,8 +363,7 @@
   <ai>trader</ai>
   <faction>Human Trader</faction>
   <pilots>
-   <pilot name="Trader Llama" ship="Llama"></pilot>
-   <pilot name="Trader Llama" ship="Llama"></pilot>
+   
    <pilot name="Trader Koala" ship="Koala"></pilot>
   </pilots>
  </fleet>

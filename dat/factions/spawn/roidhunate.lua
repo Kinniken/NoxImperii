@@ -8,12 +8,12 @@ function spawn_patrol ()
    local r = rnd.rnd()
 
    if r < 0.5 then
-      scom.addPilot( pilots, "Merseian Meteor", 25 );
+      scom.addPilot( pilots, "Ardar Meteor", 25 );
    elseif r < 0.8 then
-      scom.addPilot( pilots, "Merseian Meteor", 20 );
-      scom.addPilot( pilots, "Merseian Comet", 25 );
+      scom.addPilot( pilots, "Ardar Meteor", 20 );
+      scom.addPilot( pilots, "Ardar Comet", 25 );
    else
-      scom.addPilot( pilots, "Merseian Comet", 75 );
+      scom.addPilot( pilots, "Ardar Comet", 75 );
    end
 
    return pilots
@@ -26,16 +26,16 @@ function spawn_squad ()
    local r = rnd.rnd()
 
    if r < 0.5 then
-      scom.addPilot( pilots, "Merseian Meteor", 20 );
-      scom.addPilot( pilots, "Merseian Meteor", 25 );
-      scom.addPilot( pilots, "Merseian Comet", 45 );
+      scom.addPilot( pilots, "Ardar Meteor", 20 );
+      scom.addPilot( pilots, "Ardar Meteor", 25 );
+      scom.addPilot( pilots, "Ardar Comet", 45 );
    elseif r < 0.8 then
-      scom.addPilot( pilots, "Merseian Meteor", 25 );
-      scom.addPilot( pilots, "Merseian Comet", 45 );
+      scom.addPilot( pilots, "Ardar Meteor", 25 );
+      scom.addPilot( pilots, "Ardar Comet", 45 );
    else
-      scom.addPilot( pilots, "Merseian Meteor", 20 );
-      scom.addPilot( pilots, "Merseian Comet", 25 );
-      scom.addPilot( pilots, "Merseian Continent", 75 );
+      scom.addPilot( pilots, "Ardar Meteor", 20 );
+      scom.addPilot( pilots, "Ardar Comet", 25 );
+      scom.addPilot( pilots, "Ardar Continent", 75 );
    end
 
    return pilots
@@ -49,23 +49,23 @@ function spawn_capship ()
 
    -- Generate the capship
    if r < 0.7 then
-      scom.addPilot( pilots, "Merseian Continent", 140 )
+      scom.addPilot( pilots, "Ardar Continent", 140 )
    else
-      scom.addPilot( pilots, "Merseian Continent", 165 )
+      scom.addPilot( pilots, "Ardar Continent", 165 )
    end
 
    -- Generate the escorts
    r = rnd.rnd()
    if r < 0.5 then
-      scom.addPilot( pilots, "Merseian Meteor", 20 );
-      scom.addPilot( pilots, "Merseian Comet", 25 );
-      scom.addPilot( pilots, "Merseian Comet", 25 );
+      scom.addPilot( pilots, "Ardar Meteor", 20 );
+      scom.addPilot( pilots, "Ardar Comet", 25 );
+      scom.addPilot( pilots, "Ardar Comet", 25 );
    elseif r < 0.8 then
-      scom.addPilot( pilots, "Merseian Meteor", 25 );
-      scom.addPilot( pilots, "Merseian Comet", 45 );
+      scom.addPilot( pilots, "Ardar Meteor", 25 );
+      scom.addPilot( pilots, "Ardar Comet", 45 );
    else
-      scom.addPilot( pilots, "Merseian Meteor", 25 );
-      scom.addPilot( pilots, "Merseian Meteor", 75 );
+      scom.addPilot( pilots, "Ardar Meteor", 25 );
+      scom.addPilot( pilots, "Ardar Meteor", 75 );
    end
 
    return pilots

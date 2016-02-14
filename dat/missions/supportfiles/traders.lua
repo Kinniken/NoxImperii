@@ -1,7 +1,7 @@
 include "jumpdist.lua"
 include "pilot/traders.lua"
 
-function trader_createSmallMerseianBorderTrader ()
+function trader_createSmallArdarBorderTrader ()
 
    target_ship_name = trader_name()
 
@@ -14,5 +14,5 @@ function trader_createSmallMerseianBorderTrader ()
    -- Make sure to save the outfits.
    target_ship_outfits["__save"] = true
 
-   return target_ship_name, target_ship, target_ship_outfits,"trader","Merseian Trader"
+   return target_ship_name, target_ship, target_ship_outfits,"trader","Ardar Trader"
 end

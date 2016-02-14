@@ -57,39 +57,39 @@
    <enemy>Pirate</enemy>
   </enemies>
  </faction>
- <faction name="Human Trader">
+ <faction name="Imperial Trader">
   <known/>
-  <logo>trader</logo>
-  <longname>Human Trader</longname>
+  <logo>empire</logo>
+  <longname>Imperial Trader</longname>
   <player>3</player>
-  <spawn>human_trader</spawn>
-  <standing>human_trader</standing>
+  <spawn>imperial_trader</spawn>
+  <standing>imperial_trader</standing>
   <allies>
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
   </enemies>
  </faction>
-  <faction name="Merseian Trader">
+  <faction name="Ardar Trader">
   <known/>
   <logo>roidhunate</logo>
-  <longname>Merseian Trader</longname>
+  <longname>Ardar Trader</longname>
   <player>0</player>
-  <spawn>merseian_trader</spawn>
-  <standing>merseian_trader</standing>
+  <spawn>ardar_trader</spawn>
+  <standing>ardar_trader</standing>
   <allies>
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
   </enemies>
  </faction>
-  <faction name="Betelgeusean Trader">
+  <faction name="Betelgian Trader">
   <known/>
   <logo>betelgeuse</logo>
-  <longname>Betelgeusean Trader</longname>
+  <longname>Betelgian Trader</longname>
   <player>3</player>
-  <spawn>betelgeusean_trader</spawn>
-  <standing>betelgeusean_trader</standing>
+  <spawn>betelgian_trader</spawn>
+  <standing>betelgian_trader</standing>
   <allies>
   </allies>
   <enemies>
@@ -126,7 +126,7 @@
    <enemy>Pirate</enemy>
   </enemies>
  </faction>
-  <faction name="Roidhunate of Merseia">
+  <faction name="Roidhunate of Ardarshir">
   <known/>
   <logo>roidhunate</logo>
   <colour>green</colour>
@@ -166,7 +166,7 @@
   <equip>barbarian</equip>
   <enemies>
    <enemy>Civilian</enemy>
-   <enemy>Roidhunate of Merseia</enemy>
+   <enemy>Roidhunate of Ardarshir</enemy>
    <enemy>Empire of Terra</enemy>
    <enemy>Trader</enemy>
    <enemy>Independent</enemy>

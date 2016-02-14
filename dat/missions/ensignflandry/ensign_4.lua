@@ -19,9 +19,9 @@ title = {}  --stage titles
 text = {}   --mission text
 
 title[1] = "Commander Abrams' Office"
-text[1] = [[You land at Highport and go looking for Commander Abrams. You find him at his desk, chewing one of his cigars and looking somber. "${playerName}, I've just had news from Ujanka. The city's been attacked - sea-folks crafts, plus a Merseian submarine using artillery. Only a very brash attack on that sub by our local hero prevented the city from falling. It's lucky Flandry was there on a diplomatic mission, with an armed flitter."
+text[1] = [[You land at Highport and go looking for Commander Abrams. You find him at his desk, chewing one of his cigars and looking somber. "${playerName}, I've just had news from Ujanka. The city's been attacked - sea-folks crafts, plus a Ardar submarine using artillery. Only a very brash attack on that sub by our local hero prevented the city from falling. It's lucky Flandry was there on a diplomatic mission, with an armed flitter."
 
-"There's one interesting development however. Not only did that rascal save the city, he managed to capture one of the attacker, and prevent the Toborkos from grilling him alive. We've been fighting a proxy war with them for months now and still know almost nothing about them - most of it from the Toborkos, who considers them almost animals. Maybe if we can question one we can figure out why they are lashing out at the Toborkos like that and what their relations with the Merseians really are. I've sent a team to bring him back here. Shouldn't take long.
+"There's one interesting development however. Not only did that rascal save the city, he managed to capture one of the attacker, and prevent the Toborkos from grilling him alive. We've been fighting a proxy war with them for months now and still know almost nothing about them - most of it from the Toborkos, who considers them almost animals. Maybe if we can question one we can figure out why they are lashing out at the Toborkos like that and what their relations with the Ardars really are. I've sent a team to bring him back here. Shouldn't take long.
 
 Wait for the team to return?"]]
 

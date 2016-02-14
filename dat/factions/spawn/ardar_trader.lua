@@ -7,13 +7,13 @@ function spawn_patrol ()
     local r = rnd.rnd()
 
     if r < 0.5 then
-       scom.addPilot( pilots, "Merseian Trader Llama", 20 );
+       scom.addPilot( pilots, "Ardar Trader Llama", 20 );
     elseif r < 0.8 then
-       scom.addPilot( pilots, "Merseian Trader Llama", 20 );
-       scom.addPilot( pilots, "Merseian Trader Llama", 20 );
+       scom.addPilot( pilots, "Ardar Trader Llama", 20 );
+       scom.addPilot( pilots, "Ardar Trader Llama", 20 );
     else
-       scom.addPilot( pilots, "Merseian Trader Llama", 20 );
-       scom.addPilot( pilots, "Merseian Trader Koala", 40 );
+       scom.addPilot( pilots, "Ardar Trader Llama", 20 );
+       scom.addPilot( pilots, "Ardar Trader Koala", 40 );
     end
 
     return pilots
@@ -26,20 +26,20 @@ function spawn_squad ()
     local r = rnd.rnd()
 
     if r < 0.5 then
-       scom.addPilot( pilots, "Merseian Trader Koala", 40 );
-       scom.addPilot( pilots, "Merseian Trader Gawain", 20 );
-       scom.addPilot( pilots, "Merseian Trader Gawain", 20 );
+       scom.addPilot( pilots, "Ardar Trader Koala", 40 );
+       scom.addPilot( pilots, "Ardar Trader Gawain", 20 );
+       scom.addPilot( pilots, "Ardar Trader Gawain", 20 );
     elseif r < 0.8 then
-       scom.addPilot( pilots, "Merseian Trader Mule", 45 );
-       scom.addPilot( pilots, "Merseian Trader Llama", 20 );
-       scom.addPilot( pilots, "Merseian Trader Quicksilver", 20 );
-       scom.addPilot( pilots, "Merseian Trader Rhino", 35 );
+       scom.addPilot( pilots, "Ardar Trader Mule", 45 );
+       scom.addPilot( pilots, "Ardar Trader Llama", 20 );
+       scom.addPilot( pilots, "Ardar Trader Quicksilver", 20 );
+       scom.addPilot( pilots, "Ardar Trader Rhino", 35 );
     else
-       scom.addPilot( pilots, "Merseian Trader Llama", 20 );
-       scom.addPilot( pilots, "Merseian Trader Mule", 45 );
-       scom.addPilot( pilots, "Merseian Trader Gawain", 20 );
-       scom.addPilot( pilots, "Merseian Trader Rhino", 35 );
-       scom.addPilot( pilots, "Merseian Trader Quicksilver", 20 );
+       scom.addPilot( pilots, "Ardar Trader Llama", 20 );
+       scom.addPilot( pilots, "Ardar Trader Mule", 45 );
+       scom.addPilot( pilots, "Ardar Trader Gawain", 20 );
+       scom.addPilot( pilots, "Ardar Trader Rhino", 35 );
+       scom.addPilot( pilots, "Ardar Trader Quicksilver", 20 );
     end
 
     return pilots

@@ -26,7 +26,7 @@ text[1] = [[As you land on ${pickupPlanet}, a shady-looking man is waiting for y
 
 
 title[2] = "City of Ujanka"
-text[2] = [[Once again, you land close to the city of Ujanka. Dragoika is waiting for you and supervises the unloading of the weapons while updating you of the latest conflicts. The death toil seems to be rising inexorably on both side, as Merseia and the Empire continue to supply weapons to their allies.
+text[2] = [[Once again, you land close to the city of Ujanka. Dragoika is waiting for you and supervises the unloading of the weapons while updating you of the latest conflicts. The death toil seems to be rising inexorably on both side, as Ardarshir and the Empire continue to supply weapons to their allies.
 
 You can feel an ashen taste in your mouth as you leave the city.]]
 

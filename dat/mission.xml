@@ -23,7 +23,7 @@
   </avail>
  </mission>
  <mission name="Economy Student">
-  <lua>intro/merseia</lua>
+  <lua>intro/ardarshir</lua>
   <avail>
    <priority>5</priority>
    <chance>100</chance>
@@ -107,8 +107,8 @@
    <faction>Empire of Terra</faction>
   </avail>
  </mission>
- <mission name="Empire Merseian Scouting">
-  <lua>empiremilitary/merseia_recon_bar</lua>
+ <mission name="Empire Ardar Scouting">
+  <lua>empiremilitary/ardar_recon_bar</lua>
   <flags>
    <unique />
   </flags>
@@ -120,12 +120,12 @@
    <faction>Empire of Terra</faction>
   </avail>
  </mission>
- <mission name="Empire Merseian Scouting Rec">
-  <lua>empiremilitary/merseia_recon_rec</lua>
+ <mission name="Empire Ardar Scouting Rec">
+  <lua>empiremilitary/ardar_recon_rec</lua>
   <avail>
    <priority>5</priority>
    <chance>100</chance>
-   <done>Empire Merseian Scouting</done>
+   <done>Empire Ardar Scouting</done>
    <location>Computer</location>
    <faction>Empire of Terra</faction>
   </avail>

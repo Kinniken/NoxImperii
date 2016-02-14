@@ -16,7 +16,7 @@ end
 
 
 
-function nameGenerator.generateNameMerseia()
+function nameGenerator.generateNameArdarshir()
 
 	local nameStart={"mer","bry","roi","brech","y","da","mo","khrai","qan","ur","tach","tel","chydh","gel","fo","mor"}
 	local nameMiddle={"thio","dhu","na","dwy","thol","rio","ry","dio","ru"}

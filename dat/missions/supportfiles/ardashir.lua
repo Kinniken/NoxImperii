@@ -1,5 +1,5 @@
 
-function get_merseia_system( sys,sysTaken )
+function get_ardarshir_system( sys,sysTaken )
    local planets = {}
     getsysatdistance(system.cur(), 3, 8,
         function(s)
@@ -15,7 +15,7 @@ function get_merseia_system( sys,sysTaken )
               return true
             end
             for i, v in ipairs(s:planets()) do
-                if v:faction() == faction.get("Roidhunate of Merseia") and
+                if v:faction() == faction.get("Roidhunate of Ardarshir") and
                         v:canLand() then
                     planets[#planets + 1] = {v, s}
                 end

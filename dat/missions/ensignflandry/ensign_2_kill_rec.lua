@@ -11,10 +11,10 @@ include "dat/missions/supportfiles/traders.lua"
    -- Whether mission ends in bar (if not, it ends in space in start system)
    mission_return_to_bar=false
 
-   computer_title  = "Starkad: Merseian Convoy"
+   computer_title  = "Starkad: Ardar Convoy"
 
    -- Mission details
-   misn_title  = "Intercept Merseian Convoy"
+   misn_title  = "Intercept Ardar Convoy"
    misn_desc   = [[We have information that an independent cargo ship is used to supply the Seatrolls with weapons. It will be passing in ${targetSystem}. Destroy it.]]
 
 
@@ -25,7 +25,7 @@ include("pilot/pirate.lua")
 function create ()
    -- Note: this mission does not make any system claims.
    -- Create the target pirate
-   target_ship_name, target_ship, target_ship_outfits,target_ship_ai,target_ship_faction = trader_createSmallMerseianBorderTrader()
+   target_ship_name, target_ship, target_ship_outfits,target_ship_ai,target_ship_faction = trader_createSmallArdarBorderTrader()
 
    -- Get target system
    target_system = get_suitable_system( system.cur() )

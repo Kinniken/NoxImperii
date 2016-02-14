@@ -1,7 +1,7 @@
 include('universe/generate_helper.lua')
 include('universe/generate_nameGenerator.lua')
 include('universe/settlements/human_settlements.lua')
-include('universe/settlements/merseian_settlements.lua')
+include('universe/settlements/ardar_settlements.lua')
 include('universe/settlements/barbarian_settlements.lua')
 include('universe/settlements/betelgeuse_settlements.lua')
 include('universe/objects/class_settlements.lua')
@@ -58,18 +58,18 @@ local function outer_zone_generate(star)
 end
 
 local function barbarian_priority(star)
-	if (gh.calculateDistance(earth_pos,star)<1500 or gh.calculateDistance(merseia_pos,star)<1000) then
+	if (gh.calculateDistance(earth_pos,star)<1500 or gh.calculateDistance(ardarshir_pos,star)<1000) then
 		return 5
 	end
 
 	return 0
 end
 
-local function empire_merseia_border_priority(star,priority)
+local function empire_ardarshir_border_priority(star,priority)
 	local distanceEarth=gh.calculateDistance(earth_pos,star)
-	local distanceMerseia=gh.calculateDistance(merseia_pos,star)
+	local distanceArdarshir=gh.calculateDistance(ardarshir_pos,star)
 
-	if (distanceEarth<1000 and distanceMerseia<1200) then
+	if (distanceEarth<1000 and distanceArdarshir<1200) then
 		return priority
 	end
 
@@ -109,7 +109,7 @@ local function generate_human_population(star,planet,minFertility,settlementChan
 	end
 end
 
-local function generate_merseia_population(planet,minFertility,settlementChance,populationRange,industryFactor,agricultureFactor,technologyFactor,militaryFactor,stabilityFactor)
+local function generate_ardar_population(planet,minFertility,settlementChance,populationRange,industryFactor,agricultureFactor,technologyFactor,militaryFactor,stabilityFactor)
 	if (planet.lua.humanFertility>minFertility and math.random()<settlementChance) then
 		local settlement=settlement_class.createNew()
 		settlement.population=gh.randomInRange(populationRange)*planet.lua.humanFertility
@@ -122,8 +122,8 @@ local function generate_merseia_population(planet,minFertility,settlementChance,
 
 		settlement:randomizeSettlementData(0.2)
 		
-		planet.lua.settlements.merseians=settlement
-		planet.faction="Roidhunate of Merseia"
+		planet.lua.settlements.ardars=settlement
+		planet.faction="Roidhunate of Ardarshir"
 		planet.factionPresence=1
 		planet.factionRange=1
 	end
@@ -199,7 +199,7 @@ local function empire_fringe_generate(star)
 	end
 end
 
-local function empire_merseia_border_generate(star)
+local function empire_ardarshir_border_generate(star)
 	for k,planet in pairs(star.planets) do
 		generate_human_population(star,planet,0.5,0.7,{50000,20000000},0.8,0.7,0.5,5,0.7,"Empire of Terra");
 	end
@@ -234,21 +234,21 @@ local function barbarian_fringe_generate(star)
 	end
 end
 
-local function merseia_inner_generate(star)
+local function ardarshir_inner_generate(star)
 	for k,planet in pairs(star.planets) do
-		generate_merseia_population(planet,0.2,1,{100000000,1000000000},1.5,1.5,0.9,0.8,1.2)
+		generate_ardarshir_population(planet,0.2,1,{100000000,1000000000},1.5,1.5,0.9,0.8,1.2)
 	end
 end
 
-local function merseia_outer_generate(star)
+local function ardarshir_outer_generate(star)
 	for k,planet in pairs(star.planets) do
-		generate_merseia_population(planet,0.3,0.7,{10000000,100000000},1,1,0.5,1.2,0.9)
+		generate_ardar_population(planet,0.3,0.7,{10000000,100000000},1,1,0.5,1.2,0.9)
 	end
 end
 
-local function merseia_fringe_generate(star)
+local function ardarshir_fringe_generate(star)
 	for k,planet in pairs(star.planets) do
-		generate_merseia_population(planet,0.5,0.4,{1000000,10000000},0.5,0.5,0.3,1.5,0.6)
+		generate_ardar_population(planet,0.5,0.4,{1000000,10000000},0.5,0.5,0.3,1.5,0.6)
 	end
 end
 
@@ -265,7 +265,7 @@ local empire_border={name="empire_border",priority=function(star) return priorit
 specialSettlement=gh.concatLists({settlement_generator.fringeEmpireSettlements,settlement_generator.fringeHumanIndependentSettlements}),
 nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.5},nativeFaction="Independent",zoneName=imperial_sector_names}
 
-local empire_merseia_border={name="empire_merseia_border",priority=function(star) return empire_merseia_border_priority(star,25) end,generate=empire_merseia_border_generate,
+local empire_ardarshir_border={name="empire_ardarshir_border",priority=function(star) return empire_ardarshir_border_priority(star,25) end,generate=empire_ardarshir_border_generate,
 specialSettlement=settlement_generator.fringeEmpireSettlements,
 nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction="Empire of Terra",zoneName=imperial_sector_names}
 
@@ -275,12 +275,12 @@ nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,
 
 local barbarian_fringe={name="barbarian_fringe",priority=function(star) return barbarian_priority(star) end,generate=barbarian_fringe_generate,specialSettlement=settlement_generator.barbarianSettlements,nativeCivilization=0,nativeFactors={agriculture=0.5,industry=0.3,services=0.1,technology=0.2,military=1.2,stability=0.3},nativeFaction="Independent",zoneName=barbarian_fringes_names}
 
-local merseia_inner={name="merseia_inner",priority=function(star) return priority_distance(merseia_pos,star,250,100) end,generate=merseia_inner_generate,specialSettlement=settlement_generator.coreMerseianSettlements,nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1.2},nativeFaction="Roidhunate of Merseia",zoneName=function(star) return "Inner Roidhunate" end}
+local ardarshir_inner={name="ardarshir_inner",priority=function(star) return priority_distance(ardarshir_pos,star,250,100) end,generate=ardarshir_inner_generate,specialSettlement=settlement_generator.coreArdarSettlements,nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1.2},nativeFaction="Roidhunate of Ardarshir",zoneName=function(star) return "Inner Roidhunate" end}
 
-local merseia_outer={name="merseia_outer",priority=function(star) return priority_distance(merseia_pos,star,500,45) end,generate=merseia_outer_generate,nativeCivilization=0.5,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.9},nativeFaction="Roidhunate of Merseia",zoneName=function(star) return "Outer Roidhunate" end}
+local ardarshir_outer={name="ardarshir_outer",priority=function(star) return priority_distance(ardarshir_pos,star,500,45) end,generate=ardarshir_outer_generate,nativeCivilization=0.5,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.9},nativeFaction="Roidhunate of Ardarshir",zoneName=function(star) return "Outer Roidhunate" end}
 
-local merseia_fringe={name="merseia_fringe",priority=function(star) return priority_distance(merseia_pos,star,700,18) end,generate=merseia_fringe_generate,nativeCivilization=0.3,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction="Independent",zoneName=function(star) return "Roidhunate Fringes" end}
+local ardarshir_fringe={name="ardarshir_fringe",priority=function(star) return priority_distance(ardarshir_pos,star,700,18) end,generate=ardarshir_fringe_generate,nativeCivilization=0.3,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction="Independent",zoneName=function(star) return "Roidhunate Fringes" end}
 
 local betelgeuse={name="betelgeuse",priority=function(star) return priority_distance(betelgeuse_pos,star,200,100) end,generate=betelgeuse_generate,specialSettlement=gh.concatLists({settlement_generator.betelgeuseSettlements}),nativeCivilization=0.8,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.8,stability=0.8},nativeFaction="Oligarchy of Betelgeuse",zoneName=function(star) return "Betelgeuse" end}
 
-base_populations.templates={outer_zone,barbarian_fringe,empire_inner,empire_outer,empire_border,empire_merseia_border,empire_fringe,merseia_inner,merseia_outer,merseia_fringe,betelgeuse}
+base_populations.templates={outer_zone,barbarian_fringe,empire_inner,empire_outer,empire_border,empire_ardarshir_border,empire_fringe,ardarshir_inner,ardarshir_outer,ardarshir_fringe,betelgeuse}

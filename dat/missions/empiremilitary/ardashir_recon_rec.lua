@@ -1,11 +1,11 @@
 --[[
 
-   Rec version of Merseia recon
+   Rec version of Ardarshir recon
 
 --]]
 
 include "dat/missions/templates/recon.lua"
-include "dat/missions/supportfiles/merseia.lua"
+include "dat/missions/supportfiles/ardarshir.lua"
 
 
 -- Whether mission starts in bar (if false, it starts in computer)
@@ -13,11 +13,11 @@ mission_bar=false
 -- Whether mission ends in bar (if not, it ends in space in start system)
 mission_return_to_bar=false
 
-computer_title ="NAVY: Investigate Merseian systems"
+computer_title ="NAVY: Investigate Ardar systems"
 
 -- Mission details
-misn_title  = "Investigate Merseian systems"
-misn_desc = "Perform a recon in Merseian systems ${targetSystem1}, ${targetSystem2}, ${targetSystem3} and ${targetSystem4}."
+misn_title  = "Investigate Ardar systems"
+misn_desc = "Perform a recon in Ardar systems ${targetSystem1}, ${targetSystem2}, ${targetSystem3} and ${targetSystem4}."
 
   -- Text if mission ends in space in starting system.
 space_success_text = "You enter system ${startSystem} and transfer the data to the Navy base. Your payment of ${credits} cr is immediately wired."
@@ -34,16 +34,16 @@ function create ()
   local cursys=system.cur()
 
    -- Get target system
-   _,main_target_system = get_merseia_system( cursys )
+   _,main_target_system = get_ardarshir_system( cursys )
 
    -- Handle edge cases where no suitable neighbours exist.
    if not main_target_system then
       misn.finish(false)
    end
 
-   local _,target_sys_2 = get_merseia_system(cursys)
-   local _,target_sys_3 = get_merseia_system(cursys,{target_sys_2})
-   local _,target_sys_4 = get_merseia_system(cursys,{target_sys_2,target_sys_3})
+   local _,target_sys_2 = get_ardarshir_system(cursys)
+   local _,target_sys_3 = get_ardarshir_system(cursys,{target_sys_2})
+   local _,target_sys_4 = get_ardarshir_system(cursys,{target_sys_2,target_sys_3})
 
    if not target_sys_4 then
       misn.finish(false)

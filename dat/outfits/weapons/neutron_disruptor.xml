@@ -6,7 +6,7 @@
   <mass>6</mass>
   <price>18500</price>
   <license>Heavy Weapon License</license>
-  <description>The Neutron Disruptor uses high-energy pulses that modify the base composition of molecules, causing heavy damage. This advanced weapon was developed in Merseian labs and is not in widespread use in human space.</description>
+  <description>The Neutron Disruptor uses high-energy pulses that modify the base composition of molecules, causing heavy damage. This advanced weapon was developed in Ardar labs and is not in widespread use in human space.</description>
   <gfx_store>neutron</gfx_store>
   <cpu>-8</cpu>
  </general>

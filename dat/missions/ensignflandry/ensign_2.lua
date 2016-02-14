@@ -24,7 +24,7 @@ text = {}   --mission text
 title[1] = "Commander Abrams' Office"
 text[1] = [["Captain ${playerName}. I am Commander Max Abrams, Imperial Naval Intelligence Corps, in charge of this garrison. Flandry had a lot to say about you, and not just about your little incident in Navy School.", the Commander starts as you enter his office. He is a stocky man, hair grizzled, face big and hooknosed. His uniform is rumpled, tunic collar open, twin planets of his rank tarnished on the wide shoulders, blaster at belt.
 
-"I expect he briefed out about the general situation, and his little maritime adventures. The attack on the Toborko ship he helped push back is but one of many. Our allies need more weapons to help fight back, and yet I can't just ask for Imperial supplies - Merseia would know and use that as an excuse to escalate further. There's a nearby independent world, ${pickupPlanet}, that will serve as an intermediary. We just need you to pickup the weapons from there and deliver them directly to the nearby Toborko city. Officially, the Empire isn't involved, understood?"]]
+"I expect he briefed out about the general situation, and his little maritime adventures. The attack on the Toborko ship he helped push back is but one of many. Our allies need more weapons to help fight back, and yet I can't just ask for Imperial supplies - Ardarshir would know and use that as an excuse to escalate further. There's a nearby independent world, ${pickupPlanet}, that will serve as an intermediary. We just need you to pickup the weapons from there and deliver them directly to the nearby Toborko city. Officially, the Empire isn't involved, understood?"]]
 
 title[2] = "${pickupPlanet} Spaceport"
 text[2] = [[As you land on ${pickupPlanet}, a shady-looking man is waiting for you. He signals you over, and dock workers start loading weapon crates in your ship. Time to head back to Starkad. Curiosity tickles you - your contact is Dragoika, the very captain whose ship rescued Flandry, and apparently an important member of the Sisterhood organization that runs the city.]]
@@ -46,7 +46,7 @@ Time to head back to Highport.]]
 title[5] = "Highport"
 text[5] = [[As you land on Highport, Commander Abrams is waiting for you. He pays you your ${payment} credits while you describe the mission.
 
-"Sure that pirate ship was looking for you? That's worrying. Until now Merseians had not dared target our ships, even via 'intermediaries'. Well... If that's how they want to play... I also have intel on the greentails' supply ships." says Abrams, waving his lighted cigar around. "You can consider you have an open-ended job in getting more weapons to the Toborkos. Expect more pirates on the way. And I'll let you know whenever I hear of Merseian convoys to Starkad. You'll be notified via the mission computer on imperial worlds."]]
+"Sure that pirate ship was looking for you? That's worrying. Until now Ardars had not dared target our ships, even via 'intermediaries'. Well... If that's how they want to play... I also have intel on the greentails' supply ships." says Abrams, waving his lighted cigar around. "You can consider you have an open-ended job in getting more weapons to the Toborkos. Expect more pirates on the way. And I'll let you know whenever I hear of Ardar convoys to Starkad. You'll be notified via the mission computer on imperial worlds."]]
 
 function getStringData()
 	local stringData={}

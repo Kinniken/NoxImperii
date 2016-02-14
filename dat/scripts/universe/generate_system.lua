@@ -24,7 +24,7 @@ function starGenerator.generateStar(x,y,nameTakenSystem,nameTakenPlanet)
 
 	star.spacePict=star.template.spacePicts[math.random(#star.template.spacePicts)]
 
-	star.nameGenerator=nameGenerator.generateNameMerseia
+	star.nameGenerator=nameGenerator.generateNameArdarshir
 
 	star.planets={}
 

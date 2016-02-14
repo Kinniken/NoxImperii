@@ -40,8 +40,8 @@ local productionFactors={}
 
 productionFactors.humans={[TELLOCH]={price=3}}--mostly empty, humans are default
 
---Merseians: less luxury, more weapons & industry
-productionFactors.merseians={
+--Ardars: less luxury, more weapons & industry
+productionFactors.ardars={
 	[FOOD]={demand=1,supply=1},[EXOTIC_FOOD]={demand=0.5},[GOURMET_FOOD]={demand=0.5,supply=0.5},[BORDEAUX]={demand=0.7,price=3},[TELLOCH]={demand=2},
 	[PRIMITIVE_CONSUMER]={demand=1,supply=1},[CONSUMER_GOODS]={demand=1,supply=1},
 	[LUXURY_GOODS]={demand=0.5,supply=0.2},[EXOTIC_FURS]={demand=0.5},[NATIVE_ARTWORK]={demand=0.5},[NATIVE_SCULPTURES]={demand=0.5},
@@ -433,8 +433,8 @@ local function generateExtraPresences(planet,sectorStability)
 
 	end
 
-	if (planet.lua.settlements.merseians) then
-		local settlement=planet.lua.settlements.merseians
+	if (planet.lua.settlements.ardars) then
+		local settlement=planet.lua.settlements.ardars
 
 		local amount=100*(settlement.services+settlement.industry+settlement.agriculture/2)*sectorStability
 		local range=1
@@ -445,7 +445,7 @@ local function generateExtraPresences(planet,sectorStability)
 			range=3
 		end
 
-		planet.c:setFactionExtraPresence("Merseian Trader",amount,range)
+		planet.c:setFactionExtraPresence("Ardar Trader",amount,range)
 
 		if (settlement.stability<0.3) then
 			local amount=30*(1-settlement.stability*3)/sectorStability
@@ -644,7 +644,7 @@ local function generateCivilizedPlanetServices(planet)
 			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Empire")
 		elseif (factionName=="Independent") then
 			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Independent")
-		elseif (factionName=="Roidhunate of Merseia") then
+		elseif (factionName=="Roidhunate of Ardarshir") then
 			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Roidhunate")
 		elseif (factionName=="Oligarchy of Betelgeuse") then
 			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Betelgeuse")

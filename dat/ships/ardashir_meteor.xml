@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ship name="Merseian Roeth">
- <base_type>Merseian Roeth</base_type>
- <GFX sx="10" sy="10">merseia_meteor</GFX>
+<ship name="Ardar Roeth">
+ <base_type>Ardar Roeth</base_type>
+ <GFX sx="10" sy="10">ardarv_meteor</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Fighter</class>
  <price>250000</price>
  <fabricator>Roidhunate Shipyards</fabricator>
- <description>Merseian Roeths are the most common fighters in the Roidhunate's navy. Smaller and lighter than the typical Terran meteor-class vessel, they are unusually fast and maneuverable.</description>
+ <description>Ardar Roeths are the most common fighters in the Roidhunate's navy. Smaller and lighter than the typical Terran meteor-class vessel, they are unusually fast and maneuverable.</description>
  <movement>
   <thrust>280</thrust>
   <turn>155</turn>

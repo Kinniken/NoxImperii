@@ -12,9 +12,9 @@ function trader_createSmallBorderTrader(  )
    local z = rnd.rnd()
    local p, o
    if z < 0.5 then
-      p,o = trader_createMuleMerseia( trader_create )
+      p,o = trader_createMuleArdarshir( trader_create )
    else
-      p,o = trader_createKoalaMerseia( trader_create )
+      p,o = trader_createKoalaArdarshir( trader_create )
    end
 
    -- Set name

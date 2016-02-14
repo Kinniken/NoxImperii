@@ -24,7 +24,7 @@ The major oxygen-breathing races in the sector have broadly compatible dietary r
 		<price>2000</price>
 	</commodity> 
 	<commodity name="Roidhun Fine Telloch">
-		<description>This fiery Merseian liqueur is widely popular in the Rhoidunate as well as amoung worldly humans. This particular brand is sourced from Merseia itself and renowned among connoisseurs.</description>
+		<description>This fiery Ardar liqueur is widely popular in the Rhoidunate as well as amoung worldly humans. This particular brand is sourced from Ardarshir itself and renowned among connoisseurs.</description>
 		<price>1500</price>
 	</commodity> 
 	
@@ -48,7 +48,7 @@ The major oxygen-breathing races in the sector have broadly compatible dietary r
 		<price>700</price>
 	</commodity>
 	<commodity name="Native Artworks">
-		<description>Art in the Empire is often terribly abstract, and that of the Rhoidunate too focused on promoting Merseian virtues. "Primitive" art of various origin is thus prized by discerning collectors, eager to hang mosaics made of reptilian scales or paintings of alien rituals alongside holograms of the latest Imperial school.</description>
+		<description>Art in the Empire is often terribly abstract, and that of the Rhoidunate too focused on promoting Ardar virtues. "Primitive" art of various origin is thus prized by discerning collectors, eager to hang mosaics made of reptilian scales or paintings of alien rituals alongside holograms of the latest Imperial school.</description>
 		<price>800</price>
 	</commodity>
 	<commodity name="Native Sculptures">
@@ -72,7 +72,7 @@ The major oxygen-breathing races in the sector have broadly compatible dietary r
 		<price>200</price>
 	</commodity>
 	<commodity name="Industrial Goods">
-		<description>Modern civilizations depend on all sort of industrial goods, often produced on specialized worlds. Those are not top-of-the-line goods, but they are still of use on hundreds of Imperial and Merseian worlds.</description>
+		<description>Modern civilizations depend on all sort of industrial goods, often produced on specialized worlds. Those are not top-of-the-line goods, but they are still of use on hundreds of Imperial and Ardar worlds.</description>
 		<price>400</price>
 	</commodity>
 	<commodity name="Modern Industrial Goods">
@@ -92,7 +92,7 @@ The major oxygen-breathing races in the sector have broadly compatible dietary r
  
 	<!-- Weapons -->
 	<commodity name="Native Weapons">
-		<description>Modern weapons are of extraordinary effectiveness yet few people would hand a blaster on their wall. More primitive weapons are thus in high demands among aristocrats and officers, on human and Merseian worlds: spears that only a four-arm, three-meter centaur could yield, elegant assegais designed for use by tree-dwellers, nameless weapons with more blades than seem usable - if they look deadly, they will find a buyer.</description>
+		<description>Modern weapons are of extraordinary effectiveness yet few people would hand a blaster on their wall. More primitive weapons are thus in high demands among aristocrats and officers, on human and Ardar worlds: spears that only a four-arm, three-meter centaur could yield, elegant assegais designed for use by tree-dwellers, nameless weapons with more blades than seem usable - if they look deadly, they will find a buyer.</description>
 		<price>600</price>
 	</commodity>
 	<commodity name="Non-Industrial Weapons">

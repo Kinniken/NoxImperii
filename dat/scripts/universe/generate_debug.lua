@@ -72,7 +72,7 @@ end
 for i=0,10 do
 	--debugGenerateStar(0,0)
 	
-  --Merseian core
+  --Ardar core
   --debugGenerateStar(1800,-100)
 	
   --Betelgeuse

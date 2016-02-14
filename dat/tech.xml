@@ -628,7 +628,7 @@
  
  
 	<tech name="Roidhunate Military 1">
-		<item>Merseian Roeth</item>
+		<item>Ardar Roeth</item>
 		<item>Laser Cannon MK1</item>
 		<item>Laser Turret MK1</item>
 		<item>Plasma Blaster MK1</item>
@@ -636,7 +636,7 @@
 		<item>Turreted Gauss Gun</item>
 	</tech>
 	<tech name="Roidhunate Military 2">
-		<item>Merseian Vach Rueth</item>
+		<item>Ardar Vach Rueth</item>
 		<item>BioPlasma Organ Stage 1</item>
 		<item>Gauss Gun</item>
 		<item>Ion Cannon</item>
@@ -651,7 +651,7 @@
 		<item>Ripper Cannon</item>
 	</tech>
 	<tech name="Roidhunate Military 3">
-		<item>Merseian Brythioch</item>
+		<item>Ardar Brythioch</item>
 		<item>BioPlasma Organ Stage 2</item>
 		<item>Laser Cannon MK3</item>
 		<item>Laser Turret MK3</item>

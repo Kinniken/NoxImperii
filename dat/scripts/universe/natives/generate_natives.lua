@@ -121,7 +121,7 @@ leonids.specialities[#leonids.specialities+1]={
 			(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
-		return "Their hunting scenes painted inside dried-out animal skins "..(planet:isCivilized() and "are particularly prized by humans and Merseians. " or "would likely have success in many civilized worlds. ")
+		return "Their hunting scenes painted inside dried-out animal skins "..(planet:isCivilized() and "are particularly prized by humans and Ardars. " or "would likely have success in many civilized worlds. ")
 	end
 }
 leonids.specialities[#leonids.specialities+1]={

@@ -3,7 +3,7 @@ include('universe/objects/class_planets.lua')
 include('universe/live/live_services.lua')
 
 earth_pos={x=0,y=0}
-merseia_pos={x=1800,y=-100}
+ardarshir_pos={x=1800,y=-100}
 betelgeuse_pos={x=1000,y=460}
 
 local acturus_sector={x=2,y=893}--Diadomes
@@ -177,9 +177,9 @@ end
 function get_nearest_barbarian_zone(star)
 
 	local dist_earth=gh.calculateDistance(earth_pos,star)
-	local dist_merseia=gh.calculateDistance(merseia_pos,star)
+	local dist_ardarshir=gh.calculateDistance(ardarshir_pos,star)
 
-	if (dist_earth<dist_merseia) then
+	if (dist_earth<dist_ardarshir) then
 
 		local dx=star.x-earth_pos.x
 		local dy=star.y-earth_pos.y
@@ -198,8 +198,8 @@ function get_nearest_barbarian_zone(star)
 			end
 		end
 	else
-		local dx=star.x-merseia_pos.x
-		local dy=star.y-merseia_pos.y
+		local dx=star.x-ardarshir_pos.x
+		local dy=star.y-ardarshir_pos.y
 
 		if math.abs(dx)>math.abs(dy) then
 			if (dx>0) then

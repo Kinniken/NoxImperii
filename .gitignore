@@ -46,3 +46,6 @@ datapath.lua
 core
 
 /autom4te.cache
+/pacman.sh
+/.project
+/.cproject

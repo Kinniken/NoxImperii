@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ship name="SunFlower">
- <base_type>SunFlower</base_type>
+<ship name="Sunflower">
+ <base_type>Sunflower</base_type>
  <GFX sx="6" sy="6">sunflower</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

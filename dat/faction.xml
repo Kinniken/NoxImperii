@@ -19,10 +19,11 @@
    <enemy>Pirate</enemy>
   </enemies>
  </faction>
+ 
  <faction name="Natives">
   <known/>
   <player>0</player>
-  <colour>grey</colour>
+  <colour>grey50</colour>
   <spawn>natives</spawn>
   <standing>natives</standing>
   <allies>
@@ -31,6 +32,7 @@
    <enemy>Pirate</enemy>
   </enemies>
  </faction>
+ 
  <faction name="Civilian">
   <invisible />
   <static />
@@ -44,19 +46,7 @@
    <enemy>Pirate</enemy>
   </enemies>
  </faction>
-  <faction name="Trader">
-  <known/>
-  <logo>trader</logo>
-  <longname>Trader</longname>
-  <player>3</player>
-  <spawn>human_trader</spawn>
-  <standing>human_trader</standing>
-  <allies>
-  </allies>
-  <enemies>
-   <enemy>Pirate</enemy>
-  </enemies>
- </faction>
+  
  <faction name="Imperial Trader">
   <known/>
   <logo>empire</logo>
@@ -96,6 +86,8 @@
    <enemy>Pirate</enemy>
   </enemies>
  </faction>
+ 
+ 
  <faction name="Pirate">
   <known/>
   <logo>pirate</logo>
@@ -108,10 +100,12 @@
   <enemies>
    <enemy>Civilian</enemy>
    <enemy>Empire of Terra</enemy>
-   <enemy>Trader</enemy>
    <enemy>Independent</enemy>
   </enemies>
  </faction>
+ 
+ 
+ 
  <faction name="Empire of Terra">
   <known/>
   <logo>empire</logo>
@@ -168,7 +162,6 @@
    <enemy>Civilian</enemy>
    <enemy>Roidhunate of Ardarshir</enemy>
    <enemy>Empire of Terra</enemy>
-   <enemy>Trader</enemy>
    <enemy>Independent</enemy>
   </enemies>
   </faction>

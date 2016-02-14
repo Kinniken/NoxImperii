@@ -8,7 +8,7 @@
    <location>Computer</location>
    <faction>Empire of Terra</faction>
    <faction>Independent</faction>
-   <faction>Human Trader</faction>
+   <faction>Imperial Trader</faction>
   </avail>
  </mission>
  <mission name="Cargo Rush">
@@ -19,7 +19,7 @@
    <location>Computer</location>
    <faction>Empire of Terra</faction>
    <faction>Independent</faction>
-   <faction>Human Trader</faction>
+   <faction>Imperial Trader</faction>
   </avail>
  </mission>
  <mission name="Economy Student">
@@ -108,7 +108,7 @@
   </avail>
  </mission>
  <mission name="Empire Ardar Scouting">
-  <lua>empiremilitary/ardar_recon_bar</lua>
+  <lua>empiremilitary/ardarshir_recon_bar</lua>
   <flags>
    <unique />
   </flags>
@@ -121,7 +121,7 @@
   </avail>
  </mission>
  <mission name="Empire Ardar Scouting Rec">
-  <lua>empiremilitary/ardar_recon_rec</lua>
+  <lua>empiremilitary/ardarshir_recon_rec</lua>
   <avail>
    <priority>5</priority>
    <chance>100</chance>

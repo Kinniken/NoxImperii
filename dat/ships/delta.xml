@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Delta">
+ <base_type>Delta</base_type>
+ <GFX sx="10" sy="10">phalanx</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Corvette</class>
+ <fabricator>Generic</fabricator>
+ <description>More agile than vendettas but with comparable offensive capacities, delta-based designs are a popular alternative in the frigate category. Pirates are known to make heavy use of an adapted version.</description>
+ 
+<price>1000000</price>
+ <movement>
+  <thrust>200</thrust>
+  <turn>120</turn>
+  <speed>200</speed>
+ </movement>
+ <health>
+  <absorb>15</absorb>
+  <shield>200</shield>
+  <armour>400</armour>
+  <energy>500</energy>
+  <shield_regen>5</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>30</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>60</cpu>
+  <crew>12</crew>
+  <mass>400</mass>
+  <fuel>500</fuel>
+  <cargo>70</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+ <slots>
+  <weapon size="medium" x="4" y="5" h="-2"/>
+  <weapon size="medium" x="4" y="-5" h="-2"/>
+  <weapon size="medium" x="0" y="10" h="-2"/>
+  <weapon size="medium" x="0" y="-10" h="-2"/>  
+
+  <utility size="medium"/>
+  <utility size="medium"/>
+
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+ </slots>
+</ship>

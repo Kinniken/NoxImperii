@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ship name="Empire Valenderay">
- <base_type>Empire Valenderay</base_type>
+<ship name="Imperial Valenderay">
+ <base_type>Imperial Valenderay</base_type>
  <GFX sx="12" sy="12">empire_nova</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Carrier</class>
  <price>20000000</price>
  <fabricator>Imperial Shipyards</fabricator>
- <license>Heavy Combat Vessel License</license>
  <description>The heaviest ship in the Terran navy, the Valendray dreadnought is the pride of the Terran Empire. With devastating firepower and massive, layered defenses, its primary role is protecting the headquarters of major Terran fleets. As such it is rarely exposed to direct combat.
  
 In a symbolic act of defiance, this latest model of Nova-class dreadnought was named after the nova that almost obliterated Ardar civilisation back when it had just become spacefaring - a fate only avoided with timely human help. The Roidhunate did not appreciate this reminder of its former inferiority.</description>

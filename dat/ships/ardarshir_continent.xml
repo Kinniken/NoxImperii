@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ship name="Ardar Brythioch">
  <base_type>Ardar Brythioch</base_type>
- <GFX sx="12" sy="12">ardar_continent</GFX>
+ <GFX sx="12" sy="12">ardarshir_continent</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Destroyer</class>

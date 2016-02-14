@@ -5,46 +5,51 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Armoured Transport</class>
- <price>1500000</price>
- <fabricator>Skull and Bones</fabricator>
- <description>The traditional Skull and Bones refit has left the Rhino substantially more manoeuvrable, though somewhat less armoured. Exploiting its large cargo bay and durability, the Rhino has become an excellent scavenger ship.</description>
+ <fabricator>Pirate Shipyards</fabricator>
+ <description>Adapted to pirate needs, the rhino trades some of its generous cargo hold in exchange for more armour and offensive capacity. A very capable ship indeed.</description>
+
+<price>2500000</price>
+ <movement>
+  <thrust>200</thrust>
+  <turn>120</turn>
+  <speed>180</speed>
+ </movement>
  <health>
-  <absorb>20</absorb>
-  <armour>350</armour>
+  <absorb>30</absorb>
+  <shield>300</shield>
+  <armour>750</armour>
+  <energy>900</energy>
+  <shield_regen>5</shield_regen>
   <armour_regen>0</armour_regen>
+  <energy_regen>40</energy_regen>
  </health>
  <characteristics>
-  <crew>10</crew>
-  <mass>500</mass>
-  <cargo>90</cargo>
+  <cpu>50</cpu>
+  <crew>45</crew>
+  <mass>1700</mass>
+  <fuel>500</fuel>
+  <cargo>120</cargo>
  </characteristics>
+<stats>
+  
+</stats>
+
+
  <slots>
   <weapon size="large" x="25" y="-3" h="4"/>
   <weapon size="large" x="25" y="3" h="4"/>
   <weapon size="medium" x="-15" y="-3" h="4"/>
   <weapon size="medium" x="-15" y="3" h="4"/>
-  <utility size="medium" prop="systems" exclusive="1" required="1">Previous Generation Medium Systems</utility>
   <utility size="medium"/>
   <utility size="medium"/>
   <utility size="medium"/>
-  <structure size="medium" prop="engines" exclusive="1" required="1">Beat Up Medium Engine</structure>
-  <structure size="medium" prop="hull" exclusive="1" required="1">Patchwork Medium Plating</structure>
+  <utility size="large"/>
   <structure size="medium"/>
   <structure size="medium"/>
   <structure size="medium"/>
   <structure size="medium"/>
+  <structure size="large"/>
+  <structure size="large"/>
  </slots>
- <stats>
-  <fuel_consumption>200</fuel_consumption>
-  <speed_mod>10</speed_mod>
-  <turn_mod>0</turn_mod>
-  <thrust_mod>0</thrust_mod>
-  <armour_mod>0</armour_mod>
-  <shield_mod>10</shield_mod>
-  <energy_mod>0</energy_mod>
-  <energy_regen_mod>10</energy_regen_mod>
-  <cargo_mod>25</cargo_mod>
-  <ew_detect>0</ew_detect>
-  <ew_hide>10</ew_hide>
- </stats>
+
 </ship>

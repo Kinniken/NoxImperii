@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ship name="Empire Jupiter">
- <base_type>Empire Jupiter</base_type>
+<ship name="Imperial Jupiter">
+ <base_type>Imperial Jupiter</base_type>
  <GFX sx="12" sy="12">empire_planet</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Cruiser</class>
  <price>9000000</price>
  <fabricator>Imperial Shipyards</fabricator>
- <license>Heavy Combat Vessel License</license>
  <description>All but the most important Terran fleets are lead by Planet-class cruisers, and the Jupiter is the most advanced ever built by the Terran Navy. Clearly this is a ship that can face anything... this side of the Ardar border.</description>
  <movement>
   <thrust>120</thrust>

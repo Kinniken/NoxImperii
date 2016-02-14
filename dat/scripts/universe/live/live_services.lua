@@ -423,7 +423,7 @@ local function generateExtraPresences(planet,sectorStability)
 			range=3
 		end
 
-		planet.c:setFactionExtraPresence("Human Trader",amount,range)
+		planet.c:setFactionExtraPresence("Imperial Trader",amount,range)
 
 		if (settlement.stability<0.5) then
 			local amount=100*(1-settlement.stability*2)/sectorStability
@@ -466,7 +466,7 @@ local function generateExtraPresences(planet,sectorStability)
 			range=3
 		end
 
-		planet.c:setFactionExtraPresence("Betelgeusean Trader",amount,range)
+		planet.c:setFactionExtraPresence("Betelgian Trader",amount,range)
 
 		if (settlement.stability<0.3) then
 			local amount=40*(1-settlement.stability*3)/sectorStability

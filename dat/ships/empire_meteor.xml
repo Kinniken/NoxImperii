@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ship name="Empire Tunguska">
- <base_type>Empire Tunguska</base_type>
+<ship name="Imperial Tunguska">
+ <base_type>Imperial Tunguska</base_type>
  <GFX>empire_meteor</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Fighter</class>
  <price>280000</price>
  <fabricator>Imperial Shipyards</fabricator>
- <license>Light Combat Vessel License</license>
  <description>The Tunguska light fighter is the Meteor-class ship currently used in the Terran Navy for patrolling systems and for short-range recognition.</description>
  <movement>
   <thrust>250</thrust>

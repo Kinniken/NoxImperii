@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ship name="Ardar Roeth">
  <base_type>Ardar Roeth</base_type>
- <GFX sx="10" sy="10">ardarv_meteor</GFX>
+ <GFX sx="10" sy="10">ardarshir_meteor</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Fighter</class>

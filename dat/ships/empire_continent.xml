@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ship name="Empire Asieneuve">
- <base_type>Empire Asieneuve</base_type>
+<ship name="Imperial Asieneuve">
+ <base_type>Imperial Asieneuve</base_type>
  <GFX sx="12" sy="12">empire_continent</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

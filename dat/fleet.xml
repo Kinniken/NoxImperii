@@ -1,175 +1,407 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Fleets>
- <fleet name="Independent Schroedinger">
+ 
+ <!-- Independent Trade -->
+ <fleet name="Independent Endeavour">
   <ai>independent</ai>
   <faction>Independent</faction>
   <pilots>
-   <pilot name="Independent Schroedinger" ship="Schroedinger"></pilot>
+   <pilot name="Independent Endeavour" ship="Endeavour"></pilot>
   </pilots>
  </fleet>
- <fleet name="Independent Hyena">
+ <fleet name="Independent Scarab">
   <ai>independent</ai>
   <faction>Independent</faction>
   <pilots>
-   <pilot name="Independent Hyena" ship="Hyena"></pilot>
+   <pilot name="Independent Scarab" ship="Scarab"></pilot>
   </pilots>
  </fleet>
- <fleet name="Independent Gawain">
+ <fleet name="Independent Fish Bone">
   <ai>independent</ai>
   <faction>Independent</faction>
   <pilots>
-   <pilot name="Independent Gawain" ship="Gawain"></pilot>
+   <pilot name="Independent Fish Bone" ship="Fish Bone"></pilot>
   </pilots>
  </fleet>
- <fleet name="Civilian Schroedinger">
-  <ai>civilian</ai>
-  <faction>Civilian</faction>
+ <fleet name="Independent Voyager Cargo">
+  <ai>independent</ai>
+  <faction>Independent</faction>
   <pilots>
-   <pilot name="Civilian Schroedinger" ship="Schroedinger"></pilot>
+   <pilot name="Independent Voyager Cargo" ship="Voyager Cargo"></pilot>
   </pilots>
  </fleet>
- <fleet name="Civilian Hyena">
-  <ai>civilian</ai>
-  <faction>Civilian</faction>
+ <fleet name="Independent Hauler">
+  <ai>independent</ai>
+  <faction>Independent</faction>
   <pilots>
-   <pilot name="Civilian Hyena" ship="Hyena"></pilot>
+   <pilot name="Independent Hauler" ship="Hauler"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Independent Whale">
+  <ai>independent</ai>
+  <faction>Independent</faction>
+  <pilots>
+   <pilot name="Independent Whale" ship="Whale"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Independent Rhino">
+  <ai>independent</ai>
+  <faction>Independent</faction>
+  <pilots>
+   <pilot name="Independent Rhino" ship="Rhino"></pilot>
   </pilots>
  </fleet>
  
- <fleet name="Civilian Gawain">
-  <ai>civilian</ai>
-  <faction>Civilian</faction>
+ <!-- Independent Military -->
+ 
+ <fleet name="Independent Shark">
+  <ai>independent</ai>
+  <faction>Independent</faction>
   <pilots>
-   <pilot name="Civilian Gawain" ship="Gawain"></pilot>
+   <pilot name="Independent Shark" ship="Shark"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Independent Admonisher">
+  <ai>independent</ai>
+  <faction>Independent</faction>
+  <pilots>
+   <pilot name="Independent Admonisher" ship="Admonisher"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Independent Wasp">
+  <ai>independent</ai>
+  <faction>Independent</faction>
+  <pilots>
+   <pilot name="Independent Wasp" ship="Wasp"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Independent Voyager Frigate">
+  <ai>independent</ai>
+  <faction>Independent</faction>
+  <pilots>
+   <pilot name="Independent Voyager Frigate" ship="Voyager Frigate"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Independent Delta">
+  <ai>independent</ai>
+  <faction>Independent</faction>
+  <pilots>
+   <pilot name="Independent Delta" ship="Delta"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Independent Vendetta">
+  <ai>independent</ai>
+  <faction>Independent</faction>
+  <pilots>
+   <pilot name="Independent Vendetta" ship="Vendetta"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Independent Raptor">
+  <ai>independent</ai>
+  <faction>Independent</faction>
+  <pilots>
+   <pilot name="Independent Raptor" ship="Raptor"></pilot>
   </pilots>
  </fleet>
  
- <fleet name="Human Trader Koala">
-  <ai>trader</ai>
-  <faction>Human Trader</faction>
+ <!-- Natives Trade -->
+ <fleet name="Natives Endeavour">
+  <ai>natives</ai>
+  <faction>Natives</faction>
   <pilots>
-   <pilot name="Trader Koala" ship="Koala"></pilot>
+   <pilot name="Natives Endeavour" ship="Endeavour"></pilot>
   </pilots>
  </fleet>
- <fleet name="Human Trader Rhino">
-  <ai>trader</ai>
-  <faction>Human Trader</faction>
+ <fleet name="Natives Scarab">
+  <ai>natives</ai>
+  <faction>Natives</faction>
   <pilots>
-   <pilot name="Trader Rhino" ship="Rhino"></pilot>
+   <pilot name="Natives Scarab" ship="Scarab"></pilot>
   </pilots>
  </fleet>
- <fleet name="Human Trader Mule">
-  <ai>trader</ai>
-  <faction>Human Trader</faction>
+ <fleet name="Natives Wasp">
+  <ai>natives</ai>
+  <faction>Natives</faction>
   <pilots>
-   <pilot name="Trader Mule" ship="Mule"></pilot>
+   <pilot name="Natives Wasp" ship="Wasp"></pilot>
   </pilots>
  </fleet>
- <fleet name="Human Trader Gawain">
-  <ai>trader</ai>
-  <faction>Human Trader</faction>
+ 
+ <!-- Civilian Trade -->
+ <fleet name="Civilian Endeavour">
+  <ai>civilian</ai>
+  <faction>Civilian</faction>
   <pilots>
-   <pilot name="Trader Gawain" ship="Gawain"></pilot>
+   <pilot name="Civilian Endeavour" ship="Endeavour"></pilot>
   </pilots>
  </fleet>
- <fleet name="Human Trader Quicksilver">
+ <fleet name="Civilian Scarab">
+  <ai>civilian</ai>
+  <faction>Civilian</faction>
+  <pilots>
+   <pilot name="Civilian Scarab" ship="Scarab"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Civilian Fish Bone">
+  <ai>civilian</ai>
+  <faction>Civilian</faction>
+  <pilots>
+   <pilot name="Civilian Fish Bone" ship="Fish Bone"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Civilian Voyager Cargo">
+  <ai>civilian</ai>
+  <faction>Civilian</faction>
+  <pilots>
+   <pilot name="Civilian Voyager Cargo" ship="Voyager Cargo"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Civilian Hauler">
+  <ai>civilian</ai>
+  <faction>Civilian</faction>
+  <pilots>
+   <pilot name="Civilian Hauler" ship="Hauler"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Civilian Whale">
+  <ai>civilian</ai>
+  <faction>Civilian</faction>
+  <pilots>
+   <pilot name="Civilian Whale" ship="Whale"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Civilian Rhino">
+  <ai>civilian</ai>
+  <faction>Civilian</faction>
+  <pilots>
+   <pilot name="Civilian Rhino" ship="Rhino"></pilot>
+  </pilots>
+ </fleet>
+ 
+
+<!-- Imperial Traders -->
+ <fleet name="Imperial Trader Schroedinger">
   <ai>trader</ai>
-  <faction>Human Trader</faction>
+  <faction>Imperial Trader</faction>
+  <pilots>
+   <pilot name="Trader Schroedinger" ship="Schroedinger"></pilot>
+  </pilots>
+ </fleet> 
+ <fleet name="Imperial Trader Quicksilver">
+  <ai>trader</ai>
+  <faction>Imperial Trader</faction>
   <pilots>
    <pilot name="Trader Quicksilver" ship="Quicksilver"></pilot>
   </pilots>
  </fleet>
+ <fleet name="Imperial Trader Fish Bone">
+  <ai>trader</ai>
+  <faction>Imperial Trader</faction>
+  <pilots>
+   <pilot name="Trader Fish Bone" ship="Fish Bone"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Imperial Trader Zheng He">
+  <ai>trader</ai>
+  <faction>Imperial Trader</faction>
+  <pilots>
+   <pilot name="Trader Zheng He" ship="Zheng He"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Imperial Trader Sunflower">
+  <ai>trader</ai>
+  <faction>Imperial Trader</faction>
+  <pilots>
+   <pilot name="Trader Sunflower" ship="Sunflower"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Imperial Trader Argosy">
+  <ai>trader</ai>
+  <faction>Imperial Trader</faction>
+  <pilots>
+   <pilot name="Imperial Trader Argosy" ship="Argosy"></pilot>
+  </pilots>
+ </fleet>
  
  
- 
- <fleet name="Ardar Trader Koala">
+ <!-- Ardar Traders --> 
+ <fleet name="Ardar Trader Endeavour">
   <ai>trader</ai>
   <faction>Ardar Trader</faction>
   <pilots>
-   <pilot name="Trader Koala" ship="Koala"></pilot>
+   <pilot name="Trader Endeavour" ship="Endeavour"></pilot>
   </pilots>
  </fleet>
- <fleet name="Ardar Trader Rhino">
+ <fleet name="Ardar Trader Fish Bone">
   <ai>trader</ai>
   <faction>Ardar Trader</faction>
   <pilots>
-   <pilot name="Trader Rhino" ship="Rhino"></pilot>
+   <pilot name="Trader Fish Bone" ship="Fish Bone"></pilot>
   </pilots>
  </fleet>
- <fleet name="Ardar Trader Mule">
+ <fleet name="Ardar Trader Meryoch">
   <ai>trader</ai>
   <faction>Ardar Trader</faction>
   <pilots>
-   <pilot name="Trader Mule" ship="Mule"></pilot>
+   <pilot name="Trader Meryoch" ship="Meryoch"></pilot>
   </pilots>
  </fleet>
- <fleet name="Ardar Trader Gawain">
+ <fleet name="Ardar Trader Rioloch">
   <ai>trader</ai>
   <faction>Ardar Trader</faction>
   <pilots>
-   <pilot name="Trader Gawain" ship="Gawain"></pilot>
+   <pilot name="Trader Rioloch" ship="Rioloch"></pilot>
   </pilots>
  </fleet>
- <fleet name="Ardar Trader Quicksilver">
+ <fleet name="Ardar Trader Geldoch">
   <ai>trader</ai>
   <faction>Ardar Trader</faction>
   <pilots>
-   <pilot name="Trader Quicksilver" ship="Quicksilver"></pilot>
-  </pilots>
- </fleet>
- 
- <fleet name="Koala">
-  <ai>trader</ai>
-  <faction>Independent</faction>
-  <pilots>
-   <pilot name="Koala" ship="Koala"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Mule">
-  <ai>trader</ai>
-  <faction>Independent</faction>
-  <pilots>
-   <pilot name="Mule" ship="Mule"></pilot>
+   <pilot name="Trader Geldoch" ship="Geldoch"></pilot>
   </pilots>
  </fleet>
  
  
- <fleet name="Betelgeusean Trader Koala">
+<!-- Betelgian Traders -->
+ <fleet name="Betelgian Trader Pelegrina">
   <ai>trader</ai>
-  <faction>Betelgeusean Trader</faction>
+  <faction>Betelgian Trader</faction>
   <pilots>
-   <pilot name="Trader Koala" ship="Koala"></pilot>
+   <pilot name="Trader Pelegrina" ship="Pelegrina"></pilot>
   </pilots>
  </fleet>
- <fleet name="Betelgeusean Trader Rhino">
+ <fleet name="Betelgian Trader Carvela">
   <ai>trader</ai>
-  <faction>Betelgeusean Trader</faction>
+  <faction>Betelgian Trader</faction>
   <pilots>
-   <pilot name="Trader Rhino" ship="Rhino"></pilot>
+   <pilot name="Trader Carvela" ship="Carvela"></pilot>
   </pilots>
  </fleet>
- <fleet name="Betelgeusean Trader Mule">
+ <fleet name="Betelgian Trader Veniera">
   <ai>trader</ai>
-  <faction>Betelgeusean Trader</faction>
+  <faction>Betelgian Trader</faction>
   <pilots>
-   <pilot name="Trader Mule" ship="Mule"></pilot>
+   <pilot name="Trader Veniera" ship="Veniera"></pilot>
   </pilots>
  </fleet>
- <fleet name="Betelgeusean Trader Gawain">
+ <fleet name="Betelgian Trader Impresa">
   <ai>trader</ai>
-  <faction>Betelgeusean Trader</faction>
+  <faction>Betelgian Trader</faction>
   <pilots>
-   <pilot name="Trader Gawain" ship="Gawain"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Betelgeusean Trader Quicksilver">
-  <ai>trader</ai>
-  <faction>Betelgeusean Trader</faction>
-  <pilots>
-   <pilot name="Trader Quicksilver" ship="Quicksilver"></pilot>
+   <pilot name="Trader Impresa" ship="Impresa"></pilot>
   </pilots>
  </fleet>
  
+ <!-- Pirates -->
+ <fleet name="Pirate Shark">
+  <ai>pirate</ai>
+  <faction>Pirate</faction>
+  <pilots>
+   <pilot name="Pirate Shark" ship="Pirate Shark"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Pirate Admonisher">
+  <ai>pirate</ai>
+  <faction>Pirate</faction>
+  <pilots>
+   <pilot name="Pirate Admonisher" ship="Pirate Admonisher"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Pirate Vendetta">
+  <ai>pirate</ai>
+  <faction>Pirate</faction>
+  <pilots>
+   <pilot name="Pirate Vendetta" ship="Pirate Vendetta"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Pirate Rhino">
+  <ai>pirate</ai>
+  <faction>Pirate</faction>
+  <pilots>
+   <pilot name="Pirate Rhino" ship="Pirate Rhino"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Pirate Kestrel">
+  <ai>pirate</ai>
+  <faction>Pirate</faction>
+  <pilots>
+   <pilot name="Pirate Kestrel" ship="Pirate Kestrel"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Pirate Delta">
+  <ai>pirate</ai>
+  <faction>Pirate</faction>
+  <pilots>
+   <pilot name="Pirate Delta" ship="Pirate Delta"></pilot>
+  </pilots>
+ </fleet>
+ 
+ 
+ 
+ <!-- Navies -->
+ 
+ <!-- Terra -->
+ <fleet name="Imperial Meteor">
+  <ai>empire</ai>
+  <faction>Empire of Terra</faction>
+  <pilots>
+   <pilot name="Imperial Tunguska" ship="Imperial Tunguska"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Imperial Comet">
+  <ai>empire</ai>
+  <faction>Empire of Terra</faction>
+  <pilots>
+   <pilot name="Imperial Halley" ship="Imperial Halley"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Imperial Continent">
+  <ai>empire</ai>
+  <faction>Empire of Terra</faction>
+  <pilots>
+   <pilot name="Imperial Asieneuve" ship="Imperial Asieneuve"></pilot>
+  </pilots>
+ </fleet>
+  <fleet name="Imperial Planet">
+  <ai>empire</ai>
+  <faction>Empire of Terra</faction>
+  <pilots>
+   <pilot name="Imperial Jupiter" ship="Imperial Jupiter"></pilot>
+  </pilots>
+ </fleet>
+<fleet name="Imperial Nova">
+  <ai>empire</ai>
+  <faction>Empire of Terra</faction>
+  <pilots>
+   <pilot name="Imperial Valenderay" ship="Imperial Valenderay"></pilot>
+  </pilots>
+ </fleet>
+ 
+ <!-- Ardarshir -->
+ <fleet name="Ardar Meteor">
+  <ai>empire</ai>
+  <faction>Roidhunate of Ardarshir</faction>
+  <pilots>
+   <pilot name="Ardar Roeth" ship="Ardar Roeth"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Ardar Comet">
+  <ai>empire</ai>
+  <faction>Roidhunate of Ardarshir</faction>
+  <pilots>
+   <pilot name="Ardar Brythioch" ship="Ardar Brythioch"></pilot>
+  </pilots>
+ </fleet>
+  <fleet name="Ardar Continent">
+  <ai>empire</ai>
+  <faction>Roidhunate of Ardarshir</faction>
+  <pilots>
+   <pilot name="Ardar Vach Rueth" ship="Ardar Vach Rueth"></pilot>
+  </pilots>
+ </fleet>
+ 
+ 
+ <!-- Betelgeuse -->
  <fleet name="Betelgian Meteor">
   <ai>betelgeuse</ai>
   <faction>Oligarchy of Betelgeuse</faction>
@@ -206,177 +438,8 @@
   </pilots>
  </fleet>
 
-
-
- 
- 
- <fleet name="Pirate Hyena">
-  <ai>pirate</ai>
-  <faction>Pirate</faction>
-  <pilots>
-   <pilot name="Pirate Hyena" ship="Hyena"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Pirate Shark">
-  <ai>pirate</ai>
-  <faction>Pirate</faction>
-  <pilots>
-   <pilot name="Pirate Shark" ship="Pirate Shark"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Pirate Admonisher">
-  <ai>pirate</ai>
-  <faction>Pirate</faction>
-  <pilots>
-   <pilot name="Pirate Admonisher" ship="Pirate Admonisher"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Pirate Vendetta">
-  <ai>pirate</ai>
-  <faction>Pirate</faction>
-  <pilots>
-   <pilot name="Pirate Vendetta" ship="Pirate Vendetta"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Pirate Ancestor">
-  <ai>pirate</ai>
-  <faction>Pirate</faction>
-  <pilots>
-   <pilot name="Pirate Ancestor" ship="Pirate Ancestor"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Pirate Rhino">
-  <ai>pirate</ai>
-  <faction>Pirate</faction>
-  <pilots>
-   <pilot name="Pirate Rhino" ship="Pirate Rhino"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Pirate Phalanx">
-  <ai>pirate</ai>
-  <faction>Pirate</faction>
-  <pilots>
-   <pilot name="Pirate Phalanx" ship="Pirate Phalanx"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Pirate Kestrel">
-  <ai>pirate</ai>
-  <faction>Pirate</faction>
-  <pilots>
-   <pilot name="Pirate Kestrel" ship="Pirate Kestrel"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Empire Meteor">
-  <ai>empire</ai>
-  <faction>Empire of Terra</faction>
-  <pilots>
-   <pilot name="Empire Tunguska" ship="Empire Tunguska"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Empire Comet">
-  <ai>empire</ai>
-  <faction>Empire of Terra</faction>
-  <pilots>
-   <pilot name="Empire Halley" ship="Empire Halley"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Empire Continent">
-  <ai>empire</ai>
-  <faction>Empire of Terra</faction>
-  <pilots>
-   <pilot name="Empire Asieneuve" ship="Empire Asieneuve"></pilot>
-  </pilots>
- </fleet>
-  <fleet name="Empire Planet">
-  <ai>empire</ai>
-  <faction>Empire of Terra</faction>
-  <pilots>
-   <pilot name="Empire Jupiter" ship="Empire Jupiter"></pilot>
-  </pilots>
- </fleet>
-<fleet name="Empire Nova">
-  <ai>empire</ai>
-  <faction>Empire of Terra</faction>
-  <pilots>
-   <pilot name="Empire Valenderay" ship="Empire Valenderay"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Empire Sml Defense">
-  <ai>empire</ai>
-  <faction>Empire of Terra</faction>
-  <pilots>
-   <pilot name="Empire Tunguska" ship="Empire Tunguska"></pilot>
-   <pilot name="Empire Tunguska" ship="Empire Tunguska"></pilot>
-   <pilot name="Empire Halley" ship="Empire Halley"></pilot>
-   <pilot name="Empire Halley" ship="Empire Halley"></pilot>
-   <pilot name="Empire Asieneuve" ship="Empire Asieneuve"></pilot>
-   <pilot name="Empire Jupiter" ship="Empire Jupiter"></pilot>
-  </pilots>
- </fleet>
- 
-<fleet name="Ardar Meteor">
-  <ai>empire</ai>
-  <faction>Roidhunate of Ardarshir</faction>
-  <pilots>
-   <pilot name="Ardar Roeth" ship="Ardar Roeth"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Ardar Comet">
-  <ai>empire</ai>
-  <faction>Roidhunate of Ardarshir</faction>
-  <pilots>
-   <pilot name="Ardar Brythioch" ship="Ardar Brythioch"></pilot>
-  </pilots>
- </fleet>
-  <fleet name="Ardar Continent">
-  <ai>empire</ai>
-  <faction>Roidhunate of Ardarshir</faction>
-  <pilots>
-   <pilot name="Ardar Vach Rueth" ship="Ardar Vach Rueth"></pilot>
-  </pilots>
- </fleet>
- <fleet name="DTS Defense Fleet">
-  <ai>empire</ai>
-  <faction>Human Trader</faction>
-  <pilots>
-   <pilot name="Trader Mule" ship="Mule"></pilot>
-   <pilot name="Trader Mule" ship="Mule"></pilot>
-   <pilot name="Trader Lancelot" ship="Lancelot"></pilot>
-   <pilot name="Trader Lancelot" ship="Lancelot"></pilot>
-   <pilot name="Trader Ancestor" ship="Ancestor"></pilot>
-   <pilot name="Trader Gawain" ship="Gawain"></pilot>
-   <pilot name="Trader Gawain" ship="Gawain"></pilot>
-   <pilot name="Trader Gawain" ship="Gawain"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Vendetta Quartet">
-  <ai>flf</ai>
-  <faction>Independent</faction>
-  <pilots>
-   <pilot name="Independent Vendetta" ship="Vendetta"></pilot>
-   <pilot name="Independent Vendetta" ship="Vendetta"></pilot>
-   <pilot name="Independent Vendetta" ship="Vendetta"></pilot>
-   <pilot name="Independent Vendetta" ship="Vendetta"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Sml Trader Convoy">
-  <ai>trader</ai>
-  <faction>Human Trader</faction>
-  <pilots>
+<!-- Barbarians -->
    
-   <pilot name="Trader Koala" ship="Koala"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Pirate Hyena Pack">
-  <ai>pirate</ai>
-  <faction>Pirate</faction>
-  <pilots>
-   <pilot name="Pirate Hyena" ship="Hyena"></pilot>
-   <pilot name="Pirate Hyena" ship="Hyena"></pilot>
-   <pilot name="Pirate Hyena" ship="Hyena"></pilot>
-   <pilot name="Pirate Hyena" ship="Hyena"></pilot>
-  </pilots>
- </fleet>
  <fleet name="Barbarian Raider">
   <ai>pirate</ai>
   <faction>Barbarians</faction>
@@ -398,25 +461,20 @@
    <pilot name="Barbarian Slaver" ship="Barbarian Slaver"></pilot>
   </pilots>
  </fleet>
-  <fleet name="Betelgeusean Schroedinger">
-  <ai>independent</ai>
-  <faction>Oligarchy of Betelgeuse</faction>
+ <fleet name="Barbarian Vendetta">
+  <ai>pirate</ai>
+  <faction>Barbarians</faction>
   <pilots>
-   <pilot name="Betelgeusean Schroedinger" ship="Schroedinger"></pilot>
+   <pilot name="Barbarian Vendetta" ship="Vendetta"></pilot>
   </pilots>
  </fleet>
- <fleet name="Betelgeusean Hyena">
-  <ai>independent</ai>
-  <faction>Oligarchy of Betelgeuse</faction>
+ <fleet name="Barbarian Raptor">
+  <ai>pirate</ai>
+  <faction>Barbarians</faction>
   <pilots>
-   <pilot name="Betelgeusean Hyena" ship="Hyena"></pilot>
+   <pilot name="Barbarian Raptor" ship="Raptor"></pilot>
   </pilots>
  </fleet>
- <fleet name="Betelgeusean Gawain">
-  <ai>independent</ai>
-  <faction>Oligarchy of Betelgeuse</faction>
-  <pilots>
-   <pilot name="Betelgeusean Gawain" ship="Gawain"></pilot>
-  </pilots>
- </fleet>
+ 
+ 
 </Fleets>

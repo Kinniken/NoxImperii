@@ -7,13 +7,27 @@
   <allies />
   <enemies />
  </faction>
- <faction name="Independent">
+ <faction name="Independent Worlds">
   <known/>
   <player>3</player>
   <colour>blue</colour>
-  <spawn>independent</spawn>
-  <standing>independent</standing>
+  <spawn>independent_worlds</spawn>
+  <standing>independent_worlds</standing>
   <allies>
+    <ally>Independent Trader</ally>
+  </allies>
+  <enemies>
+   <enemy>Pirate</enemy>
+  </enemies>
+ </faction>
+ 
+ <faction name="Independent Trader">
+  <known/>
+  <player>3</player>
+  <spawn>independent_trader</spawn>
+  <standing>independent_trader</standing>
+  <allies>
+    <ally>Independent Worlds</ally>
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
@@ -33,19 +47,6 @@
   </enemies>
  </faction>
  
- <faction name="Civilian">
-  <invisible />
-  <static />
-  <known/>
-  <player>0</player>
-  <colour>black</colour>
-  <spawn>civilian</spawn>
-  <allies>
-  </allies>
-  <enemies>
-   <enemy>Pirate</enemy>
-  </enemies>
- </faction>
   
  <faction name="Imperial Trader">
   <known/>
@@ -98,9 +99,12 @@
   <standing>pirate</standing>
   <equip>pirate</equip>
   <enemies>
-   <enemy>Civilian</enemy>
-   <enemy>Empire of Terra</enemy>
-   <enemy>Independent</enemy>
+   <enemy>Independent Trader</enemy>
+   <enemy>Independent Worlds</enemy>
+   <enemy>Natives</enemy>
+   <enemy>Imperial Trader</enemy>
+   <enemy>Ardar Trader</enemy>
+   <enemy>Betelgian Trader</enemy>
   </enemies>
  </faction>
  
@@ -159,10 +163,10 @@
   <standing>barbarian</standing>
   <equip>barbarian</equip>
   <enemies>
-   <enemy>Civilian</enemy>
    <enemy>Roidhunate of Ardarshir</enemy>
    <enemy>Empire of Terra</enemy>
-   <enemy>Independent</enemy>
+   <enemy>Independent Worlds</enemy>
+   <enemy>Oligarchy of Betelgeuse</enemy>
   </enemies>
   </faction>
   

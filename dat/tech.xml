@@ -335,212 +335,48 @@
 		<item>Luxury Goods</item>
 	</tech>
 
-	<!-- Weapon Trees -->
-	
-
-	<!-- Ships -->
-	<tech name="Basic Civilian Ships">
-    <item>Argosy</item>
-		<item>Ancestor</item>
-		<item>Gawain</item>
-		<item>Hyena</item>
-		<item>Llama</item>
-		<item>Schroedinger</item>
+<tech name="Generic Military 1">
+    <item>Wasp</item>
+		<item>Laser Cannon MK1</item>
+		<item>BioPlasma Organ Stage 1</item>
+		<item>Gauss Gun</item>
+		<item>Mass Driver MK1</item>
 	</tech>
-	<tech name="Basic Trade Ships">
-		<item>Koala</item>
-		<item>Llama</item>
+	<tech name="Generic Military 2">
+  <item>Shark</item>
+		<item>Laser Turret MK1</item>
+		<item>Plasma Blaster MK1</item>
+		<item>Turreted Gauss Gun</item>
+		<item>Ion Cannon</item>
+		<item>Laser Cannon MK2</item>
+		<item>Plasma Cluster Cannon MK1</item>
+		<item>Plasma Turret MK1</item>
+		<item>BioPlasma Organ Stage 2</item>
+		<item>Mass Driver MK2</item>
+		<item>Plasma Blaster MK2</item>
+		<item>Plasma Cluster Cannon MK2</item>
+		<item>Shredder</item>
 	</tech>
-	<tech name="Bulk Trade Ships">
-		<item>Koala</item>
-		<item>Quicksilver</item>
-		<item>Rhino</item>
-		<item>Mule</item>
+	<tech name="Generic Military 3">
+    <item>Admonisher</item>
+    <item>Voyager Frigate</item>
+		<item>Laser Turret MK2</item>
+		<item>Orion Beam</item>
+		<item>Laser Cannon MK3</item>
+		<item>Plasma Turret MK2</item>
+		<item>Plasma Cluster Cannon MK3</item>
 	</tech>
-	<tech name="Light Civilian Combat Ships">
-		<item>Ancestor</item>
-		<item>Hyena</item>
-		<item>Shark</item>
-		<item>Vendetta</item>
+	<tech name="Generic Military 4">
+    <item>Delta</item>
+    <item>Vendetta</item>
 	</tech>
-	<tech name="Heavy Civilian Combat Ships">
-		<item>Phalanx</item>
-		<item>Admonisher</item>
-		<item>Hawking</item>
-		<item>Lancelot</item>
-		<item>Pacifier</item>
-		<item>Vigilance</item>
-		<item>Kestrel</item>
+	<tech name="Generic Military 5">
+    <item>Raptor</item>
 	</tech>
-	<tech name="Goddard Ship">
-		<item>Goddard</item>
-	</tech>
-	<tech name="Pirate Ships">
-		<item>Pirate Admonisher</item>
-		<item>Pirate Ancestor</item>
-		<item>Pirate Kestrel</item>
-		<item>Pirate Phalanx</item>
-		<item>Pirate Rhino</item>
-		<item>Pirate Shark</item>
-		<item>Pirate Vendetta</item>
-	</tech>
-	<tech name="__Heavy Weapon License">
-		<item>Heavy Weapon License</item>
-	</tech>
-	<tech name="__Heavy Combat Vessel License">
-		<item>Heavy Combat Vessel License</item>
-	</tech>
-	<tech name="__Collective">
-		<item>Neutron Disruptor</item>
-		<item>Drone Fighter Bay</item>
-		<item>Drone Fighter</item>
-		<item>Drone</item>
-	</tech>
-	<tech name="Systems Low">
-		<item>Previous Generation Small Systems</item>
-		<item>Previous Generation Medium Systems</item>
-		<item>Previous Generation Large Systems</item>
-		<item>Basic Small Systems</item>
-		<item>Basic Medium Systems</item>
-		<item>Basic Large Systems</item>
-		<item>Unicorp PT-100 Core System</item>
-		<item>Unicorp PT-200 Core System</item>
-		<item>Unicorp PT-500 Core System</item>
-		<item>Unicorp PT-600 Core System</item>
-		<item>Unicorp PT-1000 Core System</item>
-		<item>Unicorp PT-1200 Core System</item>
-	</tech>
-	<tech name="Systems Medium">
-		<item>Unicorp RX-14 Core System</item>
-		<item>Unicorp RX-26 Core System</item>
-		<item>Unicorp RX-71 Core System</item>
-		<item>Unicorp JX-16 Core System</item>
-		<item>Unicorp JX-30 Core System</item>
-		<item>Unicorp JX-66 Core System</item>
-		<item>Unicorp EX-19 Core System</item>
-		<item>Unicorp EX-24 Core System</item>
-		<item>Unicorp EX-80 Core System</item>
-	</tech>
-	<tech name="Systems High">
-		<item>Milspec Orion 2301 Core System</item>
-		<item>Milspec Orion 2302 Core System</item>
-		<item>Milspec Orion 3701 Core System</item>
-		<item>Milspec Orion 3702 Core System</item>
-		<item>Milspec Orion 4801 Core System</item>
-		<item>Milspec Orion 4802 Core System</item>
-		<item>Milspec Gemini 2501 Core System</item>
-		<item>Milspec Gemini 3308 Core System</item>
-		<item>Milspec Taurus 2520 Core System</item>
-		<item>Milspec Taurus 3323 Core System</item>
-		<item>Milspec Vespa 2544 Core System</item>
-		<item>Milspec Vespa 3380 Core System</item>
-	</tech>
-	<tech name="Systems Elite">
-		<item>Milspec Orion 5501 Core System</item>
-		<item>Milspec Orion 5502 Core System</item>
-		<item>Milspec Orion 8801 Core System</item>
-		<item>Milspec Orion 8802 Core System</item>
-		<item>Milspec Orion 9901 Core System</item>
-		<item>Milspec Orion 9902 Core System</item>
-		<item>Milspec Orion 9903 Core System</item>
-		<item>Milspec Gemini 5050 Core System</item>
-		<item>Milspec Taurus 4909 Core System</item>
-		<item>Milspec Vespa 6114 Core System</item>
-	</tech>
-	<tech name="Engines Low">
-		<item>Beat Up Small Engine</item>
-		<item>Beat Up Medium Engine</item>
-		<item>Beat Up Large Engine</item>
-		<item>Manufacturer Small Engine</item>
-		<item>Manufacturer Medium Engine</item>
-		<item>Manufacturer Large Engine</item>
-		<item>Unicorp KRD-B10 Engine</item>
-		<item>Unicorp KRD-B12 Engine</item>
-		<item>Unicorp KRD-G10 Engine</item>
-		<item>Unicorp KRD-G15 Engine</item>
-		<item>Unicorp KRD-T10 Engine</item>
-		<item>Unicorp KRD-T20 Engine</item>
-	</tech>
-	<tech name="Engines Medium">
-		<item>Unicorp EXA-49F Engine</item>
-		<item>Unicorp EXA-66F Engine</item>
-		<item>Unicorp EXA-71F Engine</item>
-		<item>Unicorp AUR-50A Engine</item>
-		<item>Unicorp AUR-70A Engine</item>
-		<item>Unicorp AUR-79A Engine</item>
-		<item>Unicorp JNS-44K Engine</item>
-		<item>Unicorp JNS-54K Engine</item>
-		<item>Unicorp JNS-99K Engine</item>
-	</tech>
-	<tech name="Engines High">
-		<item>Tricon Naga Mk3 Engine</item>
-		<item>Tricon Naga Mk5 Engine</item>
-		<item>Tricon Centaur Mk2 Engine</item>
-		<item>Tricon Centaur Mk3 Engine</item>
-		<item>Tricon Harpy Mk1 Engine</item>
-		<item>Tricon Harpy Mk6 Engine</item>
-		<item>Tricon Crane Engine</item>
-		<item>Tricon Kolibri Engine</item>
-		<item>Tricon Raven Engine</item>
-		<item>Tricon Albatross Engine</item>
-		<item>Tricon Antelope Engine</item>
-		<item>Tricon Kraken Engine</item>
-		<item>Tricon Oxen Engine</item>
-		<item>Tricon Buffalo Engine</item>
-		<item>Tricon Mammoth Engine</item>
-	</tech>
-	<tech name="Engines Elite">
-		<item>Tricon Naga Mk9 Engine</item>
-		<item>Tricon Naga Mk12 Engine</item>
-		<item>Tricon Centaur Mk7 Engine</item>
-		<item>Tricon Centaur Mk8 Engine</item>
-		<item>Tricon Centaur Mk7-Ra Engine</item>
-		<item>Tricon Harpy Mk11 Engine</item>
-		<item>Tricon Harpy Mk15 Engine</item>
-	</tech>
-	<tech name="Hulls Low">
-		<item>Patchwork Light Plating</item>
-		<item>Patchwork Medium Plating</item>
-		<item>Patchwork Heavy Plating</item>
-		<item>Unmodified Small Hull</item>
-		<item>Unmodified Medium Hull</item>
-		<item>Unmodified Large Hull</item>
-		<item>Unicorp D-2 Light Plating</item>
-		<item>Unicorp C-2 Light Plating</item>
-		<item>Unicorp D-8 Medium Plating</item>
-		<item>Unicorp D-16 Heavy Plating</item>
-		<item>Unicorp C-16 Heavy Plating</item>
-	</tech>
-	<tech name="Hulls Medium">
-		<item>Unicorp B-2 Light Plating</item>
-		<item>Unicorp C-8 Medium Plating</item>
-		<item>Unicorp B-16 Heavy Plating</item>
-		<item>Unicorp Small Cargo Hull</item>
-		<item>Unicorp Medium Cargo Hull</item>
-		<item>Unicorp Large Cargo Hull</item>
-	</tech>
-	<tech name="Hulls High">
-		<item>Schafer &amp; Kane Light Combat Plating</item>
-		<item>Schafer &amp; Kane Medium Combat Plating Alpha</item>
-		<item>Schafer &amp; Kane Medium Combat Plating Beta</item>
-		<item>Schafer &amp; Kane Medium Stealth Plating</item>
-		<item>Schafer &amp; Kane Heavy Combat Plating Alpha</item>
-		<item>Schafer &amp; Kane Heavy Combat Plating Beta</item>
-		<item>Schafer &amp; Kane Small Cargo Hull</item>
-		<item>Schafer &amp; Kane Medium Cargo Hull</item>
-		<item>Schafer &amp; Kane Large Cargo Hull</item>
-	</tech>
-	<tech name="Hulls Elite">
-		<item>Schafer &amp; Kane Light Stealth Plating</item>
-		<item>Schafer &amp; Kane Medium Combat Plating Gamma</item>
-		<item>Schafer &amp; Kane Medium Solar Plating</item>
-		<item>Schafer &amp; Kane Heavy Combat Plating Gamma</item>
-		<item>Schafer &amp; Kane Heavy Solar Plating</item>
-		<item>Schafer &amp; Kane Heavy Dissipation Plating</item>
-		<item>Schafer &amp; Kane Superheavy Combat Plating</item>
-	</tech>
+  
 	<tech name="Empire Military 1">
-		<item>Empire Tunguska</item>
+		<item>Imperial Tunguska</item>
+    <item>Lancelot</item>
 		<item>Laser Cannon MK1</item>
 		<item>Laser Turret MK1</item>
 		<item>Plasma Blaster MK1</item>
@@ -548,7 +384,7 @@
 		<item>Turreted Gauss Gun</item>
 	</tech>
 	<tech name="Empire Military 2">
-		<item>Empire Halley</item>
+    <item>Lancelot</item>
 		<item>BioPlasma Organ Stage 1</item>
 		<item>Gauss Gun</item>
 		<item>Ion Cannon</item>
@@ -563,7 +399,9 @@
 		<item>Ripper Cannon</item>
 	</tech>
 	<tech name="Empire Military 3">
-		<item>Empire Asieneuve</item>
+		<item>Imperial Asieneuve</item>
+    <item>Buffel</item>
+    
 		<item>BioPlasma Organ Stage 2</item>
 		<item>Heavy Ion Cannon</item>
 		<item>Heavy Ion Turret</item>
@@ -577,7 +415,8 @@
 		<item>Vulcan Gun</item>
 	</tech>
 	<tech name="Empire Military 4">
-		<item>Empire Jupiter</item>
+		<item>Imperial Jupiter</item>
+    <item>Kestrel</item>
 		<item>Heavy Ripper Cannon</item>
 		<item>Mass Driver MK3</item>
 		<item>Plasma Cluster Cannon MK3</item>
@@ -585,45 +424,13 @@
 		<item>Turbolaser</item>
 	</tech>
 	<tech name="Empire Military 5">
-		<item>Empire Valenderay</item>
+		<item>Imperial Valenderay</item>
 		<item>Ragnarok Beam</item>
 		<item>Turreted Vulcan Gun</item>
 	</tech>
 	
 	
-	<tech name="Independent Military 1">
-		<item>Laser Cannon MK1</item>
-		<item>BioPlasma Organ Stage 1</item>
-		<item>Gauss Gun</item>
-		<item>Mass Driver MK1</item>
-	</tech>
-	<tech name="Independent Military 2">
-		<item>Laser Turret MK1</item>
-		<item>Plasma Blaster MK1</item>
-		<item>Turreted Gauss Gun</item>
-		<item>Ion Cannon</item>
-		<item>Laser Cannon MK2</item>
-		<item>Plasma Cluster Cannon MK1</item>
-		<item>Plasma Turret MK1</item>
-		<item>BioPlasma Organ Stage 2</item>
-		<item>Mass Driver MK2</item>
-		<item>Plasma Blaster MK2</item>
-		<item>Plasma Cluster Cannon MK2</item>
-		<item>Shredder</item>
-	</tech>
-	<tech name="Independent Military 3">
-		<item>Laser Turret MK2</item>
-		<item>Orion Beam</item>
-		<item>Laser Cannon MK3</item>
-		<item>Plasma Turret MK2</item>
-		<item>Plasma Cluster Cannon MK3</item>
-	</tech>
-	<tech name="Independent Military 4">
-
-	</tech>
-	<tech name="Independent Military 5">
-
-	</tech>
+	
  
  
  
@@ -665,6 +472,7 @@
 		<item>Railgun</item>
 	</tech>
 	<tech name="Roidhunate Military 4">
+    <item>Merkhrioch</item>
 		<item>Heavy Ripper Cannon</item>
 		<item>Plasma Cluster Cannon MK3</item>
 		<item>Heavy Laser</item>
@@ -697,6 +505,7 @@
 	</tech>
 	<tech name="Betelgeuse Military 3">
     <item>Betelgian Cassandra</item>
+    <item>Violente</item>
 		<item>Heavy Ion Turret</item>
 		<item>Plasma Blaster MK2</item>
 		<item>Plasma Blaster MK3</item>
@@ -710,6 +519,7 @@
 	<tech name="Betelgeuse Military 4">
     <item>Betelgian Orsa</item>
     <item>Betelgian Stella</item>
+    <item>Impresa</item>
 		<item>Plasma Turret MK2</item>
     <item>Unicorp Headhunter Launcher</item>
 		<item>Headhunter Missile</item>
@@ -726,9 +536,7 @@
   <!--5 is too high even for Dandalo -->
 	<tech name="Betelgeuse Military 5">  
 		
-	</tech>
- 
- 
+	</tech> 
  
 	<tech name="Barbarian Military 1">
 		<item>Barbarian Looter</item>
@@ -772,6 +580,92 @@
 	<tech name="Barbarian Military 5">
     
 	</tech>
+  
+  <tech name="Generic Civil 1">
+    <item>Endeavour</item>
+    <item>Scarab</item>
+	</tech>
+  <tech name="Generic Civil 2">
+    <item>Fish Bone</item>
+    <item>Voyager Cargo</item>
+	</tech>
+  <tech name="Generic Civil 3">
+    <item>Hauler</item>
+	</tech>
+  <tech name="Generic Civil 4">
+    <item>Whale</item>
+    <item>Rhino</item>
+	</tech>
+  <tech name="Generic Civil 5">
+  
+	</tech>
+  
+  <tech name="Empire Civil 1">
+    <item>Schroedinger</item>
+	</tech>
+  <tech name="Empire Civil 2">
+    <item>Quicksilver</item>
+	</tech>
+  <tech name="Empire Civil 3">
+  
+	</tech>
+  <tech name="Empire Civil 4">
+    <item>Zheng He</item>
+    <item>Argosy</item>
+	</tech>
+  <tech name="Empire Civil 5">
+    <item>Sunflower</item>
+	</tech>
+  
+  <tech name="Roidhunate Civil 1">
+  
+	</tech>
+  <tech name="Roidhunate Civil 2">
+    <item>Meryoch</item>
+	</tech>
+  <tech name="Roidhunate Civil 3">
+  
+	</tech>
+  <tech name="Roidhunate Civil 4">
+    <item>Rioloch</item>
+	</tech>
+  <tech name="Roidhunate Civil 5">
+    <item>Geldoch</item>
+	</tech>
+  
+  <tech name="Betelgeuse Civil 1">
+  
+	</tech>
+  <tech name="Betelgeuse Civil 2">
+    <item>Pelegrina</item>
+	</tech>
+  <tech name="Betelgeuse Civil 3">
+    <item>Carvela</item>
+    <item>Veniera</item>
+	</tech>
+  <tech name="Betelgeuse Civil 4">
+    
+	</tech>
+  <tech name="Betelgeuse Civil 5">
+  
+	</tech>
+  
+  <tech name="Barbarian Civil 1">
+  
+	</tech>
+  <tech name="Barbarian Civil 2">
+
+	</tech>
+  <tech name="Barbarian Civil 3">
+
+	</tech>
+  <tech name="Barbarian Civil 4">
+    
+	</tech>
+  <tech name="Barbarian Civil 5">
+  
+	</tech>
+  
  
 	<tech name="Basic Outfits 1 Light">
 		<item>Battery</item>

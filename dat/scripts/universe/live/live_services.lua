@@ -411,6 +411,14 @@ end
 
 local function generateExtraPresences(planet,sectorStability)
 
+  local f=planet.c:faction()
+  local factionName=""
+
+	if (f and not (f==faction.get("Natives"))) then
+		factionName=f:name()
+  end
+
+
 	if (planet.lua.settlements.humans) then
 		local settlement=planet.lua.settlements.humans
 
@@ -422,8 +430,13 @@ local function generateExtraPresences(planet,sectorStability)
 		if (settlement.technology>1.2) then
 			range=3
 		end
-
-		planet.c:setFactionExtraPresence("Imperial Trader",amount,range)
+    
+    if (factionName=="Empire of Terra") then
+      planet.c:setFactionExtraPresence("Imperial Trader",amount,range)
+      planet.c:setFactionExtraPresence("Independent Trader",amount/2,range)
+    else
+      planet.c:setFactionExtraPresence("Independent Trader",amount,range)
+    end
 
 		if (settlement.stability<0.5) then
 			local amount=100*(1-settlement.stability*2)/sectorStability
@@ -476,7 +489,7 @@ local function generateExtraPresences(planet,sectorStability)
 	end
 end
 
-local function generateTechnologiesCivilian(planet,bestIndustry,bestTechnology)
+local function generateTechnologiesCivilianOld(planet,bestIndustry,bestTechnology)
 
 	planet.c:removeTechGroup("Basic Outfits 1 Light")
 	planet.c:removeTechGroup("Basic Outfits 1 Med")
@@ -572,6 +585,22 @@ local function generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,b
 	end
 end
 
+local function generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,faction)
+	planet.c:addTechGroup(faction.." Civil 1")
+	if (bestIndustry>0.2 and bestTechnology>0.5) then
+		planet.c:addTechGroup(faction.." Civil 2")
+	end
+	if (bestIndustry>0.4 and bestTechnology>0.6) then
+		planet.c:addTechGroup(faction.." Civil 3")
+	end
+	if (bestIndustry>0.6 and bestTechnology>0.7) then
+		planet.c:addTechGroup(faction.." Civil 4")
+	end
+	if (bestIndustry>0.9 and bestTechnology>1) then
+		planet.c:addTechGroup(faction.." Civil 5")
+	end
+end
+
 local function generateCivilizedPlanetServices(planet)
 
 	local bestPop=0
@@ -633,17 +662,29 @@ local function generateCivilizedPlanetServices(planet)
 		planet.c:removeService("s")
 	end
 
-	generateTechnologiesCivilian(planet,bestIndustry,bestTechnology)
+	generateTechnologiesCivilianOld(planet,bestIndustry,bestTechnology)
 
 	local f=planet.c:faction()
 
 	if (f and not (f==faction.get("Natives"))) then
 		factionName=f:name()
+    
+  generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Generic")
+
+		if (factionName=="Empire of Terra") then
+			generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Empire")
+		elseif (factionName=="Roidhunate of Ardarshir") then
+			generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Roidhunate")
+		elseif (factionName=="Oligarchy of Betelgeuse") then
+			generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Betelgeuse")
+		elseif (factionName=="Barbarians") then
+			generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Barbarian")
+		end
+
+  generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Generic")
 
 		if (factionName=="Empire of Terra") then
 			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Empire")
-		elseif (factionName=="Independent") then
-			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Independent")
 		elseif (factionName=="Roidhunate of Ardarshir") then
 			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Roidhunate")
 		elseif (factionName=="Oligarchy of Betelgeuse") then

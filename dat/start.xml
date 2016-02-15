@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Start>
- <name>Sea of Darkness</name>
+ <name>Long Night</name>
  <player>
-  <ship name="El Ego de Deiz">Empire Halley</ship>
+  <ship name="El Ego de Deiz">Imperial Halley</ship>
   <credits>30000</credits>
   <system>
    <name>Sol</name>

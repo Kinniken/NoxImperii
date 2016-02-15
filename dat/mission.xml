@@ -7,7 +7,7 @@
    <chance>960</chance>
    <location>Computer</location>
    <faction>Empire of Terra</faction>
-   <faction>Independent</faction>
+   <faction>Independent Worlds</faction>
    <faction>Imperial Trader</faction>
   </avail>
  </mission>
@@ -18,7 +18,7 @@
    <chance>960</chance>
    <location>Computer</location>
    <faction>Empire of Terra</faction>
-   <faction>Independent</faction>
+   <faction>Independent Worlds</faction>
    <faction>Imperial Trader</faction>
   </avail>
  </mission>

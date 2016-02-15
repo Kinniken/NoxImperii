@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Fleets>
  
- <!-- Independent Trade -->
- <fleet name="Independent Endeavour">
-  <ai>independent</ai>
-  <faction>Independent</faction>
+ <!-- Independent Trader -->
+ <fleet name="Independent Trader Endeavour">
+  <ai>independent_trader</ai>
+  <faction>Independent Trader</faction>
   <pilots>
    <pilot name="Independent Endeavour" ship="Endeavour"></pilot>
   </pilots>
  </fleet>
- <fleet name="Independent Scarab">
-  <ai>independent</ai>
-  <faction>Independent</faction>
+ <fleet name="Independent Trader Scarab">
+  <ai>independent_trader</ai>
+  <faction>Independent Trader</faction>
   <pilots>
    <pilot name="Independent Scarab" ship="Scarab"></pilot>
   </pilots>
  </fleet>
- <fleet name="Independent Fish Bone">
-  <ai>independent</ai>
-  <faction>Independent</faction>
+ <fleet name="Independent Trader Fish Bone">
+  <ai>independent_trader</ai>
+  <faction>Independent Trader</faction>
   <pilots>
    <pilot name="Independent Fish Bone" ship="Fish Bone"></pilot>
   </pilots>
  </fleet>
- <fleet name="Independent Voyager Cargo">
-  <ai>independent</ai>
-  <faction>Independent</faction>
+ <fleet name="Independent Trader Voyager Cargo">
+  <ai>independent_trader</ai>
+  <faction>Independent Trader</faction>
   <pilots>
    <pilot name="Independent Voyager Cargo" ship="Voyager Cargo"></pilot>
   </pilots>
  </fleet>
- <fleet name="Independent Hauler">
-  <ai>independent</ai>
-  <faction>Independent</faction>
+ <fleet name="Independent Trader Hauler">
+  <ai>independent_trader</ai>
+  <faction>Independent Trader</faction>
   <pilots>
    <pilot name="Independent Hauler" ship="Hauler"></pilot>
   </pilots>
  </fleet>
- <fleet name="Independent Whale">
-  <ai>independent</ai>
-  <faction>Independent</faction>
+ <fleet name="Independent Trader Whale">
+  <ai>independent_trader</ai>
+  <faction>Independent Trader</faction>
   <pilots>
    <pilot name="Independent Whale" ship="Whale"></pilot>
   </pilots>
  </fleet>
- <fleet name="Independent Rhino">
-  <ai>independent</ai>
-  <faction>Independent</faction>
+ <fleet name="Independent Trader Rhino">
+  <ai>independent_trader</ai>
+  <faction>Independent Trader</faction>
   <pilots>
    <pilot name="Independent Rhino" ship="Rhino"></pilot>
   </pilots>
@@ -54,57 +54,57 @@
  
  <!-- Independent Military -->
  
- <fleet name="Independent Shark">
-  <ai>independent</ai>
-  <faction>Independent</faction>
+ <fleet name="Independent Worlds Shark">
+  <ai>independent_worlds</ai>
+  <faction>Independent Worlds</faction>
   <pilots>
    <pilot name="Independent Shark" ship="Shark"></pilot>
   </pilots>
  </fleet>
- <fleet name="Independent Admonisher">
-  <ai>independent</ai>
-  <faction>Independent</faction>
+ <fleet name="Independent Worlds Admonisher">
+  <ai>independent_worlds</ai>
+  <faction>Independent Worlds</faction>
   <pilots>
    <pilot name="Independent Admonisher" ship="Admonisher"></pilot>
   </pilots>
  </fleet>
- <fleet name="Independent Wasp">
-  <ai>independent</ai>
-  <faction>Independent</faction>
+ <fleet name="Independent Worlds Wasp">
+  <ai>independent_worlds</ai>
+  <faction>Independent Worlds</faction>
   <pilots>
    <pilot name="Independent Wasp" ship="Wasp"></pilot>
   </pilots>
  </fleet>
- <fleet name="Independent Voyager Frigate">
-  <ai>independent</ai>
-  <faction>Independent</faction>
+ <fleet name="Independent Worlds Voyager Frigate">
+  <ai>independent_worlds</ai>
+  <faction>Independent Worlds</faction>
   <pilots>
    <pilot name="Independent Voyager Frigate" ship="Voyager Frigate"></pilot>
   </pilots>
  </fleet>
- <fleet name="Independent Delta">
-  <ai>independent</ai>
-  <faction>Independent</faction>
+ <fleet name="Independent Worlds Delta">
+  <ai>independent_worlds</ai>
+  <faction>Independent Worlds</faction>
   <pilots>
    <pilot name="Independent Delta" ship="Delta"></pilot>
   </pilots>
  </fleet>
- <fleet name="Independent Vendetta">
-  <ai>independent</ai>
-  <faction>Independent</faction>
+ <fleet name="Independent Worlds Vendetta">
+  <ai>independent_worlds</ai>
+  <faction>Independent Worlds</faction>
   <pilots>
    <pilot name="Independent Vendetta" ship="Vendetta"></pilot>
   </pilots>
  </fleet>
- <fleet name="Independent Raptor">
-  <ai>independent</ai>
-  <faction>Independent</faction>
+ <fleet name="Independent Worlds Raptor">
+  <ai>independent_worlds</ai>
+  <faction>Independent Worlds</faction>
   <pilots>
    <pilot name="Independent Raptor" ship="Raptor"></pilot>
   </pilots>
  </fleet>
  
- <!-- Natives Trade -->
+ <!-- Natives -->
  <fleet name="Natives Endeavour">
   <ai>natives</ai>
   <faction>Natives</faction>
@@ -127,99 +127,48 @@
   </pilots>
  </fleet>
  
- <!-- Civilian Trade -->
- <fleet name="Civilian Endeavour">
-  <ai>civilian</ai>
-  <faction>Civilian</faction>
-  <pilots>
-   <pilot name="Civilian Endeavour" ship="Endeavour"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Civilian Scarab">
-  <ai>civilian</ai>
-  <faction>Civilian</faction>
-  <pilots>
-   <pilot name="Civilian Scarab" ship="Scarab"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Civilian Fish Bone">
-  <ai>civilian</ai>
-  <faction>Civilian</faction>
-  <pilots>
-   <pilot name="Civilian Fish Bone" ship="Fish Bone"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Civilian Voyager Cargo">
-  <ai>civilian</ai>
-  <faction>Civilian</faction>
-  <pilots>
-   <pilot name="Civilian Voyager Cargo" ship="Voyager Cargo"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Civilian Hauler">
-  <ai>civilian</ai>
-  <faction>Civilian</faction>
-  <pilots>
-   <pilot name="Civilian Hauler" ship="Hauler"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Civilian Whale">
-  <ai>civilian</ai>
-  <faction>Civilian</faction>
-  <pilots>
-   <pilot name="Civilian Whale" ship="Whale"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Civilian Rhino">
-  <ai>civilian</ai>
-  <faction>Civilian</faction>
-  <pilots>
-   <pilot name="Civilian Rhino" ship="Rhino"></pilot>
-  </pilots>
- </fleet>
- 
 
 <!-- Imperial Traders -->
  <fleet name="Imperial Trader Schroedinger">
   <ai>trader</ai>
   <faction>Imperial Trader</faction>
   <pilots>
-   <pilot name="Trader Schroedinger" ship="Schroedinger"></pilot>
+   <pilot name="Imperial Schroedinger" ship="Schroedinger"></pilot>
   </pilots>
  </fleet> 
  <fleet name="Imperial Trader Quicksilver">
   <ai>trader</ai>
   <faction>Imperial Trader</faction>
   <pilots>
-   <pilot name="Trader Quicksilver" ship="Quicksilver"></pilot>
+   <pilot name="Imperial Quicksilver" ship="Quicksilver"></pilot>
   </pilots>
  </fleet>
  <fleet name="Imperial Trader Fish Bone">
   <ai>trader</ai>
   <faction>Imperial Trader</faction>
   <pilots>
-   <pilot name="Trader Fish Bone" ship="Fish Bone"></pilot>
+   <pilot name="Imperial Fish Bone" ship="Fish Bone"></pilot>
   </pilots>
  </fleet>
  <fleet name="Imperial Trader Zheng He">
   <ai>trader</ai>
   <faction>Imperial Trader</faction>
   <pilots>
-   <pilot name="Trader Zheng He" ship="Zheng He"></pilot>
+   <pilot name="Imperial Zheng He" ship="Zheng He"></pilot>
   </pilots>
  </fleet>
  <fleet name="Imperial Trader Sunflower">
   <ai>trader</ai>
   <faction>Imperial Trader</faction>
   <pilots>
-   <pilot name="Trader Sunflower" ship="Sunflower"></pilot>
+   <pilot name="Imperial Sunflower" ship="Sunflower"></pilot>
   </pilots>
  </fleet>
  <fleet name="Imperial Trader Argosy">
   <ai>trader</ai>
   <faction>Imperial Trader</faction>
   <pilots>
-   <pilot name="Imperial Trader Argosy" ship="Argosy"></pilot>
+   <pilot name="Imperial Argosy" ship="Argosy"></pilot>
   </pilots>
  </fleet>
  
@@ -229,35 +178,35 @@
   <ai>trader</ai>
   <faction>Ardar Trader</faction>
   <pilots>
-   <pilot name="Trader Endeavour" ship="Endeavour"></pilot>
+   <pilot name="Ardar Endeavour" ship="Endeavour"></pilot>
   </pilots>
  </fleet>
  <fleet name="Ardar Trader Fish Bone">
   <ai>trader</ai>
   <faction>Ardar Trader</faction>
   <pilots>
-   <pilot name="Trader Fish Bone" ship="Fish Bone"></pilot>
+   <pilot name="Ardar Fish Bone" ship="Fish Bone"></pilot>
   </pilots>
  </fleet>
  <fleet name="Ardar Trader Meryoch">
   <ai>trader</ai>
   <faction>Ardar Trader</faction>
   <pilots>
-   <pilot name="Trader Meryoch" ship="Meryoch"></pilot>
+   <pilot name="Ardar Meryoch" ship="Meryoch"></pilot>
   </pilots>
  </fleet>
  <fleet name="Ardar Trader Rioloch">
   <ai>trader</ai>
   <faction>Ardar Trader</faction>
   <pilots>
-   <pilot name="Trader Rioloch" ship="Rioloch"></pilot>
+   <pilot name="Ardar Rioloch" ship="Rioloch"></pilot>
   </pilots>
  </fleet>
  <fleet name="Ardar Trader Geldoch">
   <ai>trader</ai>
   <faction>Ardar Trader</faction>
   <pilots>
-   <pilot name="Trader Geldoch" ship="Geldoch"></pilot>
+   <pilot name="Ardar Geldoch" ship="Geldoch"></pilot>
   </pilots>
  </fleet>
  
@@ -267,28 +216,28 @@
   <ai>trader</ai>
   <faction>Betelgian Trader</faction>
   <pilots>
-   <pilot name="Trader Pelegrina" ship="Pelegrina"></pilot>
+   <pilot name="Betelgian Pelegrina" ship="Pelegrina"></pilot>
   </pilots>
  </fleet>
  <fleet name="Betelgian Trader Carvela">
   <ai>trader</ai>
   <faction>Betelgian Trader</faction>
   <pilots>
-   <pilot name="Trader Carvela" ship="Carvela"></pilot>
+   <pilot name="Betelgian Carvela" ship="Carvela"></pilot>
   </pilots>
  </fleet>
  <fleet name="Betelgian Trader Veniera">
   <ai>trader</ai>
   <faction>Betelgian Trader</faction>
   <pilots>
-   <pilot name="Trader Veniera" ship="Veniera"></pilot>
+   <pilot name="Betelgian Veniera" ship="Veniera"></pilot>
   </pilots>
  </fleet>
  <fleet name="Betelgian Trader Impresa">
   <ai>trader</ai>
   <faction>Betelgian Trader</faction>
   <pilots>
-   <pilot name="Trader Impresa" ship="Impresa"></pilot>
+   <pilot name="Betelgian Impresa" ship="Impresa"></pilot>
   </pilots>
  </fleet>
  

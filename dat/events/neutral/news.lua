@@ -13,65 +13,31 @@ else --default english
 
    header_table["Generic"] =     {"We bring you the latest news in the galaxy."
                                  }
-   header_table["Independent"] = {"Welcome to Universal News Feed. All the headlines all the time."
+   header_table["Independent Worlds"] = {"Welcome to Universal News Feed. All the headlines all the time."
                                  }
-   header_table["Empire"] =      {"Welcome to the Empire News Centre."
-                                 }
-   header_table["Dvaered"] =     {"Welcome to the Dvaered News Centre. All that happens. In simple words. So you can understand."
-                                 }
-   header_table["Goddard"] =     {"Welcome to Goddard News Centre. We bring you the news from around the Empire."
-                                 }
+   header_table["Empire of Terra"] =      {"Welcome to the Empire News Centre."
+                      }
    header_table["Pirate"] =      {"Pirate News. News that matters."
                                  }
-   header_table["Sirius"] =      {"Sirius News Reel. Words of the Sirichana for all."
-                                 }
-   header_table["FLF"] =         {"The word of the Free Resistance."
-                                 }
-   header_table["Frontier"] =    {"News from the Frontier Alliance."
-                                 }
-   header_table["Proteron"] =    {"Word from the Proteron state."
-                                 }
-   header_table["Za'lek"] =      {"Scientific, Socioeconomic, and Sundry Events"
-                                 }
-   header_table["Soromid"] =     {"The voice of the future."
-                                 }
-   header_table["Thurion"] =     {"Data Relay Network"
+
                                  }
    
    greet_table={}
 
    greet_table["Generic"] =      {""
                                  }
-   greet_table["Independent"] =  {""
-                                 }
    greet_table["Empire"] =       {"Fresh news from around the Empire.",
-                                 "Remembering the Incident.",
+                                 "Celebrating the Empire.",
                                  "Keeping you informed."
                                  }
-   greet_table["Dvaered"] =      {""
-                                 }
-   greet_table["Goddard"] =      {""}
+
    greet_table["Pirate"] =       {"News that matters.",
                                  "Adopt a cat today!",
                                  "Laughing at the Emperor.",
                                  "On top of the world.",
                                  "Piracy has never been better."
                                  }
-   greet_table["FLF"] =          {""
-                                 }
-   greet_table["Frontier"] =     {"News you can trust."
-                                 }
-   greet_table["Sirius"] =       {"Stay faithful.",
-                                 "Sirichana watches and guides you."
-                                 }
-   greet_table["Proteron"] =     {""
-                                 }
-   greet_table["Za'lek"] =       {""
-                                 }
-   greet_table["Soromid"] =      {"Genetically tailoured for you."
-                                 }
-   greet_table["Thurion"] =      {""
-                                 }
+
    
    articles={}
 
@@ -79,10 +45,6 @@ else --default english
       --[[
          Science and technology
       --]]
-      {
-         title = "Techs Probe for Sol",
-         desc = "Technicians at the Omega Station recently returned from a new effort to understand the Sol Incident. They expect the first data to arrive in two months' time."
-      },
       {
          title = "Sand Monster Caught On Tape",
          desc = "Local residents claim footage from an Arrakis security camera shows elusive beast walking through a desert storm. Exobiologists suspect a hoax."
@@ -94,10 +56,6 @@ else --default english
       {
          title = "Experiment Produces Cold Fusion",
          desc = "In an interview with Bleeding Edge anchor McKenzie Kruft, a researcher at Eureka labs says he has produced a tabletop atomic reaction. He hopes to publish his results in a science journal later this year."
-      },
-      {
-         title = "Bees Introduced to Emperor's Fist",
-         desc = "As they prepare the gardens of the future Imperial compound, entomologists have established the first colony of the Earth insects on the planet formerly known as G Scorpeii 5."
       },
       {
          title = "The Case for Sex",

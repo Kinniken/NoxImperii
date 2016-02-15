@@ -7,13 +7,13 @@ function spawn_patrol ()
     local r = rnd.rnd()
 
     if r < 0.5 then
-       scom.addPilot( pilots, "Ardar Trader Llama", 20 );
+       scom.addPilot( pilots, "Ardar Trader Endeavour", 10 );
     elseif r < 0.8 then
-       scom.addPilot( pilots, "Ardar Trader Llama", 20 );
-       scom.addPilot( pilots, "Ardar Trader Llama", 20 );
+       scom.addPilot( pilots, "Ardar Trader Endeavour", 10 );
+       scom.addPilot( pilots, "Ardar Trader Endeavour", 10 );
     else
-       scom.addPilot( pilots, "Ardar Trader Llama", 20 );
-       scom.addPilot( pilots, "Ardar Trader Koala", 40 );
+       scom.addPilot( pilots, "Ardar Trader Endeavour", 10 );
+       scom.addPilot( pilots, "Ardar Trader Fish Bone", 20 );
     end
 
     return pilots
@@ -26,20 +26,20 @@ function spawn_squad ()
     local r = rnd.rnd()
 
     if r < 0.5 then
-       scom.addPilot( pilots, "Ardar Trader Koala", 40 );
-       scom.addPilot( pilots, "Ardar Trader Gawain", 20 );
-       scom.addPilot( pilots, "Ardar Trader Gawain", 20 );
+       scom.addPilot( pilots, "Ardar Trader Endeavour", 10 );
+       scom.addPilot( pilots, "Ardar Trader Fish Bone", 20 );
+       scom.addPilot( pilots, "Ardar Trader Fish Bone", 20 );
     elseif r < 0.8 then
-       scom.addPilot( pilots, "Ardar Trader Mule", 45 );
-       scom.addPilot( pilots, "Ardar Trader Llama", 20 );
-       scom.addPilot( pilots, "Ardar Trader Quicksilver", 20 );
-       scom.addPilot( pilots, "Ardar Trader Rhino", 35 );
+       scom.addPilot( pilots, "Ardar Trader Endeavour", 10 );
+       scom.addPilot( pilots, "Ardar Trader Fish Bone", 20 );
+       scom.addPilot( pilots, "Ardar Trader Meryoch", 40 );
+       scom.addPilot( pilots, "Ardar Trader Rioloch", 100 );
     else
-       scom.addPilot( pilots, "Ardar Trader Llama", 20 );
-       scom.addPilot( pilots, "Ardar Trader Mule", 45 );
-       scom.addPilot( pilots, "Ardar Trader Gawain", 20 );
-       scom.addPilot( pilots, "Ardar Trader Rhino", 35 );
-       scom.addPilot( pilots, "Ardar Trader Quicksilver", 20 );
+       scom.addPilot( pilots, "Ardar Trader Endeavour", 10 );
+       scom.addPilot( pilots, "Ardar Trader Fish Bone", 20 );
+       scom.addPilot( pilots, "Ardar Trader Meryoch", 40 );
+       scom.addPilot( pilots, "Ardar Trader Rioloch", 100 );
+       scom.addPilot( pilots, "Ardar Trader Geldoch", 100 );
     end
 
     return pilots

@@ -341,7 +341,7 @@ settlement_generator.fringeHumanIndependentSettlements[#settlement_generator.fri
 		planet.lua.settlements.humans:addTag("buddhist")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Independent") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Independent Worlds") then
 			return false
 		end
 		return true
@@ -359,7 +359,7 @@ settlement_generator.fringeHumanIndependentSettlements[#settlement_generator.fri
 		planet.lua.settlements.humans:addTag("isolated")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Independent") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Independent Worlds") then
 			return false
 		end
 		return true
@@ -377,7 +377,7 @@ settlement_generator.fringeHumanIndependentSettlements[#settlement_generator.fri
 		planet.lua.settlements.humans:addTag("eximperial")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Independent") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Independent Worlds") then
 			return false
 		end
 		return true
@@ -395,7 +395,7 @@ settlement_generator.fringeHumanIndependentSettlements[#settlement_generator.fri
 		planet.lua.settlements.humans:addTag("disagracedearl")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Independent") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Independent Worlds") then
 			return false
 		end
 		return true
@@ -413,7 +413,7 @@ settlement_generator.fringeHumanIndependentSettlements[#settlement_generator.fri
 		planet.lua.settlements.humans:addTag("feudalworld")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Independent") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Independent Worlds") then
 			return false
 		end
 		return true

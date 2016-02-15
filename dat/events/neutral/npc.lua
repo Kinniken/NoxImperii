@@ -75,7 +75,7 @@ else --default english
                                "Hey, you ever wonder why we're here?\", you say, \"It's one of life's great mysteries isn't it?\", the citizen replys, \"Why are we here? Are we the product of some cosmic coincidence or is there some great cosmic plan for us? I dunno, but it keeps me up at night\" ... \"What?? No, I mean why are we in here, in this bar?"
                               }
 
-   msg_lore["Independent"] =  {"We're not part of any of the galactic superpowers. We can take care of ourselves!",
+   msg_lore["Independent Worlds"] =  {"We're not part of any of the galactic superpowers. We can take care of ourselves!",
                                "Sometimes I worry that our lack of a standing military leaves us vulnerable to attack. I hope nobody will get any ideas of conquering us!",
                               }
 
@@ -87,50 +87,6 @@ else --default english
                                "Don't pay attention to the naysayers. The Empire is still strong. Have you ever seen a Peacemaker up close? I doubt any ship fielded by any other power could stand up to one.",
                               }
 
-   msg_lore["Dvaered"] =      {"Our Warlord is currently fighting for control over another planet. We all support him unconditionally, of course! Of course...",
-                               "My great-great-great-grandfather fought in the Dvaered Revolts! We still have the holovids he made. I'm proud to be a Dvaered!",
-                               "I've got lots of civilian commendations! It's important to have commendations if you're a Dvaered.",
-                               "You better not mess with House Dvaered. Our military is the largest and strongest in the galaxy. Nobody can stand up to us!",
-                               "House Dvaered? House? The Empire is weak and useless, we don't need them anymore! I say we declare ourselves an independent faction today. What are they going to do, subjugate us? We all know how well that went last time! Ha!",
-                               "I'm thinking about joining the military. Every time I see or hear news about those rotten FLF bastards, it makes my blood boil! They should all be pounded into space dust!",
-                               "FLF terrorists? I'm not too worried about them. You'll see, High Command will have smoked them out of their den soon enough, and then the Frontier will be ours.",
-                               "Did you know that House Dvaered was named after a hero of the revolt? At least that's what my grandparents told me.",
-                              }
-
-   msg_lore["Sirius"] =       {"Greetings, traveler. May Sirichana's wisdom guide you as it guides me.",
-                               "I once met one of the Touched in person. Well, it wasn't really a meeting, our eyes simply met... But that instant alone was awe-inspiring.",
-                               "They say Sirichana lives and dies like any other man, but each new Sirichana is the same as the last. How is that possible?",
-                               "My cousin was called to Mutris a cycle ago... He must be in Crater City by now. And one day, he will become one of the Touched!",
-                               "Some people say Sirius society is unfair because our echelons are determined by birth. But even though we are different, we are all followers of Sirichana. Spiritually, we are equal.",
-                               "House Sirius is officially part of the Empire, but everyone knows that's only true on paper. The Emperor has nothing to say in these systems. We follow Sirichana, and no-one else.",
-                               "You can easily tell the different echelons apart. Every Sirian citizen and soldier wears clothing appropriate to his or her echelon.",
-                               "I hope to meet one of the Touched one day!",
-                              }
-
-   msg_lore["Soromid"] =      {"Hello. Can I interest you in one of our galaxy famous cosmetic gene treatments? You look like you could use them...",
-                               "Can you believe it? I was going to visit Sorom to find my roots, and then boom! It got burnt to a crisp! Even now, cycles later, I still can't believe it.",
-                               "Yes, it's true, our military ships are alive. Us normal folk don't get to own bioships though, we have to make do with synthetic constructs just like everyone else.",
-                               "Everyone knows that we Soromid altered ourselves to survive the deadly conditions on Sorom during the Great Quarantine. What you don't hear so often is that billions of us died from the therapy itself. We paid a high price for survival.",
-                               "Our cosmetic gene treatments are even safer now for non-Soromids, with a rate of survival of 99.4%!",
-                               "We have been rebuilding and enhancing our bodies for so long, I say we've become a new species, one above human.",
-                              }
-
-   msg_lore["Za'lek"] =       {"It's not easy, dancing to those scientists' tunes. They give you the most impossible tasks! Like, where am I supposed to get a triple redundant helitron converter? Honestly.",
-                               "The Soromids? Hah! We Za'lek are the only true scientists in this galaxy.",
-                               "I don't understand why we bother sending our research results to the Empire. These simpletons can't understand the simplest formulas!",
-                               }
-
-   msg_lore["Proteron"] =     {"Hello, traveler. Welcome to Proteron space. We are an evil, power hungry dystopia on a quest for dominance over the galaxy. Would you like a brochure?",
-                              }
-
-   msg_lore["Frontier"] =     {"We value our autonomy. We don't want to be ruled by those megalomanic Dvaered Warlords! Can't they just shoot at each other instead of threatening us? If it wasn't for the Liberation Front...",
-                               "Have you studied your galactic history? The Frontier worlds were the first to be colonized by humans. That makes our worlds the oldest human settlements in the galaxy, now that Earth is gone.",
-                               "We have the Dvaered encroaching on our territory on one side, and the Sirius zealots on the other. Sometimes I worry that in a few decacycles, the Frontier will no longer exist.",
-                               "Have you visited the Frontier Museum? They've got a scale model of a First Growth colony ship on display in one of the big rooms. Even scaled down like that, it's massive! Imagine how overwhelming the real ones must have been.",
-                               "There are twelve true Frontier worlds, because twelve colony ships successfully completed their journey in the First Growth. But did you know that there were twenty colony ships to begin with? Eight of them never made it. Some are said to have mysteriously disappeared. I wonder what happened to them?",
-                               "We don't have much here in the Frontier, other than our long history leading directly back to Earth. But I don't mind. I'm happy living here, and I wouldn't want to move anywhere else.",
-                               "You know the Frontier Liberation Front? They're the guerilla movement that fights for the Frontier. Not to be confused with the Liberation Front of the Frontier, the Frontier Front for Liberation, or the Liberal Frontier's Front!",
-                              }
 
    msg_lore["Pirate"] =       {"Hi mate. Money or your life! Heh heh, just messing with you.",
                                "Hey, look at these new scars I got!",
@@ -138,7 +94,7 @@ else --default english
                                "My gran said 'Never trust a pirate', she was right too, I got a pretty credit chip for her with the slavers.",
                               }
 
-   msg_lore["Trader"] =       {"Just another link in the Great Chain, right?",
+   msg_lore["Imperial Trader"] =       {"Just another link in the Great Chain, right?",
                                "You win some, you lose some but if you don't try you're never going to win",
                                "If you don't watch the markets then you'll be hopping between planets in a jury-rigged ship in no time.",
                                "Them blimming pirates, stopping honest folk from making an honest living - it's not like we're exploiting the needy!",

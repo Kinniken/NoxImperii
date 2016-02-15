@@ -63,7 +63,7 @@ function create ()
 		misn.finish()
 	end
 
-	pickupPlanet=get_faction_planet(system.cur(),"Independent",2,7)
+	pickupPlanet=get_faction_planet(system.cur(),"Independent Worlds",2,7)
 
 	if not pickupPlanet then
 		misn.finish()

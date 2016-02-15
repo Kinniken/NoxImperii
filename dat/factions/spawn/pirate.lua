@@ -7,16 +7,16 @@ function spawn_patrol ()
     local r = rnd.rnd()
 
     if r < 0.3 then
-       scom.addPilot( pilots, "Pirate Hyena", 15 );
+       scom.addPilot( pilots, "Pirate Shark", 15 );
     elseif r < 0.5 then
-       scom.addPilot( pilots, "Pirate Shark", 20 );
+       scom.addPilot( pilots, "Pirate Admonisher", 20 );
     elseif r < 0.8 then
-       scom.addPilot( pilots, "Pirate Hyena", 15 );
-       scom.addPilot( pilots, "Pirate Shark", 20 );
+       scom.addPilot( pilots, "Pirate Shark", 15 );
+       scom.addPilot( pilots, "Pirate Shark", 15 );
     else
-       scom.addPilot( pilots, "Pirate Hyena", 15 );
-       scom.addPilot( pilots, "Pirate Shark", 20 );
-       scom.addPilot( pilots, "Pirate Vendetta", 25 );
+       scom.addPilot( pilots, "Pirate Shark", 15 );
+       scom.addPilot( pilots, "Pirate Shark", 15 );
+       scom.addPilot( pilots, "Pirate Admonisher", 20 );
     end
 
     return pilots
@@ -29,24 +29,24 @@ function spawn_squad ()
     local r = rnd.rnd()
 
     if r < 0.4 then
-       scom.addPilot( pilots, "Pirate Hyena", 15 );
-       scom.addPilot( pilots, "Pirate Vendetta", 25 );
-       scom.addPilot( pilots, "Pirate Ancestor", 20 );
-       scom.addPilot( pilots, "Pirate Ancestor", 20 );
+       scom.addPilot( pilots, "Pirate Shark", 15 );
+       scom.addPilot( pilots, "Pirate Admonisher", 20 );
+       scom.addPilot( pilots, "Pirate Shark", 15 );
+       scom.addPilot( pilots, "Pirate Vendetta", 80 );
     elseif r < 0.6 then
-       scom.addPilot( pilots, "Pirate Hyena", 15 );
-       scom.addPilot( pilots, "Pirate Shark", 20 );
-       scom.addPilot( pilots, "Pirate Vendetta", 25 );
-       scom.addPilot( pilots, "Pirate Ancestor", 20 );
+       scom.addPilot( pilots, "Pirate Shark", 15 );
+       scom.addPilot( pilots, "Pirate Shark", 15 );
+       scom.addPilot( pilots, "Pirate Vendetta", 40 );
+       scom.addPilot( pilots, "Pirate Delta", 80 );
     elseif r < 0.8 then
-       scom.addPilot( pilots, "Pirate Shark", 20 );
-       scom.addPilot( pilots, "Pirate Rhino", 35 );
-       scom.addPilot( pilots, "Pirate Phalanx", 45 );
+       scom.addPilot( pilots, "Pirate Shark", 15 );
+       scom.addPilot( pilots, "Pirate Shark", 15 );
+       scom.addPilot( pilots, "Pirate Rhino", 80 );
     else
-       scom.addPilot( pilots, "Pirate Hyena", 15 );
-       scom.addPilot( pilots, "Pirate Shark", 20 );
-       scom.addPilot( pilots, "Pirate Vendetta", 25 );
-       scom.addPilot( pilots, "Pirate Admonisher", 45 );
+       scom.addPilot( pilots, "Pirate Admonisher", 20 );
+       scom.addPilot( pilots, "Pirate Shark", 15 );
+       scom.addPilot( pilots, "Pirate Vendetta", 80 );
+       scom.addPilot( pilots, "Pirate Kestrel", 120 );
     end
 
     return pilots

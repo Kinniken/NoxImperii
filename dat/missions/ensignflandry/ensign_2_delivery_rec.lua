@@ -42,7 +42,7 @@ end
 
 function create ()
 
-	pickupPlanet=get_faction_planet(system.get("Saxo"),"Independent",2,7)
+	pickupPlanet=get_faction_planet(system.get("Saxo"),"Independent Worlds",2,7)
 
 	if not pickupPlanet then
 		misn.finish()

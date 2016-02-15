@@ -2,6 +2,8 @@ include("dat/ai/tpl/generic.lua")
 include("dat/ai/personality/patrol.lua")
 
 -- Settings
+mem.armour_run = 40
+mem.armour_return = 70
 mem.aggressive = true
 
 
@@ -13,22 +15,28 @@ function create ()
 
    -- Bribing
    bribe_no = {
-         "\"You insult my honour.\"",
-         "\"I find your lack of honour disturbing.\"",
+         "\"You imperials believe you buy anything.\"",
          "\"You disgust me.\"",
-         "\"Bribery carries a harsh penalty.\"",
-         "\"House Goddard does not lower itself to common scum.\""
+         "\"You should never have left Imperial space!\""
    }
    mem.bribe_no = bribe_no[ rnd.rnd(1,#bribe_no) ]
 
-   -- Refueling
+  -- Get refuel chance
    p = ai.getPlayer()
    if ai.exists(p) then
       standing = ai.getstanding( p ) or -1
       mem.refuel = rnd.rnd( 2000, 4000 )
-      if standing > 60 then mem.refuel = mem.refuel * 0.7 end
-      mem.refuel_msg = string.format( "\"I could do you the favour of refueling for the price of %d credits.\"",
-            mem.refuel )
+      if standing < 20 then
+         mem.refuel_no = "\"My fuel belongs to my people.\""
+      elseif standing < 70 then
+         if rnd.rnd() > 0.2 then
+            mem.refuel_no = "\"My fuel belongs to my people.\""
+         end
+      else
+         mem.refuel = mem.refuel * 0.6
+      end
+      -- Most likely no chance to refuel
+      mem.refuel_msg = string.format( "\"I suppose I could spare some fuel for %d credits.\"", mem.refuel )
    end
 
    mem.loiter = 3 -- This is the amount of waypoints the pilot will pass through before leaving the system
@@ -41,7 +49,7 @@ end
 function taunt ( target, offense )
    -- Offense is not actually used
    taunts = {
-         "Prepare to face annihilation!",
+         "You should never have left Imperial space!",
          "I shall wash my hull in your blood!",
          "Your head will make a great trophy!",
          "These moments will be your last!",

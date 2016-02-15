@@ -14,9 +14,9 @@ function equip_generic( p )
    local shiptype, shipsize = equip_getShipBroad( p:ship():class() )
 
    -- Split by type
-   if shiptype == "civilian" and p:faction() ~= faction.get("Trader") then
+   if shiptype == "civilian" then
       equip_genericCivilian( p, shipsize )
-   elseif shiptype == "merchant" or p:faction() == faction.get("Trader") then
+   elseif shiptype == "merchant" then
       equip_genericMerchant( p, shipsize )
    elseif shiptype == "military" then
       equip_genericMilitary( p, shipsize )

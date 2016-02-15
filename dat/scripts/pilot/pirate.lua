@@ -22,7 +22,7 @@ function pirate_create( )
    elseif z < 0.5 then
       p,o = pirate_createAdmonisher( )
    elseif z < 0.75 then
-      p,o = pirate_createAncestor( )
+      p,o = pirate_createDelta( )
    else
       p,o = pirate_createVendetta( )
    end
@@ -112,12 +112,12 @@ function pirate_createAdmonisher( pirate_create )
 end
 
 
--- Creates a pirate flying a "Pirate Ancestor"
-function pirate_createAncestor( pirate_create )
+-- Creates a pirate flying a "Pirate Delta"
+function pirate_createDelta( pirate_create )
    -- Create the pirate ship
    local p, s, olist
 
-      p     = "Pirate Ancestor"
+      p     = "Pirate Delta"
       s     = ship.get(p)
       olist = { }
    
@@ -127,7 +127,7 @@ function pirate_createAncestor( pirate_create )
    local use_primary, use_secondary, use_medium, use_low
    local nhigh, nmedium, nlow = s:slots()
 
-   -- Ancestor specializes in ranged combat.
+   -- Delta specializes in ranged combat.
    primary        = { "Laser Cannon MK1", "Laser Cannon MK2", "Plasma Blaster MK1", "Plasma Blaster MK2", "Razor MK1", "Razor MK2" }
    secondary      = { "Unicorp Fury Launcher" }
    use_primary    = nhigh-2

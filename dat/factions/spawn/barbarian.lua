@@ -11,7 +11,9 @@ function spawn_patrol ()
    elseif r < 0.8 then
       scom.addPilot( pilots, "Barbarian Raider", 20 );
       scom.addPilot( pilots, "Barbarian Raider", 25 );
+      scom.addPilot( pilots, "Barbarian Vendetta", 25 );
    else
+     scom.addPilot( pilots, "Barbarian Vendetta", 25 );
       scom.addPilot( pilots, "Barbarian Looter", 75 );
    end
 
@@ -30,11 +32,13 @@ function spawn_squad ()
       scom.addPilot( pilots, "Barbarian Looter", 45 );
    elseif r < 0.8 then
       scom.addPilot( pilots, "Barbarian Raider", 25 );
+      scom.addPilot( pilots, "Barbarian Vendetta", 25 );
       scom.addPilot( pilots, "Barbarian Looter", 45 );
    else
       scom.addPilot( pilots, "Barbarian Raider", 20 );
       scom.addPilot( pilots, "Barbarian Raider", 25 );
       scom.addPilot( pilots, "Barbarian Looter", 75 );
+      scom.addPilot( pilots, "Barbarian Raptor", 75 );
    end
 
    return pilots
@@ -62,6 +66,7 @@ function spawn_capship ()
    else
       scom.addPilot( pilots, "Barbarian Raider", 25 );
       scom.addPilot( pilots, "Barbarian Looter", 75 );
+      scom.addPilot( pilots, "Barbarian Raptor", 75 );
    end
 
    return pilots

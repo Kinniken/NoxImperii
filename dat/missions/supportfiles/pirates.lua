@@ -52,7 +52,7 @@ function pir_generate ()
 end
 function pir_easy ()
    if rnd.rnd() < 0.5 then
-      return pirate_createAncestor()
+      return pirate_createDelta()
    else
       return pirate_createVendetta()
    end

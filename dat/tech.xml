@@ -584,13 +584,104 @@
   <tech name="Generic Civil 1">
     <item>Endeavour</item>
     <item>Scarab</item>
+    <item>Battery</item>
+		<item>Solar Panel</item>
+		<item>Fuel Pod</item>
+		<item>Large Civilian Vessel License</item>
+		<item>GUI - Brushed</item>
+		<item>Previous Generation Small Systems</item>
+		<item>Basic Small Systems</item>
+		<item>Beat Up Small Engine</item>
+		<item>Manufacturer Small Engine</item>
+		<item>Patchwork Light Plating</item>
+		<item>Unmodified Small Hull</item>
+		<item>Previous Generation Medium Systems</item>
+		<item>Basic Medium Systems</item>
+		<item>Beat Up Medium Engine</item>
+		<item>Manufacturer Medium Engine</item>
+		<item>Patchwork Medium Plating</item>
+		<item>Unmodified Medium Hull</item>
+		<item>Previous Generation Medium Systems</item>
+		<item>Basic Medium Systems</item>
+		<item>Previous Generation Large Systems</item>
+		<item>Basic Large Systems</item>
+		<item>Beat Up Small Engine</item>
+		<item>Manufacturer Small Engine</item>
+		<item>Beat Up Medium Engine</item>
+		<item>Manufacturer Medium Engine</item>
+		<item>Beat Up Large Engine</item>
+		<item>Manufacturer Large Engine</item>
+		<item>Patchwork Light Plating</item>
+		<item>Unmodified Small Hull</item>
+		<item>Patchwork Medium Plating</item>
+		<item>Unmodified Medium Hull</item>
+		<item>Patchwork Heavy Plating</item>
+		<item>Unmodified Large Hull</item>
+		<item>Manufacturer Large Engine</item>
+		<item>Beat Up Large Engine</item>
+		<item>Patchwork Heavy Plating</item>
+		<item>Unmodified Large Hull</item>
 	</tech>
   <tech name="Generic Civil 2">
     <item>Fish Bone</item>
     <item>Voyager Cargo</item>
+    
+    <item>Shield Capacitor</item>
+		<item>Plasteel Plating</item>
+		<item>Engine Reroute</item>
+		<item>Generic Afterburner</item>
+		<item>Cargo Pod</item>
+		<item>Boarding Androids MKI</item>
+		<item>Unicorp Scrambler</item>
+		<item>Unicorp Jammer</item>
+		<item>Large Civilian Vessel License</item>
+		<item>GUI - Brushed</item>
+		<item>GUI - Legacy</item>
+		<item>Unicorp Medusa Launcher</item>
+		<item>Jump Scanner</item>
+		<item>Emergency Shield Booster</item>
+		<item>Small Shield Booster</item>
+		<item>Previous Generation Small Systems</item>
+    <item>Basic Small Systems</item>
+    <item>Beat Up Small Engine</item>    
+    <item>Manufacturer Small Engine</item>    
+    <item>Patchwork Light Plating</item>    
+    <item>Unmodified Small Hull</item>
+		<item>Previous Generation Medium Systems</item>
+		<item>Basic Medium Systems</item>
+		<item>Beat Up Medium Engine</item>
+		<item>Manufacturer Medium Engine</item>
+		<item>Patchwork Medium Plating</item>
+		<item>Unmodified Medium Hull</item>
+		<item>Previous Generation Large Systems</item>    
+    <item>Basic Large Systems</item>    
+    <item>Beat Up Large Engine</item>    
+    <item>Manufacturer Large Engine</item>    
+    <item>Patchwork Heavy Plating</item>    
+    <item>Unmodified Large Hull</item>
 	</tech>
   <tech name="Generic Civil 3">
     <item>Hauler</item>
+    
+    <item>Reactor Class I</item>
+		<item>Shield Capacitor</item>
+		<item>Medium Shield Booster</item>
+		<item>Unicorp Scrambler</item>
+		<item>Unicorp Jammer</item>
+		<item>Battery II</item>
+		<item>Improved Stabilizer</item>
+		<item>Forward Shock Absorbers</item>
+		<item>Power Regulation Override</item>
+		<item>Reactor Class II</item>
+		<item>Shield Capacitor II</item>
+		<item>Boarding Androids MKII</item>
+		<item>Reverse Thrusters</item>
+		<item>Large Fuel Pod</item>
+		<item>Large Shield Booster</item>
+		<item>Plasteel Plating</item>
+		<item>Nanobond Plating</item>
+		<item>Lancelot Fighter Bay</item>
+		<item>Lancelot Fighter</item>
 	</tech>
   <tech name="Generic Civil 4">
     <item>Whale</item>
@@ -664,115 +755,6 @@
 	</tech>
   <tech name="Barbarian Civil 5">
   
-	</tech>
-  
- 
-	<tech name="Basic Outfits 1 Light">
-		<item>Battery</item>
-		<item>Solar Panel</item>
-		<item>Fuel Pod</item>
-		<item>Large Civilian Vessel License</item>
-		<item>GUI - Brushed</item>
-		<item>Previous Generation Small Systems</item>
-		<item>Basic Small Systems</item>
-		<item>Beat Up Small Engine</item>
-		<item>Manufacturer Small Engine</item>
-		<item>Patchwork Light Plating</item>
-		<item>Unmodified Small Hull</item>
-	</tech>
-	<tech name="Basic Outfits 1 Med">
-		<item>Previous Generation Medium Systems</item>
-		<item>Basic Medium Systems</item>
-		<item>Beat Up Medium Engine</item>
-		<item>Manufacturer Medium Engine</item>
-		<item>Patchwork Medium Plating</item>
-		<item>Unmodified Medium Hull</item>
-
-	</tech>
-	<tech name="Basic Outfits 1 Heavy">
-		<item>Previous Generation Medium Systems</item>
-		<item>Basic Medium Systems</item>
-		<item>Previous Generation Large Systems</item>
-		<item>Basic Large Systems</item>
-		<item>Beat Up Small Engine</item>
-		<item>Manufacturer Small Engine</item>
-		<item>Beat Up Medium Engine</item>
-		<item>Manufacturer Medium Engine</item>
-		<item>Beat Up Large Engine</item>
-		<item>Manufacturer Large Engine</item>
-		<item>Patchwork Light Plating</item>
-		<item>Unmodified Small Hull</item>
-		<item>Patchwork Medium Plating</item>
-		<item>Unmodified Medium Hull</item>
-		<item>Patchwork Heavy Plating</item>
-		<item>Unmodified Large Hull</item>
-		<item>Manufacturer Large Engine</item>
-		<item>Beat Up Large Engine</item>
-		<item>Patchwork Heavy Plating</item>
-		<item>Unmodified Large Hull</item>
-		
-	</tech>
-	<tech name="Basic Outfits 2 Light">
-		<item>Shield Capacitor</item>
-		<item>Plasteel Plating</item>
-		<item>Engine Reroute</item>
-		<item>Generic Afterburner</item>
-		<item>Cargo Pod</item>
-		<item>Boarding Androids MKI</item>
-		<item>Unicorp Scrambler</item>
-		<item>Unicorp Jammer</item>
-		<item>Large Civilian Vessel License</item>
-		<item>GUI - Brushed</item>
-		<item>GUI - Legacy</item>
-		<item>Unicorp Medusa Launcher</item>
-		<item>Jump Scanner</item>
-		<item>Emergency Shield Booster</item>
-		<item>Small Shield Booster</item>
-		<item>Previous Generation Small Systems</item>    <item>Basic Small Systems</item>    <item>Beat Up Small Engine</item>    <item>Manufacturer Small Engine</item>    <item>Patchwork Light Plating</item>    <item>Unmodified Small Hull</item>
-	</tech>
-	<tech name="Basic Outfits 2 Med">
-
-		<item>Previous Generation Medium Systems</item>
-		<item>Basic Medium Systems</item>
-	
-
-		<item>Beat Up Medium Engine</item>
-		<item>Manufacturer Medium Engine</item>
-
-
-		<item>Patchwork Medium Plating</item>
-		<item>Unmodified Medium Hull</item>
-
-
-	</tech>
-	<tech name="Basic Outfits 2 Heavy">
- 	
-		<item>Previous Generation Large Systems</item>    <item>Basic Large Systems</item>    <item>Beat Up Large Engine</item>    <item>Manufacturer Large Engine</item>    <item>Patchwork Heavy Plating</item>    <item>Unmodified Large Hull</item>
-	</tech>
-	<tech name="Basic Outfits 3 Light">
-		<item>Reactor Class I</item>
-		<item>Shield Capacitor</item>
-		<item>Medium Shield Booster</item>
-		<item>Unicorp Scrambler</item>
-		<item>Unicorp Jammer</item>
-		<item>Battery II</item>
-		<item>Improved Stabilizer</item>
-		<item>Forward Shock Absorbers</item>
-		<item>Power Regulation Override</item>
-	</tech>
-	<tech name="Basic Outfits 3 Med">
-		<item>Reactor Class II</item>
-		<item>Shield Capacitor II</item>
-		<item>Boarding Androids MKII</item>
-		<item>Reverse Thrusters</item>
-		<item>Large Fuel Pod</item>
-	</tech>
-	<tech name="Basic Outfits 3 Heavy">
-		<item>Large Shield Booster</item>
-		<item>Plasteel Plating</item>
-		<item>Nanobond Plating</item>
-		<item>Lancelot Fighter Bay</item>
-		<item>Lancelot Fighter</item>
 	</tech>
 
 </Techs>

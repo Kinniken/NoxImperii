@@ -489,84 +489,19 @@ local function generateExtraPresences(planet,sectorStability)
 	end
 end
 
-local function generateTechnologiesCivilianOld(planet,bestIndustry,bestTechnology)
-
-	planet.c:removeTechGroup("Basic Outfits 1 Light")
-	planet.c:removeTechGroup("Basic Outfits 1 Med")
-	planet.c:removeTechGroup("Basic Outfits 1 Heavy")
-	planet.c:removeTechGroup("Basic Outfits 2 Light")
-	planet.c:removeTechGroup("Basic Outfits 2 Med")
-	planet.c:removeTechGroup("Basic Outfits 2 Heavy")
-	planet.c:removeTechGroup("Basic Outfits 3 Light")
-	planet.c:removeTechGroup("Basic Outfits 3 Med")
-	planet.c:removeTechGroup("Basic Outfits 3 Heavy")
-	planet.c:addTechGroup("Systems Low")
-	planet.c:addTechGroup("Systems Medium")
-	planet.c:addTechGroup("Systems High")
-	planet.c:addTechGroup("Systems Elite")
-	planet.c:addTechGroup("Engines Low")
-	planet.c:addTechGroup("Engines Medium")
-	planet.c:addTechGroup("Engines High")
-	planet.c:addTechGroup("Engines Elite")
-	planet.c:addTechGroup("Hulls Low")
-	planet.c:addTechGroup("Hulls Medium")
-	planet.c:addTechGroup("Hulls High")
-	planet.c:addTechGroup("Hulls Elite")
-	planet.c:addTechGroup("Goddard Ship")
-
-
-	if (bestTechnology>0.1) then
-		planet.c:addTechGroup("Basic Outfits 1 Light")
-		if (bestIndustry>0.5) then
-			planet.c:addTechGroup("Basic Outfits 1 Med")
-			planet.c:addTechGroup("Systems Low")
-			planet.c:addTechGroup("Engines Low")
-			planet.c:addTechGroup("Hulls Low")
-			planet.c:addTechGroup("Basic Civilian Ships")
-		end
-		if (bestIndustry>1) then
-			planet.c:addTechGroup("Basic Outfits 1 Heavy")
-			
-		end
-	end
-	if (bestTechnology>0.5) then
-		planet.c:addTechGroup("Basic Outfits 2 Light")
-		if (bestIndustry>0.5) then
-			planet.c:addTechGroup("Basic Outfits 2 Med")
-			planet.c:addTechGroup("Systems Medium")
-			planet.c:addTechGroup("Engines Medium")
-			planet.c:addTechGroup("Basic Trade Ships")
-			planet.c:addTechGroup("Light Civilian Combat Ships")
-		end
-		if (bestIndustry>1) then
-			planet.c:addTechGroup("Basic Outfits 2 Heavy")
-			planet.c:addTechGroup("Hulls Medium")
-			planet.c:addTechGroup("Bulk Trade Ships")
-			planet.c:addTechGroup("Heavy Civilian Combat Ships")
-		end
-	end
-	if (bestTechnology>1) then
-		planet.c:addTechGroup("Basic Outfits 3 Light")
-		if (bestIndustry>0.5) then
-			planet.c:addTechGroup("Basic Outfits 3 Med")
-			planet.c:addTechGroup("Systems High")
-			planet.c:addTechGroup("Engines High")
-		end
-		if (bestIndustry>1) then
-			planet.c:addTechGroup("Basic Outfits 3 Heavy")
-			planet.c:addTechGroup("Hulls High")
-		end
-	end
-	if (bestTechnology>1.1) then
-		if (bestIndustry>0.5) then
-			planet.c:addTechGroup("Systems Elite")
-			planet.c:addTechGroup("Engines Elite")
-		end
-		if (bestIndustry>1) then
-			planet.c:addTechGroup("Hulls Elite")
-			planet.c:addTechGroup("Goddard Ship")
-		end
-	end
+local function removeAllTechGroups(planet)
+  for i=1,5 do
+    planet.c:removeTechGroup("Generic Civil "..i)
+    planet.c:removeTechGroup("Generic Military "..i)
+    planet.c:removeTechGroup("Empire Civil "..i)
+    planet.c:removeTechGroup("Empire Military "..i)
+    planet.c:removeTechGroup("Roidhunate Civil "..i)
+    planet.c:removeTechGroup("Roidhunate Military "..i)
+    planet.c:removeTechGroup("Betelgeuse Civil "..i)
+    planet.c:removeTechGroup("Betelgeuse Military "..i)
+    planet.c:removeTechGroup("Barbarian Civil "..i)
+    planet.c:removeTechGroup("Barbarian Military "..i)
+  end
 end
 
 local function generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,faction)
@@ -662,7 +597,7 @@ local function generateCivilizedPlanetServices(planet)
 		planet.c:removeService("s")
 	end
 
-	generateTechnologiesCivilianOld(planet,bestIndustry,bestTechnology)
+	removeAllTechGroups(planet)
 
 	local f=planet.c:faction()
 

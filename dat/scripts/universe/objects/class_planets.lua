@@ -76,6 +76,29 @@ local planet_prototype = {
 		end
 		self.lua.worldHistory[#self.lua.worldHistory+1]={time=evttime,msg=msg}
 	end,
+	addTag=function(self,tag)
+		for k,v in pairs(self.lua.tags) do
+			if v==tag then return end
+		end
+		if not exists then
+			self.lua.tags[#self.lua.tags+1]=tag
+		end
+	end,
+	removeTag=function(self,tag)
+		for k,v in pairs(self.lua.tags) do--assumes tag present only once
+			if (v==tag) then
+				table.remove(self.lua.tags, k)
+			end
+		end
+	end,
+	hasTag=function(self,tag)
+		for k,v in pairs(self.lua.tags) do
+			if (v==tag) then
+				return true
+			end
+		end
+		return false
+	end,
 	save=function (self)
 		setPlanetLuaData(self.c,self.lua)
 	end
@@ -87,6 +110,7 @@ function planet_class.createNew()
 	local o={}
 	setmetatable(o, planet_prototype)
 	o.lua={}
+	o.lua.tags={}
 	o.lua.settlements={}
 	o.lua.worldHistory={}
 	o.lua.humanFertility=0
@@ -118,7 +142,11 @@ function planet_class.load(c_planet)
 		for k,v in pairs(planet.lua.settlements) do
 			settlement_class.applyToObject(v)
 		end
-	end		
+	end
+
+	if (not planet.lua.tags) then
+		planet.lua.tags={}
+	end
 
 	return planet
 end

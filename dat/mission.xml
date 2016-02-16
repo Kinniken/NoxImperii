@@ -22,6 +22,15 @@
    <faction>Imperial Trader</faction>
   </avail>
  </mission>
+ <mission name="The Great Survey">
+  <lua>greatsurvey/great_survey_intro</lua>
+  <avail>
+   <priority>5</priority>
+   <chance>100</chance>
+   <location>Bar</location>
+   <faction>Empire of Terra</faction>
+  </avail>
+ </mission>
  <mission name="Economy Student">
   <lua>intro/ardarshir</lua>
   <avail>

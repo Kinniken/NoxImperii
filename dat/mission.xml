@@ -22,12 +22,23 @@
    <faction>Imperial Trader</faction>
   </avail>
  </mission>
- <mission name="The Great Survey">
+ <mission name="The Great Survey Intro">
   <lua>greatsurvey/great_survey_intro</lua>
   <avail>
    <priority>5</priority>
    <chance>100</chance>
    <location>Bar</location>
+   <faction>Empire of Terra</faction>
+  </avail>
+  <flags>
+   <unique />
+  </flags>
+ </mission>
+ <mission name="The Great Survey Rec">
+  <lua>greatsurvey/great_survey_rec</lua>
+  <avail>
+   <priority>0</priority>
+   <chance>0</chance>
    <faction>Empire of Terra</faction>
   </avail>
  </mission>
@@ -61,7 +72,7 @@
    <faction>Empire of Terra</faction>
   </avail>
  </mission>
-   <mission name="Empire Pirate Elimination Recuring">
+<mission name="Empire Pirate Elimination Recuring">
   <lua>empiremilitary/pirate_bounty_rec</lua>
   <avail>
    <priority>5</priority>

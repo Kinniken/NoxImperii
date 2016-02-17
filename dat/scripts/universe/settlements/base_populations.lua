@@ -5,7 +5,7 @@ include('universe/settlements/ardar_settlements.lua')
 include('universe/settlements/barbarian_settlements.lua')
 include('universe/settlements/betelgeuse_settlements.lua')
 include('universe/objects/class_settlements.lua')
-include("universe/live/universe_status.lua")
+include("universe/live/live_universe.lua")
 
 base_populations= {} --public interface
 

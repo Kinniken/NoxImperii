@@ -150,3 +150,4 @@ function planet_class.load(c_planet)
 
 	return planet
 end
+

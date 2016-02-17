@@ -1,6 +1,6 @@
 include('universe/objects/class_worldevents.lua')
 include('universe/objects/class_systems.lua')
-include('universe/live/universe_status.lua')
+include('universe/live/live_universe.lua')
 
 --Const copy-pasted for auto-completion. Not best design but avoids mistakes
 EXOTIC_FOOD="Exotic Food"

@@ -3,7 +3,8 @@ include "jumpdist.lua"
 include "numstring.lua"
 include "universe/generate_helper.lua"
 include('universe/objects/class_planets.lua')
-include "universe/live/live_services.lua"
+include "universe/live/live_universe.lua"
+include "dat/missions/greatsurvey/great_survey_utils.lua"
 
 bar_desc = "You see an old pilot sitting in a corner, studying people coming in.."
 
@@ -44,7 +45,7 @@ title[3] = "Refuse"
 text[3] = [["I see you already have much to do. If you ever change your mind, you know where to find me. Fly far, my boy!"]]
 
 finishedtitle = "Exploring a new world"
-finishedtxt = [[You orbit the world several times, scanning its surface and atmosphere, letting your systems analyse the geology and any living presence, before landing and taking samples. You enter the report into the survey computer provided by the old pilot, and it immediately computes your reward: %s credits. You have just added your first little stone to the new Great Survey!]]
+finishedtxt = [[You orbit the world several times, scanning its surface and atmosphere, letting your systems analyse the geology and any living presence, before landing and taking samples. You enter the report into the survey computer provided by the old pilot, and it immediately computes your reward: ${rewardTotal} credits. You have just added your first little stone to the new Great Survey!]]
 
 function create ()
    -- Note: this mission does not make any system claims.
@@ -83,45 +84,16 @@ end
 
 function land ()
 
-   local presences=system.cur():presences()
+   local successful=handlePlanet(planet.cur(), finishedtxt)
 
-   if not presences["Empire of Terra"] and not presences["Roidhunate of Ardarshir"] and not presences["Oligarchy of Betelgeuse"] then
-      
-      local surveyedPlanet=planet_class.load(planet:cur())
+   if successful then
+      hook.rm(landhook)
+      misn.finish( true )
 
-      if not surveyedPlanet:hasTag("surveyed") then
-         surveyedPlanet:addTag("surveyed")
-         surveyedPlanet:addHistory("The world was surveyed by "..player:name().." on board the "..player:ship().." as part of the Second Great Survey.")
-         generatePlanetServices(surveyedPlanet)
-         surveyedPlanet:save()
-
-         local payment=computePayement(surveyedPlanet)
-
-         tk.msg( finishedtitle, finishedtxt:format( numstring(payment) ) )
-         player.pay( payment )
-
-         hook.rm(landhook)
-         misn.finish( true )
-      end   
-   end
+      naev.missionStart( "The Great Survey Rec" ) 
+   end   
 end
 
-function computePayement(surveyedPlanet)
-   local lx,ly=surveyedPlanet.c:system():coords()
-   local distanceValue=math.max(0,(gh.calculateDistance({x=0,y=0},{x=lx,y=ly})-600)*10)
-
-   local reward=distanceValue
-
-   if #(surveyedPlanet.lua.settlements)>1 then
-      reward=reward+1000
-   end
-
-   reward=reward+surveyedPlanet.lua.humanFertility*1000
-   reward=reward+surveyedPlanet.lua.minerals*1000
-
-   return math.floor(reward)
-
-end
 
 function abort()
    misn.finish()

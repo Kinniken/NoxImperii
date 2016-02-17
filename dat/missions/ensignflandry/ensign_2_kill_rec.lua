@@ -2,7 +2,7 @@
 include "numstring.lua"
 include "dat/missions/templates/ship_kill.lua"
 include('universe/objects/class_planets.lua')
-include "universe/live/live_services.lua"
+include "universe/live/live_universe.lua"
 include "dat/missions/supportfiles/common.lua"
 include "dat/missions/supportfiles/traders.lua"
 

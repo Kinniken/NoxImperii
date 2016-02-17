@@ -12,7 +12,7 @@ include "numstring.lua"
 include "dat/missions/templates/ship_kill.lua"
 include "dat/missions/supportfiles/pirates.lua"
 include('universe/objects/class_planets.lua')
-include "universe/live/live_services.lua"
+include "universe/live/live_universe.lua"
 include("pilot/pirate.lua")
 
    -- Whether mission starts in bar (if false, it starts in computer)

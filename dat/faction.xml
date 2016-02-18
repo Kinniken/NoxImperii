@@ -18,6 +18,7 @@
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
+   <enemy>Barbarians</enemy>
   </enemies>
  </faction>
  
@@ -31,6 +32,7 @@
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
+   <enemy>Barbarians</enemy>
   </enemies>
  </faction>
  
@@ -44,6 +46,7 @@
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
+   <enemy>Barbarians</enemy>
   </enemies>
  </faction>
  
@@ -59,8 +62,10 @@
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
+   <enemy>Barbarians</enemy>
   </enemies>
  </faction>
+ 
   <faction name="Ardar Trader">
   <known/>
   <logo>roidhunate</logo>
@@ -72,8 +77,10 @@
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
+   <enemy>Barbarians</enemy>
   </enemies>
  </faction>
+ 
   <faction name="Betelgian Trader">
   <known/>
   <logo>betelgeuse</logo>
@@ -85,6 +92,7 @@
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
+   <enemy>Barbarians</enemy>
   </enemies>
  </faction>
  
@@ -105,6 +113,10 @@
    <enemy>Imperial Trader</enemy>
    <enemy>Ardar Trader</enemy>
    <enemy>Betelgian Trader</enemy>
+   <enemy>Empire of Terra</enemy>
+   <enemy>Roidhunate of Ardarshir</enemy>
+   <enemy>Oligarchy of Betelgeuse</enemy>
+   <enemy>Barbarians</enemy>
   </enemies>
  </faction>
  
@@ -122,8 +134,10 @@
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
+   <enemy>Barbarians</enemy>
   </enemies>
  </faction>
+ 
   <faction name="Roidhunate of Ardarshir">
   <known/>
   <logo>roidhunate</logo>
@@ -136,6 +150,7 @@
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
+   <enemy>Barbarians</enemy>
   </enemies>
  </faction>
 <faction name="Oligarchy of Betelgeuse">
@@ -150,6 +165,7 @@
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
+   <enemy>Barbarians</enemy>
   </enemies>
  </faction>
  
@@ -163,10 +179,16 @@
   <standing>barbarian</standing>
   <equip>barbarian</equip>
   <enemies>
-   <enemy>Roidhunate of Ardarshir</enemy>
-   <enemy>Empire of Terra</enemy>
+   <enemy>Independent Trader</enemy>
    <enemy>Independent Worlds</enemy>
+   <enemy>Natives</enemy>
+   <enemy>Imperial Trader</enemy>
+   <enemy>Ardar Trader</enemy>
+   <enemy>Betelgian Trader</enemy>
+   <enemy>Empire of Terra</enemy>
+   <enemy>Roidhunate of Ardarshir</enemy>
    <enemy>Oligarchy of Betelgeuse</enemy>
+   <enemy>Pirate</enemy>
   </enemies>
   </faction>
   

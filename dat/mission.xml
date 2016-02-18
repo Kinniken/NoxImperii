@@ -158,7 +158,7 @@
   </flags>
   <avail>
    <priority>5</priority>
-   <chance>100</chance>
+   <chance>0</chance>
    <location>Space</location>
   </avail>
  </mission>

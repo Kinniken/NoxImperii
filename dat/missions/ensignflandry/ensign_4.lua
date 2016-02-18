@@ -32,7 +32,7 @@ At the center of a soundproofed room, whose fluoros glared with Saxo light, the 
 
 He is big, 210 centimeters in length and thick of body. His skin is glabrous, deep blue on the back, paler greenish blue on the stomach, opalescent on the gillcovers. In shape he suggests a cross between dolphin, seal, and man. But the flukes, and the two flippers near his middle, were marvels of musculature with some prehensile capability. A fleshy dorsal fin grew above. Not far behind the head are two short, strong arms; except for vestigial webs, the hands are startlingly humanlike. The head is big and golden of eyes, blunt of snout, with quivering cilia flanking a mouth that had lips.
 
-As you finally take your eyes of him, you notice Abrams discussing with what looks like a high-ranking aristocrat. "That'd be Lord Hauksberg." Flandry silently appeared next to you. He looks shaken - the battle at Ujanka must have been hard. "He's on the Imperial Council, sent to investigate Starkad. That means our little quarrels are starting to attract serious attention back on Terra.". The commander and him seem to be having a serious argument, though Abrams is clearly mindful of how over-ranked he is, while Lord Hauksberg argues with all the grace of a born aristocrat. "They've been discussing for a while. Abrams wants to hypnoprobe the alien. It might damage him, but we'd learn much. His Lordship wants to try a softer approach. Technically it's Commander Abrams's decision... but Hauksberg has a long, long arm.".
+As you finally take your eyes of him, you notice Abrams discussing with what looks like a high-ranking aristocrat. "That'd be Lord Hauksberg." Flandry silently appeared next to you. He looks shaken - the battle at Ujanka must have been hard. "He's on the Imperial Council, sent to investigate Harkan. That means our little quarrels are starting to attract serious attention back on Terra.". The commander and him seem to be having a serious argument, though Abrams is clearly mindful of how over-ranked he is, while Lord Hauksberg argues with all the grace of a born aristocrat. "They've been discussing for a while. Abrams wants to hypnoprobe the alien. It might damage him, but we'd learn much. His Lordship wants to try a softer approach. Technically it's Commander Abrams's decision... but Hauksberg has a long, long arm.".
 
 As the Lord leaves the room, Commander Abrams heads your way. "${playerName}, turns out we need you again. Our "friend" here seems wounded and I'm under orders to keep him alive and cooperative. I need you to take him to ${targetPlanet} for treatment. We know little of his biology but they have a good multi-species hospital there. Bring him back in top shape. If His Lordship is right he might help us understand the conflict. If he isn't we'll do it my way."]]
 
@@ -53,7 +53,7 @@ function getStringData()
 end
 
 function create ()
-	if not planet.cur()==planet.get("Starkad") then
+	if not planet.cur()==planet.get("Harkan") then
 		misn.finish()
 	end
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<asset name="Ronruad">
+<asset name="Sasserid">
  <pos>
   <x>-7375.540824</x>
   <y>3908.594988</y>
@@ -16,7 +16,17 @@
  <general>
   <class>G</class>
   <population>0</population>
-  <hide>0.250000</hide>
-  <services/>
+  <services>
+     <land/>
+  </services>
+  <description>A large, desertic planet, Sasserid has been associated since ancient time with royalty and power.</description>
+  <luadata>{
+  humanFertility = 0,
+  minerals = 0,
+  nativeFertility = 0,
+  settlements = { },
+  tags = { },
+  worldHistory = { },
+}</luadata>
  </general>
 </asset>

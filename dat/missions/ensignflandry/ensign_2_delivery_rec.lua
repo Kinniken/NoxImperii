@@ -6,23 +6,23 @@ include "dat/missions/supportfiles/pirates.lua"
 payment = 30000
 
 -- Mission Details
-misn_title = "Starkad: Weapon delivery"
+misn_title = "Harkan: Weapon delivery"
 misn_reward = ""..payment.." cr"
-misn_desc = "Collect weapons from ${pickupPlanet} and deliver them to the Toborkos on Starkad."
+misn_desc = "Collect weapons from ${pickupPlanet} and deliver them to the Toborkos on Harkan."
 
 
 
 -- Messages
 osd_msg = {}
 osd_msg[1] = "Collect weapons from ${pickupPlanet}."
-osd_msg[2] = "Return to Starkad."
+osd_msg[2] = "Return to Harkan."
 osd_msg["__save"] = true
 
 title = {}  --stage titles
 text = {}   --mission text
 
 title[1] = "${pickupPlanet} Spaceport"
-text[1] = [[As you land on ${pickupPlanet}, a shady-looking man is waiting for you. He signals you over, and dock workers start loading weapon crates in your ship. Time to head back to Starkad.]]
+text[1] = [[As you land on ${pickupPlanet}, a shady-looking man is waiting for you. He signals you over, and dock workers start loading weapon crates in your ship. Time to head back to Harkan.]]
 
 
 title[2] = "City of Ujanka"
@@ -83,7 +83,7 @@ function land_pickup ()
    	  carg_id = misn.cargoAdd( "Primitive Armament", 10 )
 
    	  misn.markerRm(landmarker)
-   	  landmarker = misn.markerAdd( planet.get("Starkad"):system(), "low" )
+   	  landmarker = misn.markerAdd( planet.get("Harkan"):system(), "low" )
 
    	  misn.osdActive(2)
 
@@ -128,7 +128,7 @@ function ship_dead( pilot, attacker )
 end
 
 function land_final ()
-   if planet.cur() == planet.get("Starkad") then
+   if planet.cur() == planet.get("Harkan") then
    	local stringData=getStringData()
 
       tk.msg( gh.format(title[2],stringData), gh.format(text[2],stringData) )

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<asset name="Starkad">
+<asset name="Harkan">
  <pos>
   <x>7618.447857</x>
   <y>5564.779304</y>
@@ -16,17 +16,16 @@
  <general>
   <class>A</class>
   <population>0</population>
-  <hide>0.250000</hide>
   <services>
    <land/>
    <refuel/>
    <missions/>
   </services>
   <commodities/>
-  <description>"Starkad was a big world, whose gravity and atmosphere gnawed land masses away between tectonic epochs. Thus, a world of shallow ocean, made turbulent by wind and the moons; a world of many islands large and small, but no real continents." ("Ensign Flandry")
+  <description>A large, light planet of shallow seas and many islands, Harkan is unusual in being home to two sapient species: one land-based, though keen sailors, and one aquatic, though more at home in shallow seas than in oceanic depths.
 
-And there, two sapient species were locked in endless conflicts: the land-dwelling Toborkos, generally called Tigeries by humans, and the maritime Sea Folks. For reasons unclear to the public, Terra and the Roidhunate had progressively involved themselves in the rivalries between species. Since then, incidents between the Tigeries supported by their Terran allies and the Sea Folks and their Ardar backers have become increasingly frequent, and Starkad was fast becoming yet an other flash-point in the long border between the two rivals.</description>
- 	<bar>The Empire's military base might be small, but it has a small mess. The view over Starkad's oceans is spectacular.</bar>
+  Their ancestral if limited conflicts have taken a dangerous new turn with the arrival of the Empire and the Roidhunate on the world; having each chosen to support a client specie, the two realms are now engaged in a low-level proxy conflict that could degenerate at any moment.</description>
+ 	<bar>The Empire's military base might be small, but it has a small mess. The view over Harkan's oceans is spectacular.</bar>
     <luadata>{
 	humanFertility = 0.5,
 	minerals = 1.0508896145512,

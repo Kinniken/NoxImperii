@@ -4,7 +4,7 @@ include "dat/missions/supportfiles/common.lua"
 payment = 50000
 
 -- Mission Details
-misn_title = "Bring back Evenfall to Starkad"
+misn_title = "Bring back Evenfall to Harkan"
 misn_reward = ""..payment.." cr"
 misn_desc = "Take \"Charlie\", the Siravo alien captured by Flandry, to ${targetPlanet} on ${targetSystem} for treatment."
 
@@ -12,7 +12,7 @@ misn_desc = "Take \"Charlie\", the Siravo alien captured by Flandry, to ${target
 
 -- Messages
 osd_msg = {}
-osd_msg[1] = "Bring back Evenfall to Starkad"
+osd_msg[1] = "Bring back Evenfall to Harkan"
 osd_msg["__save"] = true
 
 title = {}  --stage titles

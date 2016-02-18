@@ -11,7 +11,17 @@
  <general>
   <class>A</class>
   <population>0</population>
-  <hide>0.250000</hide>
-  <services/>
+  <services>
+     <land/>
+  </services>
+  <description>Icht is classified as an cold gas giant, with an atmospheric temperature of around 170K (-110 C). Its surface is an ill-defined transition from an ever-thicker atmosphere to a rocky core far, far below the storms visible from space.</description>
+  <luadata>{
+	humanFertility = 0,
+	minerals = 0,
+	nativeFertility = 0,
+	settlements = { },
+	tags = { },
+	worldHistory = { },
+}</luadata>
  </general>
 </asset>

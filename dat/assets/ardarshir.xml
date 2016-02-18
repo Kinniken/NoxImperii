@@ -16,20 +16,18 @@
  <general>
   <class>A</class>
   <population>5000000000</population>
-  <hide>0.250000</hide>
+  <hide>0.0000</hide>
   <services>
    <land/>
    <refuel/>
    <bar/>
   </services>
   <commodities/>
-  <description>Homeworld of the Ardar race, seat of the capitals of the Roidhunate, Ardarshir is in many ways a sister of Terra - a lush world admired for its natural beauty by human visitors, recovered from the period of hyper-industrialization earlier in Ardar history. Six billion Mersians now populate its continents, several more in the rest of the system.
+  <description>Homeworld of the Ardar race, seat of the capitals of the Roidhunate, Ardarshir is in many ways a sister of Terra - a lush world admired for its natural beauty by human visitors, recovered from the period of hyper-industrialization earlier in Ardar history. Six billion ardars now populate its continents, several more in the rest of the system.
 
-"They resembled especially large men...somewhat. A number of their faces might have been called good-looking in a craggy fashion; their hands each had four fingers and a thumb; the proportions and articulations of most body parts were fairly anthropoid. But the posture was forward-leaning, balanced by a heavy tail. The feet, revealed by sandals, were splayed, webbed, and clawed. The skin was hairless and looked faintly scaled; depending on sub-species, its color ranged from the pale green which was commonest through golden brown to ebony. The head had two convoluted bony orifices where man's has external ears. A ridge of serrations ran from its top, down the spine to the end of the tail." (Ensign Flandry)
+That Earth's most important rival come from a planet so similar to Earth struck many as a kind of cosmic joke; but savvier observers realized that it was precisely the similarities between the two worlds and the two races that spawned from them that made the rivalry so fierce: they fought for the same worlds, and with the same conquering instincts. Only the longer human history had dulled Terra's imperialist drive, drive that still shaped Mersian society.
 
-That Earth's most important rival come from a planet so similar to Earth struck many as a kind of cosmic joke; but savvier observers realized that it was precisely the similarities between the two worlds and the two races that spawned from them that made the rivalry so fierce: they fought for the same worlds, and with the same conquering instincts. Only the longer human history had dulled Terra's imperialist drive, drive that still shaped Mersian society. 
-
-"Ardaig, the original capital, had grown to surround that bay where the River Oiss poured into the Wilwidh Ocean; and its hinterland was now megalopolis eastward to the Hun foothills. Nonetheless it retained a flavor of antiquity. Its citizens were more tradition-minded, ceremonious, leisurely than most. It was the cultural and artistic center of Ardarshir. Though the Grand Council still met here annually, and Castle Afon was still the Roidhun's official primary residence, the bulk of government business was transacted in antipodal Tridaig. The co-capital was young, technology-oriented, brawling with traffic and life, seething with schemes and occasional violence." ("Ensign Flandry")</description>
+Physically, ardars are somewhat taller and bulkier than humans, and generally considered reptilian-looking with their heavy, crocodile-like tails, lack of ears and mouths that jut forward. They are however warm-blooded mammals, and raise their youngs much like humans.</description>
   <bar>The main bar in Ardaig's spaceport is renowned for its unmatched selection of Ardar alcohols, many of whom rival Terran ones even in human taste.</bar>
       <luadata>{
 	humanFertility = 1,

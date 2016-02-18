@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<asset name="Dchaira">
+<asset name="Cestiphia">
  <pos>
-  <x>-4281.031992</x>
-  <y>-7795.311985</y>
+  <x>4821.041935</x>
+  <y>-4065.235085</y>
  </pos>
  <GFX>
-  <space>moon-C01.png</space>
-  <exterior>mining2.png</exterior>
+  <space>moon-D01.png</space>
+  <exterior>asteroid.png</exterior>
  </GFX>
  <general>
   <class>A</class>
   <population>0</population>
-  <hide>0.000000</hide>
   <services>
      <land/>
   </services>
-  <description>A small, rocky moon like so many others, Dchaira leisurely orbits Fez below.</description>
   <luadata>{
 	humanFertility = 0,
 	minerals = 0,
@@ -24,5 +22,6 @@
 	tags = { },
 	worldHistory = { },
 }</luadata>
+<description>The small moon of Cestiphia orbits Ardarshir twice a day. It is much celebrated in Ardar epics, where it symbolises the pull of one's destiny.</description>
  </general>
 </asset>

@@ -11,11 +11,17 @@
  <general>
   <class>A</class>
   <population>0</population>
-  <hide>0.250000</hide>
   <services>
-   <land/>
+     <land/>
   </services>
-  <commodities/>
+  <luadata>{
+  humanFertility = 0,
+  minerals = 0,
+  nativeFertility = 0,
+  settlements = { },
+  tags = { },
+  worldHistory = { },
+}</luadata>
   <description>Today, Mercury is home only to a small scientific base and some automated mining operations. But at the height of the Troubles, after the Commonwealth had collapsed and Terra itself had been sacked by barbarians, it was here that the remains of the human forces rallied to the man that would found the Empire and bring Terra its greatest glory yet.</description>
  </general>
 </asset>

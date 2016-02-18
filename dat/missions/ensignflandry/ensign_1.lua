@@ -12,9 +12,9 @@ text[1] = [[As you enter the system, your ship automatically connects to the Imp
 
 You're about to dismiss the message as typical Flandry when you have a wild thought - and attempt a second decryption with the mock identity you used in navy school to plan drunken escapades with fellow cadets.
 
-"An other thing - I'm posted on Starkad now, on the Ardar border. Check a map. We could use someone with your piloting skills and no official ties to the Imperial Navy. Be discreet. And bring a bottle of brandy. The navy mess is out of everything drinkable."
+"An other thing - I'm posted on Harkan now, on the Ardar border. Check a map. We could use someone with your piloting skills and no official ties to the Imperial Navy. Be discreet. And bring a bottle of brandy. The navy mess is out of everything drinkable."
 
-Starkad... yes, you've heard of it. A barely-explored planet in the wilderness between the Empire and the Roidhunate, on which the two rivals have gotten embroiled in quarrels between two local sapient species. Typical Flandry to end up there.
+Harkan... yes, you've heard of it. A barely-explored planet in the wilderness between the Empire and the Roidhunate, on which the two rivals have gotten embroiled in quarrels between two local sapient species. Typical Flandry to end up there.
 
 [The following mission series is based on Poul Anderson's "Ensign Flandry" novel. Citations from the book can be integrated within mission texts. Check it out!]].."]"
 
@@ -29,11 +29,11 @@ The rest of Flandry's ramblings feel almost like fantasy - especially the part o
 
 -- Mission Details
 misn_title = "Message from a friend"
-misn_desc = "Visit Flandry in Starkad."
+misn_desc = "Visit Flandry in Harkan."
 
 -- OSD
 osd_msg = {}
-osd_msg[1] = "Visit Flandry in Starkad."
+osd_msg[1] = "Visit Flandry in Harkan."
 
 function getStringData()
   local stringData={}
@@ -54,7 +54,7 @@ function create ()
 
 	   tk.msg( gh.format(title[1],stringData), gh.format(text[1],stringData) )
 
-	   landmarker = misn.markerAdd( planet.get("Starkad"):system(), "plot" )
+	   landmarker = misn.markerAdd( planet.get("Harkan"):system(), "plot" )
 
 	  -- mission details
 	  misn.setTitle( misn_title )
@@ -70,7 +70,7 @@ end
 function land ()
 	local stringData=getStringData()
 
-   if planet.cur() == planet.get("Starkad") then
+   if planet.cur() == planet.get("Harkan") then
    	tk.msg( gh.format(title[2],stringData), gh.format(text[2],stringData) )
 
       hook.rm(landhook)

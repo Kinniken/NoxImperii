@@ -16,7 +16,6 @@
  <general>
   <class>A</class>
   <population>0</population>
-  <hide>0.250000</hide>
   <services>
    <land/>
    <refuel/>
@@ -26,5 +25,21 @@
   <commodities/>
   <description>Like Mars, Venus was settled before the invention of faster-than-life travel. Today, this unforgiving world is home to the underclass of the Solar System, sheltering from the harsh surface conditions in underground cities.</description>
   <bar>The "Amtor" bar is filled with nervous-looking bourgeois from Terra and Luna looking for an "adventure". Luckily for them, the "Amtor" is as safe as it goes on Venus.</bar>
+  <luadata>{
+  humanFertility = 0,
+  minerals = 0.5,
+  nativeFertility = 0,
+  settlements = {
+    humans = {
+      agriculture = 0,
+      industry = 1.0,
+      population = 145000000,
+      technology = 1.2,
+      services = 1,
+      military = 1,
+      stability = 1
+    },
+  },
+}</luadata>
  </general>
 </asset>

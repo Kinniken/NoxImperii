@@ -11,7 +11,7 @@ include "dat/missions/supportfiles/traders.lua"
    -- Whether mission ends in bar (if not, it ends in space in start system)
    mission_return_to_bar=false
 
-   computer_title  = "Starkad: Ardar Convoy"
+   computer_title  = "Harkan: Ardar Convoy"
 
    -- Mission details
    misn_title  = "Intercept Ardar Convoy"
@@ -35,7 +35,7 @@ function create ()
 
    template_create()
 
-   end_planet=planet.get("Starkad")
+   end_planet=planet.get("Harkan")
 end
 
 

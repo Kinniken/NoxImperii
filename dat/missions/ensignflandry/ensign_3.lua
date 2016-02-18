@@ -3,15 +3,15 @@ include "universe/generate_helper.lua"
 include "dat/missions/supportfiles/common.lua"
 
 -- Mission Details
-misn_title = "Meet Abrams on Starkad"
+misn_title = "Meet Abrams on Harkan"
 misn_reward = ""
-misn_desc = "Head to Starkad to meet Commander Abrams, who requires your services urgently."
+misn_desc = "Head to Harkan to meet Commander Abrams, who requires your services urgently."
 
 
 
 -- Messages
 osd_msg = {}
-osd_msg[1] = "Head to Starkad."
+osd_msg[1] = "Head to Harkan."
 osd_msg["__save"] = true
 
 title = {}  --stage titles
@@ -20,7 +20,7 @@ text = {}   --mission text
 title[1] = "Incoming Message"
 text[1] = [[As your ship connects to the system's communication network, a coded message from Commander Abrams appears: "Your services are needed for an urgent mission. Hurry. Abrams.".
 
-Time to head for Starkad again, it seems.]]
+Time to head for Harkan again, it seems.]]
 
 function getStringData()
 	local stringData={}
@@ -41,7 +41,7 @@ function create ()
 
 	   tk.msg( gh.format(title[1],stringData), gh.format(text[1],stringData) )
 
-	   landmarker = misn.markerAdd( planet.get("Starkad"):system(), "plot" )
+	   landmarker = misn.markerAdd( planet.get("Harkan"):system(), "plot" )
 
 	  -- mission details
 	  misn.setTitle( misn_title )
@@ -57,7 +57,7 @@ end
 function land ()
 	local stringData=getStringData()
 
-   if planet.cur() == planet.get("Starkad") then
+   if planet.cur() == planet.get("Harkan") then
       hook.rm(landhook)
       misn.finish( true )
    end

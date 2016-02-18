@@ -36,7 +36,7 @@ settlement_generator.coreArdarSettlements[#settlement_generator.coreArdarSettlem
 		if (not planet.lua.settlements.ardars) then
 			return false
 		end
-		if (not planet.natives) then
+		if (not planet.lua.natives) then
 			return false
 		end
 		return true
@@ -57,7 +57,7 @@ settlement_generator.coreArdarSettlements[#settlement_generator.coreArdarSettlem
 		if (not planet.lua.settlements.ardars) then
 			return false
 		end
-		if (planet.natives) then
+		if (planet.lua.natives) then
 			return false
 		end
 		return true
@@ -78,7 +78,7 @@ settlement_generator.coreArdarSettlements[#settlement_generator.coreArdarSettlem
 		if (not planet.lua.settlements.ardars) then
 			return false
 		end
-		if (planet.humanFertility < 1) then
+		if (planet.lua.humanFertility < 1) then
 			return false
 		end
 		return true
@@ -99,7 +99,7 @@ settlement_generator.coreArdarSettlements[#settlement_generator.coreArdarSettlem
 		if (not planet.lua.settlements.ardars) then
 			return false
 		end
-		if (planet.minerals < 1) then
+		if (planet.lua.minerals < 1) then
 			return false
 		end
 		return true

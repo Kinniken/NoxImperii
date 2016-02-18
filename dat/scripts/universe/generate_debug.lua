@@ -73,9 +73,9 @@ for i=0,10 do
 	--debugGenerateStar(0,0)
 	
   --Ardar core
-  --debugGenerateStar(1800,-100)
+  debugGenerateStar(1800,-100)
 	
   --Betelgeuse
-  debugGenerateStar(1000,460)
+  --debugGenerateStar(1000,460)
 end
 

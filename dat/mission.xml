@@ -37,9 +37,10 @@
  <mission name="The Great Survey Rec">
   <lua>greatsurvey/great_survey_rec</lua>
   <avail>
-   <priority>0</priority>
-   <chance>0</chance>
-   <faction>Empire of Terra</faction>
+    <priority>5</priority>
+    <chance>100</chance>
+    <location>Space</location>
+    <done>The Great Survey Intro</done>
   </avail>
  </mission>
  <mission name="Economy Student">

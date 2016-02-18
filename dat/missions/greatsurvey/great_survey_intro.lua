@@ -89,8 +89,6 @@ function land ()
    if successful then
       hook.rm(landhook)
       misn.finish( true )
-
-      naev.missionStart( "The Great Survey Rec" ) 
    end   
 end
 

@@ -34,6 +34,10 @@ You have added one more line to the great enterprise, and boosted your bank acco
 function create ()
    misn.accept()
    landhook = hook.land ("land")
+
+   misn.setTitle( misn_title )
+   misn.setReward( misn_reward )
+   misn.setDesc( misn_desc )
 end
 
 function land ()

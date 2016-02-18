@@ -110,17 +110,6 @@
 		<item>Power Regulation Override</item>
 		<item>Improved Power Regulator</item>
 		<item>Improved Refrigeration Cycle</item>
-		<item>Map: Nebula Edge</item>
-		<item>Map: Collective Space</item>
-		<item>Map: Dvaered-Soromid trade route</item>
-		<item>Map: Sirian border systems</item>
-		<item>Map: The Frontier</item>
-		<item>Map: Sol</item>
-		<item>Map: Dvaered Core</item>
-		<item>Map: Empire Core</item>
-		<item>Map: Pirate strongholds</item>
-		<item>Ultra Map</item>
-		<item>Local System Map</item>
 		<item>Unicorp Scrambler</item>
 		<item>Milspec Scrambler</item>
 		<item>Unicorp Jammer</item>
@@ -130,202 +119,22 @@
 		<item>Jump Scanner</item>
 		<item>Lancelot Fighter Bay</item>
 		<item>Lancelot Fighter</item>
-		<item>Drone Fighter Bay</item>
-		<item>Drone Fighter</item>
-		<item>Large Civilian Vessel License</item>
-		<item>Medium Weapon License</item>
-		<item>Heavy Weapon License</item>
-		<item>Light Combat Vessel License</item>
-		<item>Medium Combat Vessel License</item>
-		<item>Heavy Combat Vessel License</item>
-		<item>Tricon Experimental Engine License</item>
-		<item>Pirate Landing Pass</item>
-		<item>Previous Generation Small Systems</item>
-		<item>Basic Small Systems</item>
-		<item>Unicorp PT-100 Core System</item>
-		<item>Unicorp PT-200 Core System</item>
-		<item>Unicorp RX-14 Core System</item>
-		<item>Unicorp JX-16 Core System</item>
-		<item>Unicorp EX-19 Core System</item>
-		<item>Milspec Orion 2301 Core System</item>
-		<item>Milspec Orion 2302 Core System</item>
-		<item>Milspec Gemini 2501 Core System</item>
-		<item>Milspec Taurus 2520 Core System</item>
-		<item>Milspec Vespa 2544 Core System</item>
-		<item>Milspec Orion 3701 Core System</item>
-		<item>Milspec Orion 3702 Core System</item>
-		<item>Previous Generation Medium Systems</item>
-		<item>Basic Medium Systems</item>
-		<item>Unicorp PT-500 Core System</item>
-		<item>Unicorp PT-600 Core System</item>
-		<item>Unicorp RX-26 Core System</item>
-		<item>Unicorp JX-30 Core System</item>
-		<item>Unicorp EX-24 Core System</item>
-		<item>Milspec Orion 4801 Core System</item>
-		<item>Milspec Orion 4802 Core System</item>
-		<item>Milspec Gemini 3308 Core System</item>
-		<item>Milspec Taurus 3323 Core System</item>
-		<item>Milspec Vespa 3380 Core System</item>
-		<item>Milspec Orion 5501 Core System</item>
-		<item>Milspec Orion 5502 Core System</item>
-		<item>Previous Generation Large Systems</item>
-		<item>Basic Large Systems</item>
-		<item>Unicorp PT-1000 Core System</item>
-		<item>Unicorp PT-1200 Core System</item>
-		<item>Unicorp RX-71 Core System</item>
-		<item>Unicorp JX-66 Core System</item>
-		<item>Unicorp EX-80 Core System</item>
-		<item>Milspec Orion 8801 Core System</item>
-		<item>Milspec Orion 8802 Core System</item>
-		<item>Milspec Gemini 5050 Core System</item>
-		<item>Milspec Taurus 4909 Core System</item>
-		<item>Milspec Vespa 6114 Core System</item>
-		<item>Milspec Orion 9901 Core System</item>
-		<item>Milspec Orion 9902 Core System</item>
-		<item>Milspec Orion 9903 Core System</item>
-		<item>Beat Up Small Engine</item>
-		<item>Manufacturer Small Engine</item>
-		<item>Unicorp KRD-B10 Engine</item>
-		<item>Unicorp KRD-B12 Engine</item>
-		<item>Unicorp EXA-49F Engine</item>
-		<item>Unicorp AUR-50A Engine</item>
-		<item>Unicorp JNS-44K Engine</item>
-		<item>Tricon Naga Mk3 Engine</item>
-		<item>Tricon Naga Mk5 Engine</item>
-		<item>Tricon Crane Engine</item>
-		<item>Tricon Albatross Engine</item>
-		<item>Tricon Oxen Engine</item>
-		<item>Tricon Naga Mk9 Engine</item>
-		<item>Tricon Naga Mk12 Engine</item>
-		<item>Beat Up Medium Engine</item>
-		<item>Manufacturer Medium Engine</item>
-		<item>Unicorp KRD-G10 Engine</item>
-		<item>Unicorp KRD-G15 Engine</item>
-		<item>Unicorp EXA-66F Engine</item>
-		<item>Unicorp AUR-70A Engine</item>
-		<item>Unicorp JNS-54K Engine</item>
-		<item>Tricon Centaur Mk2 Engine</item>
-		<item>Tricon Centaur Mk3 Engine</item>
-		<item>Tricon Kolibri Engine</item>
-		<item>Tricon Antelope Engine</item>
-		<item>Tricon Buffalo Engine</item>
-		<item>Tricon Centaur Mk7 Engine</item>
-		<item>Tricon Centaur Mk8 Engine</item>
-		<item>Tricon Centaur Mk7-Ra Engine</item>
-		<item>Beat Up Large Engine</item>
-		<item>Manufacturer Large Engine</item>
-		<item>Unicorp KRD-T10 Engine</item>
-		<item>Unicorp KRD-T20 Engine</item>
-		<item>Unicorp EXA-71F Engine</item>
-		<item>Unicorp AUR-79A Engine</item>
-		<item>Unicorp JNS-99K Engine</item>
-		<item>Tricon Harpy Mk1 Engine</item>
-		<item>Tricon Harpy Mk6 Engine</item>
-		<item>Tricon Raven Engine</item>
-		<item>Tricon Kraken Engine</item>
-		<item>Tricon Mammoth Engine</item>
-		<item>Tricon Harpy Mk11 Engine</item>
-		<item>Tricon Harpy Mk15 Engine</item>
-		<item>Tricon Model X Large Engine</item>
-		<item>Patchwork Light Plating</item>
-		<item>Unmodified Small Hull</item>
-		<item>Unicorp D-2 Light Plating</item>
-		<item>Unicorp C-2 Light Plating</item>
-		<item>Unicorp B-2 Light Plating</item>
-		<item>Unicorp Small Cargo Hull</item>
-		<item>Schafer &amp; Kane Light Combat Plating</item>
-		<item>Schafer &amp; Kane Light Stealth Plating</item>
-		<item>Schafer &amp; Kane Small Cargo Hull</item>
-		<item>Patchwork Medium Plating</item>
-		<item>Unmodified Medium Hull</item>
-		<item>Unicorp D-8 Medium Plating</item>
-		<item>Unicorp C-8 Medium Plating</item>
-		<item>Unicorp Medium Cargo Hull</item>
-		<item>Schafer &amp; Kane Medium Combat Plating Alpha</item>
-		<item>Schafer &amp; Kane Medium Combat Plating Beta</item>
-		<item>Schafer &amp; Kane Medium Cargo Hull</item>
-		<item>Schafer &amp; Kane Medium Stealth Plating</item>
-		<item>Schafer &amp; Kane Medium Combat Plating Gamma</item>
-		<item>Schafer &amp; Kane Medium Solar Plating</item>
-		<item>Patchwork Heavy Plating</item>
-		<item>Unmodified Large Hull</item>
-		<item>Unicorp D-16 Heavy Plating</item>
-		<item>Unicorp C-16 Heavy Plating</item>
-		<item>Unicorp B-16 Heavy Plating</item>
-		<item>Unicorp Large Cargo Hull</item>
-		<item>Schafer &amp; Kane Heavy Combat Plating Alpha</item>
-		<item>Schafer &amp; Kane Heavy Combat Plating Beta</item>
-		<item>Schafer &amp; Kane Large Cargo Hull</item>
-		<item>Schafer &amp; Kane Heavy Combat Plating Gamma</item>
-		<item>Schafer &amp; Kane Heavy Solar Plating</item>
-		<item>Schafer &amp; Kane Heavy Dissipation Plating</item>
-		<item>Schafer &amp; Kane Superheavy Combat Plating</item>
 	</tech>
 	<tech name="All Ships">
-		<item>Llama</item>
-		<item>Hyena</item>
+	
 		<item>Schroedinger</item>
-		<item>Gawain</item>
-		<item>Drone</item>
-		<item>Koala</item>
 		<item>Quicksilver</item>
-		<item>Proteron Derivative</item>
-		<item>Sirius Fidelity</item>
-		<item>Sirius Shaman</item>
-		<item>Sirius Preacher</item>
-		<item>Sirius Divinity</item>
-		<item>Sirius Dogma</item>
-		<item>Thurion Ingenuity</item>
-		<item>Soromid Brigand</item>
 		<item>Shark</item>
 		<item>Pirate Shark</item>
-		<item>Empire Shark</item>
-		<item>Soromid Reaver</item>
 		<item>Lancelot</item>
-		<item>Empire Lancelot</item>
 		<item>Vendetta</item>
-		<item>Dvaered Vendetta</item>
 		<item>Pirate Vendetta</item>
-		<item>Sirius Shaman</item>
-		<item>Soromid Marauder</item>
-		<item>Ancestor</item>
-		<item>Dvaered Ancestor</item>
-		<item>Pirate Ancestor</item>
-		<item>Phalanx</item>
-		<item>Dvaered Phalanx</item>
-		<item>Pirate Phalanx</item>
-		<item>Sirius Preacher</item>
-		<item>Soromid Odium</item>
 		<item>Admonisher</item>
 		<item>Pirate Admonisher</item>
-		<item>Empire Admonisher</item>
-		<item>Vigilance</item>
-		<item>Dvaered Vigilance</item>
-		<item>Proteron Kahan</item>
-		<item>Soromid Nyx</item>
-		<item>Pacifier</item>
-		<item>Empire Pacifier</item>
 		<item>Rhino</item>
 		<item>Pirate Rhino</item>
-		<item>Mule</item>
 		<item>Kestrel</item>
 		<item>Pirate Kestrel</item>
-		<item>Proteron Archimedes</item>
-		<item>Soromid Ira</item>
-		<item>Hawking</item>
-		<item>Empire Hawking</item>
-		<item>Sirius Dogma</item>
-		<item>Goddard</item>
-		<item>Dvaered Goddard</item>
-		<item>Sirius Divinity</item>
-		<item>Soromid Arx</item>
-		<item>Proteron Watson</item>
-		<item>Empire Peacemaker</item>
-		<item>Za'lek Sting</item>
-		<item>Za'lek Imp</item>
-		<item>Za'lek Demon</item>
-		<item>Za'lek Mephisto</item>
-		<item>Za'lek Diablo</item>
 	</tech>
 	<tech name="All Commodities">
 		<item>Food</item>
@@ -587,40 +396,9 @@
     <item>Battery</item>
 		<item>Solar Panel</item>
 		<item>Fuel Pod</item>
-		<item>Large Civilian Vessel License</item>
 		<item>GUI - Brushed</item>
-		<item>Previous Generation Small Systems</item>
-		<item>Basic Small Systems</item>
-		<item>Beat Up Small Engine</item>
-		<item>Manufacturer Small Engine</item>
-		<item>Patchwork Light Plating</item>
-		<item>Unmodified Small Hull</item>
-		<item>Previous Generation Medium Systems</item>
-		<item>Basic Medium Systems</item>
-		<item>Beat Up Medium Engine</item>
-		<item>Manufacturer Medium Engine</item>
-		<item>Patchwork Medium Plating</item>
-		<item>Unmodified Medium Hull</item>
-		<item>Previous Generation Medium Systems</item>
-		<item>Basic Medium Systems</item>
-		<item>Previous Generation Large Systems</item>
-		<item>Basic Large Systems</item>
-		<item>Beat Up Small Engine</item>
-		<item>Manufacturer Small Engine</item>
-		<item>Beat Up Medium Engine</item>
-		<item>Manufacturer Medium Engine</item>
-		<item>Beat Up Large Engine</item>
-		<item>Manufacturer Large Engine</item>
-		<item>Patchwork Light Plating</item>
-		<item>Unmodified Small Hull</item>
-		<item>Patchwork Medium Plating</item>
-		<item>Unmodified Medium Hull</item>
-		<item>Patchwork Heavy Plating</item>
-		<item>Unmodified Large Hull</item>
-		<item>Manufacturer Large Engine</item>
-		<item>Beat Up Large Engine</item>
-		<item>Patchwork Heavy Plating</item>
-		<item>Unmodified Large Hull</item>
+
+
 	</tech>
   <tech name="Generic Civil 2">
     <item>Fish Bone</item>
@@ -634,31 +412,12 @@
 		<item>Boarding Androids MKI</item>
 		<item>Unicorp Scrambler</item>
 		<item>Unicorp Jammer</item>
-		<item>Large Civilian Vessel License</item>
 		<item>GUI - Brushed</item>
 		<item>GUI - Legacy</item>
 		<item>Unicorp Medusa Launcher</item>
 		<item>Jump Scanner</item>
 		<item>Emergency Shield Booster</item>
 		<item>Small Shield Booster</item>
-		<item>Previous Generation Small Systems</item>
-    <item>Basic Small Systems</item>
-    <item>Beat Up Small Engine</item>    
-    <item>Manufacturer Small Engine</item>    
-    <item>Patchwork Light Plating</item>    
-    <item>Unmodified Small Hull</item>
-		<item>Previous Generation Medium Systems</item>
-		<item>Basic Medium Systems</item>
-		<item>Beat Up Medium Engine</item>
-		<item>Manufacturer Medium Engine</item>
-		<item>Patchwork Medium Plating</item>
-		<item>Unmodified Medium Hull</item>
-		<item>Previous Generation Large Systems</item>    
-    <item>Basic Large Systems</item>    
-    <item>Beat Up Large Engine</item>    
-    <item>Manufacturer Large Engine</item>    
-    <item>Patchwork Heavy Plating</item>    
-    <item>Unmodified Large Hull</item>
 	</tech>
   <tech name="Generic Civil 3">
     <item>Hauler</item>

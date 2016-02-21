@@ -84,6 +84,7 @@ static int playerL_misnDone( lua_State *L );
 static int playerL_evtActive( lua_State *L );
 static int playerL_evtDone( lua_State *L );
 static int playerL_teleport( lua_State *L );
+static int playerL_addCargo( lua_State *L );
 static const luaL_reg playerL_methods[] = {
    { "name", playerL_getname },
    { "ship", playerL_shipname },
@@ -118,6 +119,7 @@ static const luaL_reg playerL_methods[] = {
    { "evtActive", playerL_evtActive },
    { "evtDone", playerL_evtDone },
    { "teleport", playerL_teleport },
+   { "addCargo", playerL_addCargo },
    {0,0}
 }; /**< Player Lua methods. */
 static const luaL_reg playerL_cond_methods[] = {
@@ -1189,4 +1191,41 @@ static int playerL_teleport( lua_State *L )
    return 0;
 }
 
+/**
+ * @brief Adds cargo to the player's ship
+ *
+ * Only works for valid trade cargos (not mission-specific cargos)
+ *
+ * @usage player.addCargo( "Food" ) -- Gives the player one tonne of food
+ * @usage player.addCargo( "Food", 2 ) -- Gives the player two tonnes of food
+ *
+ *    @luaparam name Name of the commodity to give.
+ *    @luaparam q Optional parameter that sets the quantity to give (default 1).
+ * @luafunc addCargo( name, q )
+ */
+static int playerL_addCargo( lua_State *L  )
+{
+   const char *str;
+   Commodity *cargo;
+   int q;
 
+   /* Defaults. */
+   q = 1;
+
+   /* Handle parameters. */
+   str = luaL_checkstring(L, 1);
+   if (lua_gettop(L) > 1)
+      q = luaL_checkint(L, 2);
+
+   /* Get outfit. */
+   cargo = commodity_get( str );
+   if (cargo==NULL) {
+      NLUA_ERROR(L, "Cargo '%s' not found.", str);
+      return 0;
+   }
+
+   /* Add the cargo. */
+   pilot_cargoAddRaw( player.p, cargo, q, 0 );
+
+   return 0;
+}

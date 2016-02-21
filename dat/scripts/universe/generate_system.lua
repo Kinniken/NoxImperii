@@ -136,7 +136,7 @@ end
  		local planetType=gh.pickWeightedObject(star.template.planets)
 		local planet=planet_class.createNew()
 		planet.template=gh.pickWeightedObject(planetType.planetClass).template
-
+    
 		for k,randomAttribute in pairs(planetRandomAttributes) do
 			if (planet.template[randomAttribute]~=nil) then
 				planet[randomAttribute]=gh.randomInRange(planet.template[randomAttribute])
@@ -152,10 +152,11 @@ end
 				planet.lua[randomAttribute]=0
 			end
 		end
-
 		
 		planet.spacePict=planet.template.spacePicts[ math.random(#planet.template.spacePicts)]
 		planet.exteriorPict=planet.template.exteriorPicts[ math.random(#planet.template.exteriorPicts)]
+
+		planet.lua.planetType=planet.template.id
 
 		generatePlanetCoords(star,planet)
 
@@ -201,6 +202,7 @@ function populateSystemNatives(star)
 			if (natives) then
 				natives.applyOnPlanet(planet)
 				planet.nativeType=natives --needed later to generate desc
+				planet.lua.natives.type=natives.id
 
 				if (natives.specialities) then
 					local speciality=gh.pickConditionalWeightedObject(natives.specialities,planet)
@@ -232,8 +234,8 @@ function populateSystemCivilized(star)
 						planet.settlementSpecialities[settlement.appliesTo]=speciality --needed later to generate desc
 					end
 				end
-			end
-		end
+        	end
+        end
 	end
 end
 

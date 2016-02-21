@@ -35,6 +35,7 @@ ARMAMENT="Armament"
 MODERN_ARMAMENT="Modern Armament"
 
 NATIVE_TECHNOLOGY="Native Technology"
+ANCIENT_TECHNOLOGY="Ancient Technology"
 
 earth_pos={x=0,y=0}
 ardarshir_pos={x=1800,y=-100}

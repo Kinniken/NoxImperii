@@ -34,6 +34,7 @@ ARMAMENT="Armament"
 MODERN_ARMAMENT="Modern Armament"
 
 NATIVE_TECHNOLOGY="Native Technology"
+ANCIENT_TECHNOLOGY="Ancient Technology"
 
 settlements_specialities.specialityUniversity={
 	weight=10,
@@ -45,6 +46,7 @@ settlements_specialities.specialityUniversity={
 		planet.lua.settlements.humans.technology=planet.lua.settlements.humans.technology+0.5
 		planet.lua.settlements.humans:addGoodDemand(NATIVE_TECHNOLOGY,10,3)
 		planet.lua.settlements.humans:addGoodDemand(NATIVE_ARTWORK,10,2)
+		planet.lua.settlements.humans:addGoodDemand(ANCIENT_TECHNOLOGY,10,1.2)
 	end,
 	getDesc=function(planet)
 		return "The planet is famous for its university, founded early in the colony's history and today a major center of learning for surrounding systems. "

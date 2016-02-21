@@ -35,7 +35,7 @@ ARMAMENT="Armament"
 MODERN_ARMAMENT="Modern Armament"
 
 NATIVE_TECHNOLOGY="Native Technology"
-
+ANCIENT_TECHNOLOGY="Ancient Technology"
 
 ardar_specialities.specialityUniversity={
 	weight=10,
@@ -48,6 +48,7 @@ ardar_specialities.specialityUniversity={
 		planet.lua.settlements.ardars:addGoodDemand(NATIVE_TECHNOLOGY,10,3)
 		planet.lua.settlements.ardars:addGoodSupply(MODERN_ARMAMENT,30,1)
 		planet.lua.settlements.ardars:addGoodDemand(MODERN_INDUSTRIAL,30,1)
+		planet.lua.settlements.ardars:addGoodDemand(ANCIENT_TECHNOLOGY,10,1.5)
 	end,
 	getDesc=function(planet)
 		return "Ardars do not have universities in the human style, instead choosing to focus research in high technology production centers. #planetname# is an important one in armament and communication technology. "

@@ -80,9 +80,7 @@ local planet_prototype = {
 		for k,v in pairs(self.lua.tags) do
 			if v==tag then return end
 		end
-		if not exists then
-			self.lua.tags[#self.lua.tags+1]=tag
-		end
+		self.lua.tags[#self.lua.tags+1]=tag
 	end,
 	removeTag=function(self,tag)
 		for k,v in pairs(self.lua.tags) do--assumes tag present only once

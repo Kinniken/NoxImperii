@@ -35,6 +35,10 @@ NATIVE_TECHNOLOGY="Native Technology"
 
 natives_generator = {} --public interface
 
+local all = {}
+
+natives_generator.all=all
+
 local function generateNativeCivilizedData(planet,industryFactor,agricultureFactor,serviceFactor,technologyFactor,militaryFactor)
 	local baseFactor=planet.star.populationTemplate.nativeFactors
 	planet.lua.natives.industry=(planet.lua.nativeFertility*0.2+planet.lua.minerals*0.5+0.3)*industryFactor*baseFactor.industry
@@ -89,7 +93,7 @@ local function genericSpecieName()
 	return name
 end
 
-local leonids={
+all.leonids={
 	weight=10,
 	applyOnPlanet=function(planet)
 		local natives=natives_class.createNew(genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({1000000,10000000}),
@@ -111,7 +115,7 @@ local leonids={
 	specialities={}
 }
 
-leonids.specialities[#leonids.specialities+1]={
+all.leonids.specialities[#all.leonids.specialities+1]={
 	weight=10,
 	weightValidity=function(planet)
 		return not planet:areNativeCivilized()
@@ -124,7 +128,7 @@ leonids.specialities[#leonids.specialities+1]={
 		return "Their hunting scenes painted inside dried-out animal skins "..(planet:isCivilized() and "are particularly prized by humans and Ardars. " or "would likely have success in many civilized worlds. ")
 	end
 }
-leonids.specialities[#leonids.specialities+1]={
+all.leonids.specialities[#all.leonids.specialities+1]={
 	weight=10,
 	weightValidity=function(planet)
 		return not planet:areNativeCivilized()
@@ -137,7 +141,7 @@ leonids.specialities[#leonids.specialities+1]={
 		return "The meat of their prize cattle animal, a graceful mammal covered in multicolored feathers, is a delicacy for human palates. "
 	end
 }
-leonids.specialities[#leonids.specialities+1]={
+all.leonids.specialities[#all.leonids.specialities+1]={
 	weight=10,
 	weightValidity=function(planet)
 		return planet:areNativeCivilized()
@@ -150,7 +154,7 @@ leonids.specialities[#leonids.specialities+1]={
 	end
 }
 
-local otters={
+all.otters={
 	weight=10,
 	applyOnPlanet=function(planet)
 		planet.lua.natives=natives_class.createNew(genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({10000000,100000000}),planet:areNativeCivilized())
@@ -168,7 +172,7 @@ local otters={
 	end,
 	specialities={}
 }
-otters.specialities[#otters.specialities+1]={
+all.otters.specialities[#all.otters.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
 		planet.lua.natives:addGoodSupply(EXOTIC_ORGANIC,gh.populationScore(planet.lua.natives.population)*20,
@@ -178,7 +182,7 @@ otters.specialities[#otters.specialities+1]={
 		return "They cultivate a large variety of alga, from which exotic organic components can be extracted for industrial use. "
 	end
 }
-otters.specialities[#otters.specialities+1]={
+all.otters.specialities[#all.otters.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
 		planet.lua.natives:addGoodSupply(EXOTIC_FOOD,gh.populationScore(planet.lua.natives.population)*20,
@@ -189,7 +193,7 @@ otters.specialities[#otters.specialities+1]={
 	end
 }
 
-local bovines={
+all.bovines={
 	weight=10,
 	applyOnPlanet=function(planet)
 		planet.lua.natives=natives_class.createNew(genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({50000000,500000000}),planet:areNativeCivilized())
@@ -211,7 +215,7 @@ local bovines={
 	end,
 	specialities={}
 }
-bovines.specialities[#bovines.specialities+1]={
+all.bovines.specialities[#all.bovines.specialities+1]={
 	weight=10,
 	weightValidity=function(planet)
 		return (not planet.lua.natives.civilized)
@@ -224,7 +228,7 @@ bovines.specialities[#bovines.specialities+1]={
 		return "Wood is rare and cherished in the plains they roam, and they carve elaborate sculptures out of it "..(planet:isCivilized() and "that have had some success among connoisseurs on civilized worlds. " or " that should be appreciated by collectors on more civilized worlds. ")
 	end
 }
-bovines.specialities[#bovines.specialities+1]={
+all.bovines.specialities[#all.bovines.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
 		planet.lua.natives.specialGoods[#planet.lua.natives.specialGoods+1]={type=FOOD,production=gh.populationScore(planet.lua.natives.population)*100,buyingPrice=0.5}
@@ -239,7 +243,7 @@ bovines.specialities[#bovines.specialities+1]={
 	end
 }
 
-local avians={
+all.avians={
 	weight=10,
 	weightValidity=function(planet)
 		return (planet.planetRadius>1.1)
@@ -266,7 +270,7 @@ local avians={
 	end,
 	specialities={}
 }
-avians.specialities[#avians.specialities+1]={
+all.avians.specialities[#all.avians.specialities+1]={
 	weight=5,
 	weightValidity=function(planet)
 		return (not planet.lua.natives.civilized)
@@ -279,7 +283,7 @@ avians.specialities[#avians.specialities+1]={
 		return "While their technology is far below that of space-faring races, they do produce intricate mechanical computers, chiefly to calculate star movements. Of course, modern navigation computers can produce the same results in a fraction of the cost, but they do not have the same retro cachet. "
 	end
 }
-avians.specialities[#avians.specialities+1]={
+all.avians.specialities[#all.avians.specialities+1]={
 	weight=10,
 	weightValidity=function(planet)
 		return (not planet.lua.natives.civilized)
@@ -293,7 +297,7 @@ avians.specialities[#avians.specialities+1]={
 	end
 }
 
-local simians={
+all.simians={
 	weight=10,
 	applyOnPlanet=function(planet)
 		planet.lua.natives=natives_class.createNew(genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({5000000,50000000}),planet:areNativeCivilized())
@@ -315,7 +319,7 @@ local simians={
 	end,
 	specialities={}
 }
-simians.specialities[#simians.specialities+1]={
+all.simians.specialities[#all.simians.specialities+1]={
 	weight=10,
 	weightValidity=function(planet)
 		return (not planet.lua.natives.civilized)
@@ -328,7 +332,7 @@ simians.specialities[#simians.specialities+1]={
 		return (planet:isCivilized() and "Some of their tribes will however agree to trade their fruits in exchange for industrial weapons. " or "Their fruits look like they would please gourmets on many worlds. ")
 	end
 }
-simians.specialities[#simians.specialities+1]={
+all.simians.specialities[#all.simians.specialities+1]={
 	weight=5,
 	weightValidity=function(planet)
 		return (not planet.lua.natives.civilized)
@@ -342,7 +346,7 @@ simians.specialities[#simians.specialities+1]={
 	end
 }
 
-local carnivorousHumanoids={
+all.carnivorousHumanoids={
 	weight=100000,
 	applyOnPlanet=function(planet)
 		planet.lua.natives=natives_class.createNew(genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({5000000,50000000}),planet:areNativeCivilized())
@@ -367,7 +371,7 @@ local carnivorousHumanoids={
 	end,
 	specialities={}
 }
-carnivorousHumanoids.specialities[#carnivorousHumanoids.specialities+1]={
+all.carnivorousHumanoids.specialities[#all.carnivorousHumanoids.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
 		planet.lua.natives:addGoodSupply(FOOD,gh.populationScore(planet.lua.natives.population)*20,
@@ -377,7 +381,7 @@ carnivorousHumanoids.specialities[#carnivorousHumanoids.specialities+1]={
 		return "The meat of their birds is comestible for humans; it tastes like chicken. "
 	end
 }
-carnivorousHumanoids.specialities[#carnivorousHumanoids.specialities+1]={
+all.carnivorousHumanoids.specialities[#all.carnivorousHumanoids.specialities+1]={
 	weight=5,
 	weightValidity=function(planet)
 		return (not planet.lua.natives.civilized)
@@ -391,7 +395,7 @@ carnivorousHumanoids.specialities[#carnivorousHumanoids.specialities+1]={
 	end
 }
 
-local hibernatingReptiles={
+all.hibernatingReptiles={
 	weight=10,
 	applyOnPlanet=function(planet)
 		planet.lua.natives=natives_class.createNew(genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({100000,5000000}),false)
@@ -408,7 +412,7 @@ local hibernatingReptiles={
 	end,
 	specialities={}
 }
-hibernatingReptiles.specialities[#hibernatingReptiles.specialities+1]={
+all.hibernatingReptiles.specialities[#all.hibernatingReptiles.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
 		planet.lua.natives:addGoodSupply(FOOD,gh.populationScore(planet.lua.natives.population)*10,
@@ -418,7 +422,7 @@ hibernatingReptiles.specialities[#hibernatingReptiles.specialities+1]={
 		return "They are willing to trade what little surplus fish they produce, as it is comestible by most species. "
 	end
 }
-hibernatingReptiles.specialities[#hibernatingReptiles.specialities+1]={
+all.hibernatingReptiles.specialities[#all.hibernatingReptiles.specialities+1]={
 	weight=5,
 	weightValidity=function(planet)
 		return (not planet.lua.natives.civilized)
@@ -432,7 +436,7 @@ hibernatingReptiles.specialities[#hibernatingReptiles.specialities+1]={
 	end
 }
 
-local beavers={
+all.beavers={
 	weight=10,
 	applyOnPlanet=function(planet)
 
@@ -457,7 +461,7 @@ local beavers={
 	end,
 	specialities={}
 }
-beavers.specialities[#beavers.specialities+1]={
+all.beavers.specialities[#all.beavers.specialities+1]={
 	weight=10,
 	weightValidity=function(planet)
 		return (not planet.lua.natives.civilized)
@@ -470,7 +474,7 @@ beavers.specialities[#beavers.specialities+1]={
 		return "Most of the seafood they catch is poisonous to humans and associated species, but certain species of large crustaceans "..(planet:isCivilized() and " are considered delicacies off-world. " or " would be fit to grace the Emperor's table. ")
 	end
 }
-beavers.specialities[#beavers.specialities+1]={
+all.beavers.specialities[#all.beavers.specialities+1]={
 	weight=10,
 	weightValidity=function(planet)
 		return (not planet.lua.natives.civilized)
@@ -484,8 +488,13 @@ beavers.specialities[#beavers.specialities+1]={
 	end
 }
 
+--copying the keys to an id value for future reference
+for k,v in pairs(all) do
+  v.id=k
+end
+
 natives_generator.noNatives={}
 
-natives_generator.warmTerranNatives={leonids,otters,avians,simians}
-natives_generator.temperateTerranNatives={leonids,otters,bovines,avians,simians,carnivorousHumanoids}
-natives_generator.coldTerranNatives={hibernatingReptiles,beavers}
+natives_generator.warmTerranNatives={all.leonids,all.otters,all.avians,all.simians}
+natives_generator.temperateTerranNatives={all.leonids,all.otters,all.bovines,all.avians,all.simians,all.carnivorousHumanoids}
+natives_generator.coldTerranNatives={all.hibernatingReptiles,all.beavers}

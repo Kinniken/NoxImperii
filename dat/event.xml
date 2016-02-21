@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Events>
+  <event name="Landing Events">
+    <lua>landingevents/landing_events</lua>
+    <trigger>land</trigger>
+    <chance>100</chance>
+ </event>
     <event name="start_event">
      <lua>start</lua>
      <trigger>none</trigger>

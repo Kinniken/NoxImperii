@@ -1531,7 +1531,7 @@ static void land_createMainTab( unsigned int wid )
    if (land_planet->faction != -1) {
       logo = faction_logoSmall(land_planet->faction);
       if (logo != NULL) {
-         window_addImage( wid, 440 + (w-460-logo->w)/2, -20,
+         window_addImage( wid, 440 + (w-593-logo->w)/2, -20,
                0, 0, "imgFaction", logo, 0 );
          planetDescHeight = 350;
          offset=80;
@@ -1545,12 +1545,12 @@ static void land_createMainTab( unsigned int wid )
 
 
    if (strlen(land_planet->description)<1500) {
-	   window_addText( wid, 440, -20-offset,
-	         w-460, planetDescHeight, 0,
+	   window_addText( wid, 573, -20-offset,
+	         w-593, planetDescHeight, 0,
 	         "txtPlanetDesc", &gl_smallFont, &cBlack, land_planet->description);
    } else {
-	   window_addText( wid, 440, -20-offset,
-	         w-460, planetDescHeight, 0,
+	   window_addText( wid, 573, -20-offset,
+	         w-593, planetDescHeight, 0,
 	         "txtPlanetDesc", &gl_tinyFont, &cBlack, land_planet->description);
    }
 

@@ -4,7 +4,7 @@ include('universe/live/live_desc.lua')
 include('universe/live/live_universe.lua')
 include('universe/objects/class_planets.lua')
 
-local debug=true
+
 
 local function nameTakenSystem(name)	
 	return (system.exists(name))
@@ -18,7 +18,7 @@ local function createAroundStar(c_sys,nextlevel,level,visited)
 
 	visited[c_sys:name()]=true
 
-	local known=(debug and true or false)
+	local known=(debugMode and true or false)
 
 	local sys=system_class.load(c_sys)
 
@@ -88,7 +88,7 @@ end
 
 function create()
 	
-	local stepNumber=(debug and 10 or 3)
+	local stepNumber=(debugMode and 10 or 3)
 	
 	math.randomseed(os.time())
 	

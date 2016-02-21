@@ -1,3 +1,7 @@
+
+--puts the game in debug more (mass system generations, more frequent events)
+debugMode=true
+
 gh = {}
 
 function gh.countMembers(table)
@@ -74,6 +78,23 @@ function gh.pickConditionalWeightedObject(table,obj)
 
   return nil
 
+end
+
+function gh.filterConditionalObjects(table,obj)
+
+  local valid={}
+
+  for k,v in pairs(table) do
+    if (not v.weightValidity) then--not filter method, always take
+      valid[#valid+1]=v
+    else
+      if (v.weightValidity(obj)) then--filter method, only if valid
+        valid[#valid+1]=v
+      end
+    end
+  end
+
+  return valid
 end
 
 

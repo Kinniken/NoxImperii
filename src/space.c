@@ -1763,7 +1763,8 @@ void planet_updateLand( Planet *p )
       return;
 
    /* Clean up old stuff. */
-   free( p->land_msg );
+   if (p->land_msg != NULL)
+	   free( p->land_msg );
    free( p->bribe_msg );
    free( p->bribe_ack_msg );
    p->can_land    = 0;
@@ -1803,8 +1804,9 @@ void planet_updateLand( Planet *p )
    if (lua_isstring(L,-4))
       p->land_msg = strdup( lua_tostring(L,-4) );
    else {
-      WARN( LANDING_DATA_PATH": %s (%s) -> return parameter 2 is not a string!", str, p->name );
-      p->land_msg = strdup( "Invalid land message" );
+	  //Long Night change: null message is valid (for uninhabited world)
+      //WARN( LANDING_DATA_PATH": %s (%s) -> return parameter 2 is not a string!", str, p->name );
+      p->land_msg = NULL;
    }
    /* Parse bribing. */
    if (!p->can_land && lua_isnumber(L,-3)) {

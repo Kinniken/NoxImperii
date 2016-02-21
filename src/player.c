@@ -1412,8 +1412,11 @@ void player_land (void)
       else if (!player_isFlag(PLAYER_LANDACK)) { /* no landing authorization */
          if (planet_hasService(planet,PLANET_SERVICE_INHABITED)) { /* Basic services */
             if (planet->can_land || (planet->land_override > 0)) {
-               player_message( "\e%c%s>\e0 %s", planet_getColourChar(planet),
-                     planet->name, planet->land_msg );
+            	if (planet->land_msg != NULL)
+				   player_message( "\e%c%s>\e0 %s", planet_getColourChar(planet),
+						 planet->name, planet->land_msg );
+            	else//Long Night planets with uncivilized natives
+            		player_message( "\epNo spatial control detected. Calculating our own landing parameters on %s.", planet->name );
                player_setFlag(PLAYER_LANDACK);
                player_soundPlayGUI(snd_nav,1);
             }

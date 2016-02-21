@@ -34,6 +34,13 @@ include "numstring.lua"
 
 -- Default function. Any asset that has no landing script explicitly defined will use this.
 function land( pnt )
+
+   local landedPlanet=planet_class.load(pnt)
+
+   if (#landedPlanet.lua.settlements==0) then--no civilisation present
+      return true
+   end
+
    return land_civilian(pnt, 0, -30)
 end
 

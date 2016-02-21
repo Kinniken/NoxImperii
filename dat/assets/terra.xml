@@ -46,7 +46,8 @@
 			military = 1,
 			stability = 1,
 			extraGoodsSupply = { {type="Bordeaux Grands Crus",supply=20,price=0.1} },
-			suppressGoodDemand = { {type="Bordeaux Grands Crus"} }
+			suppressGoodDemand = { {type="Bordeaux Grands Crus"} },
+			extraGoodsDemand = { {type="Ancient Technology",demand=20,price=1} }
 		},
 	},
 }</luadata>

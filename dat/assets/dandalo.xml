@@ -70,6 +70,7 @@ In the meantime, the great Trading Families make full use of their neutral posit
 							price = 4,
 							type = "Exotic Furs",
 						},
+						{type="Ancient Technology",demand=20,price=1},
 			},
 			extraGoodsSupply = {
 			},

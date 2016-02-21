@@ -117,6 +117,10 @@ The major oxygen-breathing races in the sector have broadly compatible dietary r
 		<description>It is rare that non-spacefaring races produce technological items of more than scholarly interest. And yet there is a market for ingenious alien contraptions - there are valuable ideas everywhere, and what seemed like a simple curiosity might prove the spark of a technological revolution. Sadly, human scientists are often too rigid to properly value such inputs.</description>
 		<price>900</price>
 	</commodity>
+	<commodity name="Ancient Technology">
+		<description>While humanity discovered faster-than-light travel earlier than any other currently active specie, it is not the first to do so. Millennia ago, other species spread among the stars, built wonders, fought great wars, and disappeared without much of a trace. What little can be found of extinct space-faring races is such immensely valuable; what little of it can be made sense of can revolutionise a field. University worlds and major capitals will pay excellent prices to anyone bringing such wonders.</description>
+		<price>5000</price>
+	</commodity>
 	
 	
 	

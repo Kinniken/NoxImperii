@@ -43,7 +43,8 @@ Physically, ardars are somewhat taller and bulkier than humans, and generally co
 			military = 1.5,
 			stability = 1,
 			extraGoodsSupply = { {type="Roidhun Fine Telloch",supply=20,price=0.1} },
-			extraGoodsDemand = { {type="Bordeaux Grands Crus",demand=20,price=3} },
+			extraGoodsDemand = { {type="Bordeaux Grands Crus",demand=20,price=3},
+            {type="Ancient Technology",demand=20,price=1.5} },
 			suppressGoodDemand = { {type="Roidhun Fine Telloch"} }
 		},
 	},

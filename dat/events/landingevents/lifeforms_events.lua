@@ -54,7 +54,7 @@ landing_events.temptationForest={
 
 	Do you organise a supply team?]]
 
-	if tk.yesno( "Valley of Flowers", eventText1 ) then
+	if tk.yesno( "Valley of Flowers", gh.format(eventText1,textData) ) then
 		if math.random() <0.5 then
 			local quantity=gh.floorTo(2+math.random()*2)
 			textData.quantity=quantity
@@ -75,7 +75,7 @@ landing_events.temptationForest={
 	weightValidity=function(planet)
 	local validPlanets={planetTemplateWarmTerra=true,planetTemplateTemperateTerra=true}
 
-	return validPlanets[planet.lua.planetType] and not #planet.lua.settlements>0
+	return validPlanets[planet.lua.planetType] and (#planet.lua.settlements)==0
 	end,
 	weight=10
 }

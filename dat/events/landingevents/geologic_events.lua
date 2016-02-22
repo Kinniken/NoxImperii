@@ -302,4 +302,3 @@ landing_events.gasGiantRichMoonlet={
 	end,
 	weight=10
 }
-

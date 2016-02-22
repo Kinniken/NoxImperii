@@ -84,7 +84,7 @@ settlement_generator.coreArdarSettlements[#settlement_generator.coreArdarSettlem
 		return true
 	end,
 	getDesc=function(planet)
-		return gh.randomObject({"#planetname#'s fertile plains attracted rural ardars who felt increasingly out of place in the growing megalopolises of Ardarshir. A century from now, their descendants might have to do the same. ","One of the oldest ardar noble family founded the settlement on #planetname#, seeking to exploit its agricultural riches. ","Particularly positive analysis by Roidhunate scouts decided an early colonization of #planetnale#. "})
+		return gh.randomObject({"#planetname#'s fertile plains attracted rural ardars who felt increasingly out of place in the growing megalopolises of Ardarshir. A century from now, their descendants might have to do the same. ","One of the oldest ardar noble family founded the settlement on #planetname#, seeking to exploit its agricultural riches. ","Particularly positive analysis by Roidhunate scouts decided an early colonization of #planetname#. "})
 	end,
 	specialities={ardar_specialities.specialityUniversity,ardar_specialities.specialityLuxuryResort,ardar_specialities.specialityGourmetFood},
 	weight=10

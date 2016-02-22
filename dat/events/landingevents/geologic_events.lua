@@ -65,7 +65,7 @@
 		weightValidity=function(planet)
 		local validPlanets={planetTemplateMercury=true,planetTemplateVenus=true,planetTemplateMars=true}
 
-		return validPlanets[planet.lua.planetType]
+		return validPlanets[planet.lua.planetType] and not #planet.lua.settlements>0
 		end,
 		weight=10
 	}
@@ -251,7 +251,7 @@ landing_events.gasGiantOrbitalDebris={
 
 	local validPlanets={planetHotJupiter=true,planetJovian=true}
 
-	return validPlanets[planet.lua.planetType]
+	return validPlanets[planet.lua.planetType] and not #planet.lua.settlements>0
 	end,
 	weight=10
 }
@@ -298,7 +298,7 @@ landing_events.gasGiantRichMoonlet={
 
 	local validPlanets={planetHotJupiter=true,planetJovian=true}
 
-	return validPlanets[planet.lua.planetType]
+	return validPlanets[planet.lua.planetType] and not #planet.lua.settlements>0
 	end,
 	weight=10
 }

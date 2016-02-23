@@ -158,8 +158,9 @@
   </flags>
   <avail>
    <priority>5</priority>
-   <chance>0</chance>
+   <chance>100</chance>
    <location>Space</location>
+   <cond>false</cond>
   </avail>
  </mission>
  <mission name="Ensign Flandry 2">

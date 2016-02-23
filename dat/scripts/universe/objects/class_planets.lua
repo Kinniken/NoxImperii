@@ -142,6 +142,10 @@ function planet_class.load(c_planet)
 		end
 	end
 
+	if (planet.lua.natives) then
+		settlement_class.applyToObject(planet.lua.natives)
+	end
+
 	if (not planet.lua.tags) then
 		planet.lua.tags={}
 	end

@@ -42,6 +42,7 @@ landing_events.marshMonster={
 
 	return validPlanets[planet.lua.planetType]
 	end,
+	uncivilizedOnly=true,
 	weight=20
 }
 
@@ -75,7 +76,47 @@ landing_events.temptationForest={
 	weightValidity=function(planet)
 	local validPlanets={planetTemplateWarmTerra=true,planetTemplateTemperateTerra=true}
 
-	return validPlanets[planet.lua.planetType] and (#planet.lua.settlements)==0
+	return validPlanets[planet.lua.planetType]
 	end,
+	uncivilizedOnly=true,
+	weight=10
+}
+
+
+landing_events.steacksInHerd={
+	runEvent=function(planet)
+
+	local textData=landingEventsTextData(planet)
+
+	local eventText1=[[In a wide plain cut into by a mighty river, your probes notice an inviting sight: a horde of plump, slow-moving herbivores. ${planetname}'s biology being human-compatible, they are probably safe to eat, and they look yummy!
+
+	Order a foraging party?]]
+
+	if tk.yesno( "Steak on the Horizon", gh.format(eventText1,textData) ) then
+		if math.random() <0.8 then
+			local quantity=gh.floorTo(5+math.random()*5)
+			textData.quantity=quantity
+			tk.msg( "The Barbecue of Your Lives", gh.format([[The clumsy beasts fail to react as your men take position, trapping them against the river. On your count they open fire on pre-identified animals - particularly handsome-looking specimens. They fall like bricks while the rest of the herd panics.
+
+				You do the inventory in the dying lights of the bonfire your men have roasted the animals on. ${quantity} tonnes of fresh meat! Buffalo Bill would have been proud.]],textData) )
+			player.addCargo(FOOD,quantity)
+		else
+			local damages=gh.floorTo(500+math.random()*1000,-2)
+			textData.damages=damages
+			tk.msg( "The Shepherds of the Flock", gh.format([[If your men had been attentive they might have noticed sooner the strange ripples in the long grass around the herd. Instead the first sign of trouble is a muffled cry by the lead man, falling to the ground with blood streaming from his savaged back. In an instant your men find themselves fighting shadows - small, unbelievably quick creatures with razor teeth striking without warning before melting back in the long grass. Only a quick retreat, blasters blazing, gets them out of danger.
+
+				Later surveys by probes shed light on the events: the placid herbivores are shepherded by intelligent social carnivores who protect them from outside threats - and take their pounds of flesh in return.
+
+				Medical bills for wounded crew members set you back ${damages}, and there's nothing but soup left in the ship's stores.]],textData) )
+			player.pay(-damages)
+		end
+	end
+	end,
+	weightValidity=function(planet)
+	local validPlanets={planetTemplateJungleVenus=true,planetTemplateWarmTerra=true,planetTemplateTemperateTerra=true,planetTemplateJungleVenus=true}
+
+	return validPlanets[planet.lua.planetType]
+	end,
+	uncivilizedOnly=true,
 	weight=10
 }

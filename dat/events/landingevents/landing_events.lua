@@ -17,29 +17,42 @@ function create()
 	local landedPlanet=planet_class.load(planet.cur())
 
 	if (debugMode or not landedPlanet:hasTag("visited")) then
-  
-  		local validEvents=gh.filterConditionalObjects(landing_events,landedPlanet)
+
+    local validEvents=gh.filterConditionalObjects(landing_events,landedPlanet)
+
+    local civilizedSystem=landingEventsIsSystemCivilized(system:cur())
+
+    --remove all wilderness-only events from valid events
+    --(could be handled via events' filtering methods but would be slower)
+    if civilizedSystem then
+      for k, v in pairs(validEvents) do
+        if v.uncivilizedOnly then
+          validEvents[k]=nil
+        end
+      end
+    end
+
 
   		--chances of having an event equal to total weight of events as %
       -- (i.e, below totalWeight>100, the weight and the chance % are the same)
-  		local totalWeight=0
+      local totalWeight=0
       for k, v in pairs(validEvents) do
-          totalWeight=totalWeight+v.weight
+        totalWeight=totalWeight+v.weight
       end
 
 
       if debugMode or math.random()*100<totalWeight then
 
-  			if (#validEvents>0) then
-  				local levent=gh.pickWeightedObject(validEvents)
+       if (totalWeight>0) then
+        local levent=gh.pickWeightedObject(validEvents)
 
-  				levent.runEvent(landedPlanet)
-  			end
-  		end
+        levent.runEvent(landedPlanet)
+      end
+    end
 
-  		landedPlanet:addTag("visited")
-  		landedPlanet:save()
-  	end
+    landedPlanet:addTag("visited")
+    landedPlanet:save()
+  end
 end
 
 function landingEventsTextData(landedPlanet)
@@ -57,4 +70,17 @@ function landingEventsTextData(landedPlanet)
   end
 
   return textData
+end
+
+function landingEventsIsSystemCivilized(sys)
+
+  local presences=sys:presences()
+
+  for k,v in pairs(presences) do
+    if k~="Barbarians" and k~="Natives" then
+      return true
+    end
+  end
+
+  return false
 end

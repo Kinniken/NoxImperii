@@ -65,7 +65,7 @@
 		weightValidity=function(planet)
 		local validPlanets={planetTemplateMercury=true,planetTemplateVenus=true,planetTemplateMars=true}
 
-		return validPlanets[planet.lua.planetType] and (#planet.lua.settlements)==0
+		return validPlanets[planet.lua.planetType]
 		end,
 		weight=10
 	}
@@ -101,204 +101,202 @@
 		weightValidity=function(planet)
 		local validPlanets={planetTemplateMercury=true,planetTemplateVenus=true,planetTemplateMars=true}
 
-	local civilizedPresence=(#planet.c:system():presences()>1 or (#planet.c:system():presences()==1 and not planet.c:system():presences()["Barbarians"]))--systems with non-barbarian presence
+		return validPlanets[planet.lua.planetType]
+		end,
+		uncivilizedOnly=true,
+		weight=5
+	}
 
-	return validPlanets[planet.lua.planetType] and not civilizedPresence
-	end,
-	weight=5
-}
+	landing_events.viableWorldAncientShip={
+		runEvent=function(planet)
 
-landing_events.viableWorldAncientShip={
-	runEvent=function(planet)
+		local textData=landingEventsTextData(planet)
 
-	local textData=landingEventsTextData(planet)
+		local eventText1=[[Your initial scans had picked up no signs of ${planetname} being settled by beings with advanced technology, and so it is with great surprise that you discover the results of surveys in a inhospitable region of dense forests: a few meters below the surface you discern the unmistakable outline of a spaceship! Further analysis confirms that it has been there for several millennia, long before the rise of the Empire or that of any of its rivals.
 
-	local eventText1=[[Your initial scans had picked up no signs of ${planetname} being settled by beings with advanced technology, and so it is with great surprise that you discover the results of surveys in a inhospitable region of dense forests: a few meters below the surface you discern the unmistakable outline of a spaceship! Further analysis confirms that it has been there for several millennia, long before the rise of the Empire or that of any of its rivals.
+		There is no way to predict what dangers lie in the ship, and yet it contains promises of great riches. Will you investigate?]]
 
-	There is no way to predict what dangers lie in the ship, and yet it contains promises of great riches. Will you investigate?]]
+		if tk.yesno( "The Lost Spaceship", gh.format(eventText1,textData) ) then
+			if math.random() <0.3 then
+				local quantity=gh.floorTo(1+math.random()*2,0)
+				textData.quantity=quantity
+				tk.msg( "Ancient Mechanisms", gh.format([[The soil is tightly-packed and the vegetation above it thick, but the modern tools aboard the ${shipname} make quick work of both. Soon the ancient ship is exposed to the air again. Signs point to an ancient crash, and much of the ship is destroyed beyond investigation. However you do manage to recover what looks like parts of the navigation systems.
 
-	if tk.yesno( "The Lost Spaceship", gh.format(eventText1,textData) ) then
-		if math.random() <0.3 then
-			local quantity=gh.floorTo(1+math.random()*2,0)
-			textData.quantity=quantity
-			tk.msg( "Ancient Mechanisms", gh.format([[The soil is tightly-packed and the vegetation above it thick, but the modern tools aboard the ${shipname} make quick work of both. Soon the ancient ship is exposed to the air again. Signs point to an ancient crash, and much of the ship is destroyed beyond investigation. However you do manage to recover what looks like parts of the navigation systems.
+					On board the ${shipname}, your men carefully store the ${quantity} tonnes of mechanisms recovered. No doubt some scientists somewhere will give you a good price for them.]],textData) )
+				player.addCargo(ANCIENT_TECHNOLOGY,quantity)
+			else
+				local damages=gh.floorTo(2000+math.random()*5000,-2)
+				textData.damages=damages
+				tk.msg( "Old but Deadly", gh.format([[Your team manages to dig toward the remains of the ship easily enough, and are soon entering the former hull and removing everything that looks like ancient machines. While one of your man is loading the latest cargo in one of the ${shipname}'s rover, he notices rapidly increasing radioactivity coming from the crates. His quick alerts allows the crew to flee the scene fast, but without the rover and the extraction equipment.
 
-				On board the ${shipname}, your men carefully store the ${quantity} tonnes of mechanisms recovered. No doubt some scientists somewhere will give you a good price for them.]],textData) )
-			player.addCargo(ANCIENT_TECHNOLOGY,quantity)
-		else
-			local damages=gh.floorTo(2000+math.random()*5000,-2)
-			textData.damages=damages
-			tk.msg( "Old but Deadly", gh.format([[Your team manages to dig toward the remains of the ship easily enough, and are soon entering the former hull and removing everything that looks like ancient machines. While one of your man is loading the latest cargo in one of the ${shipname}'s rover, he notices rapidly increasing radioactivity coming from the crates. His quick alerts allows the crew to flee the scene fast, but without the rover and the extraction equipment.
-
-				By the time a second team with proper radiation protection arrives on the spot, it is too late to save anything left behind; everything is now highly radioactive. It seems like the equipment removed from the ancient hull included an old fission pile, which got damaged and started leaking. There's nothing left for you to do but to write-off the equipment; ${damages} credits should cover it.]],textData) )
-			player.pay(-damages)
+					By the time a second team with proper radiation protection arrives on the spot, it is too late to save anything left behind; everything is now highly radioactive. It seems like the equipment removed from the ancient hull included an old fission pile, which got damaged and started leaking. There's nothing left for you to do but to write-off the equipment; ${damages} credits should cover it.]],textData) )
+				player.pay(-damages)
+			end
 		end
-	end
-	end,
-	weightValidity=function(planet)
-	local validPlanets={planetTemplateJungleVenus=true,planetTemplateWarmTerra=true,planetTemplateTemperateTerra=true}
+		end,
+		weightValidity=function(planet)
+		local validPlanets={planetTemplateJungleVenus=true,planetTemplateWarmTerra=true,planetTemplateTemperateTerra=true}
 
-	local civilizedPresence=(#planet.c:system():presences()>1 or (#planet.c:system():presences()==1 and not planet.c:system():presences()["Barbarians"]))
+		return validPlanets[planet.lua.planetType]
+		end,
+		uncivilizedOnly=true,
+		weight=5
+	}
 
-	return validPlanets[planet.lua.planetType] and not civilizedPresence
-	end,
-	weight=5
-}
+	landing_events.gasGiantExtractionStation={
 
-landing_events.gasGiantExtractionStation={
+		runEvent=function(planet)
 
-	runEvent=function(planet)
+		local textData=landingEventsTextData(planet)
 
-	local textData=landingEventsTextData(planet)
+		local eventText1=[[You put the ${shipname} in orbit around ${planetname} and start scanning the rings that surround the planet. The first results are exactly what you expect - the usual mix of small rocky asteroids and of chunks of ice. And then suddenly your scanner detects something quite different: a large metallic object that can only be artificial! Further analysis reveal it to likely be the remain of an atmospheric extraction facility. And it seems old, very old... older than the Empire, at least.
 
-	local eventText1=[[You put the ${shipname} in orbit around ${planetname} and start scanning the rings that surround the planet. The first results are exactly what you expect - the usual mix of small rocky asteroids and of chunks of ice. And then suddenly your scanner detects something quite different: a large metallic object that can only be artificial! Further analysis reveal it to likely be the remain of an atmospheric extraction facility. And it seems old, very old... older than the Empire, at least.
+		Valuable technology might lie in that wreck, but it is in a dangerous orbit. And even inert-looking ancient technology can be more dangerous than it looks. Should you bring the ${shipname} closer to investigate?]]
 
-	Valuable technology might lie in that wreck, but it is in a dangerous orbit. And even inert-looking ancient technology can be more dangerous than it looks. Should you bring the ${shipname} closer to investigate?]]
+		if tk.yesno( "Ancient Outposts", gh.format(eventText1,textData) ) then
+			if math.random() <0.3 then
 
-	if tk.yesno( "Ancient Outposts", gh.format(eventText1,textData) ) then
-		if math.random() <0.3 then
+				local quantity=gh.floorTo(1+math.random()*2,0)
 
-			local quantity=gh.floorTo(1+math.random()*2,0)
+				textData.quantity=quantity
 
-			textData.quantity=quantity
+				tk.msg( "Successful Rendez-vous", gh.format([[Lightly manoeuvring the ${shipname}, you settle in an orbit a hundred metres from the derelict station. Your men gingerly explore the ruin in the low light reflected from ${planetname}, loading into crates everything that looks like it was part of an ancient machine or computer before shipping it back to the ${shipname}.
 
-			tk.msg( "Successful Rendez-vous", gh.format([[Lightly manoeuvring the ${shipname}, you settle in an orbit a hundred metres from the derelict station. Your men gingerly explore the ruin in the low light reflected from ${planetname}, loading into crates everything that looks like it was part of an ancient machine or computer before shipping it back to the ${shipname}.
+					You settle your ship in a more stable orbit before doing a quick inventory; your men have recovered ${quantity} tonnes of mechanisms of various kinds. Now you just need to find a buyer.]],textData) )
 
-				You settle your ship in a more stable orbit before doing a quick inventory; your men have recovered ${quantity} tonnes of mechanisms of various kinds. Now you just need to find a buyer.]],textData) )
+				player.addCargo(ANCIENT_TECHNOLOGY,quantity)
 
-			player.addCargo(ANCIENT_TECHNOLOGY,quantity)
+			else
 
-		else
+				local damages=gh.floorTo(2000+math.random()*5000,-2)
 
-			local damages=gh.floorTo(2000+math.random()*5000,-2)
+				textData.damages=damages
 
-			textData.damages=damages
+				tk.msg( "Unstable Orbits", gh.format([[Approaching the old station is a tricky work, as it is located in the middle of a ring of dust mixed with larger rocks. You feel you are doing well until you need to swerve at the last minute to avoid an unexpected rock - straight into a second one. The ${shipname}'s shields absorb the impact, but not without damages, and you watch helplessly as the rock is deviated in a trajectory sending it toward the antique outpost, striking it with a glancing blow. The venerable structure resists the blow, but the energy transmitted makes it start to tumble on itself and leave its stable orbit. It is now falling toward ${planetname}, and it is rotating too rapidly to attempt a rendez-vous.
 
-			tk.msg( "Unstable Orbits", gh.format([[Approaching the old station is a tricky work, as it is located in the middle of a ring of dust mixed with larger rocks. You feel you are doing well until you need to swerve at the last minute to avoid an unexpected rock - straight into a second one. The ${shipname}'s shields absorb the impact, but not without damages, and you watch helplessly as the rock is deviated in a trajectory sending it toward the antique outpost, striking it with a glancing blow. The venerable structure resists the blow, but the energy transmitted makes it start to tumble on itself and leave its stable orbit. It is now falling toward ${planetname}, and it is rotating too rapidly to attempt a rendez-vous.
+					It's time to cut your losses and estimate the damages suffered: at least ${damages} credits.]],textData) )
 
-				It's time to cut your losses and estimate the damages suffered: at least ${damages} credits.]],textData) )
+				player.pay(-damages)
 
-			player.pay(-damages)
-
+			end
 		end
-	end
-	end,
+		end,
 
-	weightValidity=function(planet)
+		weightValidity=function(planet)
 
-	local validPlanets={planetHotJupiter=true,planetJovian=true}
+		local validPlanets={planetHotJupiter=true,planetJovian=true}
 
-	local civilizedPresence=(#planet.c:system():presences()>1 or (#planet.c:system():presences()==1 and not planet.c:system():presences()["Barbarians"]))
+		return validPlanets[planet.lua.planetType]
+		end,
+		uncivilizedOnly=true,
+		weight=5
+	}
 
-	return validPlanets[planet.lua.planetType] and not civilizedPresence
-	end,
-	weight=5
-}
+	landing_events.gasGiantOrbitalDebris={
 
-landing_events.gasGiantOrbitalDebris={
+		runEvent=function(planet)
 
-	runEvent=function(planet)
+		local textData=landingEventsTextData(planet)
 
-	local textData=landingEventsTextData(planet)
+		local eventText1=[[The orbit around the gas giant is difficult to navigate due to the quantity of debris surrounding the world. Distracted by the sumptuous view of ${planetname}'s swirling atmosphere, you fail to notice in time a cluster of rocks in an unstable orbit. They hit the ${shipname}, causing minor damages. On the plus side, they disintegrated during the impact, displaying rich iron ores.
 
-	local eventText1=[[The orbit around the gas giant is difficult to navigate due to the quantity of debris surrounding the world. Distracted by the sumptuous view of ${planetname}'s swirling atmosphere, you fail to notice in time a cluster of rocks in an unstable orbit. They hit the ${shipname}, causing minor damages. On the plus side, they disintegrated during the impact, displaying rich iron ores.
+		Should you try and capture those rocks, at the risk of further damage?]]
 
-	Should you try and capture those rocks, at the risk of further damage?]]
+		if tk.yesno( "Congested Orbits", gh.format(eventText1,textData) ) then
+			if math.random() <0.7 then
 
-	if tk.yesno( "Congested Orbits", gh.format(eventText1,textData) ) then
-		if math.random() <0.7 then
+				local quantity=gh.floorTo(2+math.random()*5,0)
+				local damages=gh.floorTo(500+math.random()*500,-2)
 
-			local quantity=gh.floorTo(2+math.random()*5,0)
+				textData.quantity=quantity
+				textData.damages=damages
+
+				tk.msg( "An Easy Capture", gh.format([[You carefully compute a corrected trajectory for the ${shipname}, bringing the ship in close proximity to the revealed ores. A small team sorties to bring them in.
+
+					You've collected ${quantity} tonnes of ores, compensation for the ${damages} credits worth of damages suffered.]],textData) )
+
+				player.addCargo(ORE,quantity)
+				player.pay(-damages)
+
+			else
+
+				local damages=gh.floorTo(1000+math.random()*1000,-2)
+
+				textData.damages=damages
+
+				tk.msg( "Iceberg Straight Ahead!", gh.format([[Following the rocks quickly turns more complicated than anticipated. Your sensor is confused by the great clouds of orbiting dust, and the ${shipname}'s computers struggle to keep track of all the rocks in orbit. You've almost given up on catching those ores when several tonnes of ice cross your path, battering the ${shipname} again. It's time to give up and move to a less dangerous orbit.
+
+					The two collisions battered your shields and damaged the ship's armour. Your engineer estimates ${damages} credits for the repairs.]],textData) )
+
+				player.pay(-damages)
+
+			end
+		else
 			local damages=gh.floorTo(500+math.random()*500,-2)
 
-			textData.quantity=quantity
 			textData.damages=damages
 
-			tk.msg( "An Easy Capture", gh.format([[You carefully compute a corrected trajectory for the ${shipname}, bringing the ship in close proximity to the revealed ores. A small team sorties to bring them in.
+			tk.msg( "Cutting your Losses", gh.format([[You quickly move the ${shipname} on a more stable orbit around ${planetname} and inspects the damages.
 
-				You've collected ${quantity} tonnes of ores, compensation for the ${damages} credits worth of damages suffered.]],textData) )
-
-			player.addCargo(ORE,quantity)
-			player.pay(-damages)
-
-		else
-
-			local damages=gh.floorTo(1000+math.random()*1000,-2)
-
-			textData.damages=damages
-
-			tk.msg( "Iceberg Straight Ahead!", gh.format([[Following the rocks quickly turns more complicated than anticipated. Your sensor is confused by the great clouds of orbiting dust, and the ${shipname}'s computers struggle to keep track of all the rocks in orbit. You've almost given up on catching those ores when several tonnes of ice cross your path, battering the ${shipname} again. It's time to give up and move to a less dangerous orbit.
-
-				The two collisions battered your shields and damaged the ship's armour. Your engineer estimates ${damages} credits for the repairs.]],textData) )
+				Thankfully they are quite light; ${damages} credits should cover it.]],textData) )
 
 			player.pay(-damages)
-
 		end
-	else
-		local damages=gh.floorTo(500+math.random()*500,-2)
+		end,
 
-		textData.damages=damages
+		weightValidity=function(planet)
 
-		tk.msg( "Cutting your Losses", gh.format([[You quickly move the ${shipname} on a more stable orbit around ${planetname} and inspects the damages.
+		local validPlanets={planetHotJupiter=true,planetJovian=true}
 
-			Thankfully they are quite light; ${damages} credits should cover it.]],textData) )
+		return validPlanets[planet.lua.planetType]
+		end,
+		weight=10
+	}
 
-		player.pay(-damages)
-	end
-	end,
+	landing_events.gasGiantRichMoonlet={
 
-	weightValidity=function(planet)
+		runEvent=function(planet)
 
-	local validPlanets={planetHotJupiter=true,planetJovian=true}
+		local textData=landingEventsTextData(planet)
 
-	return validPlanets[planet.lua.planetType] and (#planet.lua.settlements)==0
-	end,
-	weight=10
-}
+		local eventText1=[[Your scan of ${planetname}'s rings reveal the usual mix of dust, ancient rocks and blocks of ice, all of little value. Only one target seems interesting: a moonlet of a few hundred tonnes, on which scanners pick up unusual quantities of platinum.
 
-landing_events.gasGiantRichMoonlet={
+		The approach trajectory is a little difficult, but nothing you haven't done before. Should you order a mining expedition?]]
 
-	runEvent=function(planet)
+		if tk.yesno( "Shiny, Shiny Moon", gh.format(eventText1,textData) ) then
+			if math.random() <0.7 then
 
-	local textData=landingEventsTextData(planet)
+				local loot=gh.floorTo(2000+math.random()*2000,-2)
 
-	local eventText1=[[Your scan of ${planetname}'s rings reveal the usual mix of dust, ancient rocks and blocks of ice, all of little value. Only one target seems interesting: a moonlet of a few hundred tonnes, on which scanners pick up unusual quantities of platinum.
+				textData.loot=loot
 
-	The approach trajectory is a little difficult, but nothing you haven't done before. Should you order a mining expedition?]]
+				tk.msg( "Easy Pickings", gh.format([[You confidently slide the ${shipname} in orbit alongside the moonlet, and send hand-picked men on the surface with makeshift mining tools. While there is no time or resources for a proper excavation, they still manage to collect significant amounts of the precious metal.
 
-	if tk.yesno( "Shiny, Shiny Moon", gh.format(eventText1,textData) ) then
-		if math.random() <0.7 then
+					You've just collected several kilos of platinum in a few hours, and your bank account is now ${loot} credits heavier.]],textData) )
 
-			local loot=gh.floorTo(2000+math.random()*2000,-2)
+				player.pay(loot)
+			else
 
-			textData.loot=loot
+				local damages=gh.floorTo(500+math.random()*1000,-2)
 
-			tk.msg( "Easy Pickings", gh.format([[You confidently slide the ${shipname} in orbit alongside the moonlet, and send hand-picked men on the surface with makeshift mining tools. While there is no time or resources for a proper excavation, they still manage to collect significant amounts of the precious metal.
+				textData.damages=damages
 
-				You've just collected several kilos of platinum in a few hours, and your bank account is now ${loot} credits heavier.]],textData) )
+				tk.msg( "Not all that Glitter is Gold", gh.format([[You confidently slide the ${shipname} in orbit alongside the moonlet, and send hand-picked men on the surface with makeshift mining tools. They run into troubles almost immediately; the moonlet's surface is rough and the platinum lies below unstable rocks. Your team persevere for a few hours, with little to show for it but broken drills and narrowly-avoided accidents. When the tunnel painstakingly dug toward a platinum deposit collapses in slow-motion just as one of your man was going to enter it, you call off the attempt.
 
-			player.pay(loot)
-		else
+					You're left with a ${damages} cr bill and no platinum. Better luck next time!]],textData) )
 
-			local damages=gh.floorTo(500+math.random()*1000,-2)
+				player.pay(-damages)
 
-			textData.damages=damages
-
-			tk.msg( "Not all that Glitter is Gold", gh.format([[You confidently slide the ${shipname} in orbit alongside the moonlet, and send hand-picked men on the surface with makeshift mining tools. They run into troubles almost immediately; the moonlet's surface is rough and the platinum lies below unstable rocks. Your team persevere for a few hours, with little to show for it but broken drills and narrowly-avoided accidents. When the tunnel painstakingly dug toward a platinum deposit collapses in slow-motion just as one of your man was going to enter it, you call off the attempt.
-
-				You're left with a ${damages} cr bill and no platinum. Better luck next time!]],textData) )
-
-			player.pay(-damages)
-
+			end
 		end
-	end
-	end,
+		end,
 
-	weightValidity=function(planet)
+		weightValidity=function(planet)
 
-	local validPlanets={planetHotJupiter=true,planetJovian=true}
+		local validPlanets={planetHotJupiter=true,planetJovian=true}
 
-	return validPlanets[planet.lua.planetType] and (#planet.lua.settlements)==0
-	end,
-	weight=10
-}
+		return validPlanets[planet.lua.planetType]
+		end,
+		uncivilizedOnly=true,
+		weight=10
+	}

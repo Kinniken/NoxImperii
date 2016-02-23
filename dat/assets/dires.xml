@@ -6,7 +6,7 @@
  </pos>
  <GFX>
   <space>M06.png</space>
-  <exterior>forest.png</exterior>
+  <exterior>ln/jungle.png</exterior>
  </GFX>
  <presence>
   <faction>Empire of Terra</faction>

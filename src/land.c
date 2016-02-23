@@ -1531,7 +1531,7 @@ static void land_createMainTab( unsigned int wid )
    if (land_planet->faction != -1) {
       logo = faction_logoSmall(land_planet->faction);
       if (logo != NULL) {
-         window_addImage( wid, 440 + (w-593-logo->w)/2, -20,
+         window_addImage( wid, 440 + (w-327-logo->w)/2, -20,
                0, 0, "imgFaction", logo, 0 );
          planetDescHeight = 350;
          offset=80;

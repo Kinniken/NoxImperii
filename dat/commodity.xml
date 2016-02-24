@@ -24,7 +24,7 @@ The major oxygen-breathing races in the sector have broadly compatible dietary r
 		<price>2000</price>
 	</commodity> 
 	<commodity name="Roidhun Fine Telloch">
-		<description>This fiery Ardar liqueur is widely popular in the Rhoidunate as well as amoung worldly humans. This particular brand is sourced from Ardarshir itself and renowned among connoisseurs.</description>
+		<description>This fiery Ardar liqueur is widely popular in the Rhoidunate as well as among worldly humans. This particular brand is sourced from Ardarshir itself and renowned among connoisseurs.</description>
 		<price>1500</price>
 	</commodity> 
 	
@@ -92,7 +92,7 @@ The major oxygen-breathing races in the sector have broadly compatible dietary r
  
 	<!-- Weapons -->
 	<commodity name="Native Weapons">
-		<description>Modern weapons are of extraordinary effectiveness yet few people would hand a blaster on their wall. More primitive weapons are thus in high demands among aristocrats and officers, on human and Ardar worlds: spears that only a four-arm, three-meter centaur could yield, elegant assegais designed for use by tree-dwellers, nameless weapons with more blades than seem usable - if they look deadly, they will find a buyer.</description>
+		<description>Modern weapons are of extraordinary effectiveness yet few people would hang a blaster on their wall. More primitive weapons are thus in high demands among aristocrats and officers, on human and Ardar worlds: spears that only a four-arm, three-meter centaur could yield, elegant assegais designed for use by tree-dwellers, nameless weapons with more blades than seem usable - if they look deadly, they will find a buyer.</description>
 		<price>600</price>
 	</commodity>
 	<commodity name="Non-Industrial Weapons">
@@ -114,7 +114,7 @@ The major oxygen-breathing races in the sector have broadly compatible dietary r
 	
 	<!-- Other -->
 	<commodity name="Native Technology">
-		<description>It is rare that non-spacefaring races produce technological items of more than scholarly interest. And yet there is a market for ingenious alien contraptions - there are valuable ideas everywhere, and what seemed like a simple curiosity might prove the spark of a technological revolution. Sadly, human scientists are often too rigid to properly value such inputs.</description>
+		<description>It is rare that non-space-faring races produce technological items of more than scholarly interest. And yet there is a market for ingenious alien contraptions - there are valuable ideas everywhere, and what seemed like a simple curiosity might prove the spark of a technological revolution. Sadly, human scientists are often too rigid to properly value such inputs.</description>
 		<price>900</price>
 	</commodity>
 	<commodity name="Ancient Technology">

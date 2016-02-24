@@ -554,7 +554,7 @@ all.crabs.specialities[#all.crabs.specialities+1]={
 		return (not planet.lua.natives.civilized)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(NATIVE_ARTWORK,gh.populationScore(planet.lua.natives.population)*5,0.5)
+		planet.lua.natives:addGoodSupply(NATIVE_SCULPTURES,gh.populationScore(planet.lua.natives.population)*5,0.5)
 	end,
 	getDesc=function(planet)
 		return "With their double sets of pincers, the "..planet.lua.natives.name.." make wonderful sculptors. They carve massive but finely detailed mythological sculptures out of entire tree trunks, hacking the general shape with the outer pincers before finishing the details with the inner ones."

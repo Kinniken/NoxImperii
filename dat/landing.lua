@@ -1,4 +1,5 @@
 include('universe/objects/class_planets.lua')
+include('universe/generate_helper.lua')
 
 --[[
    Prototype function:
@@ -37,7 +38,7 @@ function land( pnt )
 
    local landedPlanet=planet_class.load(pnt)
 
-   if (#landedPlanet.lua.settlements==0) then--no civilisation present
+   if (gh.countMembers(landedPlanet.lua.settlements)==0) then--no civilisation present
       return true
    end
 

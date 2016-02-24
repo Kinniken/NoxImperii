@@ -1544,7 +1544,7 @@ static void land_createMainTab( unsigned int wid )
    window_addImage( wid, 20, -40, 0, 0, "imgPlanet", gfx_exterior, 1 );
 
 
-   if (strlen(land_planet->description)<1500) {
+   if (strlen(land_planet->description)<1300) {
 	   window_addText( wid, 573, -20-offset,
 	         w-593, planetDescHeight, 0,
 	         "txtPlanetDesc", &gl_smallFont, &cBlack, land_planet->description);

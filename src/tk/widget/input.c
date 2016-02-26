@@ -23,7 +23,10 @@ static int inp_isBreaker(char c);
 static int inp_key( Widget* inp, SDLKey key, SDLMod mod );
 static int inp_text( Widget* inp, const char *buf );
 static int inp_addKey( Widget* inp, SDLKey key );
+static void inp_clampView( Widget *inp );
 static void inp_cleanup( Widget* inp );
+static void inp_focusGain( Widget* inp );
+static void inp_focusLose( Widget* inp );
 
 
 /**
@@ -62,13 +65,15 @@ void window_addInput( const unsigned int wid,
    wgt_setFlag(wgt, WGT_FLAG_CANFOCUS);
    wgt->keyevent        = inp_key;
    wgt->textevent       = inp_text;
-   /*wgt->keyevent        = inp_key;*/
+   wgt->focusGain       = inp_focusGain;
+   wgt->focusLose       = inp_focusLose;
    wgt->dat.inp.font    = (font != NULL) ? font : &gl_smallFont;
    wgt->dat.inp.max     = max+1;
    wgt->dat.inp.oneline = oneline;
    wgt->dat.inp.pos     = 0;
    wgt->dat.inp.view    = 0;
    wgt->dat.inp.input   = calloc( wgt->dat.inp.max, 1 );
+   wgt->dat.inp.fptr    = NULL;
 
    /* position/size */
    wgt->w = (double) w;
@@ -178,6 +183,10 @@ static int inp_text( Widget* inp, const char *buf )
       ret |= inp_addKey( inp, buf[i] );
       i++;
    }
+
+   if (ret && inp->dat.inp.fptr != NULL)
+      inp->dat.inp.fptr( inp->wdw, inp->name );
+
    return ret;
 }
 
@@ -292,6 +301,8 @@ static int inp_key( Widget* inp, SDLKey key, SDLMod mod )
             }
             else
                inp->dat.inp.pos -= 1;
+
+            inp_clampView( inp );
          }
       }
       else if (key == SDLK_RIGHT) {
@@ -312,6 +323,8 @@ static int inp_key( Widget* inp, SDLKey key, SDLMod mod )
             }
             else
                inp->dat.inp.pos += 1;
+
+            inp_clampView( inp );
          }
       }
       else if (key == SDLK_UP) {
@@ -409,6 +422,14 @@ static int inp_key( Widget* inp, SDLKey key, SDLMod mod )
       return 1;
    }
 
+
+#if SDL_VERSION_ATLEAST(2,0,0)
+   /* Don't use, but don't eat, either. */
+   if ((key == SDLK_TAB) || (key == SDLK_ESCAPE))
+      return 0;
+#endif /* SDL_VERSION_ATLEAST(2,0,0) */
+
+   /* Eat everything else that isn't usable. Om nom. */
    /* Only catch some keys. */
    if ((key != SDLK_BACKSPACE) && 
          (key != SDLK_DELETE) &&
@@ -416,7 +437,11 @@ static int inp_key( Widget* inp, SDLKey key, SDLMod mod )
          (key != SDLK_KP_ENTER) &&
          (key != SDLK_HOME) &&
          (key != SDLK_END))
+#if SDL_VERSION_ATLEAST(2,0,0)
+      return 1; /* SDL2 uses TextInput and should eat most keys. Om nom. */
+#else /* SDL_VERSION_ATLEAST(2,0,0) */
       return 0;
+#endif /* SDL_VERSION_ATLEAST(2,0,0) */
 
    /* backspace -> delete text */
    if (key == SDLK_BACKSPACE) {
@@ -453,6 +478,11 @@ static int inp_key( Widget* inp, SDLKey key, SDLMod mod )
          if (n+10 < inp->w)
             inp->dat.inp.view--;
       }
+
+      if (inp->dat.inp.fptr != NULL)
+         inp->dat.inp.fptr( inp->wdw, inp->name );
+
+      inp_clampView( inp );
       return 1;
    }
    /* delete -> delete text */
@@ -484,16 +514,23 @@ static int inp_key( Widget* inp, SDLKey key, SDLMod mod )
             (inp->dat.inp.max - curpos) );
       inp->dat.inp.input[ inp->dat.inp.max - curpos + inp->dat.inp.pos ] = '\0';
 
+      if (inp->dat.inp.fptr != NULL)
+         inp->dat.inp.fptr( inp->wdw, inp->name );
+
       return 1;
    }
    /* home -> move to start */
    else if (key == SDLK_HOME) {
       inp->dat.inp.pos = 0;
+      inp_clampView( inp );
+
       return 1;
    }
    /* end -> move to end */
    else if (key == SDLK_END) {
       inp->dat.inp.pos = strlen(inp->dat.inp.input);
+      inp_clampView( inp );
+
       return 1;
    }
 
@@ -510,6 +547,10 @@ static int inp_key( Widget* inp, SDLKey key, SDLMod mod )
             inp->dat.inp.max - inp->dat.inp.pos - 2 );
       inp->dat.inp.input[ inp->dat.inp.pos++ ] = '\n';
       inp->dat.inp.input[ inp->dat.inp.max-1 ] = '\0'; /* Make sure it's NUL terminated. */
+
+      if (inp->dat.inp.fptr != NULL)
+         inp->dat.inp.fptr( inp->wdw, inp->name );
+
       return 1;
    }
 
@@ -517,6 +558,34 @@ static int inp_key( Widget* inp, SDLKey key, SDLMod mod )
    return 0;
 }
 
+
+/*
+ * @brief Keeps the input widget's view in sync with its cursor
+ *
+ *    @param inp Input widget to operate on.
+ */
+static void inp_clampView( Widget *inp )
+{
+   int visible;
+
+   /* @todo Handle multiline input widgets. */
+   if (!inp->dat.inp.oneline)
+      return;
+
+   /* If the cursor is behind the view, shift the view backwards. */
+   if (inp->dat.inp.view > inp->dat.inp.pos) {
+      inp->dat.inp.view = inp->dat.inp.pos;
+      return;
+   }
+
+   visible = gl_printWidthForText( inp->dat.inp.font,
+         &inp->dat.inp.input[ inp->dat.inp.view ], inp->w - 10 );
+
+   /* Shift the view right until the cursor is visible. */
+   while (inp->dat.inp.view + visible < inp->dat.inp.pos)
+      visible = gl_printWidthForText( inp->dat.inp.font,
+            &inp->dat.inp.input[ inp->dat.inp.view++ ], inp->w - 10 );
+}
 
 
 /**
@@ -595,6 +664,9 @@ char* window_setInput( const unsigned int wid, char* name, const char *msg )
    }
 
    /* Get the value. */
+   if (wgt->dat.inp.fptr != NULL)
+      wgt->dat.inp.fptr( wid, name );
+
    return wgt->dat.inp.input;
 }
 
@@ -630,4 +702,65 @@ void window_setInputFilter( const unsigned int wid, char* name, const char *filt
    /* Copy filter over. */
    wgt->dat.inp.filter = strdup( filter );
 }
+
+/**
+ * @brief Sets the callback used when the input's text is modified.
+ *
+ *    @param wid Window to which input widget belongs.
+ *    @param name Input widget to set callback for.
+ *    @param fptr Function to trigger when the input's text is modified.
+ */
+void window_setInputCallback( const unsigned int wid, char* name, void (*fptr)(unsigned int, char*) )
+{
+   Widget *wgt;
+
+   /* Get the widget. */
+   wgt = window_getwgt(wid, name);
+   if (wgt == NULL)
+      return;
+
+   /* Check the type. */
+   if (wgt->type != WIDGET_INPUT) {
+      WARN("Trying to set callback on non-input widget '%s'.", name);
+      return;
+   }
+
+   wgt->dat.inp.fptr = fptr;
+}
+
+/**
+ * @brief Input widget gains focus.
+ *
+ *    @param inp Widget gaining the focus.
+ */
+static void inp_focusGain( Widget* inp )
+{
+#if SDL_VERSION_ATLEAST(2,0,0)
+   SDL_Rect input_pos;
+
+   input_pos.x = (int)inp->x;
+   input_pos.y = (int)inp->y;
+   input_pos.w = (int)inp->w;
+   input_pos.h = (int)inp->h;
+
+   SDL_StartTextInput();
+   SDL_SetTextInputRect( &input_pos );
+#else /* SDL_VERSION_ATLEAST(2,0,0) */
+   (void) inp;
+#endif /* SDL_VERSION_ATLEAST(2,0,0) */
+}
+
+/**
+ * @brief Input widget loses focus.
+ *
+ *    @param inp Widget losing the focus.
+ */
+static void inp_focusLose( Widget* inp )
+{
+   (void) inp;
+#if SDL_VERSION_ATLEAST(2,0,0)
+   SDL_StopTextInput();
+#endif /* SDL_VERSION_ATLEAST(2,0,0) */
+}
+
 

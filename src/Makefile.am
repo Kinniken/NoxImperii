@@ -10,7 +10,6 @@ CODE_SOURCE = \
 	ai.c \
 	array.c \
 	background.c \
-	base64.c \
 	board.c \
 	camera.c \
 	claim.c \
@@ -145,10 +144,8 @@ CODE_SOURCE = \
 	unidiff.c \
 	weapon.c \
 	ai.h \
-	ai_extra.h \
 	array.h \
 	background.h \
-	base64.h \
 	board.h \
 	camera.h \
 	claim.h \
@@ -247,6 +244,7 @@ CODE_SOURCE = \
 	ntime.h \
 	nxml.h \
 	nxml_lua.h \
+	nzip.h \
 	opengl.h \
 	opengl_ext.h \
 	opengl_matrix.h \

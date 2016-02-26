@@ -42,6 +42,7 @@ static int hook_jumpout( lua_State *L );
 static int hook_jumpin( lua_State *L );
 static int hook_enter( lua_State *L );
 static int hook_hail( lua_State *L );
+static int hook_boarding( lua_State *L );
 static int hook_board( lua_State *L );
 static int hook_timer( lua_State *L );
 static int hook_date( lua_State *L );
@@ -62,6 +63,7 @@ static const luaL_reg hook_methods[] = {
    { "jumpin", hook_jumpin },
    { "enter", hook_enter },
    { "hail", hook_hail },
+   { "boarding", hook_boarding },
    { "board", hook_board },
    { "timer", hook_timer },
    { "date", hook_date },
@@ -246,7 +248,7 @@ static unsigned int hook_generic( lua_State *L, const char* stack, double ms, in
    if (running_mission != NULL) {
       /* make sure mission is a player mission */
       for (i=0; i<MISSION_MAX; i++)
-         if (player_missions[i].id == running_mission->id)
+         if (player_missions[i]->id == running_mission->id)
             break;
       if (i>=MISSION_MAX) {
          WARN("Mission not in stack trying to hook, forgot to run misn.accept()?");
@@ -413,6 +415,23 @@ static int hook_hail( lua_State *L )
 {
    unsigned int h;
    h = hook_generic( L, "hail", 0., 1, 0 );
+   lua_pushnumber( L, h );
+   return 1;
+}
+/**
+ * @brief Hooks the function to the player boarding any ship.
+ *
+ * The hook receives a single parameter which is the ship doing the boarding.
+ *
+ *    @luaparam funcname Name of function to run when hook is triggered.
+ *    @luaparam arg Argument to pass to hook.
+ *    @luareturn Hook identifier.
+ * @luafunc boarding( funcname, arg )
+ */
+static int hook_boarding( lua_State *L )
+{
+   unsigned int h;
+   h = hook_generic( L, "boarding", 0., 1, 0 );
    lua_pushnumber( L, h );
    return 1;
 }
@@ -610,7 +629,8 @@ static int hook_safe( lua_State *L )
  * <ul>
  *    <li> "death" : triggered when pilot dies (before marked as dead). </li>
  *    <li> "exploded" : triggered when pilot has died and the final explosion has begun. </li>
- *    <li> "board" : triggered when pilot is boarded.</li>
+ *    <li> "boarding" : triggered when a pilot boards another ship (start of boarding).</li>
+ *    <li> "board" : triggered when a pilot is boarded (start of boarding).</li>
  *    <li> "disable" : triggered when pilot is disabled (with disable set).</li>
  *    <li> "undisable" : triggered when pilot recovers from being disabled.</li>
  *    <li> "jump" : triggered when pilot jumps to hyperspace (before he actually jumps out).</li>
@@ -625,22 +645,32 @@ static int hook_safe( lua_State *L )
  * <br />
  * DO NOT DO UNSAFE THINGS IN PILOT HOOKS. THIS MEANS STUFF LIKE player.teleport(). IF YOU HAVE DOUBTS USE A "safe" HOOK.<br />
  * <br />
- * These hooks all pass the pilot triggering the hook as a parameter, so they should have the structure of:<br />
- * <br />
+ * These hooks all pass the pilot triggering the hook as a parameter, so they should have the structure of:
+ * <p>
  * function my_hook( pilot, arg )<br />
- * end<br />
- * <br />
+ *    end
+ * </p>
  * The combat hooks also pass the pilot acting on it, so for example the pilot
  *  that disabled, attacked or killed the selected pilot. They have the
- *  following format:<br />
- * <br />
+ *  following format:
+ * <p>
  * function combat_hook( pilot, attacker, arg )<br />
- * end<br />
- * <br />
+ *    end
+ * </p>
  * Please note that in the case of disable or death hook the attacker may be nil
  *  indicating that it was killed by other means like for example the shockwave
- *  of a dying ship or nebula volatility.
- *
+ *  of a dying ship or nebula volatility.<br />
+ * <br />
+ * The land and jump hooks also pass the asset or jump point the pilot is
+ * landing at or jumped from, respectively:
+ * <p>
+ *    function land_hook( pilot, planet, arg )<br />
+ *    end
+ * </p>
+ * <p style="margin-bottom: 0">
+ *    function jump_hook( pilot, jump_point, arg )<br />
+ *    end
+ * </p>
  *    @luaparam pilot Pilot identifier to hook (or nil for all).
  *    @luaparam type One of the supported hook types.
  *    @luaparam funcname Name of function to run when hook is triggered.
@@ -651,7 +681,7 @@ static int hook_safe( lua_State *L )
 static int hook_pilot( lua_State *L )
 {
    unsigned int h;
-   LuaPilot *p;
+   LuaPilot p;
    int type;
    const char *hook_type;
    char buf[ PATH_MAX ];
@@ -660,7 +690,7 @@ static int hook_pilot( lua_State *L )
    if (lua_ispilot(L,1))
       p           = luaL_checkpilot(L,1);
    else if (lua_isnil(L,1))
-      p           = NULL;
+      p           = 0;
    else {
       NLUA_ERROR(L, "Invalid parameter #1 for hook.pilot, expecting pilot or nil.");
       return 0;
@@ -670,6 +700,7 @@ static int hook_pilot( lua_State *L )
    /* Check to see if hook_type is valid */
    if (strcmp(hook_type,"death")==0)         type = PILOT_HOOK_DEATH;
    else if (strcmp(hook_type,"exploded")==0) type = PILOT_HOOK_EXPLODED;
+   else if (strcmp(hook_type,"boarditf")==0) type = PILOT_HOOK_BOARDING;
    else if (strcmp(hook_type,"board")==0)    type = PILOT_HOOK_BOARD;
    else if (strcmp(hook_type,"disable")==0)  type = PILOT_HOOK_DISABLE;
    else if (strcmp(hook_type,"undisable")==0) type = PILOT_HOOK_UNDISABLE;
@@ -687,10 +718,10 @@ static int hook_pilot( lua_State *L )
    /* actually add the hook */
    nsnprintf( buf, sizeof(buf), "p_%s", hook_type );
    h = hook_generic( L, buf, 0., 3, 0 );
-   if (p==NULL)
+   if (p==0)
       pilots_addGlobalHook( type, h );
    else
-      pilot_addHook( pilot_get(p->pilot), type, h );
+      pilot_addHook( pilot_get(p), type, h );
 
    lua_pushnumber( L, h );
    return 1;

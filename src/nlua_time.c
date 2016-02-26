@@ -25,7 +25,9 @@
 /* Time methods. */
 static int time_create( lua_State *L );
 static int time_add( lua_State *L );
+static int time_add__( lua_State *L );
 static int time_sub( lua_State *L );
+static int time_sub__( lua_State *L );
 static int time_eq( lua_State *L );
 static int time_lt( lua_State *L );
 static int time_le( lua_State *L );
@@ -36,9 +38,9 @@ static int time_tonumber( lua_State *L );
 static int time_fromnumber( lua_State *L );
 static const luaL_reg time_methods[] = {
    { "create", time_create },
-   { "add", time_add },
+   { "add", time_add__ },
    { "__add", time_add },
-   { "sub", time_sub },
+   { "sub", time_sub__ },
    { "__sub", time_sub },
    { "__eq", time_eq },
    { "__lt", time_lt },
@@ -53,9 +55,9 @@ static const luaL_reg time_methods[] = {
 }; /**< Time Lua methods. */
 static const luaL_reg time_cond_methods[] = {
    { "create", time_create },
-   { "add", time_add },
+   { "add", time_add__ },
    { "__add", time_add },
-   { "sub", time_sub },
+   { "sub", time_sub__ },
    { "__sub", time_sub },
    { "__eq", time_eq },
    { "__lt", time_lt },
@@ -123,9 +125,9 @@ int nlua_loadTime( lua_State *L, int readonly )
  *    @param ind Index position to find the time.
  *    @return Time found at the index in the state.
  */
-LuaTime* lua_totime( lua_State *L, int ind )
+ntime_t* lua_totime( lua_State *L, int ind )
 {
-   return (LuaTime*) lua_touserdata(L,ind);
+   return (ntime_t*) lua_touserdata(L,ind);
 }
 /**
  * @brief Gets time at index raising an error if isn't a time.
@@ -134,7 +136,7 @@ LuaTime* lua_totime( lua_State *L, int ind )
  *    @param ind Index position to find the time.
  *    @return Time found at the index in the state.
  */
-LuaTime* luaL_checktime( lua_State *L, int ind )
+ntime_t* luaL_checktime( lua_State *L, int ind )
 {
    if (lua_istime(L,ind))
       return lua_totime(L,ind);
@@ -150,9 +152,7 @@ LuaTime* luaL_checktime( lua_State *L, int ind )
  */
 ntime_t luaL_validtime( lua_State *L, int ind )
 {
-   LuaTime *lt;
-   lt = luaL_checktime( L, ind );
-   return lt->t;
+   return *luaL_checktime( L, ind );
 }
 /**
  * @brief Pushes a time on the stack.
@@ -161,10 +161,10 @@ ntime_t luaL_validtime( lua_State *L, int ind )
  *    @param time Time to push.
  *    @return Newly pushed time.
  */
-LuaTime* lua_pushtime( lua_State *L, LuaTime time )
+ntime_t* lua_pushtime( lua_State *L, ntime_t time )
 {
-   LuaTime *p;
-   p = (LuaTime*) lua_newuserdata(L, sizeof(LuaTime));
+   ntime_t *p;
+   p = (ntime_t*) lua_newuserdata(L, sizeof(ntime_t));
    *p = time;
    luaL_getmetatable(L, TIME_METATABLE);
    lua_setmetatable(L, -2);
@@ -208,7 +208,6 @@ int lua_istime( lua_State *L, int ind )
 static int time_create( lua_State *L )
 {
    int scu, stp, stu;
-   LuaTime lt;
 
    /* Parameters. */
    scu = luaL_checkint(L,1);
@@ -216,8 +215,7 @@ static int time_create( lua_State *L )
    stu = luaL_checkint(L,3);
 
    /* Create the time. */
-   lt.t = ntime_create( scu, stp, stu );
-   lua_pushtime( L, lt );
+   lua_pushtime( L, ntime_create( scu, stp, stu ) );
    return 1;
 }
 /**
@@ -234,15 +232,31 @@ static int time_create( lua_State *L )
 static int time_add( lua_State *L )
 {
    ntime_t t1, t2;
-   LuaTime res;
 
    /* Parameters. */
    t1 = luaL_validtime( L, 1 );
    t2 = luaL_validtime( L, 2 );
 
    /* Add them. */
-   res.t = t1 + t2;
-   lua_pushtime( L, res );
+   lua_pushtime( L, t1 + t2 );
+   return 1;
+}
+
+
+/*
+ * Method version of time_add that modifies the first time.
+ */
+static int time_add__( lua_State *L )
+{
+   ntime_t *t1, t2;
+
+   /* Parameters. */
+   t1 = luaL_checktime( L, 1 );
+   t2 = luaL_validtime( L, 2 );
+
+   /* Add them. */
+   *t1 += t2;
+   lua_pushtime( L, *t1 );
    return 1;
 }
 /**
@@ -259,15 +273,31 @@ static int time_add( lua_State *L )
 static int time_sub( lua_State *L )
 {
    ntime_t t1, t2;
-   LuaTime res;
 
    /* Parameters. */
    t1 = luaL_validtime( L, 1 );
    t2 = luaL_validtime( L, 2 );
 
    /* Sub them. */
-   res.t = t1 - t2;
-   lua_pushtime( L, res );
+   lua_pushtime( L, t1 - t2 );
+   return 1;
+}
+
+
+/*
+ * Method version of time_sub that modifies the first time.
+ */
+static int time_sub__( lua_State *L )
+{
+   ntime_t *t1, t2;
+
+   /* Parameters. */
+   t1 = luaL_checktime( L, 1 );
+   t2 = luaL_validtime( L, 2 );
+
+   /* Sub them. */
+   *t1 -= t2;
+   lua_pushtime( L, *t1 );
    return 1;
 }
 /**
@@ -336,9 +366,7 @@ static int time_le( lua_State *L )
  */
 static int time_get( lua_State *L )
 {
-   LuaTime lt;
-   lt.t = ntime_get();
-   lua_pushtime( L, lt );
+   lua_pushtime( L, ntime_get() );
    return 1;
 }
 /**
@@ -427,9 +455,9 @@ static int time_tonumber( lua_State *L )
  */
 static int time_fromnumber( lua_State *L )
 {
-   LuaTime lt;
-   lt.t = (ntime_t) luaL_checknumber(L,1);
-   lua_pushtime( L, lt );
+   ntime_t t;
+   t = (ntime_t) luaL_checknumber(L,1);
+   lua_pushtime( L, t );
    return 1;
 }
 

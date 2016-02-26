@@ -3,9 +3,9 @@
  */
 
 /**
- * @file menu.h
+ * @file info.h
  *
- * @brief Handles the important game menus.
+ * @brief Handles the info menu.
  */
 
 
@@ -291,7 +291,7 @@ static void info_setGui( unsigned int wid, char* str )
 
    /* buttons */
    window_addButton( wid, -20, 20, BUTTON_WIDTH/2, BUTTON_HEIGHT,
-         "btnBack", "Cancel", setgui_close );
+         "btnBack", "Close", setgui_close );
    window_addButton( wid, -20, 30 + BUTTON_HEIGHT, BUTTON_WIDTH/2, BUTTON_HEIGHT,
          "btnLoad", "Load", setgui_load );
 
@@ -324,7 +324,8 @@ static void setgui_load( unsigned int wdw, char *str )
       return;
 
    if (player.guiOverride == 0) {
-      if (dialogue_YesNo( "GUI Override is not set. Enable GUI Override and change GUI to '%s'?", gui )) {
+      if (dialogue_YesNo( "GUI Override is not set.",
+               "Enable GUI Override and change GUI to '%s'?", gui )) {
          player.guiOverride = 1;
          window_checkboxSet( wid, "chkOverride", player.guiOverride );
       }
@@ -393,6 +394,7 @@ static void info_openShip( unsigned int wid )
          "Speed:\n"
          "Turn:\n"
          "\n"
+         "Absorption:\n"
          "Shield:\n"
          "Armour:\n"
          "Energy:\n"
@@ -430,13 +432,14 @@ static void ship_update( unsigned int wid )
          "%s\n"
          "%d\n"
          "\n"
-         "%.0f teraflops\n"
+         "%d teraflops\n"
          "%.0f tonnes\n"
          "%s average\n"
          "%.0f kN/tonne\n"
          "%.0f m/s (max %.0f m/s)\n"
          "%.0f deg/s\n"
          "\n"
+         "%.0f%%\n" /* Absorbption */
          "%.0f / %.0f MJ (%.1f MW)\n" /* Shield */
          "%.0f / %.0f MJ (%.1f MW)\n" /* Armour */
          "%.0f / %.0f MJ (%.1f MW)\n" /* Energy */
@@ -456,6 +459,7 @@ static void ship_update( unsigned int wid )
          player.p->speed, solid_maxspeed( player.p->solid, player.p->speed, player.p->thrust ),
          player.p->turn*180./M_PI,
          /* Health. */
+         player.p->dmg_absorb * 100.,
          player.p->shield, player.p->shield_max, player.p->shield_regen,
          player.p->armour, player.p->armour_max, player.p->armour_regen,
          player.p->energy, player.p->energy_max, player.p->energy_regen,
@@ -786,8 +790,8 @@ static void cargo_jettison( unsigned int wid, char* str )
       /* Get the mission. */
       f = 0;
       for (i=0; i<MISSION_MAX; i++) {
-         for (j=0; j<player_missions[i].ncargo; j++) {
-            if (player_missions[i].cargo[j] == player.p->commodities[pos].id) {
+         for (j=0; j<player_missions[i]->ncargo; j++) {
+            if (player_missions[i]->cargo[j] == player.p->commodities[pos].id) {
                f = 1;
                break;
             }
@@ -800,7 +804,7 @@ static void cargo_jettison( unsigned int wid, char* str )
                player.p->commodities[pos].id);
          return;
       }
-      misn = &player_missions[i];
+      misn = player_missions[i];
 
       /* We run the "abort" function if it's found. */
       ret = misn_tryRun( misn, "abort" );
@@ -808,9 +812,7 @@ static void cargo_jettison( unsigned int wid, char* str )
       /* Now clean up mission. */
       if (ret != 2) {
          mission_cleanup( misn );
-         memmove( misn, &player_missions[i+1],
-               sizeof(Mission) * (MISSION_MAX-i-1) );
-         memset( &player_missions[MISSION_MAX-1], 0, sizeof(Mission) );
+         mission_shift(pos);
       }
 
       /* Reset markers. */
@@ -944,7 +946,8 @@ static void standings_update( unsigned int wid, char* str )
    window_moveWidget( wid, "txtName", lw+40, y );
    y -= 40;
    m = round( faction_getPlayer( info_factions[p] ) );
-   nsnprintf( buf, sizeof(buf), "%+d%%   [ %s ]", m, faction_getStanding( m ) );
+   nsnprintf( buf, sizeof(buf), "%+d%%   [ %s ]", m,
+      faction_getStandingText( info_factions[p] ) );
    window_modifyText( wid, "txtStanding", buf );
    window_moveWidget( wid, "txtStanding", lw+40, y );
 }
@@ -1037,8 +1040,10 @@ static void mission_menu_genList( unsigned int wid, int first )
    misn_names = malloc(sizeof(char*) * MISSION_MAX);
    j = 0;
    for (i=0; i<MISSION_MAX; i++)
-      if (player_missions[i].id != 0)
-         misn_names[j++] = (player_missions[i].title!=NULL) ? strdup(player_missions[i].title) : NULL;
+      if (player_missions[i]->id != 0)
+         misn_names[j++] = (player_missions[i]->title != NULL) ?
+               strdup(player_missions[i]->title) : NULL;
+
    if (j==0) { /* no missions */
       misn_names[0] = strdup("No Missions");
       j = 1;
@@ -1067,7 +1072,7 @@ static void mission_menu_update( unsigned int wid, char* str )
    }
 
    /* Modify the text. */
-   misn = &player_missions[ toolkit_getListPos(wid, "lstMission" ) ];
+   misn = player_missions[ toolkit_getListPos(wid, "lstMission" ) ];
    window_modifyText( wid, "txtReward", misn->reward );
    window_modifyText( wid, "txtDesc", misn->desc );
    window_enableButton( wid, "btnAbortMission" );
@@ -1092,7 +1097,7 @@ static void mission_menu_abort( unsigned int wid, char* str )
 
       /* Get the mission. */
       pos = toolkit_getListPos(wid, "lstMission" );
-      misn = &player_missions[pos];
+      misn = player_missions[pos];
 
       /* We run the "abort" function if it's found. */
       ret = misn_tryRun( misn, "abort" );
@@ -1100,9 +1105,7 @@ static void mission_menu_abort( unsigned int wid, char* str )
       /* Now clean up mission. */
       if (ret != 2) {
          mission_cleanup( misn );
-         memmove( misn, &player_missions[pos+1],
-               sizeof(Mission) * (MISSION_MAX-pos-1) );
-         memset( &player_missions[MISSION_MAX-1], 0, sizeof(Mission) );
+         mission_shift(pos);
       }
 
       /* Reset markers. */

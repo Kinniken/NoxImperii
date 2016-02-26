@@ -10,13 +10,11 @@
 
 
 #include "news.h"
-#include "ntime.h"
 
 #include "naev.h"
 
 #include <stdint.h>
 #include <stdlib.h>
-#include <string.h>
 
 
 #include "log.h"
@@ -29,6 +27,7 @@
 #include "ndata.h"
 #include "toolkit.h"
 #include "nstring.h"
+#include "ntime.h"
 #include "nxml.h"
 #include "nxml_lua.h"
 #include "space.h"
@@ -63,7 +62,7 @@ static double textlength      = 0.;
 /**
  * Save/load
  */
-static int largestID=1;
+static int largestID;
 
 /*
  * Prototypes
@@ -72,13 +71,11 @@ static void news_render( double bx, double by, double w, double h, void *data );
 static int news_mouse( unsigned int wid, SDL_Event *event, double mx, double my,
       double w, double h, void *data );
 static int news_parseArticle( xmlNodePtr parent );
-int news_saveArticles( xmlTextWriterPtr writer );
-int news_loadArticles( xmlNodePtr parent );
-char* make_clean( char* unclean);
-char* get_fromclean( char *clean);
-void clear_newslines(void);
-
-extern ntime_t naev_time;
+int news_saveArticles( xmlTextWriterPtr writer ); /* externed in save.c */
+int news_loadArticles( xmlNodePtr parent ); /* externed in load.c */
+static char* make_clean( char* unclean );
+static char* get_fromclean( char *clean );
+static void clear_newslines (void);
 
 /**
  * @brief makes a new article and puts it into the list
@@ -92,11 +89,10 @@ extern ntime_t naev_time;
 news_t* new_article(char* title, char* content, char* faction, ntime_t date,
     ntime_t date_to_rm)
 {
-
-   news_t* article_ptr;
+   news_t *article_ptr, *n_article;
 
       /* make new article */
-   news_t* n_article = calloc(sizeof(news_t),1);
+   n_article = calloc(sizeof(news_t), 1);
 
    n_article->id=next_id++;
 
@@ -121,9 +117,8 @@ news_t* new_article(char* title, char* content, char* faction, ntime_t date,
 
       article_ptr=news_list;
 
-      while ( article_ptr->next!=NULL && article_ptr->next->date > date){
+      while ((article_ptr->next != NULL) && (article_ptr->next->date > date))
          article_ptr = article_ptr->next;
-      }
 
       n_article->next=article_ptr->next;
 
@@ -140,9 +135,9 @@ news_t* new_article(char* title, char* content, char* faction, ntime_t date,
  */
 int free_article(int id)
 {
+   news_t *article_ptr, *article_to_rm;
 
-   news_t* article_ptr = news_list;
-   news_t* article_to_rm;
+   article_ptr = news_list;
 
       /* if the first article is the one we're looking for */
    if (news_list->id == id){
@@ -154,10 +149,9 @@ int free_article(int id)
          return -1;
       }
    }
-   else
-   {
+   else {
          /* get the article before the one we're looking for */
-      while ( article_ptr->next!=NULL && article_ptr->next->id!=id )
+      while ((article_ptr->next != NULL) && (article_ptr->next->id != id))
          article_ptr=article_ptr->next;
 
       if ( article_ptr->next == NULL  ){
@@ -185,9 +179,8 @@ int free_article(int id)
 int news_init (void)
 {
       /* init news list with dummy article */
-   if (news_list!=NULL){
+   if (news_list != NULL)
       news_exit();
-   }
 
    news_list = calloc(sizeof(news_t),1);
 
@@ -200,12 +193,13 @@ int news_init (void)
  */
 void news_exit (void)
 {
+   int i;
+   news_t *article_ptr, *temp;
 
    if (news_list==NULL)
       return;
 
-   news_t* article_ptr = news_list;
-   news_t* temp;
+   article_ptr = news_list;
 
    while (article_ptr!=NULL){
 
@@ -220,7 +214,6 @@ void news_exit (void)
       free(temp);
    }
 
-   int i=0;
    if (news_nlines != 0) {
       for (i=0; i<news_nlines; i++)
          free(news_lines[i]);
@@ -246,11 +239,12 @@ void news_exit (void)
  */
 news_t* news_get(int id)
 {
-   news_t* article_ptr=news_list;
+   news_t *article_ptr;
 
-   while (article_ptr!=NULL && article_ptr->id!=id){
+   article_ptr = news_list;
+
+   while ((article_ptr != NULL) && (article_ptr->id != id))
       article_ptr=article_ptr->next;
-   }
 
    if (article_ptr==NULL)
       return NULL;
@@ -267,16 +261,18 @@ news_t* news_get(int id)
  */
 int *generate_news( char* faction )
 {
-   news_t* temp;
-   news_t* article_ptr = news_list;
-   int p=0;
+   news_t *temp, *article_ptr;
+   int p;
+
+   p = 0;
+   article_ptr = news_list;
 
       /* Put all acceptable news into buf */
    do{
          /* If we've reached the end of the list */
-      if (article_ptr->faction==NULL){
+      if (article_ptr->faction == NULL)
          break;
-      }
+
          /* if the article is due for removal */
       if (article_ptr->date_to_rm<=ntime_get()){
          temp=article_ptr->next;
@@ -286,14 +282,14 @@ int *generate_news( char* faction )
       }
 
          /* if article is okay */
-      if ( !strcmp(article_ptr->faction,"Generic") || !strcmp(article_ptr->faction,faction) )
-      {
+      if (!strcmp(article_ptr->faction, "Generic") || !strcmp(article_ptr->faction, faction)) {
          if (article_ptr->date && article_ptr->date<40000000000000){
             p += nsnprintf( buf+p, NEWS_MAX_LENGTH-p,
                " %s \n"
                "%s: %s\e0\n\n"
                , article_ptr->title, ntime_pretty(article_ptr->date,1), article_ptr->desc );
-         }else{
+         }
+         else {
             p+=nsnprintf( buf+p, NEWS_MAX_LENGTH-p,
                " %s \n"
                "%s\e0\n\n"
@@ -325,6 +321,7 @@ int *generate_news( char* faction )
  */
 void news_widget( unsigned int wid, int x, int y, int w, int h )
 {
+   int i, p;
 
    /* Sane defaults. */
    news_pos    = h/3;
@@ -335,7 +332,8 @@ void news_widget( unsigned int wid, int x, int y, int w, int h )
 
 
       /* Now load up the text. */
-   int i, p = 0;
+   i = 0;
+   p = 0;
    news_nlines = 0;
 
    while (p < len) {
@@ -358,7 +356,7 @@ void news_widget( unsigned int wid, int x, int y, int w, int h )
       if (news_nlines==0)
          gl_printRestoreInit( &news_restores[ news_nlines ] );
       else  {
-         memcpy( &news_restores[ news_nlines ], &news_restores[ news_nlines-1 ], sizeof(glFontRestore) );
+         news_restores[ news_nlines ] = news_restores[ news_nlines-1 ];
          gl_printStore( &news_restores[ news_nlines ], news_lines[ news_nlines-1 ] );
       }
  
@@ -368,8 +366,7 @@ void news_widget( unsigned int wid, int x, int y, int w, int h )
    /* </load text> */
 
    /* Create the custom widget. */
-   window_addCust( wid, x, y, w, h,
-         "cstNews", 1, news_render, news_mouse, NULL );
+   window_addCust( wid, x, y, w, h, "cstNews", 1, news_render, news_mouse, NULL );
 }
 
 
@@ -378,9 +375,9 @@ void news_widget( unsigned int wid, int x, int y, int w, int h )
 void clear_newslines(void)
 {
    int i;
-   for (i=0; i<news_nlines; i++){
+   for (i=0; i<news_nlines; i++)
       free(news_lines[i]);
-   }
+
    news_nlines=0;
 }
 
@@ -401,16 +398,33 @@ static int news_mouse( unsigned int wid, SDL_Event *event, double mx, double my,
    (void) data;
 
    switch (event->type) {
+#if SDL_VERSION_ATLEAST(2,0,0)
+      case SDL_MOUSEWHEEL:
+         /* Must be in bounds. */
+         if ((mx < 0.) || (mx > w) || (my < 0.) || (my > h))
+            return 0;
+
+         if (event->wheel.y > 0)
+            news_pos -= h/3.;
+         else
+            news_pos += h/3.;
+         return 1;
+#endif /* SDL_VERSION_ATLEAST(2,0,0) */
+
       case SDL_MOUSEBUTTONDOWN:
          /* Must be in bounds. */
          if ((mx < 0.) || (mx > w) || (my < 0.) || (my > h))
             return 0;
 
+#if SDL_VERSION_ATLEAST(2,0,0)
+         if (!news_drag)
+#else /* SDL_VERSION_ATLEAST(2,0,0) */
          if (event->button.button == SDL_BUTTON_WHEELUP)
             news_pos -= h/3.;
          else if (event->button.button == SDL_BUTTON_WHEELDOWN)
             news_pos += h/3.;
          else if (!news_drag)
+#endif /* SDL_VERSION_ATLEAST(2,0,0) */
             news_drag = 1;
          return 1;
 
@@ -491,14 +505,14 @@ static void news_render( double bx, double by, double w, double h, void *data )
 /*
  * @brief replace ascii character 27 with the string "\027"
  */
-char* make_clean( char* unclean)
+static char* make_clean( char* unclean )
 {
+   int i, j;
+   char *new;
 
-   int i,j;
-   char* new = malloc( 4*strlen(unclean)+1 );
+   new = malloc( 4*strlen(unclean)+1 );
 
-   for (i=0,j=0; unclean[i]!=0; i++,j++)
-   {
+   for (i=0, j=0; unclean[i] != 0; i++, j++) {
       if (unclean[i]==27){
          new[j++]='\\';
          j += sprintf( &new[j], "%.3d", unclean[i] )-1;
@@ -517,32 +531,30 @@ char* make_clean( char* unclean)
 /*
  * @brief replace any \027 strings with the ascii character 
  */
-char* get_fromclean( char *clean)
+static char* get_fromclean( char *clean)
 {
+   int line_max, i, j;
+   char *new, *unclean;
 
-   int line_max=1024;
-   char* new = malloc(line_max);
-   int i,j;
+   line_max = 1024;
+   new = malloc(line_max);
 
-   for (i=0,j=0;clean[i]!=0;i++,j++)
-   {
+   for (i=0, j=0; clean[i] != 0; i++, j++) {
       if  (j>=line_max-3){
          line_max=line_max*2;
          new=realloc(new,line_max);
       }
-      if (clean[i]=='\\' && clean[i+1]=='0' && clean[i+2]=='2' && clean[i+3]=='7')
-      {
+      if (clean[i] == '\\' && clean[i+1] == '0' && clean[i+2] == '2' &&
+            clean[i+3] == '7') {
          new[j]=27;
          i+=3;
       }
       else
-      {
          new[j]=clean[i];
       }
-   }
    new[j]=0;
 
-   char* unclean=strdup(new);
+   unclean = strdup(new);
 
    free(new);
 
@@ -556,18 +568,17 @@ char* get_fromclean( char *clean)
  */
 int news_saveArticles( xmlTextWriterPtr writer )
 {
+   news_t *article_ptr;
+   char *ntitle, *ndesc;
 
-   news_t* article_ptr = news_list;
-   char* ntitle;
-   char* ndesc;
+   article_ptr = news_list;
 
    xmlw_startElem(writer,"news");
 
    do {
 
-      if ( article_ptr->title!=NULL && article_ptr->desc!=NULL && article_ptr->faction!=NULL )
-      {
-
+      if ( article_ptr->title != NULL && article_ptr->desc!=NULL &&
+            article_ptr->faction != NULL ) {
          xmlw_startElem(writer,"article");
 
          ntitle = make_clean( article_ptr->title );
@@ -637,12 +648,7 @@ int news_loadArticles( xmlNodePtr parent )
  */
 static int news_parseArticle( xmlNodePtr parent )
 {
-   char* title;
-   char* desc;
-   char* faction;
-   char* tag;
-   char* ntitle;
-   char* ndesc;
+   char *ntitle, *ndesc, *title, *desc, *faction, *tag;
    char* buff;
    ntime_t date, date_to_rm;
    xmlNodePtr node;
@@ -650,78 +656,62 @@ static int news_parseArticle( xmlNodePtr parent )
    news_t* n_article;
 
    node = parent->xmlChildrenNode;
+
+#define NEWS_READ(elem, s) \
+xmlr_attr(node, s, elem); \
+if (elem == NULL) { WARN("Event is missing '"s"', skipping."); goto cleanup; }
+
    do {
 
       if (!xml_isNode(node,"article"))
          continue;
 
-      xmlr_attr(node,"title",title);
-      if (title==NULL) {
-         WARN("Event has missing 'name' attribute, skipping.");
-         continue;
-      }
-      xmlr_attr(node,"desc",desc);
-      if (desc==NULL) {
-         free(title);
-         WARN("Event is missing content, skipping");
-         continue;
-      }
-      xmlr_attr(node,"faction",faction);
-      if (faction==NULL) {
-         free(title); free(desc);
-         WARN("Event has missing faction attribute, skipping.");
-         continue;
-      }
+      /* Reset parameters. */
+      ntitle  = NULL;
+      ndesc   = NULL;
+      title   = NULL;
+      desc    = NULL;
+      faction = NULL;
+      tag     = NULL;
 
-      xmlr_attr(node,"tag",tag);
+      NEWS_READ(title, "title");
+      NEWS_READ(desc, "desc");
+      NEWS_READ(faction, "faction");
 
-      xmlr_attr(node,"date",buff);
-      if (faction==NULL) {
-         free(title); free(desc); free(faction);
-         WARN("Event has missing date attribute, skipping.");
-         continue;
-      }
+      NEWS_READ(buff, "date");
       date = atoll(buff);
       free(buff);
-      xmlr_attr(node,"date_to_rm",buff);
-      if (faction==NULL) {
-         free(title); free(desc); free(faction);
-         WARN("Event has missing date attribute, skipping.");
-         continue;
-      }
+
+      NEWS_READ(buff, "date_to_rm");
       date_to_rm = atoll(buff);
       free(buff);
-      xmlr_attr(node,"id",buff);
-      if (faction==NULL) {
-         free(title); free(desc); free(faction);
-         WARN("Event has missing date attribute, skipping.");
-         continue;
-      }
 
+      NEWS_READ(buff, "id");
       next_id = atoi(buff);
-      largestID=MAX(largestID,next_id+1);
       free(buff);
+
+      largestID=MAX(largestID,next_id+1);
 
       ntitle=get_fromclean(title);
       ndesc=get_fromclean(desc);
 
+      /* Optional. */
+      xmlr_attr(node, "tag", tag);
 
          /* make the article*/
       n_article=new_article(ntitle,ndesc,faction,date,date_to_rm);
-      if (tag!=NULL){
+      if (tag != NULL)
          n_article->tag=strdup(tag);
-      }
 
+cleanup:
       free(ntitle);
       free(ndesc);
       free(title);
       free(desc);
       free(faction);
       free(tag);
-
-      tag=NULL;
-
    } while (xml_nextNode(node));
+#undef NEWS_READ
 
    return 0;
 }

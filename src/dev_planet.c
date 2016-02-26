@@ -15,6 +15,7 @@
 
 #include <stdlib.h> /* qsort */
 
+#include "conf.h"
 #include "nxml.h"
 #include "physics.h"
 #include "nfile.h"

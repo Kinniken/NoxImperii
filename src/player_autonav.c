@@ -32,13 +32,11 @@ static double tc_down   = 0.; /**< Rate of decrement. */
 static int tc_rampdown  = 0; /**< Ramping down time compression? */
 static double lasts;
 static double lasta;
-static int slockons;
-static double autopause_timer = 0.; /**< Avoid autopause if the player just unpaused, and don't compress time right away */
 
 /*
  * Prototypes.
  */
-static void player_autonavSetup (void);
+static int player_autonavSetup (void);
 static void player_autonav (void);
 static int player_autonavApproach( const Vector2d *pos, double *dist2, int count_target );
 static int player_autonavBrake (void);
@@ -56,6 +54,7 @@ void player_autonavResetSpeed (void)
      tc_mod         = 1.;
      pause_setSpeed( 1. );
    }
+   tc_rampdown = 0;
 }
 
 
@@ -64,8 +63,9 @@ void player_autonavResetSpeed (void)
  */
 void player_autonavStart (void)
 {
-   /* Not under manual control. */
-   if (pilot_isFlag( player.p, PILOT_MANUAL_CONTROL ))
+   /* Not under manual control or disabled. */
+   if (pilot_isFlag( player.p, PILOT_MANUAL_CONTROL ) ||
+         pilot_isDisabled(player.p))
       return;
 
    if ((player.p->nav_hyperspace == -1) && (player.p->nav_planet== -1))
@@ -85,21 +85,28 @@ void player_autonavStart (void)
       return;
    }
 
-   /* Cooldown and autonav are mutually-exclusive. */
-   if ((pilot_isFlag(player.p, PILOT_COOLDOWN)) ||
-         (pilot_isFlag(player.p, PILOT_COOLDOWN_BRAKE)))
-      pilot_cooldownEnd(player.p, NULL);
+   if (!player_autonavSetup())
+      return;
 
-   player_autonavSetup();
    player.autonav = AUTONAV_JUMP_APPROACH;
 }
 
 
 /**
  * @brief Prepares the player to enter autonav.
+ *
+ *    @return 1 on success, 0 on failure (disabled, etc.)
  */
-static void player_autonavSetup (void)
+static int player_autonavSetup (void)
 {
+   /* Not under manual control or disabled. */
+   if (pilot_isFlag( player.p, PILOT_MANUAL_CONTROL ) ||
+         pilot_isDisabled(player.p))
+      return 0;
+
+   /* Autonav is mutually-exclusive with other autopilot methods. */
+   player_restoreControl( PINPUT_AUTONAV, NULL );
+
    player_message("\epAutonav initialized.");
    if (!player_isFlag(PLAYER_AUTONAV)) {
 
@@ -120,11 +127,15 @@ static void player_autonavSetup (void)
    tc_down      = 0.;
    lasts        = player.p->shield / player.p->shield_max;
    lasta        = player.p->armour / player.p->armour_max;
-   slockons     = player.p->lockons;
 
    /* Set flag and tc_mod just in case. */
    player_setFlag(PLAYER_AUTONAV);
    pause_setSpeed( tc_mod );
+
+   /* Make sure time acceleration starts immediately. */
+   player.autonav_timer = 0.;
+
+   return 1;
 }
 
 
@@ -154,7 +165,9 @@ void player_autonavStartWindow( unsigned int wid, char *str)
  */
 void player_autonavPos( double x, double y )
 {
-   player_autonavSetup();
+   if (!player_autonavSetup())
+      return;
+
    player.autonav    = AUTONAV_POS_APPROACH;
    player.autonavmsg = "position";
    vect_cset( &player.autonav_pos, x, y );
@@ -169,7 +182,9 @@ void player_autonavPnt( char *name )
    Planet *p;
 
    p = planet_get( name );
-   player_autonavSetup();
+   if (!player_autonavSetup())
+      return;
+
    player.autonav    = AUTONAV_PNT_APPROACH;
    player.autonavmsg = p->name;
    vect_cset( &player.autonav_pos, p->pos.x, p->pos.y );
@@ -202,7 +217,7 @@ static void player_autonavRampdown( double d )
 void player_autonavAbortJump( const char *reason )
 {
    /* No point if player is beyond aborting. */
-   if ((player.p==NULL) || ((player.p != NULL) && pilot_isFlag(player.p, PILOT_HYPERSPACE)))
+   if ((player.p==NULL) || pilot_isFlag(player.p, PILOT_HYPERSPACE))
       return;
 
    if (!player_isFlag(PLAYER_AUTONAV) || ((player.autonav != AUTONAV_JUMP_APPROACH) &&
@@ -222,7 +237,7 @@ void player_autonavAbortJump( const char *reason )
 void player_autonavAbort( const char *reason )
 {
    /* No point if player is beyond aborting. */
-   if ((player.p==NULL) || ((player.p != NULL) && pilot_isFlag(player.p, PILOT_HYPERSPACE)))
+   if ((player.p==NULL) || pilot_isFlag(player.p, PILOT_HYPERSPACE))
       return;
 
    /* Cooldown (handled later) may be script-initiated and we don't
@@ -231,15 +246,6 @@ void player_autonavAbort( const char *reason )
       return;
 
    if (player_isFlag(PLAYER_AUTONAV)) {
-      if (conf.autonav_pause && reason) {
-         /* Keep it from re-pausing before you can react */
-         if (autopause_timer > 0) return;
-         player_message("\erGame paused: %s!", reason);
-         player_autonavResetSpeed();
-         autopause_timer = 2.;
-         pause_game();
-         return;
-      }
       if (reason != NULL)
          player_message("\erAutonav aborted: %s!", reason);
       else
@@ -258,10 +264,6 @@ void player_autonavAbort( const char *reason )
       /* Reset time compression. */
       player_autonavEnd();
    }
-   else if (pilot_isFlag(player.p, PILOT_COOLDOWN_BRAKE))
-      pilot_cooldownEnd(player.p, NULL);
-   else if (pilot_isFlag(player.p, PILOT_COOLDOWN))
-      pilot_cooldownEnd(player.p, reason);
 }
 
 
@@ -313,7 +315,16 @@ static void player_autonav (void)
 
       case AUTONAV_JUMP_BRAKE:
          /* Target jump. */
-         ret   = (player.p->stats.misc_instant_jump ? 1 : player_autonavBrake());
+         jp    = &cur_system->jumps[ player.p->nav_hyperspace ];
+         if (player.p->stats.misc_instant_jump) {
+            ret = pilot_interceptPos( player.p, jp->pos.x, jp->pos.y );
+            if (!ret && space_canHyperspace(player.p))
+               ret = 1;
+            player_acc = player.p->solid->thrust / player.p->thrust;
+         }
+         else
+            ret = player_autonavBrake();
+
          /* Try to jump or see if braked. */
          if (ret) {
             if (space_canHyperspace(player.p))
@@ -409,8 +420,21 @@ static int player_autonavApproach( const Vector2d *pos, double *dist2, int count
 static int player_autonavBrake (void)
 {
    int ret;
+   JumpPoint *jp;
+   Vector2d pos;
 
+   if ((player.autonav == AUTONAV_JUMP_BRAKE) && (player.p->nav_hyperspace != -1)) {
+      jp  = &cur_system->jumps[ player.p->nav_hyperspace ];
+
+      pilot_brakeDist( player.p, &pos );
+      if (vect_dist2( &pos, &jp->pos ) > pow2(jp->radius))
+         ret = pilot_interceptPos( player.p, jp->pos.x, jp->pos.y );
+      else
    ret = pilot_brake(player.p);
+   }
+   else
+      ret = pilot_brake(player.p);
+
    player_acc = player.p->solid->thrust / player.p->thrust;
 
    return ret;
@@ -423,38 +447,48 @@ static int player_autonavBrake (void)
  */
 int player_autonavShouldResetSpeed (void)
 {
-   double failpc = conf.autonav_reset_speed;
-   double shield = player.p->shield / player.p->shield_max;
-   double armour = player.p->armour / player.p->armour_max;
-   char *reason = NULL;
-   unsigned int eid;
-   Pilot *enemy;
-   int hostiles = 0;
+   double failpc, shield, armour;
+   int i, n;
+   Pilot **pstk;
+   int hostiles, will_reset;
 
    if (!player_isFlag(PLAYER_AUTONAV))
       return 0;
 
-   eid = pilot_getNearestEnemy( player.p );
-   if (eid != 0)
-   {
-      enemy = pilot_get( eid );
-      if (pilot_inRangePilot( player.p, enemy ))
+   hostiles   = 0;
+   will_reset = 0;
+
+   failpc = conf.autonav_reset_speed;
+   shield = player.p->shield / player.p->shield_max;
+   armour = player.p->armour / player.p->armour_max;
+
+   pstk = pilot_getAll( &n );
+   for (i=0; i<n; i++) {
+      if ((pstk[i]->id != PLAYER_ID) && pilot_isHostile( pstk[i] ) &&
+            pilot_inRangePilot( player.p, pstk[i] ) &&
+            !pilot_isDisabled( pstk[i] ) &&
+            !pilot_isFlag( pstk[i], PILOT_BRIBED )) {
          hostiles = 1;
+         break;
+   }
    }
 
-   if (failpc > .99 && hostiles)
-      reason = "Hostiles detected";
-   else if ((failpc > 0. && failpc <= .99) && (shield < failpc))
-      reason = "Shield below damage threshold";
-   else if (armour < lasta)
-      reason = "Sustaining armour damage";
+   if (hostiles) {
+      if (failpc > .995) {
+         will_reset = 1;
+         player.autonav_timer = MAX( player.autonav_timer, 0. );
+      }
+      else if ((shield < lasts && shield < failpc) || armour < lasta) {
+         will_reset = 1;
+         player.autonav_timer = MAX( player.autonav_timer, 2. );
+      }
+   }
 
-   lasts = player.p->shield / player.p->shield_max;
-   lasta = player.p->armour / player.p->armour_max;
+   lasts = shield;
+   lasta = armour;
 
-   if (reason) {
+   if (will_reset || (player.autonav_timer > 0)) {
       player_autonavResetSpeed();
-      player.autonav_timer = 30.;
       return 1;
    }
    return 0;
@@ -503,7 +537,7 @@ void player_updateAutonav( double dt )
    const double dis_max  = 4.0;
    const double dis_ramp = 6.0;
 
-   if (paused || (player.p==NULL))
+   if (paused || (player.p==NULL) || pilot_isFlag(player.p, PILOT_DEAD))
       return;
 
    /* We handle disabling here. */
@@ -548,11 +582,6 @@ void player_updateAutonav( double dt )
    }
 
    /* We'll update the time compression here. */
-   if (autopause_timer > 0) {
-      /* Don't start time acceleration right away.  Let the player react. */
-      autopause_timer -= dt;
-      return;
-   }
    if (tc_mod == player.tc_max)
       return;
    else

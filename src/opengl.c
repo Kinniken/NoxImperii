@@ -71,6 +71,10 @@ static int gl_view_w = 0; /* Viewport width. */
 static int gl_view_h = 0; /* Viewport height. */
 
 
+/* Whether Intel is the OpenGL vendor. */
+static int intel_vendor = 0;
+
+
 /*
  * prototypes
  */
@@ -290,6 +294,20 @@ GLboolean gl_hasExt( char *name )
 }
 
 
+/**
+ * @brief Returns whether the OpenGL vendor is Intel.
+ *
+ * This is a bit ugly, but it seems that Intel integrated graphics tend to lie
+ * about their capabilities with regards to smooth points and lines.
+ *
+ *    @return 1 if Intel is the vendor, 0 otherwise.
+ */
+int gl_vendorIsIntel (void)
+{
+   return intel_vendor;
+}
+
+
 #ifdef DEBUGGING
 /**
  * @brief Checks and reports if there's been an error.
@@ -484,13 +502,22 @@ static int gl_createWindow( unsigned int flags )
 {
 #if SDL_VERSION_ATLEAST(2,0,0)
    int ret;
+   int w, h;
 
    /* Create the window. */
    gl_screen.window = SDL_CreateWindow( APPNAME,
          SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-         SCREEN_W, SCREEN_H, flags | SDL_WINDOW_SHOWN);
+         SCREEN_W, SCREEN_H, flags | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE );
    if (gl_screen.window == NULL)
       ERR("Unable to create window!");
+
+   /* Reinitialize resolution parameters. */
+   if (flags & SDL_WINDOW_FULLSCREEN_DESKTOP)
+      SDL_GetWindowSize( gl_screen.window, &w, &h );
+
+   /* Set focus loss behaviour. */
+   SDL_SetHint( SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS,
+         conf.minimize ? "1" : "0" );
 
    /* Create the OpenGL context, note we don't need an actual renderer. */
    gl_screen.context = SDL_GL_CreateContext( gl_screen.window );
@@ -550,6 +577,7 @@ static int gl_createWindow( unsigned int flags )
 static int gl_getGLInfo (void)
 {
    int doublebuf;
+   char *vendor;
 
    SDL_GL_GetAttribute( SDL_GL_RED_SIZE, &gl_screen.r );
    SDL_GL_GetAttribute( SDL_GL_GREEN_SIZE, &gl_screen.g );
@@ -565,6 +593,10 @@ static int gl_getGLInfo (void)
    /* Texture information */
    glGetIntegerv(GL_MAX_TEXTURE_SIZE, &gl_screen.tex_max);
    glGetIntegerv(GL_MAX_TEXTURE_UNITS, &gl_screen.multitex_max);
+
+   /* Ugly, but Intel hardware seems to be uniquely problematic. */
+   vendor = (char*)glGetString(GL_VENDOR);
+   intel_vendor = !!(nstrcasestr(vendor, "Intel") != NULL);
 
    /* Debug happiness */
    DEBUG("OpenGL Window Created: %dx%d@%dbpp %s", SCREEN_W, SCREEN_H, gl_screen.depth,
@@ -709,7 +741,10 @@ int gl_init (void)
    if (conf.fullscreen) {
       gl_screen.flags |= OPENGL_FULLSCREEN;
 #if SDL_VERSION_ATLEAST(2,0,0)
+      if (conf.modesetting)
       flags |= SDL_WINDOW_FULLSCREEN;
+      else
+         flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 #else /* SDL_VERSION_ATLEAST(2,0,0) */
       flags |= SDL_FULLSCREEN;
 #endif /* SDL_VERSION_ATLEAST(2,0,0) */
@@ -768,6 +803,32 @@ int gl_init (void)
 
    return 0;
 }
+
+
+#if SDL_VERSION_ATLEAST(2,0,0)
+/**
+ * @brief Handles a window resize and resets gl_screen parametes.
+ *
+ *    @param w New width.
+ *    @param h New height.
+ */
+void gl_resize( int w, int h )
+{
+   glViewport( 0, 0, w, h );
+
+   gl_screen.rw = w;
+   gl_screen.rh = h;
+
+   /* Reset scaling. */
+   gl_setScale( conf.scalefactor );
+
+   gl_setupScaling();
+   gl_setDefViewport( 0, 0, gl_screen.rw, gl_screen.rh );
+   gl_defViewport();
+
+   gl_checkErr();
+}
+#endif /* SDL_VERSION_ATLEAST(2,0,0) */
 
 
 /**

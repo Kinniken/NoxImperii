@@ -71,6 +71,10 @@ void player_board (void)
    char c;
    HookParam hparam[2];
 
+   /* Not disabled. */
+   if (pilot_isDisabled(player.p))
+      return;
+
    if (player.p->target==PLAYER_ID) {
       /* We don't try to find far away targets, only nearest and see if it matches.
        * However, perhaps looking for first boardable target within a certain range
@@ -136,10 +140,12 @@ void player_board (void)
     * run hook if needed
     */
    hparam[0].type       = HOOK_PARAM_PILOT;
-   hparam[0].u.lp.pilot = p->id;
+   hparam[0].u.lp       = p->id;
    hparam[1].type       = HOOK_PARAM_SENTINEL;
    hooks_runParam( "board", hparam );
-   pilot_runHook(p, PILOT_HOOK_BOARD);
+   pilot_runHookParam(p, PILOT_HOOK_BOARD, hparam, 1);
+   hparam[0].u.lp       = PLAYER_ID;
+   pilot_runHookParam(p, PILOT_HOOK_BOARDING, hparam, 1);
 
    if (board_stopboard) {
       board_boarded = 0;
@@ -257,7 +263,7 @@ static void board_stealCargo( unsigned int wdw, char* str )
    q = 1;
    while ((p->ncommodities > 0) && (q!=0)) {
       q = pilot_cargoAdd( player.p, p->commodities[0].commodity,
-            p->commodities[0].quantity );
+            p->commodities[0].quantity, 0 );
       pilot_cargoRm( p, p->commodities[0].commodity, q );
    }
 
@@ -422,7 +428,7 @@ static int board_trySteal( Pilot *p )
       dmg.damage      = 100.;
       dmg.penetration = 1.;
       dmg.disable     = 0.;
-      pilot_hit( target, NULL, p->id, &dmg );
+      pilot_hit( target, NULL, p->id, &dmg, 1 );
       /* Return ship dead. */
       return -1;
    }
@@ -522,6 +528,7 @@ static void board_update( unsigned int wdw )
 int pilot_board( Pilot *p )
 {
    Pilot *target;
+   HookParam hparam[2];
 
    /* Make sure target is sane. */
    target = pilot_get(p->target);
@@ -549,6 +556,14 @@ int pilot_board( Pilot *p )
 
    /* Set time it takes to board. */
    p->ptimer = 3.;
+
+   /* Run pilot board hook. */
+   hparam[0].type       = HOOK_PARAM_PILOT;
+   hparam[0].u.lp       = p->id;
+   hparam[1].type       = HOOK_PARAM_SENTINEL;
+   pilot_runHookParam(target, PILOT_HOOK_BOARDING, hparam, 1);
+   hparam[0].u.lp       = target->id;
+   pilot_runHookParam(target, PILOT_HOOK_BOARD, hparam, 1);
 
    return 1;
 }

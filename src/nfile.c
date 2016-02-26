@@ -39,6 +39,18 @@
 #define BLOCK_SIZE      128*1024 /**< 128 kilobytes. */
 
 
+/**
+ * @brief Struct containing a file's name and stat structure.
+ */
+typedef struct filedata {
+   char *name;
+   struct stat stat;
+} filedata_t;
+
+
+static int nfile_sortCompare( const void *p1, const void *p2 );
+
+
 #if HAS_UNIX
 //! http://n.ethz.ch/student/nevillm/download/libxdg-basedir/doc/basedir_8c_source.html
 
@@ -417,28 +429,50 @@ int nfile_fileExists( const char* path, ... )
 int nfile_backupIfExists( const char* path, ... )
 {
    char file[PATH_MAX];
-   va_list ap;
    char backup[PATH_MAX];
+   va_list ap;
+
+   if (path == NULL)
+      return -1;
+
+      va_start(ap, path);
+      vsnprintf(file, PATH_MAX, path, ap);
+      va_end(ap);
+
+   if (!nfile_fileExists(file))
+      return 0;
+
+   nsnprintf(backup, PATH_MAX, "%s.backup", file);
+
+   return nfile_copyIfExists( path, backup );
+   }
+
+
+/**
+ * @brief Copy a file, if it exists.
+ *
+ *    @param file1 Filename to copy from.
+ *    @param file2 Filename to copy to.
+ *    @return 0 on success, or if file1 does not exist, -1 on error.
+ */
+int nfile_copyIfExists( const char* file1, const char* file2 )
+{
    FILE *f_in, *f_out;
    char buf[ 8*1024 ];
    size_t lr, lw;
 
-   if (path == NULL)
+   if (file1 == NULL)
       return -1;
-   else { /* get the message */
-      va_start(ap, path);
-      vsnprintf(file, PATH_MAX, path, ap);
-      va_end(ap);
-   }
 
-   if (nfile_fileExists(file)) {
-      nsnprintf(backup, PATH_MAX, "%s.backup", file);
+   /* Check if input file exists */
+   if (!nfile_fileExists(file1))
+      return 0;
 
       /* Open files. */
-      f_in  = fopen( file, "r" );
-      f_out = fopen( backup, "w" );
+   f_in  = fopen( file1, "rb" );
+   f_out = fopen( file2, "wb" );
       if ((f_in==NULL) || (f_out==NULL)) {
-         WARN( "Failure to create back up of '%s': %s", file, strerror(errno) );
+      WARN( "Failure to copy '%s' to '%s': %s", file1, file2, strerror(errno) );
          if (f_in!=NULL)
             fclose(f_in);
          return -1;
@@ -447,21 +481,31 @@ int nfile_backupIfExists( const char* path, ... )
       /* Copy data over. */
       do {
          lr = fread( buf, 1, sizeof(buf), f_in );
+      if (ferror(f_in))
+         goto err;
+      else if (!lr) {
+         if (feof(f_in))
+            break;
+         goto err;
+      }
+
          lw = fwrite( buf, 1, lr, f_out );
-         if (lr != lw) {
-            WARN( "Failure to create back up of '%s': %s", file, strerror(errno) );
-            fclose( f_in );
-            fclose( f_out );
-            return -1;
-         }
+      if (ferror(f_out) || (lr != lw))
+         goto err;
       } while (lr > 0);
 
       /* Close files. */
       fclose( f_in );
       fclose( f_out );
 
-   }
    return 0;
+
+err:
+   WARN( "Failure to copy '%s' to '%s': %s", file1, file2, strerror(errno) );
+   fclose( f_in );
+   fclose( f_out );
+
+   return -1;
 }
 
 
@@ -478,6 +522,7 @@ char** nfile_readDir( int* nfiles, const char* path, ... )
 {
    char file[PATH_MAX], base[PATH_MAX];
    char **files;
+   filedata_t *filedata;
    va_list ap;
 
    (*nfiles) = 0;
@@ -489,22 +534,19 @@ char** nfile_readDir( int* nfiles, const char* path, ... )
       va_end(ap);
    }
 
-   int i,j,k, n;
+   int i;
    DIR *d;
    struct dirent *dir;
    char *name;
    int mfiles;
    struct stat sb;
-   time_t *tt, *ft;
-   char **tfiles;
 
    d = opendir(base);
    if (d == NULL)
       return NULL;
 
    mfiles      = 128;
-   tfiles      = malloc(sizeof(char*)*mfiles);
-   tt          = malloc(sizeof(time_t)*mfiles);
+   filedata    = malloc(sizeof(filedata_t) * mfiles);
 
    /* Get the file list */
    while ((dir = readdir(d)) != NULL) {
@@ -522,13 +564,12 @@ char** nfile_readDir( int* nfiles, const char* path, ... )
       /* Enough memory? */
       if ((*nfiles)+1 > mfiles) {
          mfiles *= 2;
-         tfiles = realloc( tfiles, sizeof(char*) * mfiles );
-         tt     = realloc( tt, sizeof(time_t) * mfiles );
+         filedata = realloc( filedata, sizeof(filedata_t) * mfiles );
       }
 
       /* Write the information */
-      tfiles[(*nfiles)] = strdup(name);
-      tt[(*nfiles)]     = sb.st_mtime;
+      filedata[(*nfiles)].name = strdup(name);
+      filedata[(*nfiles)].stat = sb;
       (*nfiles)++;
    }
 
@@ -536,49 +577,19 @@ char** nfile_readDir( int* nfiles, const char* path, ... )
 
    /* Sort by last changed date */
    if ((*nfiles) > 0) {
+      qsort(filedata, *nfiles, sizeof(filedata_t), nfile_sortCompare);
 
-      /* Need to allocate some stuff */
       files = malloc( sizeof(char*)  * (*nfiles) );
-      ft    = malloc( sizeof(time_t) * (*nfiles) );
-
-      /* Fill the list */
       for (i=0; i<(*nfiles); i++) {
-         n = -1;
-
-         /* Get next lowest */
-         for (j=0; j<(*nfiles); j++) {
-
-            /* Is lower? */
-            if ((n == -1) || (tt[j] > tt[n])) {
-
-               /* Check if it's already there */
-               for (k=0; k<i; k++)
-                  if (strcmp(files[k],tfiles[j])==0)
-                     break;
-
-               /* New lowest */
-               if (k>=i)
-                  n = j;
-            }
-         }
-
-         files[i] = tfiles[n];
-         ft[i]    = tt[n];
+         files[i] = strdup(filedata[i].name);
+         free(filedata[i].name);
       }
-      free(ft);
    }
    else
       files = NULL;
 
-   /* Free temporary stuff */
-   free(tfiles);
-   free(tt);
-
-   /* found nothing */
-   if ((*nfiles) == 0) {
-      free(files);
-      files = NULL;
-   }
+   free(filedata);
+   filedata = NULL;
 
    return files;
 }
@@ -715,6 +726,7 @@ char* nfile_readFile( int* filesize, const char* path, ... )
          WARN("Error occurred while reading '%s': %s", base, strerror(errno));
          fclose(file);
          *filesize = 0;
+         free(buf);
          return NULL;
       }
       n += pos;
@@ -851,4 +863,23 @@ int nfile_rename( const char* oldname, const char* newname )
    if (rename(oldname,newname))
       WARN("Error renaming %s to %s",oldname,newname);
    return 0;
+}
+
+
+/**
+ * @brief qsort compare function for files.
+ */
+static int nfile_sortCompare( const void *p1, const void *p2 )
+{
+   filedata_t *f1, *f2;
+
+   f1 = (filedata_t*) p1;
+   f2 = (filedata_t*) p2;
+
+   if (f1->stat.st_mtime > f2->stat.st_mtime)
+      return -1;
+   else if (f1->stat.st_mtime < f2->stat.st_mtime)
+      return +1;
+
+   return strcmp( f1->name, f2->name );
 }

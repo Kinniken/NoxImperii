@@ -35,6 +35,7 @@
 #include "input.h"
 #include "menu.h"
 #include "nstring.h"
+#include "ndata.h"
 
 
 static int dialogue_open; /**< Number of dialogues open. */
@@ -163,27 +164,29 @@ static glFont* dialogue_getSize( const char* title,
 {
    glFont* font;
    double w, h, d;
-   int titlelen;
-#if 0
-   int len;
-   len = strlen(msg);
-#endif
+   int i, titlelen, msglen;
 
    /* Get title length. */
    titlelen = gl_printWidthRaw( &gl_defFont, title );
-   w = MAX(450, titlelen+40); /* Default width to try. */
+   msglen = gl_printWidthRaw( &gl_smallFont, msg );
 
-   /* First we split by text length. */
-#if 0
-   if (len < 50) {
-      font = &gl_defFont;
-      h = gl_printHeightRaw( font, w-40, msg );
-   }
-   else {
-#endif
+   /* Try widths from 300 to 800 in 50 px increments.
+    * Each subsequent width gets an additional line, following this table:
+    *
+    *    300 px:  2 lines,  540 px total
+    *    350 px:  3 lines,  930 px total
+    *    ...
+    *    800 px: 12 lines, 9600 px total
+    */
+   for (i=0; i<11; i++)
+      if (msglen < (260 + i * 50) * (2 + i))
+         break;
+
+   w = 300 + i * 50;
+   w = MAX(w, titlelen+40); /* Expand width if the title is long. */
+
       /* Now we look at proportion. */
       font = &gl_smallFont;
-      /* font = &gl_defFont; */
       h = gl_printHeightRaw( font, w-40, msg );
 
       d = ((double)w/(double)h)*(3./4.); /* deformation factor. */
@@ -192,9 +195,6 @@ static glFont* dialogue_getSize( const char* title,
             w = h;
          h = gl_printHeightRaw( font, w-40, msg );
       }
-#if 0
-   }
-#endif
 
    /* Set values. */
    (*width) = w;
@@ -227,6 +227,29 @@ void dialogue_msg( const char* caption, const char *fmt, ... )
 
 
 /**
+ * @brief Opens a dialogue window with an ok button, a message and an image.
+ *
+ *    @param caption Window title.
+ *    @param img Path of the image file (*.png) to display.
+ *    @param fmt Printf style message to display.
+ */
+void dialogue_msgImg( const char* caption, const char *img, const char *fmt, ... )
+{
+   char msg[4096];
+   va_list ap;
+
+   if (fmt == NULL) return;
+   else { /* get the message */
+      va_start(ap, fmt);
+      vsnprintf(msg, 4096, fmt, ap);
+      va_end(ap);
+   }
+
+   dialogue_msgImgRaw( caption, msg, img, -1, -1 );
+}
+
+
+/**
  * @brief Opens a dialogue window with an ok button and a fixed message.
  *
  *    @param caption Window title.
@@ -247,6 +270,61 @@ void dialogue_msgRaw( const char* caption, const char *msg )
    window_addText( msg_wid, 20, -40, w-40, h,  0, "txtMsg",
          font, &cBlack, msg );
    window_addButton( msg_wid, (w-50)/2, 20, 50, 30, "btnOK", "OK",
+         dialogue_close );
+
+   dialogue_open++;
+   toolkit_loop( &done );
+}
+
+
+/**
+ * @brief Opens a dialogue window with an ok button, a fixed message and an image.
+ *
+ *    @param caption Window title.
+ *    @param msg Message to display.
+ *    @param width Width of the image. Negative uses image width.
+ *    @param height Height of the image. Negative uses image height.
+ */
+void dialogue_msgImgRaw( const char* caption, const char *msg, const char *img, int width, int height )
+{
+   int w, h, img_width, img_height;
+   glFont* font;
+   unsigned int msg_wid;
+   int done;
+   glTexture *gfx;
+   char buf[PATH_MAX];
+
+   /* Get the desired texture */
+   /* IMPORTANT : texture must not be freed here, it will be freed when the widget closes */
+   nsnprintf( buf, sizeof(buf), "%s%s", GFX_PATH, img );
+   gfx = gl_newImage( buf, 0 );
+
+   /* Find the popup's dimensions from text and image */
+   img_width  = (width < 0)  ? gfx->w : width;
+   img_height = (height < 0) ? gfx->h : height;
+   font = dialogue_getSize( caption, msg, &w, &h );
+   if (h < img_width) {
+      h = img_width;
+   }
+
+   /* Create the window */
+   msg_wid = window_create( caption, -1, -1, img_width + w, 110 + h );
+   window_setData( msg_wid, &done );
+
+   /* Add the text box */
+   window_addText( msg_wid, img_width+40, -40, w-40, h,  0, "txtMsg",
+         font, &cBlack, msg );
+
+   /* Add a placeholder rectangle for the image */
+   window_addRect( msg_wid, 20, -40, img_width, img_height,
+         "rctGFX", &cGrey10, 1 );
+
+   /* Actually add the texture in the rectangle */
+   window_addImage( msg_wid, 20, -40, img_width, img_height,
+         "ImgGFX", gfx, 0 );
+
+   /* Add the OK button */
+   window_addButton( msg_wid, (img_width+w -50)/2, 20, 50, 30, "btnOK", "OK",
          dialogue_close );
 
    dialogue_open++;
@@ -426,8 +504,7 @@ char* dialogue_inputRaw( const char* title, int min, int max, const char *msg )
       if (done < 0)
          input = NULL;
       else
-         input = strdup( window_getInput( input_dialogue.input_wid,
-	                                  "inpInput" ) );
+         input = strdup(window_getInput(input_dialogue.input_wid, "inpInput"));
    }
 
    /* cleanup */
@@ -531,7 +608,8 @@ int dialogue_listRaw( const char* title, char **items, int nitems, const char *m
  *    @param add_widgets This function is called with the new window as an argument
  *    	allowing for initial population of the extra area.
  *    @param select_call This function is called when a new item in the list is
- *      selected, receiving the window's id and the selected widgets name as arguments.
+ *          selected, receiving the window's id and the selected widgets name
+ *          as arguments.
  *    @param fmt printf formatted string with text to display.
  */
 int dialogue_listPanel( const char* title, char **items, int nitems, int extrawidth,
@@ -542,13 +620,16 @@ int dialogue_listPanel( const char* title, char **items, int nitems, int extrawi
    char msg[512];
    va_list ap;
 
-   if (input_dialogue.input_wid) return -1;
-   if (fmt == NULL) return -1;
-   else { /* get the message */
+   if (input_dialogue.input_wid)
+      return -1;
+
+   if (fmt == NULL)
+      return -1;
+
+   /* get the message */
       va_start(ap, fmt);
       vsnprintf(msg, 512, fmt, ap);
       va_end(ap);
-   }
 
    return dialogue_listPanelRaw( title, items, nitems, extrawidth, minheight,
 					add_widgets, select_call, msg );
@@ -564,9 +645,9 @@ int dialogue_listPanel( const char* title, char **items, int nitems, int extrawi
  *    @param minheight Minimum height for the window.
  *    @param add_widgets This function is called with the new window as an argument
  *      allowing for initial population of the extra area.
- *    @param select_call (optional) This function is called when a new item in the list
- *      is selected, receiving the window's id and the selected widgets name as
- *      arguments.
+ *    @param select_call (optional) This function is called when a new item in the
+ *          list is selected, receiving the window's id and the selected widgets
+ *          name as arguments.
  *    @param msg string with text to display.
  */
 int dialogue_listPanelRaw( const char* title, char **items, int nitems, int extrawidth,
@@ -776,6 +857,13 @@ static int toolkit_loop( int *loop_done )
                return -1;
             }
          }
+#if SDL_VERSION_ATLEAST(2,0,0)
+         else if (event.type == SDL_WINDOWEVENT &&
+               event.window.event == SDL_WINDOWEVENT_RESIZED) {
+            naev_resize( event.window.data1, event.window.data2 );
+            continue;
+         }
+#endif /* SDL_VERSION_ATLEAST(2,0,0) */
 
          input_handle(&event); /* handles all the events and player keybinds */
       }

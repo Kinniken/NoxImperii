@@ -18,6 +18,7 @@
 #include "nluadef.h"
 #include "nlua_vec2.h"
 #include "nlua_system.h"
+#include "land_outfits.h"
 #include "log.h"
 
 
@@ -28,6 +29,7 @@ static JumpPoint* luaL_validjumpSystem( lua_State *L, int ind, int *offset, Star
 static int jumpL_get( lua_State *L );
 static int jumpL_eq( lua_State *L );
 static int jumpL_position( lua_State *L );
+static int jumpL_angle( lua_State *L );
 static int jumpL_hidden( lua_State *L );
 static int jumpL_exitonly( lua_State *L );
 static int jumpL_system( lua_State *L );
@@ -38,6 +40,7 @@ static const luaL_reg jump_methods[] = {
    { "get", jumpL_get },
    { "__eq", jumpL_eq },
    { "pos", jumpL_position },
+   { "angle", jumpL_angle },
    { "hidden", jumpL_hidden },
    { "exitonly", jumpL_exitonly },
    { "system", jumpL_system },
@@ -50,6 +53,7 @@ static const luaL_reg jump_cond_methods[] = {
    { "get", jumpL_get },
    { "__eq", jumpL_eq },
    { "pos", jumpL_position },
+   { "angle", jumpL_angle },
    { "hidden", jumpL_hidden },
    { "exitonly", jumpL_exitonly },
    { "system", jumpL_system },
@@ -163,12 +167,12 @@ static JumpPoint* luaL_validjumpSystem( lua_State *L, int ind, int *offset, Star
       if (lua_isstring(L, ind))
          a = system_get( lua_tostring( L, ind ));
       else if (lua_issystem(L, ind))
-         a = system_getIndex( lua_tosystem(L, ind)->id );
+         a = system_getIndex( lua_tosystem(L, ind) );
 
       if (lua_isstring(L, ind+1))
          b = system_get( lua_tostring( L, ind+1 ));
       else if (lua_issystem(L, ind+1))
-         b = system_getIndex( lua_tosystem(L, ind+1)->id );
+         b = system_getIndex( lua_tosystem(L, ind+1) );
 
       if (offset != NULL)
          *offset = 2;
@@ -269,12 +273,12 @@ static int jumpL_get( lua_State *L )
       if (lua_isstring(L, 1))
          a = system_get( lua_tostring(L, 1));
       else if (lua_issystem(L, 1))
-         a = system_getIndex( lua_tosystem(L, 1)->id );
+         a = system_getIndex( lua_tosystem(L, 1) );
 
       if (lua_isstring(L, 2))
          b = system_get( lua_tostring(L, 2));
       else if (lua_issystem(L, 2))
-         b = system_getIndex( lua_tosystem(L, 2)->id );
+         b = system_getIndex( lua_tosystem(L, 2) );
 
       if ((a == NULL) || (b == NULL)) {
          NLUA_ERROR(L, "No matching jump points found.");
@@ -330,10 +334,26 @@ static int jumpL_eq( lua_State *L )
 static int jumpL_position( lua_State *L )
 {
    JumpPoint *jp;
-   LuaVector v;
    jp = luaL_validjump(L,1);
-   vectcpy(&v.vec, &jp->pos);
-   lua_pushvector(L, v);
+   lua_pushvector(L, jp->pos);
+   return 1;
+}
+
+
+/**
+ * @brief Gets the angle of a jump in degrees.
+ *
+ * @usage v = j:angle()
+ *    @luaparam j Jump to get the angle of.
+ *    @luareturn The angle.
+ * @luafunc angle( j )
+ */
+static int jumpL_angle( lua_State *L )
+{
+   JumpPoint *jp;
+
+   jp = luaL_validjump(L,1);
+   lua_pushnumber(L, jp->angle * 180. / M_PI);
    return 1;
 }
 
@@ -383,11 +403,9 @@ static int jumpL_exitonly( lua_State *L )
 static int jumpL_system( lua_State *L )
 {
    StarSystem *sys;
-   LuaSystem ls;
 
    luaL_validjumpSystem(L, 1, NULL, &sys);
-   ls.id = sys->id;
-   lua_pushsystem(L,ls);
+   lua_pushsystem(L,sys->id);
    return 1;
 }
 
@@ -403,11 +421,9 @@ static int jumpL_system( lua_State *L )
 static int jumpL_dest( lua_State *L )
 {
    JumpPoint *jp;
-   LuaSystem ls;
 
    jp = luaL_validjump(L,1);
-   ls.id = jp->targetid;
-   lua_pushsystem(L,ls);
+   lua_pushsystem(L,jp->targetid);
    return 1;
 }
 
@@ -440,20 +456,27 @@ static int jumpL_isKnown( lua_State *L )
  */
 static int jumpL_setKnown( lua_State *L )
 {
-   int b, offset;
+   int b, offset, changed;
    JumpPoint *jp;
 
    jp = luaL_validjumpSystem(L, 1, &offset, NULL);
 
-   /* True is boolean isn't supplied. */
+   /* True if boolean isn't supplied. */
    if (lua_gettop(L) > offset )
       b  = lua_toboolean(L, 1 + offset);
    else
       b = 1;
 
+   changed = (b != (int)jp_isKnown(jp));
+
    if (b)
       jp_setFlag( jp, JP_KNOWN );
    else
       jp_rmFlag( jp, JP_KNOWN );
+
+   /* Update outfits image array. */
+   if (changed)
+      outfits_updateEquipmentOutfits();
+
    return 0;
 }

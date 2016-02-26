@@ -499,7 +499,7 @@ static int ship_loadGFX( Ship *temp, char *buf, int sx, int sy, int engine )
    surface = npng_readSurface( npng, gl_needPOT(), 1 );
 
    /* Load the texture. */
-   temp->gfx_space = gl_loadImagePad( str, surface,
+   temp->gfx_space = gl_loadImagePadTrans( str, surface, rw,
          OPENGL_TEX_MAPTRANS | OPENGL_TEX_MIPMAPS,
          w, h, sx, sy, 0 );
 
@@ -562,7 +562,6 @@ static int ship_parseSlot( Ship *temp, ShipOutfitSlot *slot, OutfitSlotType type
             (temp->class == SHIP_CLASS_FREIGHTER) ||
             (temp->class == SHIP_CLASS_DESTROYER) ||
             (temp->class == SHIP_CLASS_CORVETTE) ||
-            (temp->class == SHIP_CLASS_HEAVY_DRONE) ||
             (temp->class == SHIP_CLASS_ARMOURED_TRANSPORT)) {
          typ       = "Medium";
          base_size = OUTFIT_SLOT_SIZE_MEDIUM;
@@ -783,6 +782,7 @@ static int ship_parse( Ship *temp, xmlNodePtr parent )
             xmlr_float(cur,"mass",temp->mass);
             xmlr_float(cur,"cpu",temp->cpu);
             xmlr_int(cur,"fuel",temp->fuel);
+            xmlr_float(cur,"fuel_consumption",temp->fuel_consumption);
             xmlr_float(cur,"cargo",temp->cap_cargo);
             /* All the xmlr_ stuff have continue cases. */
             WARN("Ship '%s' has unknown characteristic node '%s'.", temp->name, cur->name);
@@ -892,6 +892,7 @@ static int ship_parse( Ship *temp, xmlNodePtr parent )
    MELEMENT(temp->fuel==0.,"fuel");*/
    MELEMENT(temp->crew==0,"crew");
    MELEMENT(temp->mass==0.,"mass");
+   MELEMENT(temp->fuel_consumption==0.,"fuel_consumption");
    /*MELEMENT(temp->cap_cargo==0,"cargo");
    MELEMENT(temp->cpu==0.,"cpu");*/
 #undef MELEMENT
@@ -933,11 +934,10 @@ int ships_load (void)
       buf  = ndata_read( file, &bufsize );
       doc  = xmlParseMemory( buf, bufsize );
 
-      free(file);
-   
       if (doc == NULL) {
          free(buf);
          WARN("%s file is invalid xml!",file);
+         free(file);
          continue;
       }
    
@@ -946,9 +946,12 @@ int ships_load (void)
          xmlFreeDoc(doc);
          free(buf);
          WARN("Malformed %s file: does not contain elements",file);
+         free(file);
          continue;
       }
    
+      free(file);
+
       if (xml_isNode(node, XML_SHIP))
          /* Load the ship. */
          ship_parse( &array_grow(&ship_stack), node );

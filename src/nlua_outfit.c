@@ -19,6 +19,7 @@
 #include "nlua_tex.h"
 #include "log.h"
 #include "rng.h"
+#include "slots.h"
 
 
 /* Outfit metatable methods. */
@@ -30,6 +31,7 @@ static int outfitL_typeBroad( lua_State *L );
 static int outfitL_cpu( lua_State *L );
 static int outfitL_slot( lua_State *L );
 static int outfitL_icon( lua_State *L );
+static int outfitL_price( lua_State *L );
 static const luaL_reg outfitL_methods[] = {
    { "__tostring", outfitL_name },
    { "__eq", outfitL_eq },
@@ -40,6 +42,7 @@ static const luaL_reg outfitL_methods[] = {
    { "cpu", outfitL_cpu },
    { "slot", outfitL_slot },
    { "icon", outfitL_icon },
+   { "price", outfitL_price },
    {0,0}
 }; /**< Outfit metatable methods. */
 
@@ -93,9 +96,9 @@ int nlua_loadOutfit( lua_State *L, int readonly )
  *    @param ind Index position to find the outfit.
  *    @return Outfit found at the index in the state.
  */
-LuaOutfit* lua_tooutfit( lua_State *L, int ind )
+Outfit* lua_tooutfit( lua_State *L, int ind )
 {
-   return (LuaOutfit*) lua_touserdata(L,ind);
+   return *((Outfit**) lua_touserdata(L,ind));
 }
 /**
  * @brief Gets outfit at index or raises error if there is no outfit at index.
@@ -104,7 +107,7 @@ LuaOutfit* lua_tooutfit( lua_State *L, int ind )
  *    @param ind Index position to find outfit.
  *    @return Outfit found at the index in the state.
  */
-LuaOutfit* luaL_checkoutfit( lua_State *L, int ind )
+Outfit* luaL_checkoutfit( lua_State *L, int ind )
 {
    if (lua_isoutfit(L,ind))
       return lua_tooutfit(L,ind);
@@ -120,13 +123,10 @@ LuaOutfit* luaL_checkoutfit( lua_State *L, int ind )
  */
 Outfit* luaL_validoutfit( lua_State *L, int ind )
 {
-   LuaOutfit *lo;
    Outfit *o;
 
-   if (lua_isoutfit(L, ind)) {
-      lo = luaL_checkoutfit(L,ind);
-      o  = lo->outfit;
-   }
+   if (lua_isoutfit(L, ind))
+      o  = luaL_checkoutfit(L,ind);
    else if (lua_isstring(L, ind))
       o = outfit_get( lua_tostring(L, ind) );
    else {
@@ -146,10 +146,10 @@ Outfit* luaL_validoutfit( lua_State *L, int ind )
  *    @param outfit Outfit to push.
  *    @return Newly pushed outfit.
  */
-LuaOutfit* lua_pushoutfit( lua_State *L, LuaOutfit outfit )
+Outfit** lua_pushoutfit( lua_State *L, Outfit *outfit )
 {
-   LuaOutfit *o;
-   o = (LuaOutfit*) lua_newuserdata(L, sizeof(LuaOutfit));
+   Outfit **o;
+   o = (Outfit**) lua_newuserdata(L, sizeof(Outfit*));
    *o = outfit;
    luaL_getmetatable(L, OUTFIT_METATABLE);
    lua_setmetatable(L, -2);
@@ -191,10 +191,11 @@ int lua_isoutfit( lua_State *L, int ind )
  */
 static int outfitL_eq( lua_State *L )
 {
-   LuaOutfit *a, *b;
+   Outfit *a, *b;
+
    a = luaL_checkoutfit(L,1);
    b = luaL_checkoutfit(L,2);
-   if (a->outfit == b->outfit)
+   if (a == b)
       lua_pushboolean(L,1);
    else
       lua_pushboolean(L,0);
@@ -207,7 +208,7 @@ static int outfitL_eq( lua_State *L )
 /**
  * @brief Gets a outfit.
  *
- * @usage s = outfit.get( "Hyena" ) -- Gets the hyena
+ * @usage s = outfit.get( "Heavy Laser" ) -- Gets the heavy laser
  *
  *    @luaparam s Name of the outfit to get.
  *    @luareturn The outfit matching name or nil if error.
@@ -216,14 +217,14 @@ static int outfitL_eq( lua_State *L )
 static int outfitL_get( lua_State *L )
 {
    const char *name;
-   LuaOutfit lo;
+   Outfit *lo;
 
    /* Handle parameters. */
    name = luaL_checkstring(L,1);
 
    /* Get outfit. */
-   lo.outfit = outfit_get( name );
-   if (lo.outfit == NULL) {
+   lo = outfit_get( name );
+   if (lo == NULL) {
       NLUA_ERROR(L,"Outfit '%s' not found!", name);
       return 0;
    }
@@ -308,12 +309,12 @@ static int outfitL_cpu( lua_State *L )
 
 
 /**
- * @brief Gets the slot name and size of an outfit.
+ * @brief Gets the slot name, size and property of an outfit.
  *
- * @usage slot_name, slot_size = o:slot() -- Gets the slot information of an outfit
+ * @usage slot_name, slot_size, slot_prop = o:slot() -- Gets an outfit's slot info
  *
  *    @luaparam o Outfit to get information of.
- *    @luareturn The name and the size in human readable strings.
+ *    @luareturn The name, size and property in human readable strings.
  * @luafunc slot( o )
  */
 static int outfitL_slot( lua_State *L )
@@ -321,7 +322,9 @@ static int outfitL_slot( lua_State *L )
    Outfit *o = luaL_validoutfit(L,1);
    lua_pushstring(L, outfit_slotName(o));
    lua_pushstring(L, outfit_slotSize(o));
-   return 2;
+   lua_pushstring(L, sp_display( o->slot.spid ));
+
+   return 3;
 }
 
 
@@ -336,10 +339,25 @@ static int outfitL_slot( lua_State *L )
  */
 static int outfitL_icon( lua_State *L )
 {
-   LuaTex lt;
    Outfit *o = luaL_validoutfit(L,1);
-   lt.tex = gl_dupTexture( o->gfx_store );
-   lua_pushtex( L, lt );
+   lua_pushtex( L, gl_dupTexture( o->gfx_store ) );
+   return 1;
+}
+
+
+/**
+ * @brief Gets the price of an outfit.
+ *
+ * @usage price = o:price()
+ *
+ *    @luaparam o Outfit to get the price of.
+ *    @luareturn The price, in credits.
+ * @luafunc price( o )
+ */
+static int outfitL_price( lua_State *L )
+{
+   Outfit *o = luaL_validoutfit(L,1);
+   lua_pushnumber(L, o->price);
    return 1;
 }
 

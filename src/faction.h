@@ -40,10 +40,13 @@ int faction_setKnown( int id, int state );
 void faction_modPlayer( int f, double mod, const char *source );
 void faction_modPlayerSingle( int f, double mod, const char *source );
 void faction_modPlayerRaw( int f, double mod );
+void faction_setPlayer( int f, double value );
 double faction_getPlayer( int f );
 double faction_getPlayerDef( int f );
-char* faction_getStanding( double mod );
-char *faction_getStandingBroad( double mod );
+int faction_isPlayerFriend( int f );
+int faction_isPlayerEnemy( int f );
+const char *faction_getStandingText( int f );
+const char *faction_getStandingBroad( int f, int bribed, int override );
 const glColour* faction_getColour( int f );
 char faction_getColourChar( int f );
 

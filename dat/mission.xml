@@ -42,6 +42,9 @@
     <location>Space</location>
     <done>The Great Survey Intro</done>
   </avail>
+  <flags>
+   <unique />
+  </flags>
  </mission>
  <mission name="Economy Student">
   <lua>intro/ardarshir</lua>

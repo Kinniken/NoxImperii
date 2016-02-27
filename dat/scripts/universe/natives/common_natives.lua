@@ -444,7 +444,7 @@ all.octopuses={
 		end
 	end,
 	getDesc=function(planet)
-		local desc= "The volcanic activity of #planetname# is particularly strong under the world's main oceans, creating many underwater hotspots. It is there that millennia ago a specie of octopus-like creatures learnt to use tools, first sharp flakes of volcanic rocks and later metal melted by the lava flows. Today the "..planet.lua.natives.name.." master the planet’s oceans, their sharp metal blades keeping predators at bay from the oceanic depths to the shore line. "
+		local desc= "The volcanic activity of #planetname# is particularly strong under the world's main oceans, creating many underwater hotspots. It is there that millennia ago a specie of octopus-like creatures learnt to use tools, first sharp flakes of volcanic rocks and later metal melted by the lava flows. Today the "..planet.lua.natives.name.." master the planet's oceans, their sharp metal blades keeping predators at bay from the oceanic depths to the shore line. "
 		
 		return desc
 	end,
@@ -611,7 +611,7 @@ all.spiders.specialities[#all.spiders.specialities+1]={
 		planet.lua.natives:addGoodSupply(GOURMET_FOOD,gh.populationScore(planet.lua.natives.population)*5,(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
-		return "Their diet of liquefied insects might seem repelling, but over centuries they have turned it into an art form. What terran aristocrat breed on a diet of live oysters could resist such a novelty as eating #planetname#’s shimmering insects alive - with a straw?"
+		return "Their diet of liquefied insects might seem repelling, but over centuries they have turned it into an art form. What terran aristocrat breed on a diet of live oysters could resist such a novelty as eating #planetname#'s shimmering insects alive - with a straw?"
 	end
 }
 

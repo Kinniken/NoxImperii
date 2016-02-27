@@ -10,8 +10,8 @@ function computePayement(surveyedPlanet)
    local reward={};
 
    local lx,ly=surveyedPlanet.c:system():coords()
-   reward.rewardDistance=(math.floor(math.max(0,(gh.calculateDistance({x=0,y=0},{x=lx,y=ly})-600)*10)))
-   reward.rewardDistance=math.min(reward.rewardDistance,2000)
+   reward.rewardDistance=(math.floor(math.max(0,(gh.calculateDistance({x=0,y=0},{x=lx,y=ly})-600)*5)))
+   reward.rewardDistance=math.min(reward.rewardDistance,4000)
 
    reward.rewardNatives=0
 

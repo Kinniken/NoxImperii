@@ -41,7 +41,7 @@ landing_events.attackByWarBands={
 
 	You have a split-second to decide whether to fall back to the ship or fight. Fight back?]]
 
-	if not tk.yesno( "Native attack!", eventText1 ) then
+	if not tk.yesno( "Native attack!", gh.format(eventText1,textData) ) then
 
 		if math.random() <0.8 then
 			tk.msg( "A Narrow Escape", "Your men and you quickly reach the ship's safety, no harm done. You take-off and order a landing in a different spot, and the survey goes on without further incidents." )
@@ -55,7 +55,7 @@ landing_events.attackByWarBands={
 		if math.random() <0.5 then
 			local quantity=gh.floorTo(1+math.random()*3,0)
 			textData.quantity=quantity
-			tk.msg( "Cool under Fire", "Impressed by your cool, your men calmly fire back at the advancing aliens. Startled by your blasters, the natives break and flee, abandoning their weapons. You collect ${quantity} of them: they look valuable!" )
+			tk.msg( "Cool under Fire", gh.format"Impressed by your cool, your men calmly fire back at the advancing aliens. Startled by your blasters, the natives break and flee, abandoning their weapons. You collect ${quantity} of them: they look valuable!",textData) )
 			player.addCargo(NATIVE_WEAPONS,quantity)
 		else
 			local damages=gh.floorTo(1000+math.random()*2000,-2)

@@ -234,6 +234,7 @@ function equip_findOutfit( shipname, slot, outfits )
 
    warn(string.format("Could not find an outfit fitting weapon slot %d for '%s'",
          slot, shipname ))
+   sdfdsf.sdfsdf=1
 end
 
 

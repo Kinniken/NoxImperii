@@ -32,7 +32,7 @@ function equip_forwardMed ()
    return { "Mass Driver MK1" }
 end
 function equip_forwardHig ()
-   return { }
+   return { "Railgun" }
 end
 function equip_forwardMedLow ()
    return table_merge( equip_forwardLow(), equip_forwardMed() )
@@ -46,7 +46,7 @@ end
 -- Turret mounts
 --]]
 function equip_turretLow ()
-   return { "Razor Turret MK1", "Turreted Gauss Gun", "Laser Turret MK1" }
+   return { "Razor Turret MK1", "Turreted Gauss Gun" }
 end
 function equip_turretMed ()
    return { "Laser Turret MK1", "Laser Turret MK2" }
@@ -69,10 +69,10 @@ function equip_rangedLow ()
    return { "Unicorp Fury Launcher" }
 end
 function equip_rangedMed ()
-   return { "Unicorp Headhunter Launcher" }
+   return { "Unicorp Vengeance Launcher" }
 end
 function equip_rangedHig ()
-   return { }
+   return { "Unicorp Vengeance Launcher" }
 end
 function equip_rangedMedLow ()
    return table_merge( equip_rangedLow(), equip_rangedMed() )

@@ -64,7 +64,7 @@ function barbarian_createPlanet(  )
    low            = equip_lowHig()
 
    -- FInally add outfits
-   equip_ship( p, true, weapons, medium, low,nil,
+   equip_ship( p, true, weapons, medium, low,
                use_medium, use_low, olist )
 
    return p,olist
@@ -99,7 +99,7 @@ function barbarian_createContinent(  )
    low            = equip_lowMed()
 
    -- Finally add outfits
-   equip_ship( p, true, weapons, medium, low,nil,
+   equip_ship( p, true, weapons, medium, low,
                use_medium, use_low, olist )
 
    return p,olist
@@ -132,7 +132,7 @@ function barbarian_createComet(  )
    low            = equip_lowLow()
 
    -- Finally add outfits
-   equip_ship( p, true, weapons, medium, low,nil,
+   equip_ship( p, true, weapons, medium, low,
                use_medium, use_low, olist )
 
    return p,olist

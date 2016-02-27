@@ -44,7 +44,7 @@ function equip_getShipBroad( class )
    elseif class == "Drone" then
       return "robotic", "small"
    elseif class == "Heavy Drone" then
-      return "robotic", "medium"
+      return "robotic", "small"
    elseif class == "Mothership" then
       return "robotic", "large"
 
@@ -105,7 +105,7 @@ end
 function _equip_addOutfit( p, o, olist )
    if olist ~= nil then
       olist[ #olist+1 ] = o
-      return true
+      return 1
    else
       return p:addOutfit( o )
    end
@@ -118,14 +118,13 @@ end
 --    @param weapons A table of weapon tables, with the last key of each being the number of slots for that set.
 --    @param medium List of medium outfits to use.
 --    @param low List of low outfits to use.
---    @param apu List of APU to use.
 --    @param reactor List of reactors to use.
 --    @param use_medium Amount of slots to use for medium outfits (default nmedium).
 --    @param use_low Amount of slots to use for low outfits (default nlow).
 --    @param olist If not null, adds the outfits to olist instead of actually adding
 --           them.
 --]]
-function equip_ship( p, scramble, weapons, medium, low, apu,
+function equip_ship( p, scramble, weapons, medium, low,
    use_medium, use_low, olist )
 
    -- Get the ship
@@ -155,23 +154,8 @@ function equip_ship( p, scramble, weapons, medium, low, apu,
    --[[
    --    Set up weapons
    --]]
-   equip_parseWeapons(scramble)
+   equip_parseWeapons(p, scramble, s)
 
-   -- Check CPU if we can add APU
-   if apu ~= nil and #apu > 0 then
-      local cpu_usage = 0
-      for k,v in ipairs( outfits ) do
-         cpu_usage = cpu_usage + s.outfitCPU( v )
-      end
-      local added = true
-      while added and use_medium > 0 and cpu_usage > shipcpu do -- Need to add APU
-         local o_apu
-         o_apu       = apu[ rnd.rnd(1,#apu) ]
-         added       = _equip_addOutfit( p, o_apu, olist )
-         shipcpu     = shipcpu + s.outfitCPU( o_apu )
-         use_medium  = use_medium - 1 -- Discount from available medium slots
-      end
-   end
    -- Add high slots
    for k,v in ipairs(outfits) do
       _equip_addOutfit( p, v, olist )
@@ -201,25 +185,147 @@ function equip_ship( p, scramble, weapons, medium, low, apu,
 end
 
 
---[[
--- @brief Parses a table of weapon tables with reasonable flexibility.
---
---    @param Whether or not to randomly select outfits.
---]]
-function equip_parseWeapons(scramble)
-   for ak,av in ipairs(weapons) do
-      local o
-      if not scramble then
-         o = av[ rnd.rnd( 1, #av-1 )]
-      end
-      i = 0
-      while i < av[#av] do
-         outfits[ #outfits+1 ] = o or av[ rnd.rnd(1, #av-1 ) ]
-         i = i + 1
+-- Cache to avoid repeat lookups.
+scache = {}
+ocache = {}
+
+
+-- TODO: Expose slots via the Lua API
+_slotSizes = { Small = 1, Medium = 2, Large = 3 }
+
+
+-- Caches the sizes of a ship's weapon slots.
+function cache_ship( ship, name )
+   if scache[name] then
+      return
+   end
+
+   scache[name] = {}
+   for k,v in ipairs( ship:getSlots() ) do
+      if v['type'] == "weapon" then
+         table.insert(scache[name], _slotSizes[ v['size'] ])
       end
    end
 end
 
+
+-- Caches outfit sizes.
+function cache_outfit( name )
+   if ocache[name] then
+      return
+   end
+
+   local outfit = outfit.get(name)
+   local _, size = outfit:slot()
+   ocache[name] = _slotSizes[size]
+end
+
+
+function equip_findOutfit( shipname, slot, outfits )
+   local o
+   for j=1, #outfits-1, 1 do
+      o = outfits[j]
+      cache_outfit(o)
+
+      if ocache[o] <= scache[shipname][slot] then
+         return o
+      end
+   end
+
+   warn(string.format("Could not find an outfit fitting weapon slot %d for '%s'",
+         slot, shipname ))
+end
+
+
+--[[
+-- @brief Parses a table of weapon tables with reasonable flexibility.
+--
+--    @param Pilot to add weapons to
+--    @param Whether or not to randomly select outfits.
+--    @param Ship type (optional)
+--]]
+function equip_parseWeapons( p, scramble, ship )
+   local pname, name, abort
+
+   if not ship then
+      ship = p:ship()
+   end
+
+   if p and type(p) == "userdata" then
+      pname = p:name()
+   else
+      pname = ship:name()
+   end
+
+   name = ship:name()
+
+   -- Cache ship's weapon slot sizes.
+   cache_ship(ship, name)
+
+   for ak,av in ipairs(weapons) do
+      local i, o, shuffled
+
+      i = 0
+      o = av[ rnd.rnd(1, #av-1) ]
+      cache_outfit(o)
+
+      if #outfits + av[#av] > #scache[name] then
+         av[#av] = #scache[name] - #outfits
+         abort = true
+      end
+
+      if not scramble then
+         while i < av[#av] do
+            if o and (ocache[o] > scache[name][#outfits + 1]) then
+               if not shuffled then
+                  shuffled = _shuffle( av, #av-1 )
+               end
+
+               o = equip_findOutfit( name, #outfits + 1, shuffled )
+            end
+
+            if o then
+               outfits[ #outfits+1 ] = o
+            end
+            i = i + 1
+         end
+      else
+         while i < av[#av] do
+            o = av[ rnd.rnd(1, #av-1) ]
+            cache_outfit(o)
+
+            if ocache[o] > scache[name][#outfits + 1] then
+               o = equip_findOutfit( name, #outfits + 1, _shuffle( av, #av-1 ) )
+            end
+
+            if o then
+               outfits[ #outfits+1 ] = o
+            end
+            i = i + 1
+         end
+      end
+
+      if abort then
+         warn( string.format("Attempting to equip more than %d weapons on '%s', aborting.",
+               #scache[name], pname) )
+         return
+      end
+   end
+end
+
+
+function _shuffle( t, max )
+   local n, k
+
+   n = max
+   while n > 1 do
+      k = math.random(n)
+      n = n - 1
+      t[n], t[k] = t[k], t[n]
+   end
+
+   return t
+end
 
 
 function icmb( t1, t2 )

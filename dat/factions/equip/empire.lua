@@ -7,6 +7,10 @@ include("dat/factions/equip/generic.lua")
 --    @param p Pilot to equip
 --]]
 function equip( p )
+   -- Start with an empty ship
+   p:rmOutfit("all")
+   p:rmOutfit("cores")
+
    -- Get ship info
    local shiptype, shipsize = equip_getShipBroad( p:ship():class() )
 
@@ -50,7 +54,7 @@ end
 -- @brief Equips a empire military type ship.
 --]]
 function equip_empireMilitary( p, shipsize )
-   local medium, low, apu
+   local medium, low
    local use_primary, use_secondary, use_medium, use_low
    local use_forward, use_turrets, use_medturrets
    local nhigh, nmedium, nlow = p:ship():slots()
@@ -58,7 +62,6 @@ function equip_empireMilitary( p, shipsize )
 
    -- Defaults
    medium      = { "Unicorp Scrambler" }
-   apu         = { }
    weapons     = {}
    scramble    = false
 
@@ -78,11 +81,10 @@ function equip_empireMilitary( p, shipsize )
       elseif class == "Fighter" then
          use_primary    = nhigh-1
          use_secondary  = 1
-         addWeapons( equip_forwardEmpMed(), use_primary )
+         addWeapons( equip_forwardEmpLow(), use_primary )
          addWeapons( equip_secondaryEmp(), use_secondary )
          medium         = equip_mediumLow()
          low            = equip_lowLow()
-         apu            = equip_apuLow()
 
       -- Bomber
       elseif class == "Bomber" then
@@ -92,7 +94,6 @@ function equip_empireMilitary( p, shipsize )
          addWeapons( equip_rangedEmp(), use_secondary )
          medium         = equip_mediumLow()
          low            = equip_lowLow()
-         apu            = equip_apuLow()
       end
 
    elseif shipsize == "medium" then
@@ -106,7 +107,6 @@ function equip_empireMilitary( p, shipsize )
          addWeapons( equip_secondaryEmp(), use_secondary )
          medium         = equip_mediumMed()
          low            = equip_lowMed()
-         apu            = equip_apuMed()
       end
 
       -- Destroyer
@@ -115,11 +115,10 @@ function equip_empireMilitary( p, shipsize )
          use_turrets    = nhigh - use_secondary - rnd.rnd(1,2)
          use_forward    = nhigh - use_secondary - use_turrets
          addWeapons( equip_secondaryEmp(), use_secondary )
-         addWeapons( equip_turretEmpMed(), use_turrets )
+         addWeapons( equip_turretEmpMed()), use_turrets )
          addWeapons( equip_forwardEmpMed(), use_forward )
          medium         = equip_mediumMed()
          low            = equip_lowMed()
-         apu            = equip_apuMed()
       end
 
    else -- "heavy"
@@ -135,9 +134,8 @@ function equip_empireMilitary( p, shipsize )
       addWeapons( equip_secondaryEmp(), use_secondary )
       medium         = equip_mediumHig()
       low            = equip_lowHig()
-      apu            = equip_apuHig()
    end
 
-   equip_ship( p, scramble, weapons, medium, low, apu,
-               use_medium, use_low )
+   equip_ship( p, scramble, weapons, medium, low, 
+                  use_medium, use_low )
 end

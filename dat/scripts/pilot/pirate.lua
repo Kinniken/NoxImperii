@@ -105,7 +105,7 @@ function pirate_createAdmonisher( pirate_create )
    low            = equip_lowMed()
 
    -- Finally add outfits
-      equip_ship( p, true, weapons, medium, low,nil,
+      equip_ship( p, true, weapons, medium, low,
                use_medium, use_low, olist )
 
    return p,olist
@@ -138,7 +138,7 @@ function pirate_createDelta( pirate_create )
    low            = equip_lowMed()
 
    -- Finally add outfits
-   equip_ship( p, true, weapons, medium, low,nil,
+   equip_ship( p, true, weapons, medium, low,
                use_medium, use_low, olist )
 
    return p,olist
@@ -172,7 +172,7 @@ function pirate_createVendetta( pirate_create )
    low            = equip_lowLow()
 
    -- Finally add outfits
-   equip_ship( p, true, weapons, medium, low,nil,
+   equip_ship( p, true, weapons, medium, low,
                use_medium, use_low, olist )
 
    return p,olist

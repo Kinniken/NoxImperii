@@ -60,7 +60,7 @@ function trader_createKoala(  )
    low            = equip_lowHig()
 
    -- FInally add outfits
-   equip_ship( p, true, weapons, medium, low,nil,
+   equip_ship( p, true, weapons, medium, low,
                use_medium, use_low, olist )
 
    return p,olist
@@ -90,7 +90,7 @@ function trader_createMule(  )
    low            = equip_lowHig()
 
    -- FInally add outfits
-   equip_ship( p, true, weapons, medium, low,nil,
+   equip_ship( p, true, weapons, medium, low,
                use_medium, use_low, olist )
 
    return p,olist

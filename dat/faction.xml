@@ -4,6 +4,7 @@
   <static />
   <invisible />
   <player>0</player>
+  <standing>static</standing>
   <allies />
   <enemies />
  </faction>

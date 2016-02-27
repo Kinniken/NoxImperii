@@ -724,7 +724,7 @@ static int systemL_withinradius( lua_State *L )
         distX=systems_stack[i].pos.x-centreX;
         distY=systems_stack[i].pos.y-centreY;
         if (distX*distX+distY*distY<radius*radius) {
-            sysp.id = system_index(&systems_stack[i]);
+            sysp = system_index(&systems_stack[i]);
             lua_pushnumber(L,id); /* key. */
             lua_pushsystem(L,sysp); /* value. */
             lua_rawset(L,-3);
@@ -1148,7 +1148,7 @@ static int systemL_createPlanet( lua_State *L )
     const char* descriptionBar = luaL_checkstring(L, ++pos);
     long population = luaL_checknumber(L, ++pos);
     double hide = luaL_checknumber(L, ++pos);
-    char class = luaL_checkstring(L, ++pos)[0];
+    const char* class = luaL_checkstring(L, ++pos);
     int serviceLand = luaL_checknumber(L, ++pos);
     const char* landingFunc = luaL_checkstring(L, ++pos);
     int refuel = luaL_checknumber(L, ++pos);

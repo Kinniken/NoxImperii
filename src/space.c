@@ -2368,7 +2368,7 @@ static int planet_parseCustom( Planet *planet, const xmlNodePtr parent )
  */
 Planet *planet_createNewPlanet( const char* name ,int isVirtual,const char* spaceGraphic,const char* exteriorGraphic,
                                 double posX,double posY,double presenceAmount,int presenceRange,const char* factionName
-                                  ,const char* description,const char* settlements_description,const char* history_description,const char* descriptionBar,long population,double hide,char class,
+                                  ,const char* description,const char* settlements_description,const char* history_description,const char* descriptionBar,long population,double hide,const char* class,
                                   int serviceLand,const char* landingFunc,int refuel,int bar,int missions,int commodity,int outfits,int shipyard)
 {
     
@@ -2435,7 +2435,7 @@ Planet *planet_createNewPlanet( const char* name ,int isVirtual,const char* spac
 	planet->population=population;
 	planet->hide=hide;
 
-	planet->class = planetclass_get( class );
+	planet->class = strdup(class);
 
 	planet->services = 0;
 
@@ -2482,7 +2482,7 @@ Planet *planet_createNewPlanet( const char* name ,int isVirtual,const char* spac
                  planet->gfx_exterior==NULL,"GFX exterior");
         /* MELEMENT( planet_hasService(planet,PLANET_SERVICE_INHABITED) &&
          (planet->population==0), "population"); */
-        MELEMENT(planet->class==PLANET_CLASS_NULL,"class");
+        MELEMENT(planet->class==NULL,"class");
         MELEMENT( planet_hasService(planet,PLANET_SERVICE_LAND) &&
                  planet->description==NULL,"description");
         MELEMENT( planet_hasService(planet,PLANET_SERVICE_BAR) &&
@@ -4701,7 +4701,7 @@ int planet_savePlanet( xmlTextWriterPtr writer, const Planet *p, int customDataO
 		   || planet_isSaveFlag(p,PLANET_SERVICES_SAVE || p->luaData!=NULL)) ) {
       xmlw_startElem( writer, "general" );
       if (!customDataOnly) {
-		  xmlw_elem( writer, "class", "%c", planet_getClass( p ) );
+    	  xmlw_elem( writer, "class", "%s", p->class );
 		  xmlw_elem( writer, "population", "%"PRIu64, p->population );
 		  xmlw_elem( writer, "hide", "%f", sqrt(p->hide) );
       }
@@ -4781,6 +4781,8 @@ int planet_savePlanet( xmlTextWriterPtr writer, const Planet *p, int customDataO
     	 if (!customDataOnly && p->bar_description!=NULL)
             xmlw_elem( writer, "bar", "%s", p->bar_description );
 
+    	 if (planet_isBlackMarket(p))
+    	             xmlw_elemEmpty( writer, "blackmarket" );
 
          if (p->luaData!=NULL)
             xmlw_elem( writer, "luadata", "%s", p->luaData );

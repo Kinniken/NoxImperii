@@ -362,7 +362,7 @@ int system_rmStar( StarSystem *sys, int pos);
 StarSystem *system_createNewSystem(const char* name);
 Planet *planet_createNewPlanet( const char* name ,int isVirtual,const char* spaceGraphic,const char* exteriorGraphic,
                                   double posX,double posY,double presenceAmount,int presenceRange,const char* factionName
-                                  ,const char* description,const char* settlement_description,const char* history_description,const char* descriptionBar,long population,double hide,char class,
+                                  ,const char* description,const char* settlement_description,const char* history_description,const char* descriptionBar,long population,double hide,const char* class,
                                   int serviceLand,const char* landingFunc,int refuel,int bar,int missions,int commodity,int outfits,int shipyard);
 
 /*

@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.61])
-AC_INIT([naev], [0.6.0], [bobbens@gmail.com])
+AC_INIT([naev], [0.6.1], [bobbens@gmail.com])
 AC_CONFIG_SRCDIR([src/naev.c])
 AC_CONFIG_HEADERS([src/config.h])
 AC_CONFIG_MACRO_DIR([m4])
@@ -142,7 +142,7 @@ AS_IF([test "$enable_debug" != "no"], [
   AS_IF([test "$have_custom_cflags" = "no"], [
     # Undo the default CFLAGS set by autoconf
     AS_IF([test "$ac_cv_prog_cc_g" = "yes"], [
-      CFLAGS="-g -W -Wall -Wextra -Wunused -Wshadow -Wpointer-arith -Wmissing-prototypes -Winline -Wcast-align -Wmissing-declarations -Wredundant-decls -Wno-long-long -Wcast-align"
+      CFLAGS="-g -W -Wall -Wextra -Wunused -Wshadow -Wpointer-arith -Wmissing-prototypes -Winline -Wcast-align -Wmissing-declarations -Wredundant-decls -Wno-long-long -Wcast-align -Wformat -Wformat-security"
     ], [
       CFLAGS=
     ])
@@ -175,7 +175,7 @@ AC_ARG_WITH([sdl2],
       with_sdl2=no
     ])
   ], [
-    with_sdl2=no # TODO should default to yes, but it's too broken atm
+    with_sdl2=yes
   ])
 AC_MSG_RESULT([$with_sdl2])
 
@@ -213,7 +213,7 @@ AC_MSG_RESULT([$with_sdlmixer])
 AC_MSG_CHECKING([which lua to use])
 AC_ARG_ENABLE([lua],
   AC_HELP_STRING([--enable-lua=@<:@internal|shared|luajit@:>@],
-     [lua to use (default: internal)]), [
+     [lua to use (default: luajit)]), [
     case "$enableval" in
       luajit)
         used_lua=luajit
@@ -226,7 +226,7 @@ AC_ARG_ENABLE([lua],
         ;;
     esac
   ], [
-    used_lua=internal
+    used_lua=luajit
   ])
 AC_MSG_RESULT([$used_lua])
 
@@ -286,14 +286,17 @@ case "$used_lua" in
       have_lua=yes
       LUA_CFLAGS+="-DHAVE_LUAJIT"
     ], [
-      AC_WARN([Lua is set to Lua-JIT but can not find library; using internal Lua])
+      AC_WARN([Lua is set to LuaJIT but can not find library; using internal Lua])
       have_lua=no
     ])
     ;;
   shared)
-    PKG_CHECK_MODULES([LUA], [lua], [have_lua=yes], [have_lua=no])
-    AS_IF([test "$have_lua" = "no"], [PKG_CHECK_MODULES([LUA], [lua5.1], [have_lua=yes], [have_lua=no])])
-    AS_IF([test "$have_lua" = "no"], [PKG_CHECK_MODULES([LUA], [lua51], [have_lua=yes], [have_lua=no])])
+    have_lua=no
+    m4_foreach([pkgname], [lua-5.1, lua5.1, lua51, lua], [
+        AS_IF([test "$have_lua" = "no"], [
+            PKG_CHECK_MODULES([LUA], [pkgname], [have_lua=yes], [have_lua=no])
+        ])
+    ])
     AS_IF([test "$have_lua" = "no"], [AC_WARN([Lua is set to shared but can not find library; using internal Lua])])
     ;;
   *)
@@ -339,13 +342,14 @@ AS_IF([test "$with_openal" = "yes"], [
 ])
 
 # SDL_mixer
+AS_IF([test "$have_sdl2" = "yes"], [SDLMIXER_NAME=SDL2_mixer], [SDLMIXER_NAME=SDL_mixer])
 AS_IF([test "$with_sdlmixer" = "yes"], [
-  PKG_CHECK_MODULES([SDLMIXER], [SDL_mixer], [have_sdlmixer=yes], [have_sdlmixer=no])
+  PKG_CHECK_MODULES([SDLMIXER], [$SDLMIXER_NAME], [have_sdlmixer=yes], [have_sdlmixer=no])
 ])
 
 # SDL_image
 VAR_SAVE([LIBS])
-AS_IF([test "$have_sdl2" = "yes"], [SDLIMAGE_NAME=SDL2_image], [SDLMIXER_NAME=SDL_image])
+AS_IF([test "$have_sdl2" = "yes"], [SDLIMAGE_NAME=SDL2_image], [SDLIMAGE_NAME=SDL_image])
 AC_SEARCH_LIBS([IMG_Load], [$SDLIMAGE_NAME], [
   SDLIMAGE_CFLAGS=
   SDLIMAGE_LIBS="$LIBS"

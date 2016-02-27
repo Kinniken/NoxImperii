@@ -1469,9 +1469,6 @@ static void uniedit_btnEditRmAsset( unsigned int wid, char *unused )
       return;
    }
 
-   /* Update economy due to galaxy modification. */
-   economy_execQueued();
-
    uniedit_editGenList( wid );
 }
 
@@ -1543,9 +1540,6 @@ static void uniedit_btnEditAddAssetAdd( unsigned int wid, char *unused )
       dialogue_alert( "Failed to add virtual asset '%s'!", selected );
       return;
    }
-
-   /* Update economy due to galaxy modification. */
-   economy_execQueued();
 
    /* Regenerate the list. */
    uniedit_editGenList( uniedit_widEdit );

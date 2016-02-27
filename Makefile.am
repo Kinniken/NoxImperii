@@ -11,6 +11,8 @@ appicondir = $(datadir)/pixmaps
 appicon_DATA = extras/logos/naev.png
 Graphicsdir = $(datadir)/applications
 Graphics_DATA = naev.desktop
+appdatadir = $(datadir)/appdata
+appdata_DATA = naev.appdata.xml
 dist_pkgdata_DATA = naev-confupdate.sh
 
 dist_man6_MANS = naev.6
@@ -22,7 +24,7 @@ MKSPR      = utils/mkspr/mkspr$(EXEEXT)
 endif
 NAEV	     = naev$(EXEEXT)
 
-EXTRA_DIST = LICENSE extras naev.desktop
+EXTRA_DIST = LICENSE extras naev.desktop naev.appdata.xml
 CLEANFILES = $(DATA_ARCHIVE) $(NAEV)
 
 .PHONY: docs utils help install-ndata
@@ -81,7 +83,7 @@ docs:
 help:
 	@echo "Possible targets are:"
 	@echo "        all - builds everything"
-	@echo "      ndata - creates the ndata file"
+	@echo "  ndata.zip - creates the ndata file"
 	@echo "       docs - creates the doxygen documentation"
 	@echo "      clean - removes binaries and object files"
 	@echo "    install - installs naev"

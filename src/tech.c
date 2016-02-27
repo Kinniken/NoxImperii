@@ -760,6 +760,17 @@ int tech_hasItem( tech_group_t *tech, char *item )
 
 
 /**
+ * @brief Gets the number of techs within a given group.
+ *
+ *   @return Number of techs.
+ */
+int tech_getItemCount( tech_group_t *tech )
+{
+   return array_size( tech->items );
+}
+
+
+/**
  * @brief Gets the names of all techs within a given group.
  *
  *    @param tech Tech group to operate on.

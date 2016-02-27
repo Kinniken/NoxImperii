@@ -163,12 +163,12 @@ int pilot_cargoAddRaw( Pilot* pilot, Commodity* cargo,
 int pilot_cargoAdd( Pilot* pilot, Commodity* cargo,
       int quantity, unsigned int id )
 {
-   int free;
+   int freeCargoSpace;
 
    /* Check to see how much to add. */
-   free = pilot_cargoFree(pilot);
-   if (free < quantity)
-      quantity = free;
+   freeCargoSpace = pilot_cargoFree(pilot);
+   if (freeCargoSpace < quantity)
+      quantity = freeCargoSpace;
 
    return pilot_cargoAddRaw( pilot, cargo, quantity, id );
 }

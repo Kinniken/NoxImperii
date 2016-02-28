@@ -55,7 +55,7 @@ landing_events.attackByWarBands={
 		if math.random() <0.5 then
 			local quantity=gh.floorTo(1+math.random()*3,0)
 			textData.quantity=quantity
-			tk.msg( "Cool under Fire", gh.format"Impressed by your cool, your men calmly fire back at the advancing aliens. Startled by your blasters, the natives break and flee, abandoning their weapons. You collect ${quantity} of them: they look valuable!",textData) )
+			tk.msg( "Cool under Fire", gh.format("Impressed by your cool, your men calmly fire back at the advancing aliens. Startled by your blasters, the natives break and flee, abandoning their weapons. You collect ${quantity} of them: they look valuable!",textData) )
 			player.addCargo(NATIVE_WEAPONS,quantity)
 		else
 			local damages=gh.floorTo(1000+math.random()*2000,-2)

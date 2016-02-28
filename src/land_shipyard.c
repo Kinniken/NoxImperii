@@ -126,8 +126,8 @@ void shipyard_open( unsigned int wid )
          "Armour:\n"
          "Energy:\n"
          "Cargo Space:\n"
+		 "Fuel Use:\n"
          "Fuel:\n"
-         "Fuel Use:\n"
          "Price:\n"
          "Money:\n"
          "License:\n";
@@ -181,6 +181,7 @@ void shipyard_update( unsigned int wid, char* str )
    Ship* ship;
    char buf[PATH_MAX], buf2[ECON_CRED_STRLEN], buf3[ECON_CRED_STRLEN];
    size_t len;
+   double jumps=0;
 
    shipname = toolkit_getImageArray( wid, "iarShipyard" );
 
@@ -242,6 +243,11 @@ void shipyard_update( unsigned int wid, char* str )
 		  license_text[len - 8] = '\0';
 	   }
    }
+
+   //need to avoid a /0 if fuel consumption isn't filled
+   if (ship->fuel_consumption>0 && ship->fuel>0)
+	   jumps=(ship->fuel/ship->fuel_consumption);
+
    nsnprintf( buf, PATH_MAX,
          "%s\n"
          "%s\n"
@@ -259,8 +265,8 @@ void shipyard_update( unsigned int wid, char* str )
          "%.0f MJ (%.1f MW)\n"
          "%.0f MJ (%.1f MW)\n"
          "%.0f tons\n"
-         "%d units\n"
          "%.0f units\n"
+		 "%d units (%.0f jumps)\n"
          "%s credits\n"
          "%s credits\n"
          "%s\n",
@@ -280,8 +286,9 @@ void shipyard_update( unsigned int wid, char* str )
          ship->armour, ship->armour_regen,
          ship->energy, ship->energy_regen,
          ship->cap_cargo,
+		 ship->fuel_consumption,
          ship->fuel,
-         ship->fuel_consumption,
+		 jumps,
          buf2,
          buf3,
          (license_text != NULL) ? license_text : "None" );

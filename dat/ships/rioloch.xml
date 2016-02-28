@@ -8,7 +8,6 @@
  <fabricator>Roidhunate Shipyards</fabricator>
  <description>While the Rioloch's structure clearly show its "fish bone" heritage, it has been heavily adapted by the Roidhunate and now differs significantly from the original human design. Tougher and better armed than human equivalents, it is intended to follow Ardar offensives under minimal protection.</description>
 
-
 <price>2800000</price>
  <movement>
   <thrust>160</thrust>
@@ -28,7 +27,8 @@
   <cpu>60</cpu>
   <crew>45</crew>
   <mass>2500</mass>
-  <fuel>700</fuel>
+  <fuel>2800</fuel>
+  <fuel_consumption>400</fuel_consumption>
   <cargo>600</cargo>
  </characteristics>
 <stats>

@@ -5,9 +5,9 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Fighter</class>
- <price>250000</price>
  <fabricator>Roidhunate Shipyards</fabricator>
  <description>Ardar Roeths are the most common fighters in the Roidhunate's navy. Smaller and lighter than the typical Terran meteor-class vessel, they are unusually fast and maneuverable.</description>
+ <price>250000</price>
  <movement>
   <thrust>280</thrust>
   <turn>155</turn>
@@ -27,8 +27,12 @@
   <crew>2</crew>
   <mass>75</mass>
   <fuel>600</fuel>
+  <fuel_consumption>100</fuel_consumption>
   <cargo>10</cargo>
  </characteristics>
+<stats>
+  
+</stats>
  <slots>
   <weapon x="-3" y="0" h="2" size="small"/>
   <weapon x="-3" y="0" h="2" size="small"/>
@@ -38,7 +42,4 @@
   <structure size="small"/>
   <structure size="small"/>
  </slots>
- <stats>
-  <fwd_firerate>5</fwd_firerate>
- </stats>
 </ship>

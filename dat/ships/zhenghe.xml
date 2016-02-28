@@ -8,7 +8,6 @@
  <fabricator>Xiao Shipyards</fabricator>
  <description>A higher-end variant on the common "whales" design, the Zheng He is popular in the Empire for its increased cargo capacity, greater speed and stronger shields. Its vulnerability still limits it to core Terran space.</description>
  
-
 <price>2500000</price>
  <movement>
   <thrust>150</thrust>
@@ -28,13 +27,13 @@
   <cpu>60</cpu>
   <crew>40</crew>
   <mass>2300</mass>
-  <fuel>500</fuel>
+  <fuel>2000</fuel>
+  <fuel_consumption>400</fuel_consumption>
   <cargo>550</cargo>
  </characteristics>
 <stats>
   
 </stats>
-
  <slots>
   <utility size="medium"/>
   <utility size="medium"/>

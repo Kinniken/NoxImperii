@@ -5,10 +5,10 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Destroyer</class>
- <price>2200000</price>
  <fabricator>Roidhunate Shipyards</fabricator>
  <description>While classified by the Imperial Navy as Continent-class, the Brythioch destroyer is significantly more capable than the Terran Asieneuve in all but armor. Small fleets of Brythiochs frequently probe Imperial borders, mapping potential weaknesses.
 </description>
+<price>2200000</price>
  <movement>
   <thrust>190</thrust>
   <turn>120</turn>
@@ -27,9 +27,13 @@
   <cpu>96</cpu>
   <crew>20</crew>
   <mass>1350</mass>
-  <fuel>800</fuel>
+  <fuel>1600</fuel>
+  <fuel_consumption>200</fuel_consumption>
   <cargo>100</cargo>
  </characteristics>
+<stats>
+  
+</stats>
  <slots>
   <weapon x="-15" y="-10" h="-10" size="large"/>
   <weapon x="-15" y="10" h="-10" size="large"/>
@@ -47,6 +51,4 @@
   <structure size="medium"/>
   <structure size="medium"/>
  </slots>
- <stats>
- </stats>
 </ship>

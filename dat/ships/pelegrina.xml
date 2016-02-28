@@ -28,6 +28,7 @@
   <crew>3</crew>
   <mass>120</mass>
   <fuel>800</fuel>
+  <fuel_consumption>100</fuel_consumption>
   <cargo>60</cargo>
  </characteristics>
 <stats>
@@ -42,7 +43,4 @@
   <utility size="small"/>
   <weapon    size="small"  x="+25"  y="0" h="0"/>
  </slots>
- <stats>
-  
- </stats>
 </ship>

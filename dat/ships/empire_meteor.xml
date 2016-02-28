@@ -5,9 +5,9 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Fighter</class>
- <price>280000</price>
  <fabricator>Imperial Shipyards</fabricator>
  <description>The Tunguska light fighter is the Meteor-class ship currently used in the Terran Navy for patrolling systems and for short-range recognition.</description>
+ <price>280000</price>
  <movement>
   <thrust>250</thrust>
   <turn>145</turn>
@@ -20,15 +20,19 @@
   <energy>580</energy>
   <shield_regen>7</shield_regen>
   <armour_regen>0</armour_regen>
-  <energy_regen>22.3</energy_regen>
+  <energy_regen>22,3</energy_regen>
  </health>
  <characteristics>
   <cpu>32</cpu>
   <crew>2</crew>
   <mass>86</mass>
   <fuel>600</fuel>
+  <fuel_consumption>100</fuel_consumption>
   <cargo>15</cargo>
  </characteristics>
+<stats>
+  
+</stats>
  <slots>
   <weapon x="12" y="0" h="0" size="small"/>
   <weapon x="-3" y="0" h="2" size="small"/>

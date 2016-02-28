@@ -29,7 +29,8 @@ The carvela was one of the earliest and most successful result; tougher, faster 
   <cpu>40</cpu>
   <crew>15</crew>
   <mass>450</mass>
-  <fuel>1000</fuel>
+  <fuel>1500</fuel>
+  <fuel_consumption>150</fuel_consumption>
   <cargo>120</cargo>
  </characteristics>
 <stats>

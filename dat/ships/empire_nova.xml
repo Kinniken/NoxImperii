@@ -5,11 +5,11 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Carrier</class>
- <price>20000000</price>
  <fabricator>Imperial Shipyards</fabricator>
  <description>The heaviest ship in the Terran navy, the Valendray dreadnought is the pride of the Terran Empire. With devastating firepower and massive, layered defenses, its primary role is protecting the headquarters of major Terran fleets. As such it is rarely exposed to direct combat.
  
 In a symbolic act of defiance, this latest model of Nova-class dreadnought was named after the nova that almost obliterated Ardar civilisation back when it had just become spacefaring - a fate only avoided with timely human help. The Roidhunate did not appreciate this reminder of its former inferiority.</description>
+<price>20000000</price>
  <movement>
   <thrust>90</thrust>
   <turn>60</turn>
@@ -22,15 +22,19 @@ In a symbolic act of defiance, this latest model of Nova-class dreadnought was n
   <energy>4800</energy>
   <shield_regen>12</shield_regen>
   <armour_regen>0</armour_regen>
-  <energy_regen>118.3</energy_regen>
+  <energy_regen>118,3</energy_regen>
  </health>
  <characteristics>
   <cpu>240</cpu>
   <crew>65</crew>
   <mass>6200</mass>
-  <fuel>600</fuel>
+  <fuel>3000</fuel>
+  <fuel_consumption>500</fuel_consumption>
   <cargo>680</cargo>
  </characteristics>
+<stats>
+  
+</stats>
  <slots>
   <weapon x="40" y="0" h="2"  size="large"/>
   <weapon x="25" y="0" h="2"  size="large"/>
@@ -53,8 +57,5 @@ In a symbolic act of defiance, this latest model of Nova-class dreadnought was n
   <structure size="large"/>
   <structure size="large"/>
  </slots>
- <stats>
-
- </stats>
 </ship>
 <!-- Note: the base is NOT a normal ship. Do not add to techs or fleets! -->

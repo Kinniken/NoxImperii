@@ -5,9 +5,9 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Destroyer</class>
- <price>1100000</price>
  <fabricator>Imperial Shipyards</fabricator>
  <description>This Comet-class light frigate is one of the workhorse of the Terran Navy. It is used mainly as an interceptor and as a frontier scout ship, and is provided with the engines and fuel capacity needed for those roles.</description>
+<price>1100000</price>
  <movement>
   <thrust>200</thrust>
   <turn>125</turn>
@@ -20,15 +20,19 @@
   <energy>1064</energy>
   <shield_regen>9</shield_regen>
   <armour_regen>0</armour_regen>
-  <energy_regen>43.2</energy_regen>
+  <energy_regen>43,3</energy_regen>
  </health>
  <characteristics>
   <cpu>64</cpu>
   <crew>13</crew>
   <mass>323</mass>
-  <fuel>1000</fuel>
+  <fuel>1500</fuel>
+  <fuel_consumption>150</fuel_consumption>
   <cargo>45</cargo>
  </characteristics>
+<stats>
+  
+</stats>
  <slots>
   <weapon x="-15" y="-10" h="-10" size="medium"/>
   <weapon x="-15" y="10" h="-10" size="medium"/>
@@ -42,7 +46,4 @@
   <structure size="medium"/>
   <structure size="medium"/>
  </slots>
- <stats>
-
- </stats>
 </ship>

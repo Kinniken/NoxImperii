@@ -5,11 +5,11 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Carrier</class>
- <price>15000000</price>
  <fabricator>Betelgian State Shipyards</fabricator>
  <description>Stella dreadnoughts are a rare and new sight in the Betelgian navy, a clear sign that the Merchant Princes are aware that Betelgeuse's position as a neutral trading power is under threat.
 
-Intended as command ships for large fleets, and always commanded by proeminent members of leading families, Stella dreadnoughts are not just formidable vessels but also provide luxurious accomadations worthy of the Doge himself.</description>
+Intended as command ships for large fleets, and always commanded by prominent members of leading families, Stella dreadnoughts are not just formidable vessels but also provide luxurious accommodations worthy of the Doge himself.</description>
+<price>15000000</price>
  <movement>
   <thrust>100</thrust>
   <turn>60</turn>
@@ -27,10 +27,14 @@ Intended as command ships for large fleets, and always commanded by proeminent m
  <characteristics>
   <cpu>250</cpu>
   <crew>80</crew>
-  <mass>500</mass>
-  <fuel>1000</fuel>
+  <mass>5000</mass>
+  <fuel>5000</fuel>
+  <fuel_consumption>500</fuel_consumption>
   <cargo>1200</cargo>
  </characteristics>
+<stats>
+  
+</stats>
  <slots>
   <weapon size="large" x="40" y="0" h="0"/>
   <weapon size="large" x="20" y="0" h="0"/>
@@ -59,8 +63,4 @@ Intended as command ships for large fleets, and always commanded by proeminent m
   <structure size="large"/>
   <structure size="large"/>
  </slots>
- <stats>
-
- </stats>
 </ship>
-<!-- Note: the base is NOT a normal ship. Do not add to techs or fleets! -->

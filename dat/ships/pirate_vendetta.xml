@@ -27,7 +27,8 @@
   <cpu>50</cpu>
   <crew>15</crew>
   <mass>380</mass>
-  <fuel>500</fuel>
+  <fuel>600</fuel>
+  <fuel_consumption>150</fuel_consumption>
   <cargo>40</cargo>
  </characteristics>
 <stats>

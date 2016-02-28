@@ -28,12 +28,12 @@
   <crew>1</crew>
   <mass>90</mass>
   <fuel>500</fuel>
+  <fuel_consumption>100</fuel_consumption>
   <cargo>40</cargo>
  </characteristics>
 <stats>
   <misc_instant_jump>1</misc_instant_jump>
 </stats>
-
  <slots>
   <weapon size="small" x="9" y="0" h="-2"/>
   <utility size="small"/>

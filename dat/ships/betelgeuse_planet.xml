@@ -5,9 +5,9 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Cruiser</class>
- <price>7000000</price>
  <fabricator>Maggiore Shipyards</fabricator>
  <description>The Orsa is a proud descendent of the long Betelgian tradition of capital trade ships, able to ply distant trade routes without fear of barbarian or pirates. Light for a cruiser by Terran standard, it still packs a formidable punch and has kept its generous cargo hold.</description>
+<price>7000000</price>
  <movement>
   <thrust>130</thrust>
   <turn>80</turn>
@@ -26,9 +26,13 @@
   <cpu>120</cpu>
   <crew>30</crew>
   <mass>2800</mass>
-  <fuel>900</fuel>
+  <fuel>2700</fuel>
+  <fuel_consumption>300</fuel_consumption>
   <cargo>700</cargo>
  </characteristics>
+<stats>
+  
+</stats>
  <slots>
   <weapon size="large" x="40" y="0" h="2"/>
   <weapon size="large" x="25" y="0" h="2"/>
@@ -48,7 +52,4 @@
   <structure size="large"/>
   <structure size="large"/>
  </slots>
- <stats>
-
- </stats>
 </ship>

@@ -5,9 +5,9 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Cruiser</class>
- <price>9000000</price>
  <fabricator>Imperial Shipyards</fabricator>
  <description>All but the most important Terran fleets are lead by Planet-class cruisers, and the Jupiter is the most advanced ever built by the Terran Navy. Clearly this is a ship that can face anything... this side of the Ardar border.</description>
+<price>9000000</price>
  <movement>
   <thrust>120</thrust>
   <turn>75</turn>
@@ -20,15 +20,19 @@
   <energy>2700</energy>
   <shield_regen>11</shield_regen>
   <armour_regen>0</armour_regen>
-  <energy_regen>85.3</energy_regen>
+  <energy_regen>85,3</energy_regen>
  </health>
  <characteristics>
   <cpu>157</cpu>
   <crew>35</crew>
   <mass>3750</mass>
-  <fuel>600</fuel>
+  <fuel>1800</fuel>
+  <fuel_consumption>300</fuel_consumption>
   <cargo>420</cargo>
  </characteristics>
+<stats>
+  
+</stats>
  <slots>
   <weapon x="40" y="0" h="2"  size="large"/>
   <weapon x="25" y="0" h="2" size="large"/>
@@ -48,7 +52,4 @@
   <structure size="large"/>
   <structure size="large"/>
  </slots>
- <stats>
-
- </stats>
 </ship>

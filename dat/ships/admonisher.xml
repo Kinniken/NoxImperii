@@ -28,6 +28,7 @@
   <crew>2</crew>
   <mass>120</mass>
   <fuel>400</fuel>
+  <fuel_consumption>100</fuel_consumption>
   <cargo>20</cargo>
  </characteristics>
 <stats>

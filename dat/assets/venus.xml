@@ -31,7 +31,7 @@
   nativeFertility = 0,
   settlements = {
     humans = {
-      agriculture = 0,
+      agriculture = 0.3,
       industry = 1.0,
       population = 145000000,
       technology = 1.2,

@@ -928,6 +928,14 @@ function generatePlanetServices(planet)
 			comData.supply=0
 		end
 
+		if (comData.price<0.1) then
+			error("Extreme low price factor for "..name.." on "..planet:name()..": "..comData.price)
+			comData.price=0.1
+		elseif (comData.price>10) then
+			error("Extreme high price factor for "..name.." on "..planet:name()..": "..comData.price)
+			comData.price=10
+		end
+
 		if (comData.supply>0 or comData.demand>0) then
 			planet.c:addOrUpdateTradeData(commodity.get(name),comData.price,comData.supply,comData.demand)
 		end

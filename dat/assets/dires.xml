@@ -33,8 +33,8 @@ A small permanent base of Naerisian scientists is dedicated to the study of thos
 	nativeFertility = 1.2,
 	settlements = {
 		humans = {
-			agriculture = 0,
-			industry = 0,
+			agriculture = 0.1,
+			industry = 0.1,
 			military = 0.1,
 			population = 250,
 			services = 0.2,

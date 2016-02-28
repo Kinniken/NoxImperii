@@ -1,0 +1,64 @@
+Authors of the photos used in landing pictures
+(Long Night-specific)
+(pictures stored in dat/gfx/planet/exterior/ln)
+
+coast_temperate: Matt Lavery,https://www.flickr.com/photos/mattlavery/2144390456/
+coast_rocky: Kim Verhoef,https://www.flickr.com/photos/kimverhoef/7797240316
+coast_ice: Jeff Butterworth,https://www.flickr.com/photos/jeffrocks/7998585110
+coast_warm: Sunny Lapin, https://www.flickr.com/photos/sunnylapin/24621937810
+coast_warm2: wildvoid, https://www.flickr.com/photos/wildvoid/20791770498
+forest_temperate3: Driek, https://www.flickr.com/photos/driek/8933124847
+forest_snow: peupleloup, https://www.flickr.com/photos/peupleloup/4352148348
+forest_pine: peupleloup, https://www.flickr.com/photos/peupleloup/3885954698
+forest_temperate: David Spender, https://www.flickr.com/photos/dspender/3515351421
+forest_temperate2: 姐夫 吳, https://www.flickr.com/photos/50183640@N05/4746936915
+mountain_temperate: peupleloup, https://www.flickr.com/photos/peupleloup/23935117500
+mountain_ice: orangems, https://www.flickr.com/photos/orangems/6219530064
+mountain_ice2: laurent KB, https://www.flickr.com/photos/laurentis/2043086022
+mountain_snow: Markus Trienke, https://www.flickr.com/photos/mtrienke/25019507785
+jungle: shango natty, https://www.flickr.com/photos/natty-shango/7679838236
+jungle2: Ian Tenney,https://www.flickr.com/photos/iftenney/2487547635
+jungle3: David, https://www.flickr.com/photos/wtdy/6514197537
+mangrove: Phil's 1stPix, https://www.flickr.com/photos/1stpix_diecast_dioramas/9174689148
+ocean_warm: edward musiak, https://www.flickr.com/photos/edwardmusiak/6245528107
+
+desert_cold: Kaveh Shahabi, https://www.flickr.com/photos/kaveh096/3216903735
+desert_cold2: Kaveh Shahabi, https://www.flickr.com/photos/kaveh096/3217758802
+desert: Trey Ratcliff, https://www.flickr.com/photos/stuckincustoms/7874912840
+desert2: Magic Nights Book, https://www.flickr.com/photos/74561832@N04/6773175887
+desert3: Dennis Stauffer, https://www.flickr.com/photos/zoomion/4968208871
+
+
+
+Authors of the photos used in commodities pictures
+(Long Night-specific)
+(pictures stored in dat/gfx/commodity/ln)
+
+human_food: Sarah Gilbert, https://www.flickr.com/photos/cafemama/5261367873
+gourmet_food: cristiana bolli freitas, https://www.flickr.com/photos/sopramais/1816799770
+exotic_food: 
+telloch: xlibber, https://www.flickr.com/photos/xlibber/3878850962
+wine: PRORichKnowles, https://www.flickr.com/photos/canolais/3296759207
+primitive_consumer_goods: Elliot Moore, https://www.flickr.com/photos/elliotmoore/354450984
+luxury_consumer_goods: KotomiCreations, https://www.flickr.com/photos/kotomi-jewelry/2292684172
+exotic_furs: Fred Hoysted, https://www.flickr.com/photos/freddles/514854199
+native_technology: Jean-Pierre Dalbéra, https://www.flickr.com/photos/dalbera/3306523739
+
+
+ore: Alejandro Polanco, https://www.flickr.com/photos/alpoma/27810143
+non_industrial_tools: OZinOH, https://www.flickr.com/photos/75905404@N00/7126146307
+primitive_industrial_goods: Emmanuel Huybrechts, https://www.flickr.com/photos/ensh/5063331121
+industrial_goods: Snapshooter46, https://www.flickr.com/photos/calotype46/7459174640
+modern_industrial_goods: Avram Cheaney, https://www.flickr.com/photos/liquidator/445073590
+
+
+native_weapons: madmrmox, https://www.flickr.com/photos/21304538@N00/10405276916
+native_statue: Mary Harrsch, https://www.flickr.com/photos/mharrsch/7322038254
+native_art: Jack Versloot, https://www.flickr.com/photos/jackversloot/2563365462
+
+
+non_industrial_weapons: Kordite, https://www.flickr.com/photos/kordite/8176414287
+
+ancient_technology: Anthony Nicolet, https://www.flickr.com/photos/126238895@N08/20960663721
+
+

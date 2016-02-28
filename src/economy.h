@@ -9,6 +9,7 @@
 
 
 #include <stdint.h>
+#include "opengl.h"
 
 #define ECON_CRED_STRLEN      32 /**< Maximum length a credits2str string can reach. */
 #define TRADE_REFILL_DURATION ((1000.0*10000.0)*100.0) /* Duration necessary for planet to replenish trade goods, in STP outside inner brackets */
@@ -31,6 +32,7 @@ typedef struct Commodity_ {
    char* description; /**< Description of the commodity. */
    /* Prices. */
    double price; /**< Base price of the commodity. */
+   glTexture* gfx_store; /**< Store graphic. */
 } Commodity;
 
 

@@ -34,24 +34,28 @@
 */
 static int commodity_mod = 10;
 
-/*
- * List of trade goods (actual names, not with B/S tags)
- */
-static int ngoods;
-static char **goods;
-
-
 /**
  * @brief Opens the local market window.
  */
 void commodity_exchange_open( unsigned int wid )
 {
-   int i;
-   char **goodsLabel;
+   int i, ngoods;
+   glTexture **tgoods;
+   char **goods;
    int w, h;
+   int iw, ih;
+
+  
+   /* Mark as generated. */
+   land_tabGenerate(LAND_WINDOW_COMMODITY);
 
    /* Get window dimensions. */
    window_dimWindow( wid, &w, &h );
+   
+   /* Calculate image array dimensions. */
+   /* Window size minus right column size minus space on left and right */
+   iw = w-LAND_BUTTON_WIDTH-3*20;
+   ih = h - 60;
 
    /* buttons */
    window_addButtonKey( wid, -20, 20,
@@ -68,8 +72,14 @@ void commodity_exchange_open( unsigned int wid )
    window_addCust( wid, -40-((LAND_BUTTON_WIDTH-20)/2), 60+ 2*LAND_BUTTON_HEIGHT,
          (LAND_BUTTON_WIDTH-20)/2, LAND_BUTTON_HEIGHT, "cstMod", 0, commodity_renderMod, NULL, NULL );
 
+   /* store gfx */
+   window_addRect( wid, 20+iw+20+(LAND_BUTTON_WIDTH-128)/2, -40,
+         128, 128, "rctStore", &cBlack, 0 );
+   window_addImage( wid, 20+iw+20+(LAND_BUTTON_WIDTH-128)/2, -40,
+         128, 128, "imgStore", NULL, 1 );
+
    /* text */
-   window_addText( wid, -20, -40, LAND_BUTTON_WIDTH, 120, 0,
+   window_addText( wid, -20, -190, LAND_BUTTON_WIDTH, 120, 0,
          "txtSInfo", &gl_smallFont, &cDConsole,
          "You have:\n"
          "Buying Price:\n"
@@ -79,47 +89,39 @@ void commodity_exchange_open( unsigned int wid )
          "\n"
          "Sellable:\n"
          "Free Space:\n" );
-   window_addText( wid, -20, -40, LAND_BUTTON_WIDTH/2, 120, 0,
+   window_addText( wid, -20, -190, LAND_BUTTON_WIDTH/2, 120, 0,
          "txtDInfo", &gl_smallFont, &cBlack, NULL );
-   window_addText( wid, -40, -180, LAND_BUTTON_WIDTH-20,
+   window_addText( wid, -40, -320, LAND_BUTTON_WIDTH-20,
          h-140-LAND_BUTTON_HEIGHT, 0,
          "txtDesc", &gl_smallFont, &cBlack, NULL );
 
    /* goods list */
    if (land_planet->ntradedatas > 0) {
 
-	   if (goods!=NULL) {
-		   free(goods);
-	   }
-
-      goods = malloc(sizeof(char*) * land_planet->ntradedatas);
-      goodsLabel = malloc(sizeof(char*) * land_planet->ntradedatas);
-      for (i=0; i<land_planet->ntradedatas; i++) {
-    	  char str[strlen(land_planet->tradedatas[i].commodity->name)+10];
-    	  strcpy (str,land_planet->tradedatas[i].commodity->name);
-    	  if (land_planet->tradedatas[i].buyingQuantity==0) {
-    		  strcat(str," (Selling only)");
-    	  } else  if (land_planet->tradedatas[i].sellingQuantity==0) {
-    		  strcat(str," (Buying only)");
-    	  }
-    	  goodsLabel[i]=strdup(str);
+	  ngoods = land_planet->ntradedatas;
+      goods = malloc(sizeof(char*) * ngoods);
+      tgoods    = malloc(sizeof(glTexture*) * ngoods);
+      for (i=0; i<ngoods; i++) {
     	  goods[i]=strdup(land_planet->tradedatas[i].commodity->name);
+    	  
+    	  tgoods[i] = land_planet->tradedatas[i].commodity->gfx_store;
       }
-
-      ngoods = land_planet->ntradedatas;
    }
    else {
 	   goods    = malloc( sizeof(char*) );
 	   goods[0] = strdup("None");
-	  goodsLabel    = malloc( sizeof(char*) );
-	  goodsLabel[0] = strdup("None");
+	  tgoods    = malloc(sizeof(glTexture*));
+      tgoods[0] = NULL;
       ngoods   = 1;
    }
-   window_addList( wid, 20, -40,
-         w-LAND_BUTTON_WIDTH-60, h-80-LAND_BUTTON_HEIGHT,
-         "lstGoods", goodsLabel, ngoods, 0, commodity_update );
+
+   /* set up the goods to buy/sell */
+   window_addImageArray( wid, 20, 20,
+         iw, ih, "iarTrade", 64, 64,
+         tgoods, goods, ngoods, commodity_update, commodity_update );
+
    /* Set default keyboard focuse to the list */
-   window_setFocus( wid , "lstGoods" );
+   window_setFocus( wid , "iarTrade" );
 }
 /**
  * @brief Updates the commodity window.
@@ -134,18 +136,13 @@ void commodity_update( unsigned int wid, char* str )
    Commodity *com;
    TradeData *tradeData;
 
-   int pos= toolkit_getListPos(wid, "lstGoods" );
-   if (pos==-1) {
-	   comname=NULL;
-   } else {
-	   comname=goods[pos];
-   }
+   comname = toolkit_getImageArray( wid, "iarTrade" );
    if ((comname==NULL) || (strcmp( comname, "None" )==0)) {
       nsnprintf( buf, PATH_MAX,
          "NA Tons\n"
-         "NA Credits/Ton\n"
+         "NA Cr./Ton\n"
          "\n"
-         "NA Tons\n" );
+         "%d Tons\n");
       window_modifyText( wid, "txtDInfo", buf );
       window_modifyText( wid, "txtDesc", "No commodities available." );
       window_disableButton( wid, "btnCommodityBuy" );
@@ -154,6 +151,9 @@ void commodity_update( unsigned int wid, char* str )
    }
    com = commodity_get( comname );
    tradeData = planet_getTradeData(land_planet,com);
+
+   /* modify image */
+   window_modifyImage( wid, "imgStore", com->gfx_store, 128, 128 );
 
    /* modify text */
    if (tradeData->buyingQuantity==0) {//just selling
@@ -301,12 +301,8 @@ void commodity_buy( unsigned int wid, char* str )
    /* Get selected. */
    q     = commodity_getMod();
 
-   int pos= toolkit_getListPos(wid, "lstGoods" );
-   if (pos==-1) {
-	   comname=NULL;
-   } else {
-	   comname=goods[pos];
-   }
+   comname = toolkit_getImageArray( wid, "iarTrade" );
+
    com   = commodity_get( comname );
    tradeData = planet_getTradeData(land_planet,com);
    price = planet_commodityPriceBuying( land_planet, com );
@@ -360,12 +356,8 @@ void commodity_sell( unsigned int wid, char* str )
 
    /* Get parameters. */
    q     = commodity_getMod();
-   int pos= toolkit_getListPos(wid, "lstGoods" );
-   if (pos==-1) {
-	   comname=NULL;
-   } else {
-	   comname=goods[pos];
-   }
+   comname = toolkit_getImageArray( wid, "iarTrade" );
+
    com   = commodity_get( comname );
    tradeData = planet_getTradeData(land_planet,com);
    price = planet_commodityPriceSelling( land_planet, com );

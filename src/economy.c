@@ -209,8 +209,21 @@ static int commodity_parse( Commodity *temp, xmlNodePtr parent )
       xml_onlyNodes(node);
       xmlr_strd(node, "description", temp->description);
       xmlr_int(node, "price", temp->price);
+       if (xml_isNode(node,"gfx_store")) {
+         temp->gfx_store = xml_parseTexture( node,
+               COMMODITY_GFX_PATH"%s.png", 1, 1, OPENGL_TEX_MIPMAPS );
+         if (temp->gfx_store != NULL) {
+         } else {
+            temp->gfx_store = gl_newImage( COMMODITY_GFX_PATH"_default.png", 0 );
+         }
+         continue;
+      }
       WARN("Commodity '%s' has unknown node '%s'.", temp->name, node->name);
    } while (xml_nextNode(node));
+   if ((temp->gfx_store == NULL) && (temp->price>0)) {
+      WARN("No <gfx_store> node found, using default texture for commodity \"%s\"", temp->name);
+      temp->gfx_store = gl_newImage( COMMODITY_GFX_PATH"_default.png", 0 );
+   }
 
 #if 0 /* shouldn't be needed atm */
 #define MELEMENT(o,s)   if (o) WARN("Commodity '%s' missing '"s"' element", temp->name)

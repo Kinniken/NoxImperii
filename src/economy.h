@@ -33,6 +33,7 @@ typedef struct Commodity_ {
    /* Prices. */
    double price; /**< Base price of the commodity. */
    glTexture* gfx_store; /**< Store graphic. */
+   int id; /** order from the XML file. Used for sorting trade data. **/
 } Commodity;
 
 

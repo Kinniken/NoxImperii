@@ -286,6 +286,7 @@ int commodity_load (void)
    char *buf;
    xmlNodePtr node;
    xmlDocPtr doc;
+   int commodityId=1; /* used to reference the commodities' order when dealing with trade data */
 
    /* Load the file. */
    buf = ndata_read( COMMODITY_DATA_PATH, &bufsize);
@@ -321,6 +322,9 @@ int commodity_load (void)
 
          /* Load commodity. */
          commodity_parse(&commodity_stack[commodity_nstack-1], node);
+
+         commodity_stack[commodity_nstack-1].id=commodityId;
+         commodityId++;
 
          /* See if should get added to commodity list. */
          if (commodity_stack[commodity_nstack-1].price > 0.) {

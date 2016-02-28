@@ -299,12 +299,29 @@ void planet_addOrUpdateTradeData(Planet *p, const Commodity *c,float priceFactor
 		p->tradedatas     = realloc( p->tradedatas, sizeof(TradeData) * p->mem_tradedatas );
 	}
 
-	p->tradedatas[p->ntradedatas-1].commodity=c;
-	p->tradedatas[p->ntradedatas-1].priceFactor=priceFactor;
-	p->tradedatas[p->ntradedatas-1].buyingQuantity=buyingQuantity;
-	p->tradedatas[p->ntradedatas-1].sellingQuantity=sellingQuantity;
-	p->tradedatas[p->ntradedatas-1].buyingQuantityRemaining=buyingQuantity;
-	p->tradedatas[p->ntradedatas-1].sellingQuantityRemaining=sellingQuantity;
+	//Inserting in the order of commodity ids
+
+	//Finding the pos to insert in
+	int pos=-1;
+	for (i=0;i<p->ntradedatas-1 && pos==-1;i++) {
+		if (p->tradedatas[i].commodity->id>c->id) {
+			pos=i;
+		}
+	}
+	if (pos==-1)
+		pos=p->ntradedatas-1;
+
+	//Shifting trade data
+	for (i=p->ntradedatas-2;i>=pos;i--) {
+		p->tradedatas[i+1]=p->tradedatas[i];
+	}
+
+	p->tradedatas[pos].commodity=c;
+	p->tradedatas[pos].priceFactor=priceFactor;
+	p->tradedatas[pos].buyingQuantity=buyingQuantity;
+	p->tradedatas[pos].sellingQuantity=sellingQuantity;
+	p->tradedatas[pos].buyingQuantityRemaining=buyingQuantity;
+	p->tradedatas[pos].sellingQuantityRemaining=sellingQuantity;
 
 	//space_debugCheckDataIntegrity();
 }

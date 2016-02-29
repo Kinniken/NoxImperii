@@ -415,7 +415,7 @@ static int board_trySteal( Pilot *p )
       return 1;
 
    /* See if was successful. */
-   if (RNGF() > (0.5 * (10. + target->crew)/(10. + p->crew)))
+   if (RNGF() > (0.5 * (10. + target->crew*target->boarding_skills)/(10. + p->crew*p->boarding_skills)))
       return 0;
 
    /* Triggered self destruct. */

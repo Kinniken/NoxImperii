@@ -78,6 +78,10 @@ typedef enum ShipStatsType_ {
    SS_TYPE_D_MASS,            /**< Ship mass. */
    SS_TYPE_D_ENGINE_LIMIT_REL, /**< Modifier for the ship's engine limit. */
 
+   SS_TYPE_D_FUEL_CONSUMPTION_MOD, /**< Modifier for the ship's fuel consumption. */
+
+   SS_TYPE_D_BORDING_SKILLS_MOD, /** Modifier for how well a crew fights when boarding  **/
+
    /*
     * A: Absolute double type data. Should be continuous.
     */
@@ -85,6 +89,7 @@ typedef enum ShipStatsType_ {
    SS_TYPE_A_ENERGY_REGEN_FLAT, /**< Flat energy regeneration modifier (not multiplied). */
    SS_TYPE_A_CPU_MAX,          /**< Maximum CPU modifier. */
    SS_TYPE_A_ENGINE_LIMIT,     /**< Engine's mass limit. */
+   SS_TYPE_D_ARMOUR_REGEN_FLAT, /**< Flat armour modifier (not multiplied). */
 
    /*
     * I: Integer type data. Should be continuous.
@@ -158,6 +163,7 @@ typedef struct ShipStats_ {
    double cargo_mod;          /**< Cargo space multiplier. */
    double armour_mod;         /**< Armour multiplier. */
    double armour_regen_mod;   /**< Armour regeneration multiplier. */
+   double armour_regen_flat;  /**< Armour regeneration flat. */
    double shield_mod;         /**< Shield multiplier. */
    double shield_regen_mod;   /**< Shield regeneration multiplier. */
    double energy_mod;         /**< Energy multiplier. */
@@ -204,6 +210,9 @@ typedef struct ShipStats_ {
    /* Engine limits. */
    double engine_limit_rel; /**< Engine limit modifier. */
    double engine_limit;     /**< Engine limit. */
+
+   double fuel_efficiency;     /**< Mod for fuel consumption */
+   double boarding_skills;     /**< Mod for how well crew fights in boardings */
 
    /* Misc. */
    double nebu_absorb_shield; /**< Shield nebula resistance. */

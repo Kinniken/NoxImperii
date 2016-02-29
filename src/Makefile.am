@@ -19,6 +19,7 @@ CODE_SOURCE = \
 	cond.c \
 	conf.c \
 	console.c \
+	crew.c \
 	damagetype.c \
 	debris.c \
 	dev.c \

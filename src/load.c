@@ -540,7 +540,6 @@ int load_game( const char* file, int version_diff )
 {
 
    space_reset();
-   WARN("Space cleaned");
 
    space_load();
    WARN("Space loaded");

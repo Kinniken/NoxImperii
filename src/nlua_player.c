@@ -719,6 +719,8 @@ static int playerL_landWindow( lua_State *L )
       win = LAND_WINDOW_EQUIPMENT;
    else if (strcasecmp(str,"commodity")==0)
       win = LAND_WINDOW_COMMODITY;
+   else if (strcasecmp(str,"crew")==0)
+         win = LAND_WINDOW_CREW;
    else
       NLUA_INVALID_PARAMETER(L);
 

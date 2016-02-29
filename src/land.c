@@ -37,6 +37,7 @@
 #include "news.h"
 #include "escort.h"
 #include "event.h"
+#include "crew.h"
 #include "conf.h"
 #include "gui.h"
 #include "equipment.h"
@@ -66,6 +67,7 @@
 #define VISITED_SHIPYARD      (1<<4) /**< Player already visited shipyard. */
 #define VISITED_EQUIPMENT     (1<<5) /**< Player already visited equipment. */
 #define VISITED_MISSION       (1<<6) /**< Player already visited mission computer. */
+#define VISITED_CREW          (1<<7) /**< Player already visited crew. */
 #define visited(f)            (land_visited |= (f)) /**< Mark place is visited. */
 #define has_visited(f)        (land_visited & (f)) /**< Check if player has visited. */
 static unsigned int land_visited = 0; /**< Contains what the player visited. */
@@ -87,7 +89,8 @@ static const char *land_windowNames[LAND_NUMWINDOWS] = {
    "Outfits",
    "Shipyard",
    "Equipment",
-   "Commodity"
+   "Commodity",
+   "Crew"
 };
 static int land_windowsMap[LAND_NUMWINDOWS]; /**< Mapping of windows. */
 static unsigned int *land_windows = NULL; /**< Landed window ids. */
@@ -322,7 +325,7 @@ static void bar_open( unsigned int wid )
    /* Add mission description text. */
    th -= 20 + PORTRAIT_HEIGHT + 20 + 20;
    window_addText( wid, iw + 60, th,
-         w - iw - 100, h + th - (2*bh+60), 0,
+         w - iw - 100, h + th - (2*bh) - 10, 0,
          "txtMission", &gl_smallFont, &cBlack, NULL );
 
    /* Generate the mission list. */
@@ -965,6 +968,9 @@ void land_genWindows( int load, int changetab )
       land_windowsMap[LAND_WINDOW_EQUIPMENT] = j;
       names[j++] = land_windowNames[LAND_WINDOW_EQUIPMENT];
    }
+   /* Crew, non-conditional */
+   land_windowsMap[LAND_WINDOW_CREW] = j;
+   names[j++] = land_windowNames[LAND_WINDOW_CREW];
    /* Commodity. */
    if (planet_hasService(land_planet, PLANET_SERVICE_COMMODITY)) {
       land_windowsMap[LAND_WINDOW_COMMODITY] = j;
@@ -1003,8 +1009,9 @@ void land_genWindows( int load, int changetab )
          mission_computer = missions_genList( &mission_ncomputer,
                land_planet->faction, land_planet->name, cur_system->name,
                MIS_AVAIL_COMPUTER );
-      if (planet_hasService(land_planet, PLANET_SERVICE_BAR))
+      if (planet_hasService(land_planet, PLANET_SERVICE_BAR)) {
          npc_generate(); /* Generate bar npc. */
+      }
    }
 
    /* 4) Create other tabs. */
@@ -1035,6 +1042,8 @@ void land_genWindows( int load, int changetab )
    /* Commodity. */
    if (should_open( PLANET_SERVICE_COMMODITY, LAND_WINDOW_COMMODITY ))
       commodity_exchange_open( land_getWid(LAND_WINDOW_COMMODITY) );
+   if (((!(land_generated & (1 << LAND_WINDOW_CREW)))))
+         crew_open( land_getWid(LAND_WINDOW_CREW) );
 #undef should_open
 
    if (!regen) {
@@ -1285,6 +1294,11 @@ static void land_changeTab( unsigned int wid, char *wgt, int old, int tab )
                to_visit   = VISITED_EQUIPMENT;
                torun_hook = "equipment";
                break;
+            case LAND_WINDOW_CREW:
+			   crew_update_active( w, NULL );
+			   to_visit   = VISITED_CREW;
+			   torun_hook = "crew";
+			   break;
 
             default:
                break;

@@ -10,6 +10,7 @@
 
 #include "opengl.h"
 #include "mission.h"
+#include "crew.h"
 
 
 /*
@@ -19,6 +20,8 @@ unsigned int npc_add_mission( Mission *misn, const char *func, const char *name,
       int priority, const char *portrait, const char *desc );
 unsigned int npc_add_event( unsigned int evt, const char *func, const char *name,
       int priority, const char *portrait, const char *desc );
+unsigned int npc_add_crew(Crew* crew, const char *name,
+      int priority, const char *portrait, const char *desc, const char *generatedName );
 
 /*
  * Removing.

@@ -124,11 +124,17 @@ static const ShipStatsLookup ss_lookup[] = {
    D__ELEM( SS_TYPE_D_MASS,               mass_mod,            "Mass" ),
    D__ELEM( SS_TYPE_D_ENGINE_LIMIT_REL,   engine_limit_rel,    "Engine Mass Limit" ),
 
+   D__ELEM( SS_TYPE_D_FUEL_CONSUMPTION_MOD,   fuel_efficiency,    "Fuel Efficiency" ),
+
+   D__ELEM( SS_TYPE_D_BORDING_SKILLS_MOD,   boarding_skills,    "Boarding Skills" ),
+
    A__ELEM( SS_TYPE_A_ENERGY_FLAT,        energy_flat,         "Energy Capacity" ),
    AI_ELEM( SS_TYPE_A_ENERGY_REGEN_FLAT,  energy_usage,        "Energy Usage" ),
    A__ELEM( SS_TYPE_A_CPU_MAX,            cpu_max,             "CPU Capacity" ),
 
    A__ELEM( SS_TYPE_A_ENGINE_LIMIT,       engine_limit,        "Engine Mass Limit" ),
+
+   A__ELEM( SS_TYPE_D_ARMOUR_REGEN_FLAT,  armour_regen_flat,        "Armour regeneration" ),
 
    I__ELEM( SS_TYPE_I_HIDDEN_JUMP_DETECT, misc_hidden_jump_detect, "Hidden Jump Detection" ),
    

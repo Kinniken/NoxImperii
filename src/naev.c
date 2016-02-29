@@ -97,6 +97,7 @@
 #include "options.h"
 #include "dialogue.h"
 #include "slots.h"
+#include "crew.h"
 
 
 #define CONF_FILE       "conf.lua" /**< Configuration file by default. */
@@ -683,7 +684,7 @@ static void loadscreen_unload (void)
 /**
  * @brief Loads all the data, makes main() simpler.
  */
-#define LOADING_STAGES     12. /**< Amount of loading stages. */
+#define LOADING_STAGES     13. /**< Amount of loading stages. */
 void load_all (void)
 {
    /* We can do fast stuff here. */
@@ -712,9 +713,11 @@ void load_all (void)
    fleet_load(); /* dep for space */
    loadscreen_render( 10./LOADING_STAGES, "Loading Techs..." );
    tech_load(); /* dep for space */
-   loadscreen_render( 11./LOADING_STAGES, "Loading the Universe..." );
+   loadscreen_render( 11./LOADING_STAGES, "Loading Crews..." );
+   crewPosition_load();
+   loadscreen_render( 12./LOADING_STAGES, "Loading the Universe..." );
    space_load();
-   loadscreen_render( 12./LOADING_STAGES, "Populating Maps..." );
+   loadscreen_render( 13./LOADING_STAGES, "Populating Maps..." );
    outfit_mapParse();
    background_init();
    player_init(); /* Initialize player stuff. */

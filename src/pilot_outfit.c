@@ -905,6 +905,8 @@ void pilot_calcStats( Pilot* pilot )
    pilot->energy_max    = pilot->ship->energy;
    pilot->energy_regen  = pilot->ship->energy_regen;
    pilot->energy_loss   = 0.; /* Initially no net loss. */
+   /* Misc */
+   pilot->boarding_skills = 1; /* modified by crew members only for now (or ship stats, though not used) */
    /* Stats. */ 
    s = &pilot->stats;
    *s = pilot->ship->stats_array;
@@ -981,6 +983,20 @@ void pilot_calcStats( Pilot* pilot )
       }
    }
 
+   /* Crews, only for the player for now */
+   if (pilot->id == PLAYER_ID) {
+	   const HiredCrew *crews;
+	   int ncrews;
+
+	   crews=player_getCrews(&ncrews);
+
+	   for (i=0;i<ncrews;i++) {
+		   if (crews[i].active) {//only active crews (holding their positions) count
+			   ss_statsModFromList( s, crews[i].crew->stats, &amount );
+		   }
+	   }
+   }
+
    if (!pilot_isFlag( pilot, PILOT_AFTERBURNER ))
       pilot->solid->speed_max = pilot->speed;
 
@@ -1023,6 +1039,7 @@ void pilot_calcStats( Pilot* pilot )
    pilot->speed_base   *= s->speed_mod;
    /* Health. */
    pilot->armour_max   *= s->armour_mod;
+   pilot->armour_regen += s->armour_regen_flat;
    pilot->armour_regen *= s->armour_regen_mod;
    pilot->shield_max   *= s->shield_mod;
    pilot->shield_regen *= s->shield_regen_mod;
@@ -1036,6 +1053,10 @@ void pilot_calcStats( Pilot* pilot )
    pilot->crew         *= s->crew_mod;
    pilot->cap_cargo    *= s->cargo_mod;
    s->engine_limit     *= s->engine_limit_rel;
+
+   pilot->fuel_consumption /= s->fuel_efficiency;
+
+   pilot->boarding_skills *= s->boarding_skills;
 
    /*
     * Flat increases.

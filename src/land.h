@@ -22,6 +22,7 @@ enum {
    LAND_WINDOW_SHIPYARD,     /**< Shipyard window. */
    LAND_WINDOW_EQUIPMENT,    /**< Equipment window. */
    LAND_WINDOW_COMMODITY,    /**< Commodity window. */
+   LAND_WINDOW_CREW,
    LAND_NUMWINDOWS           /**< Number of land windows. */
 };
 

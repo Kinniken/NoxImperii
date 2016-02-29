@@ -8,6 +8,7 @@
 
 
 #include "pilot.h"
+#include "crew.h"
 
 /** Player flag enum. */
 enum {
@@ -161,6 +162,7 @@ void player_nolandMsg( const char *str );
 void player_clear (void);
 void player_warp( const double x, const double y );
 const char* player_rating (void);
+const char* player_rating_other (double combatRating);
 int player_hasCredits( credits_t amount );
 credits_t player_modCredits( credits_t amount );
 void player_hailStart (void);
@@ -199,6 +201,14 @@ int player_numOutfits (void);
 int player_addOutfit( const Outfit *o, int quantity );
 int player_rmOutfit( const Outfit *o, int quantity );
 
+/*
+ * player crews
+ */
+int player_addCrew( const Crew *crew, const char* generatedName, int messages, int active );
+int player_rmCrew( const Crew *crew );
+const HiredCrew* player_getCrews( int *n );
+const HiredCrew* player_getCrew( char* name );
+int player_setCrewActiveStatus(char* name, int status);
 
 /*
  * player missions

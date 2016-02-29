@@ -338,6 +338,8 @@ typedef struct Pilot_ {
    double ctimer;    /**< Remaining cooldown time. */
    double heat_start; /**< Temperature at the start of a cooldown. */
 
+   double boarding_skills; /**< multiplier for crew size in boarding situations */
+
    /* Ship statistics. */
    ShipStats stats;  /**< Pilot's copy of ship statistics. */
 

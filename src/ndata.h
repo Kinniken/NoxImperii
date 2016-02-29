@@ -33,6 +33,7 @@
 #define SPFX_DATA_PATH           "dat/spfx.xml" /**< Location of the spfx datafile. */
 #define DTYPE_DATA_PATH          "dat/damagetype.xml" /**< Location of the spfx datafile. */
 #define COMMODITY_DATA_PATH      "dat/commodity.xml" /**< Commodity XML file. */
+#define CREW_DATA_PATH      	 "dat/crew.xml" /**< Commodity XML file. */
 #define FLEET_DATA_PATH          "dat/fleet.xml" /**< Where to find fleet data. */
 #define TECH_DATA_PATH           "dat/tech.xml"   /**< XML file containing techs. */
 #define DIFF_DATA_PATH           "dat/unidiff.xml" /**< Unidiff XML file. */
@@ -46,6 +47,8 @@
 #define SHIP_DATA_PATH           "dat/ships/" /**< Path to ships. */
 
 #define LANDING_DATA_PATH        "dat/landing.lua" /**< Lua script containing landing data. */
+
+#define CREW_NAME_DATA_PATH      "dat/crew_names.lua" /**< Lua script containing name generators for crews. */
 
 #define NEBULA_PATH              "nebula/" /**< Path to nebula files. */
 

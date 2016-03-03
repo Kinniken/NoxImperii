@@ -117,7 +117,7 @@ void commodity_exchange_open( unsigned int wid )
 
    /* set up the goods to buy/sell */
    window_addImageArray( wid, 20, 20,
-         iw, ih, "iarTrade", 64, 64,
+         iw, ih, "iarTrade", 128, 128,
          tgoods, goods, ngoods, commodity_update, commodity_update );
 
    /* Set default keyboard focuse to the list */

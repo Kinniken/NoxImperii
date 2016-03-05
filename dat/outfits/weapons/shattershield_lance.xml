@@ -3,7 +3,7 @@
  <general>
   <slot>weapon</slot>
   <size>medium</size>
-  <license>Medium Weapon License</license>
+  
   <mass>18</mass>
   <price>28000</price>
   <description>This ion-based beam weapon is designed to deliver a powerful stream of charged ions along with an electromagnetic pulse to a ship, short-circuiting its shields with ruthless efficiency. Fighters and ships that rely on shields for protection find this weapon to be devastating, but its weakness versus armor relegates to a secondary weapon.</description>

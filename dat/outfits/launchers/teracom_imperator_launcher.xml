@@ -3,7 +3,7 @@
  <general>
   <slot>weapon</slot>
   <size>large</size>
-  <license>Heavy Weapon License</license>
+  
   <mass>80</mass>
   <price>220000</price>
   <description>The Imperator launcher is a very heavy torpedo launcher that is both bulky and demanding, but whose raw firepower is a must for any captain looking to blow up some capital ships.</description>

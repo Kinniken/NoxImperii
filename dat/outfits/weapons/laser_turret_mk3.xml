@@ -3,7 +3,7 @@
  <general>
   <slot>weapon</slot>
   <size>medium</size>
-  <license>Medium Weapon License</license>
+  
   <mass>30</mass>
   <price>45000</price>
   <description>The Laser Turret MK3 is often found on Imperial fast response fleets, for use against fleets of small to medium ships. This weapon is one of the mainstays in the Imperial space forces.</description>

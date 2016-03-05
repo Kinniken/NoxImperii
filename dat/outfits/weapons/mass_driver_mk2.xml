@@ -3,7 +3,7 @@
  <general>
   <slot>weapon</slot>
   <size>medium</size>
-  <license>Medium Weapon License</license>
+  
   <mass>18</mass>
   <price>32000</price>
   <description>The MK2 version of the Mass Driver differs little from its weaker model in its working. Rather, the parts it's made of have a better performance curve, allowing the driver rounds to be fired with increased force.</description>

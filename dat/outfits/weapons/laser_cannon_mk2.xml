@@ -3,7 +3,7 @@
  <general>
   <slot>weapon</slot>
   <size>small</size>
-  <license>Medium Weapon License</license>
+  
   <mass>4.5</mass>
   <price>12500</price>
   <description>The mark 2 laser cannon improves on the original in many ways. Featuring increased range and greater firepower while only moderately increasing power demands, it's become a favourite civilian armament.</description>

@@ -3,7 +3,7 @@
  <general>
   <slot>weapon</slot>
   <size>medium</size>
-  <license>Heavy Weapon License</license>
+  
   <mass>55</mass>
   <price>120000</price>
   <description>The Caesar IV launcher does what it says on the box, which is launch Caesar IV torpedoes.</description>

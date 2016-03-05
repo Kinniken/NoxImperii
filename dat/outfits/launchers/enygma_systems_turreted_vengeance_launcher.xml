@@ -3,7 +3,7 @@
  <general>
   <slot>weapon</slot>
   <size>medium</size>
-  <license>Medium Weapon License</license>
+  
   <mass>60</mass>
   <price>200000</price>
   <description>Turreted Vengeance launchers aren't commonly seen in interplanetary combat. Only heavy cruisers can afford to mount these weapons, and they usually have other means of taking out corvette class enemies.</description>

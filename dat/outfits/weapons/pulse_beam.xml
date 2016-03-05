@@ -3,7 +3,7 @@
  <general>
   <slot>weapon</slot>
   <size>medium</size>
-  <license>Medium Weapon License</license>
+  
   <mass>22</mass>
   <price>26000</price>
   <description>The Pulse Beam is an aptly named beam weapon designed to counter fighters with a rapid-firing, short-lived pulse. It doesn't do very much damage against larger targets, but fighters who get near ships equipped with this weapon will have a bad day.</description>

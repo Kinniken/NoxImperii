@@ -15,9 +15,9 @@ function create ()
    -- Lines to annoy the player. Shouldn't be too common or Gamma Polaris and such get inundated.
    r = rnd.rnd(0,20)
    if r == 0 then
-     ai.broadcast("Peaceful traders are always welcome in Betelgian space.")
+     ai.pilot():broadcast("Peaceful traders are always welcome in Betelgian space.")
     elseif r == 1 then
-      ai.broadcast("Trade is the lifeblood of the Galaxy, and I protect it.")
+      ai.pilot():broadcast("Trade is the lifeblood of the Galaxy, and I protect it.")
    end
 
    -- Get refuel chance
@@ -38,7 +38,7 @@ function create ()
 
    -- See if can be bribed
    if rnd.rnd() > 0.7 then
-      mem.bribe = math.sqrt( ai.shipmass() ) * (500. * rnd.rnd() + 1750.)
+      mem.bribe = math.sqrt( ai.pilot():stats().mass ) * (500. * rnd.rnd() + 1750.)
       mem.bribe_prompt = string.format("\"For some %d credits I could forget about seeing you.\"", mem.bribe )
       mem.bribe_paid = "\"Now scram before I change my mind.\""
    else

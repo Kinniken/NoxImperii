@@ -1,11 +1,10 @@
-
 NAEV README
 
    For an overview of the game, please visit http://wiki.naev.org/wiki/Main_Page
    or view the man page (If you're on a Unix-like system).
-   
+
    An exhaustive list of command line arguments is detailed in the man page.
-   
+
    Hardware requirements can also be found on the website.
 
 1) DEPENDENCIES
@@ -20,10 +19,10 @@ NAEV README
       * libvorbis (>= 1.2.1 necessary for Replaygain)
       * binutils
       * libzip
-      
+
    Note that several distributions ship outdated versions of libvorbis, and
    thus libvorbisfile is statically linked into the release binary.
-   
+
    Compiling your own binary on many distributions will result in Replaygain
    being disabled.
 
@@ -32,7 +31,6 @@ NAEV README
 
    Mac Dependencies are different, see extras/macosx/COMPILE for details.
 
-      
 2) COMPILING
 
    Run: 

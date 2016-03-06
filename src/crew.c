@@ -502,35 +502,30 @@ static int crew_location( const char* loc )
 
 static char* crew_findName( char* nameGenerator )
 {
-	int errf;
+	int ret,errf;
 	char func[MAX_FUNC_NAME];
 	char* name;
+	const char *err;
 	lua_State *L;
 
 
 	L = crew_name_lua;
 
-#if DEBUGGING
-	lua_pushcfunction(L, nlua_errTrace);
-	errf = -3;
-#else /* DEBUGGING */
-	errf = 0;
-#endif /* DEBUGGING */
+   errf = 0;
 
 	/* Set up function. */
 
 	nsnprintf(func, MAX_FUNC_NAME, "get%sName", nameGenerator);
 
 	lua_getglobal( L, func );
-	if (lua_pcall(L, 0, 1, errf)) { /* error has occurred */
-		WARN("Crew name generator: '%s' : %s", func, lua_tostring(L,-1));
-#if DEBUGGING
-		lua_pop(L,2);
-#else /* DEBUGGING */
-		lua_pop(L,1);
-#endif /* DEBUGGING */
-		return NULL;
-	}
+
+	ret = lua_pcall(L, 0, 1, errf);
+   if (ret != 0) { /* error has occurred */
+	  err = (lua_isstring(L,-1)) ? lua_tostring(L,-1) : NULL;
+	  WARN("Crew getName -> '%s' : %s",func,
+			(err) ? err : "unknown error");
+	  lua_pop(L, 1);
+   }
 
 	if (lua_isstring(L,-1))
 		name = strdup( lua_tostring(L,-1) );

@@ -83,6 +83,10 @@ function getArdarName()
 	return name
 end
 
+function getHumanFemaleNameD()
+
+end
+
 function getHumanFemaleName()
 	local rand=math.random()
 
@@ -97,6 +101,10 @@ function getHumanFemaleName()
 	else
 		return generateFirstNameLastName(russianFemaleFirstName,russianLastName)
 	end
+end
+
+function getHumanMaleNameD()
+
 end
 
 function getHumanMaleName()
@@ -123,7 +131,7 @@ function generateFirstNameLastName(firstName,lastName)
 	name=firstName[ math.random(#firstName)].." "..lastName[ math.random(#lastName)]
 
   --return "Toto"
-  io.stderr:write("Returning: "..name.."\n")
+  --io.stderr:write("Returning: "..name.."\n")
 
 	return name
 end

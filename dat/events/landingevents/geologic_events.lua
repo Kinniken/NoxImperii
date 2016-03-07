@@ -43,17 +43,26 @@
 
 		if tk.yesno( "The Lure of Metals", gh.format(eventText1,textData) ) then
 			if math.random() <0.3 then
-				local quantity=gh.floorTo(5+math.random()*5,0)
-				local loot=gh.floorTo(3000+math.random()*3000,-2)
+				local quantity=gh.floorTo(adjustForCrewLevel(5+math.random()*5,CREW_ENG),0)
+				local loot=gh.floorTo(adjustForCrewLevel(3000+math.random()*3000,CREW_ENG),-2)
 				textData.quantity=quantity
 				textData.loot=loot
-				tk.msg( "Fortune Favours the Brave", gh.format([[You land the ${shipname} a kilometre from the ores and send a well-protected team to recover them. For a few tense hours, they collect the ores in improvised containers and bring them back to the ship as fast as possible. There is a moment of panic when tremors shake ${planetname} and fresh streams of lava flow a few kilometres from the ship, but things calm down and your crew finishes the job.
+
+				local level,crewname,gender,type=player.getCrew(CREW_ENG)
+
+				if level==0 then
+					textData.crewJob="Unfortunately, the lack of an engineer to monitor the flow hinders the search for minerals."
+				else
+					textData.crewJob=crewname..", your engineer, does a "..getCrewLevelAdj(level).." of helping with the search by mapping the minerals."
+				end
+
+				tk.msg( "Fortune Favours the Brave", gh.format([[You land the ${shipname} a kilometre from the ores and send a well-protected team to recover them. For a few tense hours, they collect the ores in improvised containers and bring them back to the ship as fast as possible. There is a moment of panic when tremors shake ${planetname} and fresh streams of lava flow a few kilometres from the ship, but things calm down and your crew finishes the job. ${crewJob}
 
 					After moving the ship to a safer location, you do an inventory of the ores: there are at least ${quantity} tonnes of valuable ores, plus a quantity of precious metal worth a solid ${loot} credits!]],textData) )
 				player.addCargo(ORE,quantity)
 				player.pay(loot)
 			else
-				local damages=gh.floorTo(5000+math.random()*5000,-2)
+				local damages=gh.floorTo(adjustForShipPrice(5000+math.random()*5000),-2)
 				textData.damages=damages
 				tk.msg( "Disaster!", gh.format([[The ${shipname} has barely landed close to the ore veins when the ground shakes furiously. It takes only minutes from fresh lava to come hurling toward the ship while you scramble in an emergency lift-off.
 
@@ -67,7 +76,7 @@
 
 		return validPlanets[planet.lua.planetType]
 		end,
-		weight=10
+		weight=10000
 	}
 
 	landing_events.desertWorldAncientMiningStation={
@@ -81,11 +90,21 @@
 
 		if tk.yesno( "Ruins older than the Pyramids", gh.format(eventText1,textData) ) then
 			if math.random() <0.3 then
-				local quantity=gh.floorTo(1+math.random()*3,0)
+
+				local level,crewname,gender,type=player.getCrew(CREW_ENG)
+
+				local quantity=gh.floorTo(adjustForCrewLevel(1+math.random()*3,CREW_ENG),0)
 				textData.quantity=quantity
+
+				if level==0 then
+					textData.crewJob="Without an engineer to guide them, your crew flounders in the unmapped corridors, hindering their search."
+				else
+					textData.crewJob="Following the team's progress from the bridge, "..crewname..", your engineer, does a "..getCrewLevelAdj(crew.level,CREW_ENG).." of guiding them in the corridors."
+				end
+
 				tk.msg( "Mysterious Devices", gh.format([[Up close, the ancient mining station is not so impressive; the Empire and the Ardars build bigger, more sophisticated-looking complexes. And yet the age of the walls you are touching is awe-inspiring.
 
-					Your men locate rooms full of materials and quickly transport it to the ${shipname}, for a total of ${quantity} tonnes of storage space. Your lift-off is strangely anti-climatic.]],textData) )
+					${crewJob} Your men locate rooms full of materials and quickly transport it to the ${shipname}, for a total of ${quantity} tonnes of storage space. Your lift-off is strangely anti-climatic.]],textData) )
 				player.addCargo(ANCIENT_TECHNOLOGY,quantity)
 			else
 				local damages=gh.floorTo(5000+math.random()*5000,-2)

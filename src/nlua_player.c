@@ -42,6 +42,7 @@
 #include "gui.h"
 #include "gui_omsg.h"
 #include "pause.h"
+#include "crew.h"
 
 
 /* Player methods. */
@@ -90,6 +91,7 @@ static int playerL_evtActive( lua_State *L );
 static int playerL_evtDone( lua_State *L );
 static int playerL_teleport( lua_State *L );
 static int playerL_addCargo( lua_State *L );
+static int playerL_getCrew( lua_State *L );
 static const luaL_reg playerL_methods[] = {
    { "name", playerL_getname },
    { "ship", playerL_shipname },
@@ -129,6 +131,7 @@ static const luaL_reg playerL_methods[] = {
    { "evtDone", playerL_evtDone },
    { "teleport", playerL_teleport },
    { "addCargo", playerL_addCargo },
+   { "getCrew", playerL_getCrew },
    {0,0}
 }; /**< Player Lua methods. */
 static const luaL_reg playerL_cond_methods[] = {
@@ -1363,4 +1366,38 @@ static int playerL_addCargo( lua_State *L  )
    pilot_cargoAddRaw( player.p, cargo, q, 0 );
 
    return 0;
+}
+
+/**
+ * @brief Gets the active crew member for a position, if any
+ *
+ *	@luaparam position Name of the position (pilot, engineer...)
+ *  @luareturn level of the crew (or 0 if none)
+ *  @luareturn name of the crew (or NULL if none)
+ *  @luareturn numeric gender of the crew (or 0 if none)
+ *  @luareturn type of the crew (or NULL if none)
+ *
+ * @luafunc getCrew()
+ */
+static int playerL_getCrew( lua_State *L )
+{
+	const char *position;
+	const HiredCrew* hcrew;
+
+	position = luaL_checkstring(L, 1);
+	hcrew = crew_getActiveCrewForPosition(position);
+
+	if (hcrew==NULL) {
+		lua_pushnumber(L, 0);
+		lua_pushstring(L, NULL);
+		lua_pushnumber(L, 0);
+		lua_pushstring(L, NULL);
+	} else {
+		lua_pushnumber(L, hcrew->crew->level);
+		lua_pushstring(L, hcrew->generatedName);
+		lua_pushnumber(L, hcrew->crew->gender);
+		lua_pushstring(L, hcrew->crew->name);
+	}
+
+   return 4;
 }

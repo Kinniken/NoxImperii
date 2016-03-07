@@ -8,6 +8,8 @@ include "dat/events/landingevents/native_events.lua"
 include "dat/events/landingevents/lifeforms_events.lua"
 include "dat/events/landingevents/geologic_events.lua"
 
+CREW_ENG="Engineer"
+
 --copying the keys to an id value for future reference
 for k,event in pairs(landing_events) do
   event.id=k
@@ -84,3 +86,43 @@ function landingEventsIsSystemCivilized(sys)
 
   return false
 end
+
+--return value multiplied by ratio of ship price to starting ship price
+--goes from 1 to 30 for the most expensive ships (+/- 20M)
+function adjustForShipPrice(value)
+
+  local shipPrice,b=player.pilot():ship():price()
+
+  return value*(0.75+(shipPrice/150000)/4)
+end
+
+function adjustForCrewLevel(value,position)
+
+  local level,name,gender,type=player.getCrew(position)
+
+  if level==0 then--no crew member
+    return value
+  elseif level==1 then
+    return value*2
+  elseif level==2 then
+    return value*4
+  elseif level==3 then
+    return value*6
+  else
+    return value*10
+  end
+end
+
+function getCrewLevelAdj(level)
+  if level<2 then--normally 1 only, 0 makes no sense
+    return "passable"
+  elseif level==2 then
+    return "adequate"
+  elseif level==3 then
+    return "good"
+  else
+    return "fantastic"
+  end 
+
+end
+

@@ -1,5 +1,4 @@
 local _M = {}
-local _NAME = ... or 'test'
 
 local io = require 'io'
 local os = require 'os'
@@ -399,74 +398,6 @@ function _M.tofile_safe(value, filename, oldsuffix)
 	end
 	assert(os.rename(tmpfilename, filename))
 	return true
-end
-
-if _NAME=='test' then
-	local str = [[
-return {
-	Abc = false,
-	FOO = 42,
-	Foo = "42",
-	abc = true,
-	["f O"] = 42,
-	fOO = 42,
-	foo = "42",
-	[-1] = 37,
-	[0] = 37,
-	[42] = 37,
-	Bar = {
-		foo = 142,
-	},
-	bar = {
-		foo = 142,
-	},
-	Baz = {
-		foo = 242,
-		237,
-	},
-	baz = {
-		foo = 242,
-		237,
-	},
-	Baf = {
-		337,
-	},
-	baf = {
-		337,
-	},
-	37,
-}
--- v]]..[[i: ft=lua
-]]
-	local t
-	if _VERSION=="Lua 5.1" then
-		t = assert(loadstring(str))()
-	elseif _VERSION=="Lua 5.2" then
-		t = assert(load(str))()
-	else
-		error("unsupported Lua version")
-	end
-	
-	local filename = os.tmpname()
-	if pcall(require, 'lfs') then
-		assert(_M.tofile_safe(t, filename))
-	else
-		assert(_M.tofile(t, filename))
-	end
-	local file = assert(io.open(filename, "rb"))
-	local content = assert(file:read"*a")
-	assert(file:close())
---	print("=================================")
---	print(content)
---	print("=================================")
-	assert(content==str, "tested string and dumped equivalent mismatch")
-	local str2 = assert(_M.tostring(t))
-	assert(content:sub(8, -16)==str2, "tested string and dumped equivalent mismatch")
-	assert(_M.tostring(string.char(0, 1, 7, 9, 10, 13, 14, 31, 32, 33, 126, 127, 128, 129, 254, 255))
-		==[["\000\001\007\t\n\r\014\031 !~\127]].."\128\129\254\255"..[["]])
-	assert(_M.tostring(0/0)=='0/0')
-	assert(_M.tostring(1/0)=='1/0')
-	assert(_M.tostring(-1/0)=='-1/0')
 end
 
 dump=_M

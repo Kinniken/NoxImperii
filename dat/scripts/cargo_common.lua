@@ -1,14 +1,22 @@
-include "jumpdist.lua"
-include "nextjump.lua"
+include "dat/scripts/jumpdist.lua"
+include "dat/scripts/nextjump.lua"
 
 -- Find an inhabited planet 0-3 jumps away.
 function cargo_selectMissionDistance ()
     local seed = rnd.rnd()
+
+   -- 70% chance of 0-3 jump distance
+   if seed < 0.7 then
+      seed = rnd.rnd()
     if     seed < 0.30 then missdist = 0
-    elseif seed < 0.60 then missdist = 1
-    elseif seed < 0.80 then missdist = 2
+      -- I assume this is supposed to be 50 and not 2 times 60
+      elseif seed < 0.50 then missdist = 1
+      elseif seed < 0.60 then missdist = 2
     else                    missdist = 3
     end
+   else
+      missdist = rnd.rnd(4, 6)
+   end
 
     return missdist
 end
@@ -21,7 +29,7 @@ function cargo_selectPlanets(missdist, routepos)
             for i, v in ipairs(s:planets()) do
                 if v:services()["inhabited"] and v ~= planet.cur() and v:class() ~= 0 and
                         not (s==system.cur() and ( vec2.dist( v:pos(), routepos ) < 2500 ) ) and
-                        v:canLand() then
+                  v:canLand() and cargoValidDest( v ) then
                     planets[#planets + 1] = {v, s}
                 end
            end
@@ -37,16 +45,18 @@ end
 function cargo_calculateDistance(routesys, routepos, destsys, destplanet)
     local traveldist = 0
 
-    while routesys ~= destsys do
+   jumps = routesys:jumpPath( destsys )
+   if jumps then
+      for k, v in ipairs(jumps) do
         -- We're not in the destination system yet.
-        -- So, get the next system on the route, and the distance between our entry point and the jump point to the next system.
+         -- So, get the next system on the route, and the distance between
+         -- our entry point and the jump point to the next system.
         -- Then, set the exit jump point as the next entry point.
-        local tempsys = getNextSystem(routesys, destsys)
-        local j,r = jump.get( routesys, tempsys )
+         local j, r = jump.get( v:system(), v:dest() )
         traveldist = traveldist + vec2.dist(routepos, j:pos())
         routepos = r:pos()
-        routesys = tempsys
     end
+   end
 
     -- We ARE in the destination system now, so route from the entry point to the destination planet.
     traveldist = traveldist + vec2.dist(routepos, destplanet:pos())
@@ -110,4 +120,17 @@ function cargoGetTransit( timelimit, numjumps, traveldist )
     local arrivalt = time.get() + time.create(0, 0, traveldist * stuperpx +
             numjumps * pstats.jump_delay + 10180 + 240 * numjumps)
     return arrivalt
+end
+function cargoValidDest( targetplanet )
+   -- The blacklist are factions which cannot be delivered to by factions other than themselves, i.e. the Thurion and Proteron.
+   local blacklist = {
+                     faction.get("Barbarians"),
+                     faction.get("Pirate"),
+                     }
+   for i,f in ipairs( blacklist ) do
+      if planet.cur():faction() == blacklist[i] and targetplanet:faction() ~= blacklist[i] then
+         return false
+      end
+   end
+   return true
 end

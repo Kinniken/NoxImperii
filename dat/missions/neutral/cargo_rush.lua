@@ -3,8 +3,8 @@
 -- These missions require fast ships, but higher tiers may also require increased cargo space.
 --]]
 
-include "cargo_common.lua"
-include "numstring.lua"
+include "dat/scripts/cargo_common.lua"
+include "dat/scripts/numstring.lua"
 
 lang = naev.lang()
 if lang == "es" then
@@ -89,8 +89,16 @@ function create()
     stuperpx   = 0.2 - 0.025 * tier
     stuperjump = 10300 - 300 * tier
     stupertakeoff = 10300 - 75 * tier
-    timelimit  = time.get() + time.create(0, 0, traveldist * stuperpx + numjumps * stuperjump + stupertakeoff + 240 * numjumps)
-    timelimit2 = time.get() + time.create(0, 0, (traveldist * stuperpx + numjumps * stuperjump + stupertakeoff + 240 * numjumps) * 1.2)
+    allowance  = traveldist * stuperpx + numjumps * stuperjump + stupertakeoff + 240 * numjumps
+
+    -- Allow extra time for refuelling stops.
+    local jumpsperstop = 3 + math.min(tier, 3)
+    if numjumps > jumpsperstop then
+        allowance = allowance + math.floor((numjumps-1) / jumpsperstop) * stuperjump
+    end
+
+    timelimit  = time.get() + time.create(0, 0, allowance)
+    timelimit2 = time.get() + time.create(0, 0, allowance * 1.2)
 
     -- Choose amount of cargo and mission reward. This depends on the mission tier.
     -- Note: Pay is independent from amount by design! Not all deals are equally attractive!
@@ -112,9 +120,9 @@ function accept()
         tk.msg(full[1], full[2]:format(amount, amount - player.pilot():cargoFree()))
         misn.finish()
     end
-    pilot.cargoAdd( player.pilot(), cargo, amount ) 
+    player.pilot():cargoAdd( cargo, amount ) 
     local playerbest = cargoGetTransit( timelimit, numjumps, traveldist )
-    pilot.cargoRm( player.pilot(), cargo, amount ) 
+    player.pilot():cargoRm( cargo, amount ) 
     if timelimit < playerbest then
         if not tk.yesno( slow[1], slow[2]:format( (timelimit - time.get()):str(), (playerbest - time.get()):str(), destplanet:name()) ) then
             misn.finish()

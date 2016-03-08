@@ -14,6 +14,14 @@
 #include "economy.h"
 #include "space.h"
 
+#define CREW_GENDER_MALE 1
+#define CREW_GENDER_FEMALE 2
+#define CREW_GENDER_NEUTRAL 3
+
+#define HCREW_STATUS_OK 1
+#define HCREW_STATUS_WOUNDED 2
+
+
 /* availability by location */
 enum {
    CREW_AVAIL_NONE,       /**< Mission isn't available (only from missions). */
@@ -60,6 +68,7 @@ typedef struct HiredCrew_ {
 	const Crew* crew;
 	char *generatedName;
 	int active;
+	int status;
 } HiredCrew;
 
 /*
@@ -83,7 +92,7 @@ void crew_open( unsigned int wid );
 void crew_update_active( unsigned int wid, char* str );
 void crew_update_reserve( unsigned int wid, char* str );
 
-const HiredCrew* crew_getActiveCrewForPosition(const char* position);
+HiredCrew* crew_getActiveCrewForPosition(const char* position);
 void crew_generateCrewLists(unsigned int wid);
 
 char* crew_getGenderPronoun(const Crew* crew);

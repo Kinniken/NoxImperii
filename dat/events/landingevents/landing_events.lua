@@ -98,7 +98,7 @@ end
 
 function adjustForCrewLevel(value,position)
 
-  local level,name,gender,type=player.getCrew(position)
+  local level,name,gender,type,active,status=player.crewByPosition(position)
 
   if level==0 then--no crew member
     return value
@@ -122,7 +122,36 @@ function getCrewLevelAdj(level)
     return "good"
   else
     return "fantastic"
-  end 
+  end
+end
 
+function getRandomCrewType()
+  local crewTypes=player.crews()
+
+  if (#crewTypes==0) then
+    return nil
+  end
+
+  return gh.randomObject(crewTypes)
+end
+
+function getGenderPossessive(gender)
+  if gender==1 then
+    return "his"
+  elseif gender==2 then
+    return "her"
+  else
+    return "its"
+  end
+end
+
+function getGenderPronoun(gender)
+  if gender==1 then
+    return "he"
+  elseif gender==2 then
+    return "she"
+  else
+    return "it"
+  end
 end
 

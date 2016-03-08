@@ -2499,10 +2499,10 @@ const PlayerOutfit_t* player_getOutfits( int *n )
  *    @param[out] n Number of distinct outfits (not total quantity).
  *    @return Outfits the player owns.
  */
-const HiredCrew* player_getCrews( int *n )
+HiredCrew* player_getCrews( int *n )
 {
 	*n = player_ncrews;
-	return (const HiredCrew*) player_crews;
+	return player_crews;
 }
 
 /**
@@ -2511,7 +2511,7 @@ const HiredCrew* player_getCrews( int *n )
  *    @param name of the crew type
  *    @return the crew if found, NULL otherwise
  */
-const HiredCrew* player_getCrew( char* name )
+HiredCrew* player_getCrew(const char* name )
 {
 	int i;
 
@@ -2531,7 +2531,7 @@ const HiredCrew* player_getCrew( char* name )
  * @param status to set
  * @return number of crews updated (normally only 0 or 1)
  */
-int player_setCrewActiveStatus(char* name, int status) {
+int player_setCrewActiveStatus(const char* name, int status) {
 	int i,nb;
 
 	for (i=0;i<player_ncrews;i++) {
@@ -2686,9 +2686,10 @@ int player_rmOutfit( const Outfit *o, int quantity )
  *    @param generatedName name to use for this instance of the crew (character name, like "John Smith", not "Old Engineer")
  *    @param messages whether to generate message popups
  *    @param active whether the crew is active or not. -1 for automatic choice.
+ *    @param status whether the crew is ok or wounded
  *    @return 0 if added, -1 if not
  */
-int player_addCrew( const Crew *crew, const char* generatedName, int messages, int active )
+int player_addCrew( const Crew *crew, const char* generatedName, int messages, int active, int status )
 {
 	int i;
 	int positionTaken=0;
@@ -2718,6 +2719,7 @@ int player_addCrew( const Crew *crew, const char* generatedName, int messages, i
 	/* Add the crew. */
 	player_crews[player_ncrews-1].crew=crew;
 	player_crews[player_ncrews-1].generatedName=strdup(generatedName);
+	player_crews[player_ncrews-1].status=status;
 
 	if (active==-1) {
 		player_crews[player_ncrews-1].active=!positionTaken;//only active by default if position isn't already filled
@@ -3278,6 +3280,7 @@ static int player_saveCrew( xmlTextWriterPtr writer,
 	xmlw_attr(writer,"name","%s",hiredCrew.crew->name);
 	xmlw_attr(writer,"generatedName","%s",hiredCrew.generatedName);
 	xmlw_attr(writer,"active","%i",hiredCrew.active);
+	xmlw_attr(writer,"status","%i",hiredCrew.status);
 
 	xmlw_endElem(writer); /* "ship" */
 
@@ -4075,7 +4078,7 @@ static int player_parseShip( xmlNodePtr parent, int is_player, char *planet )
 static int player_parseCrew( xmlNodePtr parent )
 {
 	char *name,*generatedName,*str;
-	int active;
+	int active,status;
 	Crew* crew;
 
 	xmlr_attr(parent,"name",name);
@@ -4084,9 +4087,12 @@ static int player_parseCrew( xmlNodePtr parent )
 	xmlr_attr(parent,"active",str);
 	active = atoi(str);
 
+	xmlr_attr(parent,"status",str);
+	status = atoi(str);
+
 	crew=crew_get(name);
 
-	player_addCrew(crew,generatedName,0,active);
+	player_addCrew(crew,generatedName,0,active,status);
 
 	return 0;
 }

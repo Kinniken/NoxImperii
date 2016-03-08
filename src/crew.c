@@ -65,6 +65,7 @@ static void crew_setCrewActive( unsigned int wid, char* str );
 static void crew_setCrewReserve( unsigned int wid, char* str );
 static char* crew_getLevelName(int level);
 static int crew_gender( char* genderName );
+static char* crew_getStatusNameColoured(int status);
 static int crew_checkBarConditions(Crew* crew, const Planet* landPlanet);
 static int crew_matchFaction( Crew* crew, int faction );
 
@@ -405,7 +406,7 @@ int crew_hireCrewFromBar(const Crew *crew, const char *generatedName) {
 	choice=dialogue_YesNo("Hire new crew member?","Do you wish to hire %s for %"CREDITS_PRI" credits?",generatedName,crew->hiringPrice);
 
 	if (choice) {
-		player_addCrew(crew,generatedName,1,-1);
+		player_addCrew(crew,generatedName,1,-1,HCREW_STATUS_OK);
 		player_modCredits(-crew->hiringPrice);
 
 		return 1;
@@ -465,9 +466,9 @@ static int crew_matchFaction( Crew* crew, int faction )
 	return 0;
 }
 
-const HiredCrew* crew_getActiveCrewForPosition(const char* position) {
+HiredCrew* crew_getActiveCrewForPosition(const char* position) {
 	int i,nbhcrews;
-	const HiredCrew* hiredCrews;
+	HiredCrew* hiredCrews;
 
 	hiredCrews=player_getCrews(&nbhcrews);
 
@@ -554,8 +555,6 @@ void crew_generateCrewLists(unsigned int wid) {
 
 	/**
 	 * If updating the window, need to clear the old lists
-	 *
-	 * TODO: save selection
 	 */
 	if (widget_exists( wid, "iarPositions" ))
 		window_destroyWidget( wid, "iarPositions" );
@@ -646,7 +645,8 @@ void crew_open( unsigned int wid ) {
 			"txtLabelCrewZoom", &gl_smallFont, &cDConsole,
 			"Name:\n"
 			"Position:\n"
-			"Level:\n");
+			"Level:\n"
+			"Status:\n");
 	window_addText( wid, -20, -210, 160, 120, 0,
 			"txtCrewZoom", &gl_smallFont, &cBlack, NULL );
 
@@ -750,7 +750,7 @@ void crew_update_reserve( unsigned int wid, char* str ) {
 /**
  * @brief Updates the ships in the shipyard window.
  *    @param wid Window to update the ships in.
- *    @param str Unused.
+ *    @param crewName crew to display.
  */
 static void display_crew(unsigned int wid, char* crewName) {
 	const HiredCrew* hiredCrew;
@@ -763,7 +763,13 @@ static void display_crew(unsigned int wid, char* crewName) {
 
 		nsnprintf( buf, PATH_MAX,
 				"%s\n"
-				"%s\n%s",hiredCrew->generatedName,hiredCrew->crew->position,crew_getLevelName(hiredCrew->crew->level));
+				"%s\n"
+				"%s\n"
+				"%s",hiredCrew->generatedName,
+				hiredCrew->crew->position,
+				crew_getLevelName(hiredCrew->crew->level),
+				crew_getStatusNameColoured(hiredCrew->status)
+		);
 		window_modifyText( wid, "txtCrewZoom", buf );
 
 		nsnprintf( buf, PATH_MAX,
@@ -811,24 +817,36 @@ static char* crew_getLevelName(int level) {
 	}
 }
 
+static char* crew_getStatusNameColoured(int status) {
+
+	if (status==HCREW_STATUS_OK) {
+		return "Healthy";
+	} else if (status==HCREW_STATUS_WOUNDED) {
+		return "\erWounded\e0";
+	} else {
+		WARN("Unknown status '%s'.", status);
+		return "UNKNOWN";
+	}
+}
+
 static int crew_gender( char* genderName ) {
 	if (strcmp(genderName,"male")==0) {
-		return 1;
+		return CREW_GENDER_MALE;
 	} else if (strcmp(genderName,"female")==0) {
-		return 2;
+		return CREW_GENDER_FEMALE;
 	} else if (strcmp(genderName,"neutral")==0) {
-		return 3;
+		return CREW_GENDER_NEUTRAL;
 	} else {
 		WARN("Unknown gender '%s', defaulting to neutral.", genderName);
-		return 3;
+		return CREW_GENDER_NEUTRAL;
 	}
 }
 
 char* crew_getGenderPronoun(const Crew* crew) {
 
-	if (crew->gender==1) {
+	if (crew->gender==CREW_GENDER_MALE) {
 		return "he";
-	} else if (crew->gender==2) {
+	} else if (crew->gender==CREW_GENDER_FEMALE) {
 		return "she";
 	} else {
 		return "it";

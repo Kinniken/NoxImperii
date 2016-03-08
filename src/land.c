@@ -768,6 +768,46 @@ void land_refuel (void)
       equipment_updateShips( w, NULL ); /* Must update counter. */
 }
 
+/**
+ * @brief Cure wounded crews, if necessary
+ */
+void land_healCrews (void)
+{
+
+	int i, nhcrews;
+	int refreshNeeded=0;
+	unsigned int w;
+
+	HiredCrew* hcrews;
+
+	hcrews=player_getCrews(&nhcrews);
+
+   /* No refuel service (doubles as flag for hospital). */
+   if (!planet_hasService(land_planet, PLANET_SERVICE_REFUEL))
+      return;
+
+   for (i=0;i<nhcrews;i++) {
+	   if (hcrews[i].status==HCREW_STATUS_WOUNDED) {
+		   hcrews[i].status=HCREW_STATUS_OK;
+		   refreshNeeded=1;
+
+		   dialogue_msg("Healed Crew","Your crew mate %s, wounded in action, was healed in the spaceport's hospital.",hcrews[i].generatedName);
+	   }
+   }
+
+
+
+   if (refreshNeeded ) {
+	   w = land_getWid( LAND_WINDOW_CREW );
+
+	   if (w>0)
+		   crew_generateCrewLists(w);
+
+	   pilot_calcStats( player.p );
+   }
+
+}
+
 
 /**
  * @brief Buys a local system map.
@@ -1070,6 +1110,9 @@ void land_genWindows( int load, int changetab )
 
    /* Refuel if necessary. */
    land_refuel();
+
+   /* Heal crews if necessary. */
+   land_healCrews();
 
    /* Finished loading. */
    land_loaded = 1;

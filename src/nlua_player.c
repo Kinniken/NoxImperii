@@ -91,7 +91,10 @@ static int playerL_evtActive( lua_State *L );
 static int playerL_evtDone( lua_State *L );
 static int playerL_teleport( lua_State *L );
 static int playerL_addCargo( lua_State *L );
+static int playerL_getCrewByPosition( lua_State *L );
+static int playerL_getCrews( lua_State *L );
 static int playerL_getCrew( lua_State *L );
+static int playerL_setCrewStatus( lua_State *L );
 static const luaL_reg playerL_methods[] = {
    { "name", playerL_getname },
    { "ship", playerL_shipname },
@@ -131,7 +134,10 @@ static const luaL_reg playerL_methods[] = {
    { "evtDone", playerL_evtDone },
    { "teleport", playerL_teleport },
    { "addCargo", playerL_addCargo },
-   { "getCrew", playerL_getCrew },
+   { "crewByPosition", playerL_getCrewByPosition },
+   { "crews", playerL_getCrews },
+   { "crew", playerL_getCrew },
+   { "setCrewStatus", playerL_setCrewStatus },
    {0,0}
 }; /**< Player Lua methods. */
 static const luaL_reg playerL_cond_methods[] = {
@@ -1376,10 +1382,12 @@ static int playerL_addCargo( lua_State *L  )
  *  @luareturn name of the crew (or NULL if none)
  *  @luareturn numeric gender of the crew (or 0 if none)
  *  @luareturn type of the crew (or NULL if none)
+ *  @luareturn if he is active or not (or 0 if none)
+ *  @luareturn his numeric status (healthy, wounded) (or 0 if none)
  *
- * @luafunc getCrew()
+ * @luafunc crewByPosition("Engineer")
  */
-static int playerL_getCrew( lua_State *L )
+static int playerL_getCrewByPosition( lua_State *L )
 {
 	const char *position;
 	const HiredCrew* hcrew;
@@ -1392,12 +1400,120 @@ static int playerL_getCrew( lua_State *L )
 		lua_pushstring(L, NULL);
 		lua_pushnumber(L, 0);
 		lua_pushstring(L, NULL);
+		lua_pushnumber(L, 0);
+		lua_pushnumber(L, 0);
 	} else {
 		lua_pushnumber(L, hcrew->crew->level);
 		lua_pushstring(L, hcrew->generatedName);
 		lua_pushnumber(L, hcrew->crew->gender);
 		lua_pushstring(L, hcrew->crew->name);
+		lua_pushnumber(L, hcrew->active);
+		lua_pushnumber(L, hcrew->status);
 	}
 
    return 4;
+}
+
+
+/**
+ * @brief Gets the crew of a type, if any
+ *
+ *	@luaparam type type of the crew ("Old Pilot",...)
+ *  @luareturn level of the crew (or 0 if none)
+ *  @luareturn name of the crew (or NULL if none)
+ *  @luareturn numeric gender of the crew (or 0 if none)
+ *  @luareturn type of the crew (or NULL if none)
+ *  @luareturn if he is active or not (or 0 if none)
+ *  @luareturn his numeric status (healthy, wounded) (or 0 if none)
+ *
+ * @luafunc crew("Old Pilot")
+ */
+static int playerL_getCrew( lua_State *L )
+{
+	const char *type;
+	const HiredCrew* hcrew;
+
+	type = luaL_checkstring(L, 1);
+	hcrew = player_getCrew(type);
+
+	if (hcrew==NULL) {
+		lua_pushnumber(L, 0);
+		lua_pushstring(L, NULL);
+		lua_pushnumber(L, 0);
+		lua_pushstring(L, NULL);
+		lua_pushnumber(L, 0);
+		lua_pushnumber(L, 0);
+	} else {
+		lua_pushnumber(L, hcrew->crew->level);
+		lua_pushstring(L, hcrew->generatedName);
+		lua_pushnumber(L, hcrew->crew->gender);
+		lua_pushstring(L, hcrew->crew->name);
+		lua_pushnumber(L, hcrew->active);
+		lua_pushnumber(L, hcrew->status);
+	}
+
+   return 6;
+}
+
+
+/**
+ * @brief Gets the type of all of the player's crews, active or not
+ *
+ * @usage player.crews() -- A table of all the player's crews.
+ *
+ * @luafunc crews()
+ */
+static int playerL_getCrews( lua_State *L )
+{
+   int i, ncrews;
+   const HiredCrew *hcrews;
+
+   hcrews = player_getCrews(&ncrews);
+
+   lua_newtable(L);
+   for (i=0; i<ncrews; i++) {
+      lua_pushnumber(L, i+1);
+      lua_pushstring(L, hcrews[i].crew->name );
+      lua_rawset(L, -3);
+   }
+
+   return 1;
+}
+
+/**
+ * @brief Sets the status of a hired crew
+ *
+ *	@luaparam type of the crew ("Old Pilot",...)
+ *  @luaparam status to put
+ *  @luareturn whether a crew was affected (1 or 0)
+ *
+ * @luafunc setCrewStatus("Old Pilot",1)
+ */
+static int playerL_setCrewStatus( lua_State *L )
+{
+	const char *type;
+	HiredCrew* hcrew;
+	int status;
+	unsigned int cw;
+
+	type = luaL_checkstring(L, 1);
+	status = luaL_checkint(L, 2);
+
+	hcrew = player_getCrew(type);
+
+	if (hcrew==NULL) {
+		lua_pushnumber(L, 0);
+	} else {
+		hcrew->status=status;
+		lua_pushnumber(L, 1);
+
+		if (landed && land_doneLoading()) {
+			cw = land_getWid( LAND_WINDOW_CREW );
+			crew_generateCrewLists(cw);
+		}
+
+		pilot_calcStats( player.p );
+	}
+
+   return 1;
 }

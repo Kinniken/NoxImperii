@@ -204,11 +204,11 @@ int player_rmOutfit( const Outfit *o, int quantity );
 /*
  * player crews
  */
-int player_addCrew( const Crew *crew, const char* generatedName, int messages, int active );
+int player_addCrew( const Crew *crew, const char* generatedName, int messages, int active, int status );
 int player_rmCrew( const Crew *crew );
-const HiredCrew* player_getCrews( int *n );
-const HiredCrew* player_getCrew( char* name );
-int player_setCrewActiveStatus(char* name, int status);
+HiredCrew* player_getCrews( int *n );
+HiredCrew* player_getCrew(const char* name );
+int player_setCrewActiveStatus(const char* name, int status);
 
 /*
  * player missions

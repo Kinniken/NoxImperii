@@ -42,13 +42,16 @@
 		Should you chance it?]]
 
 		if tk.yesno( "The Lure of Metals", gh.format(eventText1,textData) ) then
-			if math.random() <0.3 then
+
+local random=math.random()
+
+			if random <0.3 then
 				local quantity=gh.floorTo(adjustForCrewLevel(5+math.random()*5,CREW_ENG),0)
 				local loot=gh.floorTo(adjustForCrewLevel(3000+math.random()*3000,CREW_ENG),-2)
 				textData.quantity=quantity
 				textData.loot=loot
 
-				local level,crewname,gender,type=player.getCrew(CREW_ENG)
+				local level,name,gender,type,active,status=player.crewByPosition(CREW_ENG)
 
 				if level==0 then
 					textData.crewJob="Unfortunately, the lack of an engineer to monitor the flow hinders the search for minerals."
@@ -61,13 +64,41 @@
 					After moving the ship to a safer location, you do an inventory of the ores: there are at least ${quantity} tonnes of valuable ores, plus a quantity of precious metal worth a solid ${loot} credits!]],textData) )
 				player.addCargo(ORE,quantity)
 				player.pay(loot)
-			else
-				local damages=gh.floorTo(adjustForShipPrice(5000+math.random()*5000),-2)
-				textData.damages=damages
-				tk.msg( "Disaster!", gh.format([[The ${shipname} has barely landed close to the ore veins when the ground shakes furiously. It takes only minutes from fresh lava to come hurling toward the ship while you scramble in an emergency lift-off.
+			else				
+				local woundedEventHappened=false--so far
 
-					Your quick reflexes saved the ${shipname}, but not before the lava heavily damaged the lower hull. Your crew is able to carry out repairs in a more tranquil spot on the planet, but the damages still cost you ${damages} credits in supplies.]],textData) )
-				player.pay(-damages)
+				if math.random()<0.99 then
+					local randomCrewType=getRandomCrewType()
+
+					if (randomCrewType~=nil) then
+						local level,name,gender,type,active,status=player.crew(randomCrewType)
+
+						if status==1 then--healthy
+
+							player.setCrewStatus(randomCrewType,2)
+
+							textData.woundedCrewName=name
+							textData.hisher=getGenderPossessive(gender)
+							textData.heshe=getGenderPronoun(gender):gsub("^%l", string.upper)
+
+							tk.msg( "Disaster!", gh.format([[The ${shipname} has barely landed close to the ore veins when the ground shakes furiously. It takes only minutes from fresh lava to come hurling toward the ship while you scramble in an emergency lift-off.
+
+								Your quick reflexes saved the ${shipname}, but your poor ${woundedCrewName} was sent flying in the lurch and cracked his ${hisher} head on a wall. ${heshe} will be in the sick bay until the ${shipname} finds a friendly port.]],textData) )
+
+							woundedEventHappened=true
+						end					
+					end
+				end
+
+				--then the credit one
+				if not woundedEventHappened then
+					local damages=gh.floorTo(adjustForShipPrice(1000+math.random()*1000),-2)
+					textData.damages=damages
+					tk.msg( "Disaster!", gh.format([[The ${shipname} has barely landed close to the ore veins when the ground shakes furiously. It takes only minutes from fresh lava to come hurling toward the ship while you scramble in an emergency lift-off.
+
+						Your quick reflexes saved the ${shipname}, but not before the lava heavily damaged the lower hull. Your crew is able to carry out repairs in a more tranquil spot on the planet, but the damages still cost you ${damages} credits in supplies.]],textData) )
+					player.pay(-damages)
+				end
 			end
 		end
 		end,
@@ -91,7 +122,7 @@
 		if tk.yesno( "Ruins older than the Pyramids", gh.format(eventText1,textData) ) then
 			if math.random() <0.3 then
 
-				local level,crewname,gender,type=player.getCrew(CREW_ENG)
+				local level,name,gender,type,active,status=player.crewByPosition(CREW_ENG)
 
 				local quantity=gh.floorTo(adjustForCrewLevel(1+math.random()*3,CREW_ENG),0)
 				textData.quantity=quantity

@@ -991,7 +991,7 @@ void pilot_calcStats( Pilot* pilot )
 	   crews=player_getCrews(&ncrews);
 
 	   for (i=0;i<ncrews;i++) {
-		   if (crews[i].active) {//only active crews (holding their positions) count
+		   if (crews[i].active && crews[i].status==HCREW_STATUS_OK) {//only active crews (holding their positions) count, if OK
 			   ss_statsModFromList( s, crews[i].crew->stats, &amount );
 		   }
 	   }

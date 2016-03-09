@@ -59,12 +59,15 @@ int start_load (void)
    char *buf;
    xmlNodePtr node, cur, tmp;
    xmlDocPtr doc;
-   int scu, stp, stu;
+   int years,months,days,hours,minutes,seconds;
 
    /* Defaults. */
-   scu = -1;
-   stp = -1;
-   stu = -1;
+   years = -1;
+   months = -1;
+   days = -1;
+   hours = 0;
+   minutes = 0;
+   seconds = 0;
 
    /* Try to read the file. */
    buf = ndata_read( START_DATA_PATH, &bufsize );
@@ -126,9 +129,12 @@ int start_load (void)
          do {
             xml_onlyNodes(cur);
 
-            xmlr_int( cur, "scu", scu );
-            xmlr_int( cur, "stp", stp );
-            xmlr_int( cur, "stu", stu );
+            xmlr_int( cur, "years", years );
+            xmlr_int( cur, "months", months );
+            xmlr_int( cur, "days", days );
+            xmlr_int( cur, "hours", hours );
+            xmlr_int( cur, "minutes", minutes );
+            xmlr_int( cur, "seconds", seconds );
             WARN("'"START_DATA_PATH"' has unknown date node '%s'.", cur->name);
          } while (xml_nextNode(cur));
          continue;
@@ -176,13 +182,13 @@ int start_load (void)
    MELEMENT( start_data.ship==NULL, "ship" );
    MELEMENT( start_data.system==NULL, "player system" );
    MELEMENT( start_data.tutsys==NULL, "tutorial system" );
-   MELEMENT( scu<0, "scu" );
-   MELEMENT( stp<0, "stp" );
-   MELEMENT( stu<0, "stu" );
+   MELEMENT( years<0, "years" );
+   MELEMENT( months<0, "months" );
+   MELEMENT( days<0, "days" );
 #undef MELEMENT
 
    /* Post process. */
-   start_data.date = ntime_create( scu, stp, stu );
+   start_data.date = ntime_create( years, months-1, days, hours, minutes, seconds );
 
    return 0;
 }

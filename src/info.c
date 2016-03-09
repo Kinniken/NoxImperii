@@ -186,7 +186,7 @@ static void info_openMain( unsigned int wid )
    window_dimWindow( wid, &w, &h );
 
    /* pilot generics */
-   nt = ntime_pretty( ntime_get(), 2 );
+   nt = ntime_pretty( ntime_get(), 0 );
    window_addText( wid, 40, 20, 120, h-80,
          0, "txtDPilot", &gl_smallFont, &cDConsole,
          "Pilot:\n"
@@ -425,7 +425,7 @@ static void ship_update( unsigned int wid )
    int cargo, len;
 
    cargo = pilot_cargoUsed( player.p ) + pilot_cargoFree( player.p );
-   hyp_delay = ntime_pretty( pilot_hyperspaceDelay( player.p ), 2 );
+   hyp_delay = ntime_pretty( pilot_hyperspaceDelay( player.p ), 0 );
    len = nsnprintf( buf, sizeof(buf),
          "%s\n"
          "%s\n"

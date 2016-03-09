@@ -85,7 +85,7 @@ static int load_load( nsave_t *save, const char *path )
 {
    xmlDocPtr doc;
    xmlNodePtr root, parent, node, cur;
-   int scu, stp, stu;
+   long seconds;
    char *version = NULL;
 
    memset( save, 0, sizeof(nsave_t) );
@@ -136,13 +136,11 @@ static int load_load( nsave_t *save, const char *path )
             /* Time. */
             if (xml_isNode(node,"time")) {
                cur = node->xmlChildrenNode;
-               scu = stp = stu = 0;
+               seconds = 0;
                do {
-                  xmlr_int(cur,"SCU",scu);
-                  xmlr_int(cur,"STP",stp);
-                  xmlr_int(cur,"STU",stu);
+            	   xmlr_long(cur,"seconds",seconds);
                } while (xml_nextNode(cur));
-               save->date = ntime_create( scu, stp, stu );
+               save->date = ntime_getTimeFromSeconds(seconds);
                continue;
             }
 

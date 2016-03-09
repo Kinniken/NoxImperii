@@ -43,11 +43,10 @@
 #include "economy.h"
 
 
-#define NT_STU_DIV   (1000)      /* Divider for extracting STU. */
-#define NT_STU_DT    (30)        /* Update rate, how many STU are in a real second. */
-#define NT_SCU_STU   ((ntime_t)NT_SCU_STP*(ntime_t)NT_STP_STU) /* STU in an SCU */
-#define NT_STP_DIV   ((ntime_t)NT_STP_STU*(ntime_t)NT_STU_DIV) /* Divider for extracting STP. */
-#define NT_SCU_DIV   ((ntime_t)NT_SCU_STU*(ntime_t)NT_STU_DIV) /* Divider for extracting STP. */
+
+#define NT_GAME_TO_REAL_RATIO    (30)        /* Update rate, how many game seconds are in a real second. */
+
+static char* ntime_monthName(int month);
 
 
 /**
@@ -66,8 +65,26 @@ static double naev_remainder = 0.; /**< Remainder when updating, to try to keep 
 static int ntime_enable = 1; /** Allow updates? */
 
 
+void ntime_getBreakdown( ntime_t t, int *years, int *months, int *days, int *hours, int *minutes, int *seconds )
+{
+	long tmonths,tdays,thours,tminutes,tseconds;
+
+	tmonths = (t / NT_MONTH_DIV);
+	tdays = (t / NT_DAY_DIV);
+	thours = (t / NT_HOUR_DIV);
+	tminutes = (t / NT_MIN_DIV);
+	tseconds = (t / NT_SEC_DIV);
+
+	*years = (t / NT_YEAR_DIV);
+	*months = tmonths - (*years)*NT_MONTH_IN_YEAR;
+	*days = tdays - (tmonths)*NT_DAY_IN_MONTH;
+	*hours = thours - (tdays)*NT_HOUR_IN_DAY;
+	*minutes = tminutes - (thours)*NT_MIN_IN_HOUR;
+	*seconds = tseconds - (tminutes)*NT_SEC_IN_MIN;
+}
+
 /**
- * @brief Updatse the time based on realtime.
+ * @brief Updates the time based on realtime.
  */
 void ntime_update( double dt )
 {
@@ -79,7 +96,7 @@ void ntime_update( double dt )
       return;
 
    /* Calculate the effective time. */
-   dtt = naev_remainder + dt*NT_STU_DT*NT_STU_DIV;
+   dtt = naev_remainder + dt*NT_GAME_TO_REAL_RATIO*NT_SEC_DIV;
 
    /* Time to update. */
    tu             = floor( dtt );
@@ -89,19 +106,6 @@ void ntime_update( double dt )
    /* Increment. */
    naev_time     += inc;
    hooks_updateDate( inc );
-}
-
-
-/**
- * @brief Creates a time structure.
- */
-ntime_t ntime_create( int scu, int stp, int stu )
-{
-   ntime_t tscu, tstp, tstu;
-   tscu = scu;
-   tstp = stp;
-   tstu = stu;
-   return tscu*NT_SCU_DIV + tstp*NT_STP_DIV + tstu*NT_STU_DIV;
 }
 
 
@@ -117,52 +121,18 @@ ntime_t ntime_get (void)
 
 
 /**
- * @brief Gets the current time broken into individual components.
- */
-void ntime_getR( int *scu, int *stp, int *stu, double *rem )
-{
-   *scu = ntime_getSCU( naev_time );
-   *stp = ntime_getSTP( naev_time );
-   *stu = ntime_getSTU( naev_time );
-   *rem = ntime_getRemainder( naev_time ) + naev_remainder;
-}
-
-
-/**
- * @brief Gets the SCU of a time.
- */
-int ntime_getSCU( ntime_t t )
-{
-   return (t / NT_SCU_DIV);
-}
-
-
-/**
- * @brief Gets the STP of a time.
- */
-int ntime_getSTP( ntime_t t )
-{
-   return (t / NT_STP_DIV) % NT_SCU_STP;
-}
-
-
-/**
- * @brief Gets the STU of a time.
- */
-int ntime_getSTU( ntime_t t )
-{
-   return (t / NT_STU_DIV) % NT_STP_STU;
-}
-
-
-/**
- * @brief Converts the time to STU.
+ * @brief Converts the time to seconds.
  *    @param t Time to convert.
- *    @return Time in STU.
+ *    @return Time in seconds.
  */
-double ntime_convertSTU( ntime_t t )
+long ntime_convertTimeToSeconds( ntime_t t )
 {
-   return ((double)t / (double)NT_STU_DIV);
+   return ((long)t / NT_SEC_DIV);
+}
+
+ntime_t ntime_getTimeFromSeconds( long s )
+{
+   return ((ntime_t)s * NT_SEC_DIV);
 }
 
 
@@ -171,7 +141,7 @@ double ntime_convertSTU( ntime_t t )
  */
 double ntime_getRemainder( ntime_t t )
 {
-   return (double)(t % NT_STU_DIV);
+   return (double)(t % NT_SEC_DIV);
 }
 
 
@@ -182,10 +152,10 @@ double ntime_getRemainder( ntime_t t )
  *    @param d Number of digits to use.
  *    @return The time in a human readable format (must free).
  */
-char* ntime_pretty( ntime_t t, int d )
+char* ntime_pretty( ntime_t t, int dateOnly )
 {
    char str[64];
-   ntime_prettyBuf( str, sizeof(str), t, d );
+   ntime_prettyBuf( str, sizeof(str), t, dateOnly );
    return strdup(str);
 }
 
@@ -199,26 +169,62 @@ char* ntime_pretty( ntime_t t, int d )
  *    @param d Number of digits to use.
  *    @return The time in a human readable format (must free).
  */
-void ntime_prettyBuf( char *str, int max, ntime_t t, int d )
+void ntime_prettyBuf( char *str, int max, ntime_t t, int dateOnly )
 {
    ntime_t nt;
-   int scu, stp, stu;
+   int sec,min,hour,day,month,year;
 
    if (t==0)
       nt = naev_time;
    else
       nt = t;
 
-   /* UST (Universal Synchronized Time) - unit is STU (Synchronized Time Unit) */
-   scu = ntime_getSCU( nt );
-   stp = ntime_getSTP( nt );
-   stu = ntime_getSTU( nt );
-   if ((scu==0) && (stp==0)) /* only STU */
-      nsnprintf( str, max, "%04d STU", stu );
-   else if ((scu==0) || (d==0))
-      nsnprintf( str, max, "%.*f STP", d, stp + 0.0001 * stu );
-   else /* UST format */
-      nsnprintf( str, max, "UST %d:%.*f", scu, d, stp + 0.0001 * stu );
+   ntime_getBreakdown(nt, &year,&month,&day,&hour,&min,&sec);
+
+   if (nt<NT_DAY_DIV) {//duration below a day
+	   nsnprintf( str, max, "%02d:%02d:%02d", hour, min, sec );
+   } else if (nt<NT_MONTH_DIV) {//duration below a month
+   	   nsnprintf( str, max, "%dd  %02d:%02d:%02d", day, hour, min, sec );
+   } else if (nt<NT_YEAR_DIV) {//duration below a year
+	   nsnprintf( str, max, "%dm %dd  %02d:%02d:%02d", month, day, hour, min, sec );
+   } else {//Date
+	   if (dateOnly) {
+		   nsnprintf( str, max, "%s %d, %d  %02d:%02d:%02d", ntime_monthName(month+1), day, year, hour, min, sec );
+	   } else {
+		   nsnprintf( str, max, "%s %d, %d", ntime_monthName(month+1), day, year );
+	   }
+   }
+}
+
+static char* ntime_monthName(int month) {
+	if (month==1) {
+		return "January";
+	} else if (month==2) {
+		return "February";
+	} else if (month==3) {
+		return "March";
+	} else if (month==4) {
+		return "April";
+	} else if (month==5) {
+		return "May";
+	} else if (month==6) {
+		return "June";
+	} else if (month==7) {
+		return "July";
+	} else if (month==8) {
+		return "August";
+	} else if (month==9) {
+		return "September";
+	} else if (month==10) {
+		return "October";
+	} else if (month==11) {
+		return "November";
+	} else if (month==12) {
+		return "December";
+	} else {
+		ERR("Was asked for month %i.",month);
+		return "MONTHERROR";
+	}
 }
 
 
@@ -237,9 +243,9 @@ void ntime_set( ntime_t t )
 /**
  * @brief Loads time including remainder.
  */
-void ntime_setR( int scu, int stp, int stu, double rem )
+void ntime_setR( long timeInSec, double rem )
 {
-   naev_time   = ntime_create( scu, stp, stu );
+   naev_time   = (ntime_t)(floor(timeInSec));
    naev_time  += floor(rem);
    naev_remainder = fmod( rem, 1. );
 }
@@ -257,6 +263,21 @@ void ntime_inc( ntime_t t )
    /* Run hooks. */
    if (t > 0)
       hooks_updateDate( t );
+}
+
+ntime_t ntime_create( int years, int months, int days, int hours, int minutes, int seconds )
+{
+   ntime_t sec,min,hour,day,month,year;
+
+   sec=seconds;
+   min=minutes;
+   hour=hours;
+   day=days;
+   month=months;
+   year=years;
+
+
+   return sec*NT_SEC_DIV+min*NT_MIN_DIV+hour*NT_HOUR_DIV+day*NT_DAY_DIV+month*NT_MONTH_DIV+year*NT_YEAR_DIV;
 }
 
 

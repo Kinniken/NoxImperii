@@ -3036,8 +3036,6 @@ int player_save( xmlTextWriterPtr writer )
 	int i, n;
 	MissionData *m;
 	const char *ev;
-	int scu, stp, stu;
-	double rem;
 
 	xmlw_startElem(writer,"player");
 
@@ -3052,11 +3050,8 @@ int player_save( xmlTextWriterPtr writer )
 
 	/* Time. */
 	xmlw_startElem(writer,"time");
-	ntime_getR( &scu, &stp, &stu, &rem );
-	xmlw_elem(writer,"SCU","%d", scu);
-	xmlw_elem(writer,"STP","%d", stp);
-	xmlw_elem(writer,"STU","%d", stu);
-	xmlw_elem(writer,"Remainder","%lf", rem);
+	xmlw_elem(writer,"seconds","%li", ntime_convertTimeToSeconds(ntime_get()));
+	xmlw_elem(writer,"remainder","%lf", ntime_getRemainder((ntime_get())));
 	xmlw_endElem(writer); /* "time" */
 
 	/* Current ship. */
@@ -3338,8 +3333,9 @@ static Planet* player_parse( xmlNodePtr parent )
 	double a, r;
 	Pilot *old_ship;
 	PilotFlags flags;
-	int scu, stp, stu, time_set;
+	int time_set;
 	double rem;
+	long timeVal;
 
 	xmlr_attr(parent,"name",player.name);
 
@@ -3373,18 +3369,16 @@ static Planet* player_parse( xmlNodePtr parent )
 		/* Time. */
 		if (xml_isNode(node,"time")) {
 			cur = node->xmlChildrenNode;
-			scu = stp = stu = -1;
+			timeVal = -1;
 			rem = -1.;
 			do {
-				xmlr_int(cur,"SCU",scu);
-				xmlr_int(cur,"STP",stp);
-				xmlr_int(cur,"STU",stu);
-				xmlr_float(cur,"Remainder",rem);
+				xmlr_long(cur,"time",timeVal);
+				xmlr_float(cur,"remainder",rem);
 			} while (xml_nextNode(cur));
-			if ((scu < 0) || (stp < 0) || (stu < 0) || (rem<0.))
+			if ((timeVal < 0) || (rem < 0.))
 				WARN("Malformed time in save game!");
-			ntime_setR( scu, stp, stu, rem );
-			if ((scu >= 0) || (stp >= 0) || (stu >= 0))
+			ntime_setR( timeVal, rem );
+			if (timeVal >= 0.)
 				time_set = 1;
 		}
 

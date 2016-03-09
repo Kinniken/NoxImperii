@@ -45,7 +45,7 @@ event.applyOnWorldCustom=function(self,planet)
 	planet.lua.settlements.humans.population=planet.lua.settlements.humans.population*0.9
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("Urgent medical help is needed following the barbarian attack.",
-		(time.get() + time.create( 0, 5, 0 )):tonumber() )
+		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber() )
 	planet.lua.settlements.humans:addGoodDemand(HUMAN_MEDICINE,20,3,effectId)
 
 	adjustBarbarianActivity(get_nearest_barbarian_zone(system_class.load(planet.c:system())).name,1.01)
@@ -71,7 +71,7 @@ event.applyOnWorldCustom=function(self,planet)
 	planet.lua.settlements.humans.industry=planet.lua.settlements.humans.industry*0.8
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The recent financial crisis has depressed demand for industrial goods.",
-		(time.get() + time.create( 0, 5, 0 )):tonumber() )
+		(time.get() + time.create( 0,1,0, 0, 0, 0 )):tonumber() )
 	planet.lua.settlements.humans:reduceGoodDemand(INDUSTRIAL,effectId,30,2)
 	planet.lua.settlements.humans:reduceGoodDemand(MODERN_INDUSTRIAL,effectId,30,2)
 
@@ -92,7 +92,7 @@ event.weightValidity=function(planet)
 end
 event.applyOnWorldCustom=function(self,planet)	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The new governor's celebrations are driving up demands for various luxury goods.",
-		(time.get() + time.create( 0, 5, 0 )):tonumber() )
+		(time.get() + time.create( 0,0,10, 0, 0, 0 )):tonumber() )
 	planet.lua.settlements.humans:addGoodDemand(LUXURY_GOODS,20,3,effectId)
 	planet.lua.settlements.humans:addGoodDemand(GOURMET_FOOD,20,3,effectId)
 	planet.lua.settlements.humans:addGoodDemand(EXOTIC_FOOD,10,4,effectId)
@@ -117,7 +117,7 @@ event.applyOnWorldCustom=function(self,planet)
 	planet.lua.settlements.humans.services=planet.lua.settlements.humans.services*0.9
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The production of industrial and consumer goods is currently slowed by lack of offworld inputs due to pirate attacks.",
-		(time.get() + time.create( 0, 5, 0 )):tonumber() )
+		(time.get() + time.create( 0,1,0, 0, 0, 0 )):tonumber() )
 	planet.lua.settlements.humans:reduceGoodSupply(INDUSTRIAL,20,3,effectId)
 	planet.lua.settlements.humans:reduceGoodSupply(CONSUMER_GOODS,20,3,effectId)
 	

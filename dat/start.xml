@@ -12,9 +12,10 @@
   <event>start_event</event>
  </player>
  <date>
-  <scu>603</scu>
-  <stp>3726</stp>
-  <stu>2871</stu>
+  <years>3125</years>
+  <months>12</months>
+  <days>5</days>
+  <hours>12</hours>
  </date>
  <tutorial>
   <system>

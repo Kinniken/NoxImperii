@@ -97,8 +97,8 @@ function create()
         allowance = allowance + math.floor((numjumps-1) / jumpsperstop) * stuperjump
     end
 
-    timelimit  = time.get() + time.create(0, 0, allowance)
-    timelimit2 = time.get() + time.create(0, 0, allowance * 1.2)
+    timelimit  = time.get() + time.create(0,0,0,0, 0, allowance)
+    timelimit2 = time.get() + time.create(0,0,0,0, 0, allowance * 1.2)
 
     -- Choose amount of cargo and mission reward. This depends on the mission tier.
     -- Note: Pay is independent from amount by design! Not all deals are equally attractive!
@@ -135,7 +135,7 @@ function accept()
     osd_msg[2] = osd_msg2:format((timelimit - time.get()):str())
     misn.osdCreate(osd_title, osd_msg)
     hook.land("land")
-    hook.date(time.create(0, 0, 100), "tick") -- 100STU per tick
+    hook.date(time.create(0,0,0,0, 0, 100), "tick") -- 100STU per tick
 end
 
 -- Land hook

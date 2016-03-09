@@ -199,23 +199,29 @@ int lua_istime( lua_State *L, int ind )
  *
  * @usage t = time.create( 591, 3271, 12801 ) -- Gets a time near when the incident happened.
  *
- *    @luaparam scu SCU for the new time.
- *    @luaparam stp STP for the new time.
- *    @luaparam stu STU for the new time.
+ *    @luaparam year
+ *    @luaparam month
+ *    @luaparam day
+ *    @luaparam hour
+ *    @luaparam min
+ *    @luaparam sec
  *    @luareturn A newly created time metatable.
  * @luafunc create( scu, stp, stu )
  */
 static int time_create( lua_State *L )
 {
-   int scu, stp, stu;
+   int sec,min,hour,day,month,year;
 
    /* Parameters. */
-   scu = luaL_checkint(L,1);
-   stp = luaL_checkint(L,2);
-   stu = luaL_checkint(L,3);
+   year = luaL_checkint(L,1);
+   month = luaL_checkint(L,2);
+   day = luaL_checkint(L,3);
+   hour = luaL_checkint(L,4);
+   min = luaL_checkint(L,5);
+   sec = luaL_checkint(L,6);
 
    /* Create the time. */
-   lua_pushtime( L, ntime_create( scu, stp, stu ) );
+   lua_pushtime( L, ntime_create( year, month, day, hour, min, sec ) );
    return 1;
 }
 /**

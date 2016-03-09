@@ -1681,7 +1681,7 @@ void equipment_updateShips( unsigned int wid, char* str )
    price2str( buf2, price, player.p->credits, 2 ); /* transport */
    credits2str( buf3, player_shipPrice(shipname), 2 ); /* sell price */
    cargo = pilot_cargoFree(ship) + pilot_cargoUsed(ship);
-   nt = ntime_pretty( pilot_hyperspaceDelay( ship ), 2 );
+   nt = ntime_pretty( pilot_hyperspaceDelay( ship ), 0 );
    
    /* Get ship error report. */
    pilot_reportSpaceworthy( ship, errorReport, sizeof(errorReport));

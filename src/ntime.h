@@ -10,32 +10,38 @@
 #include <stdint.h>
 
 
-#define NT_SCU_STP   (5000)      /**< STP in an SCU */
-#define NT_STP_STU   (10000)     /**< STU in an STP */
+#define NT_SEC_IN_MIN   (60)
+#define NT_MIN_IN_HOUR   (60)
+#define NT_HOUR_IN_DAY   (24)
+#define NT_DAY_IN_MONTH   (30) //magic rational calendar!
+#define NT_MONTH_IN_YEAR   (12)
+
+#define NT_SEC_DIV   (1000)
+#define NT_MIN_DIV   ((ntime_t)NT_SEC_IN_MIN*(ntime_t)NT_SEC_DIV)
+#define NT_HOUR_DIV   ((ntime_t)NT_MIN_IN_HOUR*(ntime_t)NT_MIN_DIV)
+#define NT_DAY_DIV   ((ntime_t)NT_HOUR_IN_DAY*(ntime_t)NT_HOUR_DIV)
+#define NT_MONTH_DIV   ((ntime_t)NT_DAY_IN_MONTH*(ntime_t)NT_DAY_DIV)
+#define NT_YEAR_DIV   ((ntime_t)NT_MONTH_IN_YEAR*(ntime_t)NT_MONTH_DIV)
 
 
 typedef int64_t ntime_t;         /**< Core time type. */
-
-/* Create. */
-ntime_t ntime_create( int scu, int stp, int stu );
 
 /* update */
 void ntime_update( double dt );
 
 /* get */
 ntime_t ntime_get (void);
-void ntime_getR( int *scu, int *stp, int *stu, double *rem );
-int ntime_getSCU( ntime_t t );
-int ntime_getSTP( ntime_t t );
-int ntime_getSTU( ntime_t t );
-double ntime_convertSTU( ntime_t t );
+ntime_t ntime_create( int years, int months, int days, int hours, int minutes, int seconds );
+void ntime_getBreakdown( ntime_t t, int *years, int *months, int *days, int *hours, int *minutes, int *seconds );
+long ntime_convertTimeToSeconds( ntime_t t );
+ntime_t ntime_getTimeFromSeconds( long s );
 double ntime_getRemainder( ntime_t t );
 char* ntime_pretty( ntime_t t, int d );
 void ntime_prettyBuf( char *str, int max, ntime_t t, int d );
 
 /* set */
 void ntime_set( ntime_t t );
-void ntime_setR( int scu, int stp, int stu, double rem );
+void ntime_setR( long timeInSec, double rem );
 void ntime_inc( ntime_t t );
 void ntime_incLagged( ntime_t t );
 

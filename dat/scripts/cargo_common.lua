@@ -117,7 +117,7 @@ end
 function cargoGetTransit( timelimit, numjumps, traveldist )
     local pstats   = player.pilot():stats()
     local stuperpx = 1 / pstats.speed_max * 30
-    local arrivalt = time.get() + time.create(0, 0, traveldist * stuperpx +
+    local arrivalt = time.get() + time.create(0,0,0,0, 0, traveldist * stuperpx +
             numjumps * pstats.jump_delay + 10180 + 240 * numjumps)
     return arrivalt
 end

@@ -1437,7 +1437,7 @@ void space_init( const char* sysname )
          ERR("System %s not found in stack", sysname);
       cur_system = &systems_stack[i];
 
-      nt = ntime_pretty(0, 2);
+      nt = ntime_pretty(0, 0);
       player_message("\epEntering System %s on %s.", sysname, nt);
       free(nt);
 
@@ -2045,15 +2045,11 @@ static int planet_parse( Planet *planet, const xmlNodePtr parent )
             	ccur = cur->children;
             	do {
             		if (xml_isNode(ccur,"lastRefresh")) {
-            			int scu = 0;
-            			int stp = 0;
-            			int stu = 0;
+            			long seconds=0;
             			do {
-            				xmlr_int(ccur,"SCU",scu);
-            				xmlr_int(ccur,"STP",stp);
-            				xmlr_int(ccur,"STU",stu);
+            				xmlr_long(ccur,"seconds",seconds);
             			} while (xml_nextNode(ccur));
-            			planet->lastRefresh = ntime_create( scu, stp, stu );
+            			planet->lastRefresh = ntime_getTimeFromSeconds(seconds);
             		} else if (xml_isNode(ccur,"tradedata")) {
             			cccur = ccur->children;
 
@@ -2323,15 +2319,11 @@ static int planet_parseCustom( Planet *planet, const xmlNodePtr parent )
 					do {
 						if (xml_isNode(ccur,"lastRefresh")) {
 							cccur = ccur->children;
-							int scu = 0;
-							int stp = 0;
-							int stu = 0;
+							long seconds = 0;
 							do {
-								xmlr_int(cccur,"SCU",scu);
-								xmlr_int(cccur,"STP",stp);
-								xmlr_int(cccur,"STU",stu);
+								xmlr_long(cccur,"seconds",seconds);
 							} while (xml_nextNode(cccur));
-							planet->lastRefresh = ntime_create( scu, stp, stu );
+							planet->lastRefresh = ntime_getTimeFromSeconds(seconds);
 						} else if (xml_isNode(ccur,"tradedata")) {
 							cccur = ccur->children;
 
@@ -4763,16 +4755,10 @@ int planet_savePlanet( xmlTextWriterPtr writer, const Planet *p, int customDataO
     	 if (p->ntradedatas>0 && p->lastRefresh>0) {
     		 xmlw_startElem( writer, "tradeStatus" );
 
-    		 int scu, stp, stu;
-    		 double rem;
-
     		 /* Time. */
     		 xmlw_startElem(writer,"lastRefresh");
-    		 ntime_getR( &scu, &stp, &stu, &rem );
-    		 xmlw_elem(writer,"SCU","%d", scu);
-    		 xmlw_elem(writer,"STP","%d", stp);
-    		 xmlw_elem(writer,"STU","%d", stu);
-    		 xmlw_elem(writer,"Remainder","%lf", rem);
+    		 xmlw_elem(writer,"seconds","%li", ntime_convertTimeToSeconds(ntime_get()));
+    		 xmlw_elem(writer,"remainder","%lf", ntime_getRemainder((ntime_get())));
     		 xmlw_endElem(writer); /* "time" */
 
     		 for (i=0; i<p->ntradedatas; i++) {

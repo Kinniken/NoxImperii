@@ -1,10 +1,3 @@
-/*
- * crew.c
- *
- *  Created on: 29 févr. 2016
- *      Author: cedricdj
- */
-
 #include "crew.h"
 
 #include "naev.h"
@@ -68,6 +61,10 @@ static int crew_gender( char* genderName );
 static char* crew_getStatusNameColoured(int status);
 static int crew_checkBarConditions(Crew* crew, const Planet* landPlanet);
 static int crew_matchFaction( Crew* crew, int faction );
+
+static char* getColouredRequiredRating(const Crew* crew,char* buf);
+static char* getColouredRequiredRelations(const Crew* crew,char* buf);
+static char* getColouredPrice(const Crew* crew,char* buf);
 
 static lua_State *crew_name_lua = NULL; /** Crew name generators */
 
@@ -317,7 +314,7 @@ void crew_addToBar(const Planet* landPlanet) {
 	char barDesc[MAX_BAR_DESC];
 	char *generatedName;
 	double chance;
-	char bufFaction[PATH_MAX],bufRating[PATH_MAX];
+	char bufFaction[PATH_MAX],bufRating[PATH_MAX],buf[PATH_MAX];
 
 	for (i=0; i < crews_nstack; i++) {
 
@@ -338,26 +335,26 @@ void crew_addToBar(const Planet* landPlanet) {
 					nsnprintf( portrait, PATH_MAX, GFX_PATH"portraits/%s.png", crew->portrait );
 
 					if (crew->combatRatingNeeded>0) {
-						nsnprintf( bufRating, MAX_BAR_DESC, "Combat Rating Required: %s\n",
-								player_rating_other(crew->combatRatingNeeded) );
+						nsnprintf( bufRating, MAX_BAR_DESC, "\eDCombat Rating Required:\e0 %s\n",
+								getColouredRequiredRating(crew,buf) );
 					} else {
 						nsnprintf( bufRating, MAX_BAR_DESC,"");
 					}
 
 					if (crew->factionNeeded>0) {
-						nsnprintf( bufFaction, MAX_BAR_DESC, "Faction Required: %s\n"
-								"Relations Required: %i\n",
-								faction_longname(crew->factionNeeded),crew->factionRelationNeeded );
+						nsnprintf( bufFaction, MAX_BAR_DESC, "\eDFaction Required:\e0 %s\n"
+								"\eDRelations Required:\e0 %s\n",
+								faction_longname(crew->factionNeeded),getColouredRequiredRelations(crew,buf) );
 					} else {
 						nsnprintf( bufFaction, MAX_BAR_DESC,"");
 					}
 
-					nsnprintf( barDesc, MAX_BAR_DESC, "Name: %s\nPosition: %s\nHiring Cost: %"CREDITS_PRI"\n"
-							"Level: %s\n\n"
+					nsnprintf( barDesc, MAX_BAR_DESC, "\eDName:\e0 %s\n\eDPosition:\e0 %s\n\eDHiring Cost:\e0 %s\n"
+							"\eDLevel:\e0 %s\n\n"
 							"%s"
 							"%s\n"
 							"%s\n\nEffects when hired:\n\n%s",
-							generatedName, crew->position, crew->hiringPrice, crew_getLevelName(crew->level),
+							generatedName, crew->position, getColouredPrice(crew,buf), crew_getLevelName(crew->level),
 							bufRating,bufFaction,
 							crew->description, crew->desc_stats );
 
@@ -366,6 +363,39 @@ void crew_addToBar(const Planet* landPlanet) {
 				}
 			}
 		}
+	}
+}
+
+static char* getColouredRequiredRating(const Crew* crew,char* buf) {
+
+	if (player.crating < crew->combatRatingNeeded) {
+		nsnprintf( buf, PATH_MAX,"\er%s\e0",player_rating_other(crew->combatRatingNeeded) );
+		return buf;
+	} else {
+		strcpy(buf,player_rating_other(crew->combatRatingNeeded));
+		return buf;
+	}
+}
+
+static char* getColouredRequiredRelations(const Crew* crew,char* buf) {
+
+	if (faction_getPlayer(crew->factionNeeded) < crew->factionRelationNeeded) {
+		nsnprintf( buf, PATH_MAX,"\er%i\e0",crew->factionRelationNeeded );
+		return buf;
+	} else {
+		nsnprintf( buf, PATH_MAX,"%i",crew->factionRelationNeeded );
+				return buf;
+	}
+}
+
+static char* getColouredPrice(const Crew* crew,char* buf) {
+
+	if (!player_hasCredits(crew->hiringPrice)) {
+		nsnprintf( buf, PATH_MAX,"\er%"CREDITS_PRI"\e0",crew->hiringPrice );
+		return buf;
+	} else {
+		nsnprintf( buf, PATH_MAX,"%"CREDITS_PRI,crew->hiringPrice );
+				return buf;
 	}
 }
 

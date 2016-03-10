@@ -155,3 +155,20 @@ function getGenderPronoun(gender)
   end
 end
 
+function tryWoundingCrewMember()
+  local randomCrewType=getRandomCrewType()
+
+  if (randomCrewType~=nil) then
+    local level,name,gender,type,active,status=player.crew(randomCrewType)
+
+    if status==1 then--healthy
+
+      player.setCrewStatus(randomCrewType,2)
+
+      return level,name,gender,type,active,status
+    end         
+  end
+
+  return nil
+end
+

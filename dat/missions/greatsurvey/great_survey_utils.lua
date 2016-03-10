@@ -10,27 +10,27 @@ function computePayement(surveyedPlanet)
    local reward={};
 
    local lx,ly=surveyedPlanet.c:system():coords()
-   reward.rewardDistance=(math.floor(math.max(0,(gh.calculateDistance({x=0,y=0},{x=lx,y=ly})-600)*5)))
-   reward.rewardDistance=math.min(reward.rewardDistance,4000)
+   reward.rewardDistance=(math.floor(math.max(0,(gh.calculateDistance({x=0,y=0},{x=lx,y=ly})-600)*50)))
+   reward.rewardDistance=math.min(reward.rewardDistance,40000)
 
    reward.rewardNatives=0
 
    if (surveyedPlanet.lua.natives) then
       if surveyedPlanet.lua.natives:hasTag("rare") then
-         reward.rewardNatives=2500
+         reward.rewardNatives=25000
       else
-         reward.rewardNatives=1000
+         reward.rewardNatives=10000
       end
    end
 
    if (surveyedPlanet.lua.humanFertility>0.7) then
-      reward.rewardFertility=math.floor(surveyedPlanet.lua.humanFertility*1000)
+      reward.rewardFertility=math.floor(surveyedPlanet.lua.humanFertility*10000)
    else
       reward.rewardFertility=0
    end
 
    if (surveyedPlanet.lua.minerals>0.5) then
-      reward.rewardMinerals=math.floor(surveyedPlanet.lua.minerals*1000)
+      reward.rewardMinerals=math.floor(surveyedPlanet.lua.minerals*10000)
    else
       reward.rewardMinerals=0
    end

@@ -1,5 +1,24 @@
 nameGenerator={}
 
+
+function nameGenerator.generateNameNatives()
+
+	local nameStart={"mer","bry","roi","brech","y","da","mo","khrai","qan","ur","tach","tel","chydh","gel","fo","mor"}
+	local nameMiddle={"thio","dhu","na","dwy","thol","rio","ry","dio","ru"}
+	local nameEnd={"thioch","te","dan","dwyr","tholch","rioch","khraich","ryf","diolch","wyr","loch","dhwan","gelch","daich","chan"}
+  local name=""
+
+	if (math.random()>0.5) then
+		 name=nameStart[ math.random(#nameStart)]..nameMiddle[ math.random(#nameMiddle)]..nameEnd[ math.random(#nameEnd)]
+	else
+		 name=nameStart[ math.random(#nameStart)]..nameEnd[ math.random(#nameEnd)]
+	end
+
+	name=name:gsub("^%l", string.upper)
+	return name
+end
+
+
 function nameGenerator.generateNameBetelgeuse()
 
 	local nameStart={"ve","sal","pra","por","fos","chio","co","mi","mua","cam","do","con"}

@@ -64,7 +64,7 @@ Accept the mission anyway?]]
     accept_title = "Mission Accepted"
     
     timeup_1 = "You've missed the deadline for the delivery to %s! But you can still make a late delivery if you hurry."
-    timeup_2 = "The delivery to %s has been canceled! You were too late."
+    timeup_2 = "The delivery to %s has been cancelled! You were too late."
     
     osd_title = "Rush cargo mission"
     osd_msg = {}
@@ -87,8 +87,8 @@ function create()
     -- Calculate time limit. Depends on tier and distance.
     -- The second time limit is for the reduced reward.
     stuperpx   = 0.2 - 0.025 * tier
-    stuperjump = 10300 - 300 * tier
-    stupertakeoff = 10300 - 75 * tier
+    stuperjump = 24*3600 + 300 - 300 * tier
+    stupertakeoff = 5*3600 + 300 - 75 * tier
     allowance  = traveldist * stuperpx + numjumps * stuperjump + stupertakeoff + 240 * numjumps
 
     -- Allow extra time for refuelling stops.

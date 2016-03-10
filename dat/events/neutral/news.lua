@@ -1,4 +1,5 @@
 include('universe/generate_nameGenerator.lua')
+include('universe/generate_helper.lua')
 
 --[[
 -- Event for creating generic news
@@ -85,7 +86,12 @@ else --default english
       --]]
       {
          title = "A Failed Colony Abandoned for Greener Pastures",
-         desc = "The colony of "..nameGenerator.getEmpireNameGenerator().." was finally emptied of colonists last month. \"This small, distant planet was never worth it\", explained His Eminence the Imperial Representative in the sub-sector to journalists on the way to a major cocktail party. \"The colonists will be much better off in the Core Worlds.\". We thank His Eminence for his time."
+         desc = "The colony of ${world} was finally emptied of colonists last month. \"This small, distant planet was never worth it\", explained His Eminence the Imperial Representative in the sub-sector to journalists on the way to a major cocktail party. \"The colonists will be much better off in the Core Worlds.\". We thank His Eminence for his time.",
+         data = function()
+            local data={}
+            data.world=nameGenerator.getEmpireNameGenerator()
+            return data
+         end
       },
       --[[
          Politics
@@ -93,14 +99,48 @@ else --default english
       {
          title = "Pacifying Mission Being Prepared",
          desc = "His Imperial Majesty in person is said to have participated to the plans of a major pacifying operation against Barbarians coreward."
+      },      
+      {
+         title ="Diplomatic Mission on Betelgeuse",
+         desc = "A new Imperial envoy to Betelgeuse was presented to the Doge yesterday and received a warm welcome from leading Betelgian families. It is hoped that he will succeed in convincing the Oligarchy of the perils of appeasing the expansionist Roidhunate."
       },
       {
-         title = "A Firm Hand for the Empire",
-         desc = "His Excellency the Imperial Envoy to Ardarshir yesterday demonstrated again the firm hand of the Empire by sternly warning the Roidhun against continued encroachments on Imperial systems, failing which stern consequences would follow. No doubt the Ardar leadership was suitably impressed."
+         title ="Virtualised War Games: a Terran Innovation",
+         desc = "The largest war games ever performed by the Imperial Navy have just been completed - in a brand new AI on Luna! While the primitive Roidhunate continues to practice manoeuvres in space, Terra once again demonstrates its technological leadership by allowing its officers to train - from the comfort of their home!"
       },
+      {
+         title ="Barbarian Raids on Fringe Worlds",
+         desc = "Disturbing reports continue to come in from fringe worlds of increasing barbarian raids. On the remote world of ${world} last week, almost a million people died in a major attack and as many were taken captive. When will the independent worlds see wisdom and take shelter in the Empire?",
+         data = function()
+            local data={}
+            data.world=nameGenerator.getEmpireNameGenerator()
+            return data
+         end
+      },
+      --[[
+         Ardar
+      --]]
+      {
+         title = "Ardar Atrocities Reported On Frontier World",
+         desc = "Reports are coming in of a major wave of repression hitting natives on ${world}. This unfortunate world was recently annexed by the nefarious Roidhunate, and its gallant natives have been fighting hard against the hated invaders. While the Empire is sadly too far to aid them in their just struggle, we wish them all the best against their reptilian foes.",
+         data = function()
+            local data={}
+            data.world=nameGenerator.generateNameNatives()
+            return data
+         end
+      },
+      {
+         title = "A Debutante's Sensational Entry At Court",
+         desc = "The lovely Duchess of Plantais debuted at court yesterday in a grand ball held by the Crown Prince in person. Her grace and wits have made her the new darling of the court and a most alluring marriage prospect too - with an entire closet in her family, here is a girl fit for a Pair of the Realm!"
+      },
+
       --[[
          Human interest.
       --]]
+      {
+         title = "Games for Young Pilots",
+         desc = "Want your child to have a chance at a career as a space pilot?  Games like Super Julio Omniverse and SpaceFox help your child develop twitch muscles."
+      },
       {
          title = "Games for Young Pilots",
          desc = "Want your child to have a chance at a career as a space pilot?  Games like Super Julio Omniverse and SpaceFox help your child develop twitch muscles."
@@ -268,8 +308,18 @@ function add_articles(faction,num)
    for i=1,num do
 
       rnum=math.random(#news_table)
-      header=news_table[rnum]["title"]
-      desc=news_table[rnum]["desc"]
+
+      if (news_table[rnum].data==nil) then
+         header=news_table[rnum]["title"]
+         desc=news_table[rnum]["desc"]
+      else
+         local data=news_table[rnum].data()
+         header=gh.format(news_table[rnum]["title"],data)
+         desc=gh.format(news_table[rnum]["desc"],data)
+      end
+
+      
+      
 
       news.add(faction,header,desc,500000000000000,0)
 

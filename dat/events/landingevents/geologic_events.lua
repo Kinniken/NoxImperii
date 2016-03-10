@@ -51,7 +51,7 @@ local random=math.random()
 				textData.quantity=quantity
 				textData.loot=loot
 
-				local level,name,gender,type,active,status=player.crewByPosition(CREW_ENG)
+				local level,crewname,gender,type,active,status=player.crewByPosition(CREW_ENG)
 
 				if level==0 then
 					textData.crewJob="Unfortunately, the lack of an engineer to monitor the flow hinders the search for minerals."
@@ -67,26 +67,20 @@ local random=math.random()
 			else				
 				local woundedEventHappened=false--so far
 
-				if math.random()<0.99 then
-					local randomCrewType=getRandomCrewType()
+				if math.random()<0.5 then
 
-					if (randomCrewType~=nil) then
-						local level,name,gender,type,active,status=player.crew(randomCrewType)
+					local level,name,gender,type,active,status=tryWoundingCrewMember()
 
-						if status==1 then--healthy
+					if level ~= nil then
+						textData.woundedCrewName=name
+						textData.hisher=getGenderPossessive(gender)
+						textData.heshe=getGenderPronoun(gender):gsub("^%l", string.upper)
 
-							player.setCrewStatus(randomCrewType,2)
+						tk.msg( "Disaster!", gh.format([[The ${shipname} has barely landed close to the ore veins when the ground shakes furiously. It takes only minutes from fresh lava to come hurling toward the ship while you scramble in an emergency lift-off.
 
-							textData.woundedCrewName=name
-							textData.hisher=getGenderPossessive(gender)
-							textData.heshe=getGenderPronoun(gender):gsub("^%l", string.upper)
+							Your quick reflexes saved the ${shipname}, but your poor ${woundedCrewName} was sent flying in the lurch and cracked his ${hisher} head on a wall. ${heshe} will be in the sick bay until the ${shipname} finds a friendly port.]],textData) )
 
-							tk.msg( "Disaster!", gh.format([[The ${shipname} has barely landed close to the ore veins when the ground shakes furiously. It takes only minutes from fresh lava to come hurling toward the ship while you scramble in an emergency lift-off.
-
-								Your quick reflexes saved the ${shipname}, but your poor ${woundedCrewName} was sent flying in the lurch and cracked his ${hisher} head on a wall. ${heshe} will be in the sick bay until the ${shipname} finds a friendly port.]],textData) )
-
-							woundedEventHappened=true
-						end					
+						woundedEventHappened=true											
 					end
 				end
 
@@ -107,7 +101,7 @@ local random=math.random()
 
 		return validPlanets[planet.lua.planetType]
 		end,
-		weight=10000
+		weight=10
 	}
 
 	landing_events.desertWorldAncientMiningStation={
@@ -122,7 +116,7 @@ local random=math.random()
 		if tk.yesno( "Ruins older than the Pyramids", gh.format(eventText1,textData) ) then
 			if math.random() <0.3 then
 
-				local level,name,gender,type,active,status=player.crewByPosition(CREW_ENG)
+				local level,crewname,gender,type,active,status=player.crewByPosition(CREW_ENG)
 
 				local quantity=gh.floorTo(adjustForCrewLevel(1+math.random()*3,CREW_ENG),0)
 				textData.quantity=quantity
@@ -130,7 +124,7 @@ local random=math.random()
 				if level==0 then
 					textData.crewJob="Without an engineer to guide them, your crew flounders in the unmapped corridors, hindering their search."
 				else
-					textData.crewJob="Following the team's progress from the bridge, "..crewname..", your engineer, does a "..getCrewLevelAdj(crew.level,CREW_ENG).." of guiding them in the corridors."
+					textData.crewJob="Following the team's progress from the bridge, "..crewname..", your engineer, does a "..getCrewLevelAdj(level).." of guiding them in the corridors."
 				end
 
 				tk.msg( "Mysterious Devices", gh.format([[Up close, the ancient mining station is not so impressive; the Empire and the Ardars build bigger, more sophisticated-looking complexes. And yet the age of the walls you are touching is awe-inspiring.
@@ -138,12 +132,36 @@ local random=math.random()
 					${crewJob} Your men locate rooms full of materials and quickly transport it to the ${shipname}, for a total of ${quantity} tonnes of storage space. Your lift-off is strangely anti-climatic.]],textData) )
 				player.addCargo(ANCIENT_TECHNOLOGY,quantity)
 			else
-				local damages=gh.floorTo(5000+math.random()*5000,-2)
-				textData.damages=damages
-				tk.msg( "The Price of Arrogance", gh.format([[The ${shipname} is still several kilometres away from the site when a blinding light streams from the old mining complex. Your ship's shields struggle to contain the blast of radiations and fail to prevent extensive damages to the electronic systems, though at least the crew is safe. When the light returns to normal and you scan the site from a safer distance, the evidence is overwhelming: a thermonuclear device has just wiped-out the canyon. Why the ancient race thought to booby-trap their installation and how they designed a mechanism capable of surviving across fifty millennia you will never know.
 
-					Repairing your ship's electronics afterwards costs you ${damages} credits.]],textData) )
-				player.pay(-damages)
+				woundedEventHappened=false
+
+				if math.random()<0.5 then
+
+					local level,name,gender,type,active,status=tryWoundingCrewMember()
+
+					if level~=nil then
+
+						textData.woundedCrewName=name
+						textData.hisher=getGenderPossessive(gender)
+						textData.heshe=getGenderPronoun(gender):gsub("^%l", string.upper)
+
+						tk.msg( "The Price of Arrogance", gh.format([[The ${shipname} is still several kilometres away from the site when a blinding light streams from the old mining complex. Your ship's shields struggle to contain the blast of radiations, and ${woundedCrewName}, unfortunately doing maintenance in a less-well shielded section, is hit by a dangerous dose of gamma rays. When the light returns to normal and you scan the site from a safer distance, the evidence is overwhelming: a thermonuclear device has just wiped-out the canyon. Why the ancient race thought to booby-trap their installation and how they designed a mechanism capable of surviving across fifty millennia you will never know.
+
+						${woundedCrewName} is off to the sick bay, held in suspended animation until you reach a hospital.]],textData) )
+
+						woundedEventHappened=true
+					end
+
+				end
+
+				if not woundedEventHappened then
+					local damages=gh.floorTo(2000+math.random()*1000,-2)
+					textData.damages=damages
+					tk.msg( "The Price of Arrogance", gh.format([[The ${shipname} is still several kilometres away from the site when a blinding light streams from the old mining complex. Your ship's shields struggle to contain the blast of radiations and fail to prevent extensive damages to the electronic systems, though at least the crew is safe. When the light returns to normal and you scan the site from a safer distance, the evidence is overwhelming: a thermonuclear device has just wiped-out the canyon. Why the ancient race thought to booby-trap their installation and how they designed a mechanism capable of surviving across fifty millennia you will never know.
+
+						Repairing your ship's electronics afterwards costs you ${damages} credits.]],textData) )
+					player.pay(-damages)
+				end
 			end
 		end
 		end,
@@ -154,7 +172,7 @@ local random=math.random()
 		return validPlanets[planet.lua.planetType]
 		end,
 		uncivilizedOnly=true,
-		weight=5
+		weight=500000
 	}
 
 	landing_events.viableWorldAncientShip={
@@ -168,9 +186,19 @@ local random=math.random()
 
 		if tk.yesno( "The Lost Spaceship", gh.format(eventText1,textData) ) then
 			if math.random() <0.3 then
-				local quantity=gh.floorTo(1+math.random()*2,0)
+				local quantity=gh.floorTo(adjustForCrewLevel(1+math.random()*2,CREW_ENG),0)
 				textData.quantity=quantity
-				tk.msg( "Ancient Mechanisms", gh.format([[The soil is tightly-packed and the vegetation above it thick, but the modern tools aboard the ${shipname} make quick work of both. Soon the ancient ship is exposed to the air again. Signs point to an ancient crash, and much of the ship is destroyed beyond investigation. However you do manage to recover what looks like parts of the navigation systems.
+
+				local level,crewname,gender,type,active,status=player.crewByPosition(CREW_ENG)
+
+				if level==0 then
+					textData.crewJob="Unfortunately, nobody in your team proves able to guide the recovery, limiting the quantities successfully recovered."
+				else
+					textData.crewJob=""..crewname..", your engineer, takes charge of guiding the work; he does a "..getCrewLevelAdj(level).." job, helping recover more devices."
+				end
+
+
+				tk.msg( "Ancient Mechanisms", gh.format([[The soil is tightly-packed and the vegetation above it thick, but the modern tools aboard the ${shipname} make quick work of both. Soon the ancient ship is exposed to the air again. Signs point to an ancient crash, and much of the ship is destroyed beyond investigation. However you do manage to recover what looks like parts of the navigation systems. {crewJob}
 
 					On board the ${shipname}, your men carefully store the ${quantity} tonnes of mechanisms recovered. No doubt some scientists somewhere will give you a good price for them.]],textData) )
 				player.addCargo(ANCIENT_TECHNOLOGY,quantity)
@@ -190,7 +218,7 @@ local random=math.random()
 		return validPlanets[planet.lua.planetType]
 		end,
 		uncivilizedOnly=true,
-		weight=5
+		weight=5000000
 	}
 
 	landing_events.gasGiantExtractionStation={

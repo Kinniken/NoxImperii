@@ -8,6 +8,7 @@
 
 
 #include <stdint.h>
+#include "nxml.h"
 
 
 #define NT_SEC_IN_MIN   (60)
@@ -48,6 +49,9 @@ void ntime_incLagged( ntime_t t );
 /* misc */
 void ntime_refresh (void);
 void ntime_allowUpdate( int enable );
+
+ntime_t ntime_parseNode(xmlNodePtr node, const char * debugLabel);
+int ntime_saveNode(xmlTextWriterPtr writer, ntime_t time);
 
 
 #endif /* NTIME_H */

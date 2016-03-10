@@ -3033,7 +3033,7 @@ static int player_saveEscorts( xmlTextWriterPtr writer )
 int player_save( xmlTextWriterPtr writer )
 {
 	char **guis;
-	int i, n;
+	int i, n, ret;
 	MissionData *m;
 	const char *ev;
 
@@ -3050,8 +3050,12 @@ int player_save( xmlTextWriterPtr writer )
 
 	/* Time. */
 	xmlw_startElem(writer,"time");
-	xmlw_elem(writer,"seconds","%li", ntime_convertTimeToSeconds(ntime_get()));
-	xmlw_elem(writer,"remainder","%lf", ntime_getRemainder((ntime_get())));
+
+	ret=ntime_saveNode(writer, ntime_get());
+
+	if (ret!=0)
+		return ret;
+
 	xmlw_endElem(writer); /* "time" */
 
 	/* Current ship. */

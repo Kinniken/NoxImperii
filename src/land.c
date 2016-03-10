@@ -1440,7 +1440,7 @@ void takeoff( int delay )
 
    /* time goes by, triggers hook before takeoff */
    if (delay)
-      ntime_inc( ntime_create( 0, 0, 0, 1, 0, 0 ) ); /* 1 hour */
+      ntime_inc( ntime_create( 0, 0, 0, 5, 0, 0 ) ); /* 5 hours */
    nt = ntime_pretty( 0, 0 );
    player_message("\epTaking off from %s on %s.", land_planet->name, nt);
    free(nt);

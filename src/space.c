@@ -2045,11 +2045,7 @@ static int planet_parse( Planet *planet, const xmlNodePtr parent )
             	ccur = cur->children;
             	do {
             		if (xml_isNode(ccur,"lastRefresh")) {
-            			long seconds=0;
-            			do {
-            				xmlr_long(ccur,"seconds",seconds);
-            			} while (xml_nextNode(ccur));
-            			planet->lastRefresh = ntime_getTimeFromSeconds(seconds);
+            			planet->lastRefresh = ntime_parseNode(ccur,planet->name);
             		} else if (xml_isNode(ccur,"tradedata")) {
             			cccur = ccur->children;
 
@@ -2318,12 +2314,7 @@ static int planet_parseCustom( Planet *planet, const xmlNodePtr parent )
 					ccur = cur->children;
 					do {
 						if (xml_isNode(ccur,"lastRefresh")) {
-							cccur = ccur->children;
-							long seconds = 0;
-							do {
-								xmlr_long(cccur,"seconds",seconds);
-							} while (xml_nextNode(cccur));
-							planet->lastRefresh = ntime_getTimeFromSeconds(seconds);
+							planet->lastRefresh =  ntime_parseNode(ccur,planet->name);
 						} else if (xml_isNode(ccur,"tradedata")) {
 							cccur = ccur->children;
 
@@ -4649,7 +4640,7 @@ void system_rmCurrentPresence( StarSystem *sys, int faction, double amount )
 int planet_savePlanet( xmlTextWriterPtr writer, const Planet *p, int customDataOnly )
 {
 
-   int i;
+   int i, ret;
 
    /* if custom data only and no custom data, we exit */
    if (customDataOnly && !planet_isSaveFlag(p,PLANET_DESC_SAVE) && !planet_isSaveFlag(p,PLANET_SERVICES_SAVE)
@@ -4757,8 +4748,12 @@ int planet_savePlanet( xmlTextWriterPtr writer, const Planet *p, int customDataO
 
     		 /* Time. */
     		 xmlw_startElem(writer,"lastRefresh");
-    		 xmlw_elem(writer,"seconds","%li", ntime_convertTimeToSeconds(ntime_get()));
-    		 xmlw_elem(writer,"remainder","%lf", ntime_getRemainder((ntime_get())));
+
+    		 ret=ntime_saveNode(writer, ntime_get());
+
+			if (ret!=0)
+				return ret;
+
     		 xmlw_endElem(writer); /* "time" */
 
     		 for (i=0; i<p->ntradedatas; i++) {

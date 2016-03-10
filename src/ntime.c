@@ -182,14 +182,14 @@ void ntime_prettyBuf( char *str, int max, ntime_t t, int dateOnly )
    ntime_getBreakdown(nt, &year,&month,&day,&hour,&min,&sec);
 
    if (nt<NT_DAY_DIV) {//duration below a day
-	   nsnprintf( str, max, "%02d:%02d:%02d", hour, min, sec );
+	   nsnprintf( str, max, "%dh %dm", hour, min );
    } else if (nt<NT_MONTH_DIV) {//duration below a month
-   	   nsnprintf( str, max, "%dd  %02d:%02d:%02d", day, hour, min, sec );
+   	   nsnprintf( str, max, "%dd  %dh %dm", day, hour, min );
    } else if (nt<NT_YEAR_DIV) {//duration below a year
-	   nsnprintf( str, max, "%dm %dd  %02d:%02d:%02d", month, day, hour, min, sec );
+	   nsnprintf( str, max, "%dm %dd  %dh %dm", month, day, hour, min );
    } else {//Date
 	   if (dateOnly) {
-		   nsnprintf( str, max, "%s %d, %d  %02d:%02d:%02d", ntime_monthName(month+1), day, year, hour, min, sec );
+		   nsnprintf( str, max, "%s %d, %d  %02d:%02d", ntime_monthName(month+1), day, year, hour, min );
 	   } else {
 		   nsnprintf( str, max, "%s %d, %d", ntime_monthName(month+1), day, year );
 	   }
@@ -343,5 +343,43 @@ void ntime_refresh (void)
       /* Free the increment. */
       free(ntu);
    }
+}
+
+
+ntime_t ntime_parseNode(xmlNodePtr node, const char * debugLabel) {
+	xmlNodePtr cur;
+	int years,months,days, hours,minutes,seconds;
+
+	years=months=days=hours=minutes=seconds=0;
+
+	cur = node->children;
+	 do {
+		xml_onlyNodes(cur);
+
+		xmlr_int( cur, "years", years );
+		xmlr_int( cur, "months", months );
+		xmlr_int( cur, "days", days );
+		xmlr_int( cur, "hours", hours );
+		xmlr_int( cur, "minutes", minutes );
+		xmlr_int( cur, "seconds", seconds );
+		WARN("'%s' has unknown date node '%s'.", debugLabel, cur->name);
+	 } while (xml_nextNode(cur));
+
+	 return ntime_create(years,months,days,hours,minutes,seconds);
+}
+
+int ntime_saveNode(xmlTextWriterPtr writer, ntime_t time) {
+	int years,months,days, hours,minutes,seconds;
+
+	ntime_getBreakdown(time,&years,&months,&days,&hours,&minutes,&seconds);
+
+	xmlw_elem(writer,"years","%d", years);
+	xmlw_elem(writer,"months","%d", months);
+	xmlw_elem(writer,"days","%d", days);
+	xmlw_elem(writer,"hours","%d", hours);
+	xmlw_elem(writer,"minutes","%d", minutes);
+	xmlw_elem(writer,"seconds","%d", seconds);
+
+	return 0;
 }
 

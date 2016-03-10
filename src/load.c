@@ -33,6 +33,7 @@
 #include "hook.h"
 #include "nstring.h"
 #include "outfit.h"
+#include "ntime.h"
 
 
 #define LOAD_WIDTH      600 /**< Load window width. */
@@ -84,8 +85,7 @@ static int load_load( nsave_t *save, const char *path );
 static int load_load( nsave_t *save, const char *path )
 {
    xmlDocPtr doc;
-   xmlNodePtr root, parent, node, cur;
-   long seconds;
+   xmlNodePtr root, parent, node;
    char *version = NULL;
 
    memset( save, 0, sizeof(nsave_t) );
@@ -135,13 +135,8 @@ static int load_load( nsave_t *save, const char *path )
 
             /* Time. */
             if (xml_isNode(node,"time")) {
-               cur = node->xmlChildrenNode;
-               seconds = 0;
-               do {
-            	   xmlr_long(cur,"seconds",seconds);
-               } while (xml_nextNode(cur));
-               save->date = ntime_getTimeFromSeconds(seconds);
-               continue;
+            	save->date = ntime_parseNode(node,path);
+            	continue;
             }
 
             /* Ship info. */

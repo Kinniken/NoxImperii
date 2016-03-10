@@ -44,3 +44,5 @@ core
 
 /.cproject
 /.project
+/stderr.txt alias.lnk
+/stdout.txt alias.lnk

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Ardar Mowyr">
+ <base_type>Ardar Mowyr</base_type>
+ <GFX sx="12" sy="12">ardarshir_planet</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Cruiser</class>
+ <fabricator>Roidhunate Shipyards</fabricator>
+ <description>The Ardar equivalent of the Jupiter cruisers, Roidhunate Mowyrs have a somewhat more offensive design; they are intended not primarily as flagships, but as the shock elements of any large battles. And should the battle go the Roidhunate's way, they have the speed to finish off Imperial stragglers.
+</description>
+<price>8500000</price>
+ <movement>
+  <thrust>130</thrust>
+  <turn>80</turn>
+  <speed>130</speed>
+ </movement>
+ <health>
+  <absorb>60</absorb>
+  <shield>700</shield>
+  <armour>2100</armour>
+  <energy>2500</energy>
+  <shield_regen>10</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>80</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>150</cpu>
+  <crew>30</crew>
+  <mass>3100</mass>
+  <fuel>1800</fuel>
+  <fuel_consumption>300</fuel_consumption>
+  <cargo>320</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+  
+ <slots>
+  <weapon x="-15" y="-10" h="-10" size="large"/>
+  <weapon x="-15" y="10" h="-10" size="large"/>
+  <weapon x="20" y="0" h="-10" size="large"/>
+  <weapon x="4" y="-5" h="-10" size="large"/>
+  <weapon x="4" y="-5" h="-10" size="large"/>
+  <weapon x="4" y="5" h="-10" size="large"/>
+  <weapon x="4" y="5" h="-10" size="large"/>
+  <weapon x="4" y="5" h="-10" size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+ </slots>
+</ship>

@@ -347,6 +347,13 @@
   <pilots>
    <pilot name="Ardar Vach Rueth" ship="Ardar Vach Rueth"></pilot>
   </pilots>
+  </fleet>
+  <fleet name="Ardar Planet">
+  <ai>empire</ai>
+  <faction>Roidhunate of Ardarshir</faction>
+  <pilots>
+   <pilot name="Ardar Mowyr" ship="Ardar Mowyr"></pilot>
+  </pilots>
  </fleet>
  
  

@@ -281,7 +281,8 @@
 		<item>Railgun</item>
 	</tech>
 	<tech name="Roidhunate Military 4">
-    <item>Merkhrioch</item>
+		<item>Ardar Mowyr</item>
+    	<item>Merkhrioch</item>
 		<item>Heavy Ripper Cannon</item>
 		<item>Plasma Cluster Cannon MK3</item>
 		<item>Heavy Laser</item>

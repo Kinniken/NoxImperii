@@ -2144,6 +2144,9 @@ static int planet_parseCustom( Planet *planet, const xmlNodePtr parent )
 	node = parent->xmlChildrenNode;
 	do {
 
+		/* Only handle nodes. */
+		xml_onlyNodes(node);
+
 		if (xml_isNode(node, "presence")) {
 			cur = node->children;
 			do {
@@ -2158,34 +2161,35 @@ static int planet_parseCustom( Planet *planet, const xmlNodePtr parent )
 			} while (xml_nextNode(cur));
 			continue;
 		}
-		 else if (xml_isNode(node, "extraPresences")) {
-			 planet_setSaveFlag(planet,PLANET_PRESENCE_SAVE);
-		  cur = node->children;
-		  if (xml_isNode(node, "presence")) {
-			  ccur = cur->children;
+		else if (xml_isNode(node, "extraPresences")) {
+			planet_setSaveFlag(planet,PLANET_PRESENCE_SAVE);
+			cur = node->children;
+			if (xml_isNode(node, "presence")) {
+				ccur = cur->children;
 
-			  planet->nextrapresences++;
-			  if (planet->nextrapresences>planet->mem_extrapresences) {
-				  if (planet->mem_extrapresences==0)
-					  planet->mem_extrapresences=CHUNK_SIZE_SMALL;
-				  else
-					  planet->mem_extrapresences*=2;
+				planet->nextrapresences++;
+				if (planet->nextrapresences>planet->mem_extrapresences) {
+					if (planet->mem_extrapresences==0)
+						planet->mem_extrapresences=CHUNK_SIZE_SMALL;
+					else
+						planet->mem_extrapresences*=2;
 
-				  planet->extraPresenceAmounts  = realloc( planet->extraPresenceAmounts, sizeof(double) * planet->mem_extrapresences );
-				  planet->extraPresenceFactions  = realloc( planet->extraPresenceFactions, sizeof(int) * planet->mem_extrapresences );
-				  planet->extraPresenceRanges  = realloc( planet->extraPresenceRanges, sizeof(int) * planet->mem_extrapresences );
-			  }
+					planet->extraPresenceAmounts  = realloc( planet->extraPresenceAmounts, sizeof(double) * planet->mem_extrapresences );
+					planet->extraPresenceFactions  = realloc( planet->extraPresenceFactions, sizeof(int) * planet->mem_extrapresences );
+					planet->extraPresenceRanges  = realloc( planet->extraPresenceRanges, sizeof(int) * planet->mem_extrapresences );
+				}
 
-			  do {
-				  xmlr_float(ccur, "value", planet->extraPresenceAmounts[planet->nextrapresences-1]);
-				  xmlr_int(ccur, "range", planet->extraPresenceRanges[planet->nextrapresences-1]);
-				  if (xml_isNode(cur,"faction")) {
-					  planet->extraPresenceFactions[planet->nextrapresences-1] = faction_get( xml_get(ccur) );
-					  continue;
-				  }
-			  } while (xml_nextNode(cur));
-			   continue;
-		}
+				do {
+					xmlr_float(ccur, "value", planet->extraPresenceAmounts[planet->nextrapresences-1]);
+					xmlr_int(ccur, "range", planet->extraPresenceRanges[planet->nextrapresences-1]);
+					if (xml_isNode(cur,"faction")) {
+						planet->extraPresenceFactions[planet->nextrapresences-1] = faction_get( xml_get(ccur) );
+						continue;
+					}
+				} while (xml_nextNode(cur));
+				continue;
+			}
+			continue;
 	   }
 		else if (xml_isNode(node,"general")) {
 			cur = node->children;
@@ -3128,6 +3132,7 @@ static StarSystem* system_parse( StarSystem *sys, const xmlNodePtr parent )
       xml_onlyNodes(node);
 
       xmlr_strd( node, "backgroundSpaceName", sys->gfx_BackgroundSpaceName );
+
       xmlr_strd( node, "luadata", sys->luaData );
       xmlr_strd( node, "zone", sys->zone );
 
@@ -4829,7 +4834,7 @@ int system_saveSystem( xmlTextWriterPtr writer, StarSystem *sys, int customDataO
 		xmlw_endElem( writer ); /* "starGraphics" */
 
 		if (sys->gfx_BackgroundSpaceName != NULL)
-			xmlw_elem( writer, "gfx_BackgroundSpaceName", "%s", sys->gfx_BackgroundSpaceName );
+			xmlw_elem( writer, "backgroundSpaceName", "%s", sys->gfx_BackgroundSpaceName );
 
 
 

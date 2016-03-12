@@ -3338,8 +3338,7 @@ static Planet* player_parse( xmlNodePtr parent )
 	Pilot *old_ship;
 	PilotFlags flags;
 	int time_set;
-	double rem;
-	long timeVal;
+	ntime_t timeVal;
 
 	xmlr_attr(parent,"name",player.name);
 
@@ -3372,18 +3371,10 @@ static Planet* player_parse( xmlNodePtr parent )
 
 		/* Time. */
 		if (xml_isNode(node,"time")) {
-			cur = node->xmlChildrenNode;
-			timeVal = -1;
-			rem = -1.;
-			do {
-				xmlr_long(cur,"time",timeVal);
-				xmlr_float(cur,"remainder",rem);
-			} while (xml_nextNode(cur));
-			if ((timeVal < 0) || (rem < 0.))
-				WARN("Malformed time in save game!");
-			ntime_setR( timeVal, rem );
-			if (timeVal >= 0.)
-				time_set = 1;
+			timeVal = ntime_parseNode(node,"Malformed time in save game!");
+			ntime_set( timeVal );
+			time_set=1;
+			continue;
 		}
 
 		if (xml_isNode(node,"ship"))

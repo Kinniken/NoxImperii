@@ -125,7 +125,7 @@ else --default english
          desc = "Reports are coming in of a major wave of repression hitting natives on ${world}. This unfortunate world was recently annexed by the nefarious Roidhunate, and its gallant natives have been fighting hard against the hated invaders. While the Empire is sadly too far to aid them in their just struggle, we wish them all the best against their reptilian foes.",
          data = function()
             local data={}
-            data.world=nameGenerator.generateNameNatives()
+            data.world=nameGenerator.generateNameOther()
             return data
          end
       },

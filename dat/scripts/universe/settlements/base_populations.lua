@@ -109,7 +109,7 @@ local function generate_human_population(star,planet,minFertility,settlementChan
 	end
 end
 
-local function generate_ardar_population(planet,minFertility,settlementChance,populationRange,industryFactor,agricultureFactor,technologyFactor,militaryFactor,stabilityFactor)
+local function generate_ardar_population(star,planet,minFertility,settlementChance,populationRange,industryFactor,agricultureFactor,technologyFactor,militaryFactor,stabilityFactor)
 	if (planet.lua.humanFertility>minFertility and math.random()<settlementChance) then
 		local settlement=settlement_class.createNew()
 		settlement.population=gh.randomInRange(populationRange)*planet.lua.humanFertility
@@ -126,6 +126,8 @@ local function generate_ardar_population(planet,minFertility,settlementChance,po
 		planet.faction="Roidhunate of Ardarshir"
 		planet.factionPresence=1
 		planet.factionRange=1
+
+		star.nameGenerator=nameGenerator.generateNameArdarshir
 	end
 end
 
@@ -171,6 +173,8 @@ local function betelgeuse_generate(star)
 			planet.faction="Oligarchy of Betelgeuse"
 			planet.factionPresence=1
 			planet.factionRange=1
+
+			star.nameGenerator=nameGenerator.generateNameBetelgeuse
 		end
 	end
 end
@@ -236,19 +240,19 @@ end
 
 local function ardarshir_inner_generate(star)
 	for k,planet in pairs(star.planets) do
-		generate_ardar_population(planet,0.2,1,{100000000,1000000000},1.5,1.5,0.9,0.8,1.2)
+		generate_ardar_population(star,planet,0.2,1,{100000000,1000000000},1.5,1.5,0.9,0.8,1.2)
 	end
 end
 
 local function ardarshir_outer_generate(star)
 	for k,planet in pairs(star.planets) do
-		generate_ardar_population(planet,0.3,0.7,{10000000,100000000},1,1,0.5,1.2,0.9)
+		generate_ardar_population(star,planet,0.3,0.7,{10000000,100000000},1,1,0.5,1.2,0.9)
 	end
 end
 
 local function ardarshir_fringe_generate(star)
 	for k,planet in pairs(star.planets) do
-		generate_ardar_population(planet,0.5,0.4,{1000000,10000000},0.5,0.5,0.3,1.5,0.6)
+		generate_ardar_population(star,planet,0.5,0.4,{1000000,10000000},0.5,0.5,0.3,1.5,0.6)
 	end
 end
 

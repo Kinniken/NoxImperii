@@ -355,6 +355,13 @@
    <pilot name="Ardar Mowyr" ship="Ardar Mowyr"></pilot>
   </pilots>
  </fleet>
+ <fleet name="Ardar Nova">
+  <ai>empire</ai>
+  <faction>Roidhunate of Ardarshir</faction>
+  <pilots>
+   <pilot name="Ardar Moloch" ship="Ardar Moloch"></pilot>
+  </pilots>
+ </fleet>
  
  
  <!-- Betelgeuse -->

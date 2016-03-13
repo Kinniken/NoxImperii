@@ -51,7 +51,7 @@ function spawn_capship ()
    if r < 0.7 then
       scom.addPilot( pilots, "Ardar Planet", 140 )
    else
-      scom.addPilot( pilots, "Ardar Planet", 165 )
+      scom.addPilot( pilots, "Ardar Nova", 165 )
    end
 
    -- Generate the escorts

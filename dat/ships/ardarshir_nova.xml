@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Ardar Moloch">
+ <base_type>Ardar Moloch</base_type>
+ <GFX sx="12" sy="12">ardarshir_nova</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Cruiser</class>
+ <fabricator>Roidhunate Shipyards</fabricator>
+ <description>The largest ships in the Roidhunate's navy, Moloch-class dreadnoughts are the best Ardar technology can manage. While Imperial admirals would keep such prized ships in reserve, wary of losing them, the Roidhunate sends them on the riskiest missions. If some are lost, new ones can always be built, improved with the lessons learnt.</description>
+<price>19000000</price>
+ <movement>
+  <thrust>100</thrust>
+  <turn>75</turn>
+  <speed>120</speed>
+ </movement>
+ <health>
+  <absorb>70</absorb>
+  <shield>850</shield>
+  <armour>3200</armour>
+  <energy>4400</energy>
+  <shield_regen>12</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>110</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>220</cpu>
+  <crew>55</crew>
+  <mass>5500</mass>
+  <fuel>3000</fuel>
+  <fuel_consumption>500</fuel_consumption>
+  <cargo>500</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+  
+ <slots>
+  <weapon x="-15" y="-10" h="-10" size="large"/>
+  <weapon x="-15" y="10" h="-10" size="large"/>
+  <weapon x="20" y="0" h="-10" size="large"/>
+  <weapon x="4" y="-5" h="-10" size="large"/>
+  <weapon x="4" y="-5" h="-10" size="large"/>
+  <weapon x="4" y="5" h="-10" size="large"/>
+  <weapon x="4" y="5" h="-10" size="large"/>
+  <weapon x="4" y="5" h="-10" size="large"/>
+  <weapon x="4" y="-5" h="-10" size="medium"/>
+  <weapon x="4" y="5" h="-10" size="medium"/>
+  <weapon x="4" y="5" h="-10" size="medium"/>
+  <weapon x="4" y="5" h="-10" size="medium"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+ </slots>
+</ship>

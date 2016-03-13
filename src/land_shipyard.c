@@ -102,7 +102,7 @@ void shipyard_open( unsigned int wid )
          SHIP_TARGET_W, SHIP_TARGET_H, "imgTarget", NULL, 1 );
 
    /* slot types */
-   window_addCust( wid, -20, -160, 148, 70, "cstSlots", 0.,
+   window_addCust( wid, -20, -192, 148, 70, "cstSlots", 0.,
          shipyard_renderSlots, NULL, NULL );
 
    /* stat text */
@@ -161,7 +161,7 @@ void shipyard_open( unsigned int wid )
       free(ships);
    }
    window_addImageArray( wid, 20, 20,
-         iw, ih, "iarShipyard", 64./96.*128., 64.,
+         iw, ih, "iarShipyard", 96., 96.,
          tships, sships, nships, shipyard_update, shipyard_rmouse );
 
    /* write the shipyard stuff */

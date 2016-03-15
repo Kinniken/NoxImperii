@@ -6,7 +6,7 @@
  <sound>engine</sound>
  <class>Fighter</class>
  <fabricator>Roidhunate Shipyards</fabricator>
- <description>Ardar Roeths are the most common fighters in the Roidhunate's navy. Smaller and lighter than the typical Terran meteor-class vessel, they are unusually fast and maneuverable.</description>
+ <description>Ardar Roeths are the most common fighters in the Roidhunate's navy. Smaller and lighter than the typical Terran meteor-class vessel, they are unusually fast and manoeuvrable.</description>
  <price>250000</price>
  <movement>
   <thrust>280</thrust>

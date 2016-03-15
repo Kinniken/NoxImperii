@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Gonder">
+ <pos>
+  <x>800.089733</x>
+  <y>1200.068714</y>
+ </pos>
+ <GFX>
+  <space>M08.png</space>
+  <exterior>ln/desert_cold.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Holy Flame of Ixum</faction>
+  <value>400.000000</value>
+  <range>0</range>
+ </presence>
+ <general>
+  <class>A</class>
+  <population>5000000000</population>
+  <hide>0.0000</hide>
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+  </services>
+  <commodities/>
+  <description>The dry and austere world of Gonder is the homeworld and ancient capital of the Ixumites. It is there, in the mountain fortress of Kum, that burns the original Holy Flame of Ixum, lighted five millennia ago by the founder of the Ixumite religion.
+
+Before the war, Gonder had become somewhat backward. The royal court preferred staying in lusher or more sophisticated planets. But it was still the spiritual heart of the Kingdom, and it is there that the clergy finally rebelled and launched its almost complete overthrow of the ancient monarchy.
+
+Today it is once again the real capital of much of Ixumite space, under the leadership of the Council of Guardians. While they hold Kum and guard its ancient flame, their legitimacy is assured.</description>
+  <bar>The Holy Flame clergy has forbidden alcohol, despising it as a human vice foreign to the "pure nature of the Ixumites". This bar is limited to serving a local herbal brew, mildly intoxicating to human and Ixumites alike.</bar>
+      <luadata>{
+	humanFertility = 0.7,
+	minerals = 0.9,
+	nativeFertility = 0.8,
+	settlements = {
+		holyflame = {
+			agriculture = 0.9,
+			industry = 1.1,
+			population = 3821000000,
+			technology = 1,
+			services = 1.1,
+			military = 1.4,
+			stability = 0.8,
+			suppressGoodDemand = { {type="Roidhun Fine Telloch"},{type="Bordeaux Grands Crus"} }
+		},
+	},
+}</luadata>
+ </general>
+</asset>

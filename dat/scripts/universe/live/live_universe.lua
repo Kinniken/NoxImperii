@@ -2,6 +2,12 @@ include('universe/generate_helper.lua')
 include('universe/objects/class_planets.lua')
 include('universe/live/live_desc.lua')
 
+--[[
+Main class for all the dynamic stuff happening on planets (random or not).
+Used to dynamically calculate available tech groups, commodity prices and quantities,
+and faction presence (including pirates and barbarians).
+]]
+
 
 --Const copy-pasted for auto-completion. Not best design but avoids mistakes
 EXOTIC_FOOD="Exotic Food"
@@ -40,6 +46,8 @@ ANCIENT_TECHNOLOGY="Ancient Technology"
 earth_pos={x=0,y=0}
 ardarshir_pos={x=1800,y=-100}
 betelgeuse_pos={x=1000,y=460}
+tigray_pos={x=900,y=-500}
+gonder_pos={x=1200,y=-600}
 
 local acturus_sector={x=2,y=893}--Diadomes
 local taurus_sector={x=340,y=574}--Fez
@@ -49,30 +57,30 @@ local leo_sector={x=700,y=-50}
 local sol_sector={x=0,y=0}
 
 imperial_sectors={{center=sol_sector,name="Sector Sol",key="sol"},
-	{center=acturus_sector,name="Sector Acturus",key="acturus"},
-	{center=taurus_sector,name="Sector Taurus",key="taurus"},
-	{center=antares_sector,name="Sector Antares",key="antares"},
-	{center=alphacrusis_sector,name="Sector Alpha Crucis",key="alphacrucis"},
-	{center=leo_sector,name="Sector Leo",key="leo"}}
+{center=acturus_sector,name="Sector Acturus",key="acturus"},
+{center=taurus_sector,name="Sector Taurus",key="taurus"},
+{center=antares_sector,name="Sector Antares",key="antares"},
+{center=alphacrusis_sector,name="Sector Alpha Crucis",key="alphacrucis"},
+{center=leo_sector,name="Sector Leo",key="leo"}}
 
 imperial_barbarian_zones={	coreward_barb={name="Coreward Barbarian Wastes",key="coreward_barb"},
-					rimward_barb={name="Rimward Barbarian Wastes",key="rimward_barb"},
-					spinward_barb={name="Spinward Barbarian Wastes",key="spinward_barb"},
-					anti_barb={name="Anti-spinward Barbarian Wastes",key="anti_barb"}}
+rimward_barb={name="Rimward Barbarian Wastes",key="rimward_barb"},
+spinward_barb={name="Spinward Barbarian Wastes",key="spinward_barb"},
+anti_barb={name="Anti-spinward Barbarian Wastes",key="anti_barb"}}
 
 imperial_barbarian_zones_array={imperial_barbarian_zones.coreward_barb,imperial_barbarian_zones.rimward_barb,imperial_barbarian_zones.spinward_barb,imperial_barbarian_zones.anti_barb}
 
 
 roidhunate_barbarian_zones={	coreward_barb={name="Coreward Roidhunate Barbarian Wastes",key="coreward_barb"},
-					rimward_barb={name="Rimward Roidhunate Barbarian Wastes",key="rimward_barb"},
-					spinward_barb={name="Spinward Roidhunate Barbarian Wastes",key="spinward_barb"},
-					anti_barb={name="Anti-spinward Roidhunate Barbarian Wastes",key="anti_barb"}}
+rimward_barb={name="Rimward Roidhunate Barbarian Wastes",key="rimward_barb"},
+spinward_barb={name="Spinward Roidhunate Barbarian Wastes",key="spinward_barb"},
+anti_barb={name="Anti-spinward Roidhunate Barbarian Wastes",key="anti_barb"}}
 
 roidhunate_barbarian_zones_array={roidhunate_barbarian_zones.coreward_barb,roidhunate_barbarian_zones.rimward_barb,roidhunate_barbarian_zones.spinward_barb,roidhunate_barbarian_zones.anti_barb}
 
 
 
-
+--factors to apply to base calculations to change good supply and demand
 local productionFactors={}
 
 productionFactors.humans={[TELLOCH]={price=3}}--mostly empty, humans are default
@@ -97,6 +105,26 @@ productionFactors.betelgeuse={
 	[NATIVE_WEAPONS]={demand=2},[BASIC_WEAPONS]={supply=1},[PRIMITIVE_ARMAMENT]={supply=1,demand=1},[ARMAMENT]={supply=0.7,demand=1.5},[MODERN_ARMAMENT]={supply=0.3,demand=1}
 }
 
+--Royal Ixum: some luxury, lots of military, little consumer good
+productionFactors.royalixumites={
+	[FOOD]={demand=0.7,supply=0.7},[EXOTIC_FOOD]={demand=1},[GOURMET_FOOD]={demand=1,supply=1},[BORDEAUX]={demand=3,price=3},[TELLOCH]={demand=3,price=3},
+	[PRIMITIVE_CONSUMER]={demand=0.5,supply=1},[CONSUMER_GOODS]={demand=0.5,supply=1},
+	[LUXURY_GOODS]={demand=1.5,supply=1},[EXOTIC_FURS]={demand=1.5},[NATIVE_ARTWORK]={demand=0.5},[NATIVE_SCULPTURES]={demand=0.5},
+	[ORE]={demand=1},[PRIMITIVE_INDUSTRIAL]={supply=1.2,demand=1.5},[INDUSTRIAL]={supply=0.7,demand=1},[MODERN_INDUSTRIAL]={supply=0.5,demand=0.7},[EXOTIC_ORGANIC]={demand=0.5},
+	[HUMAN_MEDICINE]={demand=0,supply=0},
+	[NATIVE_WEAPONS]={demand=2},[BASIC_WEAPONS]={demand=2,supply=1},[PRIMITIVE_ARMAMENT]={supply=1,demand=1.5},[ARMAMENT]={supply=1,demand=1.5},[MODERN_ARMAMENT]={supply=0.5,demand=1.5}
+}
+
+--Holy Flame: lots of military, little consumer good, little luxury
+productionFactors.holyflame={
+	[FOOD]={demand=0.7,supply=0.7},[EXOTIC_FOOD]={demand=0.5},[GOURMET_FOOD]={demand=0.5,supply=0.5},[BORDEAUX]={demand=0},[TELLOCH]={demand=0},
+	[PRIMITIVE_CONSUMER]={demand=0.5,supply=1},[CONSUMER_GOODS]={demand=0.5,supply=1},
+	[LUXURY_GOODS]={demand=0.5,supply=0.5},[EXOTIC_FURS]={demand=0.5},[NATIVE_ARTWORK]={demand=0},[NATIVE_SCULPTURES]={demand=0},
+	[ORE]={demand=1},[PRIMITIVE_INDUSTRIAL]={supply=1.2,demand=1.5},[INDUSTRIAL]={supply=0.7,demand=1},[MODERN_INDUSTRIAL]={supply=0.5,demand=0.7},[EXOTIC_ORGANIC]={demand=0.5},
+	[HUMAN_MEDICINE]={demand=0,supply=0},
+	[NATIVE_WEAPONS]={demand=0},[BASIC_WEAPONS]={demand=2,supply=1},[PRIMITIVE_ARMAMENT]={supply=1,demand=1.5},[ARMAMENT]={supply=1,demand=1.5},[MODERN_ARMAMENT]={supply=0.5,demand=1.5}
+}
+
 --Civilized natives
 productionFactors.natives={
 	[FOOD]={demand=0,supply=0},[EXOTIC_FOOD]={demand=1.5},[GOURMET_FOOD]={demand=0.5,supply=0.5},[BORDEAUX]={demand=0},[TELLOCH]={demand=0},
@@ -119,7 +147,7 @@ productionFactors.barbarians={
 
 function initStatusVar()
 
-	var.push("universe_emperor","Georgios Manuel Krishna Murasaki")
+	var.push("universe_emperor","George Michel Ramanendra IV")
 
 	for _,v in pairs(imperial_sectors) do
 		var.push("universe_stability_"..v.key,0.9)
@@ -138,11 +166,11 @@ end
 function updateUniverseDesc()
 	local desc=[[The Empire is weak - damaged by corruption, hounded by barbarians, locked in a deadly rivalry with the Roidhunate.
 
-Current Emperor: His Imperial Majesty, High Emperor ]]..var.peek("universe_emperor")..[[
+	Current Emperor: His Imperial Majesty, High Emperor ]]..var.peek("universe_emperor")..[[
 
-Current stability of the Imperial Sectors:
+	Current stability of the Imperial Sectors:
 
-]]
+	]]
 
 	for _,v in ipairs(imperial_sectors) do
 		local stability=var.peek("universe_stability_"..v.key)
@@ -151,11 +179,11 @@ Current stability of the Imperial Sectors:
 
 	desc=desc..[[
 
-Beyond the Empire's borders, barbarians are rising to raid civilized worlds.
+	Beyond the Empire's borders, barbarians are rising to raid civilized worlds.
 
-Current barbarian activity:
+	Current barbarian activity:
 
-]]
+	]]
 
 	for _,v in ipairs(imperial_barbarian_zones_array) do
 		local activity=var.peek("universe_barbarian_activity_"..v.key)
@@ -627,14 +655,17 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 	end
 end
 
+--uses the extra presence mechanism to add presence from other factions
+--than the asset's owners. This includes "good" ones like traders but also
+--pirates
 local function generateExtraPresences(planet,sectorStability)
 
-  local f=planet.c:faction()
-  local factionName=""
+	local f=planet.c:faction()
+	local factionName=""
 
 	if (f and not (f==faction.get("Natives"))) then
 		factionName=f:name()
-  end
+	end
 
 
 	if (planet.lua.settlements.humans) then
@@ -648,20 +679,19 @@ local function generateExtraPresences(planet,sectorStability)
 		if (settlement.technology>1.2) then
 			range=3
 		end
-    
-    if (factionName=="Empire of Terra") then
-      planet.c:setFactionExtraPresence("Imperial Trader",amount,range)
-      planet.c:setFactionExtraPresence("Independent Trader",amount/2,range)
-    else
-      planet.c:setFactionExtraPresence("Independent Trader",amount,range)
-    end
+
+		if (factionName=="Empire of Terra") then
+			planet.c:setFactionExtraPresence("Imperial Trader",amount,range)
+			planet.c:setFactionExtraPresence("Independent Trader",amount/2,range)
+		else
+			planet.c:setFactionExtraPresence("Independent Trader",amount,range)
+		end
 
 		if (settlement.stability<0.5) then
 			local amount=100*(1-settlement.stability*2)/sectorStability
 			local range=2
 			planet.c:setFactionExtraPresence("Pirate",amount,range)
 		end
-
 	end
 
 	if (planet.lua.settlements.ardars) then
@@ -705,21 +735,71 @@ local function generateExtraPresences(planet,sectorStability)
 			planet.c:setFactionExtraPresence("Pirate",amount,range)
 		end
 	end
+
+
+	if (planet.lua.settlements.royalixumites) then
+		local settlement=planet.lua.settlements.royalixumites
+
+		local amount=100*(settlement.services+settlement.industry+settlement.agriculture/2)*sectorStability
+		local range=1
+		if (settlement.technology>0.8) then
+			range=2
+		end
+		if (settlement.technology>1.2) then
+			range=3
+		end
+
+		planet.c:setFactionExtraPresence("Imperial Trader",amount,range)
+		planet.c:setFactionExtraPresence("Independent Trader",amount/2,range)
+		planet.c:setFactionExtraPresence("Ardar Trader",-1000,1)
+
+		if (settlement.stability<0.5) then
+			local amount=100*(1-settlement.stability*2)/sectorStability
+			local range=2
+			planet.c:setFactionExtraPresence("Pirate",amount,range)
+		end
+	end
+
+	if (planet.lua.settlements.holyflame) then
+		local settlement=planet.lua.settlements.holyflame
+
+		local amount=100*(settlement.services+settlement.industry+settlement.agriculture/2)*sectorStability
+		local range=1
+		if (settlement.technology>0.8) then
+			range=2
+		end
+		if (settlement.technology>1.2) then
+			range=3
+		end
+
+		planet.c:setFactionExtraPresence("Ardar Trader",amount,range)
+		planet.c:setFactionExtraPresence("Independent Trader",amount/2,range)
+
+		if (settlement.stability<0.5) then
+			local amount=100*(1-settlement.stability*2)/sectorStability
+			local range=2
+			planet.c:setFactionExtraPresence("Pirate",amount,range)
+		end
+	end
+
+
 end
 
 local function removeAllTechGroups(planet)
-  for i=1,5 do
-    planet.c:removeTechGroup("Generic Civil "..i)
-    planet.c:removeTechGroup("Generic Military "..i)
-    planet.c:removeTechGroup("Empire Civil "..i)
-    planet.c:removeTechGroup("Empire Military "..i)
-    planet.c:removeTechGroup("Roidhunate Civil "..i)
-    planet.c:removeTechGroup("Roidhunate Military "..i)
-    planet.c:removeTechGroup("Betelgeuse Civil "..i)
-    planet.c:removeTechGroup("Betelgeuse Military "..i)
-    planet.c:removeTechGroup("Barbarian Civil "..i)
-    planet.c:removeTechGroup("Barbarian Military "..i)
-  end
+	for i=1,5 do
+		planet.c:removeTechGroup("Generic Civil "..i)
+		planet.c:removeTechGroup("Generic Military "..i)
+		planet.c:removeTechGroup("Empire Civil "..i)
+		planet.c:removeTechGroup("Empire Military "..i)
+		planet.c:removeTechGroup("Roidhunate Civil "..i)
+		planet.c:removeTechGroup("Roidhunate Military "..i)
+		planet.c:removeTechGroup("Betelgeuse Civil "..i)
+		planet.c:removeTechGroup("Betelgeuse Military "..i)
+		planet.c:removeTechGroup("Royal Ixum Military "..i)
+		planet.c:removeTechGroup("Holy Flame Military "..i)
+		planet.c:removeTechGroup("Barbarian Civil "..i)
+		planet.c:removeTechGroup("Barbarian Military "..i)
+	end
 end
 
 local function generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,faction)
@@ -775,98 +855,102 @@ local function generateCivilizedPlanetServices(planet)
 			bestMilitary=settlement.military
 		end
 	end
-  
+
   --test to allow this to run in LUA editor
   if planet.c["system"] then
-    local sectorName=planet.c:system():getZone()
-    local sectorStability=getSectorStability(sectorName)
+  	local sectorName=planet.c:system():getZone()
+  	local sectorStability=getSectorStability(sectorName)
   else
-    local sectorStability=1
+  	local sectorStability=1
   end
 
-	if not sectorStability then
-		sectorStability=1
-	end
+  if not sectorStability then
+  	sectorStability=1
+  end
 
-	bestIndustry=bestIndustry*sectorStability
-	bestTechnology=bestTechnology*sectorStability
+  bestIndustry=bestIndustry*sectorStability
+  bestTechnology=bestTechnology*sectorStability
 
-	planet.c:addService("r")
+  planet.c:addService("r")
 
-	if (bestPop>1000) then
-		planet.c:addService("b")
-		planet.c:addService("m")
-		planet.c:addService("c")
-	else
-		planet.c:removeService("b")
-		planet.c:removeService("m")
-		planet.c:removeService("c")
-	end
+  if (bestPop>1000) then
+  	planet.c:addService("b")
+  	planet.c:addService("m")
+  	planet.c:addService("c")
+  else
+  	planet.c:removeService("b")
+  	planet.c:removeService("m")
+  	planet.c:removeService("c")
+  end
 
-	if (bestIndustry>0.5) then
-		planet.c:addService("o")
-	else
-		planet.c:removeService("o")
-	end
+  if (bestIndustry>0.5) then
+  	planet.c:addService("o")
+  else
+  	planet.c:removeService("o")
+  end
 
-	if (bestIndustry>0.9) then
-		planet.c:addService("s")
-	else
-		planet.c:removeService("s")
-	end
+  if (bestIndustry>0.9) then
+  	planet.c:addService("s")
+  else
+  	planet.c:removeService("s")
+  end
 
-	removeAllTechGroups(planet)
+  removeAllTechGroups(planet)
 
-	local f=planet.c:faction()
+  local f=planet.c:faction()
 
-	if (f and not (f==faction.get("Natives"))) then
-		factionName=f:name()
-    
-  generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Generic")
+  if (f and not (f==faction.get("Natives"))) then
+  	factionName=f:name()
 
-		if (factionName=="Empire of Terra") then
-			generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Empire")
-		elseif (factionName=="Roidhunate of Ardarshir") then
-			generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Roidhunate")
-		elseif (factionName=="Oligarchy of Betelgeuse") then
-			generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Betelgeuse")
-		elseif (factionName=="Barbarians") then
-			generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Barbarian")
-		end
+  	generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Generic")
 
-  generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Generic")
+  	if (factionName=="Empire of Terra") then
+  		generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Empire")
+  	elseif (factionName=="Roidhunate of Ardarshir") then
+  		generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Roidhunate")
+  	elseif (factionName=="Oligarchy of Betelgeuse") then
+  		generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Betelgeuse")
+  	elseif (factionName=="Barbarians") then
+  		generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Barbarian")
+  	end
 
-		if (factionName=="Empire of Terra") then
-			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Empire")
-		elseif (factionName=="Roidhunate of Ardarshir") then
-			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Roidhunate")
-		elseif (factionName=="Oligarchy of Betelgeuse") then
-			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Betelgeuse")
-		elseif (factionName=="Barbarians") then
-			generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Barbarian")
-		end
+  	generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Generic")
+
+  	if (factionName=="Empire of Terra") then
+  		generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Empire")
+  	elseif (factionName=="Roidhunate of Ardarshir") then
+  		generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Roidhunate")
+  	elseif (factionName=="Oligarchy of Betelgeuse") then
+  		generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Betelgeuse")
+  	elseif (factionName=="Barbarians") then
+  		generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Barbarian")
+  	elseif (factionName=="Kingdom of Ixum") then
+  		generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Royal Ixum")
+  	elseif (factionName=="Holy Flame of Ixum") then
+  		generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Holy Flame")
+  	end
 
 
-		
-		if (bestTechnology<0.5) then
-			range=1
-		elseif (bestTechnology<1) then
-			range=2
-		else
-			range=3
-		end
 
-		if (factionName=="Barbarians") then
-			range=range*3
-			presence=math.pow(bestPop/10,1/3.4)*bestTechnology/sectorStability
-		else
-			presence=math.pow(bestPop/10,1/3.4)*bestTechnology*sectorStability
-		end
-		
-		planet.c:setFactionPresence(factionName,presence,range)
-	end
-	
-	generateExtraPresences(planet,sectorStability)
+  	if (bestTechnology<0.5) then
+  		range=1
+  	elseif (bestTechnology<1) then
+  		range=2
+  	else
+  		range=3
+  	end
+
+  	if (factionName=="Barbarians") then
+  		range=range*3
+  		presence=math.pow(bestPop/10,1/3.4)*bestTechnology/sectorStability
+  	else
+  		presence=math.pow(bestPop/10,1/3.4)*bestTechnology*sectorStability
+  	end
+
+  	planet.c:setFactionPresence(factionName,presence,range)
+  end
+
+  generateExtraPresences(planet,sectorStability)
 end
 
 local function handleSettlementExtraDemandAndSupply(settlement,commodities)

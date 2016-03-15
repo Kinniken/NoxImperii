@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Holy Flame Vach Rueth">
+ <base_type>Holy Flame Vach Rueth</base_type>
+ <GFX sx="12" sy="12">holyflame_comet</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Destroyer</class>
+ <fabricator>Gonder Shipyards</fabricator>
+ <description>Vach Rueth frigates produced by the Holy Flame are distinctly weaker than their Ardar models. To compensate, Holy Flame engineers slap extra armour on top, at the predictable cost of mobility. They remain dangerous foes - at least in number.</description>
+
+<price>800000</price>
+ <movement>
+  <thrust>150</thrust>
+  <turn>100</turn>
+  <speed>170</speed>
+ </movement>
+ <health>
+  <absorb>22</absorb>
+  <shield>400</shield>
+  <armour>600</armour>
+  <energy>800</energy>
+  <shield_regen>7</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>35</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>64</cpu>
+  <crew>10</crew>
+  <mass>290</mass>
+  <fuel>1000</fuel>
+  <fuel_consumption>150</fuel_consumption>
+  <cargo>30</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+ <slots>
+  <weapon x="12" y="0" h="0" size="medium"/>
+  <weapon x="12" y="0" h="0" size="medium"/>
+  <weapon x="-3" y="0" h="2" size="small"/>
+  <weapon x="-3" y="0" h="2" size="small"/>
+  <weapon x="-3" y="0" h="2" size="small"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="small"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+ </slots>
+</ship>

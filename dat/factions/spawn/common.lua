@@ -1,3 +1,4 @@
+include('universe/generate_helper.lua')
 
 
 scom = {}
@@ -58,6 +59,11 @@ scom.choose = function( stable )
    local r = rnd.rnd()
    for k,v in ipairs( stable ) do
       if r < v["chance"] then
+        if (v["func"]()==nil) then
+          print("Error: null spawn function from table")
+          gh.tprint(stable)
+        end
+
          return v["func"]()
       end
    end

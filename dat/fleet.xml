@@ -338,16 +338,16 @@
   <ai>empire</ai>
   <faction>Roidhunate of Ardarshir</faction>
   <pilots>
-   <pilot name="Ardar Brythioch" ship="Ardar Brythioch"></pilot>
-  </pilots>
- </fleet>
-  <fleet name="Ardar Continent">
-  <ai>empire</ai>
-  <faction>Roidhunate of Ardarshir</faction>
-  <pilots>
    <pilot name="Ardar Vach Rueth" ship="Ardar Vach Rueth"></pilot>
   </pilots>
   </fleet>
+ <fleet name="Ardar Continent">
+  <ai>empire</ai>
+  <faction>Roidhunate of Ardarshir</faction>
+  <pilots>
+   <pilot name="Ardar Brythioch" ship="Ardar Brythioch"></pilot>
+  </pilots>
+ </fleet>
   <fleet name="Ardar Planet">
   <ai>empire</ai>
   <faction>Roidhunate of Ardarshir</faction>
@@ -439,5 +439,64 @@
   </pilots>
  </fleet>
  
+ <!-- Kingdom of Ixum -->
+ <fleet name="Royal Ixum Meteor">
+  <ai>empire</ai>
+  <faction>Kingdom of Ixum</faction>
+  <pilots>
+   <pilot name="Royal Ixum Tunguska" ship="Royal Ixum Tunguska"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Royal Ixum Comet">
+  <ai>empire</ai>
+  <faction>Kingdom of Ixum</faction>
+  <pilots>
+   <pilot name="Royal Ixum Halley" ship="Royal Ixum Halley"></pilot>
+  </pilots>
+ </fleet>
+ <fleet name="Royal Ixum Continent">
+  <ai>empire</ai>
+  <faction>Kingdom of Ixum</faction>
+  <pilots>
+   <pilot name="Royal Ixum Asieneuve" ship="Royal Ixum Asieneuve"></pilot>
+  </pilots>
+ </fleet>
+  <fleet name="Royal Ixum Planet">
+  <ai>empire</ai>
+  <faction>Kingdom of Ixum</faction>
+  <pilots>
+   <pilot name="Royal Ixum Jupiter" ship="Royal Ixum Jupiter"></pilot>
+  </pilots>
+ </fleet>
+ 
+ <!-- Holy Flame of Ixum -->
+ <fleet name="Holy Flame Meteor">
+  <ai>empire</ai>
+  <faction>Holy Flame of Ixum</faction>
+  <pilots>
+   <pilot name="Holy Flame Roeth" ship="Holy Flame Roeth"></pilot>
+  </pilots>
+ </fleet>
+  <fleet name="Holy Flame Comet">
+  <ai>empire</ai>
+  <faction>Holy Flame of Ixum</faction>
+  <pilots>
+   <pilot name="Holy Flame Vach Rueth" ship="Holy Flame Vach Rueth"></pilot>
+  </pilots>
+  </fleet>
+   <fleet name="Holy Flame Continent">
+  <ai>empire</ai>
+  <faction>Holy Flame of Ixum</faction>
+  <pilots>
+   <pilot name="Holy Flame Brythioch" ship="Holy Flame Brythioch"></pilot>
+  </pilots>
+ </fleet>
+  <fleet name="Holy Flame Planet">
+  <ai>empire</ai>
+  <faction>Holy Flame of Ixum</faction>
+  <pilots>
+   <pilot name="Holy Flame Mowyr" ship="Holy Flame Mowyr"></pilot>
+  </pilots>
+ </fleet>
  
 </Fleets>

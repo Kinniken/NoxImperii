@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Royal Ixum Tunguska">
+ <base_type>Royal Ixum Tunguska</base_type>
+ <GFX>royalixum_meteor</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Fighter</class>
+ <fabricator>Royal Ixum Shipyards</fabricator>
+ <description>These fighters of Terran designs are the only military ships still produced by the remains of the Royal Ixum shipyards. They are poorly-made copies of the Terran version, though somewhat more heavily-armed.</description>
+ <price>250000</price>
+ <movement>
+  <thrust>250</thrust>
+  <turn>145</turn>
+  <speed>290</speed>
+ </movement>
+ <health>
+  <absorb>8</absorb>
+  <shield>180</shield>
+  <armour>60</armour>
+  <energy>500</energy>
+  <shield_regen>6</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>20</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>28</cpu>
+  <crew>2</crew>
+  <mass>86</mass>
+  <fuel>400</fuel>
+  <fuel_consumption>100</fuel_consumption>
+  <cargo>10</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+ <slots>
+  <weapon x="12" y="0" h="0" size="small"/>
+  <weapon x="-12" y="0" h="0" size="small"/>
+  <weapon x="-3" y="0" h="2" size="small"/>
+  <weapon x="3" y="0" h="2" size="small"/>
+  <utility size="small"/>
+  <utility size="small"/>
+  <structure size="small"/>
+  <structure size="small"/>
+ </slots>
+</ship>

@@ -144,12 +144,23 @@
 		<item>Luxury Goods</item>
 	</tech>
 
+
+
+
+	<!-- Long Night setup : lots of tech groups for factions
+	(or generic) coming in five levels. They are granted by the live service
+	scripts based on planet level plus specific criteria.
+
+	For example, the Imperial Military groups are granted to Imperial planets based
+	on their technology and military ratings. -->
+
+
 <tech name="Generic Military 1">
     <item>Wasp</item>
-		<item>Laser Cannon MK1</item>
-		<item>BioPlasma Organ Stage 1</item>
-		<item>Gauss Gun</item>
-		<item>Mass Driver MK1</item>
+	<item>Laser Cannon MK1</item>
+	<item>BioPlasma Organ Stage 1</item>
+	<item>Gauss Gun</item>
+	<item>Mass Driver MK1</item>
 	</tech>
 	<tech name="Generic Military 2">
   <item>Shark</item>
@@ -185,7 +196,8 @@
   
 	<tech name="Empire Military 1">
 		<item>Imperial Tunguska</item>
-    <item>Lancelot</item>
+
+    	<item>Lancelot</item>
 		<item>Laser Cannon MK1</item>
 		<item>Laser Turret MK1</item>
 		<item>Plasma Blaster MK1</item>
@@ -193,7 +205,8 @@
 		<item>Turreted Gauss Gun</item>
 	</tech>
 	<tech name="Empire Military 2">
-    <item>Lancelot</item>
+    	<item>Imperial Halley</item>
+    	<item>Lancelot</item>
 		<item>BioPlasma Organ Stage 1</item>
 		<item>Gauss Gun</item>
 		<item>Ion Cannon</item>
@@ -209,7 +222,7 @@
 	</tech>
 	<tech name="Empire Military 3">
 		<item>Imperial Asieneuve</item>
-    <item>Buffel</item>
+    	<item>Buffel</item>
     
 		<item>BioPlasma Organ Stage 2</item>
 		<item>Heavy Ion Cannon</item>
@@ -225,7 +238,7 @@
 	</tech>
 	<tech name="Empire Military 4">
 		<item>Imperial Jupiter</item>
-    <item>Kestrel</item>
+    	<item>Kestrel</item>
 		<item>Heavy Ripper Cannon</item>
 		<item>Mass Driver MK3</item>
 		<item>Plasma Cluster Cannon MK3</item>
@@ -391,6 +404,128 @@
 	<tech name="Barbarian Military 5">
     
 	</tech>
+
+
+
+
+
+
+<tech name="Royal Ixum Military 1">
+		<item>Royal Ixum Tunguska</item>
+    	<item>Lancelot</item>
+		<item>Laser Cannon MK1</item>
+		<item>Laser Turret MK1</item>
+		<item>Plasma Blaster MK1</item>
+		<item>Razor Turret MK1</item>
+		<item>Turreted Gauss Gun</item>
+	</tech>
+	<tech name="Royal Ixum Military 2">
+    	<item>Royal Ixum Halley</item>
+    	<item>Lancelot</item>
+		<item>BioPlasma Organ Stage 1</item>
+		<item>Gauss Gun</item>
+		<item>Ion Cannon</item>
+		<item>Laser Cannon MK2</item>
+		<item>Laser Turret MK2</item>
+		<item>Mass Driver MK1</item>
+		<item>Orion Beam</item>
+		<item>Plasma Cluster Cannon MK1</item>
+		<item>Plasma Turret MK1</item>
+		<item>Razor MK1</item>
+		<item>Razor Turret MK2</item>
+		<item>Ripper Cannon</item>
+	</tech>
+	<tech name="Royal Ixum Military 3">
+		<item>Royal Ixum Asieneuve</item>
+    	<item>Buffel</item>
+    
+		<item>BioPlasma Organ Stage 2</item>
+		<item>Heavy Ion Cannon</item>
+		<item>Heavy Ion Turret</item>
+		<item>Laser Cannon MK3</item>
+		<item>Laser Turret MK3</item>
+		<item>Mass Driver MK2</item>
+		<item>Plasma Blaster MK2</item>
+		<item>Plasma Cluster Cannon MK2</item>
+		<item>Plasma Turret MK2</item>
+		<item>Razor MK2</item>
+		<item>Vulcan Gun</item>
+	</tech>
+	<tech name="Royal Ixum Military 4">
+		<item>Royal Ixum Jupiter</item>
+    	<item>Kestrel</item>
+		<item>Heavy Ripper Cannon</item>
+		<item>Mass Driver MK3</item>
+		<item>Plasma Cluster Cannon MK3</item>
+		<item>Railgun</item>
+		<item>Turbolaser</item>
+	</tech>
+	<tech name="Royal Ixum Military 5">
+		<item>Ragnarok Beam</item>
+		<item>Turreted Vulcan Gun</item>
+	</tech>
+
+
+
+
+
+
+
+<tech name="Holy Flame Military 1">
+		<item>Holy Flame Roeth</item>
+		<item>Laser Cannon MK1</item>
+		<item>Laser Turret MK1</item>
+		<item>Plasma Blaster MK1</item>
+		<item>Razor Turret MK1</item>
+		<item>Turreted Gauss Gun</item>
+	</tech>
+	<tech name="Holy Flame Military 2">
+		<item>Holy Flame Vach Rueth</item>
+		<item>BioPlasma Organ Stage 1</item>
+		<item>Gauss Gun</item>
+		<item>Ion Cannon</item>
+		<item>Laser Cannon MK2</item>
+		<item>Laser Turret MK2</item>
+		<item>Mass Driver MK1</item>
+		<item>Orion Beam</item>
+		<item>Plasma Cluster Cannon MK1</item>
+		<item>Plasma Turret MK1</item>
+		<item>Razor MK1</item>
+		<item>Razor Turret MK2</item>
+		<item>Ripper Cannon</item>
+	</tech>
+	<tech name="Holy Flame Military 3">
+		<item>Holy Flame Brythioch</item>
+		<item>BioPlasma Organ Stage 2</item>
+		<item>Laser Cannon MK3</item>
+		<item>Laser Turret MK3</item>
+		<item>Mass Driver MK2</item>
+		<item>Plasma Blaster MK2</item>
+		<item>Plasma Cluster Cannon MK2</item>
+		<item>Plasma Turret MK2</item>
+		<item>Razor MK2</item>
+		<item>Vulcan Gun</item>
+		<item>Mass Driver MK3</item>
+		<item>Railgun</item>
+	</tech>
+	<tech name="Holy Flame Military 4">
+		<item>Holy Flame Mowyr</item>
+    	<item>Merkhrioch</item>
+		<item>Heavy Ripper Cannon</item>
+		<item>Plasma Cluster Cannon MK3</item>
+		<item>Heavy Laser</item>
+		<item>Railgun Turret</item>
+		<item>Razor MK3</item>
+	</tech>
+	<tech name="Holy Flame Military 5">
+		<item>Turreted Vulcan Gun</item>
+		<item>Neutron Disruptor</item>
+		<item>Razor Turret MK3</item>
+	</tech>
+
+
+
+
   
   <tech name="Generic Civil 1">
     <item>Endeavour</item>

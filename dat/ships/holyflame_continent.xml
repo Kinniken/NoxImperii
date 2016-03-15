@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Holy Flame Brythioch">
+ <base_type>Holy Flame Brythioch</base_type>
+ <GFX sx="12" sy="12">holyflame_continent</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Destroyer</class>
+ <fabricator>Gonder Shipyards</fabricator>
+ <description>The first series of Brythioches produced on Gonder were so disastrous most never made it to the front. To the great displeasure of the Council, the Roidhunate insisted that the next ones be built with the strict oversight of Ardar engineers. The resulting ship is much improved, matching the original in all but shield and energy output.</description>
+
+<price>2100000</price>
+ <movement>
+  <thrust>190</thrust>
+  <turn>120</turn>
+  <speed>180</speed>
+ </movement>
+ <health>
+  <absorb>45</absorb>
+  <shield>450</shield>
+  <armour>900</armour>
+  <energy>1500</energy>
+  <shield_regen>8</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>50</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>96</cpu>
+  <crew>20</crew>
+  <mass>1350</mass>
+  <fuel>1600</fuel>
+  <fuel_consumption>200</fuel_consumption>
+  <cargo>100</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+ <slots>
+  <weapon x="-15" y="-10" h="-10" size="large"/>
+  <weapon x="-15" y="10" h="-10" size="large"/>
+  <weapon x="20" y="0" h="-10" size="large"/>
+  <weapon x="4" y="-5" h="-10" size="large"/>
+  <weapon x="4" y="5" h="-10" size="large"/>
+  <weapon x="4" y="5" h="-10" size="medium"/>
+  <weapon x="4" y="5" h="-10" size="medium"/>
+  <utility size="large"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <structure size="large"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+ </slots>
+</ship>

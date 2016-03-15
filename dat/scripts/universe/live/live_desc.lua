@@ -78,7 +78,15 @@ function generateLiveSettlementsDesc(planet)
 					desc=desc.."."
 				end
 			else
-				desc=desc.."The "..k.." population is estimated at "..gh.prettyLargeNumber(settlement.population)
+				local popName=k
+
+				if (k=="royalixumites" or k=="holyflame") then
+					popName="Ixumite"
+				end
+
+
+
+				desc=desc.."The "..popName.." population is estimated at "..gh.prettyLargeNumber(settlement.population)
 				desc=desc..", with a "..industryQualifier(settlement.industry).." industry, a "..agricultureQualifier(settlement.agriculture).." agriculture and a "..serviceQualifier(settlement.services).." service economy."
 				desc=desc.." The technology level on the world is "..technologyQualifier(settlement.technology).."."
 				desc=desc.." The military presence on the world is "..militaryQualifier(settlement.military).."."

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Holy Flame Mowyr">
+ <base_type>Holy Flame Mowyr</base_type>
+ <GFX sx="12" sy="12">holyflame_planet</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Cruiser</class>
+ <fabricator>Gonder Shipyards</fabricator>
+ <description>Mowyers cruisers are the only ships in the Holy Flame navy to be entirely produced by the Roidhunate and sold as-is to the theocracy. Their poor performance compared to the ships serving in the Ardar navy is thus due entirely to poor maintenance.</description>
+
+
+<price>8000000</price>
+ <movement>
+  <thrust>120</thrust>
+  <turn>75</turn>
+  <speed>120</speed>
+ </movement>
+ <health>
+  <absorb>55</absorb>
+  <shield>600</shield>
+  <armour>2100</armour>
+  <energy>2300</energy>
+  <shield_regen>8</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>75</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>150</cpu>
+  <crew>30</crew>
+  <mass>3100</mass>
+  <fuel>1800</fuel>
+  <fuel_consumption>300</fuel_consumption>
+  <cargo>320</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+  
+ <slots>
+  <weapon x="-15" y="-10" h="-10" size="large"/>
+  <weapon x="-15" y="10" h="-10" size="large"/>
+  <weapon x="20" y="0" h="-10" size="large"/>
+  <weapon x="4" y="-5" h="-10" size="large"/>
+  <weapon x="4" y="-5" h="-10" size="large"/>
+  <weapon x="4" y="5" h="-10" size="large"/>
+  <weapon x="4" y="5" h="-10" size="large"/>
+  <weapon x="4" y="5" h="-10" size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+ </slots>
+</ship>

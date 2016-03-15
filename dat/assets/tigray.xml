@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Tigray">
+ <pos>
+  <x>-300.089733</x>
+  <y>-1100.068714</y>
+ </pos>
+ <GFX>
+  <space>M07.png</space>
+  <exterior>ln/coast_warm.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Kingdom of Ixum</faction>
+  <value>400.000000</value>
+  <range>0</range>
+ </presence>
+ <general>
+  <class>A</class>
+  <population>5000000000</population>
+  <hide>0.0000</hide>
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+  </services>
+  <commodities/>
+  <description>The world of Tigray was a minor planet in the Kingdom before the war, known mostly as a base for trade with the Empire. The Ixumite court relocated there early in the war under strong Terran protection; the hastily-built "palace" they settled in is a far cry from Gonder's legendary royal fortresses. Tigray's damp, cold climate only serves to make the exiles more miserable, used as they are to Gonder's desert conditions.</description>
+  <bar>The taste of the royal elite for Imperial alcohol has not diminished in exile on Tigray, and the spaceport's bar has a selection of whiskeys unmatched for light-years around.</bar>
+      <luadata>{
+	humanFertility = 1,
+	minerals = 0.7,
+	nativeFertility = 0.8,
+	settlements = {
+		royalixumites = {
+			agriculture = 0.7,
+			industry = 1.1,
+			population = 1250000000,
+			technology = 1.1,
+			services = 1.2,
+			military = 1.1,
+			stability = 0.7,
+			extraGoodsDemand = { {type="Roidhun Fine Telloch",demand=20,price=3}, {type="Bordeaux Grands Crus",demand=20,price=3} }
+		},
+	},
+}</luadata>
+ </general>
+</asset>

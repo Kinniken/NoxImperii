@@ -118,6 +118,8 @@
    <enemy>Roidhunate of Ardarshir</enemy>
    <enemy>Oligarchy of Betelgeuse</enemy>
    <enemy>Barbarians</enemy>
+   <enemy>Kingdom of Ixum</enemy>
+   <enemy>Holy Flame of Ixum</enemy>
   </enemies>
  </faction>
  
@@ -132,6 +134,7 @@
   <standing>empire</standing>
   <equip>empire</equip>
   <allies>
+    <ally>Kingdom of Ixum</ally>
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
@@ -148,12 +151,14 @@
   <standing>roidhunate</standing>
   <equip>roidhunate</equip>
   <allies>
+    <ally>Holy Flame of Ixum</ally>
   </allies>
   <enemies>
    <enemy>Pirate</enemy>
    <enemy>Barbarians</enemy>
   </enemies>
  </faction>
+
 <faction name="Oligarchy of Betelgeuse">
   <known/>
   <logo>betelgeuse</logo>
@@ -167,6 +172,42 @@
   <enemies>
    <enemy>Pirate</enemy>
    <enemy>Barbarians</enemy>
+  </enemies>
+ </faction>
+
+  <faction name="Kingdom of Ixum">
+  <known/>
+  <logo>royalixum</logo>
+  <colour>Red</colour>
+  <player>5</player>
+  <spawn>royalixum</spawn>
+  <standing>royalixum</standing>
+  <equip>royalixum</equip>
+  <allies>
+    <ally>Empire of Terra</ally>
+  </allies>
+  <enemies>
+   <enemy>Pirate</enemy>
+   <enemy>Barbarians</enemy>
+   <enemy>Holy Flame of Ixum</enemy>
+  </enemies>
+ </faction>
+ 
+  <faction name="Holy Flame of Ixum">
+  <known/>
+  <logo>holyflame</logo>
+  <colour>white</colour>
+  <player>0</player>
+  <spawn>holyflame</spawn>
+  <standing>holyflame</standing>
+  <equip>holyflame</equip>
+  <allies>
+    <ally>Roidhunate of Ardarshir</ally>
+  </allies>
+  <enemies>
+   <enemy>Pirate</enemy>
+   <enemy>Barbarians</enemy>
+   <enemy>Kingdom of Ixum</enemy>
   </enemies>
  </faction>
  
@@ -189,6 +230,8 @@
    <enemy>Empire of Terra</enemy>
    <enemy>Roidhunate of Ardarshir</enemy>
    <enemy>Oligarchy of Betelgeuse</enemy>
+   <enemy>Kingdom of Ixum</enemy>
+   <enemy>Holy Flame of Ixum</enemy>
    <enemy>Pirate</enemy>
   </enemies>
   </faction>

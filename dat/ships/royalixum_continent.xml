@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Royal Ixum Asieneuve">
+ <base_type>Royal Ixum Asieneuve</base_type>
+ <GFX sx="12" sy="12">royalixum_continent</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Destroyer</class>
+ <fabricator>Imperial Shipyards</fabricator>
+ <description>Produced in the Empire and then "loaned" to the Royal Ixumite Navy, those powerful destroyers are among the best tools still left to the hapless King of Ixum. They are generally adapted to a limited extent by the Royal Ixumite Navy, adding some extra armour at the cost of mobility.</description>
+
+<price>2700000</price>
+ <movement>
+  <thrust>160</thrust>
+  <turn>100</turn>
+  <speed>160</speed>
+ </movement>
+ <health>
+  <absorb>52</absorb>
+  <shield>600</shield>
+  <armour>1500</armour>
+  <energy>1600</energy>
+  <shield_regen>10</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>55</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>85</cpu>
+  <crew>22</crew>
+  <mass>1500</mass>
+  <fuel>1200</fuel>
+  <fuel_consumption>200</fuel_consumption>
+  <cargo>120</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+ <slots>
+  <weapon x="-15" y="-10" h="-10" size="large"/>
+  <weapon x="-15" y="10" h="-10" size="large"/>
+  <weapon x="20" y="0" h="-10" size="large"/>
+  <weapon x="4" y="-5" h="-10" size="large"/>
+  <weapon x="4" y="5" h="-10" size="medium"/>
+    <weapon x="4" y="5" h="-10" size="medium"/>
+  <utility size="large"/>
+  <utility size="large"/>
+  <utility size="medium"/>
+  <utility size="medium"/>
+  <structure size="large"/>
+  <structure size="large"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+ </slots>
+</ship>

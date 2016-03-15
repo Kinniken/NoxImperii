@@ -20,8 +20,9 @@ else --default english
                                  }
    header_table["Roidhunate of Ardarshir"] =      {"The latest from the Roidhunate."
                       }
-   header_table["Oligarchy of Betelgeuse"] =      {"Trade, economy, stock markets - all the news, curtsy of our sponsors!"
-                                 }
+   header_table["Oligarchy of Betelgeuse"] =      {"Trade, economy, stock markets - all the news, curtsy of our sponsors!"}
+   header_table["Kingdom of Ixum"] =      {"Straight from the Court."}
+   header_table["Holy Flame of Ixum"] =      {"Broadcast from the Council of Guardians"}
    header_table["Pirate"] =      {"Pirate News. News that matters."
                                  }
    header_table["Barbarians"] =  {"Welcome to the Raiding Network."
@@ -36,10 +37,13 @@ else --default english
                                  }
    greet_table["Independent Worlds"] =      {"News from the Fringe."
                                  }
-   greet_table["Roidhunate of Ardarshir"] =      {"Greating from the Roidhunate."
-                                 }
-   greet_table["Oligarchy of Betelgeuse"] =      {"Stocks of the day, goods to watch!"
-                                 }                                                                                          
+   greet_table["Roidhunate of Ardarshir"] =      {"Greating from the Roidhunate."}
+
+   greet_table["Oligarchy of Betelgeuse"] =      {"Stocks of the day, goods to watch!"}
+
+   greet_table["Kingdom of Ixum"] =      {"The Royal News Network."}
+
+   greet_table["Holy Flame of Ixum"] =      {"Seek your Salvation in the Flame."}                                                                                         
 
    greet_table["Pirate"] =       {"News that matters.",
                                  "Adopt a cat today!",
@@ -210,6 +214,36 @@ else --default english
       --[[
          Human interest.
       --]]
+   }
+   articles["Kingdom of Ixum"]={
+      --[[
+         Science and technology
+      --]]
+      --[[
+         Business
+      --]]
+      --[[
+         Politics
+      --]]
+      --[[
+         Human interest.
+      --]]
+
+   }
+   articles["Holy Flame of Ixum"]={
+      --[[
+         Science and technology
+      --]]
+      --[[
+         Business
+      --]]
+      --[[
+         Politics
+      --]]
+      --[[
+         Human interest.
+      --]]
+
    }
    articles["Barbarians"]={
       --[[

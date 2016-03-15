@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Royal Ixum Halley">
+ <base_type>Royal Ixum Halley</base_type>
+ <GFX sx="10" sy="10">royalixum_comet</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Destroyer</class>
+ <fabricator>Imperial Shipyards</fabricator>
+ <description>This slightly-adapted Imperial Halley is shipped in large quantities to the Kingdom of Ixum. It trade some of the speed and range of the original for beefier armour and one more weapon slot; the Royal Ixum Navy does not have far to patrol in any case.</description>
+<price>1200000</price>
+ <movement>
+  <thrust>200</thrust>
+  <turn>125</turn>
+  <speed>180</speed>
+ </movement>
+ <health>
+  <absorb>29</absorb>
+  <shield>500</shield>
+  <armour>550</armour>
+  <energy>1064</energy>
+  <shield_regen>9</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>43,3</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>64</cpu>
+  <crew>13</crew>
+  <mass>350</mass>
+  <fuel>600</fuel>
+  <fuel_consumption>150</fuel_consumption>
+  <cargo>30</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+ <slots>
+  <weapon x="-15" y="-10" h="-10" size="medium"/>
+  <weapon x="-15" y="10" h="-10" size="medium"/>
+  <weapon x="20" y="0" h="-10" size="medium"/>
+    <weapon x="20" y="0" h="-10" size="small"/>
+  <weapon x="4" y="-5" h="-10" size="small"/>
+  <weapon x="4" y="5" h="-10" size="small"/>
+  <utility size="medium"/>
+  <utility size="small"/>
+  <utility size="small"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+  <structure size="medium"/>
+ </slots>
+</ship>

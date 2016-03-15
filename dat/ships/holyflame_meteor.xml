@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ship name="Holy Flame Roeth">
+ <base_type>Holy Flame Roeth</base_type>
+ <GFX sx="10" sy="10">holyflame_meteor</GFX>
+ <GUI>slim</GUI>
+ <sound>engine</sound>
+ <class>Fighter</class>
+ <fabricator>Gonder Shipyards</fabricator>
+ <description>Copies of Ardar Roeth fighters such as this are made in great numbers in the former Royal Shipyards, now run by the clergy. The war and the purges that followed have however hollowed the ranks of Ixumite engineers, and quality is not up to Ardar standards.</description>
+ 
+ <price>200000</price>
+ <movement>
+  <thrust>260</thrust>
+  <turn>150</turn>
+  <speed>300</speed>
+ </movement>
+ <health>
+  <absorb>5</absorb>
+  <shield>150</shield>
+  <armour>30</armour>
+  <energy>400</energy>
+  <shield_regen>5</shield_regen>
+  <armour_regen>0</armour_regen>
+  <energy_regen>18</energy_regen>
+ </health>
+ <characteristics>
+  <cpu>24</cpu>
+  <crew>2</crew>
+  <mass>75</mass>
+  <fuel>600</fuel>
+  <fuel_consumption>100</fuel_consumption>
+  <cargo>10</cargo>
+ </characteristics>
+<stats>
+  
+</stats>
+
+ <slots>
+  <weapon x="-3" y="0" h="2" size="small"/>
+  <weapon x="-3" y="0" h="2" size="small"/>
+  <weapon x="-3" y="0" h="2" size="small"/>
+  <utility size="small"/>
+  <utility size="small"/>
+  <structure size="small"/>
+  <structure size="small"/>
+ </slots>
+</ship>

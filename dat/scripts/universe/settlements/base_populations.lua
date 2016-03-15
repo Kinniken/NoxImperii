@@ -7,6 +7,12 @@ include('universe/settlements/betelgeuse_settlements.lua')
 include('universe/objects/class_settlements.lua')
 include("universe/live/live_universe.lua")
 
+--[[
+Defines "templates" for populating systems. They have criteria to be valid
+(typically defined in terms of coordinates on the map) and define methods to be
+used to actually populate the matching systems based on the selected template.
+]]
+
 base_populations= {} --public interface
 
 local function imperial_sector_names(star)
@@ -128,6 +134,34 @@ local function generate_ardar_population(star,planet,minFertility,settlementChan
 		planet.factionRange=1
 
 		star.nameGenerator=nameGenerator.generateNameArdarshir
+	end
+end
+
+--basically copied from the human one
+local function generate_ixumite_population(star,planet,minFertility,settlementChance,populationRange,industryFactor,agricultureFactor,technologyFactor,militaryFactor,stabilityFactor,
+				factionName)
+	if (planet.lua.humanFertility>minFertility and math.random()<settlementChance) then
+		local settlement=settlement_class.createNew()
+		settlement.population=gh.randomInRange(populationRange)*planet.lua.humanFertility
+		settlement.industry=(planet.lua.humanFertility*0.2+planet.lua.minerals*0.5+0.3)*industryFactor
+		settlement.agriculture=(planet.lua.humanFertility*0.8+0.2)*agricultureFactor
+		settlement.technology=technologyFactor
+		settlement.services=(settlement.industry+settlement.agriculture+math.log10(settlement.population)/10)*(1+settlement.technology)/5
+		settlement.military=militaryFactor*(3+settlement.industry+settlement.agriculture+settlement.services)/5
+		settlement.stability=stabilityFactor
+
+		settlement:randomizeSettlementData(0.2)
+		
+		if (factionName=="Kingdom of Ixum") then
+			planet.lua.settlements.royalixumites=settlement
+		else
+			planet.lua.settlements.holyflame=settlement
+		end
+		planet.faction=factionName
+		planet.factionPresence=1
+		planet.factionRange=1
+
+		star.nameGenerator=nameGenerator.generateNameIxum
 	end
 end
 
@@ -256,9 +290,21 @@ local function ardarshir_fringe_generate(star)
 	end
 end
 
+local function royal_ixum_generate(star)
+	for k,planet in pairs(star.planets) do
+		generate_ixumite_population(star,planet,0.5,1,{50000,20000000},0.8,0.7,1,3,0.7,"Kingdom of Ixum");
+	end
+end
+
+local function holy_flame_generate(star)
+	for k,planet in pairs(star.planets) do
+		generate_ixumite_population(star,planet,0.5,1,{200000,5000000000},0.8,0.7,0.5,3,0.8,"Holy Flame of Ixum");
+	end
+end
 
 
 
+--the templates themselves
 local outer_zone={name="outer_zone",priority=function() return 1 end,generate=function(star) end,nativeCivilization=0,nativeFaction="Independent Worlds",zoneName=function(star) return "Great Beyond" end}
 local empire_inner={name="empire_inner",priority=function(star) return priority_distance(earth_pos,star,250,100) end,
 	generate=empire_inner_generate,
@@ -277,7 +323,7 @@ local empire_fringe={name="empire_fringe",priority=function(star) return priorit
 specialSettlement=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),
 nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction="Independent Worlds",zoneName=imperial_fringes_names}
 
-local barbarian_fringe={name="barbarian_fringe",priority=function(star) return barbarian_priority(star) end,generate=barbarian_fringe_generate,specialSettlement=settlement_generator.barbarianSettlements,nativeCivilization=0,nativeFactors={agriculture=0.5,industry=0.3,services=0.1,technology=0.2,military=1.2,stability=0.3},nativeFaction="Independent Worlds",zoneName=barbarian_fringes_names}
+local barbarian_fringe={name="barbarian_fringe",priority=function(star) return barbarian_priority(star) end,generate=barbarian_fringe_generate,specialSettlement=settlement_generator.barbarianSettlements,nativeCivilization=0,nativeFactors={agriculture=0.5,industry=0.3,services=0.1,technology=0.2,military=1.2,stability=0.3},nativeFaction="Natives",zoneName=barbarian_fringes_names}
 
 local ardarshir_inner={name="ardarshir_inner",priority=function(star) return priority_distance(ardarshir_pos,star,250,100) end,generate=ardarshir_inner_generate,specialSettlement=settlement_generator.coreArdarSettlements,nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1.2},nativeFaction="Roidhunate of Ardarshir",zoneName=function(star) return "Inner Roidhunate" end}
 
@@ -287,4 +333,10 @@ local ardarshir_fringe={name="ardarshir_fringe",priority=function(star) return p
 
 local betelgeuse={name="betelgeuse",priority=function(star) return priority_distance(betelgeuse_pos,star,200,100) end,generate=betelgeuse_generate,specialSettlement=gh.concatLists({settlement_generator.betelgeuseSettlements}),nativeCivilization=0.8,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.8,stability=0.8},nativeFaction="Oligarchy of Betelgeuse",zoneName=function(star) return "Betelgeuse" end}
 
-base_populations.templates={outer_zone,barbarian_fringe,empire_inner,empire_outer,empire_border,empire_ardarshir_border,empire_fringe,ardarshir_inner,ardarshir_outer,ardarshir_fringe,betelgeuse}
+local kingdom_of_ixum={name="kingdom_of_ixum",priority=function(star) return priority_distance(tigray_pos,star,150,1000) end,generate=royal_ixum_generate,
+nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction="Natives",zoneName=function(star) return "Ixum" end}
+
+local holy_flame_of_ixum={name="holy_flame_of_ixum",priority=function(star) return priority_distance(gonder_pos,star,300,150) end,generate=holy_flame_generate,
+nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction="Natives",zoneName=function(star) return "Ixum" end}
+
+base_populations.templates={outer_zone,barbarian_fringe,empire_inner,empire_outer,empire_border,empire_ardarshir_border,empire_fringe,ardarshir_inner,ardarshir_outer,ardarshir_fringe,betelgeuse,kingdom_of_ixum,holy_flame_of_ixum}

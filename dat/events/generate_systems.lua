@@ -61,7 +61,7 @@ local function createAroundStar(c_sys,nextlevel,level,visited)
 
 				system.createJump(newsys,sys.c,true,known)
 
-				local nearbySystems=system.withinRadius(targetx,targety,115)
+				local nearbySystems=system.withinRadius(targetx,targety,105)
 
 				for k2,nearbySystem in pairs(nearbySystems) do
 					if (nearbySystem~=newsys) then

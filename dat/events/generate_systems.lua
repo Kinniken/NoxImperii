@@ -69,6 +69,17 @@ local function createAroundStar(c_sys,nextlevel,level,visited)
 					end
 				end
 
+				--if not enough jumps we try targeting somewhat father systems
+				if (#(system.jumps(newsys))<3) then
+					nearbySystems=system.withinRadius(targetx,targety,120)
+
+					for k2,nearbySystem in pairs(nearbySystems) do
+						if (nearbySystem~=newsys) then
+							system.createJump(newsys,nearbySystem,true,known)
+						end
+					end
+				end
+
 				nextlevel[#nextlevel+1]=newsys
 			end
 		end

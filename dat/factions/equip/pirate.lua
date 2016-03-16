@@ -87,15 +87,26 @@ function equip_empireMilitary( p, shipsize )
 
       -- Fighter
       elseif class == "Fighter" then
-         use_forward    = nweapon-1
-         use_secondary  = 1
+         --10% of missiles on fighter
+         if (math.random()<0.1) then
+            use_forward    = nweapon-1
+            use_secondary  = 1
+         else
+            use_forward    = nweapon
+         end
          medium         = equip_mediumLow()
          low            = equip_lowLow()
 
       -- Bomber
       elseif class == "Bomber" then
-         use_forward    = rnd.rnd(1,2)
-         use_secondary  = nweapon - use_primary
+         --30% of missiles on bomber
+         if (math.random()<0.3) then
+            use_forward    = rnd.rnd(1,2)
+            use_secondary  = nweapon - use_primary
+         else
+            use_forward    = nweapon
+         end
+         
          medium         = equip_mediumLow()
          low            = equip_lowLow()
       end
@@ -105,8 +116,14 @@ function equip_empireMilitary( p, shipsize )
       
       -- Corvette
       if class == "Corvette" then
-         use_secondary  = rnd.rnd(1,2)
+         --30% of missiles on Corvette
+         if (math.random()<0.3) then
+            use_secondary  = rnd.rnd(1,2)
          use_forward    = nweapon - use_secondary
+         else
+            use_forward    = nweapon
+         end
+         
          medium         = equip_mediumMed()
          low            = equip_lowMed()
       end

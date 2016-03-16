@@ -109,10 +109,10 @@ productionFactors.betelgeuse={
 productionFactors.royalixumites={
 	[FOOD]={demand=0.7,supply=0.7},[EXOTIC_FOOD]={demand=1},[GOURMET_FOOD]={demand=1,supply=1},[BORDEAUX]={demand=3,price=3},[TELLOCH]={demand=3,price=3},
 	[PRIMITIVE_CONSUMER]={demand=0.5,supply=1},[CONSUMER_GOODS]={demand=0.5,supply=1},
-	[LUXURY_GOODS]={demand=1.5,supply=1},[EXOTIC_FURS]={demand=1.5},[NATIVE_ARTWORK]={demand=0.5},[NATIVE_SCULPTURES]={demand=0.5},
+	[LUXURY_GOODS]={demand=1.5,supply=1},[EXOTIC_FURS]={demand=1.5},[NATIVE_ARTWORK]={demand=0.5},[NATIVE_SCULPTURES]={demand=0.5},[NATIVE_WEAPONS]={demand=2},
 	[ORE]={demand=1},[PRIMITIVE_INDUSTRIAL]={supply=1.2,demand=1.5},[INDUSTRIAL]={supply=0.7,demand=1},[MODERN_INDUSTRIAL]={supply=0.5,demand=0.7},[EXOTIC_ORGANIC]={demand=0.5},
 	[HUMAN_MEDICINE]={demand=0,supply=0},
-	[NATIVE_WEAPONS]={demand=2},[BASIC_WEAPONS]={demand=2,supply=1},[PRIMITIVE_ARMAMENT]={supply=1,demand=1.5},[ARMAMENT]={supply=1,demand=1.5},[MODERN_ARMAMENT]={supply=0.5,demand=1.5}
+	[BASIC_WEAPONS]={demand=2,supply=1,price=1.5},[PRIMITIVE_ARMAMENT]={supply=1,demand=2,price=1.5},[ARMAMENT]={supply=1,demand=2,price=1.5},[MODERN_ARMAMENT]={supply=0.5,demand=2,price=2}
 }
 
 --Holy Flame: lots of military, little consumer good, little luxury
@@ -122,7 +122,7 @@ productionFactors.holyflame={
 	[LUXURY_GOODS]={demand=0.5,supply=0.5},[EXOTIC_FURS]={demand=0.5},[NATIVE_ARTWORK]={demand=0},[NATIVE_SCULPTURES]={demand=0},
 	[ORE]={demand=1},[PRIMITIVE_INDUSTRIAL]={supply=1.2,demand=1.5},[INDUSTRIAL]={supply=0.7,demand=1},[MODERN_INDUSTRIAL]={supply=0.5,demand=0.7},[EXOTIC_ORGANIC]={demand=0.5},
 	[HUMAN_MEDICINE]={demand=0,supply=0},
-	[NATIVE_WEAPONS]={demand=0},[BASIC_WEAPONS]={demand=2,supply=1},[PRIMITIVE_ARMAMENT]={supply=1,demand=1.5},[ARMAMENT]={supply=1,demand=1.5},[MODERN_ARMAMENT]={supply=0.5,demand=1.5}
+	[NATIVE_WEAPONS]={demand=0},[BASIC_WEAPONS]={demand=2,supply=1,price=1.5},[PRIMITIVE_ARMAMENT]={supply=1,demand=2,price=1.5},[ARMAMENT]={supply=1,demand=2,price=1.5},[MODERN_ARMAMENT]={supply=0.5,demand=2,price=2}
 }
 
 --Civilized natives

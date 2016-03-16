@@ -4,6 +4,8 @@ include('universe/settlements/human_settlements.lua')
 include('universe/settlements/ardar_settlements.lua')
 include('universe/settlements/barbarian_settlements.lua')
 include('universe/settlements/betelgeuse_settlements.lua')
+include('universe/settlements/royal_ixum_settlements.lua')
+include('universe/settlements/holy_flame_settlements.lua')
 include('universe/objects/class_settlements.lua')
 include("universe/live/live_universe.lua")
 
@@ -331,12 +333,12 @@ local ardarshir_outer={name="ardarshir_outer",priority=function(star) return pri
 
 local ardarshir_fringe={name="ardarshir_fringe",priority=function(star) return priority_distance(ardarshir_pos,star,700,18) end,generate=ardarshir_fringe_generate,nativeCivilization=0.1,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction="Roidhunate of Ardarshir",zoneName=function(star) return "Roidhunate Fringes" end}
 
-local betelgeuse={name="betelgeuse",priority=function(star) return priority_distance(betelgeuse_pos,star,200,100) end,generate=betelgeuse_generate,specialSettlement=gh.concatLists({settlement_generator.betelgeuseSettlements}),nativeCivilization=0.8,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.8,stability=0.8},nativeFaction="Oligarchy of Betelgeuse",zoneName=function(star) return "Betelgeuse" end}
+local betelgeuse={name="betelgeuse",priority=function(star) return priority_distance(betelgeuse_pos,star,200,100) end,generate=betelgeuse_generate,specialSettlement=settlement_generator.betelgeuseSettlements,nativeCivilization=0.8,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.8,stability=0.8},nativeFaction="Oligarchy of Betelgeuse",zoneName=function(star) return "Betelgeuse" end}
 
-local kingdom_of_ixum={name="kingdom_of_ixum",priority=function(star) return priority_distance(tigray_pos,star,150,1000) end,generate=royal_ixum_generate,
+local kingdom_of_ixum={name="kingdom_of_ixum",priority=function(star) return priority_distance(tigray_pos,star,200,1000) end,generate=royal_ixum_generate,specialSettlement=settlement_generator.royalIxumSettlements,
 nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction="Natives",zoneName=function(star) return "Ixum" end}
 
-local holy_flame_of_ixum={name="holy_flame_of_ixum",priority=function(star) return priority_distance(gonder_pos,star,300,150) end,generate=holy_flame_generate,
+local holy_flame_of_ixum={name="holy_flame_of_ixum",priority=function(star) return priority_distance(gonder_pos,star,350,900) end,generate=holy_flame_generate,specialSettlement=settlement_generator.holyFlameSettlements,
 nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction="Natives",zoneName=function(star) return "Ixum" end}
 
 base_populations.templates={outer_zone,barbarian_fringe,empire_inner,empire_outer,empire_border,empire_ardarshir_border,empire_fringe,ardarshir_inner,ardarshir_outer,ardarshir_fringe,betelgeuse,kingdom_of_ixum,holy_flame_of_ixum}

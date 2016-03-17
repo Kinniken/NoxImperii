@@ -15,14 +15,14 @@ local worldevent_prototype = {
 	applyOnWorldCustom=function(self,planet,textData)
 
 	end,
-	getEventMessage=function(self,planet)
-		return nil
-	end,
-	getWorldHistoryMessage=function(self,planet)
-		return nil
-	end,
-	getBarNews=function(self,planet)
-		return {}
+	addBarNews=function(self,faction,title,message,duration)
+		local news={}
+		news.faction=faction
+		news.title=title
+		news.message=message
+		news.duration=duration
+
+		table.insert(self.barNews,news)
 	end
 }
 
@@ -32,5 +32,9 @@ function worldevent_class.createNew()
 	local o={}
 	setmetatable(o, worldevent_prototype)
 	o.weight=10
+	o.barNews=nil
+	o.eventMessage=nil
+	o.worldHistoryMessage=nil
+	o.barNews={}
 	return o
 end

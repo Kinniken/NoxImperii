@@ -7,7 +7,8 @@ function create()
 
 	possibleTargets={}
 	
-	for k,s in ipairs( c_sys:adjacentSystems() ) do
+	local cx,cy=c_sys:coords()
+	for k,s in ipairs( system.withinRadius(cx,cy,200) ) do
 		for k2,c_planet in ipairs(s:planets()) do
 			if c_planet:getLuaData()~=nil and c_planet:getLuaData()~="" then
 				possibleTargets[#possibleTargets+1]=c_planet
@@ -16,7 +17,7 @@ function create()
 	end
 
 	if (#possibleTargets>0) then
-		for i=1,1 do
+		for i=1,5 do
 			local c_planet=possibleTargets[math.random(#possibleTargets)]
 			local planet=planet_class.load(c_planet)
 
@@ -40,22 +41,20 @@ function create()
 
 					event:applyOnWorld(planet,textData)
 
-					local msg=event:getEventMessage(planet)
-					if (msg ~="") then
+					local msg=event.eventMessage
+					if (msg ~=nil) then
 						player.msg(gh.format(msg,textData))
 					end
 
-					local history=event:getWorldHistoryMessage(planet)
-					if (history ~="") then
+					local history=event.worldHistoryMessage
+					if (history ~=nil) then
 						planet:addHistory(gh.format(history,textData))
 					end
 					generatePlanetServices(planet)
 					planet:save()
 
-					local news=event:getBarNews()
-
-					for k,v in news do
-						news.add( v.faction, gh.format(v.title,textData), gh.format(v.title,v.message), time.get() + v.duration )
+					for k,v in ipairs(event.barNews) do
+						news.add( v.faction, gh.format(v.title,textData), gh.format(v.message,textData), time.get() + v.duration )
 					end
 				end
 			end

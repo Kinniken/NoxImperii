@@ -12,14 +12,12 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.humans:addGoodDemand(HUMAN_MEDICINE,20,3,effectId)
 	planet.lua.settlements.humans:addGoodDemand(FOOD,20,3,effectId)
 end
-event.getEventMessage=function(self,planet)
-	return "NEWS ALERT: The independent world of ${world} reeling under heavy barbarian raids."
-end
-event.getWorldHistoryMessage=function(self,planet)
-	return "Major barbarian raids leave ${casualties} colonists dead and as many taken captive."
-end
-event.getBarNews=function(self,planet)
-	return {{faction="Empire of Terra","Barbarian Raids on Fringe Worlds","Disturbing reports continue to come in from fringe worlds of increasing barbarian raids. On the remote world of ${world} last week, almost ${casualties} people died in a major attack and as many were taken captive. When will the independent worlds see wisdom and take shelter in the Empire?",time.create(0,2,0, 0,0,0)},
-	{faction="Independent Worlds","An other free world hit!","Almost ${casualties} people died in a major barbarian attack on ${world} and as many were taken captive. Where is the protection promised by the Empire to the independent worlds?",time.create(0,2,0, 0,0,0)}}
-end
-world_events.events[#world_events.events+1]=event
+event.eventMessage="NEWS ALERT: The independent world of ${world} is reeling under heavy barbarian raids."
+
+event.worldHistoryMessage="Major barbarian raids leave ${casualties} colonists dead and as many taken captive."
+
+event:addBarNews("Empire of Terra","Barbarian Raids on Fringe Worlds","Disturbing reports continue to come in from fringe worlds of increasing barbarian raids. On the remote world of ${world} last week, almost ${casualties} people died in a major attack and as many were taken captive. When will the independent worlds see wisdom and take shelter in the Empire?",time.create(0,2,0, 0,0,0))
+
+event:addBarNews("Independent Worlds","An other free world hit!","Almost ${casualties} people died in a major barbarian attack on ${world} and as many were taken captive. Where is the protection promised by the Empire to the independent worlds?",time.create(0,2,0, 0,0,0))
+
+table.insert(world_events.events,event)

@@ -72,7 +72,7 @@ local planet_prototype = {
 		self.lua.worldHistory={}
 	end
 	if not evttime then
-		evttime=time.str(time.get())
+		evttime=time.tonumber(time.get())
 	end
 	self.lua.worldHistory[#self.lua.worldHistory+1]={time=evttime,msg=msg}
 	end,

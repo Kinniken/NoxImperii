@@ -12,7 +12,7 @@ function generateLiveHistoryDesc(planet)
 	desc=""
 
 	for k,event in ipairs(planet.lua.worldHistory) do
-		desc=desc..(event.time)..": "..event.msg.."\n\n"
+		desc=desc..(time.fromnumber(event.time):str(1))..": "..event.msg.."\n\n"
 	end
 
 	return desc
@@ -82,6 +82,10 @@ function generateLiveSettlementsDesc(planet)
 
 				if (k=="royalixumites" or k=="holyflame") then
 					popName="Ixumite"
+				elseif (k=="ardars") then
+					popName="Ardar"
+				elseif (k=="betelgians") then
+					popName="Betelgian"
 				end
 
 

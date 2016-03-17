@@ -1014,10 +1014,10 @@ function generatePlanetServices(planet)
 
 		if (debugMode) then
 			if (comData.price<0.1) then
-				error("Extreme low price factor for "..name.." on "..planet.c:name()..": "..comData.price)
+				--error("Extreme low price factor for "..name.." on "..planet.c:name()..": "..comData.price)
 				comData.price=0.1
 			elseif (comData.price>10) then
-				error("Extreme high price factor for "..name.." on "..planet.c:name()..": "..comData.price)
+				--error("Extreme high price factor for "..name.." on "..planet.c:name()..": "..comData.price)
 				comData.price=10
 			end
 		end

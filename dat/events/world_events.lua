@@ -32,18 +32,31 @@ function create()
 				local event=gh.pickConditionalWeightedObject(world_events.events,planet)
 
 				if (event) then
-					event:applyOnWorld(planet)
+
+					local textData={}
+					textData.world=planet.c:name()
+					textData.system=planet.c:name()
+
+
+					event:applyOnWorld(planet,textData)
+
 					local msg=event:getEventMessage(planet)
 					if (msg ~="") then
-						player.msg(msg)
+						player.msg(gh.format(msg,textData))
 					end
 
 					local history=event:getWorldHistoryMessage(planet)
 					if (history ~="") then
-						planet:addHistory(history)
+						planet:addHistory(gh.format(history,textData))
 					end
 					generatePlanetServices(planet)
 					planet:save()
+
+					local news=event:getBarNews()
+
+					for k,v in news do
+						news.add( v.faction, gh.format(v.title,textData), gh.format(v.title,v.message), time.get() + v.duration )
+					end
 				end
 			end
 		end

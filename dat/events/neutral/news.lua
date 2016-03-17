@@ -88,15 +88,6 @@ else --default english
       --[[
          Business
       --]]
-      {
-         title = "A Failed Colony Abandoned for Greener Pastures",
-         desc = "The colony of ${world} was finally emptied of colonists last month. \"This small, distant planet was never worth it\", explained His Eminence the Imperial Representative in the sub-sector to journalists on the way to a major cocktail party. \"The colonists will be much better off in the Core Worlds.\". We thank His Eminence for his time.",
-         data = function()
-            local data={}
-            data.world=nameGenerator.getEmpireNameGenerator()
-            return data
-         end
-      },
       --[[
          Politics
       --]]
@@ -112,39 +103,13 @@ else --default english
          title ="Virtualised War Games: a Terran Innovation",
          desc = "The largest war games ever performed by the Imperial Navy have just been completed - in a brand new AI on Luna! While the primitive Roidhunate continues to practice manoeuvres in space, Terra once again demonstrates its technological leadership by allowing its officers to train - from the comfort of their home!"
       },
-      {
-         title ="Barbarian Raids on Fringe Worlds",
-         desc = "Disturbing reports continue to come in from fringe worlds of increasing barbarian raids. On the remote world of ${world} last week, almost a million people died in a major attack and as many were taken captive. When will the independent worlds see wisdom and take shelter in the Empire?",
-         data = function()
-            local data={}
-            data.world=nameGenerator.getEmpireNameGenerator()
-            return data
-         end
-      },
       --[[
          Ardar
       --]]
-      {
-         title = "Ardar Atrocities Reported On Frontier World",
-         desc = "Reports are coming in of a major wave of repression hitting natives on ${world}. This unfortunate world was recently annexed by the nefarious Roidhunate, and its gallant natives have been fighting hard against the hated invaders. While the Empire is sadly too far to aid them in their just struggle, we wish them all the best against their reptilian foes.",
-         data = function()
-            local data={}
-            data.world=nameGenerator.generateNameOther()
-            return data
-         end
-      },
-      {
-         title = "A Debutante's Sensational Entry At Court",
-         desc = "The lovely Duchess of Plantais debuted at court yesterday in a grand ball held by the Crown Prince in person. Her grace and wits have made her the new darling of the court and a most alluring marriage prospect too - with an entire closet in her family, here is a girl fit for a Pair of the Realm!"
-      },
 
       --[[
          Human interest.
       --]]
-      {
-         title = "Games for Young Pilots",
-         desc = "Want your child to have a chance at a career as a space pilot?  Games like Super Julio Omniverse and SpaceFox help your child develop twitch muscles."
-      },
       {
          title = "Games for Young Pilots",
          desc = "Want your child to have a chance at a career as a space pilot?  Games like Super Julio Omniverse and SpaceFox help your child develop twitch muscles."

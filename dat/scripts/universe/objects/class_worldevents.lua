@@ -3,23 +3,26 @@ include('universe/live/live_universe.lua')
 worldevent_class = {}
 
 local worldevent_prototype = {
-	applyOnWorld=function(self,planet)
+	applyOnWorld=function(self,planet,textData)
 
-		self.applyOnWorldCustom(self,planet)
+		self.applyOnWorldCustom(self,planet,textData)
 
 		generatePlanetServices(planet)
 
 		planet:save()
 
 	end,
-	applyOnWorldCustom=function(self,planet)
+	applyOnWorldCustom=function(self,planet,textData)
 
 	end,
 	getEventMessage=function(self,planet)
-		return "Event trigger for planet "..planet.c:name()
+		return nil
 	end,
 	getWorldHistoryMessage=function(self,planet)
-		return "Event triggered for planet "..planet.c:name().." at time "..time.str(time.get())
+		return nil
+	end,
+	getBarNews=function(self,planet)
+		return {}
 	end
 }
 

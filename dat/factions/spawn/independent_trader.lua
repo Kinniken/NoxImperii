@@ -1,4 +1,5 @@
 include("dat/factions/spawn/common.lua")
+include("universe/generate_helper.lua")
 
 
 -- @brief Spawns a small patrol fleet.
@@ -64,6 +65,11 @@ function create ( max )
     -- Calculate spawn data
     spawn_data = scom.choose( spawn_table )
 
+    if (spawn_data == nil) then
+      error("Error: spawn_data is nil! spawn_table: ")
+      gh.tprint(spawn_table)
+    end
+
     return scom.calcNextSpawn( 0, scom.presence(spawn_data), max )
   end
 
@@ -77,6 +83,11 @@ function spawn ( presence, max )
      return 5
    end
 
+   if (spawn_data == nil) then
+      error("Error: spawn_data is nil! spawn_table: ")
+      gh.tprint(spawn_table)
+    end
+    
     -- Actually spawn the pilots
     pilots = scom.spawn( spawn_data )
 

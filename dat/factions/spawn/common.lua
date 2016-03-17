@@ -60,7 +60,7 @@ scom.choose = function( stable )
    for k,v in ipairs( stable ) do
       if r < v["chance"] then
         if (v["func"]()==nil) then
-          print("Error: null spawn function from table")
+          error("Null spawn function from table")
           gh.tprint(stable)
         end
 

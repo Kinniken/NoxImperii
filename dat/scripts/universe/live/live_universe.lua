@@ -32,7 +32,7 @@ INDUSTRIAL="Industrial Goods"
 MODERN_INDUSTRIAL="Modern Industrial Goods"
 
 EXOTIC_ORGANIC="Exotic Organic Components"
-HUMAN_MEDICINE="Human Medicine"
+MEDICINE="Medicine"
 
 NATIVE_WEAPONS="Native Weapons"
 BASIC_WEAPONS="Non-Industrial Weapons"
@@ -91,7 +91,7 @@ productionFactors.ardars={
 	[PRIMITIVE_CONSUMER]={demand=1,supply=1},[CONSUMER_GOODS]={demand=1,supply=1},
 	[LUXURY_GOODS]={demand=0.5,supply=0.2},[EXOTIC_FURS]={demand=0.5},[NATIVE_ARTWORK]={demand=0.5},[NATIVE_SCULPTURES]={demand=0.5},
 	[ORE]={demand=1.5},[PRIMITIVE_INDUSTRIAL]={supply=1.2,demand=1.5},[INDUSTRIAL]={supply=1.2,demand=1.5},[MODERN_INDUSTRIAL]={supply=1.2,demand=1.5},[EXOTIC_ORGANIC]={demand=1.5},
-	[HUMAN_MEDICINE]={demand=0,supply=0},
+	[MEDICINE]={demand=1,supply=1},
 	[NATIVE_WEAPONS]={demand=2},[BASIC_WEAPONS]={supply=1.2},[PRIMITIVE_ARMAMENT]={supply=1.2,demand=1.5},[ARMAMENT]={supply=1.2,demand=1.5},[MODERN_ARMAMENT]={supply=1.2,demand=1.5}
 }
 
@@ -101,7 +101,7 @@ productionFactors.betelgeuse={
 	[PRIMITIVE_CONSUMER]={demand=1.5,supply=1},[CONSUMER_GOODS]={demand=1.5,supply=1},
 	[LUXURY_GOODS]={demand=1.5,supply=1},[EXOTIC_FURS]={demand=2},[NATIVE_ARTWORK]={demand=1},[NATIVE_SCULPTURES]={demand=1},
 	[ORE]={demand=1},[PRIMITIVE_INDUSTRIAL]={supply=1,demand=1},[INDUSTRIAL]={supply=1,demand=1},[MODERN_INDUSTRIAL]={supply=0.5,demand=1},[EXOTIC_ORGANIC]={demand=1},
-	[HUMAN_MEDICINE]={demand=0,supply=0},
+	[MEDICINE]={demand=1,supply=0.7},
 	[NATIVE_WEAPONS]={demand=2},[BASIC_WEAPONS]={supply=1},[PRIMITIVE_ARMAMENT]={supply=1,demand=1},[ARMAMENT]={supply=0.7,demand=1.5},[MODERN_ARMAMENT]={supply=0.3,demand=1}
 }
 
@@ -111,7 +111,7 @@ productionFactors.royalixumites={
 	[PRIMITIVE_CONSUMER]={demand=0.5,supply=1},[CONSUMER_GOODS]={demand=0.5,supply=1},
 	[LUXURY_GOODS]={demand=1.5,supply=1},[EXOTIC_FURS]={demand=1.5},[NATIVE_ARTWORK]={demand=0.5},[NATIVE_SCULPTURES]={demand=0.5},[NATIVE_WEAPONS]={demand=2},
 	[ORE]={demand=1},[PRIMITIVE_INDUSTRIAL]={supply=1.2,demand=1.5},[INDUSTRIAL]={supply=0.7,demand=1},[MODERN_INDUSTRIAL]={supply=0.5,demand=0.7},[EXOTIC_ORGANIC]={demand=0.5},
-	[HUMAN_MEDICINE]={demand=0,supply=0},
+	[MEDICINE]={demand=1.5,supply=0.5,price=1.5},
 	[BASIC_WEAPONS]={demand=2,supply=1,price=1.5},[PRIMITIVE_ARMAMENT]={supply=1,demand=2,price=1.5},[ARMAMENT]={supply=1,demand=2,price=1.5},[MODERN_ARMAMENT]={supply=0.5,demand=2,price=2}
 }
 
@@ -121,7 +121,7 @@ productionFactors.holyflame={
 	[PRIMITIVE_CONSUMER]={demand=0.5,supply=1},[CONSUMER_GOODS]={demand=0.5,supply=1},
 	[LUXURY_GOODS]={demand=0.5,supply=0.5},[EXOTIC_FURS]={demand=0.5},[NATIVE_ARTWORK]={demand=0},[NATIVE_SCULPTURES]={demand=0},
 	[ORE]={demand=1},[PRIMITIVE_INDUSTRIAL]={supply=1.2,demand=1.5},[INDUSTRIAL]={supply=0.7,demand=1},[MODERN_INDUSTRIAL]={supply=0.5,demand=0.7},[EXOTIC_ORGANIC]={demand=0.5},
-	[HUMAN_MEDICINE]={demand=0,supply=0},
+	[MEDICINE]={demand=1.5,supply=0.5,price=1.5},
 	[NATIVE_WEAPONS]={demand=0},[BASIC_WEAPONS]={demand=2,supply=1,price=1.5},[PRIMITIVE_ARMAMENT]={supply=1,demand=2,price=1.5},[ARMAMENT]={supply=1,demand=2,price=1.5},[MODERN_ARMAMENT]={supply=0.5,demand=2,price=2}
 }
 
@@ -131,7 +131,7 @@ productionFactors.natives={
 	[PRIMITIVE_CONSUMER]={demand=1,supply=1},[CONSUMER_GOODS]={demand=1,supply=1},
 	[LUXURY_GOODS]={demand=0.5,supply=0.5},[EXOTIC_FURS]={demand=1},[NATIVE_ARTWORK]={demand=1},[NATIVE_SCULPTURES]={demand=1},
 	[ORE]={demand=1},[PRIMITIVE_INDUSTRIAL]={supply=1,demand=1.5},[INDUSTRIAL]={supply=1,demand=1},[MODERN_INDUSTRIAL]={supply=0,demand=0},[EXOTIC_ORGANIC]={demand=1},
-	[HUMAN_MEDICINE]={demand=0,supply=0},
+	[MEDICINE]={demand=1,supply=0.5},
 	[NATIVE_WEAPONS]={demand=1},[BASIC_WEAPONS]={supply=1},[PRIMITIVE_ARMAMENT]={supply=1,demand=1.5},[ARMAMENT]={supply=1,demand=1.5},[MODERN_ARMAMENT]={supply=0,demand=0}
 }
 
@@ -141,7 +141,7 @@ productionFactors.barbarians={
 	[PRIMITIVE_CONSUMER]={demand=2,supply=0.5},[CONSUMER_GOODS]={demand=2,supply=0.2},
 	[LUXURY_GOODS]={demand=3,supply=0.2},[EXOTIC_FURS]={demand=0},[NATIVE_ARTWORK]={demand=0},[NATIVE_SCULPTURES]={demand=0},
 	[ORE]={demand=1},[PRIMITIVE_INDUSTRIAL]={supply=0.5,demand=1.5},[INDUSTRIAL]={supply=0.3,demand=1.5},[MODERN_INDUSTRIAL]={supply=0,demand=0},[EXOTIC_ORGANIC]={demand=0},
-	[HUMAN_MEDICINE]={demand=0,supply=0},
+	[MEDICINE]={demand=2,supply=0.3,price=1.5},
 	[NATIVE_WEAPONS]={demand=0},[BASIC_WEAPONS]={supply=1},[PRIMITIVE_ARMAMENT]={supply=1,demand=1.5},[ARMAMENT]={supply=1,demand=1.5},[MODERN_ARMAMENT]={supply=0,demand=0}
 }
 
@@ -491,7 +491,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=settlement.services/2
 	end
 	price=1/(settlement.technology*2+0.5)+0.5
-	generateCommodity(settings,commodities,HUMAN_MEDICINE,price,need,production,20)
+	generateCommodity(settings,commodities,MEDICINE,price,need,production,20)
 
 
 	--Industrial

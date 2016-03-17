@@ -87,8 +87,8 @@ The major oxygen-breathing races in the sector have broadly compatible dietary r
 		<price>1200</price>
 		<gfx_store>resistant_biologics</gfx_store>	
 	</commodity> 
-	<commodity name="Human Medicine">
-		<description>Few things are more specie-specific than medicine. The following products include both a varied range of common medicines and diverse automated diagnostic and surgery units, all intended for human use.</description>
+	<commodity name="Medicine">
+		<description>Many people wrongly believe medicine to be specie-specific; this is no longer true of modern medical products, which are now rarely ready-made drugs but instead products made on-demand by miniature organic chemical factories, suitable for most species.</description>
 		<price>750</price>
 		<gfx_store>experimental_drugs</gfx_store>	
 	</commodity>

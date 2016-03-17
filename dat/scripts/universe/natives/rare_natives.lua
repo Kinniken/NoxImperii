@@ -22,7 +22,7 @@ INDUSTRIAL="Industrial Goods"
 MODERN_INDUSTRIAL="Modern Industrial Goods"
 
 EXOTIC_ORGANIC="Exotic Organic Components"
-HUMAN_MEDICINE="Human Medicine"
+MEDICINE="Medicine"
 
 NATIVE_WEAPONS="Native Weapons"
 BASIC_WEAPONS="Non-Industrial Weapons"

@@ -9,7 +9,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The ravages of the recent barbarian raids is causing a humanitarian crisis.",
 		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber() )
-	planet.lua.settlements.humans:addGoodDemand(HUMAN_MEDICINE,20,3,effectId)
+	planet.lua.settlements.humans:addGoodDemand(MEDICINE,20,3,effectId)
 	planet.lua.settlements.humans:addGoodDemand(FOOD,20,3,effectId)
 end
 event.eventMessage="NEWS ALERT: The independent world of ${world} is reeling under heavy barbarian raids."

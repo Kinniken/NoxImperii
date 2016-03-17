@@ -56,7 +56,7 @@ function create ()
    elseif num < 12 then
       cargo = "Luxury Goods"
    else
-      cargo = "Human Medicine"
+      cargo = "Medicine"
    end
    ai.pilot():cargoAdd( cargo, rnd.int(0, ai.pilot():cargoFree() ) )
 

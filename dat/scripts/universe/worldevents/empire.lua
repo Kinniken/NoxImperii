@@ -9,7 +9,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("Urgent medical help is needed following the barbarian attack.",
 		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber() )
-	planet.lua.settlements.humans:addGoodDemand(HUMAN_MEDICINE,20,3,effectId)
+	planet.lua.settlements.humans:addGoodDemand(MEDICINE,20,3,effectId)
 
 	adjustBarbarianActivity(get_nearest_barbarian_zone(system_class.load(planet.c:system())).name,1.01)
 end

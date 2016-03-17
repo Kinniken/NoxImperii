@@ -196,7 +196,7 @@ end
 
 function populateSystemNatives(star)
 	for k,planet in pairs(star.planets) do
-		if (planet.template.possibleNatives and ((planet.lua.nativeFertility+0.3)>math.random())) then
+		if (planet.template.possibleNatives and math.random()<0.3 and ((planet.lua.nativeFertility+0.3)>math.random())) then
 			local natives=gh.pickConditionalWeightedObject(planet.template.possibleNatives,planet)
 
 			if (natives) then

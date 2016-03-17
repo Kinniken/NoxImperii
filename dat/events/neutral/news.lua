@@ -26,7 +26,10 @@ else --default english
    header_table["Pirate"] =      {"Pirate News. News that matters."
                                  }
    header_table["Barbarians"] =  {"Welcome to the Raiding Network."
-                                 }                                                            
+                                 }   
+
+   header_table["Natives"] =  {"We bring you the latest news in the galaxy."
+                                 }                                                                                          
 
    
    greet_table={}
@@ -53,6 +56,9 @@ else --default english
                                  }
    greet_table["Barbarians"] =      {"Raiding your homeworld."
                                  }
+
+   greet_table["Natives"] =      {""
+                                 }                              
 
    
    articles={}

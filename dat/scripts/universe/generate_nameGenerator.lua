@@ -19,40 +19,17 @@ rawData.other2="Sang-thong May-par-kngum Phong-sa-ly May Khoua Sam-phanh Boun-Ne
 
 rawData.other3="Faaa Pu-na-au-ia Pa-pee-te Moo-rea Ma-iao Ma-hi-na Pi-rae Pae-a Ta-ia-ra-pu Pa-pa-ra A-ru-e Hi-ti-a-a Bo-ra-Bo-ra Te-va Ta-ia-ra-pu Hu-a-hi-ne Ta-ha-a Ta-pu-ta-pu-a-te-a Tu-ma-ra-a U-tu-ro-a Ran-gi-ro-a Nu-ku Hi-va Ru-ru-tu Hi-va-O-a U-a-Po-u Tu-bu-a-i Fa-ka-ra-va Ma-ke-mo A-ru-tu-a Gam-bi-er Ha-o Ta-ka-ro-a Ma-ni-hi Mau-pi-ti Ra-i-va-vae A-na-a Ri-ma-ta-ra Ta-hu-a-ta U-a-Hu-ka Fa-tu-Hi-va Re-a-o Ra-pa Na-pu-ka Nu-ku-ta-va-ke Tu-re-ia Fan-ga-tau Ta-ta-ko-to Hi-ku-e-ru Pu-ka-pu-ka "
 
+local ALPHABET="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-function nameGenerator.generateNameNatives()
-
-	local nameStart={"mer","bry","roi","brech","y","da","mo","khrai","qan","ur","tach","tel","chydh","gel","fo","mor"}
-	local nameMiddle={"thio","dhu","na","dwy","thol","rio","ry","dio","ru"}
-	local nameEnd={"thioch","te","dan","dwyr","tholch","rioch","khraich","ryf","diolch","wyr","loch","dhwan","gelch","daich","chan"}
-	local name=""
-
-	if (math.random()>0.5) then
-		name=nameStart[ math.random(#nameStart)]..nameMiddle[ math.random(#nameMiddle)]..nameEnd[ math.random(#nameEnd)]
-	else
-		name=nameStart[ math.random(#nameStart)]..nameEnd[ math.random(#nameEnd)]
-	end
-
-	name=name:gsub("^%l", string.upper)
-	return name
+function getRandomLetter()
+	return string.char(ALPHABET:byte(math.random(1, #ALPHABET)))
 end
 
+function nameGenerator.generateNameEmpty()
+	local name=getRandomLetter()..getRandomLetter().."-"..math.random(1, 999)
 
-function nameGenerator.generateNameBetelgeuse()
-
-	local nameStart={"ve","sal","pra","por","fos","chio","co","mi","mua","cam","do","con"}
-	local nameMiddle={"ra","var","ni","tel","val","pa","po"}
-	local nameEnd={"zia","ria","za","zio","sto","giore","pia","mia","no","zer","zoggio"}
-
-
-	local name=nameStart[ math.random(#nameStart)]..nameMiddle[ math.random(#nameMiddle)]..nameEnd[ math.random(#nameEnd)]
-
-
-	name=name:gsub("^%l", string.upper)
 	return name
 end
-
-
 
 function nameGenerator.generateNameArdarshir()
 
@@ -66,6 +43,26 @@ function nameGenerator.generateNameArdarshir()
 	else
 		name=nameStart[ math.random(#nameStart)]..nameEnd[ math.random(#nameEnd)]
 	end
+
+	name=name:gsub("^%l", string.upper)
+	return name
+end
+
+
+function nameGenerator.generateNameNatives()
+	return nameGenerator.generateNameOther()
+end
+
+
+function nameGenerator.generateNameBetelgeuse()
+
+	local nameStart={"ve","sal","pra","por","fos","chio","co","mi","mua","cam","do","con"}
+	local nameMiddle={"ra","var","ni","tel","val","pa","po"}
+	local nameEnd={"zia","ria","za","zio","sto","giore","pia","mia","no","zer","zoggio"}
+
+
+	local name=nameStart[ math.random(#nameStart)]..nameMiddle[ math.random(#nameMiddle)]..nameEnd[ math.random(#nameEnd)]
+
 
 	name=name:gsub("^%l", string.upper)
 	return name

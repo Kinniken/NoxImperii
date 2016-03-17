@@ -1,4 +1,5 @@
 include('universe/generate_helper.lua')
+include('universe/generate_nameGenerator.lua')
 include('universe/objects/class_natives.lua')
 
 natives_generator = {} --public interface
@@ -17,6 +18,8 @@ natives_generator.generateNativeCivilizedData=function(planet,industryFactor,agr
 	planet.faction=planet.star.populationTemplate.nativeFaction
 	planet.factionPresence=1
 	planet.factionRange=1
+
+	planet.star.nameGenerator=nameGenerator.generateNameNatives
 end
 
 natives_generator.setNativeDemands=function(planet,basicWeapons,basicTools,primitiveWeapons,primitiveIndustrial,primativeConsumption)
@@ -40,21 +43,12 @@ natives_generator.setNativeDemands=function(planet,basicWeapons,basicTools,primi
 	planet.faction="Natives"
 	planet.factionPresence=0
 	planet.factionRange=0
+
+	planet.star.nameGenerator=nameGenerator.generateNameNatives
 end
 
 natives_generator.genericSpecieName=function()
-	nameStart={"mer","bry","roi","brech","y","da","mo","khrai","qan","ur","tach","tel","chydh","gel","fo","mor"}
-	nameMiddle={"thio","dhu","na","dwy","thol","rio","ry","dio","ru"}
-	nameEnd={"thioch","te","dan","dwyr","tholch","rioch","khraich","ryf","diolch","wyr","loch","dhwan","gelch","daich","chan"}
-
-	if (math.random()>0.5) then
-		name=nameStart[ math.random(#nameStart)]..nameMiddle[ math.random(#nameMiddle)]..nameEnd[ math.random(#nameEnd)]
-	else
-		name=nameStart[ math.random(#nameStart)]..nameEnd[ math.random(#nameEnd)]
-	end
-
-	name=name:gsub("^%l", string.upper)
-	return name
+	return nameGenerator.generateNameNatives()
 end
 
 include('universe/natives/common_natives.lua')

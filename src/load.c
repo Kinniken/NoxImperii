@@ -375,7 +375,7 @@ static void load_menu_update( unsigned int wid, char *str )
 
    /* Display text. */
    credits2str( credits, ns->credits, 2 );
-   ntime_prettyBuf( date, sizeof(date), ns->date, 2 );
+   ntime_prettyBuf( date, sizeof(date), ns->date, 0 );
    naev_versionString( version, sizeof(version), ns->version[0], ns->version[1], ns->version[2] );
    nsnprintf( buf, sizeof(buf),
          "\eDName:\n"

@@ -148,8 +148,8 @@ double ntime_getRemainder( ntime_t t )
 /**
  * @brief Gets the time in a pretty human readable format.
  *
- *    @param t Time to print (in STU), if 0 it'll use the current time.
- *    @param d Number of digits to use.
+ *    @param t Time to print, if 0 it'll use the current time.
+ *    @param d  1 for date only, 0 for date and time
  *    @return The time in a human readable format (must free).
  */
 char* ntime_pretty( ntime_t t, int dateOnly )
@@ -165,8 +165,8 @@ char* ntime_pretty( ntime_t t, int dateOnly )
  *
  *    @param[out] str Buffer to use.
  *    @param max Maximum length of the buffer (recommended 64).
- *    @param t Time to print (in STU), if 0 it'll use the current time.
- *    @param d Number of digits to use.
+ *    @param t Time to print, if 0 it'll use the current time.
+ *    @param d 1 for date only, 0 for date and time
  *    @return The time in a human readable format (must free).
  */
 void ntime_prettyBuf( char *str, int max, ntime_t t, int dateOnly )
@@ -189,9 +189,9 @@ void ntime_prettyBuf( char *str, int max, ntime_t t, int dateOnly )
 	   nsnprintf( str, max, "%dm %dd  %dh %dm", month, day, hour, min );
    } else {//Date
 	   if (dateOnly) {
-		   nsnprintf( str, max, "%s %d, %d  %02d:%02d", ntime_monthName(month+1), day, year, hour, min );
+		   nsnprintf( str, max, "%s %d, %d CE", ntime_monthName(month+1), day, year );
 	   } else {
-		   nsnprintf( str, max, "%s %d, %d", ntime_monthName(month+1), day, year );
+		   nsnprintf( str, max, "%s %d, %d CE  %02d:%02d", ntime_monthName(month+1), day, year, hour, min );
 	   }
    }
 }

@@ -384,7 +384,7 @@ static int time_get( lua_State *L )
  * @usage strt = t:str() -- Gets the string of t
  *
  *    @luaparam t Time to convert to pretty format.  If omitted, current time is used.
- *    @luaparam d Decimals to use for displaying STU (should be between 0 and 5).
+ *    @luaparam d 1 for date only, 0 for date and time
  *    @luareturn The time in human readable format.
  * @luafunc str( t, d )
  */

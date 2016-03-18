@@ -42,6 +42,7 @@ event.eventMessage="NEWS ALERT: The Industrial Bank of ${world} has collapsed am
 event.worldHistoryMessage="The collapse of a major bank triggered a financial crisis, damaging the local economy."
 
 event:addBarNews("Empire of Terra","Financial crisis on ${world}","The largest bank on ${world} has collapsed, triggering a major recession.",time.create(0,1,0,0,0,0))
+event:addBarNews("Independent Worlds","Financial crisis on ${world}","In one more worrying sign on the poor health of the Imperial economy, the largest bank on ${world} has collapsed, triggering a major recession.",time.create(0,1,0,0,0,0))
 table.insert(world_events.events,event)
 
 
@@ -60,11 +61,13 @@ event.applyOnWorldCustom=function(self,planet,textData)
 
 	adjustSectorStability(planet.c:system():getZone(),0.99)
 end
-event.eventMessage="NEWS ALERT: The governor of ${world} has been arrested on charges of corruption. New governor throwing massive inauguration party."
+event.eventMessage="NEWS ALERT: The governor of ${world} has been arrested on charges of corruption. New governor throwing massive inauguration party, prices of luxury goods sky-rocket."
 
 event.worldHistoryMessage="The Imperial governor was replaced following corruption charges."
 
 event:addBarNews("Empire of Terra","New governor on ${world}","The Emperor has recently nominated a new governor for ${world}, following the arrest of the previous one on corruption charges. The inauguration celebrations are rumoured to be grand!",time.create(0,0,10, 0,0,0))
+event:addBarNews("Independent Worlds","Imperial governor arrested on ${world}","Following a new corruption scandal, yet an other Imperial governor has been arrested, this time on ${world}. Despite recent Imperial proclamations, the Terran administration seems more rotten than ever.",time.create(0,0,10, 0,0,0))
+event:addBarNews("Roidhunate of Ardarshir","Corruption spreads in the rotten Empire","The human Empire continues its steady moral collapse as news are coming in of another governor arrested for corruption on ${world}. At this rate our glorious navy will soon move in without a fight, welcomed as liberators by the humans themselves!",time.create(0,0,10, 0,0,0))
 table.insert(world_events.events,event)
 
 
@@ -111,5 +114,6 @@ event.eventMessage="NEWS ALERT: Colonists fleeing ${world} as barbarian attacks 
 
 event.worldHistoryMessage="An estimated ${departures} colonists have headed home as barbarian attacks increase."
 
+event:addBarNews("Empire of Terra","A Failed Colony Abandoned for Greener Pastures","An estimated ${departures} inhabitants of the colony on ${world} have decided to leave the world, heading back to the inner systems. \"This small, distant planet was never worth it\", explained His Eminence the Imperial Representative in the sub-sector to journalists on the way to a major cocktail party. \"The colonists will be much better off in the Core Worlds.\". We thank His Eminence for his time.",time.create(0,2,0, 0,0,0))
 event:addBarNews("Empire of Terra","A Failed Colony Abandoned for Greener Pastures","An estimated ${departures} inhabitants of the colony on ${world} have decided to leave the world, heading back to the inner systems. \"This small, distant planet was never worth it\", explained His Eminence the Imperial Representative in the sub-sector to journalists on the way to a major cocktail party. \"The colonists will be much better off in the Core Worlds.\". We thank His Eminence for his time.",time.create(0,2,0, 0,0,0))
 table.insert(world_events.events,event)

@@ -8,7 +8,7 @@ function create()
 	possibleTargets={}
 	
 	local cx,cy=c_sys:coords()
-	for k,s in ipairs( system.withinRadius(cx,cy,200) ) do
+	for k,s in ipairs( system.withinRadius(cx,cy,300) ) do
 		for k2,c_planet in ipairs(s:planets()) do
 			if c_planet:getLuaData()~=nil and c_planet:getLuaData()~="" then
 				possibleTargets[#possibleTargets+1]=c_planet

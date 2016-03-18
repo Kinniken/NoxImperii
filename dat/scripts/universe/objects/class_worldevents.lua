@@ -15,12 +15,25 @@ local worldevent_prototype = {
 	applyOnWorldCustom=function(self,planet,textData)
 
 	end,
-	addBarNews=function(self,faction,title,message,duration)
+	addBarNews=function(self,factionName,title,message,duration)
 		local news={}
-		news.faction=faction
+		news.faction=factionName
 		news.title=title
 		news.message=message
 		news.duration=duration
+
+		--could simply copy faction name but this ensures the faction exists
+		--(otherwise the news would just fail silently)
+		if (not factionName) then
+			news.faction="Generic"
+		else
+			local newsfaction=faction.get(factionName)
+			if newsfaction then
+				news.faction=newsfaction:name()
+			else
+				error("Unknown faction "..factionName.." in world event!")
+			end
+		end
 
 		table.insert(self.barNews,news)
 	end

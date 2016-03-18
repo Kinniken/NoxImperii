@@ -87,7 +87,7 @@ settlement_generator.coreHumanSettlements[#settlement_generator.coreHumanSettlem
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.humans:addTag("navyplanet")
 		planet.lua.settlements.humans.military=planet.lua.settlements.humans.military*2
-		planet.lua.settlements.humans:addGoodDemand(NATIVE_WEAPONS,20,3)
+		planet.lua.settlements.humans:addGoodDemand(C.NATIVE_WEAPONS,20,3)
 	end,
 	weightValidity=function(planet)
 		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil) then
@@ -138,7 +138,7 @@ settlement_generator.outerHumanSettlements[#settlement_generator.outerHumanSettl
 		planet.lua.settlements.humans:addTag("imperialsettlement")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Empire of Terra") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~=G.EMPIRE) then
 			return false
 		end
 		return true
@@ -156,7 +156,7 @@ settlement_generator.outerHumanSettlements[#settlement_generator.outerHumanSettl
 		planet.lua.settlements.humans:addTag("serbian")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Empire of Terra") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~=G.EMPIRE) then
 			return false
 		end
 		return true
@@ -174,7 +174,7 @@ settlement_generator.outerHumanSettlements[#settlement_generator.outerHumanSettl
 		planet.lua.settlements.humans:addTag("chinese")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Empire of Terra") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~=G.EMPIRE) then
 			return false
 		end
 		return true
@@ -192,7 +192,7 @@ settlement_generator.outerHumanSettlements[#settlement_generator.outerHumanSettl
 		planet.lua.settlements.humans:addTag("boomtown")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Empire of Terra") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~=G.EMPIRE) then
 			return false
 		end
 		return true
@@ -210,7 +210,7 @@ settlement_generator.outerHumanSettlements[#settlement_generator.outerHumanSettl
 		planet.lua.settlements.humans:addTag("excorporateworld")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Empire of Terra") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~=G.EMPIRE) then
 			return false
 		end
 		return true
@@ -228,7 +228,7 @@ settlement_generator.outerHumanSettlements[#settlement_generator.outerHumanSettl
 		planet.lua.settlements.humans:addTag("latinamerican")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Empire of Terra") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~=G.EMPIRE) then
 			return false
 		end
 		return true
@@ -248,7 +248,7 @@ settlement_generator.fringeEmpireSettlements[#settlement_generator.fringeEmpireS
 		planet.lua.settlements.humans:addTag("libertarians")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Empire of Terra") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~=G.EMPIRE) then
 			return false
 		end
 		return true
@@ -266,7 +266,7 @@ settlement_generator.fringeEmpireSettlements[#settlement_generator.fringeEmpireS
 		planet.lua.settlements.humans:addTag("backward")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Empire of Terra") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~=G.EMPIRE) then
 			return false
 		end
 		return true
@@ -284,7 +284,7 @@ settlement_generator.fringeEmpireSettlements[#settlement_generator.fringeEmpireS
 		planet.lua.settlements.humans:addTag("isolationisthumanoids")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Empire of Terra") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~=G.EMPIRE) then
 			return false
 		end
 		return true
@@ -302,7 +302,7 @@ settlement_generator.fringeEmpireSettlements[#settlement_generator.fringeEmpireS
 		planet.lua.settlements.humans:addTag("sunnibuddhist")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Empire of Terra") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~=G.EMPIRE) then
 			return false
 		end
 		return true
@@ -321,7 +321,7 @@ settlement_generator.fringeEmpireSettlements[#settlement_generator.fringeEmpireS
 		planet.lua.settlements.humans.industry=planet.lua.settlements.humans.industry*1.5
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Empire of Terra") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~=G.EMPIRE) then
 			return false
 		end
 		return (planet.lua.minerals>0.8)
@@ -341,7 +341,7 @@ settlement_generator.fringeHumanIndependentSettlements[#settlement_generator.fri
 		planet.lua.settlements.humans:addTag("buddhist")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Independent Worlds") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~=G.INDEPENDENT_WORLDS) then
 			return false
 		end
 		return true
@@ -359,7 +359,7 @@ settlement_generator.fringeHumanIndependentSettlements[#settlement_generator.fri
 		planet.lua.settlements.humans:addTag("isolated")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Independent Worlds") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~=G.INDEPENDENT_WORLDS) then
 			return false
 		end
 		return true
@@ -377,7 +377,7 @@ settlement_generator.fringeHumanIndependentSettlements[#settlement_generator.fri
 		planet.lua.settlements.humans:addTag("eximperial")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Independent Worlds") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~=G.INDEPENDENT_WORLDS) then
 			return false
 		end
 		return true
@@ -395,7 +395,7 @@ settlement_generator.fringeHumanIndependentSettlements[#settlement_generator.fri
 		planet.lua.settlements.humans:addTag("disagracedearl")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Independent Worlds") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~=G.INDEPENDENT_WORLDS) then
 			return false
 		end
 		return true
@@ -413,7 +413,7 @@ settlement_generator.fringeHumanIndependentSettlements[#settlement_generator.fri
 		planet.lua.settlements.humans:addTag("feudalworld")
 	end,
 	weightValidity=function(planet)
-		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~="Independent Worlds") then
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.faction~=G.INDEPENDENT_WORLDS) then
 			return false
 		end
 		return true

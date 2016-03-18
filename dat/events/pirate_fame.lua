@@ -64,7 +64,7 @@ local function using_impressive_ship()
 end
 
 function create()
-	local fame = faction.playerStanding("Pirate")
+	local fame = faction.playerStanding(G.PIRATES)
 
 	-- If the player already has a low reputation, just stop there. 20 is the
 	-- minimum required to land on a pirate planet without having to bribe the
@@ -83,7 +83,7 @@ function create()
 	end
 
 	if rnd.rnd() < maybe then
-		faction.modPlayerSingle("Pirate",-1)
+		faction.modPlayerSingle(G.PIRATES,-1)
 	end
 
 	evt.finish()

@@ -1,4 +1,4 @@
-include('universe/generate_helper.lua')
+include('dat/scripts/general_helper.lua')
 include('universe/generate_nameGenerator.lua')
 include('universe/objects/class_natives.lua')
 
@@ -25,22 +25,22 @@ end
 natives_generator.setNativeDemands=function(planet,basicWeapons,basicTools,primitiveWeapons,primitiveIndustrial,primativeConsumption)
 	planet.lua.natives.goodsDemand={}
 	if (basicWeapons>0) then
-		planet.lua.natives:addGoodDemand(BASIC_WEAPONS,basicWeapons,1)
+		planet.lua.natives:addGoodDemand(C.BASIC_WEAPONS,basicWeapons,1)
 	end
 	if (basicTools>0) then
-		planet.lua.natives:addGoodDemand(BASIC_TOOLS,basicTools,1)
+		planet.lua.natives:addGoodDemand(C.BASIC_TOOLS,basicTools,1)
 	end
 	if (primitiveWeapons>0) then
-		planet.lua.natives:addGoodDemand(PRIMITIVE_ARMAMENT,primitiveWeapons,1)
+		planet.lua.natives:addGoodDemand(C.PRIMITIVE_ARMAMENT,primitiveWeapons,1)
 	end
 	if (primitiveIndustrial>0) then
-		planet.lua.natives:addGoodDemand(PRIMITIVE_INDUSTRIAL,primitiveIndustrial,1)
+		planet.lua.natives:addGoodDemand(C.PRIMITIVE_INDUSTRIAL,primitiveIndustrial,1)
 	end
 	if (primativeConsumption>0) then
-		planet.lua.natives:addGoodDemand(PRIMITIVE_CONSUMER,primativeConsumption,1)
+		planet.lua.natives:addGoodDemand(C.PRIMITIVE_CONSUMER,primativeConsumption,1)
 	end
 
-	planet.faction="Natives"
+	planet.faction=G.NATIVES
 	planet.factionPresence=0
 	planet.factionRange=0
 

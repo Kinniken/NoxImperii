@@ -1,36 +1,4 @@
 
---Const copy-pasted for auto-completion. Not best design but avoids mistakes
-EXOTIC_FOOD="Exotic Food"
-FOOD="Food"
-GOURMET_FOOD="Gourmet Food"
-BORDEAUX="Bordeaux Grands Crus"
-TELLOCH="Roidhun Fine Telloch"
-
-PRIMITIVE_CONSUMER="Primitive Consumer Goods"
-CONSUMER_GOODS="Consumer Goods"
-LUXURY_GOODS="Luxury Goods"
-
-EXOTIC_FURS="Exotic Furs"
-NATIVE_ARTWORK="Native Artworks"
-NATIVE_SCULPTURES="Native Sculptures"
-
-ORE="Ore"
-
-BASIC_TOOLS="Non-Industrial Tools"
-PRIMITIVE_INDUSTRIAL="Primitive Industrial Goods"
-INDUSTRIAL="Industrial Goods"
-MODERN_INDUSTRIAL="Modern Industrial Goods"
-
-EXOTIC_ORGANIC="Exotic Organic Components"
-MEDICINE="Medicine"
-
-NATIVE_WEAPONS="Native Weapons"
-BASIC_WEAPONS="Non-Industrial Weapons"
-PRIMITIVE_ARMAMENT="Primitive Armament"
-ARMAMENT="Armament"
-MODERN_ARMAMENT="Modern Armament"
-
-NATIVE_TECHNOLOGY="Native Technology"
 
 landing_events.attackByWarBands={
 	runEvent=function(planet)
@@ -56,7 +24,7 @@ landing_events.attackByWarBands={
 			local quantity=gh.floorTo(1+math.random()*3,0)
 			textData.quantity=quantity
 			tk.msg( "Cool under Fire", gh.format("Impressed by your cool, your men calmly fire back at the advancing aliens. Startled by your blasters, the natives break and flee, abandoning their weapons. You collect ${quantity} of them: they look valuable!",textData) )
-			player.addCargo(NATIVE_WEAPONS,quantity)
+			player.addCargo(C.NATIVE_WEAPONS,quantity)
 		else
 			local damages=gh.floorTo(1000+math.random()*2000,-2)
 			textData.damages=damages

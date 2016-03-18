@@ -1,3 +1,4 @@
+include('dat/scripts/constants.lua')
 
 --puts the game in debug more (mass system generations, more frequent events)
 debugMode=true

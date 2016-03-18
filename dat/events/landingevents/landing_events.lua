@@ -1,5 +1,5 @@
 
-include('universe/generate_helper.lua')
+include('dat/scripts/general_helper.lua')
 include('universe/objects/class_planets.lua')
 
 landing_events={}  --shared public interface
@@ -79,7 +79,7 @@ function landingEventsIsSystemCivilized(sys)
   local presences=sys:presences()
 
   for k,v in pairs(presences) do
-    if k~="Barbarians" and k~="Natives" then
+    if k~=G.BARBARIANS and k~=G.NATIVES then
       return true
     end
   end

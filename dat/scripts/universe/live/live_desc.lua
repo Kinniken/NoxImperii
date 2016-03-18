@@ -1,5 +1,5 @@
 
-include('universe/generate_helper.lua')
+include('dat/scripts/general_helper.lua')
 
 local industryQualifier,agricultureQualifier,technologyQualifier,createSettlementDesc
 
@@ -60,7 +60,7 @@ function generateLiveSettlementsDesc(planet)
 	if (planet.lua.settlements) then
 		for k,settlement in pairs(planet.lua.settlements) do
 
-			if (k=="natives") then
+			if (k==G.NATIVES) then
 				desc=desc.."The native population is estimated at "..gh.prettyLargeNumber(settlement.population)..". They have assimilated into the galactic economy, and now form a community with a "..industryQualifier(settlement.industry).." industry, a "..agricultureQualifier(settlement.agriculture).." agriculture and a "..serviceQualifier(settlement.services).." service economy."
 				desc=desc.." Their technology level is "..technologyQualifier(settlement.technology)..", "
 				desc=desc.." and their native militias amount to a "..militaryQualifier(settlement.military).." military force. "

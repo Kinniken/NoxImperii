@@ -1,7 +1,7 @@
 --[[
 -- @brief Wrapper for pilot.add() that can operate on tables of fleets.
 --
--- @usage pilots = addShips( "Pirate Hyena", "pirate", nil, 2 ) -- Creates two Pirate Hyenas with pirate AIs.
+-- @usage pilots = addShips( "Pirate Hyena", G.PIRATES, nil, 2 ) -- Creates two Pirate Hyenas with pirate AIs.
 -- @usage pilots = addShips( { "Trader Rhino", "Trader Koala" }, nil, nil, 2 ) -- Creates a convoy of four trader ships with default AIs.
 --
 --    @luaparam ship Fleet to add.
@@ -43,7 +43,7 @@ end
 --[[
 -- @brief Wrapper for pilot.addRaw() that can operate on tables of ships.
 --
--- @usage pilots = addRawShips( "Hyena", "pirate", nil, "Pirate" ) -- Creates a facsimile of a Pirate Hyena.
+-- @usage pilots = addRawShips( "Hyena", G.PIRATES, nil, G.PIRATES ) -- Creates a facsimile of a Pirate Hyena.
 -- @usage pilots = addRawShips( { "Rhino", "Koala" }, nil, nil, "Trader", 2 ) -- Creates four Trader ships.
 --
 --    @luaparam ship Ship to add.

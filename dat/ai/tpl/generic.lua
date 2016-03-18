@@ -1,3 +1,4 @@
+include('dat/scripts/general_helper.lua')
 include("dat/ai/include/basic.lua")
 include("dat/ai/include/attack.lua")
 

@@ -14,5 +14,5 @@ function trader_createSmallArdarBorderTrader ()
    -- Make sure to save the outfits.
    target_ship_outfits["__save"] = true
 
-   return target_ship_name, target_ship, target_ship_outfits,"trader","Ardar Trader"
+   return target_ship_name, target_ship, target_ship_outfits,"trader",G.ARDAR_TRADERS
 end

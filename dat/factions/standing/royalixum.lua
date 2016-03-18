@@ -8,7 +8,7 @@ _fdelta_distress = {-1, 0} -- Maximum change constraints
 _fdelta_kill     = {-5, 1} -- Maximum change constraints
 _fcap_misn     = 30 -- Starting mission cap, gets overwritten
 _fcap_misn_var = "_fcap_royalixum"
-_fthis         = faction.get("Kingdom of Ixum")
+_fthis         = faction.get(G.ROYAL_IXUM)
 
 sec_hit_min = 10
 

@@ -14,7 +14,7 @@ landing_events.marshMonster={
 			tk.msg( "Value in Everything", gh.format([[A maintenance pump from the ${shipname} is quickly brought to the site, and the drainage starts. The monster hides underwater as long as possible, before rising to the surface when the level gets too low. All its tentacles are useless faced with blaster fire, and you soon recover the analyser.
 
 				And bonus, it turns out the monster's carcass contains valuable organic solvents! Not that you care to know to what use they were put by the beast...]],textData) )
-			player.addCargo(EXOTIC_ORGANIC,1)
+			player.addCargo(C.EXOTIC_ORGANIC,1)
 		elseif math.random() <0.5 then
 			local damages=gh.floorTo(500+math.random()*1000,-2)
 			textData.damages=damages
@@ -62,7 +62,7 @@ landing_events.temptationForest={
 			tk.msg( "A Taste of Eden", gh.format([[Your men return with samples of the most common fruits and a blissful look on their faces. The analysis quickly comes back: they are edible. Furthermore, they are delicious!
 
 				You order the collection of as many fruits as can be easily gathered; your men come back with ${quantity} tonnes. They will fetch a good price on sophisticated worlds.]],textData) )
-			player.addCargo(GOURMET_FOOD,quantity)
+			player.addCargo(C.GOURMET_FOOD,quantity)
 		else
 			local damages=gh.floorTo(500+math.random()*1000,-2)
 			textData.damages=damages
@@ -99,7 +99,7 @@ landing_events.steacksInHerd={
 			tk.msg( "The Barbecue of Your Lives", gh.format([[The clumsy beasts fail to react as your men take position, trapping them against the river. On your count they open fire on pre-identified animals - particularly handsome-looking specimens. They fall like bricks while the rest of the herd panics.
 
 				You do the inventory in the dying lights of the bonfire your men have roasted the animals on. ${quantity} tonnes of fresh meat! Buffalo Bill would have been proud.]],textData) )
-			player.addCargo(FOOD,quantity)
+			player.addCargo(C.FOOD,quantity)
 		else
 			local damages=gh.floorTo(500+math.random()*1000,-2)
 			textData.damages=damages

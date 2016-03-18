@@ -1,37 +1,6 @@
 --To be included ONLY via generate_natives
 
 
---Const copy-pasted for auto-completion. Not best design but avoids mistakes
-EXOTIC_FOOD="Exotic Food"
-FOOD="Food"
-GOURMET_FOOD="Gourmet Food"
-
-PRIMITIVE_CONSUMER="Primitive Consumer Goods"
-CONSUMER_GOODS="Consumer Goods"
-LUXURY_GOODS="Luxury Goods"
-
-EXOTIC_FURS="Exotic Furs"
-NATIVE_ARTWORK="Native Artworks"
-NATIVE_SCULPTURES="Native Sculptures"
-
-ORE="Ore"
-
-BASIC_TOOLS="Non-Industrial Tools"
-PRIMITIVE_INDUSTRIAL="Primitive Industrial Goods"
-INDUSTRIAL="Industrial Goods"
-MODERN_INDUSTRIAL="Modern Industrial Goods"
-
-EXOTIC_ORGANIC="Exotic Organic Components"
-MEDICINE="Medicine"
-
-NATIVE_WEAPONS="Native Weapons"
-BASIC_WEAPONS="Non-Industrial Weapons"
-PRIMITIVE_ARMAMENT="Primitive Armament"
-ARMAMENT="Armament"
-MODERN_ARMAMENT="Modern Armament"
-
-NATIVE_TECHNOLOGY="Native Technology"
-
 local all = {}
 
 natives_generator.common_natives=all
@@ -64,7 +33,7 @@ all.leonids.specialities[#all.leonids.specialities+1]={
 		return not planet:areNativeCivilized()
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(NATIVE_ARTWORK,gh.populationScore(planet.lua.natives.population)*(planet:isCivilized() and 10 or 20),
+		planet.lua.natives:addGoodSupply(C.NATIVE_ARTWORK,gh.populationScore(planet.lua.natives.population)*(planet:isCivilized() and 10 or 20),
 			(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
@@ -77,7 +46,7 @@ all.leonids.specialities[#all.leonids.specialities+1]={
 		return not planet:areNativeCivilized()
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(EXOTIC_FOOD,gh.populationScore(planet.lua.natives.population)*20,
+		planet.lua.natives:addGoodSupply(C.EXOTIC_FOOD,gh.populationScore(planet.lua.natives.population)*20,
 			(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
@@ -90,7 +59,7 @@ all.leonids.specialities[#all.leonids.specialities+1]={
 		return planet:areNativeCivilized()
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(FOOD,gh.populationScore(planet.lua.natives.population)*50,1)
+		planet.lua.natives:addGoodSupply(C.FOOD,gh.populationScore(planet.lua.natives.population)*50,1)
 	end,
 	getDesc=function(planet)
 		return "Contact with civilization has let them to focus on commercial ranching. "
@@ -118,7 +87,7 @@ all.otters={
 all.otters.specialities[#all.otters.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(EXOTIC_ORGANIC,gh.populationScore(planet.lua.natives.population)*20,
+		planet.lua.natives:addGoodSupply(C.EXOTIC_ORGANIC,gh.populationScore(planet.lua.natives.population)*20,
 			(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
@@ -128,7 +97,7 @@ all.otters.specialities[#all.otters.specialities+1]={
 all.otters.specialities[#all.otters.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(EXOTIC_FOOD,gh.populationScore(planet.lua.natives.population)*20,
+		planet.lua.natives:addGoodSupply(C.EXOTIC_FOOD,gh.populationScore(planet.lua.natives.population)*20,
 			(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
@@ -164,7 +133,7 @@ all.bovines.specialities[#all.bovines.specialities+1]={
 		return (not planet.lua.natives.civilized)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(NATIVE_SCULPTURES,gh.populationScore(planet.lua.natives.population)*10,
+		planet.lua.natives:addGoodSupply(C.NATIVE_SCULPTURES,gh.populationScore(planet.lua.natives.population)*10,
 			(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
@@ -174,8 +143,8 @@ all.bovines.specialities[#all.bovines.specialities+1]={
 all.bovines.specialities[#all.bovines.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
-		planet.lua.natives.specialGoods[#planet.lua.natives.specialGoods+1]={type=FOOD,production=gh.populationScore(planet.lua.natives.population)*100,buyingPrice=0.5}
-		planet.lua.natives:addGoodSupply(FOOD,gh.populationScore(planet.lua.natives.population)*100,
+		planet.lua.natives.specialGoods[#planet.lua.natives.specialGoods+1]={type=C.FOOD,production=gh.populationScore(planet.lua.natives.population)*100,buyingPrice=0.5}
+		planet.lua.natives:addGoodSupply(C.FOOD,gh.populationScore(planet.lua.natives.population)*100,
 			0.5)
 	end,
 	weightValidity=function(planet)
@@ -219,7 +188,7 @@ all.avians.specialities[#all.avians.specialities+1]={
 		return (not planet.lua.natives.civilized)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(NATIVE_TECHNOLOGY,gh.populationScore(planet.lua.natives.population)*5,
+		planet.lua.natives:addGoodSupply(C.NATIVE_TECHNOLOGY,gh.populationScore(planet.lua.natives.population)*5,
 			(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
@@ -232,7 +201,7 @@ all.avians.specialities[#all.avians.specialities+1]={
 		return (not planet.lua.natives.civilized)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(EXOTIC_FURS,gh.populationScore(planet.lua.natives.population)*10,
+		planet.lua.natives:addGoodSupply(C.EXOTIC_FURS,gh.populationScore(planet.lua.natives.population)*10,
 			(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
@@ -268,7 +237,7 @@ all.simians.specialities[#all.simians.specialities+1]={
 		return (not planet.lua.natives.civilized)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(EXOTIC_FOOD,gh.populationScore(planet.lua.natives.population)*20,
+		planet.lua.natives:addGoodSupply(C.EXOTIC_FOOD,gh.populationScore(planet.lua.natives.population)*20,
 			(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
@@ -281,7 +250,7 @@ all.simians.specialities[#all.simians.specialities+1]={
 		return (not planet.lua.natives.civilized)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(NATIVE_WEAPONS,gh.populationScore(planet.lua.natives.population)*5,
+		planet.lua.natives:addGoodSupply(C.NATIVE_WEAPONS,gh.populationScore(planet.lua.natives.population)*5,
 			(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
@@ -317,7 +286,7 @@ all.carnivorousHumanoids={
 all.carnivorousHumanoids.specialities[#all.carnivorousHumanoids.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(FOOD,gh.populationScore(planet.lua.natives.population)*20,
+		planet.lua.natives:addGoodSupply(C.FOOD,gh.populationScore(planet.lua.natives.population)*20,
 			(planet:isCivilized() and 0.5 or 0.3))
 	end,
 	getDesc=function(planet)
@@ -330,7 +299,7 @@ all.carnivorousHumanoids.specialities[#all.carnivorousHumanoids.specialities+1]=
 		return (not planet.lua.natives.civilized)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(EXOTIC_FURS,gh.populationScore(planet.lua.natives.population)*5,
+		planet.lua.natives:addGoodSupply(C.EXOTIC_FURS,gh.populationScore(planet.lua.natives.population)*5,
 			(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
@@ -358,7 +327,7 @@ all.hibernatingReptiles={
 all.hibernatingReptiles.specialities[#all.hibernatingReptiles.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(FOOD,gh.populationScore(planet.lua.natives.population)*10,
+		planet.lua.natives:addGoodSupply(C.FOOD,gh.populationScore(planet.lua.natives.population)*10,
 			(planet:isCivilized() and 0.5 or 0.3))
 	end,
 	getDesc=function(planet)
@@ -371,7 +340,7 @@ all.hibernatingReptiles.specialities[#all.hibernatingReptiles.specialities+1]={
 		return (not planet.lua.natives.civilized)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(NATIVE_SCULPTURES,gh.populationScore(planet.lua.natives.population)*5,
+		planet.lua.natives:addGoodSupply(C.NATIVE_SCULPTURES,gh.populationScore(planet.lua.natives.population)*5,
 			(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
@@ -410,7 +379,7 @@ all.beavers.specialities[#all.beavers.specialities+1]={
 		return (not planet.lua.natives.civilized)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(EXOTIC_FOOD,gh.populationScore(planet.lua.natives.population)*10,
+		planet.lua.natives:addGoodSupply(C.EXOTIC_FOOD,gh.populationScore(planet.lua.natives.population)*10,
 			(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
@@ -423,7 +392,7 @@ all.beavers.specialities[#all.beavers.specialities+1]={
 		return (not planet.lua.natives.civilized)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(EXOTIC_ORGANIC,gh.populationScore(planet.lua.natives.population)*5,
+		planet.lua.natives:addGoodSupply(C.EXOTIC_ORGANIC,gh.populationScore(planet.lua.natives.population)*5,
 			(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
@@ -453,7 +422,7 @@ all.octopuses={
 all.octopuses.specialities[#all.octopuses.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(FOOD,gh.populationScore(planet.lua.natives.population)*10,
+		planet.lua.natives:addGoodSupply(C.FOOD,gh.populationScore(planet.lua.natives.population)*10,
 			(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
@@ -466,7 +435,7 @@ all.octopuses.specialities[#all.octopuses.specialities+1]={
 		return (not planet.lua.natives.civilized)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(NATIVE_WEAPONS,gh.populationScore(planet.lua.natives.population)*5,1)
+		planet.lua.natives:addGoodSupply(C.NATIVE_WEAPONS,gh.populationScore(planet.lua.natives.population)*5,1)
 	end,
 	getDesc=function(planet)
 		return "Their primitive metal weapons are unusually graceful, their underwater origins showing in their sweeping curves."
@@ -495,7 +464,7 @@ all.burrowers={
 all.burrowers.specialities[#all.burrowers.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(FOOD,gh.populationScore(planet.lua.natives.population)*10,
+		planet.lua.natives:addGoodSupply(C.FOOD,gh.populationScore(planet.lua.natives.population)*10,
 			(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
@@ -508,7 +477,7 @@ all.burrowers.specialities[#all.burrowers.specialities+1]={
 		return true
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(ORE,gh.populationScore(planet.lua.natives.population)*10,
+		planet.lua.natives:addGoodSupply(C.ORE,gh.populationScore(planet.lua.natives.population)*10,
 			(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
@@ -542,7 +511,7 @@ all.crabs.specialities[#all.crabs.specialities+1]={
 		return (not planet.lua.natives.civilized)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(NATIVE_WEAPONS,gh.populationScore(planet.lua.natives.population)*5,1)
+		planet.lua.natives:addGoodSupply(C.NATIVE_WEAPONS,gh.populationScore(planet.lua.natives.population)*5,1)
 	end,
 	getDesc=function(planet)
 		return "Their shells might be stronger than most tanks' armour, but they are still vulnerable to their terrible pincers. As a result they have developed massive armours, weighting upward of half a tonne, that would make for very impressive show pieces in the retro medieval castles of imperial aristocrats."
@@ -554,7 +523,7 @@ all.crabs.specialities[#all.crabs.specialities+1]={
 		return (not planet.lua.natives.civilized)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(NATIVE_SCULPTURES,gh.populationScore(planet.lua.natives.population)*5,0.5)
+		planet.lua.natives:addGoodSupply(C.NATIVE_SCULPTURES,gh.populationScore(planet.lua.natives.population)*5,0.5)
 	end,
 	getDesc=function(planet)
 		return "With their double sets of pincers, the "..planet.lua.natives.name.." make wonderful sculptors. They carve massive but finely detailed mythological sculptures out of entire tree trunks, hacking the general shape with the outer pincers before finishing the details with the inner ones."
@@ -566,7 +535,7 @@ all.crabs.specialities[#all.crabs.specialities+1]={
 		return (planet.lua.natives.civilized)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodDemand(BASIC_WEAPONS,gh.populationScore(planet.lua.natives.population)*15,2)
+		planet.lua.natives:addGoodDemand(C.BASIC_WEAPONS,gh.populationScore(planet.lua.natives.population)*15,2)
 	end,
 	getDesc=function(planet)
 		return "Since being dragged into the Galactic civilization, older "..planet.lua.natives.name..", liberated from reproductive duties, have found employment as shock ground troops."
@@ -599,7 +568,7 @@ all.spiders.specialities[#all.spiders.specialities+1]={
 		return (not planet.lua.natives.civilized)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(NATIVE_ARTWORK,gh.populationScore(planet.lua.natives.population)*5,0.5)
+		planet.lua.natives:addGoodSupply(C.NATIVE_ARTWORK,gh.populationScore(planet.lua.natives.population)*5,0.5)
 	end,
 	getDesc=function(planet)
 		return "Instead they focus on deep meditation, spending days attempting to reach an inner nirvana. The elaborate cocoons every adult "..planet.lua.natives.name.." must build to practise those rituals are things of beauty, airy nests shimmering in ever-changing colours."
@@ -608,7 +577,7 @@ all.spiders.specialities[#all.spiders.specialities+1]={
 all.spiders.specialities[#all.spiders.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
-		planet.lua.natives:addGoodSupply(GOURMET_FOOD,gh.populationScore(planet.lua.natives.population)*5,(planet:isCivilized() and 1 or 0.5))
+		planet.lua.natives:addGoodSupply(C.GOURMET_FOOD,gh.populationScore(planet.lua.natives.population)*5,(planet:isCivilized() and 1 or 0.5))
 	end,
 	getDesc=function(planet)
 		return "Their diet of liquefied insects might seem repelling, but over centuries they have turned it into an art form. What terran aristocrat breed on a diet of live oysters could resist such a novelty as eating #planetname#'s shimmering insects alive - with a straw?"

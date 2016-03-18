@@ -1,5 +1,5 @@
 include('universe/generate_nameGenerator.lua')
-include('universe/generate_helper.lua')
+include('dat/scripts/general_helper.lua')
 include('universe/settlements/ardar_specialities.lua')
 
 
@@ -116,9 +116,9 @@ settlement_generator.coreArdarSettlements[#settlement_generator.coreArdarSettlem
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.ardars:addTag("navyplanet")
 		planet.lua.settlements.ardars.military=planet.lua.settlements.ardars.military+0.5
-		planet.lua.settlements.ardars:addGoodDemand(NATIVE_WEAPONS,20,3)
-		planet.lua.settlements.ardars:addGoodSupply(MODERN_ARMAMENT,30,1)
-		planet.lua.settlements.ardars:addGoodDemand(ARMAMENT,50,1)
+		planet.lua.settlements.ardars:addGoodDemand(C.NATIVE_WEAPONS,20,3)
+		planet.lua.settlements.ardars:addGoodSupply(C.MODERN_ARMAMENT,30,1)
+		planet.lua.settlements.ardars:addGoodDemand(C.ARMAMENT,50,1)
 	end,
 	weightValidity=function(planet)
 		if (planet.lua.settlements==nil or planet.lua.settlements.ardars==nil) then

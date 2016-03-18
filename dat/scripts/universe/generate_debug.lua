@@ -1,6 +1,6 @@
 
 
-includeFolders={"live","natives","objects","planets","settlements",".."}
+includeFolders={"live",G.NATIVES,"objects","planets","settlements",".."}
 
 package.path = package.path .. ";?.lua"
 
@@ -18,7 +18,7 @@ commodity = {get=function(name) return name end}
 
 include('universe/generate_system.lua')
 
-include('universe/generate_helper.lua')
+include('dat/scripts/general_helper.lua')
 
 include('universe/live/live_universe.lua')
 

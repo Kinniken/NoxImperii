@@ -70,8 +70,8 @@ end
 function give_rewards ()
 
    -- Give factions
-   faction.modPlayerSingle( "Empire of Terra", 1 )
-   faction.modPlayerSingle( "Pirate", -5 )
+   faction.modPlayerSingle( G.EMPIRE, 1 )
+   faction.modPlayerSingle( G.PIRATES, -5 )
    
    local planet=loadPlanetLuaData(start_planet)
 

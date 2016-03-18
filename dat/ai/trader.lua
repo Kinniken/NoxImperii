@@ -48,15 +48,15 @@ function create ()
    -- Some stuff has more chance then others
    num = rnd.int(12)
    if num < 5 then
-      cargo = "Food"
+      cargo = C.FOOD
    elseif num < 8 then
-      cargo = "Ore"
+      cargo = C.ORE
    elseif num < 10 then
-      cargo = "Industrial Goods"
+      cargo = C.INDUSTRIAL
    elseif num < 12 then
-      cargo = "Luxury Goods"
+      cargo = C.LUXURY_GOODS
    else
-      cargo = "Medicine"
+      cargo = C.MEDICINE
    end
    ai.pilot():cargoAdd( cargo, rnd.int(0, ai.pilot():cargoFree() ) )
 

@@ -63,7 +63,7 @@ function create ()
 		misn.finish()
 	end
 
-	pickupPlanet=get_faction_planet(system.cur(),"Independent Worlds",2,7)
+	pickupPlanet=get_faction_planet(system.cur(),G.INDEPENDENT_WORLDS,2,7)
 
 	if not pickupPlanet then
 		misn.finish()
@@ -100,7 +100,7 @@ function land_pickup ()
 
    	  tk.msg( gh.format(title[2],stringData), gh.format(text[2],stringData) )
 
-   	  carg_id = misn.cargoAdd( "Primitive Armament", 10 )
+   	  carg_id = misn.cargoAdd( C.PRIMITIVE_ARMAMENT, 10 )
 
    	  misn.markerRm(landmarker)
    	  landmarker = misn.markerAdd( planet.get("Harkan"):system(), "plot" )

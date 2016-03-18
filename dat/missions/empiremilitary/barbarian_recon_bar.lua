@@ -88,8 +88,8 @@ end
 -- Player won, gives rewards.
 function give_rewards ()
    -- Give factions
-   faction.modPlayerSingle( "Empire of Terra", 5 )
-   faction.modPlayerSingle( "Barbarians", -1 )
+   faction.modPlayerSingle( G.EMPIRE, 5 )
+   faction.modPlayerSingle( G.BARBARIANS, -1 )
 
    template_give_rewards()
 end

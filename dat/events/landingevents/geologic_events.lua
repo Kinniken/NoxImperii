@@ -1,36 +1,4 @@
-	--Const copy-pasted for auto-completion. Not best design but avoids mistakes
-	EXOTIC_FOOD="Exotic Food"
-	FOOD="Food"
-	GOURMET_FOOD="Gourmet Food"
-	BORDEAUX="Bordeaux Grands Crus"
-	TELLOCH="Roidhun Fine Telloch"
 
-	PRIMITIVE_CONSUMER="Primitive Consumer Goods"
-	CONSUMER_GOODS="Consumer Goods"
-	LUXURY_GOODS="Luxury Goods"
-
-	EXOTIC_FURS="Exotic Furs"
-	NATIVE_ARTWORK="Native Artworks"
-	NATIVE_SCULPTURES="Native Sculptures"
-
-	ORE="Ore"
-
-	BASIC_TOOLS="Non-Industrial Tools"
-	PRIMITIVE_INDUSTRIAL="Primitive Industrial Goods"
-	INDUSTRIAL="Industrial Goods"
-	MODERN_INDUSTRIAL="Modern Industrial Goods"
-
-	EXOTIC_ORGANIC="Exotic Organic Components"
-	MEDICINE="Medicine"
-
-	NATIVE_WEAPONS="Native Weapons"
-	BASIC_WEAPONS="Non-Industrial Weapons"
-	PRIMITIVE_ARMAMENT="Primitive Armament"
-	ARMAMENT="Armament"
-	MODERN_ARMAMENT="Modern Armament"
-
-	NATIVE_TECHNOLOGY="Native Technology"
-	ANCIENT_TECHNOLOGY="Ancient Technology"
 
 	landing_events.desertWorldOreVein={
 		runEvent=function(planet)
@@ -62,7 +30,7 @@ local random=math.random()
 				tk.msg( "Fortune Favours the Brave", gh.format([[You land the ${shipname} a kilometre from the ores and send a well-protected team to recover them. For a few tense hours, they collect the ores in improvised containers and bring them back to the ship as fast as possible. There is a moment of panic when tremors shake ${planetname} and fresh streams of lava flow a few kilometres from the ship, but things calm down and your crew finishes the job. ${crewJob}
 
 					After moving the ship to a safer location, you do an inventory of the ores: there are at least ${quantity} tonnes of valuable ores, plus a quantity of precious metal worth a solid ${loot} credits!]],textData) )
-				player.addCargo(ORE,quantity)
+				player.addCargo(C.ORE,quantity)
 				player.pay(loot)
 			else				
 				local woundedEventHappened=false--so far
@@ -130,7 +98,7 @@ local random=math.random()
 				tk.msg( "Mysterious Devices", gh.format([[Up close, the ancient mining station is not so impressive; the Empire and the Ardars build bigger, more sophisticated-looking complexes. And yet the age of the walls you are touching is awe-inspiring.
 
 					${crewJob} Your men locate rooms full of materials and quickly transport it to the ${shipname}, for a total of ${quantity} tonnes of storage space. Your lift-off is strangely anti-climatic.]],textData) )
-				player.addCargo(ANCIENT_TECHNOLOGY,quantity)
+				player.addCargo(C.ANCIENT_TECHNOLOGY,quantity)
 			else
 
 				woundedEventHappened=false
@@ -201,7 +169,7 @@ local random=math.random()
 				tk.msg( "Ancient Mechanisms", gh.format([[The soil is tightly-packed and the vegetation above it thick, but the modern tools aboard the ${shipname} make quick work of both. Soon the ancient ship is exposed to the air again. Signs point to an ancient crash, and much of the ship is destroyed beyond investigation. However you do manage to recover what looks like parts of the navigation systems. {crewJob}
 
 					On board the ${shipname}, your men carefully store the ${quantity} tonnes of mechanisms recovered. No doubt some scientists somewhere will give you a good price for them.]],textData) )
-				player.addCargo(ANCIENT_TECHNOLOGY,quantity)
+				player.addCargo(C.ANCIENT_TECHNOLOGY,quantity)
 			else
 				local damages=gh.floorTo(2000+math.random()*5000,-2)
 				textData.damages=damages
@@ -242,7 +210,7 @@ local random=math.random()
 
 					You settle your ship in a more stable orbit before doing a quick inventory; your men have recovered ${quantity} tonnes of mechanisms of various kinds. Now you just need to find a buyer.]],textData) )
 
-				player.addCargo(ANCIENT_TECHNOLOGY,quantity)
+				player.addCargo(C.ANCIENT_TECHNOLOGY,quantity)
 
 			else
 
@@ -293,7 +261,7 @@ local random=math.random()
 
 					You've collected ${quantity} tonnes of ores, compensation for the ${damages} credits worth of damages suffered.]],textData) )
 
-				player.addCargo(ORE,quantity)
+				player.addCargo(C.ORE,quantity)
 				player.pay(-damages)
 
 			else

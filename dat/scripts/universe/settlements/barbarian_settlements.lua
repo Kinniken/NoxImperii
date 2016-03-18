@@ -7,7 +7,7 @@ end
 settlement_generator.barbarianSettlements={}
 
 settlement_generator.barbarianSettlements[#settlement_generator.barbarianSettlements+1]={
-	appliesTo="barbarians",
+	appliesTo=G.BARBARIANS,
 	applyOnPlanet=function(planet)
 
 	end,
@@ -24,7 +24,7 @@ settlement_generator.barbarianSettlements[#settlement_generator.barbarianSettlem
 }
 
 settlement_generator.barbarianSettlements[#settlement_generator.barbarianSettlements+1]={
-	appliesTo="barbarians",
+	appliesTo=G.BARBARIANS,
 	applyOnPlanet=function(planet)
 
 	end,

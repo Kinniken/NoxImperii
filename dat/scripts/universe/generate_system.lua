@@ -2,7 +2,7 @@
 include('universe/objects/class_settlements.lua')
 include('universe/objects/class_planets.lua')
 include('universe/objects/class_natives.lua')
-include('universe/generate_helper.lua')
+include('dat/scripts/general_helper.lua')
 include('universe/planets/planet_templates.lua')
 include('universe/settlements/base_populations.lua')
 include('universe/generate_nameGenerator.lua')

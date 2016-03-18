@@ -44,7 +44,7 @@ end
 
 function create ()
 
-	if not has_system_faction_planet(system.cur(),"Empire of Terra") then
+	if not has_system_faction_planet(system.cur(),G.EMPIRE) then
 		misn.finish()
 	end
 

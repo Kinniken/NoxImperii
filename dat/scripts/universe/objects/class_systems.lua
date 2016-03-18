@@ -1,4 +1,4 @@
-include('universe/generate_helper.lua')
+include('dat/scripts/general_helper.lua')
 include('luadata.lua')
 
 system_class = {}

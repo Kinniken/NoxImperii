@@ -1,5 +1,5 @@
 include('universe/generate_nameGenerator.lua')
-include('universe/generate_helper.lua')
+include('dat/scripts/general_helper.lua')
 
 
 if (not settlement_generator) then
@@ -13,8 +13,8 @@ settlement_generator.royalIxumSettlements[#settlement_generator.royalIxumSettlem
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.royalixumites:addTag("weaponcentre")
 		planet.lua.settlements.royalixumites.military=planet.lua.settlements.royalixumites.military+0.5
-		planet.lua.settlements.royalixumites:addGoodSupply(MODERN_ARMAMENT,30,1)
-		planet.lua.settlements.royalixumites:addGoodSupply(ARMAMENT,50,1)
+		planet.lua.settlements.royalixumites:addGoodSupply(C.MODERN_ARMAMENT,30,1)
+		planet.lua.settlements.royalixumites:addGoodSupply(C.ARMAMENT,50,1)
 	end,
 	weightValidity=function(planet)
 		if (planet.lua.settlements==nil or planet.lua.settlements.royalixumites==nil) then

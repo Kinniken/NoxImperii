@@ -5,7 +5,7 @@ function get_barbarian_planet( sys )
     getsysatdistance(sys, 2,5,
         function(s)
             for i, v in ipairs(s:planets()) do
-                if v:faction() == faction.get("Barbarians") then
+                if v:faction() == faction.get(G.BARBARIANS) then
                     planets[#planets + 1] = {v, s}
                 end
            end
@@ -43,7 +43,7 @@ function barbarian_lord_generate ()
    -- Make sure to save the outfits.
    barbarian_outfits["__save"] = true
 
-   return barbarian_name, barbarian_ship, barbarian_outfits,"baddie","Barbarians"
+   return barbarian_name, barbarian_ship, barbarian_outfits,"baddie",G.BARBARIANS
 end
 function barbarian_easy ()
    return barbarian_createComet()
@@ -60,7 +60,7 @@ end
 function get_adjacent_barbarian_system( sys, sysTaken )
    local systems=getsysatdistance(sys, 1, 1,
         function(s)
-            if not s:presences()["Barbarians"] then
+            if not s:presences()[G.BARBARIANS] then
                return false
             end
             local taken=false

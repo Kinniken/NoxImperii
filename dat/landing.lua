@@ -1,5 +1,5 @@
 include('universe/objects/class_planets.lua')
-include('universe/generate_helper.lua')
+include('dat/scripts/general_helper.lua')
 
 --[[
    Prototype function:

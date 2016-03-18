@@ -8,7 +8,7 @@ _fdelta_distress = {-1, 0} -- Maximum change constraints
 _fdelta_kill     = {-5, 1} -- Maximum change constraints
 _fcap_misn     = 10 -- Starting mission cap, gets overwritten
 _fcap_misn_var = "_fcap_independent_traders"
-_fthis         = faction.get("Independent Trader")
+_fthis         = faction.get(G.INDEPENDENT_TRADERS)
 
 
 function faction_hit( current, amount, source, secondary )

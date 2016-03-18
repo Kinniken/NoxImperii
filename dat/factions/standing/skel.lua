@@ -1,3 +1,6 @@
+include('dat/scripts/general_helper.lua')
+
+
 --[[
    Simple skeleton for your standard faction. This is more or less what the
    standard behaviour can be, but from here you can let your imagination go

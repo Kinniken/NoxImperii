@@ -1,5 +1,5 @@
 include('universe/generate_nameGenerator.lua')
-include('universe/generate_helper.lua')
+include('dat/scripts/general_helper.lua')
 
 
 if (not settlement_generator) then
@@ -31,7 +31,7 @@ settlement_generator.holyFlameSettlements[#settlement_generator.holyFlameSettlem
 	appliesTo="holyflame",
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.holyflame:addTag("university")
-		planet.lua.settlements.holyflame:addGoodSupply(MODERN_ARMAMENT,20,1)
+		planet.lua.settlements.holyflame:addGoodSupply(C.MODERN_ARMAMENT,20,1)
 	end,
 	weightValidity=function(planet)
 		if (planet.lua.settlements==nil or planet.lua.settlements.holyflame==nil) then
@@ -67,7 +67,7 @@ settlement_generator.holyFlameSettlements[#settlement_generator.holyFlameSettlem
 	appliesTo="holyflame",
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.holyflame:addTag("religiousminority")
-		planet.lua.settlements.holyflame:addGoodSupply(ARMAMENT,50,1)
+		planet.lua.settlements.holyflame:addGoodSupply(C.ARMAMENT,50,1)
 	end,
 	weightValidity=function(planet)
 		if (planet.lua.settlements==nil or planet.lua.settlements.holyflame==nil) then

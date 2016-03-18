@@ -1,4 +1,4 @@
-include('universe/generate_helper.lua')
+include('dat/scripts/general_helper.lua')
 include('universe/objects/class_planets.lua')
 include('universe/live/live_desc.lua')
 
@@ -8,40 +8,6 @@ Used to dynamically calculate available tech groups, commodity prices and quanti
 and faction presence (including pirates and barbarians).
 ]]
 
-
---Const copy-pasted for auto-completion. Not best design but avoids mistakes
-EXOTIC_FOOD="Exotic Food"
-FOOD="Food"
-GOURMET_FOOD="Gourmet Food"
-BORDEAUX="Bordeaux Grands Crus"
-TELLOCH="Roidhun Fine Telloch"
-
-PRIMITIVE_CONSUMER="Primitive Consumer Goods"
-CONSUMER_GOODS="Consumer Goods"
-LUXURY_GOODS="Luxury Goods"
-
-EXOTIC_FURS="Exotic Furs"
-NATIVE_ARTWORK="Native Artworks"
-NATIVE_SCULPTURES="Native Sculptures"
-
-ORE="Ore"
-
-BASIC_TOOLS="Non-Industrial Tools"
-PRIMITIVE_INDUSTRIAL="Primitive Industrial Goods"
-INDUSTRIAL="Industrial Goods"
-MODERN_INDUSTRIAL="Modern Industrial Goods"
-
-EXOTIC_ORGANIC="Exotic Organic Components"
-MEDICINE="Medicine"
-
-NATIVE_WEAPONS="Native Weapons"
-BASIC_WEAPONS="Non-Industrial Weapons"
-PRIMITIVE_ARMAMENT="Primitive Armament"
-ARMAMENT="Armament"
-MODERN_ARMAMENT="Modern Armament"
-
-NATIVE_TECHNOLOGY="Native Technology"
-ANCIENT_TECHNOLOGY="Ancient Technology"
 
 earth_pos={x=0,y=0}
 ardarshir_pos={x=1800,y=-100}
@@ -83,66 +49,66 @@ roidhunate_barbarian_zones_array={roidhunate_barbarian_zones.coreward_barb,roidh
 --factors to apply to base calculations to change good supply and demand
 local productionFactors={}
 
-productionFactors.humans={[TELLOCH]={price=3}}--mostly empty, humans are default
+productionFactors.humans={[C.TELLOCH]={price=3}}--mostly empty, humans are default
 
 --Ardars: less luxury, more weapons & industry
 productionFactors.ardars={
-	[FOOD]={demand=1,supply=1},[EXOTIC_FOOD]={demand=0.5},[GOURMET_FOOD]={demand=0.5,supply=0.5},[BORDEAUX]={demand=0.7,price=3},[TELLOCH]={demand=2},
-	[PRIMITIVE_CONSUMER]={demand=1,supply=1},[CONSUMER_GOODS]={demand=1,supply=1},
-	[LUXURY_GOODS]={demand=0.5,supply=0.2},[EXOTIC_FURS]={demand=0.5},[NATIVE_ARTWORK]={demand=0.5},[NATIVE_SCULPTURES]={demand=0.5},
-	[ORE]={demand=1.5},[PRIMITIVE_INDUSTRIAL]={supply=1.2,demand=1.5},[INDUSTRIAL]={supply=1.2,demand=1.5},[MODERN_INDUSTRIAL]={supply=1.2,demand=1.5},[EXOTIC_ORGANIC]={demand=1.5},
-	[MEDICINE]={demand=1,supply=1},
-	[NATIVE_WEAPONS]={demand=2},[BASIC_WEAPONS]={supply=1.2},[PRIMITIVE_ARMAMENT]={supply=1.2,demand=1.5},[ARMAMENT]={supply=1.2,demand=1.5},[MODERN_ARMAMENT]={supply=1.2,demand=1.5}
+	[C.FOOD]={demand=1,supply=1},[C.EXOTIC_FOOD]={demand=0.5},[C.GOURMET_FOOD]={demand=0.5,supply=0.5},[C.BORDEAUX]={demand=0.7,price=3},[C.TELLOCH]={demand=2},
+	[C.PRIMITIVE_CONSUMER]={demand=1,supply=1},[C.CONSUMER_GOODS]={demand=1,supply=1},
+	[C.LUXURY_GOODS]={demand=0.5,supply=0.2},[C.EXOTIC_FURS]={demand=0.5},[C.NATIVE_ARTWORK]={demand=0.5},[C.NATIVE_SCULPTURES]={demand=0.5},
+	[C.ORE]={demand=1.5},[C.PRIMITIVE_INDUSTRIAL]={supply=1.2,demand=1.5},[C.INDUSTRIAL]={supply=1.2,demand=1.5},[C.MODERN_INDUSTRIAL]={supply=1.2,demand=1.5},[C.EXOTIC_ORGANIC]={demand=1.5},
+	[C.MEDICINE]={demand=1,supply=1},
+	[C.NATIVE_WEAPONS]={demand=2},[C.BASIC_WEAPONS]={supply=1.2},[C.PRIMITIVE_ARMAMENT]={supply=1.2,demand=1.5},[C.ARMAMENT]={supply=1.2,demand=1.5},[C.MODERN_ARMAMENT]={supply=1.2,demand=1.5}
 }
 
 --betelgeuse: more luxury, less high-tech
 productionFactors.betelgeuse={
-	[FOOD]={demand=1,supply=1},[EXOTIC_FOOD]={demand=1.5},[GOURMET_FOOD]={demand=1.5,supply=1},[BORDEAUX]={demand=1.5,price=3},[TELLOCH]={demand=1.5},
-	[PRIMITIVE_CONSUMER]={demand=1.5,supply=1},[CONSUMER_GOODS]={demand=1.5,supply=1},
-	[LUXURY_GOODS]={demand=1.5,supply=1},[EXOTIC_FURS]={demand=2},[NATIVE_ARTWORK]={demand=1},[NATIVE_SCULPTURES]={demand=1},
-	[ORE]={demand=1},[PRIMITIVE_INDUSTRIAL]={supply=1,demand=1},[INDUSTRIAL]={supply=1,demand=1},[MODERN_INDUSTRIAL]={supply=0.5,demand=1},[EXOTIC_ORGANIC]={demand=1},
-	[MEDICINE]={demand=1,supply=0.7},
-	[NATIVE_WEAPONS]={demand=2},[BASIC_WEAPONS]={supply=1},[PRIMITIVE_ARMAMENT]={supply=1,demand=1},[ARMAMENT]={supply=0.7,demand=1.5},[MODERN_ARMAMENT]={supply=0.3,demand=1}
+	[C.FOOD]={demand=1,supply=1},[C.EXOTIC_FOOD]={demand=1.5},[C.GOURMET_FOOD]={demand=1.5,supply=1},[C.BORDEAUX]={demand=1.5,price=3},[C.TELLOCH]={demand=1.5},
+	[C.PRIMITIVE_CONSUMER]={demand=1.5,supply=1},[C.CONSUMER_GOODS]={demand=1.5,supply=1},
+	[C.LUXURY_GOODS]={demand=1.5,supply=1},[C.EXOTIC_FURS]={demand=2},[C.NATIVE_ARTWORK]={demand=1},[C.NATIVE_SCULPTURES]={demand=1},
+	[C.ORE]={demand=1},[C.PRIMITIVE_INDUSTRIAL]={supply=1,demand=1},[C.INDUSTRIAL]={supply=1,demand=1},[C.MODERN_INDUSTRIAL]={supply=0.5,demand=1},[C.EXOTIC_ORGANIC]={demand=1},
+	[C.MEDICINE]={demand=1,supply=0.7},
+	[C.NATIVE_WEAPONS]={demand=2},[C.BASIC_WEAPONS]={supply=1},[C.PRIMITIVE_ARMAMENT]={supply=1,demand=1},[C.ARMAMENT]={supply=0.7,demand=1.5},[C.MODERN_ARMAMENT]={supply=0.3,demand=1}
 }
 
 --Royal Ixum: some luxury, lots of military, little consumer good
 productionFactors.royalixumites={
-	[FOOD]={demand=0.7,supply=0.7},[EXOTIC_FOOD]={demand=1},[GOURMET_FOOD]={demand=1,supply=1},[BORDEAUX]={demand=3,price=3},[TELLOCH]={demand=3,price=3},
-	[PRIMITIVE_CONSUMER]={demand=0.5,supply=1},[CONSUMER_GOODS]={demand=0.5,supply=1},
-	[LUXURY_GOODS]={demand=1.5,supply=1},[EXOTIC_FURS]={demand=1.5},[NATIVE_ARTWORK]={demand=0.5},[NATIVE_SCULPTURES]={demand=0.5},[NATIVE_WEAPONS]={demand=2},
-	[ORE]={demand=1},[PRIMITIVE_INDUSTRIAL]={supply=1.2,demand=1.5},[INDUSTRIAL]={supply=0.7,demand=1},[MODERN_INDUSTRIAL]={supply=0.5,demand=0.7},[EXOTIC_ORGANIC]={demand=0.5},
-	[MEDICINE]={demand=1.5,supply=0.5,price=1.5},
-	[BASIC_WEAPONS]={demand=2,supply=1,price=1.5},[PRIMITIVE_ARMAMENT]={supply=1,demand=2,price=1.5},[ARMAMENT]={supply=1,demand=2,price=1.5},[MODERN_ARMAMENT]={supply=0.5,demand=2,price=2}
+	[C.FOOD]={demand=0.7,supply=0.7},[C.EXOTIC_FOOD]={demand=1},[C.GOURMET_FOOD]={demand=1,supply=1},[C.BORDEAUX]={demand=3,price=3},[C.TELLOCH]={demand=3,price=3},
+	[C.PRIMITIVE_CONSUMER]={demand=0.5,supply=1},[C.CONSUMER_GOODS]={demand=0.5,supply=1},
+	[C.LUXURY_GOODS]={demand=1.5,supply=1},[C.EXOTIC_FURS]={demand=1.5},[C.NATIVE_ARTWORK]={demand=0.5},[C.NATIVE_SCULPTURES]={demand=0.5},[C.NATIVE_WEAPONS]={demand=2},
+	[C.ORE]={demand=1},[C.PRIMITIVE_INDUSTRIAL]={supply=1.2,demand=1.5},[C.INDUSTRIAL]={supply=0.7,demand=1},[C.MODERN_INDUSTRIAL]={supply=0.5,demand=0.7},[C.EXOTIC_ORGANIC]={demand=0.5},
+	[C.MEDICINE]={demand=1.5,supply=0.5,price=1.5},
+	[C.BASIC_WEAPONS]={demand=2,supply=1,price=1.5},[C.PRIMITIVE_ARMAMENT]={supply=1,demand=2,price=1.5},[C.ARMAMENT]={supply=1,demand=2,price=1.5},[C.MODERN_ARMAMENT]={supply=0.5,demand=2,price=2}
 }
 
 --Holy Flame: lots of military, little consumer good, little luxury
 productionFactors.holyflame={
-	[FOOD]={demand=0.7,supply=0.7},[EXOTIC_FOOD]={demand=0.5},[GOURMET_FOOD]={demand=0.5,supply=0.5},[BORDEAUX]={demand=0},[TELLOCH]={demand=0},
-	[PRIMITIVE_CONSUMER]={demand=0.5,supply=1},[CONSUMER_GOODS]={demand=0.5,supply=1},
-	[LUXURY_GOODS]={demand=0.5,supply=0.5},[EXOTIC_FURS]={demand=0.5},[NATIVE_ARTWORK]={demand=0},[NATIVE_SCULPTURES]={demand=0},
-	[ORE]={demand=1},[PRIMITIVE_INDUSTRIAL]={supply=1.2,demand=1.5},[INDUSTRIAL]={supply=0.7,demand=1},[MODERN_INDUSTRIAL]={supply=0.5,demand=0.7},[EXOTIC_ORGANIC]={demand=0.5},
-	[MEDICINE]={demand=1.5,supply=0.5,price=1.5},
-	[NATIVE_WEAPONS]={demand=0},[BASIC_WEAPONS]={demand=2,supply=1,price=1.5},[PRIMITIVE_ARMAMENT]={supply=1,demand=2,price=1.5},[ARMAMENT]={supply=1,demand=2,price=1.5},[MODERN_ARMAMENT]={supply=0.5,demand=2,price=2}
+	[C.FOOD]={demand=0.7,supply=0.7},[C.EXOTIC_FOOD]={demand=0.5},[C.GOURMET_FOOD]={demand=0.5,supply=0.5},[C.BORDEAUX]={demand=0},[C.TELLOCH]={demand=0},
+	[C.PRIMITIVE_CONSUMER]={demand=0.5,supply=1},[C.CONSUMER_GOODS]={demand=0.5,supply=1},
+	[C.LUXURY_GOODS]={demand=0.5,supply=0.5},[C.EXOTIC_FURS]={demand=0.5},[C.NATIVE_ARTWORK]={demand=0},[C.NATIVE_SCULPTURES]={demand=0},
+	[C.ORE]={demand=1},[C.PRIMITIVE_INDUSTRIAL]={supply=1.2,demand=1.5},[C.INDUSTRIAL]={supply=0.7,demand=1},[C.MODERN_INDUSTRIAL]={supply=0.5,demand=0.7},[C.EXOTIC_ORGANIC]={demand=0.5},
+	[C.MEDICINE]={demand=1.5,supply=0.5,price=1.5},
+	[C.NATIVE_WEAPONS]={demand=0},[C.BASIC_WEAPONS]={demand=2,supply=1,price=1.5},[C.PRIMITIVE_ARMAMENT]={supply=1,demand=2,price=1.5},[C.ARMAMENT]={supply=1,demand=2,price=1.5},[C.MODERN_ARMAMENT]={supply=0.5,demand=2,price=2}
 }
 
 --Civilized natives
 productionFactors.natives={
-	[FOOD]={demand=0,supply=0},[EXOTIC_FOOD]={demand=1.5},[GOURMET_FOOD]={demand=0.5,supply=0.5},[BORDEAUX]={demand=0},[TELLOCH]={demand=0},
-	[PRIMITIVE_CONSUMER]={demand=1,supply=1},[CONSUMER_GOODS]={demand=1,supply=1},
-	[LUXURY_GOODS]={demand=0.5,supply=0.5},[EXOTIC_FURS]={demand=1},[NATIVE_ARTWORK]={demand=1},[NATIVE_SCULPTURES]={demand=1},
-	[ORE]={demand=1},[PRIMITIVE_INDUSTRIAL]={supply=1,demand=1.5},[INDUSTRIAL]={supply=1,demand=1},[MODERN_INDUSTRIAL]={supply=0,demand=0},[EXOTIC_ORGANIC]={demand=1},
-	[MEDICINE]={demand=1,supply=0.5},
-	[NATIVE_WEAPONS]={demand=1},[BASIC_WEAPONS]={supply=1},[PRIMITIVE_ARMAMENT]={supply=1,demand=1.5},[ARMAMENT]={supply=1,demand=1.5},[MODERN_ARMAMENT]={supply=0,demand=0}
+	[C.FOOD]={demand=0,supply=0},[C.EXOTIC_FOOD]={demand=1.5},[C.GOURMET_FOOD]={demand=0.5,supply=0.5},[C.BORDEAUX]={demand=0},[C.TELLOCH]={demand=0},
+	[C.PRIMITIVE_CONSUMER]={demand=1,supply=1},[C.CONSUMER_GOODS]={demand=1,supply=1},
+	[C.LUXURY_GOODS]={demand=0.5,supply=0.5},[C.EXOTIC_FURS]={demand=1},[C.NATIVE_ARTWORK]={demand=1},[C.NATIVE_SCULPTURES]={demand=1},
+	[C.ORE]={demand=1},[C.PRIMITIVE_INDUSTRIAL]={supply=1,demand=1.5},[C.INDUSTRIAL]={supply=1,demand=1},[C.MODERN_INDUSTRIAL]={supply=0,demand=0},[C.EXOTIC_ORGANIC]={demand=1},
+	[C.MEDICINE]={demand=1,supply=0.5},
+	[C.NATIVE_WEAPONS]={demand=1},[C.BASIC_WEAPONS]={supply=1},[C.PRIMITIVE_ARMAMENT]={supply=1,demand=1.5},[C.ARMAMENT]={supply=1,demand=1.5},[C.MODERN_ARMAMENT]={supply=0,demand=0}
 }
 
 --Barbarians
 productionFactors.barbarians={
-	[FOOD]={demand=0,supply=0},[EXOTIC_FOOD]={demand=0},[GOURMET_FOOD]={demand=0,supply=0},[BORDEAUX]={demand=0},[TELLOCH]={demand=0},
-	[PRIMITIVE_CONSUMER]={demand=2,supply=0.5},[CONSUMER_GOODS]={demand=2,supply=0.2},
-	[LUXURY_GOODS]={demand=3,supply=0.2},[EXOTIC_FURS]={demand=0},[NATIVE_ARTWORK]={demand=0},[NATIVE_SCULPTURES]={demand=0},
-	[ORE]={demand=1},[PRIMITIVE_INDUSTRIAL]={supply=0.5,demand=1.5},[INDUSTRIAL]={supply=0.3,demand=1.5},[MODERN_INDUSTRIAL]={supply=0,demand=0},[EXOTIC_ORGANIC]={demand=0},
-	[MEDICINE]={demand=2,supply=0.3,price=1.5},
-	[NATIVE_WEAPONS]={demand=0},[BASIC_WEAPONS]={supply=1},[PRIMITIVE_ARMAMENT]={supply=1,demand=1.5},[ARMAMENT]={supply=1,demand=1.5},[MODERN_ARMAMENT]={supply=0,demand=0}
+	[C.FOOD]={demand=0,supply=0},[C.EXOTIC_FOOD]={demand=0},[C.GOURMET_FOOD]={demand=0,supply=0},[C.BORDEAUX]={demand=0},[C.TELLOCH]={demand=0},
+	[C.PRIMITIVE_CONSUMER]={demand=2,supply=0.5},[C.CONSUMER_GOODS]={demand=2,supply=0.2},
+	[C.LUXURY_GOODS]={demand=3,supply=0.2},[C.EXOTIC_FURS]={demand=0},[C.NATIVE_ARTWORK]={demand=0},[C.NATIVE_SCULPTURES]={demand=0},
+	[C.ORE]={demand=1},[C.PRIMITIVE_INDUSTRIAL]={supply=0.5,demand=1.5},[C.INDUSTRIAL]={supply=0.3,demand=1.5},[C.MODERN_INDUSTRIAL]={supply=0,demand=0},[C.EXOTIC_ORGANIC]={demand=0},
+	[C.MEDICINE]={demand=2,supply=0.3,price=1.5},
+	[C.NATIVE_WEAPONS]={demand=0},[C.BASIC_WEAPONS]={supply=1},[C.PRIMITIVE_ARMAMENT]={supply=1,demand=1.5},[C.ARMAMENT]={supply=1,demand=1.5},[C.MODERN_ARMAMENT]={supply=0,demand=0}
 }
 
 function initStatusVar()
@@ -434,7 +400,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 	production=10*settlement.agriculture
 	price=settlement.services/(settlement.agriculture)
 
-	generateCommodity(settings,commodities,FOOD,price,need,production,100)
+	generateCommodity(settings,commodities,C.FOOD,price,need,production,100)
 
 	need=0
 	if (settlement.services>0.7) then
@@ -446,7 +412,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 	end
 	price=(settlement.services+0.3)/(settlement.agriculture)+0.1
 
-	generateCommodity(settings,commodities,GOURMET_FOOD,price,need,production,20)
+	generateCommodity(settings,commodities,C.GOURMET_FOOD,price,need,production,20)
 
 	--Consumer Goods
 	need=0
@@ -458,7 +424,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=(settlement.services*2)
 	end
 	price=1/(settlement.technology/3+0.8)
-	generateCommodity(settings,commodities,PRIMITIVE_CONSUMER,price,need,production,100)
+	generateCommodity(settings,commodities,C.PRIMITIVE_CONSUMER,price,need,production,100)
 
 	need=0
 	if (settlement.services>0.3) then
@@ -469,7 +435,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=settlement.services
 	end
 	price=1/(settlement.technology/2+0.7)
-	generateCommodity(settings,commodities,CONSUMER_GOODS,price,need,production,50)
+	generateCommodity(settings,commodities,C.CONSUMER_GOODS,price,need,production,50)
 
 	need=0
 	if (settlement.services>0.8) then
@@ -480,7 +446,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=settlement.services/4
 	end
 	price=1/(settlement.technology+0.5)
-	generateCommodity(settings,commodities,LUXURY_GOODS,price,need,production,25)
+	generateCommodity(settings,commodities,C.LUXURY_GOODS,price,need,production,25)
 
 
 
@@ -491,7 +457,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=settlement.services/2
 	end
 	price=1/(settlement.technology*2+0.5)+0.5
-	generateCommodity(settings,commodities,MEDICINE,price,need,production,20)
+	generateCommodity(settings,commodities,C.MEDICINE,price,need,production,20)
 
 
 	--Industrial
@@ -504,7 +470,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=(planet.lua.minerals*2)
 	end
 	price=0.7+settlement.technology/3
-	generateCommodity(settings,commodities,ORE,price,need,production,100)
+	generateCommodity(settings,commodities,C.ORE,price,need,production,100)
 
 
 	need=0
@@ -513,7 +479,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=(settlement.industry*2)
 	end
 	price=1/(settlement.technology/5+0.9)
-	generateCommodity(settings,commodities,BASIC_TOOLS,price,need,production,20)
+	generateCommodity(settings,commodities,C.BASIC_TOOLS,price,need,production,20)
 
 	need=0
 	if (settlement.technology<0.5) then
@@ -524,7 +490,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=(settlement.industry*2)
 	end
 	price=1/(settlement.technology/4+0.8)
-	generateCommodity(settings,commodities,PRIMITIVE_INDUSTRIAL,price,need,production,50)
+	generateCommodity(settings,commodities,C.PRIMITIVE_INDUSTRIAL,price,need,production,50)
 
 	need=0
 	if (settlement.technology>0.3 and settlement.technology<1) then
@@ -535,7 +501,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=settlement.industry
 	end
 	price=1/(settlement.technology/3+0.8)
-	generateCommodity(settings,commodities,INDUSTRIAL,price,need,production,50)
+	generateCommodity(settings,commodities,C.INDUSTRIAL,price,need,production,50)
 
 	need=0
 	if (settlement.technology>0.8) then
@@ -546,7 +512,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=settlement.industry/4
 	end
 	price=1/(settlement.technology*2+1)+0.5
-	generateCommodity(settings,commodities,MODERN_INDUSTRIAL,price,need,production,200)
+	generateCommodity(settings,commodities,C.MODERN_INDUSTRIAL,price,need,production,200)
 
 
 	--Weapons
@@ -556,7 +522,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=(settlement.industry*2)
 	end
 	price=1/(settlement.technology/5+0.9)
-	generateCommodity(settings,commodities,BASIC_WEAPONS,price,need,production,20)
+	generateCommodity(settings,commodities,C.BASIC_WEAPONS,price,need,production,20)
 
 	need=0
 	if (settlement.technology<0.5) then
@@ -567,7 +533,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=(settlement.industry*2)
 	end
 	price=1/(settlement.technology/4+0.8)
-	generateCommodity(settings,commodities,PRIMITIVE_ARMAMENT,price,need,production,100)
+	generateCommodity(settings,commodities,C.PRIMITIVE_ARMAMENT,price,need,production,100)
 
 	need=0
 	if (settlement.technology>0.3 and settlement.technology<1) then
@@ -578,7 +544,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=settlement.industry
 	end
 	price=1/(settlement.technology/3+0.8)
-	generateCommodity(settings,commodities,ARMAMENT,price,need,production,50)
+	generateCommodity(settings,commodities,C.ARMAMENT,price,need,production,50)
 
 	need=0
 	if (settlement.technology>0.8) then
@@ -589,7 +555,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=settlement.industry/4
 	end
 	price=1/(settlement.technology*2+1)+0.5
-	generateCommodity(settings,commodities,MODERN_ARMAMENT,price,need,production,25)
+	generateCommodity(settings,commodities,C.MODERN_ARMAMENT,price,need,production,25)
 
 
 
@@ -599,49 +565,49 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		need=populationScore*settlement.industry
 	end
 	price=0.8+settlement.technology*2
-	generateCommodity(settings,commodities,EXOTIC_ORGANIC,price,need,0,10)
+	generateCommodity(settings,commodities,C.EXOTIC_ORGANIC,price,need,0,10)
 
 	need=0
 	if (settlement.services>0.7) then
 		need=populationScore*(settlement.services-0.7)*2
 	end
 	price=0.8+settlement.technology
-	generateCommodity(settings,commodities,EXOTIC_FOOD,price,need,0,10)
+	generateCommodity(settings,commodities,C.EXOTIC_FOOD,price,need,0,10)
 
 	need=0
 	if (settlement.services>1) then
 		need=populationScore*(settlement.services-1)*2
 	end
 	price=1/(settlement.technology*2+1)+0.8
-	generateCommodity(settings,commodities,BORDEAUX,price,need,0,5)
+	generateCommodity(settings,commodities,C.BORDEAUX,price,need,0,5)
 
 	need=0
 	if (settlement.services>1) then
 		need=populationScore*(settlement.services-0.7)*2
 	end
 	price=1/(settlement.technology*2+1)+0.5
-	generateCommodity(settings,commodities,TELLOCH,price,need,0,5)
+	generateCommodity(settings,commodities,C.TELLOCH,price,need,0,5)
 
 	need=0
 	if (settlement.services>1) then
 		need=populationScore*(settlement.services-0.7)*2
 	end
 	price=0.7+settlement.technology*1.5
-	generateCommodity(settings,commodities,NATIVE_ARTWORK,price,need,0,10)
+	generateCommodity(settings,commodities,C.NATIVE_ARTWORK,price,need,0,10)
 
 	need=0
 	if (settlement.services>1) then
 		need=populationScore*(settlement.services-0.7)*2
 	end
 	price=0.8+settlement.technology*1.3
-	generateCommodity(settings,commodities,NATIVE_SCULPTURES,price,need,0,10)
+	generateCommodity(settings,commodities,C.NATIVE_SCULPTURES,price,need,0,10)
 
 	need=0
 	if (settlement.military>1) then
 		need=populationScore*(settlement.military-0.7)*2
 	end
 	price=0.8+settlement.technology
-	generateCommodity(settings,commodities,NATIVE_WEAPONS,price,need,0,10)
+	generateCommodity(settings,commodities,C.NATIVE_WEAPONS,price,need,0,10)
 
 	if (settlement.suppressGoodDemand) then
 		for k,good in pairs(settlement.suppressGoodDemand) do
@@ -663,7 +629,7 @@ local function generateExtraPresences(planet,sectorStability)
 	local f=planet.c:faction()
 	local factionName=""
 
-	if (f and not (f==faction.get("Natives"))) then
+	if (f and not (f==faction.get(G.NATIVES))) then
 		factionName=f:name()
 	end
 
@@ -680,17 +646,17 @@ local function generateExtraPresences(planet,sectorStability)
 			range=3
 		end
 
-		if (factionName=="Empire of Terra") then
-			planet.c:setFactionExtraPresence("Imperial Trader",amount,range)
-			planet.c:setFactionExtraPresence("Independent Trader",amount/2,range)
+		if (factionName==G.EMPIRE) then
+			planet.c:setFactionExtraPresence(G.IMPERIAL_TRADERS,amount,range)
+			planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount/2,range)
 		else
-			planet.c:setFactionExtraPresence("Independent Trader",amount,range)
+			planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount,range)
 		end
 
 		if (settlement.stability<0.5) then
 			local amount=100*(1-settlement.stability*2)/sectorStability
 			local range=2
-			planet.c:setFactionExtraPresence("Pirate",amount,range)
+			planet.c:setFactionExtraPresence(G.PIRATES,amount,range)
 		end
 	end
 
@@ -706,12 +672,12 @@ local function generateExtraPresences(planet,sectorStability)
 			range=3
 		end
 
-		planet.c:setFactionExtraPresence("Ardar Trader",amount,range)
+		planet.c:setFactionExtraPresence(G.ARDAR_TRADERS,amount,range)
 
 		if (settlement.stability<0.3) then
 			local amount=30*(1-settlement.stability*3)/sectorStability
 			local range=2
-			planet.c:setFactionExtraPresence("Pirate",amount,range)
+			planet.c:setFactionExtraPresence(G.PIRATES,amount,range)
 		end
 	end
 
@@ -727,12 +693,12 @@ local function generateExtraPresences(planet,sectorStability)
 			range=3
 		end
 
-		planet.c:setFactionExtraPresence("Betelgian Trader",amount,range)
+		planet.c:setFactionExtraPresence(G.BETELGIAN_TRADERS,amount,range)
 
 		if (settlement.stability<0.3) then
 			local amount=40*(1-settlement.stability*3)/sectorStability
 			local range=2
-			planet.c:setFactionExtraPresence("Pirate",amount,range)
+			planet.c:setFactionExtraPresence(G.PIRATES,amount,range)
 		end
 	end
 
@@ -749,14 +715,14 @@ local function generateExtraPresences(planet,sectorStability)
 			range=3
 		end
 
-		planet.c:setFactionExtraPresence("Imperial Trader",amount,range)
-		planet.c:setFactionExtraPresence("Independent Trader",amount/2,range)
-		planet.c:setFactionExtraPresence("Ardar Trader",-1000,1)
+		planet.c:setFactionExtraPresence(G.IMPERIAL_TRADERS,amount,range)
+		planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount/2,range)
+		planet.c:setFactionExtraPresence(G.ARDAR_TRADERS,-1000,1)
 
 		if (settlement.stability<0.5) then
 			local amount=100*(1-settlement.stability*2)/sectorStability
 			local range=2
-			planet.c:setFactionExtraPresence("Pirate",amount,range)
+			planet.c:setFactionExtraPresence(G.PIRATES,amount,range)
 		end
 	end
 
@@ -772,13 +738,13 @@ local function generateExtraPresences(planet,sectorStability)
 			range=3
 		end
 
-		planet.c:setFactionExtraPresence("Ardar Trader",amount,range)
-		planet.c:setFactionExtraPresence("Independent Trader",amount/2,range)
+		planet.c:setFactionExtraPresence(G.ARDAR_TRADERS,amount,range)
+		planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount/2,range)
 
 		if (settlement.stability<0.5) then
 			local amount=100*(1-settlement.stability*2)/sectorStability
 			local range=2
-			planet.c:setFactionExtraPresence("Pirate",amount,range)
+			planet.c:setFactionExtraPresence(G.PIRATES,amount,range)
 		end
 	end
 
@@ -899,34 +865,34 @@ local function generateCivilizedPlanetServices(planet)
 
   local f=planet.c:faction()
 
-  if (f and not (f==faction.get("Natives"))) then
+  if (f and not (f==faction.get(G.NATIVES))) then
   	factionName=f:name()
 
   	generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Generic")
 
-  	if (factionName=="Empire of Terra") then
+  	if (factionName==G.EMPIRE) then
   		generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Empire")
-  	elseif (factionName=="Roidhunate of Ardarshir") then
+  	elseif (factionName==G.ROIDHUNATE) then
   		generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Roidhunate")
-  	elseif (factionName=="Oligarchy of Betelgeuse") then
+  	elseif (factionName==G.BETELGEUSE) then
   		generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Betelgeuse")
-  	elseif (factionName=="Barbarians") then
+  	elseif (factionName==G.BARBARIANS) then
   		generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Barbarian")
   	end
 
   	generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Generic")
 
-  	if (factionName=="Empire of Terra") then
+  	if (factionName==G.EMPIRE) then
   		generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Empire")
-  	elseif (factionName=="Roidhunate of Ardarshir") then
+  	elseif (factionName==G.ROIDHUNATE) then
   		generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Roidhunate")
-  	elseif (factionName=="Oligarchy of Betelgeuse") then
+  	elseif (factionName==G.BETELGEUSE) then
   		generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Betelgeuse")
-  	elseif (factionName=="Barbarians") then
+  	elseif (factionName==G.BARBARIANS) then
   		generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Barbarian")
-  	elseif (factionName=="Kingdom of Ixum") then
+  	elseif (factionName==G.ROYAL_IXUM) then
   		generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Royal Ixum")
-  	elseif (factionName=="Holy Flame of Ixum") then
+  	elseif (factionName==G.HOLY_FLAME) then
   		generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Holy Flame")
   	end
 
@@ -940,7 +906,7 @@ local function generateCivilizedPlanetServices(planet)
   		range=3
   	end
 
-  	if (factionName=="Barbarians") then
+  	if (factionName==G.BARBARIANS) then
   		range=range*3
   		presence=math.pow(bestPop/10,1/3.4)*bestTechnology/sectorStability
   	else

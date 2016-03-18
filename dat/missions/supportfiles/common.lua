@@ -28,7 +28,7 @@ function get_empty_sys( sys, min, max)
   local systems=getsysatdistance(system.cur(), min, max,
     function(s)
         for _,p in pairs(s:planets()) do
-          if p:faction() and p:faction()~=faction.get("Natives") then
+          if p:faction() and p:faction()~=faction.get(G.NATIVES) then
             return false
           end
         end

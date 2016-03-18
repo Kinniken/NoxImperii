@@ -15,7 +15,7 @@ function get_ardarshir_system( sys,sysTaken )
               return true
             end
             for i, v in ipairs(s:planets()) do
-                if v:faction() == faction.get("Roidhunate of Ardarshir") and
+                if v:faction() == faction.get(G.ROIDHUNATE) and
                         v:canLand() then
                     planets[#planets + 1] = {v, s}
                 end

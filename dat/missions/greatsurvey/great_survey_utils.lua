@@ -44,7 +44,7 @@ end
 function isSystemValid(system)
    local presences=system.cur():presences()
 
-   return not presences["Empire of Terra"] and not presences["Roidhunate of Ardarshir"] and not presences["Oligarchy of Betelgeuse"]
+   return not presences[G.EMPIRE] and not presences[G.ROIDHUNATE] and not presences[G.BETELGEUSE]
 end
 
 function handlePlanet(surveyedPlanet,successMessage)

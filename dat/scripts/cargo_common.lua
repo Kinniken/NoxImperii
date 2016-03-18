@@ -92,7 +92,7 @@ function cargo_calculateRoute ()
     
     -- We now know where. But we don't know what yet. Randomly choose a commodity type.
     -- TODO: I'm using the standard cargo types for now, but this should be changed to custom cargo once local-defined commodities are implemented.
-    local cargoes = {"Food", "Industrial Goods", "Consumer Goods", "Luxury Goods", "Ore"}
+    local cargoes = {C.FOOD, C.INDUSTRIAL, C.CONSUMER_GOODS, C.LUXURY_GOODS, C.ORE}
     local cargo = cargoes[rnd.rnd(1, #cargoes)]
 
     -- Return lots of stuff
@@ -124,8 +124,8 @@ end
 function cargoValidDest( targetplanet )
    -- The blacklist are factions which cannot be delivered to by factions other than themselves, i.e. the Thurion and Proteron.
    local blacklist = {
-                     faction.get("Barbarians"),
-                     faction.get("Pirate"),
+                     faction.get(G.BARBARIANS),
+                     faction.get(G.PIRATES),
                      }
    for i,f in ipairs( blacklist ) do
       if planet.cur():faction() == blacklist[i] and targetplanet:faction() ~= blacklist[i] then

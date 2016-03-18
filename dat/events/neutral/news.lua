@@ -1,5 +1,5 @@
 include('universe/generate_nameGenerator.lua')
-include('universe/generate_helper.lua')
+include('dat/scripts/general_helper.lua')
 
 --[[
 -- Event for creating generic news
@@ -14,21 +14,21 @@ else --default english
 
    header_table["Generic"] =     {"We bring you the latest news in the galaxy."
                                  }
-   header_table["Empire of Terra"] =      {"Welcome to the Empire News Centre."
+   header_table[G.EMPIRE] =      {"Welcome to the Empire News Centre."
                       }                             
-   header_table["Independent Worlds"] = {"Welcome to the Syndicated Independent Press Agency."
+   header_table[G.INDEPENDENT_WORLDS] = {"Welcome to the Syndicated Independent Press Agency."
                                  }
-   header_table["Roidhunate of Ardarshir"] =      {"The latest from the Roidhunate."
+   header_table[G.ROIDHUNATE] =      {"The latest from the Roidhunate."
                       }
-   header_table["Oligarchy of Betelgeuse"] =      {"Trade, economy, stock markets - all the news, curtsy of our sponsors!"}
-   header_table["Kingdom of Ixum"] =      {"Straight from the Court."}
-   header_table["Holy Flame of Ixum"] =      {"Broadcast from the Council of Guardians"}
-   header_table["Pirate"] =      {"Pirate News. News that matters."
+   header_table[G.BETELGEUSE] =      {"Trade, economy, stock markets - all the news, curtsy of our sponsors!"}
+   header_table[G.ROYAL_IXUM] =      {"Straight from the Court."}
+   header_table[G.HOLY_FLAME] =      {"Broadcast from the Council of Guardians"}
+   header_table[G.PIRATES] =      {"Pirate News. News that matters."
                                  }
-   header_table["Barbarians"] =  {"Welcome to the Raiding Network."
+   header_table[G.BARBARIANS] =  {"Welcome to the Raiding Network."
                                  }   
 
-   header_table["Natives"] =  {"We bring you the latest news in the galaxy."
+   header_table[G.NATIVES] =  {"We bring you the latest news in the galaxy."
                                  }                                                                                          
 
    
@@ -36,28 +36,28 @@ else --default english
 
    greet_table["Generic"] =      {""
                                  }
-   greet_table["Empire of Terra"] =       {"News from the court and more minor topics."
+   greet_table[G.EMPIRE] =       {"News from the court and more minor topics."
                                  }
-   greet_table["Independent Worlds"] =      {"News from the Fringe."
+   greet_table[G.INDEPENDENT_WORLDS] =      {"News from the Fringe."
                                  }
-   greet_table["Roidhunate of Ardarshir"] =      {"Greating from the Roidhunate."}
+   greet_table[G.ROIDHUNATE] =      {"Greating from the Roidhunate."}
 
-   greet_table["Oligarchy of Betelgeuse"] =      {"Stocks of the day, goods to watch!"}
+   greet_table[G.BETELGEUSE] =      {"Stocks of the day, goods to watch!"}
 
-   greet_table["Kingdom of Ixum"] =      {"The Royal News Network."}
+   greet_table[G.ROYAL_IXUM] =      {"The Royal News Network."}
 
-   greet_table["Holy Flame of Ixum"] =      {"Seek your Salvation in the Flame."}                                                                                         
+   greet_table[G.HOLY_FLAME] =      {"Seek your Salvation in the Flame."}                                                                                         
 
-   greet_table["Pirate"] =       {"News that matters.",
+   greet_table[G.PIRATES] =       {"News that matters.",
                                  "Adopt a cat today!",
                                  "Laughing at the Emperor.",
                                  "On top of the world.",
                                  "Piracy has never been better."
                                  }
-   greet_table["Barbarians"] =      {"Raiding your homeworld."
+   greet_table[G.BARBARIANS] =      {"Raiding your homeworld."
                                  }
 
-   greet_table["Natives"] =      {""
+   greet_table[G.NATIVES] =      {""
                                  }                              
 
    
@@ -83,7 +83,7 @@ else --default english
       
    }
 
-   articles["Empire of Terra"]={
+   articles[G.EMPIRE]={
       --[[
          Science and technology
       --]]
@@ -122,7 +122,7 @@ else --default english
       }
    }
 
-   articles["Independent Worlds"]={
+   articles[G.INDEPENDENT_WORLDS]={
       --[[
          Science and technology
       --]]
@@ -138,7 +138,7 @@ else --default english
       --]]
    }
 
-   articles["Roidhunate of Ardarshir"]={
+   articles[G.ROIDHUNATE]={
       --[[
          Science and technology
       --]]
@@ -153,7 +153,7 @@ else --default english
       --]]
    }
 
-   articles["Pirate"]={
+   articles[G.PIRATES]={
       --[[
          Science and technology
       --]]
@@ -172,7 +172,7 @@ else --default english
       }
    }
 
-   articles["Oligarchy of Betelgeuse"]={
+   articles[G.BETELGEUSE]={
       --[[
          Science and technology
       --]]
@@ -186,22 +186,7 @@ else --default english
          Human interest.
       --]]
    }
-   articles["Kingdom of Ixum"]={
-      --[[
-         Science and technology
-      --]]
-      --[[
-         Business
-      --]]
-      --[[
-         Politics
-      --]]
-      --[[
-         Human interest.
-      --]]
-
-   }
-   articles["Holy Flame of Ixum"]={
+   articles[G.ROYAL_IXUM]={
       --[[
          Science and technology
       --]]
@@ -216,7 +201,22 @@ else --default english
       --]]
 
    }
-   articles["Barbarians"]={
+   articles[G.HOLY_FLAME]={
+      --[[
+         Science and technology
+      --]]
+      --[[
+         Business
+      --]]
+      --[[
+         Politics
+      --]]
+      --[[
+         Human interest.
+      --]]
+
+   }
+   articles[G.BARBARIANS]={
       --[[
          Science and technology
       --]]

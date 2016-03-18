@@ -5,7 +5,7 @@ include "pilot/pirate.lua"
 function get_nearby_pirate_system( sys, sysTaken )
    local systems=getsysatdistance(system.cur(), 1, 2,
         function(s)
-            if (s:presence("Pirate")<10 or s:presence("Pirate")*3<s:presence("Empire of Terra")) then
+            if (s:presence(G.PIRATES)<10 or s:presence(G.PIRATES)*3<s:presence(G.EMPIRE)) then
                return false
             end
             local taken=false
@@ -48,7 +48,7 @@ function pir_generate ()
    -- Make sure to save the outfits.
    pir_outfits["__save"] = true
 
-   return pir_name, pir_ship, pir_outfits,"pirate","Pirate"
+   return pir_name, pir_ship, pir_outfits,G.PIRATES,G.PIRATES
 end
 function pir_easy ()
    if rnd.rnd() < 0.5 then

@@ -75,7 +75,7 @@ else --default english
                                "Hey, you ever wonder why we're here?\", you say, \"It's one of life's great mysteries isn't it?\", the citizen replys, \"Why are we here? Are we the product of some cosmic coincidence or is there some great cosmic plan for us? I dunno, but it keeps me up at night\" ... \"What?? No, I mean why are we in here, in this bar?"
                               }
 
-   msg_lore["Independent Worlds"] =  {"We're not part of any of the galactic superpowers. We can take care of ourselves!",
+   msg_lore[G.INDEPENDENT_WORLDS] =  {"We're not part of any of the galactic superpowers. We can take care of ourselves!",
                                "Sometimes I worry that our lack of a standing military leaves us vulnerable to attack. I hope nobody will get any ideas of conquering us!",
                               }
 
@@ -88,13 +88,13 @@ else --default english
                               }
 
 
-   msg_lore["Pirate"] =       {"Hi mate. Money or your life! Heh heh, just messing with you.",
+   msg_lore[G.PIRATES] =       {"Hi mate. Money or your life! Heh heh, just messing with you.",
                                "Hey, look at these new scars I got!",
                                "Have you heard of the Pirates' Code? They're more guidelines than rules...",
                                "My gran said 'Never trust a pirate', she was right too, I got a pretty credit chip for her with the slavers.",
                               }
 
-   msg_lore["Imperial Trader"] =       {"Just another link in the Great Chain, right?",
+   msg_lore[G.IMPERIAL_TRADERS] =       {"Just another link in the Great Chain, right?",
                                "You win some, you lose some but if you don't try you're never going to win",
                                "If you don't watch the markets then you'll be hopping between planets in a jury-rigged ship in no time.",
                                "Them blimming pirates, stopping honest folk from making an honest living - it's not like we're exploiting the needy!",

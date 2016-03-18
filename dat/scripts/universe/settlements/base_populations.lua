@@ -1,4 +1,4 @@
-include('universe/generate_helper.lua')
+include('dat/scripts/general_helper.lua')
 include('universe/generate_nameGenerator.lua')
 include('universe/settlements/human_settlements.lua')
 include('universe/settlements/ardar_settlements.lua')
@@ -131,7 +131,7 @@ local function generate_ardar_population(star,planet,minFertility,settlementChan
 		settlement:randomizeSettlementData(0.2)
 		
 		planet.lua.settlements.ardars=settlement
-		planet.faction="Roidhunate of Ardarshir"
+		planet.faction=G.ROIDHUNATE
 		planet.factionPresence=1
 		planet.factionRange=1
 
@@ -154,7 +154,7 @@ local function generate_ixumite_population(star,planet,minFertility,settlementCh
 
 		settlement:randomizeSettlementData(0.2)
 		
-		if (factionName=="Kingdom of Ixum") then
+		if (factionName==G.ROYAL_IXUM) then
 			planet.lua.settlements.royalixumites=settlement
 		else
 			planet.lua.settlements.holyflame=settlement
@@ -206,7 +206,7 @@ local function betelgeuse_generate(star)
 			settlement:randomizeSettlementData(0.2)
 			
 			planet.lua.settlements.betelgeuse=settlement
-			planet.faction="Oligarchy of Betelgeuse"
+			planet.faction=G.BETELGEUSE
 			planet.factionPresence=1
 			planet.factionRange=1
 
@@ -217,31 +217,31 @@ end
 
 local function empire_inner_generate(star)
 	for k,planet in pairs(star.planets) do
-		generate_human_population(star,planet,0.2,1,{1000000,1000000000},1.5,1.5,1,0.5,1,"Empire of Terra");
+		generate_human_population(star,planet,0.2,1,{1000000,1000000000},1.5,1.5,1,0.5,1,G.EMPIRE);
 	end
 end
 
 local function empire_outer_generate(star)
 	for k,planet in pairs(star.planets) do
-		generate_human_population(star,planet,0.3,0.7,{100000,100000000},1,1,0.6,1,0.7,"Empire of Terra");
+		generate_human_population(star,planet,0.3,0.7,{100000,100000000},1,1,0.6,1,0.7,G.EMPIRE);
 	end
 end
 
 local function empire_fringe_generate(star)
 	if (math.random()<0.8) then
 		for k,planet in pairs(star.planets) do
-			generate_human_population(star,planet,0.5,0.7,{50000,20000000},0.8,0.7,0.5,3,0.3,"Empire of Terra");
+			generate_human_population(star,planet,0.5,0.7,{50000,20000000},0.8,0.7,0.5,3,0.3,G.EMPIRE);
 		end
 	else
 		for k,planet in pairs(star.planets) do
-			generate_human_population(star,planet,0.5,0.7,{50000,20000000},0.5,0.8,0.3,1.5,0.3,"Independent Worlds");
+			generate_human_population(star,planet,0.5,0.7,{50000,20000000},0.5,0.8,0.3,1.5,0.3,G.INDEPENDENT_WORLDS);
 		end
 	end
 end
 
 local function empire_ardarshir_border_generate(star)
 	for k,planet in pairs(star.planets) do
-		generate_human_population(star,planet,0.5,0.7,{50000,20000000},0.8,0.7,0.5,5,0.7,"Empire of Terra");
+		generate_human_population(star,planet,0.5,0.7,{50000,20000000},0.8,0.7,0.5,5,0.7,G.EMPIRE);
 	end
 end
 
@@ -249,15 +249,15 @@ local function empire_outer_fringe_generate(star)
 
 	if (math.random()<0.5) then
 		for k,planet in pairs(star.planets) do
-			generate_human_population(star,planet,0.5,0.7,{50000,10000000},0.5,0.8,0.2,1.5,0.3,"Independent Worlds");
+			generate_human_population(star,planet,0.5,0.7,{50000,10000000},0.5,0.8,0.2,1.5,0.3,G.INDEPENDENT_WORLDS);
 		end
 	else
 		for k,planet in pairs(star.planets) do
 			if (math.random()<0.9) then-- barbarian colony
-				generate_barbarian_population(star,planet,0.5,0.4,{500000,2000000},0.3,0.5,0.2,3,0.8,"Barbarians");
+				generate_barbarian_population(star,planet,0.5,0.4,{500000,2000000},0.3,0.5,0.2,3,0.8,G.BARBARIANS);
 			else-- barbarian "home world"
 				planet.lua.natives=nil
-				generate_barbarian_population(star,planet,0.5,0.4,{5000000,500000000},0.3,0.8,0.3,3,0.8,"Barbarians");
+				generate_barbarian_population(star,planet,0.5,0.4,{5000000,500000000},0.3,0.8,0.3,3,0.8,G.BARBARIANS);
 			end
 		end
 	end
@@ -266,10 +266,10 @@ end
 local function barbarian_fringe_generate(star)
 	for k,planet in pairs(star.planets) do
 		if (math.random()<0.6) then-- barbarian colony
-			generate_barbarian_population(star,planet,0.5,0.4,{500000,2000000},0.3,0.5,0.2,3,0.8,"Barbarians");
+			generate_barbarian_population(star,planet,0.5,0.4,{500000,2000000},0.3,0.5,0.2,3,0.8,G.BARBARIANS);
 		else-- barbarian "home world"
 			planet.lua.natives=nil
-			generate_barbarian_population(star,planet,0.5,0.4,{5000000,500000000},0.3,0.8,0.3,3,0.8,"Barbarians");
+			generate_barbarian_population(star,planet,0.5,0.4,{5000000,500000000},0.3,0.8,0.3,3,0.8,G.BARBARIANS);
 		end
 	end
 end
@@ -294,51 +294,51 @@ end
 
 local function royal_ixum_generate(star)
 	for k,planet in pairs(star.planets) do
-		generate_ixumite_population(star,planet,0.5,1,{50000,20000000},0.8,0.7,1,3,0.7,"Kingdom of Ixum");
+		generate_ixumite_population(star,planet,0.5,1,{50000,20000000},0.8,0.7,1,3,0.7,G.ROYAL_IXUM);
 	end
 end
 
 local function holy_flame_generate(star)
 	for k,planet in pairs(star.planets) do
-		generate_ixumite_population(star,planet,0.5,1,{200000,5000000000},0.8,0.7,0.5,3,0.8,"Holy Flame of Ixum");
+		generate_ixumite_population(star,planet,0.5,1,{200000,5000000000},0.8,0.7,0.5,3,0.8,G.HOLY_FLAME);
 	end
 end
 
 
 
 --the templates themselves
-local outer_zone={name="outer_zone",priority=function() return 1 end,generate=function(star) end,nativeCivilization=0,nativeFaction="Independent Worlds",zoneName=function(star) return "Great Beyond" end}
+local outer_zone={name="outer_zone",priority=function() return 1 end,generate=function(star) end,nativeCivilization=0,nativeFaction=G.INDEPENDENT_WORLDS,zoneName=function(star) return "Great Beyond" end}
 local empire_inner={name="empire_inner",priority=function(star) return priority_distance(earth_pos,star,250,100) end,
 	generate=empire_inner_generate,
-	specialSettlement=settlement_generator.coreHumanSettlements,nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1},nativeFaction="Empire of Terra",zoneName=function(star) return "Sector Sol" end}
-local empire_outer={name="empire_outer",priority=function(star) return priority_distance(earth_pos,star,600,50) end,generate=empire_outer_generate,specialSettlement=settlement_generator.outerHumanSettlements,nativeCivilization=0.9,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.7},nativeFaction="Empire of Terra",zoneName=imperial_sector_names}
+	specialSettlement=settlement_generator.coreHumanSettlements,nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1},nativeFaction=G.EMPIRE,zoneName=function(star) return "Sector Sol" end}
+local empire_outer={name="empire_outer",priority=function(star) return priority_distance(earth_pos,star,600,50) end,generate=empire_outer_generate,specialSettlement=settlement_generator.outerHumanSettlements,nativeCivilization=0.9,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.7},nativeFaction=G.EMPIRE,zoneName=imperial_sector_names}
 
 local empire_border={name="empire_border",priority=function(star) return priority_distance(earth_pos,star,900,20) end,generate=empire_fringe_generate,
 specialSettlement=gh.concatLists({settlement_generator.fringeEmpireSettlements,settlement_generator.fringeHumanIndependentSettlements}),
-nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.5},nativeFaction="Independent Worlds",zoneName=imperial_sector_names}
+nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.5},nativeFaction=G.INDEPENDENT_WORLDS,zoneName=imperial_sector_names}
 
 local empire_ardarshir_border={name="empire_ardarshir_border",priority=function(star) return empire_ardarshir_border_priority(star,25) end,generate=empire_ardarshir_border_generate,
 specialSettlement=settlement_generator.fringeEmpireSettlements,
-nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction="Empire of Terra",zoneName=imperial_sector_names}
+nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction=G.EMPIRE,zoneName=imperial_sector_names}
 
 local empire_fringe={name="empire_fringe",priority=function(star) return priority_distance(earth_pos,star,1200,10) end,generate=empire_outer_fringe_generate,
 specialSettlement=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),
-nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction="Independent Worlds",zoneName=imperial_fringes_names}
+nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction=G.INDEPENDENT_WORLDS,zoneName=imperial_fringes_names}
 
-local barbarian_fringe={name="barbarian_fringe",priority=function(star) return barbarian_priority(star) end,generate=barbarian_fringe_generate,specialSettlement=settlement_generator.barbarianSettlements,nativeCivilization=0,nativeFactors={agriculture=0.5,industry=0.3,services=0.1,technology=0.2,military=1.2,stability=0.3},nativeFaction="Natives",zoneName=barbarian_fringes_names}
+local barbarian_fringe={name="barbarian_fringe",priority=function(star) return barbarian_priority(star) end,generate=barbarian_fringe_generate,specialSettlement=settlement_generator.barbarianSettlements,nativeCivilization=0,nativeFactors={agriculture=0.5,industry=0.3,services=0.1,technology=0.2,military=1.2,stability=0.3},nativeFaction=G.NATIVES,zoneName=barbarian_fringes_names}
 
-local ardarshir_inner={name="ardarshir_inner",priority=function(star) return priority_distance(ardarshir_pos,star,250,100) end,generate=ardarshir_inner_generate,specialSettlement=settlement_generator.coreArdarSettlements,nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1.2},nativeFaction="Roidhunate of Ardarshir",zoneName=function(star) return "Inner Roidhunate" end}
+local ardarshir_inner={name="ardarshir_inner",priority=function(star) return priority_distance(ardarshir_pos,star,250,100) end,generate=ardarshir_inner_generate,specialSettlement=settlement_generator.coreArdarSettlements,nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1.2},nativeFaction=G.ROIDHUNATE,zoneName=function(star) return "Inner Roidhunate" end}
 
-local ardarshir_outer={name="ardarshir_outer",priority=function(star) return priority_distance(ardarshir_pos,star,500,45) end,generate=ardarshir_outer_generate,nativeCivilization=0.5,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.9},nativeFaction="Roidhunate of Ardarshir",zoneName=function(star) return "Outer Roidhunate" end}
+local ardarshir_outer={name="ardarshir_outer",priority=function(star) return priority_distance(ardarshir_pos,star,500,45) end,generate=ardarshir_outer_generate,nativeCivilization=0.5,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.9},nativeFaction=G.ROIDHUNATE,zoneName=function(star) return "Outer Roidhunate" end}
 
-local ardarshir_fringe={name="ardarshir_fringe",priority=function(star) return priority_distance(ardarshir_pos,star,700,18) end,generate=ardarshir_fringe_generate,nativeCivilization=0.1,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction="Roidhunate of Ardarshir",zoneName=function(star) return "Roidhunate Fringes" end}
+local ardarshir_fringe={name="ardarshir_fringe",priority=function(star) return priority_distance(ardarshir_pos,star,700,18) end,generate=ardarshir_fringe_generate,nativeCivilization=0.1,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction=G.ROIDHUNATE,zoneName=function(star) return "Roidhunate Fringes" end}
 
-local betelgeuse={name="betelgeuse",priority=function(star) return priority_distance(betelgeuse_pos,star,200,100) end,generate=betelgeuse_generate,specialSettlement=settlement_generator.betelgeuseSettlements,nativeCivilization=0.8,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.8,stability=0.8},nativeFaction="Oligarchy of Betelgeuse",zoneName=function(star) return "Betelgeuse" end}
+local betelgeuse={name="betelgeuse",priority=function(star) return priority_distance(betelgeuse_pos,star,200,100) end,generate=betelgeuse_generate,specialSettlement=settlement_generator.betelgeuseSettlements,nativeCivilization=0.8,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.8,stability=0.8},nativeFaction=G.BETELGEUSE,zoneName=function(star) return "Betelgeuse" end}
 
 local kingdom_of_ixum={name="kingdom_of_ixum",priority=function(star) return priority_distance(tigray_pos,star,200,1000) end,generate=royal_ixum_generate,specialSettlement=settlement_generator.royalIxumSettlements,
-nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction="Natives",zoneName=function(star) return "Ixum" end}
+nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction=G.NATIVES,zoneName=function(star) return "Ixum" end}
 
 local holy_flame_of_ixum={name="holy_flame_of_ixum",priority=function(star) return priority_distance(gonder_pos,star,350,900) end,generate=holy_flame_generate,specialSettlement=settlement_generator.holyFlameSettlements,
-nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction="Natives",zoneName=function(star) return "Ixum" end}
+nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction=G.NATIVES,zoneName=function(star) return "Ixum" end}
 
 base_populations.templates={outer_zone,barbarian_fringe,empire_inner,empire_outer,empire_border,empire_ardarshir_border,empire_fringe,ardarshir_inner,ardarshir_outer,ardarshir_fringe,betelgeuse,kingdom_of_ixum,holy_flame_of_ixum}

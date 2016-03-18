@@ -1,7 +1,7 @@
 include('universe/objects/class_planets.lua')
 include("universe/worldevents/worldevents_main.lua")
 include("universe/live/live_universe.lua")
-include("universe/generate_helper.lua")
+include "dat/scripts/general_helper.lua"
 
 function create()
 		

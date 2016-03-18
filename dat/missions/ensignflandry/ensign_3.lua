@@ -1,5 +1,5 @@
 
-include "universe/generate_helper.lua"
+include "dat/scripts/general_helper.lua"
 include "dat/missions/supportfiles/common.lua"
 
 -- Mission Details

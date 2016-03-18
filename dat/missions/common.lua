@@ -1,3 +1,5 @@
+include "dat/scripts/general_helper.lua"
+
 --[[
 
       Common Lua Mission framework

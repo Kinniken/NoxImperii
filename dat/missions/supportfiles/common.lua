@@ -1,5 +1,5 @@
    include "numstring.lua"
-   include "universe/generate_helper.lua"
+   include "dat/scripts/general_helper.lua"
    include "jumpdist.lua"
 
 -- Gets a planet of a given faction

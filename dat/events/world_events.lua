@@ -1,6 +1,6 @@
 include('universe/objects/class_planets.lua')
 include("universe/worldevents/worldevents_main.lua")
-include("universe/generate_helper.lua")
+include "dat/scripts/general_helper.lua"
 
 function create()
 	c_sys=system.cur()

@@ -1,5 +1,5 @@
 include("dat/factions/spawn/common.lua")
-include("universe/generate_helper.lua")
+include "dat/scripts/general_helper.lua"
 
 
 -- @brief Spawns a small patrol fleet.
@@ -8,14 +8,14 @@ function spawn_patrol ()
   local r = rnd.rnd()
 
   if r < 0.5 then
-    scom.addPilot( pilots, "Independent Trader Endeavour", 10 );
+    scom.addPilot( pilots, "Independent Traders Endeavour", 10 );
  elseif r < 0.8 then
-   scom.addPilot( pilots, "Independent Trader Endeavour", 10 );
-   scom.addPilot( pilots, "Independent Trader Scarab", 10 );
+   scom.addPilot( pilots, "Independent Traders Endeavour", 10 );
+   scom.addPilot( pilots, "Independent Traders Scarab", 10 );
  else
-   scom.addPilot( pilots, "Independent Trader Endeavour", 10 );
-   scom.addPilot( pilots, "Independent Trader Scarab", 10 );
-   scom.addPilot( pilots, "Independent Trader Fish Bone", 20 );
+   scom.addPilot( pilots, "Independent Traders Endeavour", 10 );
+   scom.addPilot( pilots, "Independent Traders Scarab", 10 );
+   scom.addPilot( pilots, "Independent Traders Fish Bone", 20 );
  end
 
  return pilots
@@ -28,22 +28,22 @@ function spawn_squad ()
   local r = rnd.rnd()
 
   if r < 0.5 then
-   scom.addPilot( pilots, "Independent Trader Endeavour", 10 );
-   scom.addPilot( pilots, "Independent Trader Scarab", 10 );
-   scom.addPilot( pilots, "Independent Trader Scarab", 10 );
-   scom.addPilot( pilots, "Independent Trader Fish Bone", 20 );
+   scom.addPilot( pilots, "Independent Traders Endeavour", 10 );
+   scom.addPilot( pilots, "Independent Traders Scarab", 10 );
+   scom.addPilot( pilots, "Independent Traders Scarab", 10 );
+   scom.addPilot( pilots, "Independent Traders Fish Bone", 20 );
  elseif r < 0.8 then
-   scom.addPilot( pilots, "Independent Trader Scarab", 10 );
-   scom.addPilot( pilots, "Independent Trader Fish Bone", 20 );
-   scom.addPilot( pilots, "Independent Trader Voyager Cargo", 30 );
-   scom.addPilot( pilots, "Independent Trader Hauler", 40 );
-   scom.addPilot( pilots, "Independent Trader Scarab", 10 );
+   scom.addPilot( pilots, "Independent Traders Scarab", 10 );
+   scom.addPilot( pilots, "Independent Traders Fish Bone", 20 );
+   scom.addPilot( pilots, "Independent Traders Voyager Cargo", 30 );
+   scom.addPilot( pilots, "Independent Traders Hauler", 40 );
+   scom.addPilot( pilots, "Independent Traders Scarab", 10 );
  else
-   scom.addPilot( pilots, "Independent Trader Fish Bone", 20 );
-   scom.addPilot( pilots, "Independent Trader Voyager Cargo", 30 );
-   scom.addPilot( pilots, "Independent Trader Hauler", 50 );
-   scom.addPilot( pilots, "Independent Trader Whale", 80 );
-   scom.addPilot( pilots, "Independent Trader Rhino", 120 );
+   scom.addPilot( pilots, "Independent Traders Fish Bone", 20 );
+   scom.addPilot( pilots, "Independent Traders Voyager Cargo", 30 );
+   scom.addPilot( pilots, "Independent Traders Hauler", 50 );
+   scom.addPilot( pilots, "Independent Traders Whale", 80 );
+   scom.addPilot( pilots, "Independent Traders Rhino", 120 );
 
  end
 

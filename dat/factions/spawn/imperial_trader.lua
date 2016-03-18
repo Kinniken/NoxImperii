@@ -7,13 +7,13 @@ function spawn_patrol ()
     local r = rnd.rnd()
 
     if r < 0.5 then
-       scom.addPilot( pilots, "Imperial Trader Schroedinger", 20 );
+       scom.addPilot( pilots, "Imperial Traders Schroedinger", 20 );
     elseif r < 0.8 then
-       scom.addPilot( pilots, "Imperial Trader Schroedinger", 20 );
-       scom.addPilot( pilots, "Imperial Trader Fish Bone", 40 );
+       scom.addPilot( pilots, "Imperial Traders Schroedinger", 20 );
+       scom.addPilot( pilots, "Imperial Traders Fish Bone", 40 );
     else
-       scom.addPilot( pilots, "Imperial Trader Quicksilver", 20 );
-       scom.addPilot( pilots, "Imperial Trader Fish Bone", 40 );
+       scom.addPilot( pilots, "Imperial Traders Quicksilver", 20 );
+       scom.addPilot( pilots, "Imperial Traders Fish Bone", 40 );
     end
 
     return pilots
@@ -26,20 +26,20 @@ function spawn_squad ()
     local r = rnd.rnd()
 
     if r < 0.5 then
-       scom.addPilot( pilots, "Imperial Trader Quicksilver", 20 );
-       scom.addPilot( pilots, "Imperial Trader Schroedinger", 20 );
-       scom.addPilot( pilots, "Imperial Trader Fish Bone", 40 );
+       scom.addPilot( pilots, "Imperial Traders Quicksilver", 20 );
+       scom.addPilot( pilots, "Imperial Traders Schroedinger", 20 );
+       scom.addPilot( pilots, "Imperial Traders Fish Bone", 40 );
     elseif r < 0.8 then
-       scom.addPilot( pilots, "Imperial Trader Schroedinger", 20 );
-       scom.addPilot( pilots, "Imperial Trader Fish Bone", 20 );
-       scom.addPilot( pilots, "Imperial Trader Fish Bone", 20 );
-       scom.addPilot( pilots, "Imperial Trader Zheng He", 100 );
+       scom.addPilot( pilots, "Imperial Traders Schroedinger", 20 );
+       scom.addPilot( pilots, "Imperial Traders Fish Bone", 20 );
+       scom.addPilot( pilots, "Imperial Traders Fish Bone", 20 );
+       scom.addPilot( pilots, "Imperial Traders Zheng He", 100 );
     else
-       scom.addPilot( pilots, "Imperial Trader Fish Bone", 20 );
-       scom.addPilot( pilots, "Imperial Trader Argosy", 100 );
-       scom.addPilot( pilots, "Imperial Trader Fish Bone", 20 );
-       scom.addPilot( pilots, "Imperial Trader Sunflower", 100 );
-       scom.addPilot( pilots, "Imperial Trader Zheng He", 100 );
+       scom.addPilot( pilots, "Imperial Traders Fish Bone", 20 );
+       scom.addPilot( pilots, "Imperial Traders Argosy", 100 );
+       scom.addPilot( pilots, "Imperial Traders Fish Bone", 20 );
+       scom.addPilot( pilots, "Imperial Traders Sunflower", 100 );
+       scom.addPilot( pilots, "Imperial Traders Zheng He", 100 );
     end
 
     return pilots

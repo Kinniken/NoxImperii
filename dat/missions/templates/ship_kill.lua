@@ -5,7 +5,7 @@
 --]]
 
 include "numstring.lua"
-include "universe/generate_helper.lua"
+include "dat/scripts/general_helper.lua"
 include "jumpdist.lua"
 
 -- Whether mission starts in bar (if false, it starts in computer)

@@ -15,15 +15,15 @@
   <spawn>independent_worlds</spawn>
   <standing>independent_worlds</standing>
   <allies>
-    <ally>Independent Trader</ally>
+    <ally>Independent Traders</ally>
   </allies>
   <enemies>
-   <enemy>Pirate</enemy>
+   <enemy>Pirates</enemy>
    <enemy>Barbarians</enemy>
   </enemies>
  </faction>
  
- <faction name="Independent Trader">
+ <faction name="Independent Traders">
   <known/>
   <player>3</player>
   <spawn>independent_trader</spawn>
@@ -32,7 +32,7 @@
     <ally>Independent Worlds</ally>
   </allies>
   <enemies>
-   <enemy>Pirate</enemy>
+   <enemy>Pirates</enemy>
    <enemy>Barbarians</enemy>
   </enemies>
  </faction>
@@ -46,59 +46,59 @@
   <allies>
   </allies>
   <enemies>
-   <enemy>Pirate</enemy>
+   <enemy>Pirates</enemy>
    <enemy>Barbarians</enemy>
   </enemies>
  </faction>
  
   
- <faction name="Imperial Trader">
+ <faction name="Imperial Traders">
   <known/>
   <logo>empire</logo>
-  <longname>Imperial Trader</longname>
+  <longname>Imperial Traders</longname>
   <player>3</player>
   <spawn>imperial_trader</spawn>
   <standing>imperial_trader</standing>
   <allies>
   </allies>
   <enemies>
-   <enemy>Pirate</enemy>
+   <enemy>Pirates</enemy>
    <enemy>Barbarians</enemy>
   </enemies>
  </faction>
  
-  <faction name="Ardar Trader">
+  <faction name="Ardar Traders">
   <known/>
   <logo>roidhunate</logo>
-  <longname>Ardar Trader</longname>
+  <longname>Ardar Traders</longname>
   <player>0</player>
   <spawn>ardar_trader</spawn>
   <standing>ardar_trader</standing>
   <allies>
   </allies>
   <enemies>
-   <enemy>Pirate</enemy>
+   <enemy>Pirates</enemy>
    <enemy>Barbarians</enemy>
   </enemies>
  </faction>
  
-  <faction name="Betelgian Trader">
+  <faction name="Betelgian Traders">
   <known/>
   <logo>betelgeuse</logo>
-  <longname>Betelgian Trader</longname>
+  <longname>Betelgian Traders</longname>
   <player>3</player>
   <spawn>betelgian_trader</spawn>
   <standing>betelgian_trader</standing>
   <allies>
   </allies>
   <enemies>
-   <enemy>Pirate</enemy>
+   <enemy>Pirates</enemy>
    <enemy>Barbarians</enemy>
   </enemies>
  </faction>
  
  
- <faction name="Pirate">
+ <faction name="Pirates">
   <known/>
   <logo>pirate</logo>
   <longname>Galactic Pirates</longname>
@@ -108,12 +108,12 @@
   <standing>pirate</standing>
   <equip>pirate</equip>
   <enemies>
-   <enemy>Independent Trader</enemy>
+   <enemy>Independent Traders</enemy>
    <enemy>Independent Worlds</enemy>
    <enemy>Natives</enemy>
-   <enemy>Imperial Trader</enemy>
-   <enemy>Ardar Trader</enemy>
-   <enemy>Betelgian Trader</enemy>
+   <enemy>Imperial Traders</enemy>
+   <enemy>Ardar Traders</enemy>
+   <enemy>Betelgian Traders</enemy>
    <enemy>Empire of Terra</enemy>
    <enemy>Roidhunate of Ardarshir</enemy>
    <enemy>Oligarchy of Betelgeuse</enemy>
@@ -137,7 +137,7 @@
     <ally>Kingdom of Ixum</ally>
   </allies>
   <enemies>
-   <enemy>Pirate</enemy>
+   <enemy>Pirates</enemy>
    <enemy>Barbarians</enemy>
   </enemies>
  </faction>
@@ -154,7 +154,7 @@
     <ally>Holy Flame of Ixum</ally>
   </allies>
   <enemies>
-   <enemy>Pirate</enemy>
+   <enemy>Pirates</enemy>
    <enemy>Barbarians</enemy>
   </enemies>
  </faction>
@@ -170,7 +170,7 @@
   <allies>
   </allies>
   <enemies>
-   <enemy>Pirate</enemy>
+   <enemy>Pirates</enemy>
    <enemy>Barbarians</enemy>
   </enemies>
  </faction>
@@ -187,7 +187,7 @@
     <ally>Empire of Terra</ally>
   </allies>
   <enemies>
-   <enemy>Pirate</enemy>
+   <enemy>Pirates</enemy>
    <enemy>Barbarians</enemy>
    <enemy>Holy Flame of Ixum</enemy>
   </enemies>
@@ -205,7 +205,7 @@
     <ally>Roidhunate of Ardarshir</ally>
   </allies>
   <enemies>
-   <enemy>Pirate</enemy>
+   <enemy>Pirates</enemy>
    <enemy>Barbarians</enemy>
    <enemy>Kingdom of Ixum</enemy>
   </enemies>
@@ -221,18 +221,18 @@
   <standing>barbarian</standing>
   <equip>barbarian</equip>
   <enemies>
-   <enemy>Independent Trader</enemy>
+   <enemy>Independent Traders</enemy>
    <enemy>Independent Worlds</enemy>
    <enemy>Natives</enemy>
-   <enemy>Imperial Trader</enemy>
-   <enemy>Ardar Trader</enemy>
-   <enemy>Betelgian Trader</enemy>
+   <enemy>Imperial Traders</enemy>
+   <enemy>Ardar Traders</enemy>
+   <enemy>Betelgian Traders</enemy>
    <enemy>Empire of Terra</enemy>
    <enemy>Roidhunate of Ardarshir</enemy>
    <enemy>Oligarchy of Betelgeuse</enemy>
    <enemy>Kingdom of Ixum</enemy>
    <enemy>Holy Flame of Ixum</enemy>
-   <enemy>Pirate</enemy>
+   <enemy>Pirates</enemy>
   </enemies>
   </faction>
   

@@ -7,13 +7,13 @@ function spawn_patrol ()
     local r = rnd.rnd()
 
     if r < 0.5 then
-       scom.addPilot( pilots, "Betelgian Trader Pelegrina", 10 );
+       scom.addPilot( pilots, "Betelgian Traders Pelegrina", 10 );
     elseif r < 0.8 then
-       scom.addPilot( pilots, "Betelgian Trader Pelegrina", 10 );
-       scom.addPilot( pilots, "Betelgian Trader Carvela", 20 );
+       scom.addPilot( pilots, "Betelgian Traders Pelegrina", 10 );
+       scom.addPilot( pilots, "Betelgian Traders Carvela", 20 );
     else
-       scom.addPilot( pilots, "Betelgian Trader Carvela", 20 );
-       scom.addPilot( pilots, "Betelgian Trader Veniera", 50 );
+       scom.addPilot( pilots, "Betelgian Traders Carvela", 20 );
+       scom.addPilot( pilots, "Betelgian Traders Veniera", 50 );
     end
 
     return pilots
@@ -26,20 +26,20 @@ function spawn_squad ()
     local r = rnd.rnd()
 
     if r < 0.5 then
-       scom.addPilot( pilots, "Betelgian Trader Pelegrina", 10 );
-       scom.addPilot( pilots, "Betelgian Trader Carvela", 20 );
-       scom.addPilot( pilots, "Betelgian Trader Veniera", 50 );
+       scom.addPilot( pilots, "Betelgian Traders Pelegrina", 10 );
+       scom.addPilot( pilots, "Betelgian Traders Carvela", 20 );
+       scom.addPilot( pilots, "Betelgian Traders Veniera", 50 );
     elseif r < 0.8 then
-       scom.addPilot( pilots, "Betelgian Trader Pelegrina", 10 );
-       scom.addPilot( pilots, "Betelgian Trader Carvela", 20 );
-       scom.addPilot( pilots, "Betelgian Trader Carvela", 20 );
-       scom.addPilot( pilots, "Betelgian Trader Veniera", 50 );
+       scom.addPilot( pilots, "Betelgian Traders Pelegrina", 10 );
+       scom.addPilot( pilots, "Betelgian Traders Carvela", 20 );
+       scom.addPilot( pilots, "Betelgian Traders Carvela", 20 );
+       scom.addPilot( pilots, "Betelgian Traders Veniera", 50 );
     else
-       scom.addPilot( pilots, "Betelgian Trader Pelegrina", 10 );
-       scom.addPilot( pilots, "Betelgian Trader Carvela", 20 );
-       scom.addPilot( pilots, "Betelgian Trader Carvela", 20 );
-       scom.addPilot( pilots, "Betelgian Trader Veniera", 50 );
-       scom.addPilot( pilots, "Betelgian Trader Impresa", 150 );
+       scom.addPilot( pilots, "Betelgian Traders Pelegrina", 10 );
+       scom.addPilot( pilots, "Betelgian Traders Carvela", 20 );
+       scom.addPilot( pilots, "Betelgian Traders Carvela", 20 );
+       scom.addPilot( pilots, "Betelgian Traders Veniera", 50 );
+       scom.addPilot( pilots, "Betelgian Traders Impresa", 150 );
     end
 
     return pilots

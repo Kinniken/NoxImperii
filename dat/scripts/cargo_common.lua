@@ -1,3 +1,4 @@
+include "dat/scripts/general_helper.lua"
 include "dat/scripts/jumpdist.lua"
 include "dat/scripts/nextjump.lua"
 

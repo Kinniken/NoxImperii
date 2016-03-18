@@ -8,7 +8,7 @@
    <location>Computer</location>
    <faction>Empire of Terra</faction>
    <faction>Independent Worlds</faction>
-   <faction>Imperial Trader</faction>
+   <faction>Imperial Traders</faction>
   </avail>
  </mission>
  <mission name="Cargo Rush">
@@ -19,7 +19,7 @@
    <location>Computer</location>
    <faction>Empire of Terra</faction>
    <faction>Independent Worlds</faction>
-   <faction>Imperial Trader</faction>
+   <faction>Imperial Traders</faction>
   </avail>
  </mission>
  <mission name="The Great Survey Intro">

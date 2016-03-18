@@ -46,6 +46,35 @@ event:addBarNews(G.INDEPENDENT_WORLDS,"Financial crisis on ${world}","In one mor
 table.insert(world_events.events,event)
 
 
+
+
+event=worldevent_class.createNew()
+event.weightValidity=function(planet)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.minerals>0.8)
+end
+event.weight=20
+event.applyOnWorldCustom=function(self,planet,textData)
+	planet.lua.settlements.humans.industry=planet.lua.settlements.humans.industry*1.2
+	
+	local effectId=planet.lua.settlements.humans:addActiveEffect("A mining boom is fuelling industrial production.",
+		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber() )
+	planet.lua.settlements.humans:addGoodSupply(C.ORE,50,0.5,effectId)
+	planet.lua.settlements.humans:addGoodSupply(C.INDUSTRIAL,20,0.5,effectId)
+	planet.lua.settlements.humans:addGoodSupply(C.MODERN_INDUSTRIAL,10,0.5,effectId)
+end
+event.eventMessage="NEWS ALERT: The discovery of rich ore veins on ${world} drives an industrial boom."
+
+event.worldHistoryMessage="The discovery of rich ore veins fuelled an industrial boom."
+
+event:addBarNews(G.EMPIRE,"Mining boom on ${world}!","In more good news for the Empire's economy, the world of ${world} is seeing a major increase in industrial production as newly-discovered ore veins fuel local heavy industries. Production and prices are at all-time low!",time.create(0,1,0, 0,0,0))
+
+table.insert(world_events.events,event)
+
+
+
+
+
+
 event=worldevent_class.createNew()
 event.weight=5
 event.weightValidity=function(planet)
@@ -115,5 +144,5 @@ event.eventMessage="NEWS ALERT: Colonists fleeing ${world} as barbarian attacks 
 event.worldHistoryMessage="An estimated ${departures} colonists have headed home as barbarian attacks increase."
 
 event:addBarNews(G.EMPIRE,"A Failed Colony Abandoned for Greener Pastures","An estimated ${departures} inhabitants of the colony on ${world} have decided to leave the world, heading back to the inner systems. \"This small, distant planet was never worth it\", explained His Eminence the Imperial Representative in the sub-sector to journalists on the way to a major cocktail party. \"The colonists will be much better off in the Core Worlds.\". We thank His Eminence for his time.",time.create(0,2,0, 0,0,0))
-event:addBarNews(G.ROIDHUNATE,"A Failed Colony Abandoned for Greener Pastures","An estimated ${departures} inhabitants of the colony on ${world} have decided to leave the world, heading back to the inner systems. \"This small, distant planet was never worth it\", explained His Eminence the Imperial Representative in the sub-sector to journalists on the way to a major cocktail party. \"The colonists will be much better off in the Core Worlds.\". We thank His Eminence for his time.",time.create(0,2,0, 0,0,0))
+event:addBarNews(G.ROIDHUNATE,"The Empire's colonisation efforts falter again","Reports from the human world of ${world} indicate that around ${departures} inhabitants are leaving the planet, frightened by their government's inability to protect them from barbarians. Soon the human Empire will be reduced to Terra and its moon!",time.create(0,2,0, 0,0,0))
 table.insert(world_events.events,event)

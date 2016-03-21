@@ -83,10 +83,6 @@ function getArdarName()
 	return name
 end
 
-function getHumanFemaleNameD()
-
-end
-
 function getHumanFemaleName()
 	local rand=math.random()
 
@@ -101,10 +97,6 @@ function getHumanFemaleName()
 	else
 		return generateFirstNameLastName(russianFemaleFirstName,russianLastName)
 	end
-end
-
-function getHumanMaleNameD()
-
 end
 
 function getHumanMaleName()
@@ -137,9 +129,9 @@ function generateFirstNameLastName(firstName,lastName)
 end
 
 
-for i=1,10000 do
+--for i=1,10000 do
 	--print(getHumanMaleName())
   --print("F: "..getHumanFemaleName())
   --io.stderr:write(getHumanFemaleName())
-end
+--end
 

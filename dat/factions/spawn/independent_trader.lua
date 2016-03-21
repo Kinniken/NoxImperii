@@ -84,8 +84,8 @@ function spawn ( presence, max )
    end
 
    if (spawn_data == nil) then
-      error("Error: spawn_data is nil! spawn_table: ")
-      gh.tprint(spawn_table)
+      local errorTable=gh.tprintError(spawn_table)
+      error("Error: spawn_data is nil! spawn_table: \n"..errorTable)
     end
     
     -- Actually spawn the pilots

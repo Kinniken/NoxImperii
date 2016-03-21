@@ -41,6 +41,21 @@ function gh.tprint (tbl, indent)
   end
 end
 
+function gh.tprintError (tbl, indent)
+  local rep
+  if not indent then indent = 0 end
+  for k, v in pairs(tbl) do
+    formatting = string.rep("  ", indent) .. k .. ": "
+    if type(v) == "table" then
+      rep=rep..formatting.."\n"
+      rep=rep..gh.tprintError(v, indent+1)
+    else
+      rep=rep..formatting .. tostring(v).."\n"
+    end
+  end
+  return rep
+end
+
 function gh.pickConditionalWeightedObject(table,obj)
 
   local totalWeight=0

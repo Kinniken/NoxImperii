@@ -2,7 +2,7 @@ event=worldevent_class.createNew()
 event.weightValidity=function(planet)
 	return (planet.c:faction()==faction.get(G.ROIDHUNATE) and planet.lua.settlements.natives and planet.lua.settlements.natives.stability<1)
 end
-event.weight=5
+event.weight=10
 event.applyOnWorldCustom=function(self,planet,textData)
 	textData.natives=planet.lua.settlements.natives.name
 	textData.casualties=gh.prettyLargeNumber(planet.lua.settlements.natives.population*0.05)
@@ -53,7 +53,7 @@ event=worldevent_class.createNew()
 event.weightValidity=function(planet)
 	return (planet.c:faction()==faction.get(G.ROIDHUNATE) and planet.lua.settlements.ardars and planet.lua.settlements.ardars.industry>1 and planet.lua.settlements.ardars.technology>1)
 end
-event.weight=10
+event.weight=20
 event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.ardars.industry=planet.lua.settlements.ardars.industry*1.1
 	
@@ -90,4 +90,166 @@ event.eventMessage="NEWS ALERT: The Ardar research centre on ${world} has develo
 event.worldHistoryMessage="Technical innovations drove an armament production boom."
 
 event:addBarNews(G.ROIDHUNATE,"Innovative technology drives armament production on ${world}","The Ardar Navy research centre on ${world} is making breakthrough in modern armament production, boosting production and reducing prices! Every passing day the dominance of the Roidhunate in milutary technology grows more assured.",time.create(0,2,0, 0,0,0))
+table.insert(world_events.events,event)
+
+
+
+
+event=worldevent_class.createNew()
+event.weightValidity=function(planet)
+	return (planet.c:faction()==faction.get(G.ROIDHUNATE) and planet.lua.settlements.ardars and planet.lua.settlements.ardars:hasTag("huntingreserve"))
+end
+event.weight=50--high because so little worlds qualify
+event.duration=time.create( 0,1,0, 0, 0, 0 )
+event.applyOnWorldCustom=function(self,planet,textData)
+	
+	local effectId=planet.lua.settlements.ardars:addActiveEffect("The Great Hunt in progress is driving strong demand for native weapons and exotic food.",
+		(time.get() + self.duration):tonumber() )
+	planet.lua.settlements.ardars:addGoodDemand(C.NATIVE_WEAPONS,30,5,effectId)
+	
+end
+event.eventMessage="NEWS ALERT: Ardar nobles gather on ${world} for great hunt; exotic weapons in high demand."
+
+event.worldHistoryMessage="A Great Hunt was held to much acclaim by participating nobles."
+
+event:addBarNews(G.ROIDHUNATE,"Ardar nobles prove their valour in Great Hunt","A Great Hunt is currently being held on ${world} by a cousin of the Roidhun himself. Nobles from the entire sector are gathering, keen to prove their strength and courage. Mighty is the Roidhunate, to be led by such people!")
+event:addBarNews(G.EMPIRE,"Barbarous display by bloodthirsty Ardars","Ardar petty chiefs have gathered on ${world} to compete in bloody display of animal slaughter. We debate at noon: can the Roidhunate be considered anything more than an overgrown barbarian kingdom?")
+table.insert(world_events.events,event)
+
+
+
+
+event=worldevent_class.createNew()
+event.weightValidity=function(planet)
+	return (planet.c:faction()==faction.get(G.ROIDHUNATE) and planet.lua.settlements.ardars)
+end
+event.weight=5
+event.duration=time.create( 0,1,0, 0, 0, 0 )
+event.applyOnWorldCustom=function(self,planet,textData)
+
+	textData.poet=nameGenerator.generateNameArdarshir()
+	textData.hero=nameGenerator.generateNameArdarshir()
+	
+	local effectId=planet.lua.settlements.ardars:addActiveEffect("The recital of a great new epic tale is boosting demand for ancient weapons.",
+		(time.get() + self.duration):tonumber() )
+	planet.lua.settlements.ardars:addGoodDemand(C.NATIVE_WEAPONS,30,5,effectId)
+	
+end
+event.eventMessage="NEWS ALERT: Recital of great Ardar epic tale bring masses to ${world}, inspires fad for ancient weapons."
+
+event.worldHistoryMessage="Local poet ${poet} pens the Tale of ${hero}, is acclaimed throughout the Roidhunate."
+
+event:addBarNews(G.ROIDHUNATE,"New Epic Tale inspires martial prowess",
+	"Famous poet ${poet} of ${world} has started a recital of his new epic, \"The Tale of ${hero}\". The full recital will take thirty days, but the work is already hailed as the equal of ancient masterpieces. Local demand for bladed weapons soars as the Tale promotes a revival of fencing arts.")
+event:addBarNews(G.EMPIRE,"Latest Ardar tale fails to impress",
+	"Art critics throughout the Empire are not impressed with the latest fad in the Roidhunate, the so-called \"Tale of ${hero}\". Penned by the would-be poet ${poet} of ${world}, it is yet an other ghastly tale of endless duels against various demons by the titular Ardar hero. And not only does it last thirty days, but word has it that it had started a passion for fencing on ${world}!")
+table.insert(world_events.events,event)
+
+
+
+
+event=worldevent_class.createNew()
+event.weightValidity=function(planet)
+	return (planet.c:faction()==faction.get(G.ROIDHUNATE) and planet.lua.settlements.ardars)
+end
+event.weight=5
+event.duration=time.create( 0,1,0, 0, 0, 0 )
+event.applyOnWorldCustom=function(self,planet,textData)
+
+	textData.expert=getHumanFemaleName()
+
+	planet.lua.settlements.ardars.stability=planet.lua.settlements.ardars.stability*0.95
+	
+	local effectId=planet.lua.settlements.ardars:addActiveEffect("An anti-corruption drive is lowering demand and prices for luxury goods.",
+		(time.get() + self.duration):tonumber() )
+	planet.lua.settlements.ardars:reduceGoodDemand(C.LUXURY_GOODS,30,0.5,effectId)
+	
+end
+event.eventMessage="NEWS ALERT: Crime syndicate uncovered on ${world}; prices of luxury goods collapses as corruption is rooted out."
+
+event.worldHistoryMessage="A major crime syndicate is busted, hitting the luxury good market hard."
+
+event:addBarNews(G.ROIDHUNATE,"Anti-Ardar elements rooted out",
+	"A couple of minor officials on ${world} have been arrested for links with anti-Ardar criminals. Connections to Imperial crime Mafia are suspected. Justice will be swift and severe for the enemies of the Roidhun and the Ardar race!")
+event:addBarNews(G.EMPIRE,"Ardar world of ${world} nest of crime, corruption",
+	"Far from the image of righteousness and probity the Roidhunate likes to project, reports show the Ardar world of ${world} to be controlled by crime syndicates in collusion with corrupt officials. Leading expert on the Roidhunate ${expert} weights in: \"this goes all the way up to the Roidhun himself\".")
+table.insert(world_events.events,event)
+
+
+
+event=worldevent_class.createNew()
+event.weightValidity=function(planet)
+	return (planet.c:faction()==faction.get(G.ROIDHUNATE) and planet.lua.settlements.ardars and planet.lua.settlements.ardars:hasTag("minority"))
+end
+event.weight=50--tag-specific
+event.duration=time.create( 0,1,0, 0, 0, 0 )
+event.applyOnWorldCustom=function(self,planet,textData)
+
+	textData.minority=planet.lua.settlements.ardars.minorityName
+
+	planet.lua.settlements.ardars.stability=planet.lua.settlements.ardars.stability*0.95
+	
+	local effectId=planet.lua.settlements.ardars:addActiveEffect("Protests are paralysing the local economy, leading to rising consumer good prices.",
+		(time.get() + self.duration):tonumber() )
+	planet.lua.settlements.ardars:reduceGoodDemand(C.LUXURY_GOODS,30,0.5,effectId)
+	
+end
+event.eventMessage="NEWS ALERT: Protests by ${minority} minority paralyse economy on ${world}; price of customer goods shoot up."
+
+event.worldHistoryMessage="Massive protests by the ${minority} minority shut down the local economy."
+
+event:addBarNews(G.ROIDHUNATE,"Troublemakers perturb peaceful community",
+	"The ${minority} minority of ${world} has recently been troubled by foreign agitators trying to exploit imaginary racial prejudice. The Roidhunate authorities have again reaffirmed the full equality of all Ardars and reminded them that the so-called dominance of Roidhunate Ardars steams only from superior qualifications.")
+event:addBarNews(G.EMPIRE,"Roidhunate racism cause riots on ${world}",
+	"The contempt held by Ardars for other species is well-known; we have recently had a reminder that they also discriminate among themselves. On ${world}, the ${minority} minority has been rioting to protest at the enduring discrimination they face from the Roidhunate Ardar majority. The authorities predictably reacted with violent repression.")
+table.insert(world_events.events,event)
+
+
+
+
+
+event=worldevent_class.createNew()
+event.weightValidity=function(planet)
+	return (planet.c:faction()==faction.get(G.ROIDHUNATE) and planet.lua.settlements.ardars and planet.lua.settlements.ardars:hasTag("oldcolony"))
+end
+event.weight=50--tag-specific
+event.duration=time.create( 0,1,0, 0, 0, 0 )
+event.applyOnWorldCustom=function(self,planet,textData)
+	
+	local effectId=planet.lua.settlements.ardars:addActiveEffect("The celebration of the first settlement drives strong demand for food and luxury goods.",
+		(time.get() + self.duration):tonumber() )
+	planet.lua.settlements.ardars:addGoodDemand(C.LUXURY_GOODS,30,5,effectId)
+	planet.lua.settlements.ardars:addGoodDemand(C.FOOD,80,5,effectId)
+	
+end
+event.eventMessage="NEWS ALERT: The Ardar colony of ${world} celebrates its ancient heritage."
+
+event.worldHistoryMessage="Great celebrations were held to commemorate the founding of the first colony."
+
+event:addBarNews(G.ROIDHUNATE,"${world} celebrates its foundation",
+	"The old colony of ${world} is celebrating its founding, one of the earliest in the Roidhunate. The planet's leading officials are gathering for a month of tributes to the pioneering spirit of the early settlers.")
+table.insert(world_events.events,event)
+
+
+
+event=worldevent_class.createNew()
+event.weightValidity=function(planet)
+	return (planet.c:faction()==faction.get(G.ROIDHUNATE) and planet.lua.settlements.ardars and planet.lua.settlements.ardars:hasTag("navyplanet"))
+end
+event.weight=50--tag-specific
+event.duration=time.create( 0,1,0, 0, 0, 0 )
+event.applyOnWorldCustom=function(self,planet,textData)
+	
+	local effectId=planet.lua.settlements.ardars:addActiveEffect("The military parade is driving up the cost of food and other consumer goods.",
+		(time.get() + self.duration):tonumber() )
+	planet.lua.settlements.ardars:addGoodDemand(C.CONSUMER_GOODS,50,5,effectId)
+	planet.lua.settlements.ardars:addGoodDemand(C.FOOD,80,5,effectId)
+	
+end
+event.eventMessage="NEWS ALERT: Great military parade held on ${world}."
+
+event.worldHistoryMessage="A great military parade brought together the entire world."
+
+event:addBarNews(G.ROIDHUNATE,"Military parade on ${world} cheered by the population",
+	"${world} is famous for its military spirit and contribution to the glorious Ardar Navy, and is proving it yet again with a major military parade held over an entire month. The Roidhun himself saluted this exemplary demonstration of martial spirit and adhesion to Ardar values.")
 table.insert(world_events.events,event)

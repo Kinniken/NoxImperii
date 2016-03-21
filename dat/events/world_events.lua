@@ -17,7 +17,14 @@ function create()
 	end
 
 	if (#possibleTargets>0) then
-		for i=1,5 do
+
+		local nb=5
+
+		if (debug) then
+			nb=20
+		end
+
+		for i=1,nb do
 			local c_planet=possibleTargets[math.random(#possibleTargets)]
 			local planet=planet_class.load(c_planet)
 
@@ -54,7 +61,16 @@ function create()
 					planet:save()
 
 					for k,v in ipairs(event.barNews) do
-						news.add( v.faction, gh.format(v.title,textData), gh.format(v.message,textData), time.get() + v.duration )
+						--duration either specified in bar news itself or in event
+						local duration
+
+						if (v.duration) then
+							duration = v.duration
+						else
+							duration = event.duration
+						end
+
+						news.add( v.faction, gh.format(v.title,textData), time.get():str(1).." - "..gh.format(v.message,textData), time.get() + duration )
 					end
 				end
 			end

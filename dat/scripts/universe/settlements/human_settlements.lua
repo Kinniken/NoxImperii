@@ -44,6 +44,25 @@ settlement_generator.coreHumanSettlements[#settlement_generator.coreHumanSettlem
 	weight=10
 }
 
+
+settlement_generator.coreHumanSettlements[#settlement_generator.coreHumanSettlements+1]={
+	appliesTo="humans",
+	applyOnPlanet=function(planet)
+		planet.lua.settlements.humans:addTag("hindu")
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "The original settlers of #planetname# came primarily from the Indian subcontinent, particularly from the gangetic plains. Though they were later joined by migrants of other origins, Hinduism has remained the dominant religion on the world, and the festivals held are regular intervals by the settlers are famous in the sector. "
+	end,
+	specialities={settlements_specialities.specialityUniversity,settlements_specialities.specialityNavalBase,settlements_specialities.specialityHeavyIndustry,settlements_specialities.specialityLuxuryResort,settlements_specialities.specialityWeaponLab},
+	weight=10
+}
+
 settlement_generator.coreHumanSettlements[#settlement_generator.coreHumanSettlements+1]={
 	appliesTo="humans",
 	applyOnPlanet=function(planet)
@@ -77,7 +96,7 @@ settlement_generator.coreHumanSettlements[#settlement_generator.coreHumanSettlem
 		return (planet.lua.humanFertility<0.7)
 	end,
 	getDesc=function(planet)
-		return "#planetname# is not a particularly fertile planet, and colonization has been difficult. With little rewards to offer, the starting settlement did not get the most motivated or valuable settlers, which further handicapped the colony. As a result, it is still more backward than most of its neighbors. "
+		return "#planetname# is not a particularly fertile planet, and colonization has been difficult. With little rewards to offer, the starting settlement did not get the most motivated or valuable settlers, which further handicapped the colony. As a result, it is still more backward than most of its neighbours. "
 	end,
 	weight=10
 }
@@ -254,7 +273,7 @@ settlement_generator.fringeEmpireSettlements[#settlement_generator.fringeEmpireS
 		return true
 	end,
 	getDesc=function(planet)
-		return "The colony on #planetname# was originally independent, setup by a group of idealist libertarians keen to escape the Empire's heavy hand. Ten years after a promising start, they were raided by a major barbarian force. They rebuilt and boosted their defense. Five years after an other raid over-powered them. A coup soon followed, the original government was deposed, and a protection treaty incorporated the world inside the Empire. "
+		return "The colony on #planetname# was originally independent, set up by a group of idealist libertarians keen to escape the Empire's heavy hand. Ten years after a promising start, they were raided by a major barbarian force. They rebuilt and boosted their defence. Five years after an other raid over-powered them. A coup soon followed, the original government was deposed, and a protection treaty incorporated the world inside the Empire. "
 	end,
 	specialities={settlements_specialities.specialityCraftBeer,settlements_specialities.specialityHam,settlements_specialities.specialityFrontierBase,settlements_specialities.specialityFrontierIndustry,settlements_specialities.specialityFrontierNightLife,settlements_specialities.specialityFrontierOre},
 	weight=10
@@ -347,7 +366,7 @@ settlement_generator.fringeHumanIndependentSettlements[#settlement_generator.fri
 		return true
 	end,
 	getDesc=function(planet)
-		return "For all the risks involved in setting out to found a colony far from the Empire's protection, many are the groups willing to do so - often to preserve an endangered way of life on a world of their own. This world was settled mostly by committed Buddhists originating from different inner worlds. So far, their small self-defense force has proven sufficient against the occasional raiders. "
+		return "For all the risks involved in setting out to found a colony far from the Empire's protection, many are the groups willing to do so - often to preserve an endangered way of life on a world of their own. This world was settled mostly by committed Buddhists originating from different inner worlds. So far, their small self-defence force has proven sufficient against the occasional raiders. "
 	end,
 	specialities={settlements_specialities.specialityCraftBeer,settlements_specialities.specialityHam,settlements_specialities.specialityFrontierOre},
 	weight=10

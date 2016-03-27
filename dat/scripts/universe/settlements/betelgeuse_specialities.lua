@@ -16,7 +16,7 @@ betelgeuse_specialities.specialityUniversity={
 		planet.lua.settlements.betelgeuse:addGoodSupply(C.MODERN_INDUSTRIAL,30,1)
 	end,
 	getDesc=function(planet)
-		return "While the Oligarchy is not known for its scientific research, it has attempted to copy human-style universities. #planetname# is home to one such installation, originally setup with Terran help and now the nexus of a small advanced industrial goods industry. "
+		return "While the Oligarchy is not known for its scientific research, it has attempted to copy human-style universities. #planetname# is home to one such installation, originally set-up with Terran help and now the nexus of a small advanced industrial goods industry. "
 	end
 }
 
@@ -32,7 +32,7 @@ betelgeuse_specialities.specialityNavalBase={
     planet.lua.settlements.betelgeuse:addGoodDemand(C.MODERN_ARMAMENT,10,1.5)
 	end,
 	getDesc=function(planet)
-		return "#planetname# is home to one of the most public-minded of the Patrician families, who ensure that the local base of the Betelgian navy is unusually well-supplied, and its officers particularily loyal to Betelgeuse... and their local patrons. "
+		return "#planetname# is home to one of the most public-minded of the Patrician families, who ensure that the local base of the Betelgian navy is unusually well-supplied, and its officers particularly loyal to Betelgeuse... and their local patrons. "
 	end
 }
 
@@ -64,7 +64,7 @@ betelgeuse_specialities.specialityLuxuryResort={
 		planet.lua.settlements.betelgeuse:addGoodDemand(C.EXOTIC_FURS,10,2)
 	end,
 	getDesc=function(planet)
-		return "In one of the lushest vales of #planetname#, a great palace has been built by one of Betelgeuse' leading family. Its eleguant arches surrounded by acres of manicured gardens are famous throughout the Oligarchy, and its constant celebrations drive a strong interest in luxury goods. "
+		return "In one of the lushest vales of #planetname#, a great palace has been built by one of Betelgeuse' leading family. Its elegant arches surrounded by acres of manicured gardens are famous throughout the Oligarchy, and its constant celebrations drive a strong interest in luxury goods. "
 	end
 }
 

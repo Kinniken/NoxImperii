@@ -114,7 +114,7 @@ function descModule.warmTerraDesc(planet)
 		gh.floorTo(planet.temperature-earthAverageTemp,0).." full degrees above Earth's. "..
 		"Only traces of glaciers remain on top of particularly tall mountains. "..
 		"The local ecology is varied and developed, in surprisingly Earth-like fashion; ecosystems reminiscent of "..
-		"Terran jungles, savanna and mangroves are common."
+		"Terran jungles, savannah and mangroves are common."
 	}
 
 	descs[#descs+1]={weight=20,weightValidity=function(planet) return planet.lua.nativeFertility>1 end, desc=
@@ -125,14 +125,14 @@ function descModule.warmTerraDesc(planet)
 
 	descs[#descs+1]={weight=20,weightValidity=function(planet) return planet.lua.nativeFertility<0.8 end, desc=
 		"#planetname# looks like it could have been an other Earth, but high average temperatures turned "..
-		"part of the world barren. Seemingly endless deserts merge into dry savannas, while forests of cactus-like trees cluster "..
+		"part of the world barren. Seemingly endless deserts merge into dry savannah, while forests of cactus-like trees cluster "..
 		"around rare oasis."
 	}
 
 	descs[#descs+1]={weight=20,weightValidity=function(planet) return #planet.lua.settlements==0 end, desc=
-		"The oceans of #planetname# are dotted with archipelagos, stretching over thousand of kilometers. Coral-like "..
-		"creatures have patiently accumulated into colorful formations inhabited by a varied marine life. The empty beaches of sand "..
-		"of unearthly colors seem to be waiting for sapient visitors."
+		"The oceans of #planetname# are dotted with archipelagos, stretching over thousand of kilometres. Coral-like "..
+		"creatures have patiently accumulated into colourful formations inhabited by a varied marine life. The empty beaches of sand "..
+		"of unearthly colours seem to be waiting for sapient visitors."
 	}
 
 	return gh.pickConditionalWeightedObject(descs,planet).desc
@@ -145,8 +145,8 @@ function descModule.temperateTerraDesc(planet)
 	--convention: first desc has no criteria, to ensure at least one will be valid
 	descs[#descs+1]={weight=10, desc=
 		"#planetname# is an impressively Earth-like world, with a day of "..gh.floorTo(planet.dayLength*24).." hours. "..
-		"The vegetation has developed in parallel forms, with a green-blue color dominating and tall fronds covered with "..
-		"huge flowers of varied colors. Native animals tend to be viviparous, including the analogs for birds."
+		"The vegetation has developed in parallel forms, with a green-blue colour dominating and tall fronds covered with "..
+		"huge flowers of varied colours. Native animals tend to be viviparous, including the analogues for birds."
 	}
 
 	descs[#descs+1]={weight=20,weightValidity=function(planet) return planet.planetRadius>1.05 end, desc=

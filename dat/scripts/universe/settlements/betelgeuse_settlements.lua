@@ -23,7 +23,7 @@ settlement_generator.betelgeuseSettlements[#settlement_generator.betelgeuseSettl
 		return true
 	end,
 	getDesc=function(planet)
-		return gh.randomObject({"Settled early by the Betelgians, #planetname# has long been one of the most integrated world of the Oligarchy. ","#plantename# had no sapient inhabitants when it was first discovered by the Betelgians, who promptly settled it. " , "#plantename# is home to large communities of subject races from the Oligarchy, though power is firmly in the hands of Betelgian nobility. "})
+		return gh.randomObject({"Settled early by the Betelgians, #planetname# has long been one of the most integrated world of the Oligarchy. ","#planetname# had no sapient inhabitants when it was first discovered by the Betelgians, who promptly settled it. " , "#planetname# is home to large communities of subject races from the Oligarchy, though power is firmly in the hands of Betelgian nobility. "})
 	end,
 	specialities={betelgeuse_specialities.specialityUniversity,betelgeuse_specialities.specialityNavalBase,betelgeuse_specialities.specialityHeavyIndustry,betelgeuse_specialities.specialityLuxuryResort,betelgeuse_specialities.specialityOre},
 	weight=10

@@ -68,12 +68,12 @@ local planet_prototype = {
 	return (self.star.populationTemplate.nativeCivilization>0.5)
 	end,
 	addHistory=function(self,msg,evttime)
-	if (not self.lua.worldHistory) then
-		self.lua.worldHistory={}
-	end
-	if not evttime then
-		evttime=time.tonumber(time.get())
-	end
+		if (not self.lua.worldHistory) then
+			self.lua.worldHistory={}
+		end
+		if not evttime then
+			evttime=time.get():tonumber()
+		end
 	self.lua.worldHistory[#self.lua.worldHistory+1]={time=evttime,msg=msg}
 	end,
 	addTag=function(self,tag)

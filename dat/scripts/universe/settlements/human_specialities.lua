@@ -16,7 +16,7 @@ settlements_specialities.specialityUniversity={
 		planet.lua.settlements.humans:addGoodDemand(C.ANCIENT_TECHNOLOGY,10,1.2)
 	end,
 	getDesc=function(planet)
-		return "The planet is famous for its university, founded early in the colony's history and today a major center of learning for surrounding systems. "
+		return "The planet is famous for its university, founded early in the colony's history and today a major centre of learning for surrounding systems. "
 	end
 }
 
@@ -31,7 +31,7 @@ settlements_specialities.specialityNavalBase={
 		planet.lua.settlements.humans:addGoodDemand(C.NATIVE_WEAPONS,10,2)
 	end,
 	getDesc=function(planet)
-		return "The #planetname# naval base is a major command center for this area of space, and a large community of retired soldiers and officers has settled around it. "
+		return "The #planetname# naval base is a major command centre for this area of space, and a large community of retired soldiers and officers has settled around it. "
 	end
 }
 
@@ -68,9 +68,9 @@ settlements_specialities.specialityLuxuryResort={
 }
 
 settlements_specialities.specialityCraftBeer={
-	weight=5,
+	weight=50,
 	weightValidity=function(planet)
-		return (planet.lua.settlements.humans.agriculture>1)
+		return (planet.lua.settlements.humans.agriculture>0.8)
 	end,
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.humans:addTag("craftbeers")
@@ -91,7 +91,7 @@ settlements_specialities.specialityHam={
 		planet.lua.settlements.humans:addGoodSupply(C.GOURMET_FOOD,50,1)
 	end,
 	getDesc=function(planet)
-		return "Porks brought from Earth thrive on #planetname#, and local plants give their meat a distinctive flavor. #planetname# curated hams are legendary among the empire's gourmets. "
+		return "Porks brought from Earth thrive on #planetname#, and local plants give their meat a distinctive flavour. #planetname# curated hams are legendary among the empire's gourmets. "
 	end
 }
 
@@ -120,7 +120,7 @@ settlements_specialities.specialityFrontierBase={
 		planet.lua.settlements.humans.military=planet.lua.settlements.humans.military*1.5
 	end,
 	getDesc=function(planet)
-		return "The Imperial Navy has setup a significant naval base on #planetname# to protect the sector from barbarian raids. "
+		return "The Imperial Navy has set up a significant naval base on #planetname# to protect the sector from barbarian raids. "
 	end
 }
 

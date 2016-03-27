@@ -1,14 +1,14 @@
 event=worldevent_class.createNew()
 event.weight=10
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.BARBARIANS)>0)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.BARBARIANS)>20)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 	textData.casualties=gh.prettyLargeNumber(planet.lua.settlements.humans.population*0.1)
 	planet.lua.settlements.humans.population=planet.lua.settlements.humans.population*0.9
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("Urgent medical help is needed following the barbarian attack.",
-		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber() )
+		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber(), "empire_barbarian_raid" )
 	planet.lua.settlements.humans:addGoodDemand(C.MEDICINE,20,3,effectId)
 
 	adjustBarbarianActivity(get_nearest_barbarian_zone(system_class.load(planet.c:system())).name,1.01)
@@ -102,7 +102,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.PIRATES)>0)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.PIRATES)>10)
 end
 event.weight=10
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -125,7 +125,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.BARBARIANS)>0)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.BARBARIANS)>20)
 end
 event.weight=5
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -159,7 +159,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.humans.population=planet.lua.settlements.humans.population*0.95
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The ongoing plague is driving up the price of medicine while the quarantine depresses the cost of consumer goods.",
-		(time.get() + time.create( 0,1,0, 0, 0, 0 )):tonumber() )
+		(time.get() + time.create( 0,1,0, 0, 0, 0 )):tonumber(), "empire_plague" )
 	planet.lua.settlements.humans:addGoodDemand(C.MEDICINE,20,5,effectId)
 	planet.lua.settlements.humans:reduceGoodDemand(C.CONSUMER_GOODS,50,0.5,effectId)
 	
@@ -188,7 +188,7 @@ event.weight=50--tag-specific so higher priority
 event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("A major wine festival is driving up the price of gourmet food.",
-		(time.get() + time.create( 0,0,2, 0, 0, 0 )):tonumber() )
+		(time.get() + time.create( 0,0,2, 0, 0, 0 )):tonumber(),"winefair" )
 	planet.lua.settlements.humans:addGoodDemand(C.GOURMET_FOOD,20,5,effectId)
 	planet.lua.settlements.humans:addGoodDemand(C.EXOTIC_FOOD,20,5,effectId)
 end
@@ -211,7 +211,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	textData.god=gh.randomObject({"Ganesh","Ram","Vishnu","Durga","Kali","Hanuman"})
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The ongoing mela is driving up demand for food and consumer goods.",
-		(time.get() + time.create( 0,0,2, 0, 0, 0 )):tonumber() )
+		(time.get() + time.create( 0,0,2, 0, 0, 0 )):tonumber(), "mela" )
 	planet.lua.settlements.humans:addGoodDemand(C.FOOD,100,5,effectId)
 	planet.lua.settlements.humans:addGoodDemand(C.CONSUMER_GOODS,100,5,effectId)
 end

@@ -153,7 +153,7 @@ event.weightValidity=function(planet)
 	return (planet.c:faction()==faction.get(G.ROIDHUNATE) and planet.lua.settlements.ardars)
 end
 event.weight=5
-event.duration=time.create( 0,1,0, 0, 0, 0 )
+event.duration=time.create( 0,0,2, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 
 	textData.expert=getHumanFemaleName()
@@ -212,8 +212,8 @@ event=worldevent_class.createNew()
 event.weightValidity=function(planet)
 	return (planet.c:faction()==faction.get(G.ROIDHUNATE) and planet.lua.settlements.ardars and planet.lua.settlements.ardars:hasTag("oldcolony"))
 end
-event.weight=50--tag-specific
-event.duration=time.create( 0,1,0, 0, 0, 0 )
+event.weight=30--tag-specific
+event.duration=time.create( 0,0,2, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.ardars:addActiveEffect("The celebration of the first settlement drives strong demand for food and luxury goods.",
@@ -227,7 +227,7 @@ event.eventMessage="NEWS ALERT: The Ardar colony of ${world} celebrates its anci
 event.worldHistoryMessage="Great celebrations were held to commemorate the founding of the first colony."
 
 event:addBarNews(G.ROIDHUNATE,"${world} celebrates its foundation",
-	"The old colony of ${world} is celebrating its founding, one of the earliest in the Roidhunate. The planet's leading officials are gathering for a month of tributes to the pioneering spirit of the early settlers.")
+	"The old colony of ${world} is celebrating its founding, one of the earliest in the Roidhunate. The planet's leading officials are gathering for two weeks of tributes to the pioneering spirit of the early settlers.")
 table.insert(world_events.events,event)
 
 
@@ -237,7 +237,7 @@ event.weightValidity=function(planet)
 	return (planet.c:faction()==faction.get(G.ROIDHUNATE) and planet.lua.settlements.ardars and planet.lua.settlements.ardars:hasTag("navyplanet"))
 end
 event.weight=50--tag-specific
-event.duration=time.create( 0,1,0, 0, 0, 0 )
+event.duration=time.create( 0,0,2, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.ardars:addActiveEffect("The military parade is driving up the cost of food and other consumer goods.",
@@ -251,5 +251,32 @@ event.eventMessage="NEWS ALERT: Great military parade held on ${world}."
 event.worldHistoryMessage="A great military parade brought together the entire world."
 
 event:addBarNews(G.ROIDHUNATE,"Military parade on ${world} cheered by the population",
-	"${world} is famous for its military spirit and contribution to the glorious Ardar Navy, and is proving it yet again with a major military parade held over an entire month. The Roidhun himself saluted this exemplary demonstration of martial spirit and adhesion to Ardar values.")
+	"${world} is famous for its military spirit and contribution to the glorious Ardar Navy, and is proving it yet again with a major military parade held over two entire weeks. The Roidhun himself saluted this exemplary demonstration of martial spirit and adhesion to Ardar values.")
+table.insert(world_events.events,event)
+
+
+
+
+event=worldevent_class.createNew()
+event.weightValidity=function(planet)
+	return (planet.c:faction()==faction.get(G.ROIDHUNATE) and planet.lua.settlements.ardars and planet.lua.settlements.ardars:hasTag("gourmetfood"))
+end
+event.weight=50--tag-specific
+event.duration=time.create( 0,0,2, 0, 0, 0 )
+event.applyOnWorldCustom=function(self,planet,textData)
+	
+	local effectId=planet.lua.settlements.ardars:addActiveEffect("Ardar Traditional Food Festival features gourmet food and Telloch at promotional prices.",
+		(time.get() + self.duration):tonumber() )
+	planet.lua.settlements.ardars:addGoodSupply(C.GOURMET_FOOD,50,0.5,effectId)
+	planet.lua.settlements.ardars:addGoodSupply(C.TELLOCH,30,0.5,effectId)
+	
+end
+event.eventMessage="NEWS ALERT: Ardar Traditional Food Festival starts on ${world}, special prices on offer."
+
+event.worldHistoryMessage="A Traditional Food Festival highlighted Ardar food specialities."
+
+event:addBarNews(G.ROIDHUNATE,"Virtues of Ardar Traditional Food showcased on ${world}",
+	"A major food festival is starting on ${world}, promoting the virtues of traditional Ardar food. Far from the degenerate \"delicacies\" favoured in the Empire, Ardar food is renowned in the Galaxy for its healthy benefits and vigour-inducing properties! Special prices on offer.")
+event:addBarNews(G.EMPIRE,"Ardar \"delicacies\" on display on ${world}",
+	"In a hilarious development, the Ardar world of ${world} is holding a would-be gourmet food festival. Adventurers on a dare can try such delicacies as whole animals roasted in their own blood, snake-like creatures served raw in thin slices and soups of \"vigour-inducing\" roots of various kind. We'll stick with oysters, steak tartare and swallows' nests - civilized food for a civilized race.")
 table.insert(world_events.events,event)

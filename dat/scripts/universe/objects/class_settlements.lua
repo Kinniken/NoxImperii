@@ -63,9 +63,17 @@ settlement_class.settlement_prototype = {
 	suppressSupply=function(self,good,effectId)
 		self.suppressGoodSupply[#self.suppressGoodSupply+1]={type=good,effectId=effectId}
 	end,
-	addActiveEffect=function(self,desc,timeLimit,methodOnEnd)
-		self.activeEffects[#self.activeEffects+1]={id=gh.floorTo(math.random(100000000)),desc=desc,timeLimit=timeLimit,methodOnEnd=methodOnEnd}
+	addActiveEffect=function(self,desc,timeLimit,type)
+		self.activeEffects[#self.activeEffects+1]={id=gh.floorTo(math.random(100000000)),desc=desc,timeLimit=timeLimit,type=type}
 		return self.activeEffects[#self.activeEffects].id
+	end,
+	hasActiveEffect=function(self,type)
+		for k,v in pairs(self.activeEffects) do
+			if (v.type==type) then
+				return true
+			end
+		end
+		return false
 	end,
 	addTag=function(self,tag)
 		for k,v in pairs(self.tags) do

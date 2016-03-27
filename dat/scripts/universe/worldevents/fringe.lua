@@ -8,7 +8,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.humans.population=planet.lua.settlements.humans.population*0.9--5% dead, 5% captives
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The ravages of the recent barbarian raids is causing a humanitarian crisis.",
-		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber() )
+		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber(), "fringe_barbarian_raid" )
 	planet.lua.settlements.humans:addGoodDemand(C.MEDICINE,20,3,effectId)
 	planet.lua.settlements.humans:addGoodDemand(C.FOOD,20,3,effectId)
 end

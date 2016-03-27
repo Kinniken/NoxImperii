@@ -11,3 +11,4 @@ world_events.events={}
 include('universe/worldevents/empire.lua')
 include('universe/worldevents/roidhunate.lua')
 include('universe/worldevents/fringe.lua')
+include('universe/worldevents/betelgeuse.lua')

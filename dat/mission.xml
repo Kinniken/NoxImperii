@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Missions>
- <mission name="Cargo">
-  <lua>neutral/cargo</lua>
+ <mission name="Cargo Custom">
+  <lua>cargo_custom</lua>
   <avail>
-   <priority>6</priority>
-   <chance>960</chance>
+   <priority>8</priority>
+   <!-- forty missions at 100% chance. Will be lowered within mission script itself -->
+   <chance>4000</chance>
    <location>Computer</location>
+   <!-- should be basically everybody with a mission computer -->
    <faction>Empire of Terra</faction>
    <faction>Independent Worlds</faction>
-   <faction>Imperial Traders</faction>
-  </avail>
- </mission>
- <mission name="Cargo Rush">
-  <lua>neutral/cargo_rush</lua>
-  <avail>
-   <priority>5</priority>
-   <chance>960</chance>
-   <location>Computer</location>
-   <faction>Empire of Terra</faction>
-   <faction>Independent Worlds</faction>
-   <faction>Imperial Traders</faction>
+   <faction>Roidhunate of Ardarshir</faction>
+   <faction>Oligarchy of Betelgeuse</faction>
+   <faction>Kingdom of Ixum</faction>
+   <faction>Holy Flame of Ixum</faction>
   </avail>
  </mission>
  <mission name="The Great Survey Intro">

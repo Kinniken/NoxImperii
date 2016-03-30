@@ -91,7 +91,7 @@ event.weightValidity=function(planet)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 
-	textData.house=nameGenerator.generateNameBetelgeuse()
+	textData.lord=nameGenerator.generateNameBetelgeuse()
 
 	local effectId=planet.lua.settlements.betelgeuse:addActiveEffect("The ongoing political crisis is undermining the economy, causing a collapse in trade good prices.",
 		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber(), "betelgeuse_noblemurder" )

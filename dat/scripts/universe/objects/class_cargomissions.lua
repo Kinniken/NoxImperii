@@ -8,6 +8,32 @@ local cargomission_prototype = {
 	end,
 	validEndPlanet=function(self,c_planet)
 		return true
+	end,
+	addFactionReward=function(self,factionName,rewardFactor,rewardLimit)
+		local factionReward={}
+
+		local thefaction=faction.get(factionName)
+		if thefaction then
+			factionReward.faction=thefaction:name()
+		else
+			error("Unknown faction "..factionName.." in cargo mission!")
+		end
+
+		factionReward.faction=thefaction:name()
+
+		if rewardFactor then
+			factionReward.rewardFactor=rewardFactor
+		else
+			factionReward.rewardFactor=self.factionRewardFactor
+		end
+
+		if rewardLimit then
+			factionReward.rewardLimit=rewardLimit
+		else
+			factionReward.rewardLimit=self.factionRewardLimit
+		end
+
+		table.insert(self.factionRewards,factionReward)
 	end
 }
 
@@ -24,7 +50,10 @@ function cargomission_class.createNew()
 	o.minDistance=1
 	o.maxDistance=3
 	o.priceFactor=1
-	o.lateRewardFactor=0.8
+	o.lateRewardFactor=0.5
+	o.factionRewardFactor=0.00002--1 point for every 50k of reward
+	o.factionRewardLimit=50--can't get above this from mission rewards
+	o.factionRewards={}
 	o.cargoSizeLabels={"Small","Medium","Sizeable","Large","Bulk"}
     o.cargoPriorityLabels={"Courier","Priority","Pressing","Urgent","Emergency"}
 	o.commodities={C.FOOD, C.INDUSTRIAL, C.CONSUMER_GOODS, C.LUXURY_GOODS, C.ORE}

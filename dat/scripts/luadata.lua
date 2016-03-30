@@ -2,15 +2,17 @@ include('dump.lua')
 
 function getPlanetLuaData(c_planet)
   
-  local stringdata=c_planet:getLuaData()
+  	local stringdata=c_planet:getLuaData()
   
 	if stringdata==nil then
 			return "{}"
 	end
     
-  local data=assert(loadstring("return "..stringdata,c_planet:name()))
+  	local fdata=assert(loadstring("return "..stringdata,c_planet:name()))
+
+  	local data=fdata()
   
-	return data()
+	return data
 end
 
 function setPlanetLuaData(c_planet,luaData)
@@ -24,7 +26,18 @@ function setPlanetLuaData(c_planet,luaData)
 end
 
 function getSystemLuaData(c_sys)
-	return loadstring("return "..c_sys:getLuaData())()
+  
+  	local stringdata=c_sys:getLuaData()
+  
+	if stringdata==nil then
+		return "{}"
+	end
+    
+  	local fdata=assert(loadstring("return "..stringdata,c_sys:name()))
+
+  	local data=fdata()
+  
+	return data
 end
 
 function setSystemLuaData(c_sys,luaData)

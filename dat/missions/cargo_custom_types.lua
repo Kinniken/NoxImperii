@@ -14,6 +14,7 @@ cargoCustom.validStartPlanet=function(self,c_planet)
 cargoCustom.validEndPlanet=function(self,c_planet)
 		return c_planet:faction()==faction.get(G.EMPIRE) and c_planet:system():presence(G.PIRATES)<10 and c_planet:system():presence(G.BARBARIANS)<10
 	end
+cargoCustom:addFactionReward(G.IMPERIAL_TRADERS)
 table.insert(cargo_custom.types,cargoCustom)
 
 
@@ -31,6 +32,28 @@ cargoCustom.validStartPlanet=function(self,c_planet)
 cargoCustom.validEndPlanet=function(self,c_planet)
 		return c_planet:faction()==faction.get(G.EMPIRE) and (c_planet:system():presence(G.PIRATES)>=10 or c_planet:system():presence(G.BARBARIANS)>=10)
 	end
+cargoCustom:addFactionReward(G.IMPERIAL_TRADERS)
+table.insert(cargo_custom.types,cargoCustom)
+
+
+--Imperial military, risky
+cargoCustom=cargomission_class.createNew()
+cargoCustom.id="imperial_military"
+cargoCustom.weight=50
+cargoCustom.priceFactor=1.2
+cargoCustom.maxRushLevel=1--with pirates to fight more is impossible
+cargoCustom.commodities={C.ARMAMENT,C.MODERN_ARMAMENT}
+cargoCustom.misn_title = "Navy shipment to ${targetWorld} (${quantity} tonnes)"
+cargoCustom.misn_title_urgent = "${urgencyAdj} navy transport to ${targetWorld} (${quantity} tonnes)"
+cargoCustom.misn_desc = "The Imperial Navy needs ${quantity} tonnes of ${commodity} shipped to a base on ${targetWorld} in the ${targetSystem} system. The pay isn't great, but the Navy will be grateful."
+cargoCustom.misn_desc_urgent = "The Imperial Navy needs ${quantity} tonnes of ${commodity} shipped to a base on ${targetWorld} in the ${targetSystem} system. It must reach before his party on the ${deadline} (time left: ${timeRemaining}). The pay isn't great, but the Navy will be grateful."
+cargoCustom.validStartPlanet=function(self,c_planet)
+		return c_planet:faction()==faction.get(G.EMPIRE)
+	end
+cargoCustom.validEndPlanet=function(self,c_planet)
+		return c_planet:faction()==faction.get(G.EMPIRE) and (c_planet:system():presence(G.PIRATES)>=10 or c_planet:system():presence(G.BARBARIANS)>=10)
+	end
+cargoCustom:addFactionReward(G.EMPIRE)
 table.insert(cargo_custom.types,cargoCustom)
 
 
@@ -49,6 +72,7 @@ cargoCustom.validStartPlanet=function(self,c_planet)
 cargoCustom.validEndPlanet=function(self,c_planet)
 		return c_planet:faction()==faction.get(G.INDEPENDENT_WORLDS)
 	end
+cargoCustom:addFactionReward(G.INDEPENDENT_TRADERS)
 table.insert(cargo_custom.types,cargoCustom)
 
 
@@ -66,12 +90,36 @@ cargoCustom.validStartPlanet=function(self,c_planet)
 cargoCustom.validEndPlanet=function(self,c_planet)
 		return c_planet:faction()==faction.get(G.ROIDHUNATE)
 	end
+cargoCustom:addFactionReward(G.ROIDHUNATE)
 cargoCustom.misn_title = "Ardar shipment to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_title_urgent = "${urgencyAdj} Ardar transport to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_desc = "An Ardar company needs ${quantity} tonnes of ${commodity} shipped to a client on ${targetWorld} in the ${targetSystem} system."
 cargoCustom.misn_desc_urgent = "An Ardar company needs ${quantity} tonnes of ${commodity} shipped to a client on ${targetWorld} in the ${targetSystem} system. It must reach before his party on the ${deadline} (time left: ${timeRemaining})."
 cargoCustom.land_msg={"The Ardars at the spaceport are clearly not used to dealing with independent couriers, an a human one at that. They process the delivery competently, but you can feel lingering unease."}
 cargoCustom.land_msg_late={"The Ardars at the spaceport are clearly not used to dealing with independent couriers, an a human one at that. When they realise that you are late, unease turns to hostility; they pay you ${paymentPartial} of the ${payment} credits promised, scornfully commenting on human unreliability."}
+table.insert(cargo_custom.types,cargoCustom)
+
+
+--Imperial military, risky
+cargoCustom=cargomission_class.createNew()
+cargoCustom.id="roidhunate_military"
+cargoCustom.weight=20
+cargoCustom.priceFactor=1
+cargoCustom.maxRushLevel=1
+cargoCustom.commodities={C.ARMAMENT,C.MODERN_ARMAMENT}
+cargoCustom.validStartPlanet=function(self,c_planet)
+		return c_planet:faction()==faction.get(G.ROIDHUNATE)
+	end
+cargoCustom.validEndPlanet=function(self,c_planet)
+		return c_planet:faction()==faction.get(G.ROIDHUNATE) and (c_planet:system():presence(G.PIRATES)>=10 or c_planet:system():presence(G.BARBARIANS)>=10)
+	end
+cargoCustom:addFactionReward(G.ROIDHUNATE)
+cargoCustom.misn_title = "Ardar Navy shipment to ${targetWorld} (${quantity} tonnes)"
+cargoCustom.misn_title_urgent = "${urgencyAdj} Ardar Navy transport to ${targetWorld} (${quantity} tonnes)"
+cargoCustom.misn_desc = "The Ardar Navy needs ${quantity} tonnes of ${commodity} shipped to a base on ${targetWorld} in the ${targetSystem} system, and due to a lack of transport ships will even pay independent traders to do it."
+cargoCustom.misn_desc_urgent = "The Ardar Navy needs ${quantity} tonnes of ${commodity} shipped to a base on ${targetWorld} in the ${targetSystem} system, and due to a lack of transport ships will even pay independent traders to do it. It must reach before his party on the ${deadline} (time left: ${timeRemaining})."
+cargoCustom.land_msg={"The Ardar Officer you deliver the cargo to is clearly angry at dealing with an independent contractor, and a human one at that. He proceeds the delivery and your payment well enough though, muttering under his breath about possible spies and saboteurs."}
+cargoCustom.land_msg_late={"The Ardar Officer you deliver the cargo to is clearly angry at dealing with an independent contractor, and a human one at that. When he realises you are late he turns hostile. But rules are rules, and Ardars generally respect them, so he pays you ${paymentPartial} of the ${payment} credits agreed, deducting the late fee without hesitation."}
 table.insert(cargo_custom.types,cargoCustom)
 
 
@@ -83,6 +131,7 @@ cargoCustom.priceFactor=2
 cargoCustom.minDistance=5
 cargoCustom.maxDistance=15
 cargoCustom.maxRushLevel=1--with pirates to fight more is impossible
+cargoCustom:addFactionReward(G.BETELGIAN_TRADERS)
 cargoCustom.misn_title = "Betelgian shipment to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_title_urgent = "${urgencyAdj} Betelgian transport to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_desc = "A Betelgian trading house needs ${quantity} tonnes of ${commodity} shipped to its base of ${targetWorld} in the ${targetSystem} system."
@@ -105,6 +154,7 @@ cargoCustom.priceFactor=2
 cargoCustom.minDistance=5
 cargoCustom.maxDistance=15
 cargoCustom.maxRushLevel=1--with pirates to fight more is impossible
+cargoCustom:addFactionReward(G.BETELGIAN_TRADERS)
 cargoCustom.misn_title = "Betelgian shipment to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_title_urgent = "${urgencyAdj} Betelgian transport to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_desc = "A Betelgian trading house needs ${quantity} tonnes of ${commodity} shipped to its branch on ${targetWorld} in the ${targetSystem} system."
@@ -129,6 +179,8 @@ cargoCustom.minDistance=3
 cargoCustom.maxDistance=10
 cargoCustom.maxRushLevel=1--with pirates to fight more is impossible
 cargoCustom.commodities={C.ARMAMENT,C.MODERN_ARMAMENT}
+cargoCustom:addFactionReward(G.EMPIRE)
+cargoCustom:addFactionReward(G.ROYAL_IXUM)
 cargoCustom.misn_title = "Military aid to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_title_urgent = "${urgencyAdj} military aid to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_desc = "The Imperial Navy needs ${quantity} tonnes of ${commodity} sent to its Royal Ixum allies on ${targetWorld} in the ${targetSystem} system."
@@ -152,6 +204,8 @@ cargoCustom.minDistance=3
 cargoCustom.maxDistance=10
 cargoCustom.maxRushLevel=1--with pirates to fight more is impossible
 cargoCustom.commodities={C.ARMAMENT,C.MODERN_ARMAMENT}
+cargoCustom:addFactionReward(G.ROIDHUNATE)
+cargoCustom:addFactionReward(G.HOLY_FLAME)
 cargoCustom.misn_title = "Military aid to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_title_urgent = "${urgencyAdj} military aid to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_desc = "The Ardar Navy needs ${quantity} tonnes of ${commodity} sent to its Holy Flame allies on ${targetWorld} in the ${targetSystem} system."
@@ -183,6 +237,7 @@ cargoCustom.minCargoSize=5
 cargoCustom.maxCargoSize=10
 cargoCustom.minDistance=1
 cargoCustom.maxDistance=5
+cargoCustom:addFactionReward(G.IMPERIAL_TRADERS)
 cargoCustom.validStartPlanet=function(self,c_planet)
 		local planet=planet_class.load(c_planet)
 		return planet.lua.settlements and planet.lua.settlements.humans and planet.lua.settlements.humans:hasActiveEffect("winefair")
@@ -211,6 +266,7 @@ cargoCustom.minDistance=1
 cargoCustom.maxDistance=5
 cargoCustom.minRushLevel=2
 cargoCustom.maxRushLevel=4
+cargoCustom:addFactionReward(G.IMPERIAL_TRADERS)
 cargoCustom.validStartPlanet=function(self,c_planet)
 		local planet=planet_class.load(c_planet)
 		return planet.lua.settlements and planet.lua.settlements.humans and planet.lua.settlements.humans.agriculture>0.8
@@ -238,6 +294,7 @@ cargoCustom.minCargoSize=5
 cargoCustom.maxCargoSize=10
 cargoCustom.minDistance=1
 cargoCustom.maxDistance=5
+cargoCustom:addFactionReward(G.IMPERIAL_TRADERS)
 cargoCustom.validStartPlanet=function(self,c_planet)
 		local planet=planet_class.load(c_planet)
 		return planet.lua.settlements and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("craftbeers")
@@ -267,6 +324,7 @@ cargoCustom.minCargoSize=20
 cargoCustom.maxCargoSize=100
 cargoCustom.minDistance=1
 cargoCustom.maxDistance=5
+cargoCustom:addFactionReward(G.IMPERIAL_TRADERS)
 cargoCustom.validStartPlanet=function(self,c_planet)
 		local planet=planet_class.load(c_planet)
 		return planet.lua.settlements and planet.lua.settlements.humans
@@ -295,6 +353,7 @@ cargoCustom.minCargoSize=20
 cargoCustom.maxCargoSize=100
 cargoCustom.minDistance=1
 cargoCustom.maxDistance=8
+cargoCustom:addFactionReward(G.EMPIRE)
 cargoCustom.validStartPlanet=function(self,c_planet)
 		local planet=planet_class.load(c_planet)
 		return planet.lua.settlements and planet.lua.settlements.humans
@@ -323,6 +382,7 @@ cargoCustom.minCargoSize=20
 cargoCustom.maxCargoSize=100
 cargoCustom.minDistance=1
 cargoCustom.maxDistance=8
+cargoCustom:addFactionReward(G.EMPIRE)
 cargoCustom.validStartPlanet=function(self,c_planet)
 		local planet=planet_class.load(c_planet)
 		return planet.lua.settlements and planet.lua.settlements.humans
@@ -330,6 +390,36 @@ cargoCustom.validStartPlanet=function(self,c_planet)
 cargoCustom.validEndPlanet=function(self,c_planet)
 		local planet=planet_class.load(c_planet)
 		return planet.lua.settlements and planet.lua.settlements.humans and planet.lua.settlements.humans:hasActiveEffect("empire_plague")
+	end
+table.insert(cargo_custom.types,cargoCustom)
+
+
+--Betelgeuse
+
+cargoCustom=cargomission_class.createNew()
+cargoCustom.id="betelgeuse_trade_flet_preparation"
+cargoCustom.osd_title="Goods for trade fleet"
+cargoCustom.misn_title_urgent = "${urgencyAdj} goods for trade fleet on ${targetWorld} (Space: ${quantity} tonnes)"
+cargoCustom.misn_desc_urgent = "${quantity} tonnes of ${commodity} is needed by the trade fleet assembling on ${targetWorld} in the ${targetSystem} system. It must reach before the ${deadline} (time left: ${timeRemaining})."
+
+cargoCustom.land_msg={"${targetWorld}'s spaceport is bustling with preparations, with dozens of technicians surrounding each of the massive Betelgian trade ships. You've barely landed that your cargo is hurriedly unloaded and forwarded to a waiting ship. Excitement is palpable in the air; here is the real glory of Betelgeuse, in the sleek lines of the ships tasked with exploring the unknown, not in the refined palaces of the princes or the store rooms filled with precious goods."}
+cargoCustom.land_msg_late={"${targetWorld}'s spaceport is bustling with preparations, with dozens of technicians surrounding each of the massive Betelgian trade ships. You've barely landed that your cargo is hurriedly unloaded and forwarded to a waiting ship. Excitement is palpable in the air; here is the real glory of Betelgeuse, in the sleek lines of the ships tasked with exploring the unknown, not in the refined palaces of the princes or the store rooms filled with precious goods.\n\nYou being late costs you a fine, and you're paid only ${paymentPartial} of the ${payment} credits."}
+cargoCustom.commodities={C.BASIC_TOOLS,C.BASIC_WEAPONS,C.PRIMITIVE_CONSUMER,C.PRIMITIVE_INDUSTRIAL}
+cargoCustom.priceFactor=2
+cargoCustom.minRushLevel=2
+cargoCustom.maxRushLevel=5
+cargoCustom.minCargoSize=20
+cargoCustom.maxCargoSize=100
+cargoCustom.minDistance=1
+cargoCustom.maxDistance=8
+cargoCustom:addFactionReward(G.BETELGEUSE)
+cargoCustom.validStartPlanet=function(self,c_planet)
+		local planet=planet_class.load(c_planet)
+		return c_planet:faction()==faction.get(G.EMPIRE) or c_planet:faction()==faction.get(G.ROIDHUNATE) or c_planet:faction()==faction.get(G.BETELGEUSE)
+	end
+cargoCustom.validEndPlanet=function(self,c_planet)
+		local planet=planet_class.load(c_planet)
+		return planet.lua.settlements and planet.lua.settlements.betelgeuse and planet.lua.settlements.betelgeuse:hasActiveEffect("betelgeuse_fleetleaving")
 	end
 table.insert(cargo_custom.types,cargoCustom)
 

@@ -2,7 +2,7 @@ include "dat/scripts/general_helper.lua"
 include "dat/scripts/jumpdist.lua"
 include "dat/scripts/nextjump.lua"
 include "dat/scripts/numstring.lua"
-include "dat/scripts/universe/objects/class_cargomission.lua"
+include "dat/scripts/universe/objects/class_cargomissions.lua"
 include "dat/scripts/universe/objects/class_planets.lua"
 include "dat/scripts/universe/objects/class_settlements.lua"
 include "dat/missions/cargo_custom_types.lua"
@@ -97,10 +97,6 @@ function create()
     distreward = 0.12
     reward     = math.floor(1.5^urgency * 1.2^cargoSizeTier * (numjumps * jumpreward + traveldist * distreward) * (1. + 0.05*rnd.twosigma())* cargoType.priceFactor)
 
-    local cargoSizeTier
-
-    
-
     textData_targetWorld=destplanet:name()
     textData_targetSystem=destsys:name()
     textData_quantity=amount
@@ -113,18 +109,48 @@ function create()
       textData_urgencyAdj=cargoType.cargoPriorityLabels[urgency]
     end
     textData_cargoSizeAdj=cargoType.cargoSizeLabels[cargoSizeTier]
-
     
+    print(cargoSizeTier)
+    print(textData_cargoSizeAdj)
+    print(#cargoType.cargoSizeLabels)
+
+
+    local factionDescText
+
+    if #(cargoType.factionRewards)==1 then
+      factionDescText="This mission will increase your standing with the "..cargoType.factionRewards[1].faction.." and their allies, and reduce it with their enemies."
+    elseif #(cargoType.factionRewards)>1 then
+      factionDescText="This mission will increase your standing with the following factions and their allies, and reduce it with their enemies: "
+
+      for k,v in ipairs(cargoType.factionRewards) do
+        factionDescText=factionDescText..v.faction
+
+        if k<#(cargoType.factionRewards) then
+          factionDescText=factionDescText..", "
+        end
+      end
+    end
+
+    local misnDesc
+
+    if (urgency==0) then
+     misnDesc=cargoType.misn_desc,textData
+    else
+     misnDesc=cargoType.misn_desc_urgent,textData
+    end
+
+    if factionDescText then
+      misnDesc=misnDesc.."\n\n"..factionDescText
+    end
 
     local textData=createTextData()
 
     if (urgency==0) then
-      misn.setTitle( gh.format(cargoType.misn_title,textData))
-      misn.setDesc(gh.format(cargoType.misn_desc,textData))
+      misn.setTitle( gh.format(cargoType.misn_title,textData))      
     else
       misn.setTitle( gh.format(cargoType.misn_title_urgent,textData))
-      misn.setDesc(gh.format(cargoType.misn_desc_urgent,textData))
     end
+    misn.setDesc(gh.format(misnDesc,textData))
     misn.markerAdd(destsys, "computer")
 
     misn.setReward(gh.format(cargoType.misn_reward,textData))
@@ -196,14 +222,36 @@ function land()
   local textData=createTextData()
 
     if planet.cur() == destplanet then
+
+        local effectiveReward
+
         if intime then
             -- Semi-random message.
             tk.msg(gh.format(cargoType.land_title,textData), gh.format(gh.randomObject(cargoType.land_msg),textData))
-            player.pay(reward)
+            effectiveReward=reward
         else
             -- Semi-random message for being late.
             tk.msg(gh.format(cargoType.land_title_late,textData), gh.format(gh.randomObject(cargoType.land_msg_late),textData))
-            player.pay(reward*cargoType.lateRewardFactor)
+            effectiveReward=reward*cargoType.lateRewardFactor
+        end
+
+        player.pay(effectiveReward)
+
+        for k,v in ipairs(cargoType.factionRewards) do
+
+          local f=faction.get(v.faction)
+
+          if f then
+            local repReward=effectiveReward*v.rewardFactor
+
+            if (f:playerStanding()+repReward<=v.rewardLimit) then
+              f:modPlayer(repReward)
+            elseif f:playerStanding()<v.rewardLimit and f:playerStanding()+repReward>v.rewardLimit then
+              --just enough to get to the limit
+              f:modPlayer(v.rewardLimit-f:playerStanding())
+            end            
+          end
+
         end
         
         misn.finish(true)

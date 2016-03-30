@@ -60,6 +60,7 @@
   <spawn>imperial_trader</spawn>
   <standing>imperial_trader</standing>
   <allies>
+    <ally>Empire of Terra</ally>
   </allies>
   <enemies>
    <enemy>Pirates</enemy>
@@ -75,6 +76,7 @@
   <spawn>ardar_trader</spawn>
   <standing>ardar_trader</standing>
   <allies>
+    <ally>Roidhunate of Ardarshir</ally>
   </allies>
   <enemies>
    <enemy>Pirates</enemy>
@@ -90,6 +92,7 @@
   <spawn>betelgian_trader</spawn>
   <standing>betelgian_trader</standing>
   <allies>
+    <ally>Oligarchy of Betelgeuse</ally>
   </allies>
   <enemies>
    <enemy>Pirates</enemy>
@@ -135,6 +138,7 @@
   <equip>empire</equip>
   <allies>
     <ally>Kingdom of Ixum</ally>
+    <ally>Imperial Traders</ally>
   </allies>
   <enemies>
    <enemy>Pirates</enemy>
@@ -152,6 +156,7 @@
   <equip>roidhunate</equip>
   <allies>
     <ally>Holy Flame of Ixum</ally>
+    <ally>Ardar Traders</ally>
   </allies>
   <enemies>
    <enemy>Pirates</enemy>
@@ -168,6 +173,7 @@
   <standing>betelgeuse</standing>
   <equip>betelgeuse</equip>
   <allies>
+    <ally>Betelgian Traders</ally>
   </allies>
   <enemies>
    <enemy>Pirates</enemy>

@@ -157,8 +157,12 @@ The major oxygen-breathing races in the sector have broadly compatible dietary r
 		</commodity>
 		<commodity name="Student">
 		</commodity>
-		<commodity name="Captured Seafolk">
-		</commodity>
 		<commodity name="Pilgrims">
+		</commodity>
+		<commodity name="Tourists">
+		</commodity>
+		<commodity name="Ardar Settlers">
+		</commodity>
+		<commodity name="Ixumite Refugees">
 		</commodity>
 </Commodities>

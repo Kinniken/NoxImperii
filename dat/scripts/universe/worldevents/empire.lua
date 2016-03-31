@@ -1,5 +1,6 @@
 event=worldevent_class.createNew()
 event.weight=10
+event.duration=time.create(0,0,2, 0, 0, 0 )
 event.weightValidity=function(planet)
 	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.BARBARIANS)>20)
 end
@@ -8,7 +9,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.humans.population=planet.lua.settlements.humans.population*0.9
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("Urgent medical help is needed following the barbarian attack.",
-		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber(), "empire_barbarian_raid" )
+		(time.get() + self.duration):tonumber(), "empire_barbarian_raid" )
 	planet.lua.settlements.humans:addGoodDemand(C.MEDICINE,20,3,effectId)
 
 	adjustBarbarianActivity(get_nearest_barbarian_zone(system_class.load(planet.c:system())).name,1.01)
@@ -17,7 +18,7 @@ event.eventMessage="NEWS ALERT: An major barbarian raid on ${world} has decimate
 
 event.worldHistoryMessage="A major barbarian raid caused important damages to the main human cities."
 
-event:addBarNews(G.EMPIRE,"Barbarian raid on ${world}!","Once again, barbarians have raided ${world}. Losses of lives are reported to be a staggering ${casualties} people. When will the Empire finally push back the barbarian threat?",time.create(0,0,10,0,0,0))
+event:addBarNews(G.EMPIRE,"Barbarian raid on ${world}!","Once again, barbarians have raided ${world}. Losses of lives are reported to be a staggering ${casualties} people. When will the Empire finally push back the barbarian threat?")
 table.insert(world_events.events,event)
 
 
@@ -52,7 +53,7 @@ event=worldevent_class.createNew()
 event.weightValidity=function(planet)
 	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.minerals>0.8)
 end
-event.weight=20
+event.weight=10
 event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.humans.industry=planet.lua.settlements.humans.industry*1.2
 	
@@ -229,10 +230,11 @@ event.weightValidity=function(planet)
 	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("latinamerican"))
 end
 event.weight=50--tag-specific so higher priority
+event.duration=time.create( 0,0,2, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The carnival is increasing demand for food and alcohol.",
-		(time.get() + time.create( 0,0,2, 0, 0, 0 )):tonumber() )
+		(time.get() + self.duration):tonumber() )
 	planet.lua.settlements.humans:addGoodDemand(C.FOOD,100,5,effectId)
 	planet.lua.settlements.humans:addGoodDemand(C.BORDEAUX,20,5,effectId)
 	planet.lua.settlements.humans:addGoodDemand(C.TELLOCH,20,5,effectId)
@@ -241,7 +243,7 @@ event.eventMessage="NEWS ALERT: The famous carnival of ${world} has just started
 
 event.worldHistoryMessage="The famous carnival of Port ${world} was held."
 
-event:addBarNews(G.EMPIRE,"Samba! Carnival starts on ${world}","The streets of Port ${world} are ringing with music as the famous carnival starts. A month of festivities awaits locals and the numerous visitors as Imperial citizens enjoy the party of the year!",time.create(0,0,2, 0,0,0))
+event:addBarNews(G.EMPIRE,"Samba! Carnival starts on ${world}","The streets of Port ${world} are ringing with music as the famous carnival starts. A month of festivities awaits locals and the numerous visitors as Imperial citizens enjoy the party of the year!","empire_carnival")
 table.insert(world_events.events,event)
 
 
@@ -267,3 +269,7 @@ event.worldHistoryMessage="The start of the Year of the ${sign} was celebrated w
 
 event:addBarNews(G.EMPIRE,"Happy Year of the ${sign}!","Our reporters are live from ${world} where the New Year celebrations are under way. Firecrackers are everywhere as this world celebrates its Chinese heritage and the calendar the pioneers had adapted to local conditions.",time.create(0,0,2, 0,0,0))
 table.insert(world_events.events,event)
+
+
+
+

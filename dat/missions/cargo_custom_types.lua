@@ -338,7 +338,37 @@ table.insert(cargo_custom.types,cargoCustom)
 
 
 cargoCustom=cargomission_class.createNew()
-cargoCustom.id="human_barbarian_help"
+cargoCustom.id="carnivaltourists"
+cargoCustom.osd_title="Tourists for the Carnival"
+cargoCustom.cargoPriorityLabels={"","Priority","Pressing","Urgent",""}
+cargoCustom.misn_title_urgent = "${urgencyAdj} Tourists for ${targetWorld} (Space: ${quantity} tonnes)"
+cargoCustom.misn_desc_urgent = "A group of tourists are headed for the carnival on ${targetWorld} in the ${targetSystem} system. They'll need ${quantity} tonnes of space refitted as temporary accommodation. They must reach before the ${deadline} (time left: ${timeRemaining})."
+
+cargoCustom.land_msg={"The tourists excitedly exit the ship, taking in the carnival atmosphere of Port ${targetWorld}."}
+cargoCustom.land_msg={"The tourists exit the ship, grumbling about the delay."}
+cargoCustom.commodities={"Tourists"}
+cargoCustom.priceFactor=1.5
+cargoCustom.minRushLevel=2
+cargoCustom.maxRushLevel=4
+cargoCustom.minCargoSize=20
+cargoCustom.maxCargoSize=100
+cargoCustom.minDistance=1
+cargoCustom.maxDistance=5
+cargoCustom:addFactionReward(G.IMPERIAL_TRADERS)
+cargoCustom.validStartPlanet=function(self,c_planet)
+		local planet=planet_class.load(c_planet)
+		return planet.lua.settlements and planet.lua.settlements.humans
+	end
+cargoCustom.validEndPlanet=function(self,c_planet)
+		local planet=planet_class.load(c_planet)
+		return planet.lua.settlements and planet.lua.settlements.humans and planet.lua.settlements.humans:hasActiveEffect("empire_carnival")
+	end
+table.insert(cargo_custom.types,cargoCustom)
+
+
+
+cargoCustom=cargomission_class.createNew()
+cargoCustom.id="empire_barbarian_help"
 cargoCustom.osd_title="Urgent Medical Help"
 cargoCustom.misn_title_urgent = "${urgencyAdj} medical help for ${targetWorld} (Space: ${quantity} tonnes)"
 cargoCustom.misn_desc_urgent = "${quantity} tonnes of urgent medical help is needed on ${targetWorld} in the ${targetSystem} system following the recent barbarian raids. It must reach before the ${deadline} (time left: ${timeRemaining})."
@@ -360,14 +390,42 @@ cargoCustom.validStartPlanet=function(self,c_planet)
 	end
 cargoCustom.validEndPlanet=function(self,c_planet)
 		local planet=planet_class.load(c_planet)
-		return planet.lua.settlements and planet.lua.settlements.humans and planet.lua.settlements.humans:hasActiveEffect("empire_barbarian_raid") and planet.lua.settlements.humans:hasActiveEffect("fringe_barbarian_raid")
+		return planet.lua.settlements and planet.lua.settlements.humans and (planet.lua.settlements.humans:hasActiveEffect("empire_barbarian_raid"))
+	end
+table.insert(cargo_custom.types,cargoCustom)
+
+
+cargoCustom=cargomission_class.createNew()
+cargoCustom.id="fringe_barbarian_help"
+cargoCustom.osd_title="Urgent Medical Help"
+cargoCustom.misn_title_urgent = "${urgencyAdj} medical help for ${targetWorld} (Space: ${quantity} tonnes)"
+cargoCustom.misn_desc_urgent = "${quantity} tonnes of urgent medical help is needed on ${targetWorld} in the ${targetSystem} system following the recent barbarian raids. It must reach before the ${deadline} (time left: ${timeRemaining})."
+
+cargoCustom.land_msg={"${targetWorld}'s spaceport is a ruin, with makeshift facilities barely operational. Clearly the damages suffered were much bigger than announced on the news. A harried crew takes your crate and they are rushed onward to makeshift hospitals."}
+cargoCustom.land_msg_late={"${targetWorld}'s spaceport is a ruin, with makeshift facilities barely operational. Clearly the damages suffered were much bigger than announced on the news. A harried crew takes your crate and they are rushed onward to makeshift hospitals; your late arrival means they've run out."}
+cargoCustom.commodities={C.MEDICINE}
+cargoCustom.priceFactor=2
+cargoCustom.minRushLevel=2
+cargoCustom.maxRushLevel=4
+cargoCustom.minCargoSize=20
+cargoCustom.maxCargoSize=100
+cargoCustom.minDistance=1
+cargoCustom.maxDistance=8
+cargoCustom:addFactionReward(G.INDEPENDENT_WORLDS)
+cargoCustom.validStartPlanet=function(self,c_planet)
+		local planet=planet_class.load(c_planet)
+		return planet.lua.settlements and planet.lua.settlements.humans
+	end
+cargoCustom.validEndPlanet=function(self,c_planet)
+		local planet=planet_class.load(c_planet)
+		return planet.lua.settlements and planet.lua.settlements.humans and (planet.lua.settlements.humans:hasActiveEffect("fringe_barbarian_raid"))
 	end
 table.insert(cargo_custom.types,cargoCustom)
 
 
 
 cargoCustom=cargomission_class.createNew()
-cargoCustom.id="human_barbarian_help"
+cargoCustom.id="empire_plague_medical_help"
 cargoCustom.osd_title="Urgent Medical Help"
 cargoCustom.misn_title_urgent = "${urgencyAdj} medical help for ${targetWorld} (Space: ${quantity} tonnes)"
 cargoCustom.misn_desc_urgent = "${quantity} tonnes of urgent medical help is needed on ${targetWorld} in the ${targetSystem} system due to the ongoing plague. It must reach before the ${deadline} (time left: ${timeRemaining})."
@@ -392,6 +450,125 @@ cargoCustom.validEndPlanet=function(self,c_planet)
 		return planet.lua.settlements and planet.lua.settlements.humans and planet.lua.settlements.humans:hasActiveEffect("empire_plague")
 	end
 table.insert(cargo_custom.types,cargoCustom)
+
+
+--Fringe
+cargoCustom=cargomission_class.createNew()
+cargoCustom.id="fringe_alien_fungus"
+cargoCustom.osd_title="Famine Relief"
+cargoCustom.misn_title_urgent = "${urgencyAdj} famine relief for ${targetWorld} (Space: ${quantity} tonnes)"
+cargoCustom.misn_desc_urgent = "${quantity} tonnes of food are urgently needed ${targetWorld} in the ${targetSystem} system following crop failures caused by an alien fungus. It must reach before the ${deadline} (time left: ${timeRemaining})."
+
+cargoCustom.land_msg={"${targetWorld}'s spaceport is a hub of activity, with food help from the Empire and traders pouring in. Your cargo is handled promptly and professionally, though you cannot help but notice the sunken cheeks of the spaceport workers."}
+cargoCustom.land_msg_late={"${targetWorld}'s spaceport is a hub of activity, with food help from the Empire and traders pouring in. Your cargo is handled promptly and professionally, though you cannot help but notice the sunken cheeks of the spaceport workers - your delay might have played a part."}
+cargoCustom.commodities={C.FOOD}
+cargoCustom.priceFactor=2
+cargoCustom.minRushLevel=2
+cargoCustom.maxRushLevel=4
+cargoCustom.minCargoSize=20
+cargoCustom.maxCargoSize=100
+cargoCustom.minDistance=1
+cargoCustom.maxDistance=8
+cargoCustom:addFactionReward(G.INDEPENDENT_WORLDS)
+cargoCustom.validStartPlanet=function(self,c_planet)
+		return c_planet:faction()==faction.get(G.EMPIRE)
+	end
+cargoCustom.validEndPlanet=function(self,c_planet)
+		local planet=planet_class.load(c_planet)
+		return planet.lua.settlements and planet.lua.settlements.humans and planet.lua.settlements.humans:hasActiveEffect("fringe_alienfungus")
+	end
+table.insert(cargo_custom.types,cargoCustom)
+
+
+--Roidhunate
+
+cargoCustom=cargomission_class.createNew()
+cargoCustom.id="ardar_settlers"
+cargoCustom.osd_title="Ardar Settlers"
+cargoCustom.misn_title = "Ardar settlers for ${targetWorld} (Space: ${quantity} tonnes)"
+cargoCustom.misn_desc = "Ardar settlers are heading for ${targetWorld} in the ${targetSystem} system, following the recently-announced Ardar settlement program there. They'll need ${quantity} tonnes of space refitted as temporary accommodation."
+cargoCustom.misn_title_urgent = "${urgencyAdj} Ardar settlers for ${targetWorld} (Space: ${quantity} tonnes)"
+cargoCustom.misn_desc_urgent = "Ardar settlers are heading for ${targetWorld} in the ${targetSystem} system, following the recently-announced Ardar settlement program there. They'll need ${quantity} tonnes of space refitted as temporary accommodation. They must reach before the ${deadline} (time left: ${timeRemaining})."
+
+cargoCustom.land_msg={"The settlers exit your ship, enthusiastically looking at their new home, breathing ${targetWorld}'s heady frontier air. Their reactions are almost human, and it reminds you of similar scenes involving Terran settlers - the kind you rarely see any more outside of historical holovids."}
+cargoCustom.land_msg_late={"The settlers exit your ship, enthusiastically looking at their new home, breathing ${targetWorld}'s heady frontier air. Their reactions are almost human, and it reminds you of similar scenes involving Terran settlers - the kind you rarely see any more outside of historical holovids.\n\nThey are so taken with the sights they do not even grumble at your late arrival."}
+cargoCustom.commodities={"Ardar Settlers"}
+cargoCustom.priceFactor=1.5
+cargoCustom.minRushLevel=0
+cargoCustom.maxRushLevel=1
+cargoCustom.minCargoSize=20
+cargoCustom.maxCargoSize=100
+cargoCustom.minDistance=1
+cargoCustom.maxDistance=8
+cargoCustom:addFactionReward(G.ROIDHUNATE)
+cargoCustom.validStartPlanet=function(self,c_planet)
+		local planet=planet_class.load(c_planet)
+		return planet.lua.settlements and planet.lua.settlements.ardars
+	end
+cargoCustom.validEndPlanet=function(self,c_planet)
+		local planet=planet_class.load(c_planet)
+		return planet.lua.settlements and planet.lua.settlements.ardars and planet.lua.settlements.ardars:hasActiveEffect("ardar_settlers")
+	end
+table.insert(cargo_custom.types,cargoCustom)
+
+
+
+
+cargoCustom=cargomission_class.createNew()
+cargoCustom.id="ardar_hunting_weapons"
+cargoCustom.osd_title="Hunting Weapons"
+cargoCustom.misn_title_urgent = "${urgencyAdj} hunting weapons for hunt on ${targetWorld} (Space: ${quantity} tonnes)"
+cargoCustom.misn_desc_urgent = "A party of Ardar nobles have requested the delivery of ${quantity} tonnes of hunting weapons for their hunt on ${targetWorld} in the ${targetSystem} system. It must reach before the ${deadline} (time left: ${timeRemaining})."
+
+cargoCustom.land_msg={"The nobles' servants are waiting when your ship lands and hurriedly collect the delivered weapons. Tomorrow will be a great hunting day!"}
+cargoCustom.land_msg={"The nobles' servants are waiting when your ship lands and hurriedly collect the delivered weapons, protesting at your late arrival. Tomorrow will be a great hunting day!"}
+cargoCustom.commodities={C.NATIVE_WEAPONS}
+cargoCustom.priceFactor=1.5
+cargoCustom.minRushLevel=1
+cargoCustom.maxRushLevel=4
+cargoCustom.minCargoSize=5
+cargoCustom.maxCargoSize=50
+cargoCustom.minDistance=1
+cargoCustom.maxDistance=8
+cargoCustom:addFactionReward(G.ROIDHUNATE)
+cargoCustom.validStartPlanet=function(self,c_planet)
+		local planet=planet_class.load(c_planet)
+		return planet.lua.settlements and planet.lua.settlements.ardars
+	end
+cargoCustom.validEndPlanet=function(self,c_planet)
+		local planet=planet_class.load(c_planet)
+		return planet.lua.settlements and planet.lua.settlements.ardars and planet.lua.settlements.ardars:hasActiveEffect("ardar_greathunt")
+	end
+table.insert(cargo_custom.types,cargoCustom)
+
+
+
+cargoCustom=cargomission_class.createNew()
+cargoCustom.id="ardar_gourmetfood"
+cargoCustom.osd_title="Ardar Gourmet Food"
+cargoCustom.misn_title = "Festival food delivery to ${targetWorld} (${quantity} tonnes)"
+cargoCustom.misn_title_urgent = "${urgencyAdj} festival food transport to ${targetWorld} (${quantity} tonnes)"
+cargoCustom.misn_desc = "An Ardar noble on ${targetWorld} in the ${targetSystem} system has placed an order for ${quantity} tonnes of gourmet Ardar food from the festival."
+cargoCustom.misn_desc_urgent = "An Ardar noble on ${targetWorld} in the ${targetSystem} system has placed an order for ${quantity} tonnes of gourmet Ardar food from the festival. It must reach before his party on the ${deadline} (time left: ${timeRemaining})."
+cargoCustom.land_msg={"The Ardar noble's servants quickly and efficiently unload the crates and ship them to his estate."}
+cargoCustom.land_msg_late={"The Ardar noble's servants quickly and efficiently unload the crates and ship them to his estate. His household head is furious at the delay and pays only ${paymentPartial} of the ${payment} credits agreed."}
+cargoCustom.commodities={C.GOURMET_FOOD}
+cargoCustom.priceFactor=1.5
+cargoCustom.minCargoSize=5
+cargoCustom.maxCargoSize=10
+cargoCustom.minDistance=1
+cargoCustom.maxDistance=5
+cargoCustom:addFactionReward(G.ARDAR_TRADERS)
+cargoCustom.validStartPlanet=function(self,c_planet)
+		local planet=planet_class.load(c_planet)
+		return planet.lua.settlements and planet.lua.settlements.ardar and planet.lua.settlements.ardar:hasActiveEffect("ardar_foodfestival")
+	end
+cargoCustom.validEndPlanet=function(self,c_planet)
+		local planet=planet_class.load(c_planet)
+		return planet.lua.settlements and planet.lua.settlements.ardar and planet.lua.settlements.ardar.services > 0.7
+	end
+table.insert(cargo_custom.types,cargoCustom)
+
 
 
 --Betelgeuse
@@ -430,3 +607,117 @@ cargo_custom.typesById={}
 for k,v in pairs(cargo_custom.types) do
 	cargo_custom.typesById[v.id]=v
 end
+
+
+-- Royal Ixum
+
+cargoCustom=cargomission_class.createNew()
+cargoCustom.id="royalixum_bombingraid"
+cargoCustom.osd_title="Urgent Humanitarian Help"
+cargoCustom.misn_title_urgent = "${urgencyAdj} humanitarian help for ${targetWorld} (Space: ${quantity} tonnes)"
+cargoCustom.misn_desc_urgent = "${quantity} tonnes of urgent humanitarian help is needed on ${targetWorld} in the ${targetSystem} system following the recent bombings by the Holy Flame. It must reach before the ${deadline} (time left: ${timeRemaining})."
+
+cargoCustom.land_msg={"${targetWorld}'s spaceport looks even more damaged than before the recent raids. Royal officers have managed to reopen a small section to handle humanitarian relief, and that's about it. Your cargo is unloaded by hand, the usual equipment being out of order."}
+cargoCustom.land_msg_late={"${targetWorld}'s spaceport looks even more damaged than before the recent raids. Royal officers have managed to reopen a small section to handle humanitarian relief, and that's about it. Your cargo is unloaded by hand, the usual equipment being out of order. Your late arrival reduces your fee."}
+cargoCustom.commodities={C.MEDICINE,C.FOOD}
+cargoCustom.priceFactor=2
+cargoCustom.minRushLevel=2
+cargoCustom.maxRushLevel=4
+cargoCustom.minCargoSize=20
+cargoCustom.maxCargoSize=100
+cargoCustom.minDistance=1
+cargoCustom.maxDistance=8
+cargoCustom:addFactionReward(G.ROYAL_IXUM)
+cargoCustom.validStartPlanet=function(self,c_planet)
+		return c_planet:faction()==faction.get(G.EMPIRE) or c_planet:faction()==faction.get(G.ROYAL_IXUM)
+	end
+cargoCustom.validEndPlanet=function(self,c_planet)
+		local planet=planet_class.load(c_planet)
+		return planet.lua.settlements and planet.lua.settlements.royalixumites and (planet.lua.settlements.royalixumites:hasActiveEffect("royalixum_bombingraid"))
+	end
+table.insert(cargo_custom.types,cargoCustom)
+
+
+
+cargoCustom=cargomission_class.createNew()
+cargoCustom.id="royalixum_militaryhelp"
+cargoCustom.osd_title="Dispatch Terran Military Help"
+cargoCustom.misn_title_urgent = "${urgencyAdj} military help for ${targetWorld} (Space: ${quantity} tonnes)"
+cargoCustom.misn_desc_urgent = "${quantity} tonnes of Terran military help must be shipped to ${targetWorld} in the ${targetSystem} system. It must reach before the ${deadline} (time left: ${timeRemaining})."
+
+cargoCustom.land_msg={"The Royal Ixum military spaceport is a mess; it looks it has suffered damages, only hastily repaired. A gruff-looking sergeant processes your papers while exhausted-looking grunts unload your cargo."}
+cargoCustom.land_msg_late={"The Royal Ixum military spaceport is a mess; it looks it has suffered damages, only hastily repaired. While exhausted-looking grunts unload your cargo, a furious sergeant berates you for the late shipment. You end up getting ${paymentPartial} of the ${payment} credits promised, and an earful as a bonus."}
+cargoCustom.commodities={C.MODERN_ARMAMENT,C.ARMAMENT}
+cargoCustom.priceFactor=2
+cargoCustom.minRushLevel=2
+cargoCustom.maxRushLevel=4
+cargoCustom.minCargoSize=20
+cargoCustom.maxCargoSize=100
+cargoCustom.minDistance=1
+cargoCustom.maxDistance=8
+cargoCustom:addFactionReward(G.ROYAL_IXUM)
+cargoCustom.validStartPlanet=function(self,c_planet)
+		local planet=planet_class.load(c_planet)
+
+		return c_planet:faction()==faction.get(G.ROYAL_IXUM) and planet.lua.settlements and planet.lua.settlements.royalixumites and (planet.lua.settlements.royalixumites:hasActiveEffect("royalixum_imperialhelp"))
+	end
+cargoCustom.validEndPlanet=function(self,c_planet)
+		return c_planet:faction()==faction.get(G.ROYAL_IXUM)
+	end
+table.insert(cargo_custom.types,cargoCustom)
+
+
+
+--Holy Flame
+
+cargoCustom=cargomission_class.createNew()
+cargoCustom.id="holyflame_bombingraid"
+cargoCustom.osd_title="Urgent Reconstruction Help"
+cargoCustom.misn_title_urgent = "${urgencyAdj} reconstruction help for ${targetWorld} (Space: ${quantity} tonnes)"
+cargoCustom.misn_desc_urgent = "${quantity} tonnes of urgent reconstruction help is needed on ${targetWorld} in the ${targetSystem} system following the recent bombings by the Kingdom of Ixum. It must reach before the ${deadline} (time left: ${timeRemaining})."
+cargoCustom.land_msg={"The Holy Flame spaceport is chaos incarnated; nobody seems to know how to process deliveries. You finally locate a stern-looking minor officer that organises the unloading and your payment, though he is clearly unhappy at dealing with an infidel."}
+cargoCustom.land_msg_late={"The Holy Flame spaceport is chaos incarnated; nobody seems to know how to process deliveries. You finally locate a stern-looking minor officer that organises the unloading and your payment, though he is clearly unhappy at dealing with an infidel. When he realises that you are late, he becomes incandescent you are lucky to get even ${paymentPartial} of the ${payment} credits promised."}
+cargoCustom.commodities={C.INDUSTRIAL,C.PRIMITIVE_INDUSTRIAL}
+cargoCustom.priceFactor=2
+cargoCustom.minRushLevel=2
+cargoCustom.maxRushLevel=4
+cargoCustom.minCargoSize=20
+cargoCustom.maxCargoSize=100
+cargoCustom.minDistance=1
+cargoCustom.maxDistance=8
+cargoCustom:addFactionReward(G.HOLY_FLAME)
+cargoCustom.validStartPlanet=function(self,c_planet)
+		return c_planet:faction()==faction.get(G.ROIDHUNATE) or c_planet:faction()==faction.get(G.HOLY_FLAME)
+	end
+cargoCustom.validEndPlanet=function(self,c_planet)
+		local planet=planet_class.load(c_planet)
+		return planet.lua.settlements and planet.lua.settlements.holyflame and (planet.lua.settlements.holyflame:hasActiveEffect("holyflame_bombingraid"))
+	end
+table.insert(cargo_custom.types,cargoCustom)
+
+
+
+cargoCustom=cargomission_class.createNew()
+cargoCustom.id="holyflame_refugees"
+cargoCustom.osd_title="Ixumite Refugees"
+cargoCustom.misn_title = "Ixumite Refugees for ${targetWorld} (Space: ${quantity} tonnes)"
+cargoCustom.misn_desc = "Refugees fleeing persecution need safe travel to ${targetWorld} in the ${targetSystem} system. They'll need ${quantity} tonnes of space refitted as temporary accommodation."
+
+cargoCustom.land_msg={"The exhausted refugees exit your ship, penny-less but safe, ready to start a new life on ${targetWorld} - provided the Holy Flame does not manage to overrun it as well."}
+cargoCustom.commodities={"Ixumite Refugees"}
+cargoCustom.priceFactor=2
+cargoCustom.minRushLevel=0
+cargoCustom.maxRushLevel=0
+cargoCustom.minCargoSize=20
+cargoCustom.maxCargoSize=100
+cargoCustom.minDistance=1
+cargoCustom.maxDistance=8
+cargoCustom:addFactionReward(G.ROYAL_IXUM)
+cargoCustom.validStartPlanet=function(self,c_planet)
+		local planet=planet_class.load(c_planet)
+		return planet.lua.settlements and planet.lua.settlements.holyflame and planet.lua.settlements.holyflame:hasActiveEffect("holyflame_minoritydeparture")
+	end
+cargoCustom.validEndPlanet=function(self,c_planet)
+		return c_planet:faction()==faction.get(G.ROYAL_IXUM)
+	end
+table.insert(cargo_custom.types,cargoCustom)

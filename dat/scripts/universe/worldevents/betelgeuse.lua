@@ -122,7 +122,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	textData.house=nameGenerator.generateNameBetelgeuse()
 
 	local effectId=planet.lua.settlements.betelgeuse:addActiveEffect("Ongoing political lobbying is driving up the price of luxury and other rare goods.",
-		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber(), "betelgeuse_lobbying" )
+		(time.get() + self.duration):tonumber(), "betelgeuse_lobbying" )
 	planet.lua.settlements.betelgeuse:addGoodDemand(C.LUXURY_GOODS,30,3,effectId)
 	planet.lua.settlements.betelgeuse:addGoodDemand(C.GOURMET_FOOD,30,3,effectId)
 end

@@ -109,11 +109,6 @@ function create()
       textData_urgencyAdj=cargoType.cargoPriorityLabels[urgency]
     end
     textData_cargoSizeAdj=cargoType.cargoSizeLabels[cargoSizeTier]
-    
-    print(cargoSizeTier)
-    print(textData_cargoSizeAdj)
-    print(#cargoType.cargoSizeLabels)
-
 
     local factionDescText
 

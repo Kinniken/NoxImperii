@@ -49,6 +49,7 @@ settlement_generator.holyFlameSettlements[#settlement_generator.holyFlameSettlem
 	appliesTo="holyflame",
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.holyflame:addTag("religiousminority")
+		planet.lua.settlements.holyflame.minorityReligion=nameGenerator.generateNameIxum()
 		planet.lua.settlements.holyflame.stability=planet.lua.settlements.holyflame.stability-0.5
 	end,
 	weightValidity=function(planet)
@@ -58,13 +59,13 @@ settlement_generator.holyFlameSettlements[#settlement_generator.holyFlameSettlem
 		return true
 	end,
 	getDesc=function(planet)
-		return "#planetname# was colonised centuries ago by Ixumites of a minority religion, keen to escape the grasp of the expanding Holy Flame. They were never royalists, but have seen with dismay the soft discrimination of the monarchy replaced with outright persecution at the hands of the victorious clergy. They would welcome a liberator with open arms now - even the kings they used to call tyrants."
+		return "#planetname# was colonised centuries ago by Ixumites of the "..planet.lua.settlements.holyflame.minorityReligion.." minority religion, keen to escape the grasp of the expanding Holy Flame. They were never royalists, but have seen with dismay the soft discrimination of the monarchy replaced with outright persecution at the hands of the victorious clergy. They would welcome a liberator with open arms now - even the kings they used to call tyrants."
 	end,
 	weight=5
 }
 
 settlement_generator.holyFlameSettlements[#settlement_generator.holyFlameSettlements+1]={
-	appliesTo="holyflame",
+	appliesTo="feudal",
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.holyflame:addTag("religiousminority")
 		planet.lua.settlements.holyflame:addGoodSupply(C.ARMAMENT,50,1)

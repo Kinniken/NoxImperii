@@ -94,3 +94,26 @@ event:addBarNews(G.INDEPENDENT_WORLDS,"Deadly tensions on ${world}","Confusing r
 
 event:addBarNews(G.EMPIRE,"Deadly tensions on independent world","Confusing reports are streaming in of major clashes between the ${natives} and the settlers on ${world}, with casualties estimate as high as ${nativeCasualties} natives and ${humanCasualties} humans. The incompetent local government is unable to provide an explanation of the event. We debate at noon: should the Empire intervene?",time.create(0,2,0, 0,0,0))
 table.insert(world_events.events,event)
+
+
+event=worldevent_class.createNew()
+event.weightValidity=function(planet)
+	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.humans and planet.lua.settlements.humans.technology<0.8 and planet.lua.nativeFertility>0.8)
+end
+event.weight=20
+event.duration=time.create( 0,1, 0, 0, 0, 0 )
+event.applyOnWorldCustom=function(self,planet,textData)
+
+	local effectId=planet.lua.settlements.humans:addActiveEffect("The fungus attack on crops is greatly reducing supplies.",
+		(time.get() + self.duration):tonumber(),"fringe_alienfungus" )
+	planet.lua.settlements.humans:reduceGoodSupply(C.FOOD,100,5,effectId)
+	planet.lua.settlements.humans:reduceGoodSupply(C.GOURMET_FOOD,20,5,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.FOOD,50,5,effectId)
+end
+event.eventMessage="NEWS ALERT: Crops on ${world} under attack by native fungus, major food penury starting."
+
+event.worldHistoryMessage="A native fungus destroyed crops, causing a near-famine."
+
+event:addBarNews(G.INDEPENDENT_WORLDS,"Alien fungus destroys harvest on ${world}","Crops are failing on ${world} as a previously unknown native fungus invades human plantations. A famine is feared if help is not available soon; reports are ${world}'s government is appealing to the Empire for help, a clear sign of despair for this proudly independent world.")
+event:addBarNews(G.EMPIRE,"Empire called for help as crops on ${world} fail","The independent world of ${world} has appealed to the Empire for help due to large-scale crop failure; a previously-undetected native fungus is suspected. We debate at noon: should the Empire help such careless colons?")
+table.insert(world_events.events,event)

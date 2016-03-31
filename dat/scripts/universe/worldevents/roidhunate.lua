@@ -18,7 +18,7 @@ event.worldHistoryMessage="${casualties} ${natives} casualties reported in a fer
 
 event:addBarNews(G.EMPIRE,"Ardar Atrocities Reported On Frontier World","Reports are coming in of a major wave of repression hitting natives on ${world}, with casualties estimated at ${casualties}. This unfortunate world was recently annexed by the nefarious Roidhunate, and the gallant ${natives} have been fighting hard against the hated invaders. While the Empire is sadly too far to aid them in their just struggle, we wish them all the best against their reptilian foes.",time.create(0,2,0, 0,0,0))
 
-event:addBarNews(G.ROIDHUNATE,"Pacification of ${world} in progress","Recent troubles on ${world} are coming to an end thanks to the prompt and vigorous intervention of the Ardar army. The efforts of suspected Terran agitateurs is believed to be behind the recent events, as the loyalty of the ${natives} to the Roidhunate is beyond doubts.",time.create(0,2,0, 0,0,0))
+event:addBarNews(G.ROIDHUNATE,"Pacification of ${world} in progress","Recent troubles on ${world} are coming to an end thanks to the prompt and vigorous intervention of the Ardar army. The efforts of suspected Terran agitators is believed to be behind the recent events, as the loyalty of the ${natives} to the Roidhunate is beyond doubts.",time.create(0,2,0, 0,0,0))
 table.insert(world_events.events,event)
 
 
@@ -29,12 +29,13 @@ event.weightValidity=function(planet)
 	return (planet.c:faction()==faction.get(G.ROIDHUNATE) and planet.lua.settlements.ardars and planet.c:system():presence(G.BARBARIANS)>0)
 end
 event.weight=5
+event.duration=time.create( 0,2,0, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 	textData.arrivals=gh.prettyLargeNumber(planet.lua.settlements.ardars.population*0.3)
 	planet.lua.settlements.ardars.population=planet.lua.settlements.ardars.population*1.3
 	
 	local effectId=planet.lua.settlements.ardars:addActiveEffect("Demand for industrial goods increase to accommodate new settlers.",
-		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber() )
+		(time.get() + self.duration):tonumber(),"ardar_settlers" )
 	planet.lua.settlements.ardars:addGoodDemand(C.INDUSTRIAL,20,2,effectId)
 	planet.lua.settlements.ardars:addGoodDemand(C.PRIMITIVE_INDUSTRIAL,20,2,effectId)
 	
@@ -43,7 +44,7 @@ event.eventMessage="NEWS ALERT: The Roidhunate launches a massive settlement pro
 
 event.worldHistoryMessage="${arrivals} new Ardar settlers move in as part of new government program."
 
-event:addBarNews(G.ROIDHUNATE,"The Roidhunate strengthens colonization efforts","The Roidhunate is launching a new colonization program aimed at strengthening our hold over ${world}. ${arrivals} settlers are being moved to the planet; demand for industrial goods increases to cope with the arrivals.",time.create(0,2,0, 0,0,0))
+event:addBarNews(G.ROIDHUNATE,"The Roidhunate strengthens colonization efforts","The Roidhunate is launching a new colonization program aimed at strengthening our hold over ${world}. ${arrivals} settlers are being moved to the planet; demand for industrial goods increases to cope with the arrivals.")
 table.insert(world_events.events,event)
 
 
@@ -89,7 +90,7 @@ event.eventMessage="NEWS ALERT: The Ardar research centre on ${world} has develo
 
 event.worldHistoryMessage="Technical innovations drove an armament production boom."
 
-event:addBarNews(G.ROIDHUNATE,"Innovative technology drives armament production on ${world}","The Ardar Navy research centre on ${world} is making breakthrough in modern armament production, boosting production and reducing prices! Every passing day the dominance of the Roidhunate in milutary technology grows more assured.",time.create(0,2,0, 0,0,0))
+event:addBarNews(G.ROIDHUNATE,"Innovative technology drives armament production on ${world}","The Ardar Navy research centre on ${world} is making breakthrough in modern armament production, boosting production and reducing prices! Every passing day the dominance of the Roidhunate in military technology grows more assured.",time.create(0,2,0, 0,0,0))
 table.insert(world_events.events,event)
 
 
@@ -104,7 +105,7 @@ event.duration=time.create( 0,1,0, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.ardars:addActiveEffect("The Great Hunt in progress is driving strong demand for native weapons and exotic food.",
-		(time.get() + self.duration):tonumber() )
+		(time.get() + self.duration):tonumber(),"ardar_greathunt" )
 	planet.lua.settlements.ardars:addGoodDemand(C.NATIVE_WEAPONS,30,5,effectId)
 	
 end
@@ -266,7 +267,7 @@ event.duration=time.create( 0,0,2, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.ardars:addActiveEffect("Ardar Traditional Food Festival features gourmet food and Telloch at promotional prices.",
-		(time.get() + self.duration):tonumber() )
+		(time.get() + self.duration):tonumber(),"ardar_foodfestival" )
 	planet.lua.settlements.ardars:addGoodSupply(C.GOURMET_FOOD,50,0.5,effectId)
 	planet.lua.settlements.ardars:addGoodSupply(C.TELLOCH,30,0.5,effectId)
 	
@@ -278,5 +279,5 @@ event.worldHistoryMessage="A Traditional Food Festival highlighted Ardar food sp
 event:addBarNews(G.ROIDHUNATE,"Virtues of Ardar Traditional Food showcased on ${world}",
 	"A major food festival is starting on ${world}, promoting the virtues of traditional Ardar food. Far from the degenerate \"delicacies\" favoured in the Empire, Ardar food is renowned in the Galaxy for its healthy benefits and vigour-inducing properties! Special prices on offer.")
 event:addBarNews(G.EMPIRE,"Ardar \"delicacies\" on display on ${world}",
-	"In a hilarious development, the Ardar world of ${world} is holding a would-be gourmet food festival. Adventurers on a dare can try such delicacies as whole animals roasted in their own blood, snake-like creatures served raw in thin slices and soups of \"vigour-inducing\" roots of various kind. We'll stick with oysters, steak tartare and swallows' nests - civilized food for a civilized race.")
+	"In a hilarious development, the Ardar world of ${world} is holding a would-be gourmet food festival. Adventurers on a dare can try such delicacies as whole animals roasted in their own blood, snake-like creatures served raw in thin slices and soups of \"vigour-inducing\" roots of various kind. We'll stick with oysters, steak tartar and swallows' nests - civilized food for a civilized race.")
 table.insert(world_events.events,event)

@@ -5249,6 +5249,12 @@ void planet_updateQuantities(Planet* p) {
  *    @return
  */
 void planet_refreshPlanetPriceFactors(Planet* p) {
+
+	const char* sysName=planet_getSystem(p->name);
+
+	if (sysName==NULL)//Planet not part of any system
+		return;
+
 	int nbcom=p->ntradedatas;
 	int i;
 
@@ -5268,10 +5274,6 @@ void planet_refreshPlanetPriceFactors(Planet* p) {
 	int pos;
 	int nstack;
 
-	const char* sysName=planet_getSystem(p->name);
-
-	if (sysName==NULL)//Planet not part of any system
-		return;
 
 	//Start with planet's system
 	sysStack[0]=system_get(sysName);
@@ -5322,11 +5324,11 @@ static void planet_refreshPlanetPriceFactors_handleSystem(Planet* p,float* facto
 
 					//Then adjusted based on how far we are from target world:
 					if (level==0 && p!=sys->planets[i]) {
-						weight*=0.9;//same system but different world
+						weight*=0.8;//same system but different world
 					} else if (level==1) {
-						weight*=0.5;
+						weight*=0.3;
 					} else if (level==2) {
-						weight*=0.25;
+						weight*=0.1;
 					}
 
 					factorTotals[k]+=(weight*sys->planets[i]->tradedatas[j].priceFactor);

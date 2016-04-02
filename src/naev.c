@@ -104,8 +104,8 @@
 #define VERSION_FILE    "VERSION" /**< Version file by default. */
 
 #define NAEV_INIT_DELAY 3000 /**< Minimum amount of time_ms to wait with loading screen */
-
-
+static const int BCK_H = 1024;
+static const int BCK_W = 1280;
 static int quit               = 0; /**< For primary loop */
 static unsigned int time_ms   = 0; /**< used to calculate FPS and movement. */
 static char short_version[64]; /**< Contains version. */
@@ -597,8 +597,10 @@ void loadscreen_load (void)
 void loadscreen_render( double done, const char *msg )
 {
    glColour col;
+   double sw,sh;
    double bx,by, bw,bh;
    double x,y, w,h, rh;
+   double scale;
    SDL_Event event;
 
    /* Clear background. */
@@ -607,22 +609,28 @@ void loadscreen_render( double done, const char *msg )
    /* Draw stars. */
    background_renderStars( 0. );
 
+   sw=SCREEN_W;
+   sh=SCREEN_H;
+
+   scale=1;
+
    /*
     * Dimensions.
     */
    /* Image. */
-   bx = (SCREEN_W-1280)/2.;
-   by = (SCREEN_H-1024)/2.;
+	if (sw < BCK_W) {
+		scale=sw/BCK_W;
+	}
 
-   if (SCREEN_W<1280)
-	   bw=SCREEN_W;
-   else
-	   bw=1280;
+	if (sh/BCK_H < scale) {
+		scale=sh/BCK_H;
+	}
 
-   if (SCREEN_H<1024)
-	   bh=SCREEN_H;
-   else
-	   bh=1024;
+	bw=BCK_W*scale;
+	bh=BCK_H*scale;
+
+	bx = (sw - bw) / 2.;
+	by = (sh - bh) / 2.;
 
    /* Loading bar. */
    w  = gl_screen.w * 0.4;

@@ -65,6 +65,8 @@ static int crew_matchFaction( Crew* crew, int faction );
 static char* getColouredRequiredRating(const Crew* crew,char* buf);
 static char* getColouredRequiredRelations(const Crew* crew,char* buf);
 static char* getColouredPrice(const Crew* crew,char* buf);
+static void getCrewLayers(const Crew* crew, glTexture*** layers, int* nlayers);
+static void getCrewEmptyLayers(glTexture*** layers, int* nlayers);
 
 static lua_State *crew_name_lua = NULL; /** Crew name generators */
 
@@ -569,16 +571,53 @@ static char* crew_findName( char* nameGenerator )
 	return name;
 }
 
+
+static void getCrewLayers(const Crew* crew, glTexture*** layers, int* nlayers) {
+
+	char buf[PATH_MAX];
+
+	*layers=malloc( sizeof(glTexture *) * 3 );
+
+	glTexture **portraitLayers=*layers;
+
+	nsnprintf( buf, PATH_MAX, GFX_PATH"portraits/%s.png", crew->portrait);
+	portraitLayers[0]=gl_newImage(buf,0);
+
+	nsnprintf( buf, PATH_MAX, GFX_PATH"portraits/crewlayers/stars%d.png", crew->level);
+	portraitLayers[1]=gl_newImage(buf,0);
+
+	nsnprintf( buf, PATH_MAX, GFX_PATH"portraits/crewlayers/positions/%s.png", crew->position);
+	portraitLayers[2]=gl_newImage(buf,0);
+
+	*nlayers=3;
+}
+
+static void getCrewEmptyLayers(glTexture*** layers, int* nlayers) {
+	char buf[PATH_MAX];
+
+	nsnprintf(buf, PATH_MAX, "dat/gfx/portraits/empty.png");
+
+	*layers=malloc( sizeof(glTexture *) * 1 );
+
+	glTexture **portraitLayers=*layers;
+
+	portraitLayers[0]=gl_newImage(buf,0);
+
+	*nlayers=1;
+}
+
+
 void crew_generateCrewLists(unsigned int wid) {
 	int w, h;
 	int i, pos, npositions;
-	glTexture** tpositions;
+	glTexture*** tpositions;
+	int* positionsnLayers;
 	char** positions;
 	const HiredCrew* hcrew;
-	char portrait[PATH_MAX];
 	int nActiveCrew = 0;
 	int nReserveCrews;
-	glTexture** tReserveCrews;
+	glTexture*** tReserveCrews;
+	int* reserveCrewsnLayers;
 	char** reserveCrews;
 	const HiredCrew* allCrews;
 	int nAllCrews;
@@ -596,45 +635,48 @@ void crew_generateCrewLists(unsigned int wid) {
 
 	npositions = crewPositions_nstack;
 	positions = malloc(sizeof(char*) * npositions);
-	tpositions = malloc(sizeof(glTexture*) * npositions);
+	tpositions = malloc(sizeof(glTexture**) * npositions);
+	positionsnLayers = malloc(sizeof(int) * npositions);
 
 	for (i = 0; i < npositions; i++) {
 		hcrew = crew_getActiveCrewForPosition(crewPositions_stack[i].name);
 		if (hcrew != NULL) {
 			positions[i] = strdup(hcrew->crew->name);
-			nsnprintf(portrait, PATH_MAX, "dat/gfx/portraits/%s.png",
-					hcrew->crew->portrait);
+
+			getCrewLayers(hcrew->crew,&tpositions[i],&positionsnLayers[i]);
+
 			nActiveCrew++;
 		} else {
 			positions[i] = strdup(crewPositions_stack[i].name);
-			nsnprintf(portrait, PATH_MAX, "dat/gfx/portraits/empty.png");
+
+			getCrewEmptyLayers(&tpositions[i],&positionsnLayers[i]);
 		}
-		tpositions[i] = gl_newImage(portrait, 0);
 	}
 
-	window_addImageArray(wid, 20, -40, w - 320 - 40 - 20, 400, "iarPositions",
-			150, (150. / 200.) * 150., tpositions, positions, npositions,
+	window_addImageLayeredArray(wid, 20, -40, w - 320 - 40 - 20, 400, "iarPositions",
+			150, (150. / 200.) * 150., tpositions, positionsnLayers, positions, npositions,
 			crew_update_active, crew_update_active);
 
 	allCrews = player_getCrews(&nAllCrews);
 	nReserveCrews = nAllCrews - nActiveCrew;
 	reserveCrews = malloc(sizeof(char*) * nReserveCrews);
 	tReserveCrews = malloc(sizeof(glTexture*) * nReserveCrews);
+	reserveCrewsnLayers = malloc(sizeof(int) * nReserveCrews);
 	pos = 0;
 
 	for (i = 0; i < nAllCrews; i++) {
 		if (!allCrews[i].active) {
 			reserveCrews[pos] = strdup(allCrews[i].crew->name);
-			nsnprintf(portrait, PATH_MAX, "dat/gfx/portraits/%s.png",
-					allCrews[i].crew->portrait);
-			tReserveCrews[pos] = gl_newImage(portrait, 0);
+
+			getCrewLayers(allCrews[i].crew,&tReserveCrews[pos],&reserveCrewsnLayers[pos]);
+
 			pos++;
 		}
 	}
 
-	window_addImageArray(wid, 20, -480, w - 320 - 40 - 20,
+	window_addImageLayeredArray(wid, 20, -480, w - 320 - 40 - 20,
 			h - 20 - 20 - 400 - 20 - 20 - 20, "iarReserve", 100, 75,
-			tReserveCrews, reserveCrews, nReserveCrews, crew_update_reserve,
+			tReserveCrews, reserveCrewsnLayers, reserveCrews, nReserveCrews, crew_update_reserve,
 			crew_update_reserve);
 }
 
@@ -668,8 +710,8 @@ void crew_open( unsigned int wid ) {
 	/* Crew zoom pict */
 	window_addRect( wid, -80, -40,
 			200, 150, "rctCrewZoom", &cBlack, 0 );
-	window_addImage( wid, -80, -40,
-			200, 150, "imgCrewZoom", NULL, 1 );
+	window_addImageLayered( wid, -80, -40,
+			200, 150, "imgCrewZoom", NULL, 0, 1 );
 
 	window_addText( wid, -20, -210, 320, 120, 0,
 			"txtLabelCrewZoom", &gl_smallFont, &cDConsole,
@@ -705,7 +747,7 @@ static void crew_setCrewActive( unsigned int wid, char* str ) {
 	int nAllCrews;
 
 	//We're setting a crew to active, so it comes from the reserve list
-	crewName = toolkit_getImageArray( wid, "iarReserve" );
+	crewName = toolkit_getImageLayeredArray( wid, "iarReserve" );
 
 	if (crewName!=NULL) {
 		hcrew = player_getCrew(crewName);
@@ -734,7 +776,7 @@ static void crew_setCrewReserve( unsigned int wid, char* str ) {
 	char *crewName;
 
 	//We're setting a crew to reserve, so it comes from the active list
-	crewName = toolkit_getImageArray( wid, "iarPositions" );
+	crewName = toolkit_getImageLayeredArray( wid, "iarPositions" );
 
 	if (crewName!=NULL) {
 		player_setCrewActiveStatus(crewName,0);
@@ -756,7 +798,7 @@ void crew_update_active( unsigned int wid, char* str ) {
 	(void)str;//to get rid of unused compile warning.
 
 	char *crewName;
-	crewName = toolkit_getImageArray( wid, "iarPositions" );
+	crewName = toolkit_getImageLayeredArray( wid, "iarPositions" );
 
 	if (crewName!=NULL)
 		display_crew(wid,crewName);
@@ -771,7 +813,7 @@ void crew_update_reserve( unsigned int wid, char* str ) {
 	(void)str;//to get rid of unused compile warning.
 
 	char *crewName;
-	crewName = toolkit_getImageArray( wid, "iarReserve" );
+	crewName = toolkit_getImageLayeredArray( wid, "iarReserve" );
 
 	if (crewName!=NULL)
 		display_crew(wid,crewName);
@@ -810,9 +852,12 @@ static void display_crew(unsigned int wid, char* crewName) {
 				"%s",hiredCrew->crew->description,hiredCrew->crew->desc_stats);
 		window_modifyText( wid, "txtCrewZoomDesc", buf );
 
-		nsnprintf( buf, PATH_MAX, GFX_PATH"portraits/%s.png", hiredCrew->crew->portrait);
+		glTexture **portraitLayers;
+		int nlayers;
 
-		window_modifyImage( wid, "imgCrewZoom", gl_newImage(buf,0), 200, 150 );
+		getCrewLayers(hiredCrew->crew, &portraitLayers, &nlayers);
+
+		window_modifyImageLayered( wid, "imgCrewZoom",portraitLayers, nlayers, 200, 150 );
 
 		if (hiredCrew->active) {
 			window_enableButton( wid, "btnCrewReserve");
@@ -826,8 +871,12 @@ static void display_crew(unsigned int wid, char* crewName) {
 		window_modifyText( wid, "txtCrewZoom", "" );
 		window_modifyText( wid, "txtCrewZoomDesc", "" );
 
-		nsnprintf(buf, PATH_MAX, "dat/gfx/portraits/empty.png");
-		window_modifyImage( wid, "imgCrewZoom", gl_newImage(buf,0), 200, 150 );
+		glTexture **portraitLayers;
+		int nlayers;
+
+		getCrewEmptyLayers(&portraitLayers, &nlayers);
+
+		window_modifyImageLayered( wid, "imgCrewZoom", portraitLayers, nlayers, 200, 150 );
 
 		window_disableButtonSoft( wid, "btnCrewActivate");
 		window_disableButtonSoft( wid, "btnCrewReserve");

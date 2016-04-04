@@ -41,20 +41,24 @@ void window_addImageLayered( const unsigned int wid,
    if (wgt == NULL)
       return;
 
+   glTexture **p = malloc(nlayers * sizeof(glTexture *));
+   memcpy(p, layers, nlayers * sizeof(glTexture *));
+
+
    /* generic */
    wgt->type   = WIDGET_IMAGE_LAYERED;
 
    /* specific */
    wgt->render          = img_render;
    wgt->cleanup         = iar_cleanup;
-   wgt->dat.imgl.layers   = layers;
+   wgt->dat.imgl.layers   = p;
    wgt->dat.imgl.nlayers = nlayers;
    wgt->dat.imgl.border  = border;
    wgt->dat.imgl.colour  = cWhite; /* normal colour */
 
    /* position/size */
-   wgt->w = (w > 0) ? w : ((nlayers==0 || layers[0]==NULL) ? 0 : layers[0]->sw);
-   wgt->h = (h > 0) ? h : ((nlayers==0 || layers[0]==NULL) ? 0 : layers[0]->sh);
+   wgt->w = (w > 0) ? w : ((nlayers==0 || p[0]==NULL) ? 0 : p[0]->sw);
+   wgt->h = (h > 0) ? h : ((nlayers==0 || p[0]==NULL) ? 0 : p[0]->sh);
    toolkit_setPos( wdw, wgt, x, y );
 }
 
@@ -163,8 +167,11 @@ void window_modifyImageLayered( const unsigned int wid,
 	   free(wgt->dat.imgl.layers);
    }
 
+   glTexture **p = malloc(nlayers * sizeof(glTexture *));
+   memcpy(p, layers, nlayers * sizeof(glTexture *));
+
    /* Set the layers. */
-   wgt->dat.imgl.layers = layers;
+   wgt->dat.imgl.layers = p;
    wgt->dat.imgl.nlayers = nlayers;
 
    /* Adjust size. */

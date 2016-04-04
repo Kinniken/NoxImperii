@@ -69,6 +69,9 @@ void window_addImageLayeredArray( const unsigned int wid,
                            void (*call) (unsigned int wdw, char* wgtname),
                            void (*rmcall) (unsigned int wdw, char* wgtname) )
 {
+
+   int i;
+
    Window *wdw = window_wget(wid);
    Widget *wgt = window_newWidget(wdw, name);
    if (wgt == NULL)
@@ -82,6 +85,13 @@ void window_addImageLayeredArray( const unsigned int wid,
    wgt->h = (double) h;
    toolkit_setPos( wdw, wgt, x, y );
 
+   glTexture ***p = malloc(nelem * sizeof(glTexture **));
+
+   for (i=0;i<nelem;i++) {
+	   p[i]=malloc(nlayers[i] * sizeof(glTexture *));
+	   memcpy(p[i], layers[i], nlayers[i] * sizeof(glTexture **));
+   }
+
    /* specific */
    wgt->render             = iar_render;
    wgt->renderOverlay      = iar_renderOverlay;
@@ -94,8 +104,8 @@ void window_addImageLayeredArray( const unsigned int wid,
 #endif /* SDL_VERSION_ATLEAST(2,0,0) */
    wgt->mmoveevent         = iar_mmove;
    wgt_setFlag(wgt, WGT_FLAG_ALWAYSMMOVE);
-   wgt->dat.iarl.layers     = layers;
-   wgt->dat.iarl.nlayers     = nlayers;
+   wgt->dat.iarl.layers     = p;
+   wgt->dat.iarl.nlayers    = nlayers;
    wgt->dat.iarl.captions   = caption;
    wgt->dat.iarl.nelements  = nelem;
    wgt->dat.iarl.selected   = 0;

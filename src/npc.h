@@ -21,7 +21,7 @@ unsigned int npc_add_mission( Mission *misn, const char *func, const char *name,
 unsigned int npc_add_event( unsigned int evt, const char *func, const char *name,
       int priority, const char *portrait, const char *desc );
 unsigned int npc_add_crew(Crew* crew, const char *name,
-      int priority, const char *portrait, const char *desc, const char *generatedName );
+	      int priority, glTexture** layers, int nlayers, const char *desc, const char *generatedName );
 
 /*
  * Removing.
@@ -45,9 +45,10 @@ void npc_freeAll (void);
  */
 int npc_getArraySize (void);
 int npc_getNameArray( char **names, int n );
-int npc_getTextureArray( glTexture **tex, int n );
+int npc_getLayersArray( glTexture ***layers, int *nlayers, int n );
 const char *npc_getName( int i );
-glTexture *npc_getTexture( int i );
+glTexture **npc_getLayers( int i );
+int npc_getNLayers( int i);
 const char *npc_getDesc( int i );
 int npc_approach( int i );
 

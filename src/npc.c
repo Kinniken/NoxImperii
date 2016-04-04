@@ -68,7 +68,8 @@ typedef struct NPC_s {
    NPCtype type; /**< Type of the NPC. */
    int priority; /**< NPC priority, 5 is average, 0 is highest, 10 is lowest. */
    char *name; /**< Name of the NPC. */
-   glTexture *portrait; /**< Portrait of the NPC. */
+   glTexture **layers; /**< Layers of the NPC */
+   int nlayers; /** number of layers **/
    char *desc; /**< NPC description. */
    union {
       Mission g; /**< Mission information (for mission giver). */
@@ -127,12 +128,15 @@ static unsigned int npc_add( NPC_t *npc )
 static unsigned int npc_add_giver( Mission *misn )
 {
    NPC_t npc;
+   glTexture** layers=malloc(sizeof(glTexture*));
+   layers[0]= gl_dupTexture(misn->portrait);
 
    /* Set up the data. */
    npc.type       = NPC_TYPE_GIVER;
    npc.name       = strdup(misn->npc);
    npc.priority   = misn->data->avail.priority;
-   npc.portrait   = gl_dupTexture(misn->portrait);
+   npc.layers	  = layers;
+   npc.nlayers	  = 1;
    npc.desc       = strdup(misn->desc);
    npc.u.g        = *misn;
 
@@ -147,12 +151,16 @@ unsigned int npc_add_mission( Mission *misn, const char *func, const char *name,
       int priority, const char *portrait, const char *desc )
 {
    NPC_t npc;
+   glTexture** layers;
+   layers=malloc(sizeof(glTexture*));
+   layers[0]=gl_newImage( portrait, 0 );
 
    /* The data. */
    npc.type       = NPC_TYPE_MISSION;
    npc.name       = strdup( name );
    npc.priority   = priority;
-   npc.portrait   = gl_newImage( portrait, 0 );
+   npc.layers	  = layers;
+   npc.nlayers	  = 1;
    npc.desc       = strdup( desc );
    npc.u.m.misn   = misn;
    npc.u.m.func   = strdup( func );
@@ -168,12 +176,16 @@ unsigned int npc_add_event( unsigned int evt, const char *func, const char *name
       int priority, const char *portrait, const char *desc )
 {
    NPC_t npc;
+   glTexture** layers;
+   layers=malloc(sizeof(glTexture*));
+   layers[0]=gl_newImage( portrait, 0 );
 
    /* The data. */
    npc.type       = NPC_TYPE_EVENT;
    npc.name       = strdup( name );
    npc.priority   = priority;
-   npc.portrait   = gl_newImage( portrait, 0 );
+   npc.layers	  = layers;
+   npc.nlayers	  = 1;
    npc.desc       = strdup( desc );
    npc.u.e.id     = evt;
    npc.u.e.func   = strdup( func );
@@ -185,7 +197,7 @@ unsigned int npc_add_event( unsigned int evt, const char *func, const char *name
  * @brief Adds a crew NPC to the bar.
  */
 unsigned int npc_add_crew(Crew* crew, const char *name,
-      int priority, const char *portrait, const char *desc, const char *generatedName )
+      int priority, glTexture** layers, int nlayers, const char *desc, const char *generatedName )
 {
    NPC_t npc;
 
@@ -193,7 +205,8 @@ unsigned int npc_add_crew(Crew* crew, const char *name,
    npc.type       = NPC_TYPE_CREW;
    npc.name       = strdup( name );
    npc.priority   = priority;
-   npc.portrait   = gl_newImage( portrait, 0 );
+   npc.layers	  = layers;
+   npc.nlayers	  = nlayers;
    npc.desc       = strdup( desc );
    npc.u.c.crew  = crew;
    npc.u.c.generatedName = strdup(generatedName);
@@ -429,9 +442,20 @@ void npc_patchMission( Mission *misn )
  */
 static void npc_free( NPC_t *npc )
 {
+
+	int i;
+
    /* Common free stuff. */
    free(npc->name);
-   gl_freeTexture(npc->portrait);
+
+   for (i=0;i<npc->nlayers;i++) {
+	   if (npc->layers[i] != NULL)
+	   	   gl_freeTexture(npc->layers[i]);
+   }
+   if (npc->layers != NULL)
+   	   free(npc->layers);
+
+
    free(npc->desc);
 
    /* Type-specific free stuff. */
@@ -526,12 +550,13 @@ int npc_getNameArray( char **names, int n )
 
 
 /**
- * @brief Get the npc array textures for an image array.
+ * @brief Get the npc array layers for an image layered array.
  *
- *    @param tex Texture array to fill.
+ *    @param layers Layers array to fill.
+ *    @param nlayers Number of layers for each NPC
  *    @param n Number to fill with.
  */
-int npc_getTextureArray( glTexture **tex, int n )
+int npc_getLayersArray( glTexture ***layers, int *nlayers, int n )
 {
    int i;
 
@@ -539,8 +564,10 @@ int npc_getTextureArray( glTexture **tex, int n )
       return 0;
 
    /* Create the array. */
-   for (i=0; i<MIN(n,array_size(npc_array)); i++)
-      tex[i] = npc_array[i].portrait;
+   for (i=0; i<MIN(n,array_size(npc_array)); i++) {
+	  layers[i] = npc_array[i].layers;
+	  nlayers[i] = npc_array[i].nlayers;
+   }
 
    return i;
 }
@@ -560,15 +587,27 @@ const char *npc_getName( int i )
 
 
 /**
- * @brief Get the texture of an NPC.
+ * @brief Get the layers of an NPC portrait.
  */
-glTexture *npc_getTexture( int i )
+glTexture **npc_getLayers( int i )
 {
    /* Make sure in bounds. */
    if ((i<0) || (i>=array_size(npc_array)))
       return NULL;
 
-   return npc_array[i].portrait;
+   return npc_array[i].layers;
+}
+
+/**
+ * @brief Get the number of layers of an NPC portrait.
+ */
+int npc_getNLayers( int i)
+{
+   /* Make sure in bounds. */
+   if ((i<0) || (i>=array_size(npc_array)))
+      return 0;
+
+   return npc_array[i].nlayers;
 }
 
 

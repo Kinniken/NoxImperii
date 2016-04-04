@@ -106,7 +106,7 @@ static int mission_ncomputer = 0; /**< Number of missions at the computer. */
 /*
  * Bar stuff.
  */
-static glTexture *mission_portrait = NULL; /**< Mission portrait. */
+static glTexture *news_portrait = NULL; /**< Mission portrait. */
 
 /*
  * player stuff
@@ -341,7 +341,8 @@ static void bar_open( unsigned int wid )
  */
 static int bar_genList( unsigned int wid )
 {
-   glTexture **portraits;
+   glTexture ***layers;
+   int *nlayers;
    char **names, *focused;
    int w, h, iw, ih, bw, bh;
    int n, pos;
@@ -359,7 +360,7 @@ static int bar_genList( unsigned int wid )
    /* Destroy widget if already exists. */
    if (widget_exists( wid, "iarMissions" )) {
       /* Store position. */
-      pos = toolkit_getImageArrayPos( wid, "iarMissions" );
+      pos = toolkit_getImageLayeredArrayPos( wid, "iarMissions" );
 
       window_destroyWidget( wid, "iarMissions" );
    }
@@ -370,31 +371,41 @@ static int bar_genList( unsigned int wid )
    npc_sort();
 
    /* Set up missions. */
-   if (mission_portrait == NULL)
-      mission_portrait = gl_newImage( PORTRAIT_GFX_PATH"news.png", 0 );
+   if (news_portrait == NULL)
+      news_portrait = gl_newImage( PORTRAIT_GFX_PATH"news.png", 0 );
    n = npc_getArraySize();
    if (n <= 0) {
       n            = 1;
-      portraits    = malloc(sizeof(glTexture*));
-      portraits[0] = mission_portrait;
+      layers    = malloc(sizeof(glTexture**));
+      nlayers   = malloc(sizeof(int));
+
+      layers[0] = malloc(sizeof(glTexture*));
+      layers[0][0] = news_portrait;
+      nlayers[0]= 1;
+
       names        = malloc(sizeof(char*));
       names[0]     = strdup("News");
    }
    else {
       n            = n+1;
-      portraits    = malloc( sizeof(glTexture*) * n );
-      portraits[0] = mission_portrait;
-      npc_getTextureArray( &portraits[1], n-1 );
+      layers    = malloc(sizeof(glTexture**) * n );
+      nlayers   = malloc(sizeof(int) * n);
+
+      layers[0] = malloc(sizeof(glTexture*));
+      layers[0][0] = news_portrait;
+      nlayers[0]= 1;
+
+      npc_getLayersArray( &layers[1], &nlayers[1], n-1 );
       names        = malloc( sizeof(char*) * n );
       names[0]     = strdup("News");
       npc_getNameArray( &names[1], n-1 );
    }
-   window_addImageArray( wid, 20, -40,
+   window_addImageLayeredArray( wid, 20, -40,
          iw, ih, "iarMissions", 100, 75,
-         portraits, names, n, bar_update, bar_approach );
+         layers, nlayers, names, n, bar_update, bar_approach );
 
    /* Restore position. */
-   toolkit_setImageArrayPos( wid, "iarMissions", pos );
+   toolkit_setImageLayeredArrayPos( wid, "iarMissions", pos );
 
    /* write the outfits stuff */
    bar_update( wid, NULL );
@@ -430,7 +441,7 @@ static void bar_update( unsigned int wid, char* str )
    dh = gl_printHeightRaw( &gl_smallFont, w - iw - 60, land_planet->bar_description );
 
    /* Get array. */
-   pos = toolkit_getImageArrayPos( wid, "iarMissions" );
+   pos = toolkit_getImageLayeredArrayPos( wid, "iarMissions" );
 
    /* See if is news. */
    if (pos==0) { /* News selected. */
@@ -464,16 +475,16 @@ static void bar_update( unsigned int wid, char* str )
 
    /* Create widgets if needed. */
    if (!widget_exists(wid, "imgPortrait"))
-      window_addImage( wid, iw + 40 + (w-iw-60-PORTRAIT_WIDTH)/2,
+      window_addImageLayered( wid, iw + 40 + (w-iw-60-PORTRAIT_WIDTH)/2,
             -(40 + dh + 40 + gl_defFont.h + 20 + PORTRAIT_HEIGHT),
-            0, 0, "imgPortrait", NULL, 1 );
+            0, 0, "imgPortrait", NULL, 0, 1 );
 
    /* Enable button. */
    window_enableButton( wid, "btnApproach" );
 
    /* Set portrait. */
    window_modifyText(  wid, "txtPortrait", npc_getName( pos ) );
-   window_modifyImage( wid, "imgPortrait", npc_getTexture( pos ), 0, 0 );
+   window_modifyImageLayered( wid, "imgPortrait", npc_getLayers( pos ), npc_getNLayers( pos ), 0, 0 );
 
    /* Set mission description. */
    window_modifyText(  wid, "txtMission", npc_getDesc( pos ));
@@ -494,9 +505,9 @@ static void bar_close( unsigned int wid, char *name )
       return;
    }
 
-   if (mission_portrait != NULL)
-      gl_freeTexture(mission_portrait);
-   mission_portrait = NULL;
+   if (news_portrait != NULL)
+      gl_freeTexture(news_portrait);
+   news_portrait = NULL;
 }
 /**
  * @brief Approaches guy in mission computer.
@@ -507,7 +518,7 @@ static void bar_approach( unsigned int wid, char *str )
    int pos, n;
 
    /* Get position. */
-   pos = toolkit_getImageArrayPos( wid, "iarMissions" );
+   pos = toolkit_getImageLayeredArrayPos( wid, "iarMissions" );
 
    /* Should never happen, but in case news is selected */
    if (pos == 0)
@@ -522,7 +533,7 @@ static void bar_approach( unsigned int wid, char *str )
 
    /* Focus the news if the number of NPCs has changed. */
    if (n != npc_getArraySize())
-      toolkit_setImageArrayPos( wid, "iarMissions", 0 );
+      toolkit_setImageLayeredArrayPos( wid, "iarMissions", 0 );
 
    /* Reset markers. */
    mission_sysMark();

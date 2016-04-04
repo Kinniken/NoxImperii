@@ -65,7 +65,7 @@ static int crew_matchFaction( Crew* crew, int faction );
 static char* getColouredRequiredRating(const Crew* crew,char* buf);
 static char* getColouredRequiredRelations(const Crew* crew,char* buf);
 static char* getColouredPrice(const Crew* crew,char* buf);
-static void getCrewLayers(const Crew* crew, glTexture*** layers, int* nlayers);
+static glTexture** getCrewLayers(const Crew* crew, int* nlayers);
 static void getCrewEmptyLayers(glTexture*** layers, int* nlayers);
 
 static lua_State *crew_name_lua = NULL; /** Crew name generators */
@@ -312,11 +312,12 @@ Crew* crew_get( const char* name ) {
 void crew_addToBar(const Planet* landPlanet) {
 	int i;
 	Crew* crew;
-	char portrait[PATH_MAX];
 	char barDesc[MAX_BAR_DESC];
 	char *generatedName;
 	double chance;
 	char bufFaction[PATH_MAX],bufRating[PATH_MAX],buf[PATH_MAX];
+	glTexture **layers;
+	int nlayers;
 
 	for (i=0; i < crews_nstack; i++) {
 
@@ -334,7 +335,7 @@ void crew_addToBar(const Planet* landPlanet) {
 				if (player_getCrew(crew->name)==NULL) {
 					generatedName=crew_findName(crew->nameGenerator);
 
-					nsnprintf( portrait, PATH_MAX, GFX_PATH"portraits/%s.png", crew->portrait );
+
 
 					if (crew->combatRatingNeeded>0) {
 						nsnprintf( bufRating, MAX_BAR_DESC, "\eDCombat Rating Required:\e0 %s\n",
@@ -360,8 +361,10 @@ void crew_addToBar(const Planet* landPlanet) {
 							bufRating,bufFaction,
 							crew->description, crew->desc_stats );
 
+					layers=getCrewLayers(crew,&nlayers);
+
 					npc_add_crew(crew, crew->name,
-							10, portrait, barDesc, generatedName);
+							10, layers, nlayers, barDesc, generatedName);
 				}
 			}
 		}
@@ -572,24 +575,27 @@ static char* crew_findName( char* nameGenerator )
 }
 
 
-static void getCrewLayers(const Crew* crew, glTexture*** layers, int* nlayers) {
+static glTexture** getCrewLayers(const Crew* crew, int* nlayers) {
 
 	char buf[PATH_MAX];
 
-	*layers=malloc( sizeof(glTexture *) * 3 );
-
-	glTexture **portraitLayers=*layers;
+	glTexture** layers=malloc( sizeof(glTexture *) * 4 );
 
 	nsnprintf( buf, PATH_MAX, GFX_PATH"portraits/%s.png", crew->portrait);
-	portraitLayers[0]=gl_newImage(buf,0);
+	layers[0]=gl_newImage(buf,0);
+
+	nsnprintf( buf, PATH_MAX, GFX_PATH"portraits/%s.png", crew->portrait);
+	layers[1]=gl_newImage(buf,0);
 
 	nsnprintf( buf, PATH_MAX, GFX_PATH"portraits/crewlayers/stars%d.png", crew->level);
-	portraitLayers[1]=gl_newImage(buf,0);
+	layers[2]=gl_newImage(buf,0);
 
 	nsnprintf( buf, PATH_MAX, GFX_PATH"portraits/crewlayers/positions/%s.png", crew->position);
-	portraitLayers[2]=gl_newImage(buf,0);
+	layers[3]=gl_newImage(buf,0);
 
-	*nlayers=3;
+	*nlayers=4;
+
+	return layers;
 }
 
 static void getCrewEmptyLayers(glTexture*** layers, int* nlayers) {
@@ -643,7 +649,7 @@ void crew_generateCrewLists(unsigned int wid) {
 		if (hcrew != NULL) {
 			positions[i] = strdup(hcrew->crew->name);
 
-			getCrewLayers(hcrew->crew,&tpositions[i],&positionsnLayers[i]);
+			tpositions[i]=getCrewLayers(hcrew->crew,&positionsnLayers[i]);
 
 			nActiveCrew++;
 		} else {
@@ -668,7 +674,7 @@ void crew_generateCrewLists(unsigned int wid) {
 		if (!allCrews[i].active) {
 			reserveCrews[pos] = strdup(allCrews[i].crew->name);
 
-			getCrewLayers(allCrews[i].crew,&tReserveCrews[pos],&reserveCrewsnLayers[pos]);
+			tReserveCrews[pos]=getCrewLayers(allCrews[i].crew,&reserveCrewsnLayers[pos]);
 
 			pos++;
 		}
@@ -855,7 +861,7 @@ static void display_crew(unsigned int wid, char* crewName) {
 		glTexture **portraitLayers;
 		int nlayers;
 
-		getCrewLayers(hiredCrew->crew, &portraitLayers, &nlayers);
+		portraitLayers=getCrewLayers(hiredCrew->crew, &nlayers);
 
 		window_modifyImageLayered( wid, "imgCrewZoom",portraitLayers, nlayers, 200, 150 );
 

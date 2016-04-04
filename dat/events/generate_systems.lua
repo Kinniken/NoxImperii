@@ -49,7 +49,7 @@ local function createAroundStar(c_sys,nextlevel,level,visited)
 
 
 
-					newsys:createPlanet(p.name,p.x,p.y,p.spacePict,p.exteriorPict,p.factionPresence,p.factionRange,p.faction,p.baseDesc,"","History","bar desc",0,0,p.template.classification,1,"",p.services.fuel,p.services.bar,p.services.missions,p.services.commodity,p.services.outfits,p.services.shipyard,known)
+					newsys:createPlanet(p.name,p.x,p.y,p.spacePict,p.exteriorPict,p.factionPresence,p.factionRange,p.faction,p.baseDesc,"","History"," ",0,0,p.template.classification,1,"",p.services.fuel,p.services.bar,p.services.missions,p.services.commodity,p.services.outfits,p.services.shipyard,known)
 
 					p.c=planet.get(p.name)
 

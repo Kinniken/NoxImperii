@@ -44,7 +44,7 @@ end
 function isSystemValid(system)
    local presences=system.cur():presences()
 
-   return not presences[G.EMPIRE] and not presences[G.ROIDHUNATE] and not presences[G.BETELGEUSE]
+   return not presences[G.EMPIRE] and not presences[G.ROIDHUNATE] and not presences[G.BETELGEUSE] and not presences[G.ROYAL_IXUM] and not presences[G.HOLY_FLAME]
 end
 
 function handlePlanet(surveyedPlanet,successMessage)

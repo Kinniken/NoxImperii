@@ -1,3 +1,5 @@
+include('universe/generate_nameGenerator.lua')
+
 local frenchLastName={"de la Tour","Anjou","Lorraine","Foix","Montfort","Blois","Penthievre","Dreux","Rohan","Bar","d'Albert","d'Escoubleau","Neufville","Bourgogne","Castellane","d'Auvergne","Montbeliard","Metz","Laval","Tremoille","Crequy","Broglie","Montesquiou","Courtenay","d'Harcourt","Croix","Le Tellier","Rochechouart","d'Aumont","Vergy","Saboulin","Gramont","Bissy","Barrau","de La Fayette","Armagnac","Rouge","Quenoy","Ficquelmont","Talleyrand","Saintignon","Montmorency","Savoie","Vaudemont","Nicolay"}
 
 local germanLastName={"Klinckow","Puttkamer","Barnekow","Strantz","Gryf","Wizlawid","Krassow","der Lancken","Schlieffen","Schwerin", "Schoning","Suhm","Maltzahn","Below","Blixen","Borcke", "Buggenhagen","Manteuffel","Corswant","Stralenheim","Dewitz","Preen","Podewils", "Flemming","Platen","Neuenkirchen","Gottberg","Hackewitz","Hennigs","Trampe","Hertzberg","Heyden","Kameke","Kleist","Natzmer","Zepelin","Gostowski","Wakenitz","Usedom","Thun","Thadden"}
@@ -36,51 +38,21 @@ local spanishFemaleFirstName={"Aldonza","Anderquina","Beatriz","Beatrice","Beren
 
 
 function getBetelgianName()
+	local name=nameGenerator.generateNameBetelgeuse().." "..nameGenerator.generateNameBetelgeuse()
 
-	local nameStart={"ve","sal","pra","por","fos","chio","co","mi","mua","cam","do","con"}
-	local nameMiddle={"ra","var","ni","tel","val","pa","po"}
-	local nameEnd={"zia","ria","za","zio","sto","giore","pia","mia","no","zer","zoggio"}
-
-
-	local name=nameStart[ math.random(#nameStart)]..nameMiddle[ math.random(#nameMiddle)]..nameEnd[ math.random(#nameEnd)]
-
-
-	name=name:gsub("^%l", string.upper)
 	return name
 end
 
 function getOtherName()
-
-	local nameStart={"mer","bry","roi","brech","y","da","mo","khrai","qan","ur","tach","tel","chydh","gel","fo","mor"}
-	local nameMiddle={"thio","dhu","na","dwy","thol","rio","ry","dio","ru"}
-	local nameEnd={"thioch","te","dan","dwyr","tholch","rioch","khraich","ryf","diolch","wyr","loch","dhwan","gelch","daich","chan"}
-	local name=""
-
-	if (math.random()>0.5) then
-		name=nameStart[ math.random(#nameStart)]..nameMiddle[ math.random(#nameMiddle)]..nameEnd[ math.random(#nameEnd)]
-	else
-		name=nameStart[ math.random(#nameStart)]..nameEnd[ math.random(#nameEnd)]
-	end
-
-	name=name:gsub("^%l", string.upper)
-	return name
+	return nameGenerator.generateNameOther()
 end
 
 function getArdarName()
+	return nameGenerator.generateNameArdarshir().." "..nameGenerator.generateNameArdarshir()
+end
 
-	local nameStart={"mer","bry","roi","brech","y","da","mo","khrai","qan","ur","tach","tel","chydh","gel","fo","mor"}
-	local nameMiddle={"thio","dhu","na","dwy","thol","rio","ry","dio","ru"}
-	local nameEnd={"thioch","te","dan","dwyr","tholch","rioch","khraich","ryf","diolch","wyr","loch","dhwan","gelch","daich","chan"}
-	local name=""
-
-	if (math.random()>0.5) then
-		name=nameStart[ math.random(#nameStart)]..nameMiddle[ math.random(#nameMiddle)]..nameEnd[ math.random(#nameEnd)]
-	else
-		name=nameStart[ math.random(#nameStart)]..nameEnd[ math.random(#nameEnd)]
-	end
-
-	name=name:gsub("^%l", string.upper)
-	return name
+function getIxumiteName()
+	return nameGenerator.generateNameIxum().." "..nameGenerator.generateNameIxum()
 end
 
 function getHumanFemaleName()
@@ -127,11 +99,4 @@ function generateFirstNameLastName(firstName,lastName)
 
 	return name
 end
-
-
---for i=1,10000 do
-	--print(getHumanMaleName())
-  --print("F: "..getHumanFemaleName())
-  --io.stderr:write(getHumanFemaleName())
---end
 

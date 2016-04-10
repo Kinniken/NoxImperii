@@ -49,3 +49,9 @@ G.BETELGEUSE="Oligarchy of Betelgeuse"
 G.ROYAL_IXUM="Kingdom of Ixum"
 G.HOLY_FLAME="Holy Flame of Ixum"
 G.BARBARIANS="Barbarians"
+
+CW={}
+CW.PILOT="Pilot"
+CW.ENGINEER="Engineer"
+CW.WEAPON="Weapon Officer"
+CW.DEFENCE="Defence Officer"

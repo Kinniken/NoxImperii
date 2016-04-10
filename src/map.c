@@ -229,7 +229,7 @@ void map_open (void)
    /* Presence. */
    window_addText( wid, x, y, 90, 20, 0, "txtSPresence",
          &gl_smallFont, &cDConsole, "Presence:" );
-   window_addText( wid, x + 50, y-gl_smallFont.h-5, rw, 100, 0, "txtPresence",
+   window_addText( wid, x + 50, y-gl_smallFont.h-5, rw, 150, 0, "txtPresence",
          &gl_smallFont, &cBlack, NULL );
    y -= 2 * gl_smallFont.h + 5 + 15;
 

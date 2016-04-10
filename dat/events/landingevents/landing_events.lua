@@ -1,6 +1,7 @@
 
 include('dat/scripts/general_helper.lua')
 include('universe/objects/class_planets.lua')
+include('universe/objects/class_landingevents.lua')
 
 landing_events={}  --shared public interface
 
@@ -8,7 +9,7 @@ include "dat/events/landingevents/native_events.lua"
 include "dat/events/landingevents/lifeforms_events.lua"
 include "dat/events/landingevents/geologic_events.lua"
 
-CREW_ENG="Engineer"
+
 
 --copying the keys to an id value for future reference
 for k,event in pairs(landing_events) do
@@ -48,7 +49,12 @@ function create()
        if (totalWeight>0) then
         local levent=gh.pickWeightedObject(validEvents)
 
-        levent.runEvent(landedPlanet)
+        if levent.run then
+          levent:run(landedPlanet)
+        else
+          levent.runEvent(landedPlanet)
+        end
+        
       end
     end
 
@@ -79,7 +85,7 @@ function landingEventsIsSystemCivilized(sys)
   local presences=sys:presences()
 
   for k,v in pairs(presences) do
-    if k~=G.BARBARIANS and k~=G.NATIVES then
+    if k~=G.BARBARIANS and k~=G.NATIVES and k~=G.PIRATES then
       return true
     end
   end

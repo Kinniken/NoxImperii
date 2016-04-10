@@ -61,12 +61,16 @@ function gh.pickConditionalWeightedObject(table,obj)
   local totalWeight=0
 
   for k,v in pairs(table) do
-    if (not v.weightValidity) then--not filter method, always take
-      totalWeight=totalWeight+v.weight
-    else
-      if (v.weightValidity(obj)) then--filter method, only if valid
+    if (v.weightValidity) then--filter method, only if valid
+      if (v.weightValidity(obj)) then
         totalWeight=totalWeight+v.weight
       end
+    elseif (v.weightValiditySelf) then--filter method, only if valid
+      if (v:weightValiditySelf(obj)) then
+        totalWeight=totalWeight+v.weight
+      end
+    else
+      totalWeight=totalWeight+v.weight
     end
   end
 
@@ -79,14 +83,19 @@ function gh.pickConditionalWeightedObject(table,obj)
   local weightPassed=0
 
   for k,v in pairs(table) do
-    if (not v.weightValidity) then
-       weightPassed=weightPassed+v.weight
-    else
+
+    if (v.weightValidity) then--filter method, only if valid
       if (v.weightValidity(obj)) then
-         weightPassed=weightPassed+v.weight
-       end
+        weightPassed=weightPassed+v.weight
+      end
+    elseif (v.weightValiditySelf) then--filter method, only if valid
+      if (v:weightValiditySelf(obj)) then
+        weightPassed=weightPassed+v.weight
+      end
+    else
+      weightPassed=weightPassed+v.weight
     end
-   
+
     if (targetWeight<=weightPassed) then
       return v
     end
@@ -101,12 +110,17 @@ function gh.filterConditionalObjects(table,obj)
   local valid={}
 
   for k,v in pairs(table) do
-    if (not v.weightValidity) then--not filter method, always take
-      valid[#valid+1]=v
-    else
-      if (v.weightValidity(obj)) then--filter method, only if valid
+
+    if (v.weightValidity) then--filter method, only if valid
+      if (v.weightValidity(obj)) then
         valid[#valid+1]=v
       end
+    elseif (v.weightValiditySelf) then--filter method, only if valid
+      if (v:weightValiditySelf(obj)) then
+        valid[#valid+1]=v
+      end
+    else
+      valid[#valid+1]=v
     end
   end
 

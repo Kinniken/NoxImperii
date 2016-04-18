@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Medium Extended Fuel Pod">
+ <general>
+  <typename>Fuel Expansion</typename>
+  <slot>structure</slot>
+  <size>medium</size>
+  <mass>12</mass>
+  <price>300000</price>
+  <description>This Betelgian-designed fuel pod has almost twice the capacity of standard medium fuel pods.</description>
+  <gfx_store>medium_fuel_pod</gfx_store>
+  <level>4</level>
+  <logo>betelgeuse</logo>
+ </general>
+ <specific type="modification">
+  <fuel>700</fuel>
+ </specific>
+</outfit>

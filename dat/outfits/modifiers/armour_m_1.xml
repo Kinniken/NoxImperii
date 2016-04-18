@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Composite Plating">
+ <general>
+  <typename>Armour Modifier</typename>
+  <slot>structure</slot>
+  <size>medium</size>
+  <mass/>
+  <price>50000</price>
+  <gfx_store>plasteel</gfx_store>
+  <description>Composite plating is the most common approach for armour packs; it's cheap, easy to adjust to various hulls, and reasonably resistant.</description>
+  <level>1</level>
+ </general>
+ <specific type="modification">
+  <armour_mod>4</armour_mod>
+  <mass_mod>4</mass_mod>
+ </specific>
+</outfit>

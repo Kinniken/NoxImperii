@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Naval Fusion Reactor">
+ <general>
+  <typename>Energy Modifier</typename>
+  <slot>utility</slot>
+  <size>large</size>
+  <mass>80</mass>
+  <price>1500000</price>
+  <gfx_store>reactor_iii</gfx_store>
+  <description>While based on the universal Class III design, the largest reactors used by the Roidhunate Navy are superior in almost every way - they have greater power output and weight less. Their main drawback, price aside, are their hefty CPU requirements.</description>
+  <cpu>-30</cpu>
+  <level>4</level>
+  <logo>ardarshir</logo>
+  <license>Ardarshir Auxilliary, Honourable</license>
+ </general>
+ <specific type="modification">
+  <energy>225</energy>
+  <energy_regen>25</energy_regen>
+ </specific>
+</outfit>

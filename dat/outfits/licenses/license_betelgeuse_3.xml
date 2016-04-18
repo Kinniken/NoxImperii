@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Betelgian Merchant License">
+ <general>
+ 	<license>Betelgian Trader License</license>
+  <mass>0</mass>
+  <price>50000</price>
+  <gfx_store>license</gfx_store>
+  <description>This license makes you a licensed Betelgian merchant.</description>
+  <faction_needed>Oligarchy of Betelgeuse</faction_needed>
+  <faction_relation_needed>30</faction_relation_needed>
+  <level>3</level>
+  <logo>betelgeuse</logo>
+ </general>
+ <specific type="license"/>
+</outfit>

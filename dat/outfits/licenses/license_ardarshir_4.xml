@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Ardarshir Auxilliary, Honourable">
+ <general>
+  <mass>0</mass>
+  <price>1000</price>
+  <gfx_store>license</gfx_store>
+  <license>Ardarshir Auxilliary, Class III</license>
+  <description>This license grants you the title of Honourable Auxiliary - a clear step up from a mere mercenary!</description>
+  <faction_needed>Roidhunate of Ardarshir</faction_needed>
+  <faction_relation_needed>50</faction_relation_needed>
+  <level>4</level>
+  <logo>ardarshir</logo>
+ </general>
+ <specific type="license"/>
+</outfit>

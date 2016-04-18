@@ -106,13 +106,13 @@ end
 -- Medium slots
 --]]
 function equip_mediumLow ()
-   return { "Reactor Class I", "Unicorp Scrambler" }
+   return { "Reactor Class I", "Civilian Scrambler" }
 end
 function equip_mediumMed ()
-   return { "Reactor Class II", "Milspec Scrambler" }
+   return { "Reactor Class II", "Civilian Scrambler" }
 end
 function equip_mediumHig ()
-   return { "Reactor Class III", "Milspec Scrambler" }
+   return { "Reactor Class III", "Civilian Scrambler" }
 end
 
 
@@ -120,12 +120,12 @@ end
 -- Low slots
 --]]
 function equip_lowLow ()
-   return { "Battery", "Shield Capacitor", "Plasteel Plating", "Engine Reroute" }
+   return { "Light Battery", "Shield Capacitor", "Composite Plating", "Engine Reroute" }
 end
 function equip_lowMed ()
-   return { "Shield Capacitor II", "Shield Capacitor III", "Plasteel Plating",
-            "Engine Reroute", "Battery II" }
+   return { "Shield Capacitor II", "Shield Capacitor III", "Composite Plating",
+            "Engine Reroute", "Medium Battery" }
 end
 function equip_lowHig ()
-   return { "Shield Capacitor III", "Shield Capacitor IV", "Battery III" }
+   return { "Shield Capacitor III", "Shield Capacitor III", "Large Battery" }
 end

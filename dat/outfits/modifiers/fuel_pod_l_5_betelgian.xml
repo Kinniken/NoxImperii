@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Large Extended Fuel Pod">
+ <general>
+  <typename>Fuel Expansion</typename>
+  <slot>structure</slot>
+  <size>large</size>
+  <mass>25</mass>
+  <price>750000</price>
+  <description>The highest-capacity fuel pods ever designed, they are intended for use in long-distance exploration missions. Access to them is limited to the major Trading Houses, less such a technology leak to rival explorers.</description>
+  <gfx_store>large_fuel_pod</gfx_store>
+  <level>4</level>
+  <logo>betelgeuse</logo>
+  <license>Betelgian Explorer License</license>
+ </general>
+ <specific type="modification">
+  <fuel>1500</fuel>
+ </specific>
+</outfit>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Improved Generic Afterburner">
+ <general>
+  <slot>utility</slot>
+  <size>small</size>
+  <mass>8</mass>
+  <price>40000</price>
+  <description>This improved afterburner model offers better performance.</description>
+  <gfx_store>afterburner</gfx_store>
+  <limit>afterburner</limit>
+  <cpu>-4</cpu>
+  <level>3</level>
+ </general>
+ <specific type="afterburner" group="9">
+  <rumble>0.5</rumble>
+  <sound>afterburner</sound>
+  <sound_off>afb_disengage</sound_off>
+  <thrust>220</thrust>
+  <speed>35</speed>
+  <energy>45</energy>
+  <mass_limit>190</mass_limit>
+  <heatup>15</heatup>
+  <heat_base>350</heat_base>
+  <heat_cap>450</heat_cap>
+ </specific>
+</outfit>

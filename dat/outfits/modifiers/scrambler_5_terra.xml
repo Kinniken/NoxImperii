@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Advanced Terran Scrambler">
+ <general>
+  <slot>utility</slot>
+  <size>medium</size>
+  <mass>5</mass>
+  <price>1100000</price>
+  <description>The Empire's edge in electronics extends to jammers, and this model is the one fitted on modern Imperial Navy ships. Its jamming capacities are  a vital asset for Terra, whether to carry out offensives undetected deep in enemy territory - or more often these days, to allow endangered ships to "perform a strategic withdrawal".</description>
+  <gfx_store>jammer1</gfx_store>
+  <cpu>-10</cpu>
+  <level>5</level>
+  <logo>terra</logo>
+  <license>Reserve Colonel License</license>
+ </general>
+ <specific type="modification">
+  <energy_usage>15</energy_usage>
+  <ew_hide>50</ew_hide>
+ </specific>
+</outfit>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Terran Light Battery">
+ <general>
+  <typename>Power Modifier</typename>
+  <slot>structure</slot>
+  <size>small</size>
+  <mass>6</mass>
+  <price>80000</price>
+  <description>This small Terran-made battery pack holds significantly more power than generic variants.</description>
+  <gfx_store>capacitor-g</gfx_store>
+  <level>2</level>
+  <logo>terra</logo>
+ </general>
+ <specific type="modification">
+  <energy>300</energy>
+ </specific>
+</outfit>

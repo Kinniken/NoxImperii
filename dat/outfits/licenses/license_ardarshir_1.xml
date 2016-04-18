@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Ardarshir Auxilliary, Class I">
+ <general>
+  <mass>0</mass>
+  <price>1000</price>
+  <gfx_store>license</gfx_store>
+  <description>For a small handling fee, this license recognises you as a Class I auxiliary of the Ardar Navy.</description>
+  <faction_needed>Roidhunate of Ardarshir</faction_needed>
+  <faction_relation_needed>10</faction_relation_needed>
+  <level>1</level>
+  <logo>ardarshir</logo>
+ </general>
+ <specific type="license"/>
+</outfit>

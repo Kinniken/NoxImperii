@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Terran Navy Plating">
+ <general>
+  <typename>Armour Modifier</typename>
+  <slot>structure</slot>
+  <size>medium</size>
+  <mass/>
+  <price>500000</price>
+  <gfx_store>plasteel</gfx_store>
+  <description>The Terran Navy has long privileged shields, seeing armour as a rather crude technology. Nevertheless, the Navy's internally-developed composite platings offer good protection for their weight.</description>
+  <level>2</level>
+  <logo>terra</logo>
+  <license>Reserve Sub-Lieutenant License</license>
+ </general>
+ <specific type="modification">
+  <armour_mod>6</armour_mod>
+  <mass_mod>5</mass_mod>
+ </specific>
+</outfit>

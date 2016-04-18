@@ -52,7 +52,7 @@ function equip_genericCivilian( p, shipsize )
    use_turrets=0
 
    -- Defaults
-   medium      = { "Unicorp Scrambler" }
+   medium      = { "Civilian Scrambler" }
    low = {}
 
    weapons = {}
@@ -65,18 +65,18 @@ function equip_genericCivilian( p, shipsize )
    if shipsize == "small" then
       use_forward=rnd.rnd(1,nweapons)
 
-      medium   = { "Unicorp Scrambler" }
+      medium   = { "Civilian Scrambler" }
       if rnd.rnd() > 0.8 then
          use_medium = 1
       end
    else
       use_turrets=rnd.rnd(nweapons)
 
-      medium   = { "Unicorp Scrambler" }
+      medium   = { "Civilian Scrambler" }
       if rnd.rnd() > 0.5 then
          use_medium = 1
       end
-      low      = { "Plasteel Plating" }
+      low      = { "Composite Plating" }
       if rnd.rnd() > 0.5 then
          use_low = 1
       end
@@ -101,7 +101,7 @@ function equip_genericMerchant( p, shipsize )
    local nweapons, nmedium, nlow = p:ship():slots()
 
    -- Defaults
-   medium      = { "Unicorp Scrambler" }
+   medium      = { "Civilian Scrambler" }
    low = {}
 
    weapons     = {}
@@ -123,7 +123,7 @@ function equip_genericMerchant( p, shipsize )
          use_forward = nweapons
       end
 
-      medium   = { "Unicorp Scrambler" }
+      medium   = { "Civilian Scrambler" }
       if rnd.rnd() > 0.8 then
          use_medium = 1
       end
@@ -132,11 +132,11 @@ function equip_genericMerchant( p, shipsize )
 
       use_turrets = nweapons - use_secondary
 
-      medium   = { "Unicorp Scrambler" }
+      medium   = { "Civilian Scrambler" }
       if rnd.rnd() > 0.6 then
          use_medium = 1
       end
-      low    = { "Plasteel Plating" }
+      low    = { "Composite Plating" }
       if rnd.rnd() > 0.6 then
          use_low = 1
       end
@@ -146,11 +146,11 @@ function equip_genericMerchant( p, shipsize )
 
       use_turrets = nweapons - use_secondary
 
-      medium = { "Unicorp Scrambler" }
+      medium = { "Civilian Scrambler" }
       if rnd.rnd() > 0.4 then
          use_medium = 1
       end
-      low    = { "Plasteel Plating" }
+      low    = { "Composite Plating" }
       if rnd.rnd() > 0.6 then
          use_low = 1
       end
@@ -173,7 +173,7 @@ function equip_genericMilitary( p, shipsize )
    local nweapons, nmedium, nlow = p:ship():slots()
 
    -- Defaults
-   medium      = { "Unicorp Scrambler" }
+   medium      = { "Civilian Scrambler" }
    low = {}
    weapons     = {}
 
@@ -190,7 +190,7 @@ function equip_genericMilitary( p, shipsize )
       if class == "Scout" then
          use_forward    = rnd.rnd(1,nweapons)
 
-         medium         = { "Generic Afterburner", "Milspec Scrambler" }
+         medium         = { "Generic Afterburner", "Civilian Scrambler" }
          use_medium     = 2
          low            = { "Solar Panel" }
 

@@ -878,6 +878,8 @@ local function generateCivilizedPlanetServices(planet)
   		generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Betelgeuse")
   	elseif (factionName==G.BARBARIANS) then
   		generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Barbarian")
+  	elseif (factionName==G.INDEPENDENT_WORLDS) then
+  		generateTechnologiesCivilian(planet,bestIndustry,bestTechnology,"Fringe")
   	end
 
   	generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Generic")
@@ -894,6 +896,8 @@ local function generateCivilizedPlanetServices(planet)
   		generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Royal Ixum")
   	elseif (factionName==G.HOLY_FLAME) then
   		generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Holy Flame")
+  	elseif (factionName==G.INDEPENDENT_WORLDS) then
+  		generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Fringe")
   	end
 
 

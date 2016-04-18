@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Improved Turret Refrigeration Cycle">
+ <general>
+  <typename>Weapon Modifier (Turret)</typename>
+  <slot>structure</slot>
+  <size>small</size>
+  <mass>5</mass>
+  <price>190000</price>
+  <description>This Betelgian technology adds an auxiliary coolant reservoir to a ship's turrets, enabling the ship to dissipate heat more quickly, and allowing it to exceed standard firing rates. The side effect of having everything cool faster is minor instabilities that end up affecting both accuracy and damage.</description>
+  <gfx_store>firerate_turret</gfx_store>
+  <cpu>-2</cpu>
+  <level>4</level>
+  <logo>betelgeuse</logo>
+  <license>Betelgian Merchant License</license>
+ </general>
+ <specific type="modification">
+  <tur_heat>-10</tur_heat>
+  <tur_damage>-5</tur_damage>
+ </specific>
+</outfit>

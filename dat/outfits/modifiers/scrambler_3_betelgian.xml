@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Betelgian Scrambler">
+ <general>
+  <slot>utility</slot>
+  <size>small</size>
+  <mass>3</mass>
+  <price>250000</price>
+  <description>This Betelgian scrambler is good at hiding your electronic signature from enemy ships; it works at longer distances only, but is still enough to escape many smaller pirates.</description>
+  <gfx_store>jammer1</gfx_store>
+  <cpu>-3</cpu>
+  <level>3</level>
+  <logo>betelgeuse</logo>
+ </general>
+ <specific type="modification">
+  <energy_usage>12</energy_usage>
+  <ew_hide>20</ew_hide>
+ </specific>
+</outfit>

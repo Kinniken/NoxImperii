@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Combat Droids">
+ <general>
+  <typename>Crew enhancement</typename>
+  <slot>utility</slot>
+  <size>medium</size>
+  <mass>1</mass>
+  <price>20000</price>
+  <description>Basic combat droids such as these are often installed on merchant ships to help repeal pirates. Of course, they are also usable the other way round...</description>
+  <gfx_store>cargo_pod</gfx_store>
+  <level>1</level>
+ </general>
+ <specific type="modification">
+  <crew>5</crew>
+ </specific>
+</outfit>

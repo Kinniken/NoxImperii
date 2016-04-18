@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Ixumite Honorary Hunter">
+ <general>
+  <mass>0</mass>
+  <price>10000</price>
+  <gfx_store>license</gfx_store>
+  <description>This license recognises you as an Ixumite Honorary Hunter.</description>
+  <faction_needed>Kingdom of Ixum</faction_needed>
+  <faction_relation_needed>10</faction_relation_needed>
+  <level>1</level>
+  <logo>royalixum</logo>
+ </general>
+ <specific type="license"/>
+</outfit>

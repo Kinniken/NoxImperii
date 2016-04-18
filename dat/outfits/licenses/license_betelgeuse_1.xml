@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Betelgian Courier License">
+ <general>
+  <mass>0</mass>
+  <price>10000</price>
+  <gfx_store>license</gfx_store>
+  <description>This license makes you a licensed Betelgian courier.</description>
+  <faction_needed>Oligarchy of Betelgeuse</faction_needed>
+  <faction_relation_needed>10</faction_relation_needed>
+  <level>1</level>
+  <logo>betelgeuse</logo>
+ </general>
+ <specific type="license"/>
+</outfit>

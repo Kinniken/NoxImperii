@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Generic Jammer">
+ <general>
+  <slot>utility</slot>
+  <size>small</size>
+  <mass>2</mass>
+  <price>25000</price>
+  <description>Unlike general purpose scrambler systems, jammers are heavy-duty pieces of hardware used for serious electronic warfare in space. A jammer works by actively interfering with nearby ships' sensor systems, rather than modulating the signature of the ship it's installed in. This is much more effective, but it also uses a lot more power. For this reason, jammer systems are inactive until needed, and must be activated manually. Basic models like this are available throughout the Galaxy.</description>
+  <gfx_store>jammer0</gfx_store>
+  <limit>jammer</limit>
+  <cpu>-4</cpu>
+  <level>2</level>
+ </general>
+ <specific type="jammer" group="7">
+  <range>130</range>
+  <power>30</power>
+  <energy>-12</energy>
+ </specific>
+</outfit>

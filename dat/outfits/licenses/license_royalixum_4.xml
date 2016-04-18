@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Ixumite Baron">
+ <general>
+ 	<license>Ixumite Knight</license>
+  <mass>0</mass>
+  <price>100000</price>
+  <gfx_store>license</gfx_store>
+  <description>This license recognises you as an Ixumite Baron.</description>
+  <faction_needed>Kingdom of Ixum</faction_needed>
+  <faction_relation_needed>50</faction_relation_needed>
+  <level>4</level>
+  <logo>royalixum</logo>
+ </general>
+ <specific type="license"/>
+</outfit>

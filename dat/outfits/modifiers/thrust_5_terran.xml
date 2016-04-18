@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Reworked Energy Lines">
+ <general>
+  <typename>Manoeuvrability Modifier</typename>
+  <slot>structure</slot>
+  <size>medium</size>
+  <mass>0</mass>
+  <price>1500000</price>
+  <description>Classic engine reroutes are a crude way of boosting a ship's engine's power supply; this operation, while much costlier, does a much more thorough job, boosting not just thrust but maximum speed. Terran flagships are often equipped with it, giving a them a tactical edge on the battlefield.</description>
+  <gfx_store>reroute</gfx_store>
+  <cpu>-5</cpu>
+  <level>5</level>
+  <logo>terra</logo>
+  <license>Reserve Major License</license>
+ </general>
+ <specific type="modification">
+  <thrust>10</thrust>
+  <thrust_mod>20</thrust_mod>
+  <speed_mod>15</speed_mod>
+  <energy_usage>5</energy_usage>
+ </specific>
+</outfit>

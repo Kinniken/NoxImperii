@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Improved Trajectory Stabilizer">
+ <general>
+  <typename>Manoeuvrability Modifier</typename>
+  <slot>structure</slot>
+  <size>medium</size>
+  <mass>5</mass>
+  <price>1250000</price>
+  <description>This advanced electronic stabiliser monitors a ship's trajectory and automatically optimises it, enabling higher trusts, sharper turns, and even a faster top speed. This impressive technology was developed by the Roidhunate and has no real human equivalent.</description>
+  <gfx_store>stabilizer</gfx_store>
+  <cpu>-10</cpu>
+  <level>5</level>
+  <logo>ardarshir</logo>
+  <license>Ardarshir Ally</license>
+ </general>
+ <specific type="modification">
+  <thrust>10</thrust>
+  <thrust_mod>20</thrust_mod>
+  <speed_mod>15</speed_mod>
+ </specific>
+</outfit>

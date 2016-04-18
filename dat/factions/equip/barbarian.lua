@@ -65,7 +65,7 @@ function equip_empireMilitary( p, shipsize )
    local scramble
 
    -- Defaults
-   medium      = { "Unicorp Scrambler" }
+   medium      = { "Civilian Scrambler" }
    weapons     = {}
    scramble    = false
 
@@ -81,7 +81,7 @@ function equip_empireMilitary( p, shipsize )
       -- Scout
       if class == "Scout" then
          use_forward    = rnd.rnd(1,#nweapon)
-         medium         = { "Generic Afterburner", "Milspec Scrambler" }
+         medium         = { "Generic Afterburner", "Civilian Scrambler" }
          use_medium     = 2
          low            = { "Solar Panel" }
 

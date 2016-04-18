@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Self-Repairing Plating">
+ <general>
+  <typename>Armour Modifier</typename>
+  <slot>structure</slot>
+  <size>medium</size>
+  <mass/>
+  <price>600000</price>
+  <gfx_store>biometal</gfx_store>
+  <description>The Roidhunate has worked to compensate its weaknesses in shield technologies by improving armours beyond what has been achieved by Terran engineers; this self-repairing armour is the most striking result. Integrated between layers of alloys and composites, miniature repair bots can gradually repair damaged areas while the ship is still in space.</description>
+  <level>5</level>
+  <logo>ardarshir</logo>
+  <license>Ardarshir Auxilliary, Honourable</license>
+</general>
+<specific type="modification">
+  <armour_mod>12</armour_mod>
+  <armour_regen>0.5</armour_regen>
+  <mass_mod>10</mass_mod>
+</specific>
+</outfit>

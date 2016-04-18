@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Ardar Large Battery">
+ <general>
+  <typename>Power Modifier</typename>
+  <slot>structure</slot>
+  <size>large</size>
+  <mass>150</mass>
+  <price>600000</price>
+  <description>The Roidhunate has developed massive batteries for use on their battleships, with much greater capacities than standard models. Strong demand from trade companies have seen them released on the open market.</description>
+  <gfx_store>capacitor4-g</gfx_store>
+  <level>4</level>
+  <logo>ardarshir</logo>
+ </general>
+ <specific type="modification">
+  <energy>1200</energy>
+ </specific>
+</outfit>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Reserve Lieutenant License">
+ <general>
+  <license>Reserve Sub-Lieutenant License</license>
+  <mass>0</mass>
+  <price>20000</price>
+  <gfx_store>license</gfx_store>
+  <description>This license makes you a reserve Imperial Lieutenant.</description>
+  <faction_needed>Empire of Terra</faction_needed>
+  <faction_relation_needed>20</faction_relation_needed>
+  <level>2</level>
+  <logo>terra</logo>
+ </general>
+ <specific type="license"/>
+</outfit>

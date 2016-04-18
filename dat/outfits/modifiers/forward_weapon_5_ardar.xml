@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Forward Stabilised Mount">
+ <general>
+  <typename>Weapon Modifier (Forward)</typename>
+  <slot>structure</slot>
+  <size>medium</size>
+  <mass>10</mass>
+  <price>950000</price>
+  <description>Stabilised cannon mounts such as these are an Ardar speciality; by isolating forward weapons from the hull they allow much more precise firing, less heat build-up and even higher firing rates. Unfortunately, they are too big to fit on fighters.</description>
+  <gfx_store>accuracy_forward</gfx_store>
+  <level>5</level>
+  <logo>ardarshir</logo>
+  <license>Ardarshir Auxilliary, Honourable</license>
+ </general>
+ <specific type="modification">
+  <fwd_heat>-15</fwd_heat>
+  <fwd_damage>40</fwd_damage>
+  <fwd_firerate>20</fwd_firerate>
+ </specific>
+</outfit>

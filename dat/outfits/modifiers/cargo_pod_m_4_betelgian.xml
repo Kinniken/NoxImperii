@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Medium Trade Pod">
+ <general>
+  <typename>Cargo Expansion</typename>
+  <slot>structure</slot>
+  <size>medium</size>
+  <mass>8</mass>
+  <price>250000</price>
+  <description>Betelgian Trading Houses are always looking at improving their ships' cargo capacities, and have thus invested important sums in improving the venerable cargo pods so common in the Galaxy. The result is the Trade Pod - slightly heavier than regular cargo pods, but with 50% extra capacity.</description>
+  <gfx_store>cargo_pod</gfx_store>
+  <level>4</level>
+  <logo>betelgeuse</logo>
+ </general>
+ <specific type="modification">
+  <cargo>45</cargo>
+ </specific>
+</outfit>

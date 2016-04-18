@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Ardar Navy Scrambler">
+ <general>
+  <slot>utility</slot>
+  <size>medium</size>
+  <mass>5</mass>
+  <price>650000</price>
+  <description>The model most commonly used on Ardar cruisers, this scrambler is larger than typical civilian models but also much more effective. Its used has proven very effective at enabling surprise attacks, causing much sorrows to the Roidhunate's foes.</description>
+  <gfx_store>jammer1</gfx_store>
+  <cpu>-5</cpu>
+  <level>4</level>
+  <logo>ardarshir</logo>
+  <license>Ardarshir Auxilliary, Class III</license>
+ </general>
+ <specific type="modification">
+  <energy_usage>15</energy_usage>
+  <ew_hide>30</ew_hide>
+ </specific>
+</outfit>

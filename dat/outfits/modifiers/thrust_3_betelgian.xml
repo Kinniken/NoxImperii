@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Betelgian Engine Rework">
+ <general>
+  <typename>Manoeuvrability Modifier</typename>
+  <slot>structure</slot>
+  <size>small</size>
+  <mass>0</mass>
+  <price>150000</price>
+  <description>Always looking to optimise shipping times, Betelgian engineers have a come up with a reworked engine controller that helps gets the maximum speed and acceleration from Betelgian ships - good for trade, good for avoid pirates!</description>
+  <gfx_store>reroute</gfx_store>
+  <cpu>-1</cpu>
+  <level>3</level>
+  <logo>betelgeuse</logo>
+ </general>
+ <specific type="modification">
+  <thrust>4</thrust>
+  <thrust_mod>8</thrust_mod>
+  <speed_mod>5</speed_mod>
+  <energy_usage>2</energy_usage>
+ </specific>
+</outfit>

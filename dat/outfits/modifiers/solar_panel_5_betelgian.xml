@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Concentrated Solar Panels">
+ <general>
+  <typename>Energy Modifier</typename>
+  <slot>structure</slot>
+  <size>large</size>
+  <mass>40</mass>
+  <price>2500000</price>
+  <description>The peak of Betelgian solar panel technology, this set-up uses impossibly thin layers of very light alloy to focus sunlight on optimised solar panels, generating much greater power from limited weight.</description>
+  <gfx_store>solar</gfx_store>
+  <cpu>-10</cpu>
+  <level>5</level>
+  <logo>betelgeuse</logo>
+  <license>Betelgian Merchant Prince License</license>
+ </general>
+ <specific type="modification">
+  <energy_regen>25</energy_regen>
+ </specific>
+</outfit>

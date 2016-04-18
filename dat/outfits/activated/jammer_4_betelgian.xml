@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Betelgian Jammer">
+ <general>
+  <slot>utility</slot>
+  <size>small</size>
+  <mass>3</mass>
+  <price>120000</price>
+  <description>Betelgeuse is not know for its electronics, but it has developed some excellent devices with imported electronics. This is a shinning example: not quite the equal of Terran versions, but better than anything you'd find in the Roidhunate. Betelgian heavy freighters will sometime carry some, less to fight than to confuse the enemy long enough to escape.</description>
+  <gfx_store>jammer1</gfx_store>
+  <limit>jammer</limit>
+  <cpu>-8</cpu>
+  <level>4</level>
+  <logo>betelgeuse</logo>
+  <license>Betelgian Merchant License</license>
+ </general>
+ <specific type="jammer" group="7">
+  <range>200</range>
+  <power>40</power>
+  <energy>-25</energy>
+ </specific>
+</outfit>

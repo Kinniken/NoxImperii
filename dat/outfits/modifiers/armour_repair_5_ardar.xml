@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Armour Repair Droids">
+ <general>
+  <typename>Armour Repair Modifier</typename>
+  <slot>utility</slot>
+  <size>medium</size>
+  <mass>3</mass>
+  <price>430000</price>
+  <gfx_store>droid</gfx_store>
+  <description>These specialised droids are able to repair a ship's armour - in flight. An Ardar speciality, they have few equivalent in the Galaxy, and provide the Roidhunate's fleets with a clear edge in long engagements.</description>
+  <cpu>-4</cpu>
+  <level>5</level>
+  <logo>ardarshir</logo>
+  <license>Ardarshir Auxilliary, Honourable</license>
+ </general>
+ <specific type="modification">
+  <armour_regen>2</armour_regen>
+  <energy_usage>4</energy_usage>
+ </specific>
+</outfit>

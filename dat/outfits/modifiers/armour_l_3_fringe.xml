@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Large Steel Plating">
+ <general>
+  <typename>Armour Modifier</typename>
+  <slot>structure</slot>
+  <size>large</size>
+  <mass/>
+  <price>225000</price>
+  <gfx_store>nanobond</gfx_store>
+  <description>Pure metal armours have been largely abandoned in high-tech societies due to their cost and weight; on fringe worlds, they remain popular for their enduring qualities: simplicity and effectiveness.</description>
+  <level>3</level>
+ </general>
+ <specific type="modification">
+  <armour_mod>25</armour_mod>
+  <mass_mod>16</mass_mod>
+ </specific>
+</outfit>

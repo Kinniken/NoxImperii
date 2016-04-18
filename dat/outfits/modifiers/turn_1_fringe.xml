@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Makeshift Steering Thrusters">
+ <general>
+  <typename>Manoeuvrability Modifier</typename>
+  <slot>structure</slot>
+  <size>small</size>
+  <mass>0</mass>
+  <price>80000</price>
+  <description>These makeshift steering thrusters produced on Fringe worlds give pilots an edge in dogfights, though they require much energy.</description>
+  <gfx_store>thruster</gfx_store>
+ </general>
+ <specific type="modification">
+  <turn>3</turn>
+  <turn_mod>7</turn_mod>
+  <energy_usage>1.5</energy_usage>
+ </specific>
+</outfit>

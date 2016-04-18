@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Large Exploration Battery">
+ <general>
+  <typename>Power Modifier</typename>
+  <slot>structure</slot>
+  <size>large</size>
+  <mass>130</mass>
+  <price>1000000</price>
+  <description>Betelgian exploration fleets have driven a strong need for better battery technology in Betelgian fleets, to the point where it is one of the few areas where Betelgeuse is now a tech leader. This top-of-the-line large battery pack is similar to those equipping Betelgeuse's famous exploration ships.</description>
+  <gfx_store>capacitor4-g</gfx_store>
+  <level>5</level>
+  <logo>betelgeuse</logo>
+ </general>
+ <specific type="modification">
+  <energy>1500</energy>
+ </specific>
+</outfit>

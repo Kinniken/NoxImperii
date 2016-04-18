@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Space Mercenaries">
+ <general>
+  <typename>Crew enhancement</typename>
+  <slot>utility</slot>
+  <size>large</size>
+  <mass>5</mass>
+  <price>100000</price>
+  <description>Droids are rare in fringe worlds, where lower-tech solutions are favoured - for example, keeping mercenaries on board. Fighting off boarders or capturing enemy ships, it's all the same to them.</description>
+  <gfx_store>cargo_pod</gfx_store>
+  <level>3</level>
+ </general>
+ <specific type="modification">
+  <crew>20</crew>
+ </specific>
+</outfit>

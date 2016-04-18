@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Ardar Hellburner">
+ <general>
+  <license>Ardarshir Auxilliary, Class III</license>
+  <slot>utility</slot>
+  <size>small</size>
+  <mass>10</mass>
+  <price>120000</price>
+  <description>Originally based on reverse-engineered Terran Hellburners, this Ardar model improves it significantly - both in thrust and in lessened heat build-up.</description>
+  <gfx_store>afterburner2</gfx_store>
+  <limit>afterburner</limit>
+  <cpu>-6</cpu>
+  <level>5</level>
+  <logo>ardarshir</logo>
+ </general>
+ <specific type="afterburner" group="9">
+  <rumble>1</rumble>
+  <sound>afterburner</sound>
+  <sound_off>afb_disengage</sound_off>
+  <thrust>350</thrust>
+  <speed>50</speed>
+  <energy>70</energy>
+  <mass_limit>250</mass_limit>
+  <heatup>8</heatup>
+  <heat_base>350</heat_base>
+  <heat_cap>650</heat_cap>
+ </specific>
+</outfit>

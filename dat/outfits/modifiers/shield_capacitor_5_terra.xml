@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Terran Navy Shield Capacitor">
+ <general>
+  <typename>Shield Power Modifier</typename>
+  <slot>structure</slot>
+  <size>large</size>
+  <mass>80</mass>
+  <price>900000</price>
+  <description>Shield technology is one of the key sector where the Empire keeps a decisive edge, and these capacitors are the best the Terran Navy has to offer.</description>
+  <gfx_store>capacitor8</gfx_store>
+  <level>5</level>
+  <logo>terra</logo>
+  <license>Reserve Colonel License</license>
+ </general>
+ <specific type="modification">
+  <shield>450</shield>
+ </specific>
+</outfit>

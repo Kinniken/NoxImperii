@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Ardarshir Auxilliary, Class III">
+ <general>
+  <mass>0</mass>
+  <price>1000</price>
+  <gfx_store>license</gfx_store>
+  <license>Ardarshir Auxilliary, Class II</license>
+  <description>For a small handling fee, this license upgrades you to Class II status.</description>
+  <faction_needed>Roidhunate of Ardarshir</faction_needed>
+  <faction_relation_needed>30</faction_relation_needed>
+  <level>3</level>
+  <logo>ardarshir</logo>
+ </general>
+ <specific type="license"/>
+</outfit>

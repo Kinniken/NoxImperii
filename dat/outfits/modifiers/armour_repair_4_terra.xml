@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Armour Repair Equipment">
+ <general>
+  <typename>Armour Repair Modifier</typename>
+  <slot>utility</slot>
+  <size>medium</size>
+  <mass>3</mass>
+  <price>300000</price>
+  <gfx_store>misc04</gfx_store>
+  <description>Though the Terran Navy focuses on shields and not armours, its secret labs have still worked on the eternal problem of how to repair armour in-flight. This specialised tool is their answer: using it, a ship's engineers can repair most armour, at a significant power draw.</description>
+  <cpu>-2</cpu>
+  <level>4</level>
+  <logo>terra</logo>
+  <license>Reserve Colonel License</license>
+ </general>
+ <specific type="modification">
+  <armour_regen>1</armour_regen>
+  <energy_usage>5</energy_usage>
+ </specific>
+</outfit>

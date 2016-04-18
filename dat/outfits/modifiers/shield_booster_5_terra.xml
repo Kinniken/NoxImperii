@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Terran Shield Regenerator">
+ <general>
+  <typename>Shield Energy Modifier</typename>
+  <slot>utility</slot>
+  <size>large</size>
+  <mass>25</mass>
+  <price>350000</price>
+  <description>Very powerful shield regenerators are difficult to build, as the stability of shields goes down as the power input increases. Only the Empire has mastered the technology necessary to build boosters of this size.</description>
+  <gfx_store>shield</gfx_store>
+  <cpu>-12</cpu>
+  <level>5</level>
+  <logo>terra</logo>
+  <license>Reserve Colonel License</license>
+ </general>
+ <specific type="modification">
+  <shield>60</shield>
+  <shield_regen>3</shield_regen>
+  <energy_usage>30</energy_usage>
+ </specific>
+</outfit>

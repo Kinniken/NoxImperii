@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Terran Medium Battery">
+ <general>
+  <typename>Power Modifier</typename>
+  <slot>structure</slot>
+  <size>medium</size>
+  <mass>30</mass>
+  <price>300000</price>
+  <description>Imperial battery technology enables the production of batteries with higher energy densities than commonly found; this model is intended for medium-sized hulls.</description>
+  <gfx_store>capacitor2-g</gfx_store>
+  <level>3</level>
+  <logo>terra</logo>
+ </general>
+ <specific type="modification">
+  <energy>600</energy>
+ </specific>
+</outfit>

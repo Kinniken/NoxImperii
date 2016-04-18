@@ -243,7 +243,9 @@ typedef struct OutfitModificationData_ {
 
    /* Misc. */
    double cargo;     /**< Cargo space modifier. */
+   double crew;		 /** Added crew for boarding */
    double crew_rel;  /**< Relative crew modification. */
+   double boarding_skills_rel;
    double mass_rel;  /**< Relative mass modification. */
    double fuel;      /**< Maximum fuel modifier. */
 
@@ -337,7 +339,17 @@ typedef struct Outfit_ {
    char *desc_short; /**< Short outfit description. */
    int priority;     /**< Sort priority, highest first. */
 
+   int level;     /**< Item level, 1 to 5. Informative only. */
+
+   char *logo; /**< Logo to add to outfit pict (optional) */
+
+   /** optionally, faction with which minimal relations are needed to purchase this **/
+   int factionNeeded;
+   int factionRelationNeeded;
+
    glTexture* gfx_store; /**< Store graphic. */
+   glTexture** gfx_store_layers; /**< Store graphic, with layers */
+   int gfx_store_nlayers; /**< Store graphic, layer number */
 
    unsigned int properties; /**< Properties stored bitwise. */
 

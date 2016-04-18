@@ -2553,7 +2553,7 @@ int player_setCrewActiveStatus(const char* name, int status) {
  *    @param[in] name Name fragment that each outfit must contain.
  *    @return Number of outfits.
  */
-int player_getOutfitsFiltered( Outfit **outfits, glTexture** toutfits,
+int player_getOutfitsFiltered( Outfit **outfits, glTexture*** toutfits, int* ntoutfits,
 		int(*filter)( const Outfit *o ), char *name )
 {
 	int i;
@@ -2568,7 +2568,7 @@ int player_getOutfitsFiltered( Outfit **outfits, glTexture** toutfits,
 	for (i=0; i<player_noutfits; i++)
 		outfits[i] = (Outfit*)player_outfits[i].o;
 
-	return outfits_filter( outfits, toutfits, player_noutfits, filter, name );
+	return outfits_filter( outfits, toutfits, ntoutfits, player_noutfits, filter, name );
 }
 
 

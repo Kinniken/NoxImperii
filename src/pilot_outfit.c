@@ -906,7 +906,7 @@ void pilot_calcStats( Pilot* pilot )
    pilot->energy_regen  = pilot->ship->energy_regen;
    pilot->energy_loss   = 0.; /* Initially no net loss. */
    /* Misc */
-   pilot->boarding_skills = 1; /* modified by crew members only for now (or ship stats, though not used) */
+   pilot->boarding_skills = 1;
    /* Stats. */ 
    s = &pilot->stats;
    *s = pilot->ship->stats_array;
@@ -966,7 +966,9 @@ void pilot_calcStats( Pilot* pilot )
          /* Misc. */
          pilot->cap_cargo     += o->u.mod.cargo;
          pilot->mass_outfit   += o->u.mod.mass_rel * pilot->ship->mass;
+         pilot->crew		  += o->u.mod.crew;
          pilot->crew          += o->u.mod.crew_rel * pilot->ship->crew;
+         pilot->boarding_skills += o->u.mod.boarding_skills_rel * pilot->boarding_skills;
          /*
           * Stats.
           */

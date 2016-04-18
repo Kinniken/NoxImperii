@@ -29,6 +29,7 @@
 #include "toolkit.h"
 #include "dialogue.h"
 #include "map_find.h"
+#include "faction.h"
 
 
 #define  OUTFITS_IAR    "iarOutfits"
@@ -126,7 +127,7 @@ void outfits_open( unsigned int wid )
 
    /* fancy 128x128 image */
    window_addRect( wid, 19 + iw + 20, -50, 128, 129, "rctImage", &cBlack, 0 );
-   window_addImage( wid, 20 + iw + 20, -50-128, 0, 0, "imgOutfit", NULL, 1 );
+   window_addImageLayered( wid, 20 + iw + 20, -50-128, 0, 0, "imgOutfit", NULL, 0, 1 );
 
    /* cust draws the modifier */
    window_addCust( wid, -40-bw, 60+2*bh,
@@ -147,7 +148,8 @@ void outfits_open( unsigned int wid )
          "\n"
          "Price:\n"
          "Money:\n"
-         "License:\n" );
+         "License:\n"
+		 "Faction:\n");
    window_addText( wid, 20 + iw + 20 + 60, -60-128-10,
          250, 160, 0, "txtDDesc", &gl_smallFont, &cBlack, NULL );
    window_addText( wid, 20 + iw + 20, -60-128-10-160,
@@ -183,14 +185,14 @@ void outfits_regenList( unsigned int wid, char *str )
 
    /* Save positions. */
    tab = window_tabWinGetActive( wid, OUTFITS_TAB );
-   toolkit_saveImageArrayData( wid, OUTFITS_IAR, &iar_data[tab] );
+   toolkit_saveImageLayeredArrayData( wid, OUTFITS_IAR, &iar_data[tab] );
    window_destroyWidget( wid, OUTFITS_IAR );
 
    outfits_genList( wid );
 
    /* Restore positions. */
-   toolkit_setImageArrayPos(    wid, OUTFITS_IAR, iar_data[tab].pos );
-   toolkit_setImageArrayOffset( wid, OUTFITS_IAR, iar_data[tab].offset );
+   toolkit_setImageLayeredArrayPos(    wid, OUTFITS_IAR, iar_data[tab].pos );
+   toolkit_setImageLayeredArrayOffset( wid, OUTFITS_IAR, iar_data[tab].offset );
    outfits_update( wid, NULL );
 
    /* Restore focus. */
@@ -239,13 +241,15 @@ static void outfits_genList( unsigned int wid )
    int i, active, owned, len;
    int fx, fy, fw, fh, barw; /* Input filter. */
    Outfit **outfits;
-   char **soutfits, **slottype, **quantity;
-   glTexture **toutfits;
+   char **soutfits, **quantity;
+   //char **slottype;
+   glTexture ***toutfits;
+   int *ntoutfits;
    int noutfits, moutfits;
    int w, h, iw, ih;
-   glColour *bg, blend;
-   const glColour *c;
-   const char *slotname;
+   //glColour *bg, blend;
+   //const glColour *c;
+   //const char *slotname;
    char *filtertext;
 
    /* Get dimensions. */
@@ -289,9 +293,10 @@ static void outfits_genList( unsigned int wid )
 
    moutfits = MAX( 1, noutfits );
    soutfits = malloc( moutfits * sizeof(char*) );
-   toutfits = malloc( moutfits * sizeof(glTexture*) );
+   toutfits = malloc( moutfits * sizeof(glTexture**) );
+   ntoutfits = malloc( moutfits * sizeof(int) );
 
-   noutfits = outfits_filter( outfits, toutfits, noutfits,
+   noutfits = outfits_filter( outfits, toutfits, ntoutfits, noutfits,
          tabfilters[active], filtertext );
 
    if (noutfits <= 0) { /* No outfits */
@@ -302,17 +307,19 @@ static void outfits_genList( unsigned int wid )
    else {
       /* Create the outfit arrays. */
       quantity = malloc(sizeof(char*)*noutfits);
-      bg       = malloc(sizeof(glColour)*noutfits);
-      slottype = malloc(sizeof(char*)*noutfits );
+      //bg       = malloc(sizeof(glColour)*noutfits);
+      //slottype = malloc(sizeof(char*)*noutfits );
       for (i=0; i<noutfits; i++) {
          soutfits[i] = strdup(outfits[i]->name);
 
-         /* Background colour. */
+         /* Background colour. Removed in LN (replaced with layers) */
+         /*
          c = outfit_slotSizeColour( &outfits[i]->slot );
          if (c == NULL)
             c = &cBlack;
          col_blend( &blend, c, &cGrey70, 0.4 );
          bg[i] = blend;
+         */
 
          /* Quantity. */
          owned = player_outfitOwned(outfits[i]);
@@ -325,7 +332,8 @@ static void outfits_genList( unsigned int wid )
             quantity[i] = NULL;
 
 
-         /* Get slot name. */
+         /* Get slot name. Removed in LN (replaced with layers) */
+         /*
          slotname = outfit_slotName(outfits[i]);
          if ((strcmp(slotname,"NA") != 0) && (strcmp(slotname,"NULL") != 0)) {
             slottype[i]    = malloc( 2 );
@@ -334,23 +342,25 @@ static void outfits_genList( unsigned int wid )
          }
          else
             slottype[i] = NULL;
+           */
       }
    }
 
    /* Clean up. */
       free(outfits);
 
-   window_addImageArray( wid, 20, 20,
-         iw, ih - 31, OUTFITS_IAR, 64, 64,
-         toutfits, soutfits, noutfits, outfits_update, outfits_rmouse );
+   window_addImageLayeredArray( wid, 20, 20,
+         iw, ih - 31, OUTFITS_IAR, 96, 96,
+         toutfits, ntoutfits, soutfits, noutfits, outfits_update, outfits_rmouse );
 
    /* write the outfits stuff */
    outfits_update( wid, NULL );
 
    if (noutfits > 0 && (strcmp(soutfits[0], "None") != 0)) {
-      toolkit_setImageArrayQuantity( wid, OUTFITS_IAR, quantity );
-      toolkit_setImageArraySlotType( wid, OUTFITS_IAR, slottype );
-      toolkit_setImageArrayBackground( wid, OUTFITS_IAR, bg );
+      toolkit_setImageLayeredArrayQuantity( wid, OUTFITS_IAR, quantity );
+      //Removed in LN
+      //toolkit_setImageLayeredArraySlotType( wid, OUTFITS_IAR, slottype );
+      //toolkit_setImageLayeredArrayBackground( wid, OUTFITS_IAR, bg );
    }
 }
 
@@ -365,7 +375,7 @@ void outfits_update( unsigned int wid, char* str )
    (void)str;
    char *outfitname;
    Outfit* outfit;
-   char buf[PATH_MAX], buf2[ECON_CRED_STRLEN], buf3[ECON_CRED_STRLEN], buf4[PATH_MAX];
+   char buf[PATH_MAX], buf2[ECON_CRED_STRLEN], buf3[ECON_CRED_STRLEN], buf4[PATH_MAX], buf5[PATH_MAX];
    double th;
    int iw, ih;
    int w, h;
@@ -374,9 +384,9 @@ void outfits_update( unsigned int wid, char* str )
    outfits_getSize( wid, &w, &h, &iw, &ih, NULL, NULL );
 
    /* Get and set parameters. */
-   outfitname = toolkit_getImageArray( wid, OUTFITS_IAR );
+   outfitname = toolkit_getImageLayeredArray( wid, OUTFITS_IAR );
    if (strcmp(outfitname,"None")==0) { /* No outfits */
-      window_modifyImage( wid, "imgOutfit", NULL, 0, 0 );
+      window_modifyImageLayered( wid, "imgOutfit", NULL, 0, 0, 0 );
       window_disableButton( wid, "btnBuyOutfit" );
       window_disableButton( wid, "btnSellOutfit" );
       nsnprintf( buf, PATH_MAX,
@@ -404,7 +414,7 @@ void outfits_update( unsigned int wid, char* str )
    outfit = outfit_get( outfitname );
 
    /* new image */
-   window_modifyImage( wid, "imgOutfit", outfit->gfx_store, 0, 0 );
+   window_modifyImageLayered( wid, "imgOutfit", outfit->gfx_store_layers, outfit->gfx_store_nlayers, 0, 0 );
 
    if (outfit_canBuy(outfitname, land_planet) > 0)
       window_enableButton( wid, "btnBuyOutfit" );
@@ -429,6 +439,13 @@ void outfits_update( unsigned int wid, char* str )
    else
       nsnprintf( buf4, sizeof(buf4), "\er%s\e0", outfit->license );
 
+   if (outfit->factionNeeded == 0)
+	   strncpy( buf5, "None", sizeof(buf5) );
+   else if (faction_getPlayer(outfit->factionNeeded) >= outfit->factionRelationNeeded)
+   	   nsnprintf( buf5, sizeof(buf5), "%s (%i)\e0", faction_longname(outfit->factionNeeded),outfit->factionRelationNeeded);
+   else
+	   nsnprintf( buf5, sizeof(buf5), "\er%s (%i)\e0", faction_longname(outfit->factionNeeded),outfit->factionRelationNeeded);
+
    nsnprintf( buf, PATH_MAX,
          "%d\n"
          "\n"
@@ -438,14 +455,16 @@ void outfits_update( unsigned int wid, char* str )
          "\n"
          "%s credits\n"
          "%s credits\n"
-         "%s\n",
+         "%s\n"
+		 "%s\n",
          player_outfitOwned(outfit),
          outfit_slotName(outfit),
          outfit_slotSize(outfit),
          outfit->mass,
          buf2,
          buf3,
-         buf4 );
+         buf4,
+		 buf5);
    window_modifyText( wid, "txtDDesc", buf );
    window_modifyText( wid, "txtOutfitName", outfit->name );
    window_modifyText( wid, "txtDescShort", outfit->desc_short );
@@ -492,7 +511,7 @@ static void outfits_changeTab( unsigned int wid, char *wgt, int old, int tab )
    int pos;
    double offset;
 
-   toolkit_saveImageArrayData( wid, OUTFITS_IAR, &iar_data[old] );
+   toolkit_saveImageLayeredArrayData( wid, OUTFITS_IAR, &iar_data[old] );
 
    /* Store the currently-saved positions for the new tab. */
    pos    = iar_data[tab].pos;
@@ -507,8 +526,8 @@ static void outfits_changeTab( unsigned int wid, char *wgt, int old, int tab )
    /* Set positions for the new tab. This is necessary because the stored
     * position for the new tab may have exceeded the size of the old tab,
     * resulting in it being clipped. */
-   toolkit_setImageArrayPos(    wid, OUTFITS_IAR, pos );
-   toolkit_setImageArrayOffset( wid, OUTFITS_IAR, offset );
+   toolkit_setImageLayeredArrayPos(    wid, OUTFITS_IAR, pos );
+   toolkit_setImageLayeredArrayOffset( wid, OUTFITS_IAR, offset );
 
    /* Focus the outfit image array. */
    window_setFocus( wid, OUTFITS_IAR );
@@ -519,13 +538,14 @@ static void outfits_changeTab( unsigned int wid, char *wgt, int old, int tab )
  * @brief Applies a filter function and string to a list of outfits.
  *
  *    @param outfits Array of outfits to filter.
- *    @param[out] toutfits Optional array of outfit textures to generate.
+ *    @param[out] toutfits Optional array of arrays of layers of outfit textures to generate.
+ *    @param n Number of layers of each outfits in the array.
  *    @param n Number of outfits in the array.
  *    @param filter Filter function to run on each outfit.
  *    @param name Name fragment that each outfit name must contain.
  *    @return Number of outfits.
  */
-int outfits_filter( Outfit **outfits, glTexture **toutfits, int n,
+int outfits_filter( Outfit **outfits, glTexture ***toutfits, int *ntoutfits, int n,
       int(*filter)( const Outfit *o ), char *name )
 {
    int i, j;
@@ -540,8 +560,10 @@ int outfits_filter( Outfit **outfits, glTexture **toutfits, int n,
 
       /* Shift matches downward. */
       outfits[j] = outfits[i];
-      if (toutfits != NULL)
-         toutfits[j] = outfits[i]->gfx_store;
+      if (toutfits != NULL) {
+         toutfits[j] = outfits[i]->gfx_store_layers;
+         ntoutfits[j] = outfits[i]->gfx_store_nlayers;
+      }
 
       j++;
    }
@@ -620,6 +642,14 @@ int outfit_canBuy( char *name, Planet *planet )
                outfit->license );
       failure = 1;
    }
+   /* needs minimum rep */
+   if (outfit->factionNeeded>0) {
+	   if (faction_getPlayer(outfit->factionNeeded) < outfit->factionRelationNeeded) {
+		   land_errDialogueBuild( "You need relations of at least %i with the %s to buy this outfit.",
+				   outfit->factionRelationNeeded, faction_longname(outfit->factionNeeded) );
+		   failure = 1;
+	   }
+   }
 
    return !failure;
 }
@@ -648,7 +678,7 @@ static void outfits_buy( unsigned int wid, char* str )
    Outfit* outfit;
    int q;
 
-   outfitname = toolkit_getImageArray( wid, OUTFITS_IAR );
+   outfitname = toolkit_getImageLayeredArray( wid, OUTFITS_IAR );
    if (strcmp(outfitname, "None") == 0)
       return;
 
@@ -714,7 +744,7 @@ static void outfits_sell( unsigned int wid, char* str )
    Outfit* outfit;
    int q;
 
-   outfitname  = toolkit_getImageArray( wid, OUTFITS_IAR );
+   outfitname  = toolkit_getImageLayeredArray( wid, OUTFITS_IAR );
    if (strcmp(outfitname, "None") == 0)
       return;
 

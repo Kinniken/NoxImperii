@@ -208,10 +208,16 @@ int outfit_compareTech( const void *outfit1, const void *outfit2 )
    }
 
    /* Compare slot sizes. */
-   if (o1->slot.size < o2->slot.size)
+   if (o1->slot.size > o2->slot.size)
       return +1;
-   else if (o1->slot.size > o2->slot.size)
+   else if (o1->slot.size < o2->slot.size)
       return -1;
+
+   /* Compare levels. */
+	 if (o1->level > o2->level)
+		return +1;
+	 else if (o1->level < o2->level)
+		return -1;
 
    /* Compare sort priority. */
    if (o1->priority < o2->priority)
@@ -1560,6 +1566,8 @@ static void outfit_parseSMod( Outfit* temp, const xmlNodePtr parent )
       /* misc */
       xmlr_float(node,"cargo",temp->u.mod.cargo);
       xmlr_float(node,"crew_rel", temp->u.mod.crew_rel);
+      xmlr_float(node,"crew", temp->u.mod.crew);
+      xmlr_float(node,"boarding_skills", temp->u.mod.boarding_skills_rel);
       xmlr_float(node,"mass_rel",temp->u.mod.mass_rel);
       /* Stats. */
       ll = ss_listFromXML( node );
@@ -1604,6 +1612,8 @@ if ((x) != 0.) \
    DESC_ADD0( temp->u.mod.absorb, "Absorption" );
    DESC_ADD0( temp->u.mod.cargo, "Cargo" );
    DESC_ADD0( temp->u.mod.crew_rel, "%% Crew" );
+   DESC_ADD0( temp->u.mod.crew, "Crew" );
+   DESC_ADD0( temp->u.mod.boarding_skills_rel, "%% Boarding Efficiency" );
    DESC_ADD0( temp->u.mod.mass_rel, "%% Mass" );
 #undef DESC_ADD1
 #undef DESC_ADD0
@@ -1621,6 +1631,7 @@ if ((x) != 0.) \
    temp->u.mod.energy_rel /= 100.;
    temp->u.mod.mass_rel   /= 100.;
    temp->u.mod.crew_rel   /= 100.;
+   temp->u.mod.boarding_skills_rel /= 100.;
 }
 
 
@@ -2103,6 +2114,8 @@ static int outfit_parse( Outfit* temp, const char* file )
             xmlr_strd(cur,"description",temp->description);
             xmlr_strd(cur,"typename",temp->typename);
             xmlr_int(cur,"priority",temp->priority);
+            xmlr_int(cur,"level",temp->level);
+            xmlr_strd(cur,"logo",temp->logo);
             if (xml_isNode(cur,"gfx_store")) {
                temp->gfx_store = xml_parseTexture( cur,
                      OUTFIT_GFX_PATH"store/%s.png", 1, 1, OPENGL_TEX_MIPMAPS );
@@ -2131,7 +2144,16 @@ static int outfit_parse( Outfit* temp, const char* file )
             else if (xml_isNode(cur,"size")) {
                temp->slot.size = outfit_toSlotSize( xml_get(cur) );
                continue;
-            }
+            } else if (xml_isNode(cur,"faction_needed")) {
+				temp->factionNeeded=faction_get( xml_get(cur) );
+
+				if (temp->factionNeeded==0) {
+					WARN("Outfit '%s' has unknown needed faction '%s'.", temp->name, xml_get(cur));
+				}
+				continue;
+			}
+			xmlr_int(cur, "faction_relation_needed", temp->factionRelationNeeded);
+
             WARN("Outfit '%s' has unknown general node '%s'",temp->name, cur->name);
          } while (xml_nextNode(cur));
          continue;
@@ -2217,6 +2239,64 @@ if (o) WARN("Outfit '%s' missing/invalid '"s"' element", temp->name) /**< Define
 #undef MELEMENT
 
    xmlFreeDoc(doc);
+
+   if (temp->gfx_store) {
+
+	   int nlayers=1;
+
+	   if (temp->slot.type != OUTFIT_SLOT_NA) {
+		   nlayers+=2;
+	   }
+
+	   if (temp->level > 0) {
+		   nlayers++;
+	   }
+
+	   if (temp->logo) {
+		   nlayers++;
+	   }
+
+	   int layerpos=0;
+
+	   temp->gfx_store_layers=malloc(sizeof(glTexture*)*nlayers);
+	   temp->gfx_store_layers[layerpos]=temp->gfx_store;
+	   layerpos++;
+	   if (temp->slot.type != OUTFIT_SLOT_NA) {
+		   if (temp->slot.type == OUTFIT_SLOT_UTILITY) {
+			   temp->gfx_store_layers[layerpos]=gl_newImage( OUTFIT_GFX_PATH"store/layers/slot_utility.png", OPENGL_TEX_MIPMAPS );
+		   } else if (temp->slot.type == OUTFIT_SLOT_STRUCTURE) {
+			   temp->gfx_store_layers[layerpos]=gl_newImage( OUTFIT_GFX_PATH"store/layers/slot_structure.png", OPENGL_TEX_MIPMAPS );
+		   } else if (temp->slot.type == OUTFIT_SLOT_WEAPON) {
+			   temp->gfx_store_layers[layerpos]=gl_newImage( OUTFIT_GFX_PATH"store/layers/slot_weapon.png", OPENGL_TEX_MIPMAPS );
+		   }
+
+		   layerpos++;
+
+		   if (temp->slot.size == OUTFIT_SLOT_SIZE_HEAVY)
+			   temp->gfx_store_layers[layerpos]=gl_newImage( OUTFIT_GFX_PATH"store/layers/slot_heavy.png", OPENGL_TEX_MIPMAPS );
+		  else if (temp->slot.size == OUTFIT_SLOT_SIZE_MEDIUM)
+			  temp->gfx_store_layers[layerpos]=gl_newImage( OUTFIT_GFX_PATH"store/layers/slot_medium.png", OPENGL_TEX_MIPMAPS );
+		  else if (temp->slot.size == OUTFIT_SLOT_SIZE_LIGHT)
+			  temp->gfx_store_layers[layerpos]=gl_newImage( OUTFIT_GFX_PATH"store/layers/slot_light.png", OPENGL_TEX_MIPMAPS );
+
+		   layerpos++;
+	   }
+
+	   if (temp->level > 0) {
+		   nsnprintf( buf, bufsize, OUTFIT_GFX_PATH"store/layers/level_%d.png", temp->level);
+		   temp->gfx_store_layers[layerpos]=gl_newImage( buf, OPENGL_TEX_MIPMAPS );
+		   layerpos++;
+	   }
+
+	   if (temp->logo) {
+		   nsnprintf( buf, bufsize, OUTFIT_GFX_PATH"store/layers/logo_%s.png", temp->logo);
+		   temp->gfx_store_layers[layerpos]=gl_newImage( buf, OPENGL_TEX_MIPMAPS );
+		   layerpos++;
+	   }
+
+	   temp->gfx_store_nlayers=nlayers;
+   }
+
    free(buf);
 
    return 0;
@@ -2473,6 +2553,9 @@ void outfit_free (void)
          free( o->u.map );
       }
 
+      if (o->gfx_store_layers)
+          	  free(o->gfx_store_layers);
+
       /* strings */
       free(o->typename);
       free(o->description);
@@ -2482,6 +2565,8 @@ void outfit_free (void)
       free(o->name);
       if (o->gfx_store)
          gl_freeTexture(o->gfx_store);
+      if (o->logo)
+         free(o->logo);
    }
 
    array_free(outfit_stack);

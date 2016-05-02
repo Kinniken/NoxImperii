@@ -190,11 +190,17 @@ int outfit_compareTech( const void *outfit1, const void *outfit2 )
    else if (o1->slot.type > o2->slot.type)
       return -1;
 
+   /* Compare special slot type. */
+      if (o1->slot.spid < o2->slot.spid)
+         return +1;
+      else if (o1->slot.spid > o2->slot.spid)
+         return -1;
+
    /* Compare intrinsic types. */
-   if (o1->type < o2->type)
-      return -1;
-   else if (o1->type > o2->type)
-      return +1;
+   //if (o1->type > o2->type)
+   //   return -1;
+   //else if (o1->type < o2->type)
+   //   return +1;
 
    /* Compare named types. */
    if ((o1->typename == NULL) && (o2->typename != NULL))
@@ -1023,6 +1029,10 @@ static int outfit_parseDamage( Damage *dmg, xmlNodePtr node )
       }
       WARN("Damage has unknown node '%s'", cur->name);
    } while (xml_nextNode(cur));
+
+   if (dmg->penetration>=100) {
+	   WARN("Damage has penetration >100 : '%f'", dmg->penetration);
+   }
 
    /* Normalize. */
    dmg->penetration /= 100.;
@@ -2236,6 +2246,7 @@ if (o) WARN("Outfit '%s' missing/invalid '"s"' element", temp->name) /**< Define
    MELEMENT(temp->type==0,"type");
    /*MELEMENT(temp->price==0,"price");*/
    MELEMENT(temp->description==NULL,"description");
+   MELEMENT(temp->level==0,"level");
 #undef MELEMENT
 
    xmlFreeDoc(doc);
@@ -2262,7 +2273,10 @@ if (o) WARN("Outfit '%s' missing/invalid '"s"' element", temp->name) /**< Define
 	   temp->gfx_store_layers[layerpos]=temp->gfx_store;
 	   layerpos++;
 	   if (temp->slot.type != OUTFIT_SLOT_NA) {
-		   if (temp->slot.type == OUTFIT_SLOT_UTILITY) {
+		   if (temp->slot.spid>0) {
+			   nsnprintf( buf, bufsize, OUTFIT_GFX_PATH"store/layers/slot_special_%s.png",  sp_display(temp->slot.spid));
+			   temp->gfx_store_layers[layerpos]=gl_newImage( buf, OPENGL_TEX_MIPMAPS );
+		   } else if (temp->slot.type == OUTFIT_SLOT_UTILITY) {
 			   temp->gfx_store_layers[layerpos]=gl_newImage( OUTFIT_GFX_PATH"store/layers/slot_utility.png", OPENGL_TEX_MIPMAPS );
 		   } else if (temp->slot.type == OUTFIT_SLOT_STRUCTURE) {
 			   temp->gfx_store_layers[layerpos]=gl_newImage( OUTFIT_GFX_PATH"store/layers/slot_structure.png", OPENGL_TEX_MIPMAPS );

@@ -912,6 +912,8 @@ void pilot_calcStats( Pilot* pilot )
    *s = pilot->ship->stats_array;
    memset( &amount, 0, sizeof(ShipStats) );
 
+   s->engine_limit = pilot->ship->engine_limit;
+
    /*
     * Now add outfit changes
     */

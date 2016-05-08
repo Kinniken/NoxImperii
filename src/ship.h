@@ -96,6 +96,7 @@ typedef struct Ship_ {
    double thrust;    /**< Ship's thrust in "pixel/sec^2" (not multiplied by mass) */
    double turn;      /**< Ship's turn in rad/s */
    double speed;     /**< Ship's max speed in "pixel/sec" */
+   double engine_limit; /** maximum mass engine can carry without issues **/
 
    /* characteristics */
    int crew;         /**< Crew members. */

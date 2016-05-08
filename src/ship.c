@@ -753,6 +753,7 @@ static int ship_parse( Ship *temp, xmlNodePtr parent )
             xmlr_float(cur,"thrust",temp->thrust);
             xmlr_float(cur,"turn",temp->turn);
             xmlr_float(cur,"speed",temp->speed);
+            xmlr_float(cur,"engine_limit",temp->engine_limit);
             /* All the xmlr_ stuff have continue cases. */
             WARN("Ship '%s' has unknown movement node '%s'.", temp->name, cur->name);
          } while (xml_nextNode(cur));

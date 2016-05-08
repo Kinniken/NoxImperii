@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Superior Mass Driver">
+ <general>
+  <slot>weapon</slot>
+  <size>large</size>
+  
+  <mass>30</mass>
+  <price>100000</price>
+  <description>The largest model in common use on the Fringes, it fires massive slugs causing great damages, though suffers from the same drawbacks as smaller models.</description>
+  <gfx_store>gatling</gfx_store>
+  <cpu>-7</cpu>
+  <level>3</level>
+ </general>
+ <specific type="bolt">
+  <gfx>autocannon</gfx>
+  <sound>autocannon</sound>
+  <sound_hit>medexp0</sound_hit>
+  <spfx_shield>ExpS</spfx_shield>
+  <spfx_armour>ExpS</spfx_armour>
+  <delay>1.4</delay>
+  <speed>575</speed>
+  <range blowup="armour">1800</range>
+  <energy>70</energy>
+  <heatup>80</heatup>
+  <track>1.4</track>
+  <swivel>8</swivel>
+  <damage>
+   <type>impact</type>
+   <penetrate>55</penetrate>
+   <physical>70</physical>
+   <disable>4</disable>
+  </damage>
+ </specific>
+</outfit>

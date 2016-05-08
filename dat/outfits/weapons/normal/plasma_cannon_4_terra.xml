@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Plasma Cannon MK2">
+ <general>
+  <slot>weapon</slot>
+  <size>medium</size>  
+  <mass>28</mass>
+  <price>75000</price>
+  <description>Though plasma cannons are based on the same technology than plasma blasters, they are optimised in very different ways - larger and bulkier, they eject plasma farther and faster, at the cost of longer reload times. The Imperial Navy tends to limit them to larger ships, fighting from further away.</description>
+  <gfx_store>plasma2</gfx_store>
+  <cpu>-35</cpu>
+  <level>4</level>
+  <logo>terra</logo>
+  <license>Reserve Captain License</license>
+ </general>
+ <specific type="bolt">
+  <gfx>plasma2</gfx>
+  <sound>plasma</sound>
+  <spfx_shield>ShiS</spfx_shield>
+  <spfx_armour>PlaS2</spfx_armour>
+  <delay>1.2</delay>
+  <speed>650</speed>
+  <range>1025</range>
+  <falloff>225</falloff>
+  <gfx_end>plasma2-end</gfx_end>
+  <energy>35</energy>
+  <heatup>50</heatup>
+  <track>1.5</track>
+  <swivel>11</swivel>
+  <damage>
+   <type>normal</type>
+   <penetrate>60</penetrate>
+   <physical>75</physical>
+   <disable>6</disable>
+  </damage>
+ </specific>
+</outfit>

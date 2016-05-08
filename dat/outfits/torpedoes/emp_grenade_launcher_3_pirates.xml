@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="EMP Grenade Launcher">
+ <general>
+  <slot>weapon</slot>
+  <size>medium</size>
+  <mass>15</mass>
+  <price>31000</price>
+  <gfx_store>empgrenadelauncher</gfx_store>
+  <description>This launcher can fire EMP grenades in any direction using a unique internal guidance system, a system much loved by pirates throughout the Galaxy.</description>
+  <cpu>-8</cpu>
+  <level>3</level>
+  <logo>pirates</logo>
+ </general>
+ <specific type="turret launcher" secondary="1">
+  <ammo>EMP Grenade</ammo>
+  <delay>2</delay>
+  <amount>18</amount>
+ </specific>
+</outfit>

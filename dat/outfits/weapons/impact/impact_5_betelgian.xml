@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Heavy Railgun">
+ <general>
+  <slot>weapon</slot>
+  <size>large</size>
+  
+  <mass>30</mass>
+  <price>400000</price>
+  <description>Railguns are cannons that uses heavy magnetic pulses to accelerate pieces of debris to extremely high velocities. Lighter and with faster reload than mass drivers, they are particularly good against armour. Betelgeuse is known for them: they require less high-end technology than laser or ion guns, and they are a good match with the armour-heavy barbarian ships often faced by Betelgian exploration fleets.</description>
+  <gfx_store>railgun</gfx_store>
+  <cpu>-25</cpu>
+  <level>5</level>
+  <logo>betelgeuse</logo>
+  <license>Betelgian Explorer License</license>
+ </general>
+ <specific type="bolt">
+  <gfx>massL</gfx>
+  <sound>mass</sound>
+  <sound_hit>medexp0</sound_hit>
+  <spfx_shield>ShiM</spfx_shield>
+  <spfx_armour>ExpL</spfx_armour>
+  <delay>1</delay>
+  <speed>700</speed>
+  <range>2200</range>
+  <falloff>1600</falloff>
+  <gfx_end>massL-end</gfx_end>
+  <energy>90</energy>
+  <heatup>100</heatup>
+  <track>1</track>
+  <swivel>15</swivel>
+  <damage>
+   <type>impact</type>
+   <penetrate>80</penetrate>
+   <physical>95</physical>
+   <disable>10</disable>
+  </damage>
+ </specific>
+</outfit>

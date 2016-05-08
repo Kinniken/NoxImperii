@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Turreted Railgun">
+ <general>
+  <slot prop="turret">weapon</slot>
+  <size>small</size>  
+  <mass>12</mass>
+  <price>210000</price>
+  <description>Railguns are cannons that uses heavy magnetic pulses to accelerate pieces of debris to extremely high velocities. Lighter and with faster reload than mass drivers, they are particularly good against armour. Betelgeuse is known for them: they require less high-end technology than laser or ion guns, and they are a good match with the armour-heavy barbarian ships often faced by Betelgian exploration fleets.</description>
+  <gfx_store>railgunturret</gfx_store>
+  <cpu>-12</cpu>
+  <level>4</level>
+  <logo>betelgeuse</logo>
+  <license>Betelgian Trader License</license>
+ </general>
+ <specific type="turret bolt">
+  <gfx>massM</gfx>
+  <sound>mass</sound>
+  <sound_hit>medexp0</sound_hit>
+  <spfx_shield>ShiM</spfx_shield>
+  <spfx_armour>ExpM</spfx_armour>
+  <delay>1</delay>
+  <speed>700</speed>
+  <range>2200</range>
+  <falloff>1600</falloff>
+  <gfx_end>massM-end</gfx_end>
+  <energy>25</energy>
+  <heatup>30</heatup>
+  <track>1</track>
+  <damage>
+   <type>impact</type>
+   <penetrate>20</penetrate>
+   <physical>25</physical>
+   <disable>3</disable>
+  </damage>
+ </specific>
+</outfit>

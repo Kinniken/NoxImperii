@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Light Narval Torpedo Tube">
+ <general>
+  <slot>weapon</slot>
+  <size>medium</size>  
+  <mass>25</mass>
+  <price>90000</price>
+  <description>This Narval Torpedo Tube has been stripped down as much as the torpedo's large size allows; as a result, it has a low capacity and long launch times, but can fit on Continent or even Comet-class ships, turning them into deadly capital ship hunters.</description>
+  <gfx_store>caesarlauncher</gfx_store>
+  <cpu>-5</cpu>
+  <level>4</level>
+  <logo>terra</logo>
+  <license>Reserve Captain License</license>
+ </general>
+ <specific type="launcher" secondary="1">
+  <ammo>Narval Heavy Torpedo</ammo>
+  <delay>11</delay>
+  <arc>6</arc>
+  <amount>5</amount>
+ </specific>
+</outfit>

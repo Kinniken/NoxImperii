@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Heavy Plasma Turret">
+ <general>
+  <slot prop="turret">weapon</slot>
+  <size>large</size>
+  
+  <mass>80</mass>
+  <price>450000</price>
+  <description>Terra's heaviest energy turret, this massive weapon equips the largest human ships, typically Planet-class or above. Even more devastating that fixed plasma cannons, their heavy weight and huge energy requirements are the only limit on their devastating power.</description>
+  <gfx_store>plasma2</gfx_store>
+  <cpu>-80</cpu>
+  <level>5</level>
+  <logo>terra</logo>
+  <license>Reserve Colonel License</license>
+ </general>
+ <specific type="turret bolt">
+  <gfx>plasma2</gfx>
+  <sound>plasma</sound>
+  <spfx_shield>ShiS</spfx_shield>
+  <spfx_armour>PlaS2</spfx_armour>
+  <delay>1.5</delay>
+  <speed>750</speed>
+  <range>1400</range>
+  <falloff>225</falloff>
+  <gfx_end>plasma2-end</gfx_end>
+  <energy>60</energy>
+  <heatup>80</heatup>
+  <track>1.5</track>
+  <damage>
+   <type>normal</type>
+   <penetrate>90</penetrate>
+   <physical>190</physical>
+   <disable>10</disable>
+  </damage>
+ </specific>
+</outfit>

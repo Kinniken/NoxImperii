@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Marara Launcher">
+ <general>
+  <slot>weapon</slot>
+  <size>medium</size>
+  <mass>25</mass>
+  <price>115000</price>
+  <description>Heavy-duty launchers such as these are intended for use on destroyers or even light capital ships; bulkier than the fighter model, they fire faster and hold more missiles.</description>
+  <gfx_store>teracom_fury_launcher</gfx_store>
+  <cpu>-8</cpu>
+  <level>4</level>
+  <logo>terra</logo>
+  <license>Reserve Captain License</license>
+ </general>
+ <specific type="launcher" secondary="1">
+  <ammo>Marara Missile</ammo>
+  <delay>2</delay>
+  <amount>25</amount>
+  <lockon>4</lockon>
+  <arc>8</arc>
+  <ew_target>3</ew_target>
+ </specific>
+</outfit>

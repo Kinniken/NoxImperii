@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Upgraded Mass Driver Turret">
+ <general>
+  <slot prop="turret">weapon</slot>
+  <size>medium</size>
+  <mass>30</mass>
+  <price>70000</price>
+  <description>Mass Drivers are little used in the Empire, but on the Fringes, their reliability and simplicity make them popular. This upgraded design fires much bigger slugs than standard drivers; in turreted form it is a strong deterrent to weakly-shielded enemies.</description>
+  <gfx_store>gaussturret</gfx_store>
+  <cpu>-8</cpu>
+  <level>3</level>
+ </general>
+ <specific type="turret bolt">
+  <gfx>autocannon</gfx>
+  <sound>autocannon</sound>
+  <sound_hit>medexp0</sound_hit>
+  <spfx_shield>ExpS</spfx_shield>
+  <spfx_armour>ExpS</spfx_armour>
+  <delay>1.44</delay>
+  <speed>575</speed>
+  <range blowup="armour">1200</range>
+  <energy>38</energy>
+  <heatup>50</heatup>
+  <track>1.5</track>
+  <damage>
+   <type>impact</type>
+   <penetrate>29</penetrate>
+   <physical>36</physical>
+   <disable>2</disable>
+  </damage>
+ </specific>
+</outfit>

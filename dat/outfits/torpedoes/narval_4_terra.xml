@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Narval Heavy Torpedo">
+ <general>
+  
+  <mass>5</mass>
+  <price>4000</price>
+  <description>The main torpedoes used by the Imperial Navy, the narvals are heavy but particularly powerful. With no guidance system and fairly slow speed, they are really anti-capital ship weapons.</description>
+  <gfx_store>caesar</gfx_store>
+  <level>4</level>
+  <logo>terra</logo>
+  <license>Reserve Captain License</license>
+ </general>
+ <specific type="ammo">
+  <gfx>caesar</gfx>
+  <sound>mace</sound>
+  <sound_hit>lrgexp0</sound_hit>
+  <spfx_shield>ExpL2</spfx_shield>
+  <spfx_armour>ExpL2</spfx_armour>
+  <duration blowup="armour">60</duration>
+  <thrust>50</thrust>
+  <speed>150</speed>
+  <resist>100</resist>
+  <damage>
+   <type>impact</type>
+   <penetrate>90</penetrate>
+   <physical>1000</physical>
+   <disable>25</disable>
+  </damage>
+  <ai>dumb</ai>
+ </specific>
+</outfit>

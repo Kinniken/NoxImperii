@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Plasma Cannon Turret">
+ <general>
+  <slot prop="turret">weapon</slot>
+  <size>medium</size>
+  
+  <mass>45</mass>
+  <price>250000</price>
+  <description>The Empire favours Plasma Cannons for its bigger turrets, their long range and heavy weight being good fits for medium capital ships.</description>
+  <gfx_store>plasma2</gfx_store>
+  <cpu>-55</cpu>
+  <level>4</level>
+  <logo>terra</logo>
+  <license>Reserve Captain License</license>
+ </general>
+ <specific type="turret bolt">
+  <gfx>plasma2</gfx>
+  <sound>plasma</sound>
+  <spfx_shield>ShiS</spfx_shield>
+  <spfx_armour>PlaS2</spfx_armour>
+  <delay>1.2</delay>
+  <speed>650</speed>
+  <range>1025</range>
+  <falloff>225</falloff>
+  <gfx_end>plasma2-end</gfx_end>
+  <energy>45</energy>
+  <heatup>70</heatup>
+  <track>1.5</track>
+  <damage>
+   <type>normal</type>
+   <penetrate>60</penetrate>
+   <physical>75</physical>
+   <disable>6</disable>
+  </damage>
+ </specific>
+</outfit>

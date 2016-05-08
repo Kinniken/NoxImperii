@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Upgraded Hunter Launcher">
+ <general>
+  <slot>weapon</slot>
+  <size>small</size>
+  <mass>8</mass>
+  <price>38000</price>
+  <description>This improved Hunt missile launcher offers better performance than the basic model in multiple ways, particularly firing delay, ammo storage and locking delays.</description>
+  <gfx_store>seekerlauncher</gfx_store>
+  <cpu>-6</cpu>
+  <level>2</level>
+ </general>
+  <specific type="launcher" secondary="1">
+  <ammo>Hunter Missile</ammo>
+  <delay>3.5</delay>
+  <amount>15</amount>
+  <lockon>7</lockon>
+  <arc>8</arc>
+  <ew_target>1.5</ew_target>
+ </specific>
+</outfit>

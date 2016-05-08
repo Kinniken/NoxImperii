@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Turreted Neutron Disruptor">
+ <general>
+  <slot prop="turret">weapon</slot>
+  <size>medium</size>
+  <mass>25</mass>
+  <price>130500</price>  
+  <description>Turreted weapons are not the Roidhunate's speciality, and Ardar turrets tend to require more CPU and energy than human models. The upgraded disruptors mounted on this turret however have no lack of fire-power.</description>
+  <gfx_store>neutron</gfx_store>
+  <cpu>-12</cpu>
+  <level>4</level>
+  <logo>ardarshir</logo>
+  <license>Ardarshir Auxilliary, Class III</license>
+ </general>
+ <specific type="turret bolt">
+  <gfx>neutron</gfx>
+  <sound>neutron</sound>
+  <spfx_shield>ShiS</spfx_shield>
+  <spfx_armour>ExpS</spfx_armour>
+  <delay>0.9</delay>
+  <speed>650</speed>
+  <range>400</range>
+  <falloff>250</falloff>
+  <gfx_end>neutron-end</gfx_end>
+  <energy>45</energy>
+  <heatup>80</heatup>
+  <track>3</track>
+  <damage>
+   <type>normal</type>
+   <penetrate>45</penetrate>
+   <physical>35</physical>
+   <disable>4</disable>
+  </damage>
+ </specific>
+</outfit>

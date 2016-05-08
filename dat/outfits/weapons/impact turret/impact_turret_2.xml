@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Mass Driver Turret">
+ <general>
+  <slot prop="turret">weapon</slot>
+  <size>small</size>  
+  <mass>15</mass>
+  <price>20000</price>
+  <description>Mass Drivers fire slugs of matter at enemy ships, dealing damage through kinetic impact and knocking the target back. One of the most economical heavy weapons in the galaxy, though heavy, slow and not very precise. Turreted versions are popular with merchants travelling in Barbarian-heavy spaces.</description>
+  <gfx_store>gaussturret</gfx_store>
+  <cpu>-4</cpu>
+  <level>2</level>
+ </general>
+ <specific type="turret bolt">
+  <gfx>autocannon</gfx>
+  <sound>autocannon</sound>
+  <sound_hit>medexp0</sound_hit>
+  <spfx_shield>ExpS</spfx_shield>
+  <spfx_armour>ExpS</spfx_armour>
+  <delay>1.44</delay>
+  <speed>575</speed>
+  <range blowup="armour">600</range>
+  <energy>16</energy>
+  <heatup>25</heatup>
+  <track>1.5</track>
+  <damage>
+   <type>impact</type>
+   <penetrate>15</penetrate>
+   <physical>16</physical>
+   <disable>1</disable>
+  </damage>
+ </specific>
+</outfit>

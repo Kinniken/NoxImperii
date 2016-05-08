@@ -8,6 +8,7 @@
   <price>80000</price>
   <description>These makeshift steering thrusters produced on Fringe worlds give pilots an edge in dogfights, though they require much energy.</description>
   <gfx_store>thruster</gfx_store>
+  <level>1</level>
  </general>
  <specific type="modification">
   <turn>3</turn>

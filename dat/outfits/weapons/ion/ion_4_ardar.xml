@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Ion Cannon II">
+ <general>
+  <slot>weapon</slot>
+  <size>medium</size>
+  <mass>28</mass>
+  <price>82000</price>
+  <description>Ion cannons fire concentrated pockets of high energy ions that are very effective at draining shields, but have only limited effect on a ship's armour. The Roidhunate has heavily invested in the technology to counter Terra's superiority in shields; their light weight and low heat build-up are also an advantage on the typically smaller Ardar ships.</description>
+  <gfx_store>ioncannon</gfx_store>
+  <cpu>-20</cpu>
+  <level>4</level>
+  <logo>ardarshir</logo>
+  <license>Ardarshir Auxilliary, Class III</license>
+ </general>
+ <specific type="bolt">
+  <gfx>razorS</gfx>
+  <sound>ion</sound>
+  <spfx_shield>ShiS</spfx_shield>
+  <spfx_armour>ExpS</spfx_armour>
+  <delay>0.6</delay>
+  <speed>800</speed>
+  <range>900</range>
+  <falloff>700</falloff>
+  <gfx_end>razorS-end</gfx_end>
+  <energy>25</energy>
+  <heatup>35</heatup>
+  <track>2.25</track>
+  <swivel>5</swivel>
+  <damage>
+   <type>ion</type>
+   <penetrate>20</penetrate>
+   <physical>40</physical>
+   <disable>10</disable>
+  </damage>
+ </specific>
+</outfit>

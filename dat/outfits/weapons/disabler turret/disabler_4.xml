@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Powerful EMP Turret">
+ <general>
+  <slot prop="turret">weapon</slot>
+  <size>medium</size>
+  <mass>30</mass>
+  <price>202000</price>
+  <description>EMP turrets are used by larger pirate ships to immobilise their targets without damaging them too much; respectable worlds will not sell them.</description>
+  <gfx_store>weapon01</gfx_store>
+  <cpu>-18</cpu>
+  <level>4</level>
+  <logo>pirates</logo>
+ </general>
+ <specific type="turret bolt">
+  <gfx>razorS</gfx>
+  <sound>ion</sound>
+  <spfx_shield>ShiS</spfx_shield>
+  <spfx_armour>ExpS</spfx_armour>
+  <delay>0.6</delay>
+  <speed>600</speed>
+  <range>700</range>
+  <falloff>300</falloff>
+  <gfx_end>razorS-end</gfx_end>
+  <energy>25</energy>
+  <heatup>20</heatup>
+  <track>2.25</track>
+  <damage>
+   <type>emp</type>
+   <penetrate>0</penetrate>
+   <physical>10</physical>
+   <disable>25</disable>
+  </damage>
+ </specific>
+</outfit>

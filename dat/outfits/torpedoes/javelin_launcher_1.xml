@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Javelin Tube">
+ <general>
+  <slot>weapon</slot>
+  <size>small</size>
+  <mass>8</mass>
+  <price>12000</price>
+  <description>This simple torpedo tube launches the basic Javelins; with its low price and good fire rate, it is a cheap way of boosting small fighters or light cargo ships.</description>
+  <gfx_store>seekerlauncher</gfx_store>
+  <cpu>-2</cpu>
+  <level>1</level>
+ </general>
+ <specific type="launcher" secondary="1">
+  <ammo>Javelin Torpedo</ammo>
+  <delay>3</delay>
+  <amount>20</amount>
+  <arc>6</arc>
+ </specific>
+</outfit>

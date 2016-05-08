@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Turreted Hurricane">
+ <general>
+  <slot prop="turret">weapon</slot>
+  <size>medium</size>
+  <mass>45</mass>
+  <price>145000</price>
+  <description>Strongly inspired by Ardar designs, this turreted ion cannon is among the core equipment of Holy Flame capital ships.</description>
+  <gfx_store>ioncannon</gfx_store>
+  <cpu>-30</cpu>
+  <level>4</level>
+  <logo>holyflame</logo>
+  <license>Holy Flame Brother</license>
+ </general>
+ <specific type="turret bolt">
+  <gfx>razorS</gfx>
+  <sound>ion</sound>
+  <spfx_shield>ShiS</spfx_shield>
+  <spfx_armour>ExpS</spfx_armour>
+  <delay>0.8</delay>
+  <speed>750</speed>
+  <range>780</range>
+  <falloff>700</falloff>
+  <gfx_end>razorS-end</gfx_end>
+  <energy>25</energy>
+  <heatup>35</heatup>
+  <track>2.25</track>
+  <damage>
+   <type>ion</type>
+   <penetrate>18</penetrate>
+   <physical>40</physical>
+   <disable>10</disable>
+  </damage>
+ </specific>
+</outfit>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Marara Missile">
+ <general>
+  <mass>1</mass>
+  <price>1500</price>
+  <description>Marara missiles are the main guided missiles in use within the Imperial Navy; powerful and fast, they are very effective against fighters and light capital ships.</description>
+  <gfx_store>fury</gfx_store>
+  <level>3</level>
+  <logo>terra</logo>
+  <license>Reserve Lieutenant License</license>
+ </general>
+ <specific type="ammo">
+  <gfx>fury</gfx>
+  <sound>seeker</sound>
+  <sound_hit>medexp1</sound_hit>
+  <spfx_shield>ExpM</spfx_shield>
+  <spfx_armour>ExpM</spfx_armour>
+  <duration blowup="armour">8</duration>
+  <thrust>0</thrust>
+  <turn>60</turn>
+  <speed>900</speed>
+  <resist>15</resist>
+  <damage>
+   <type>impact</type>
+   <penetrate>15</penetrate>
+   <physical>90</physical>
+   <disable>5</disable>
+  </damage>
+  <ai>smart</ai>
+ </specific>
+</outfit>

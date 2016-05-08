@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Telchan Heavy Tube">
+ <general>
+  <slot>weapon</slot>
+  <size>large</size>  
+  <mass>35</mass>
+  <price>220000</price>
+  <description>This upgraded Telchan tube is intended for capital ships; it fires the swift and deadly torpedoes at much higher rate and with greater capacity.</description>
+  <gfx_store>macelauncher</gfx_store>
+  <cpu>-10</cpu>
+  <level>5</level>
+  <logo>ardarshir</logo>
+  <license>Ardarshir Auxilliary, Honourable</license>
+ </general>
+ <specific type="launcher" secondary="1">
+  <ammo>Telchan Torpedo</ammo>
+  <delay>5</delay>
+  <arc>5</arc>
+  <amount>30</amount>
+ </specific>
+</outfit>

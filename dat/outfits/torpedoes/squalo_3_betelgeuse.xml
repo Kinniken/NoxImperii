@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Squalo Torpedo">
+ <general>  
+  <mass>0.5</mass>
+  <price>1300</price>
+  <description>The Squalo is a light torpedo developed by Betelgeuse to help exploration ships fight off barbarian cruisers. It is neither terribly powerful nor terribly fast, but its light weight and low cost makes it a good choice in long expeditions.</description>
+  <gfx_store>headhunter</gfx_store>
+  <level>3</level>
+  <logo>betelgeuse</logo>
+  <license>Betelgian Trader License</license>
+ </general>
+ <specific type="ammo">
+  <gfx>headhunter</gfx>
+  <sound>missile</sound>
+  <sound_hit>medexp0</sound_hit>
+  <spfx_shield>ExpM</spfx_shield>
+  <spfx_armour>ExpM</spfx_armour>
+  <duration blowup="armour">20</duration>
+  <thrust>60</thrust>
+  <speed>200</speed>
+  <resist>30</resist>
+  <damage>
+   <type>impact</type>
+   <penetrate>30</penetrate>
+   <physical>400</physical>
+   <disable>10</disable>
+  </damage>
+  <ai>dumb</ai>
+ </specific>
+</outfit>

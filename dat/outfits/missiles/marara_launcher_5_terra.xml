@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Turreted Marara Launcher">
+ <general>
+  <slot prop="turret">weapon</slot>
+  <size>large</size>
+  <mass>45</mass>
+  <price>235000</price>
+  <description>Turret-based missile launchers are bulky and difficult to engineer, and generally thought to be not worth the extra cost. The Imperial Navy disagrees, at least for flagships; the faster targeting makes this Marara turreted launcher a much improved fighter defence.</description>
+  <gfx_store>turreted_fury_launcher</gfx_store>
+  <cpu>-15</cpu>
+  <level>5</level>
+  <logo>terra</logo>
+  <license>Reserve Major License</license>
+ </general>
+ <specific type="turret launcher" secondary="1">
+  <ammo>Marara Missile</ammo>
+  <delay>1</delay>
+  <amount>80</amount>
+  <lockon>3</lockon>
+  <ew_target>3</ew_target>
+ </specific>
+</outfit>

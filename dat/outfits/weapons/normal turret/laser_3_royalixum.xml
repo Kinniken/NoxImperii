@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Ixum Laser Turret MK2">
+ <general>
+  <slot prop="turret">weapon</slot>
+  <size>medium</size>  
+  <mass>20</mass>
+  <price>85000</price>
+  <description>Unlike their patron the Imperial Navy, the Royal Ixumite Navy prefers to use lasers as their primary weapons - though much improved from civilian models. Their characteristic double-gun design ensures a high rate of fire that compensate for their weaker punch.</description>
+  <gfx_store>ripperturret</gfx_store>
+  <cpu>-22</cpu>
+  <level>3</level>
+  <logo>royalixum</logo>
+  <license>Ixumite Honorary Lancer</license>
+ </general>
+ <specific type="turret bolt">
+  <gfx>ripperS</gfx>
+  <sound>ripper</sound>
+  <spfx_shield>ShiS</spfx_shield>
+  <spfx_armour>ExpS</spfx_armour>
+  <delay>0.4</delay>
+  <speed>600</speed>
+  <range>600</range>
+  <falloff>300</falloff>
+  <gfx_end>ripperS-end</gfx_end>
+  <energy>22</energy>
+  <heatup>45</heatup>
+  <track>2</track>
+  <damage>
+   <type>normal</type>
+   <penetrate>6</penetrate>
+   <physical>9</physical>
+   <disable>3</disable>
+  </damage>
+ </specific>
+</outfit>

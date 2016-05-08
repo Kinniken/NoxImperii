@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Javelin Torpedo">
+ <general>
+  <mass>0.2</mass>
+  <price>150</price>
+  <description>Javelin Torpedoes are little more than Hunter Missiles without the expensive targeting system and the engine manoeuvrability, making them much cheaper and slightly faster. They are a popular choice for pilots needing extra fire-power in emergencies for a limited cost.</description>
+  <gfx_store>seeker</gfx_store>
+  <level>1</level>
+ </general>
+ <specific type="ammo">
+  <gfx>seeker</gfx>
+  <sound>seeker</sound>
+  <sound_hit>medexp1</sound_hit>
+  <spfx_shield>ExpM</spfx_shield>
+  <spfx_armour>ExpM</spfx_armour>
+  <duration blowup="armour">5</duration>
+  <thrust>0</thrust>
+  <speed>900</speed>
+  <resist>5</resist>
+  <damage>
+   <type>impact</type>
+   <penetrate>5</penetrate>
+   <physical>40</physical>
+   <disable>1</disable>
+  </damage>
+  <ai>dumb</ai>
+ </specific>
+</outfit>

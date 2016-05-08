@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Heavy Ion Cannon Turret">
+ <general>
+  <slot prop="turret">weapon</slot>
+  <size>large</size>
+  <mass>60</mass>
+  <price>350000</price>
+  <description>Turret-mounted ion cannons are a mainstay of Ardar capital vessels, having proved very effective at stripping away the shields of smaller Terran vessels. This design is based on a level III heavy Ardar Ion Cannon.</description>
+  <gfx_store>ioncannon</gfx_store>
+  <cpu>-55</cpu>
+  <level>5</level>
+  <logo>ardarshir</logo>
+  <license>Ardarshir Auxilliary, Honourable</license>
+ </general>
+ <specific type="turret bolt">
+  <gfx>razorS</gfx>
+  <sound>ion</sound>
+  <spfx_shield>ShiS</spfx_shield>
+  <spfx_armour>ExpS</spfx_armour>
+  <delay>0.6</delay>
+  <speed>800</speed>
+  <range>900</range>
+  <falloff>700</falloff>
+  <gfx_end>razorS-end</gfx_end>
+  <energy>45</energy>
+  <heatup>55</heatup>
+  <track>2.25</track>
+  <damage>
+   <type>ion</type>
+   <penetrate>45</penetrate>
+   <physical>90</physical>
+   <disable>22</disable>
+  </damage>
+ </specific>
+</outfit>

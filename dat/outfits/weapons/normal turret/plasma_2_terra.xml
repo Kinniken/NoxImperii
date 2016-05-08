@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Plasma Turret">
+ <general>
+  <slot prop="turret">weapon</slot>
+  <size>small</size>
+  <mass>10</mass>
+  <price>40000</price>
+  <description>Basic plasma turrets such as this equip Terran Comet-class vessels and Navy transports; they are intended for anti-fighter duties and little else.</description>
+  <gfx_store>plasma</gfx_store>
+  <cpu>-5</cpu>
+  <level>2</level>
+  <logo>terra</logo>
+  <license>Reserve Lieutenant License</license>
+ </general>
+ <specific type="turret bolt">
+  <gfx>plasma</gfx>
+  <sound>plasma</sound>
+  <spfx_shield>ShiS</spfx_shield>
+  <spfx_armour>PlaS</spfx_armour>
+  <delay>0.675</delay>
+  <speed>450</speed>
+  <range>450</range>
+  <falloff>210</falloff>
+  <energy>12</energy>
+  <heatup>25</heatup>
+  <track>2</track>
+  <damage>
+   <type>normal</type>
+   <penetrate>12</penetrate>
+   <physical>11</physical>
+   <disable>1</disable>
+  </damage>
+ </specific>
+</outfit>

@@ -5,6 +5,7 @@
   <price>75000</price>
   <description>This is a new GUI which will become available to you by purchase. It has a legacy look.</description>
   <gfx_store>brushedGUI</gfx_store>
+  <level>3</level>
  </general>
  <specific type="gui">
   <gui>legacy</gui>

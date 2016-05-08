@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Ardar Lance">
+ <general>
+  <slot>weapon</slot>
+  <size>small</size>  
+  <mass>12</mass>
+  <price>45000</price>
+  <description>Ardar technicians have taken a different approach to continuous beam weapons than human ones; they focused on smaller, lighter designs, to be used by fighters in short approach runs. The Ardar Lance is the most common version; while its power requirements are too high to be used long, it is devastating when used simultaneously by fighter squadrons.</description>
+  <gfx_store>orion</gfx_store>
+  <cpu>-8</cpu>
+  <level>3</level>
+  <logo>ardarshir</logo>
+  <license>Ardarshir Auxilliary, Class III</license>
+ </general>
+ <specific type="beam">
+  <delay>3</delay>
+  <duration>4</duration>
+  <range>300</range>
+  <energy>45</energy>
+  <heatup>40</heatup>
+  <damage>
+   <type>normal</type>
+   <penetrate>50</penetrate>
+   <physical>70</physical>
+   <disable>5</disable>
+  </damage>
+  <spfx_shield>ShiS</spfx_shield>
+  <spfx_armour>ExpS</spfx_armour>
+  <gfx>beam_orion</gfx>
+  <sound>beam0</sound>
+  <sound_off>beam_off0</sound_off>
+ </specific>
+</outfit>

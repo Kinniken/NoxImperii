@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Hunter Missile">
+ <general>
+  <mass>0.2</mass>
+  <price>400</price>
+  <description>Hunter missiles such as this are a common design in the Galaxy, ensuring compatibility between launchers. They are however rather obsolete - slow and not very powerful. Merchants are their main users, in their quest for something to fend off light pirates.</description>
+  <gfx_store>seeker</gfx_store>
+  <level>1</level>
+ </general>
+ <specific type="ammo">
+  <gfx>seeker</gfx>
+  <sound>seeker</sound>
+  <sound_hit>medexp1</sound_hit>
+  <spfx_shield>ExpM</spfx_shield>
+  <spfx_armour>ExpM</spfx_armour>
+  <duration blowup="armour">5</duration>
+  <thrust>0</thrust>
+  <turn>50</turn>
+  <speed>800</speed>
+  <resist>5</resist>
+  <damage>
+   <type>impact</type>
+   <penetrate>5</penetrate>
+   <physical>40</physical>
+   <disable>1</disable>
+  </damage>
+  <ai>smart</ai>
+ </specific>
+</outfit>

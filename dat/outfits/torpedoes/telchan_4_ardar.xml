@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Telchan Torpedo">
+ <general>  
+  <mass>4</mass>
+  <price>3200</price>
+  <description>Telchan torpedoes are lighter and quicker than their Imperial equivalents, the Narvals. Somewhat less effective against large capital ships, they are easier to use against enemy destroyers.</description>
+  <gfx_store>mace</gfx_store>
+  <level>4</level>
+  <logo>ardarshir</logo>
+  <license>Ardarshir Auxilliary, Class III</license>
+ </general>
+ <specific type="ammo">
+  <gfx>mace</gfx>
+  <sound>mace</sound>
+  <sound_hit>lrgexp0</sound_hit>
+  <spfx_shield>ExpM</spfx_shield>
+  <spfx_armour>ExpM</spfx_armour>
+  <duration blowup="armour">40</duration>
+  <thrust>75</thrust>
+  <speed>220</speed>
+  <resist>60</resist>
+  <damage>
+   <type>impact</type>
+   <penetrate>60</penetrate>
+   <physical>600</physical>
+   <disable>15</disable>
+  </damage>
+  <ai>dumb</ai>
+ </specific>
+</outfit>

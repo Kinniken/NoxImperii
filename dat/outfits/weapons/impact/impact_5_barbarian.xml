@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Heavy Shredder">
+ <general>
+  <slot>weapon</slot>
+  <size>large</size>
+  <mass>35</mass>
+  <price>210000</price>
+  <description>Shredders are based on similar principles than mass drivers, but with smaller projectiles fired much faster. They are a favourite of barbarians everywhere for their mix of low technology and great efficiency. They are weak against shields, however.</description>
+  <gfx_store>shredder</gfx_store>
+  <cpu>-20</cpu>
+  <level>5</level>
+  <logo>barbarians</logo>
+ </general>
+ <specific type="bolt">
+  <gfx>gatling</gfx>
+  <sound>autocannon</sound>
+  <sound_hit>medexp0</sound_hit>
+  <spfx_shield>ExpS</spfx_shield>
+  <spfx_armour>ExpS</spfx_armour>
+  <delay>0.4</delay>
+  <speed>500</speed>
+  <range blowup="armour">900</range>
+  <energy>35</energy>
+  <heatup>80</heatup>
+  <track>1.5</track>
+  <swivel>8</swivel>
+  <damage>
+   <type>impact</type>
+   <penetrate>70</penetrate>
+   <physical>40</physical>
+   <disable>4</disable>
+  </damage>
+ </specific>
+</outfit>

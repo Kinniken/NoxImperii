@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Yrioch Heavy Launcher">
+ <general>
+  <slot>weapon</slot>
+  <size>large</size>  
+  <mass>35</mass>
+  <price>135000</price>
+  <gfx_store>bansheelauncher</gfx_store>
+  <description>Heavy-duty launchers like this are a big operational improvement over lighter models; with twice the firing rate, a much greated ammunition storage and faster target lock, they make Yrioch usable as a capital ship defence system.</description>
+  <cpu>-8</cpu>
+  <level>4</level>
+  <logo>ardarshir</logo>
+  <license>Ardarshir Auxilliary, Class III</license>
+ </general>
+ <specific type="launcher" secondary="1">
+  <ammo>Yrioch Missile</ammo>
+  <delay>1.5</delay>
+  <amount>35</amount>
+  <lockon>6</lockon>
+  <arc>8</arc>
+  <ew_target>3</ew_target>
+ </specific>
+</outfit>

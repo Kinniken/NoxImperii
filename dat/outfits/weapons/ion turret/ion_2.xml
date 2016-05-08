@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Ion Turret">
+ <general>
+  <slot prop="turret">weapon</slot>
+  <size>small</size>
+  <mass>9</mass>
+  <price>32000</price>
+  <description>Ion cannons' light weight and lower power requirement make them easy to mount on turrets; this model based on a standard ion gun is thus particularly cheap and light, and thus popular on small cargo ships.</description>
+  <gfx_store>ioncannon</gfx_store>
+  <cpu>-10</cpu>
+  <level>2</level>
+ </general>
+ <specific type="turret bolt">
+  <gfx>razorS</gfx>
+  <sound>ion</sound>
+  <spfx_shield>ShiS</spfx_shield>
+  <spfx_armour>ExpS</spfx_armour>
+  <delay>0.6</delay>
+  <speed>800</speed>
+  <range>900</range>
+  <falloff>700</falloff>
+  <gfx_end>razorS-end</gfx_end>
+  <energy>7</energy>
+  <heatup>15</heatup>
+  <track>2.25</track>
+  <damage>
+   <type>ion</type>
+   <penetrate>2</penetrate>
+   <physical>7</physical>
+   <disable>3</disable>
+  </damage>
+ </specific>
+</outfit>

@@ -5,6 +5,7 @@
   <price>75000</price>
   <description>This is a new GUI which will become available to you by purchase. It has a brushed steel look.</description>
   <gfx_store>brushedGUI</gfx_store>
+  <level>1</level>
  </general>
  <specific type="gui">
   <gui>slimv2</gui>

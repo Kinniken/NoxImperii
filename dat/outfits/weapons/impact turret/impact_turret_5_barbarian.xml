@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Improved Shredder Turret">
+ <general>
+  <slot prop="turret">weapon</slot>
+  <size>medium</size>
+  <mass>30</mass>
+  <price>305000</price>
+  <description>Shredders are based on similar principles than mass drivers, but with smaller projectiles fired much faster. They are a favourite of barbarians everywhere for their mix of low technology and great efficiency. They are weak against shields, however.</description>
+  <gfx_store>vulcanturret</gfx_store>
+  <cpu>-20</cpu>
+  <level>5</level>
+  <logo>barbarians</logo>
+ </general>
+ <specific type="turret bolt">
+  <gfx>gatling</gfx>
+  <sound>autocannon</sound>
+  <sound_hit>medexp0</sound_hit>
+  <spfx_shield>ExpS</spfx_shield>
+  <spfx_armour>ExpS</spfx_armour>
+  <delay>0.4</delay>
+  <speed>500</speed>
+  <range blowup="armour">900</range>
+  <energy>20</energy>
+  <heatup>55</heatup>
+  <track>1.5</track>
+  <damage>
+   <type>impact</type>
+   <penetrate>35</penetrate>
+   <physical>20</physical>
+   <disable>2</disable>
+  </damage>
+ </specific>
+</outfit>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Laser Turret MK1">
+ <general>
+  <slot prop="turret">weapon</slot>
+  <size>small</size>
+  <mass>6</mass>
+  <price>12000</price>
+  <description>Laser turrets such as these are little more than standard laser guns on a basic turret mount. Not particularly powerful, they remain popular due to their low cost and low weight.</description>
+  <gfx_store>laserturret</gfx_store>
+  <cpu>-6</cpu>
+  <level>1</level>
+  </general>
+ <specific type="turret bolt">
+  <gfx>laser1S</gfx>
+  <sound>laser</sound>
+  <spfx_shield>ShiS</spfx_shield>
+  <spfx_armour>ExpS</spfx_armour>
+  <delay>0.5</delay>
+  <speed>550</speed>
+  <range>550</range>
+  <falloff>275</falloff>
+  <energy>7</energy>
+  <heatup>19</heatup>
+  <track>3</track>
+  <damage>
+   <type>normal</type>
+   <penetrate>0</penetrate>
+   <physical>6</physical>
+   <disable>1</disable>
+  </damage>
+ </specific>
+</outfit>

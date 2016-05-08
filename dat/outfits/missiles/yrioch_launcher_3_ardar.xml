@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Yrioch Launcher">
+ <general>
+  <slot>weapon</slot>
+  <size>medium</size>  
+  <mass>15</mass>
+  <price>55000</price>
+  <gfx_store>bansheelauncher</gfx_store>
+  <description>Yrioch launchers are too large to fit on typical fighters, but often equip Comet-class ships. Their low ammunition capacity limits their use to bombing runs, not sustainable fighter defence.</description>
+  <cpu>-5</cpu>
+  <level>3</level>
+  <logo>ardarshir</logo>
+  <license>Ardarshir Auxilliary, Class II</license>
+ </general>
+ <specific type="launcher" secondary="1">
+  <ammo>Yrioch Missile</ammo>
+  <delay>3</delay>
+  <amount>10</amount>
+  <lockon>8</lockon>
+  <arc>5</arc>
+  <ew_target>3</ew_target>
+ </specific>
+</outfit>

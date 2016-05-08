@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Narval Torpedo Tube">
+ <general>
+  <slot>weapon</slot>
+  <size>large</size>  
+  <mass>45</mass>
+  <price>220000</price>
+  <description>Intended for capital ships, this heavy-duty Narval Torpedo tube is a formidable weapon in capital ship to capital ship engagements. Its decent firing rate and large ammo capacity enables it to sustain fire capable of destroying any known ship.</description>
+  <gfx_store>caesarlauncher</gfx_store>
+  <cpu>-10</cpu>
+  <level>5</level>
+  <logo>terra</logo>
+  <license>Reserve Major License</license>
+ </general>
+ <specific type="launcher" secondary="1">
+  <ammo>Narval Heavy Torpedo</ammo>
+  <delay>5</delay>
+  <arc>10</arc>
+  <amount>20</amount>
+ </specific>
+</outfit>

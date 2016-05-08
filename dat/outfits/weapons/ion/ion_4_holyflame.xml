@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Holy Flame Hurricane">
+ <general>
+  <slot>weapon</slot>
+  <size>medium</size>
+  <mass>30</mass>
+  <price>68000</price>
+  <description>Ion cannons fire concentrated pockets of high energy ions that are very effective at draining shields, but have only limited effect on a ship's armour. This Holy Flame copy of an Ardar design is not quite to original specs, but it is cheaper, has a much cooler name, and has been personally blessed by a Holy Flame cleric.</description>
+  <gfx_store>ioncannon</gfx_store>
+  <cpu>-20</cpu>
+  <level>4</level>
+  <logo>holyflame</logo>
+  <license>Holy Flame Brother</license>
+ </general>
+ <specific type="bolt">
+  <gfx>razorS</gfx>
+  <sound>ion</sound>
+  <spfx_shield>ShiS</spfx_shield>
+  <spfx_armour>ExpS</spfx_armour>
+  <delay>0.8</delay>
+  <speed>750</speed>
+  <range>780</range>
+  <falloff>700</falloff>
+  <gfx_end>razorS-end</gfx_end>
+  <energy>25</energy>
+  <heatup>35</heatup>
+  <track>2.25</track>
+  <swivel>5</swivel>
+  <damage>
+   <type>ion</type>
+   <penetrate>18</penetrate>
+   <physical>40</physical>
+   <disable>10</disable>
+  </damage>
+ </specific>
+</outfit>

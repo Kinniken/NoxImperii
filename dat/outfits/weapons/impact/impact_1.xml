@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Mass Driver">
+ <general>
+  <slot>weapon</slot>
+  <size>small</size>  
+  <mass>10</mass>
+  <price>8000</price>
+  <description>Mass Drivers fire slugs of matter at enemy ships, dealing damage through kinetic impact and knocking the target back. One of the most economical heavy weapons in the galaxy, though heavy, slow and not very precise.</description>
+  <gfx_store>gatling</gfx_store>
+  <cpu>-2</cpu>
+  <level>1</level>
+ </general>
+ <specific type="bolt">
+  <gfx>autocannon</gfx>
+  <sound>autocannon</sound>
+  <sound_hit>medexp0</sound_hit>
+  <spfx_shield>ExpS</spfx_shield>
+  <spfx_armour>ExpS</spfx_armour>
+  <delay>1.44</delay>
+  <speed>575</speed>
+  <range blowup="armour">600</range>
+  <energy>16</energy>
+  <heatup>25</heatup>
+  <track>1.5</track>
+  <swivel>8</swivel>
+  <damage>
+   <type>impact</type>
+   <penetrate>15</penetrate>
+   <physical>16</physical>
+   <disable>1</disable>
+  </damage>
+ </specific>
+</outfit>

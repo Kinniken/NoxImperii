@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Plasma Cannon MK3">
+ <general>
+  <slot>weapon</slot>
+  <size>large</size>  
+  <mass>40</mass>
+  <price>150000</price>
+  <description>The heaviest plasma cannon used by the Imperial Navy can only be fitted on cruisers and above; its slow firing rate and the lack of mobility of ships it is generally fitted on makes it a poor choice again mobile targets. Larger enemy ships however will find its barrages devastating.</description>
+  <gfx_store>plasma2</gfx_store>
+  <cpu>-55</cpu>
+  <level>5</level>
+  <logo>terra</logo>
+  <license>Reserve Major License</license>
+ </general>
+ <specific type="bolt">
+  <gfx>plasma2</gfx>
+  <sound>plasma</sound>
+  <spfx_shield>ShiS</spfx_shield>
+  <spfx_armour>PlaS2</spfx_armour>
+  <delay>1.5</delay>
+  <speed>750</speed>
+  <range>1225</range>
+  <falloff>225</falloff>
+  <gfx_end>plasma2-end</gfx_end>
+  <energy>60</energy>
+  <heatup>80</heatup>
+  <track>1.5</track>
+  <swivel>11</swivel>
+  <damage>
+   <type>normal</type>
+   <penetrate>90</penetrate>
+   <physical>160</physical>
+   <disable>10</disable>
+  </damage>
+ </specific>
+</outfit>

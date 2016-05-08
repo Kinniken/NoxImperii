@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Plasma Blaster MK1">
+ <general>
+  <slot>weapon</slot>
+  <size>small</size>
+  <mass>5</mass>
+  <price>15000</price>
+  <description>Plasma blasters are the primary energy weapons in use in the Terran Navy, preferred by Imperial Officers to lasers for their greater power, despite increased bulk and slightly smaller range.</description>
+  <gfx_store>plasma</gfx_store>
+  <cpu>-3</cpu>
+  <level>2</level>
+  <logo>terra</logo>
+  <license>Reserve Sub-Lieutenant License</license>
+ </general>
+ <specific type="bolt">
+  <gfx>plasma</gfx>
+  <sound>plasma</sound>
+  <spfx_shield>ShiS</spfx_shield>
+  <spfx_armour>PlaS</spfx_armour>
+  <delay>0.675</delay>
+  <speed>450</speed>
+  <range>450</range>
+  <falloff>210</falloff>
+  <energy>8</energy>
+  <heatup>20</heatup>
+  <track>2</track>
+  <swivel>4</swivel>
+  <damage>
+   <type>normal</type>
+   <penetrate>12</penetrate>
+   <physical>11</physical>
+   <disable>1</disable>
+  </damage>
+ </specific>
+</outfit>

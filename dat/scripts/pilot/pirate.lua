@@ -48,33 +48,30 @@ function pirate_createKestrel(  )
 
 
    -- Create the pirate ship
-   local p, s, olist
+   local p, s, outfits
 
-      p     = "Pirate Kestrel"
-      s     = ship.get(p)
-      olist = { }
+   p     = "Pirate Kestrel"
+   s     = ship.get(p)
+   outfits = { }
    
 
-   -- Equipment vars
-   local primary, secondary, medium, low
-   local use_primary, use_secondary, use_medium, use_low
-   local nhigh, nmedium, nlow = s:slots()
+   local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 
-   -- Kestrel gets some good stuff
-   primary        = { "Heavy Ion Turret", "Razor Turret MK2", "Laser Turret MK2", "Turreted Vulcan Gun" }
-   secondary      = { "Unicorp Headhunter Launcher" }
-   use_primary    = nhigh-2
-   use_secondary  = 2
-   addWeapons( primary, use_primary )
-   addWeapons( secondary, use_secondary )
-   medium         = equip_mediumHig()
-   low            = equip_lowHig()
+   local nbTurrets,nbForwards,nbSecondaries,nbStructures,nbUtilities
 
-   -- FInally add outfits
-   equip_ship( p, true, weapons, medium, low,nil,
-               use_medium, use_low, olist )
+   -- fully equipped
+   nbTurrets=nbSlotTurrets
+   nbForwards=nbSlotWeapons-2
+   nbSecondaries=2
+   nbStructures=nbSlotStructures
+   nbUtilities=nSlotUtilities
 
-   return p,olist
+   equip_fillTurretsBySlotSize(s,outfits,nbTurrets,equip_defaultTurretsPirates())
+   equip_fillWeaponsBySlotSize(s,outfits,nbForwards,nbSecondaries,equip_defaultForwardPirates(),equip_defaultSecondaryPirates())
+   equip_fillUtilitiesBySlotSize(s,outfits,nbUtilities,equip_defaultUtilitiesPirates())
+   equip_fillStructuresBySlotSize(s,outfits,nbStructures,equip_defaultStructuresPirates())
+
+   return p,outfits
 end
 
 
@@ -82,66 +79,60 @@ end
 function pirate_createAdmonisher( pirate_create )
 
    -- Create the pirate ship
-   local p, s, olist
+   local p, s, outfits
 
-      p     = "Pirate Admonisher"
-      s     = ship.get(p)
-      olist = { }
+   p     = "Pirate Admonisher"
+   s     = ship.get(p)
+   outfits = { }
    
 
-   -- Equipment vars
-   local primary, secondary, medium, low
-   local use_primary, use_secondary, use_medium, use_low
-   local nhigh, nmedium, nlow = s:slots()
+   local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 
-   -- Admonisher specializes in forward-firing weapons.
-   primary        = { "Mass Driver MK2", "Plasma Blaster MK2", "Vulcan Gun" }
-   secondary      = { "Unicorp Headhunter Launcher", "Unicorp Fury Launcher", "Unicorp Banshee Launcher" }
-   use_primary    = nhigh-1
-   use_secondary  = 1
-   addWeapons( primary, use_primary )
-   addWeapons( secondary, use_secondary )
-   medium         = equip_mediumMed()
-   low            = equip_lowMed()
+   local nbTurrets,nbForwards,nbSecondaries,nbStructures,nbUtilities
 
-   -- Finally add outfits
-      equip_ship( p, true, weapons, medium, low,
-               use_medium, use_low, olist )
+   -- fully equipped
+   nbTurrets=nbSlotTurrets
+   nbForwards=nbSlotWeapons-1
+   nbSecondaries=1
+   nbStructures=nbSlotStructures
+   nbUtilities=nSlotUtilities
 
-   return p,olist
+   equip_fillTurretsBySlotSize(s,outfits,nbTurrets,equip_defaultTurretsPirates())
+   equip_fillWeaponsBySlotSize(s,outfits,nbForwards,nbSecondaries,equip_defaultForwardPirates(),equip_defaultSecondaryPirates())
+   equip_fillUtilitiesBySlotSize(s,outfits,nbUtilities,equip_defaultUtilitiesPirates())
+   equip_fillStructuresBySlotSize(s,outfits,nbStructures,equip_defaultStructuresPirates())
+
+   return p,outfits
 end
 
 
 -- Creates a pirate flying a "Pirate Delta"
 function pirate_createDelta( pirate_create )
    -- Create the pirate ship
-   local p, s, olist
+   local p, s, outfits
 
       p     = "Pirate Delta"
       s     = ship.get(p)
-      olist = { }
+      outfits = { }
    
 
-   -- Equipment vars
-   local primary, secondary, medium, low
-   local use_primary, use_secondary, use_medium, use_low
-   local nhigh, nmedium, nlow = s:slots()
+   local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 
-   -- Delta specializes in ranged combat.
-   primary        = { "Laser Cannon MK1", "Laser Cannon MK2", "Plasma Blaster MK1", "Plasma Blaster MK2", "Razor MK1", "Razor MK2" }
-   secondary      = { "Unicorp Fury Launcher" }
-   use_primary    = nhigh-2
-   use_secondary  = 2
-   addWeapons( primary, use_primary )
-   addWeapons( secondary, use_secondary )
-   medium         = equip_mediumMed()
-   low            = equip_lowMed()
+   local nbTurrets,nbForwards,nbSecondaries,nbStructures,nbUtilities
 
-   -- Finally add outfits
-   equip_ship( p, true, weapons, medium, low,
-               use_medium, use_low, olist )
+   -- fully equipped
+   nbTurrets=nbSlotTurrets
+   nbForwards=nbSlotWeapons/2
+   nbSecondaries=nbSlotWeapons/2
+   nbStructures=nbSlotStructures/2
+   nbUtilities=nSlotUtilities/2
 
-   return p,olist
+   equip_fillTurretsBySlotSize(s,outfits,nbTurrets,equip_defaultTurretsPirates())
+   equip_fillWeaponsBySlotSize(s,outfits,nbForwards,nbSecondaries,equip_defaultForwardPirates(),equip_defaultSecondaryPirates())
+   equip_fillUtilitiesBySlotSize(s,outfits,nbUtilities,equip_defaultUtilitiesPirates())
+   equip_fillStructuresBySlotSize(s,outfits,nbStructures,equip_defaultStructuresPirates())
+
+   return p,outfits
 end
 
 
@@ -150,32 +141,29 @@ function pirate_createVendetta( pirate_create )
 
 
    -- Create the pirate ship
-   local p, s, olist
+   local p, s, outfits
 
       p     = "Pirate Vendetta"
       s     = ship.get(p)
-      olist = { } 
+      outfits = { } 
 
-   -- Equipment vars
-   local primary, secondary, medium, low
-   local use_primary, use_secondary, use_medium, use_low
-   local nhigh, nmedium, nlow = s:slots()
+   local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 
-   -- Vendettas are all about close-range firepower.
-   primary        = { "Plasma Blaster MK1", "Plasma Blaster MK2", "Laser Cannon MK1", "Razor MK2" }
-   secondary      = { "Unicorp Fury Launcher", "Unicorp Banshee Launcher" }
-   use_primary    = nhigh-1
-   use_secondary  = 1
-   addWeapons( primary, use_primary )
-   addWeapons( secondary, use_secondary )
-   medium         = equip_mediumLow()
-   low            = equip_lowLow()
+   local nbTurrets,nbForwards,nbSecondaries,nbStructures,nbUtilities
 
-   -- Finally add outfits
-   equip_ship( p, true, weapons, medium, low,
-               use_medium, use_low, olist )
+   -- fully equipped
+   nbTurrets=nbSlotTurrets
+   nbForwards=nbSlotWeapons
+   nbSecondaries=0
+   nbStructures=nbSlotStructures/2
+   nbUtilities=nSlotUtilities/2
 
-   return p,olist
+   equip_fillTurretsBySlotSize(s,outfits,nbTurrets,equip_defaultTurretsPirates())
+   equip_fillWeaponsBySlotSize(s,outfits,nbForwards,nbSecondaries,equip_defaultForwardPirates(),equip_defaultSecondaryPirates())
+   equip_fillUtilitiesBySlotSize(s,outfits,nbUtilities,equip_defaultUtilitiesPirates())
+   equip_fillStructuresBySlotSize(s,outfits,nbStructures,equip_defaultStructuresPirates())
+
+   return p,outfits
 end
 
 

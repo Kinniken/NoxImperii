@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Geldoch">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Geldoch'>
  <base_type>Geldoch</base_type>
  <GFX sx="10" sy="10">kahan</GFX>
  <GUI>slim</GUI>
@@ -7,12 +7,12 @@
  <class>Armoured Transport</class>
  <fabricator>Roidhunate Shipyards</fabricator>
  <description>As often in the Roidhunate's navy, civilian and military designs overlap. The Geldoch is a good example; fast and durable, it is used by the Ardars both for civilian deliveries in dangerous space and as a first-wave army transport on major operations.</description>
- 
-<price>2400000</price>
+ <price>2400000</price>
  <movement>
   <thrust>210</thrust>
   <turn>120</turn>
   <speed>190</speed>
+  <engine_limit>2500</engine_limit>
  </movement>
  <health>
   <absorb>25</absorb>
@@ -34,23 +34,22 @@
 <stats>
   
 </stats>
+<slots>
+<weapon size="large" x="28" y="0" h="5" />
+<weapon size="large" x="18" y="0" h="5" />
+<weapon prop="turret" size="medium" x="-30" y="-8" h="3" />
+<weapon prop="turret" size="medium" x="-30" y="8" h="3" />
+<utility size="large"/>
+<utility size="large"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+</slots>
 
- <slots>
-  <weapon size="medium" x="28" y="0" h="5"/>
-  <weapon size="medium" x="18" y="0" h="5"/>
-  <weapon size="large" x="-30" y="-8" h="3"/>
-  <weapon size="large" x="-30" y="8" h="3"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
- </slots>
 </ship>

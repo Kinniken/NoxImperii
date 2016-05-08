@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Imperial Jupiter">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Imperial Jupiter'>
  <base_type>Imperial Jupiter</base_type>
  <GFX sx="12" sy="12">empire_planet</GFX>
  <GUI>slim</GUI>
@@ -7,11 +7,13 @@
  <class>Cruiser</class>
  <fabricator>Imperial Shipyards</fabricator>
  <description>All but the most important Terran fleets are lead by Planet-class cruisers, and the Jupiter is the most advanced ever built by the Terran Navy. Clearly this is a ship that can face anything... this side of the Ardar border.</description>
-<price>9000000</price>
+ <price>9000000</price>
+ <license>Reserve Major License</license>
  <movement>
   <thrust>120</thrust>
   <turn>75</turn>
   <speed>120</speed>
+  <engine_limit>5000</engine_limit>
  </movement>
  <health>
   <absorb>63</absorb>
@@ -33,23 +35,23 @@
 <stats>
   
 </stats>
- <slots>
-  <weapon x="40" y="0" h="2"  size="large"/>
-  <weapon x="25" y="0" h="2" size="large"/>
-  <weapon x="12" y="-6" h="0" size="large"/>
-  <weapon x="12" y="6" h="0" size="large"/>
-  <weapon x="0" y="0" h="7" size="large"/>
-  <weapon x="-15" y="0" h="7" size="large"/>
-  <weapon x="-33" y="0" h="7" size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
- </slots>
+<slots>
+<weapon size="large" x="40" y="0" h="2" />
+<weapon size="large" x="25" y="0" h="2" />
+<weapon prop="turret" size="large" x="12" y="-6" h="0" />
+<weapon prop="turret" size="large" x="12" y="6" h="0" />
+<weapon prop="turret" size="large" x="0" y="0" h="7" />
+<weapon prop="turret" size="large" x="-15" y="0" h="7" />
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+</slots>
+
 </ship>

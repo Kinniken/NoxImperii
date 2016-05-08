@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Scarab">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Scarab'>
  <base_type>Scarab</base_type>
- <GFX>koala</GFX>
+ <GFX sx="8" sy="8">koala</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Freighter</class>
  <fabricator>Generic</fabricator>
  <description>Nicknamed "Scarabs" in the Empire, those odd little cargo ships are produced throughout human space, and beyond. They are cheap and effective at short-range deliveries, but make easy targets in more troubled areas.</description>
- 
-<price>350000</price>
+ <price>350000</price>
  <movement>
   <thrust>180</thrust>
   <turn>100</turn>
   <speed>180</speed>
+  <engine_limit>500</engine_limit>
  </movement>
  <health>
   <absorb>6</absorb>
@@ -34,14 +34,13 @@
 <stats>
   
 </stats>
+<slots>
+<weapon size="small" x="11" y="0" h="-7" />
+<utility size="small"/>
+<utility size="small"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
 
-
- <slots>
-  <weapon size="small" x="11" y="0" h="-7"/>
-  <utility size="small"/>
-  <utility size="small"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
- </slots>
 </ship>

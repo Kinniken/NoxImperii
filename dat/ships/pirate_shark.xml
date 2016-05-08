@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Pirate Shark">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Pirate Shark'>
  <base_type>Shark</base_type>
- <GFX>shark_pirate</GFX>
+ <GFX sx="8" sy="8">shark_pirate</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Fighter</class>
  <fabricator>Pirate Shipyards</fabricator>
  <description>The pirate variants of the shark design are known for focusing on speed and offensive capacities, to better close in on weaker targets.</description>
- 
-<price>230000</price>
+ <price>230000</price>
  <movement>
   <thrust>250</thrust>
   <turn>140</turn>
   <speed>270</speed>
+  <engine_limit>150</engine_limit>
  </movement>
  <health>
   <absorb>6</absorb>
@@ -34,14 +34,13 @@
 <stats>
   
 </stats>
-
- <slots>
-  <weapon size="small" x="-3" y="0" h="2"/>
-  <weapon size="small" x="3" y="0" h="2"/>
-  <weapon size="small" x="3" y="0" h="2"/>
-  <utility size="small"/>
-  <structure size="small"/>
-  <structure size="small"/>
- </slots>
+<slots>
+<weapon size="small" x="-3" y="0" h="2" />
+<weapon size="small" x="3" y="0" h="2" />
+<weapon size="small" x="3" y="0" h="2" />
+<utility size="small"/>
+<structure size="small"/>
+<structure size="small"/>
+</slots>
 
 </ship>

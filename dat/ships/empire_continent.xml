@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Imperial Asieneuve">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Imperial Asieneuve'>
  <base_type>Imperial Asieneuve</base_type>
  <GFX sx="12" sy="12">empire_continent</GFX>
  <GUI>slim</GUI>
@@ -7,11 +7,13 @@
  <class>Destroyer</class>
  <fabricator>Imperial Shipyards</fabricator>
  <description>Like all Terran Continent-class ship, the Asieneuve destroyer is named after a continent - in this case the main landmass of the Ardeche planet. This powerful destroyer is effective against most Imperial enemies. Pirates and barbarian races would rarely challenge one.</description>
-<price>3000000</price>
+ <price>3000000</price>
+ <license>Reserve Captain License</license>
  <movement>
   <thrust>180</thrust>
   <turn>110</turn>
   <speed>170</speed>
+  <engine_limit>2000</engine_limit>
  </movement>
  <health>
   <absorb>52</absorb>
@@ -33,20 +35,21 @@
 <stats>
   
 </stats>
- <slots>
-  <weapon x="-15" y="-10" h="-10" size="large"/>
-  <weapon x="-15" y="10" h="-10" size="large"/>
-  <weapon x="20" y="0" h="-10" size="large"/>
-  <weapon x="4" y="-5" h="-10" size="large"/>
-  <weapon x="4" y="5" h="-10" size="medium"/>
-    <weapon x="4" y="5" h="-10" size="medium"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
- </slots>
+<slots>
+<weapon size="large" x="-15" y="-10" h="-10" />
+<weapon size="large" x="-15" y="10" h="-10" />
+<weapon prop="turret" size="medium" x="20" y="0" h="-10" />
+<weapon prop="turret" size="medium" x="4" y="-5" h="-10" />
+<weapon prop="turret" size="medium" x="4" y="5" h="-10" />
+<weapon prop="turret" size="medium" x="4" y="5" h="-10" />
+<utility size="large"/>
+<utility size="large"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
+
 </ship>

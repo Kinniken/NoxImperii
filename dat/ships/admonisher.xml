@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Admonisher">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Admonisher'>
  <base_type>Admonisher</base_type>
- <GFX>admonisher</GFX>
+ <GFX sx="8" sy="8">admonisher</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Corvette</class>
  <fabricator>Generic</fabricator>
  <description>Generally known as admonishers, those versatile heavy fighters are less agile than most, but pack more fire-power than shark or wasp-based designs.</description>
- 
-<price>270000</price>
+ <price>270000</price>
  <movement>
   <thrust>190</thrust>
   <turn>120</turn>
   <speed>200</speed>
+  <engine_limit>250</engine_limit>
  </movement>
  <health>
   <absorb>6</absorb>
@@ -34,16 +34,14 @@
 <stats>
   
 </stats>
-
- <slots>
-  <weapon size="small" x="4" y="2" h="-5"/>
-  <weapon size="small" x="4" y="-2" h="-5"/>
-  <weapon size="small" x="-9" y="-5" h="-9"/>
-  <weapon size="small" x="-9" y="5" h="-9"/>
-  <utility size="small"/>
-
-  <structure size="small"/>
-  <structure size="small"/>
- </slots>
+<slots>
+<weapon size="small" x="4" y="2" h="-5" />
+<weapon size="small" x="4" y="-2" h="-5" />
+<weapon size="small" x="-9" y="-5" h="-9" />
+<weapon size="small" x="-9" y="5" h="-9" />
+<utility size="small"/>
+<structure size="small"/>
+<structure size="small"/>
+</slots>
 
 </ship>

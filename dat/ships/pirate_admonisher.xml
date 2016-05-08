@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Pirate Admonisher">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Pirate Admonisher'>
  <base_type>Admonisher</base_type>
- <GFX>admonisher_pirate</GFX>
+ <GFX sx="8" sy="8">admonisher_pirate</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Corvette</class>
  <fabricator>Pirate Shipyards</fabricator>
-  <description>The pirate variant of this old classic makes room for even more guns and a little more mobility by reducing the armour. It's not intended for targets that can fight back anyway.</description>
- 
-<price>310000</price>
+ <description>The pirate variant of this old classic makes room for even more guns and a little more mobility by reducing the armour. It's not intended for targets that can fight back anyway.</description>
+ <price>310000</price>
  <movement>
   <thrust>200</thrust>
   <turn>120</turn>
   <speed>210</speed>
+  <engine_limit>250</engine_limit>
  </movement>
  <health>
   <absorb>6</absorb>
@@ -34,17 +34,15 @@
 <stats>
   
 </stats>
-
- <slots>
-  <weapon size="small" x="15" y="0" h="2"/>
-  <weapon size="small" x="4" y="2" h="-5"/>
-  <weapon size="small" x="4" y="-2" h="-5"/>
-  <weapon size="small" x="-9" y="-5" h="-9"/>
-  <weapon size="small" x="-9" y="5" h="-9"/>
-  <utility size="small"/>
-
-  <structure size="small"/>
-  <structure size="small"/>
- </slots>
+<slots>
+<weapon size="small" x="4" y="2" h="-5" />
+<weapon size="small" x="4" y="-2" h="-5" />
+<weapon size="small" x="-9" y="-5" h="-9" />
+<weapon size="small" x="-9" y="5" h="-9" />
+<weapon size="small" x="-9" y="5" h="-9" />
+<utility size="small"/>
+<structure size="small"/>
+<structure size="small"/>
+</slots>
 
 </ship>

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Holy Flame Brythioch">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Holy Flame Brythioch'>
  <base_type>Holy Flame Brythioch</base_type>
  <GFX sx="12" sy="12">holyflame_continent</GFX>
  <GUI>slim</GUI>
@@ -7,12 +7,13 @@
  <class>Destroyer</class>
  <fabricator>Gonder Shipyards</fabricator>
  <description>The first series of Brythioches produced on Gonder were so disastrous most never made it to the front. To the great displeasure of the Council, the Roidhunate insisted that the next ones be built with the strict oversight of Ardar engineers. The resulting ship is much improved, matching the original in all but shield and energy output.</description>
-
-<price>2100000</price>
+ <price>2100000</price>
+ <license>Holy Flame Brother</license>
  <movement>
   <thrust>190</thrust>
   <turn>120</turn>
   <speed>180</speed>
+  <engine_limit>1800</engine_limit>
  </movement>
  <health>
   <absorb>45</absorb>
@@ -34,22 +35,21 @@
 <stats>
   
 </stats>
+<slots>
+<weapon size="large" x="-15" y="-10" h="-10" />
+<weapon size="large" x="-15" y="10" h="-10" />
+<weapon size="large" x="20" y="0" h="-10" />
+<weapon size="large" x="4" y="-5" h="-10" />
+<weapon prop="turret" size="medium" x="4" y="5" h="-10" />
+<weapon prop="turret" size="medium" x="4" y="5" h="-10" />
+<utility size="large"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<structure size="large"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
 
- <slots>
-  <weapon x="-15" y="-10" h="-10" size="large"/>
-  <weapon x="-15" y="10" h="-10" size="large"/>
-  <weapon x="20" y="0" h="-10" size="large"/>
-  <weapon x="4" y="-5" h="-10" size="large"/>
-  <weapon x="4" y="5" h="-10" size="large"/>
-  <weapon x="4" y="5" h="-10" size="medium"/>
-  <weapon x="4" y="5" h="-10" size="medium"/>
-  <utility size="large"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <structure size="large"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
- </slots>
 </ship>

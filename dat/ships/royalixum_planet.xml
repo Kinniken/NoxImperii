@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Royal Ixum Jupiter">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Royal Ixum Jupiter'>
  <base_type>Royal Ixum Jupiter</base_type>
  <GFX sx="12" sy="12">royalixum_planet</GFX>
  <GUI>slim</GUI>
@@ -7,13 +7,13 @@
  <class>Cruiser</class>
  <fabricator>Imperial Shipyards</fabricator>
  <description>The few remaining heavy cruisers in the Royal Ixumite Navy are Jupiter-class Imperial models. As the Empire refuses its ally access to Imperial Nova dreadnoughts, they are the flagships of the Royal Navy, cherished and rarely risked in open battle. They are generally equipped with all the resources the Kingdom can still muster, and are in fact often better armed than their Terran equivalents.</description>
-
-
-<price>11000000</price>
+ <price>11000000</price>
+ <license>Ixumite Baron</license>
  <movement>
   <thrust>120</thrust>
   <turn>75</turn>
   <speed>120</speed>
+  <engine_limit>5000</engine_limit>
  </movement>
  <health>
   <absorb>65</absorb>
@@ -35,26 +35,23 @@
 <stats>
   
 </stats>
+<slots>
+<weapon size="large" x="40" y="0" h="2" />
+<weapon size="large" x="25" y="0" h="2" />
+<weapon prop="turret" size="large" x="12" y="-6" h="0" />
+<weapon prop="turret" size="large" x="12" y="6" h="0" />
+<weapon prop="turret" size="large" x="0" y="0" h="7" />
+<weapon prop="turret" size="large" x="-15" y="0" h="7" />
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+</slots>
 
-
- <slots>
-  <weapon x="40" y="0" h="2"  size="large"/>
-  <weapon x="25" y="0" h="2" size="large"/>
-  <weapon x="12" y="-6" h="0" size="large"/>
-  <weapon x="12" y="6" h="0" size="large"/>
-  <weapon x="0" y="0" h="7" size="large"/>
-  <weapon x="-15" y="0" h="7" size="large"/>
-  <weapon x="-33" y="0" h="7" size="large"/>
-  <weapon x="-33" y="0" h="7" size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
- </slots>
 </ship>

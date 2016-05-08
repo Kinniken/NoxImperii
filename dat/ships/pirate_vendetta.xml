@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Pirate Vendetta">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Pirate Vendetta'>
  <base_type>Vendetta</base_type>
- <GFX>vendetta_pirate</GFX>
+ <GFX sx="8" sy="8">vendetta_pirate</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Destroyer</class>
  <fabricator>Pirate Shipyards</fabricator>
  <description>With a greater range, a more powerful engine and boosted weapon capacities, the pirate variants of the famous vendetta design make excellent piracy vessels.</description>
- 
-<price>1100000</price>
+ <price>1100000</price>
  <movement>
   <thrust>200</thrust>
   <turn>100</turn>
   <speed>190</speed>
+  <engine_limit>600</engine_limit>
  </movement>
  <health>
   <absorb>15</absorb>
@@ -34,22 +34,19 @@
 <stats>
   
 </stats>
+<slots>
+<weapon size="medium" x="16" y="-9" h="0" />
+<weapon size="medium" x="16" y="9" h="0" />
+<weapon size="medium" x="13" y="-13" h="0" />
+<weapon size="medium" x="13" y="13" h="0" />
+<weapon size="small" x="19" y="0" h="-2" />
+<weapon size="small" x="3" y="0" h="2" />
+<utility size="medium"/>
+<utility size="small"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="small"/>
+<structure size="small"/>
+</slots>
 
- <slots>
-  <weapon size="medium" x="16" y="-9" h="0"/>
-  <weapon size="medium" x="16" y="9" h="0"/>
-  <weapon size="medium" x="13" y="-13" h="0"/>
-  <weapon size="medium" x="13" y="13" h="0"/>
-  <weapon size="small" x="19" y="0" h="-2"/>
-  <weapon size="small" x="3" y="0" h="2"/>
-
-  <utility size="medium"/>
-  <utility size="small"/>
-
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="small"/>
-  <structure size="small"/>
-
- </slots>
 </ship>

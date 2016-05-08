@@ -1,11 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Techs>
 	<!-- Templates - add all new outfits, commodities and ships here! -->
-	<tech name="All Outfits">
-		
-	</tech>
-	<tech name="All Ships">
-
+	<tech name="All">
 		<item>Schroedinger</item>
 		<item>Quicksilver</item>
 		<item>Shark</item>
@@ -19,6 +15,257 @@
 		<item>Pirate Rhino</item>
 		<item>Kestrel</item>
 		<item>Pirate Kestrel</item>
+		<item>Food</item>
+		<item>Ore</item>
+		<item>Industrial Goods</item>
+		<item>Medicine</item>
+		<item>Luxury Goods</item>
+		<item>Wasp</item>
+		<item>Small Composite Plating</item>
+		<item>Composite Plating</item>
+		<item>Mass Driver</item>
+		<item>Laser Cannon MK1</item>
+		<item>Laser Cannon MK2</item>
+		<item>Laser Turret MK1</item>
+		<item>Javelin Torpedo</item>
+		<item>Large Composite Plating</item>
+		<item>Shield Capacitor</item>
+		<item>Small Shield Regenerator</item>
+		<item>Mass Driver Turret</item>
+		<item>Laser Cannon MK3</item>
+		<item>Laser Turret MK2</item>
+		<item>Light Ion Gun</item>
+		<item>Hunter Missile</item>
+		<item>Hunter Launcher</item>
+		<item>Javelin Tube</item>
+		<item>Voyager Frigate</item>
+		<item>Shield Capacitor II</item>
+		<item>Medium Shield Regenerator</item>
+		<item>Laser Turret MK3</item>
+		<item>Ion Gun</item>
+		<item>Ion Turret</item>
+		<item>Upgraded Hunter Launcher</item>
+		<item>Turreted Javelin Tubes</item>
+		<item>Delta</item>
+		<item>Shield Capacitor III</item>
+		<item>Raptor</item>
+		<item>Imperial Tunguska</item>
+		<item>Reserve Sub-Lieutenant License</item>
+		<item>Marine Small Arms</item>
+		<item>Plasma Blaster MK1</item>
+		<item>Plasma Turret</item>
+		<item>Imperial Halley</item>
+		<item>Reserve Lieutenant License</item>
+		<item>Terran Navy Plating</item>
+		<item>Steering Thrusters</item>
+		<item>Civilian Scrambler</item>
+		<item>Plasma Blaster MK2</item>
+		<item>Plasma Cannon MK1</item>
+		<item>Marara Missile</item>
+		<item>Imperial Asieneuve</item>
+		<item>Reserve Captain License</item>
+		<item>Buffel</item>
+		<item>Terran Hellburner</item>
+		<item>Terran Navy Jammer</item>
+		<item>Large Terran Navy Plating</item>
+		<item>Forward Shock Absorbers</item>
+		<item>Plasma Blaster MK3</item>
+		<item>Plasma Cannon MK2</item>
+		<item>Plasma Cannon Turret</item>
+		<item>Marara Light Launcher</item>
+		<item>Marara Launcher</item>
+		<item>Narval Heavy Torpedo</item>
+		<item>Imperial Jupiter</item>
+		<item>Reserve Colonel License</item>
+		<item>Terran Navy Heavy Shield Booster</item>
+		<item>Armour Repair Equipment</item>
+		<item>Reworked Energy Lines</item>
+		<item>Advanced Terran Scrambler</item>
+		<item>Terran Navy Shield Capacitor</item>
+		<item>Terran Shield Regenerator</item>
+		<item>Plasma Cannon MK3</item>
+		<item>Turreted Marara Launcher</item>
+		<item>Light Narval Torpedo Tube</item>
+		<item>Narval Torpedo Tube</item>
+		<item>Imperial Valenderay</item>
+		<item>Reserve Major License</item>
+		<item>Integrated Targeting Array</item>
+		<item>Anti-Matter Reactor</item>
+		<item>Heavy Plasma Turret</item>
+		<item>Ram Beam</item>
+		<item>Beam Turret</item>
+		<item>Ardar Roeth</item>
+		<item>Ardarshir Auxilliary, Class I</item>
+		<item>Neutron Disruptor</item>
+		<item>Ardar Vach Rueth</item>
+		<item>Ardarshir Auxilliary, Class II</item>
+		<item>Improved Neutron Disruptor</item>
+		<item>Ion Cannon I</item>
+		<item>Yrioch Launcher</item>
+		<item>Yrioch Missile</item>
+		<item>Telchan Torpedo</item>
+		<item>Ardar Brythioch</item>
+		<item>Ardarshir Auxilliary, Class III</item>
+		<item>Ardar Jammer</item>
+		<item>Ardar Navy Scrambler</item>
+		<item>Heavy Neutron Disruptor</item>
+		<item>Turreted Neutron Disruptor</item>
+		<item>Ion Cannon II</item>
+		<item>Ion Cannon Turret</item>
+		<item>Ardar Lance</item>
+		<item>Ardar Beam</item>
+		<item>Telchan Torpedo Tube</item>
+		<item>Ardar Mowyr</item>
+		<item>Merkhrioch</item>
+		<item>Ardarshir Auxilliary, Honourable</item>
+		<item>Ardar Hellburner</item>
+		<item>Ardar Medium Shield Booster</item>
+		<item>Self-Repairing Plating</item>
+		<item>Forward Stabilised Mount</item>
+		<item>Improved Power Regulator</item>
+		<item>Naval Fusion Reactor</item>
+		<item>Ardar Navy Shield Capacitor</item>
+		<item>Turreted Heavy Neutron Disruptor</item>
+		<item>Ion Cannon III</item>
+		<item>Heavy Ion Cannon Turret</item>
+		<item>Breakshield Lance</item>
+		<item>Yrioch Heavy Launcher</item>
+		<item>Telchan Heavy Tube</item>
+		<item>Ardar Moloch</item>
+		<item>Ardarshir Ally</item>
+		<item>Large Self-Repairing Plating</item>
+		<item>Ardar Shock Troops</item>
+		<item>Armour Repair Droids</item>
+		<item>Improved Trajectory Stabilizer</item>
+		<item>Shattershield Lance</item>
+		<item>Betelgian Alba</item>
+		<item>Betelgian Courier License</item>
+		<item>Betelgian Libera</item>
+		<item>Betelgian Trader License</item>
+		<item>Railgun</item>
+		<item>Squalo Torpedo</item>
+		<item>Betelgian Cassandra</item>
+		<item>Betelgian Merchant License</item>
+		<item>Violente</item>
+		<item>Betelgian Jammer</item>
+		<item>Betelgian Scrambler</item>
+		<item>Medium Railgun</item>
+		<item>Turreted Railgun</item>
+		<item>Squalo Tube</item>
+		<item>Betelgian Orsa</item>
+		<item>Betelgian Stella</item>
+		<item>Betelgian Explorer License</item>
+		<item>Betelgian Merchant Prince License</item>
+		<item>Impresa</item>
+		<item>Improved Turret Refrigeration Cycle</item>
+		<item>Heavy Railgun</item>
+		<item>Turreted Medium Railgun</item>
+		<item>Turreted Heavy Railgun</item>
+		<item>Steel Plating</item>
+		<item>Makeshift Steering Thrusters</item>
+		<item>Large Steel Plating</item>
+		<item>Power Regulation Override</item>
+		<item>Upgraded Mass Driver</item>
+		<item>Space Mercenaries</item>
+		<item>Superior Mass Driver</item>
+		<item>Upgraded Mass Driver Turret</item>
+		<item>Light EMP Gun</item>
+		<item>EMP Gun</item>
+		<item>Light EMP Turret</item>
+		<item>EMP Grenade</item>
+		<item>Powerful EMP Gun</item>
+		<item>EMP Turret</item>
+		<item>EMP Grenade Launcher</item>
+		<item>Powerful EMP Turret</item>
+		<item>Barbarian Looter</item>
+		<item>Shredder</item>
+		<item>Barbarian Raider</item>
+		<item>Improved Shredder</item>
+		<item>Improved Shredder Turret</item>
+		<item>Barbarian Slaver</item>
+		<item>Heavy Shredder</item>
+		<item>Heavy Shredder Turret</item>
+		<item>Ixumite Honorary Hunter</item>
+		<item>Royal Ixum Tunguska</item>
+		<item>Ixum Laser Cannon MK1</item>
+		<item>Ixum Laser Turret MK1</item>
+		<item>Ixumite Honorary Lancer</item>
+		<item>Royal Ixum Halley</item>
+		<item>Ixum Laser Cannon MK2</item>
+		<item>Ixum Laser Turret MK2</item>
+		<item>Ixumite Knight</item>
+		<item>Royal Ixum Asieneuve</item>
+		<item>Ixumite Targeting Array</item>
+		<item>Ixum Laser Cannon MK3</item>
+		<item>Ixumite Baron</item>
+		<item>Royal Ixum Jupiter</item>
+		<item>Ixum Laser Turret MK3</item>
+		<item>Ixumite Earl</item>
+		<item>Holy Flame Servant</item>
+		<item>Holy Flame Roeth</item>
+		<item>Holy Flame Initiate</item>
+		<item>Holy Flame Vach Rueth</item>
+		<item>Holy Flame Plating</item>
+		<item>Holy Flame Storm</item>
+		<item>Holy Flame Brother</item>
+		<item>Holy Flame Brythioch</item>
+		<item>Large Holy Flame Plating</item>
+		<item>Holy Flame Hurricane</item>
+		<item>Turreted Hurricane</item>
+		<item>Holy Flame Warrior</item>
+		<item>Holy Flame Mowyr</item>
+		<item>Endeavour</item>
+		<item>Scarab</item>
+		<item>Light Battery</item>
+		<item>Fuel Pod</item>
+		<item>Solar Panel</item>
+		<item>GUI - Brushed</item>
+		<item>Fish Bone</item>
+		<item>Voyager Cargo</item>
+		<item>Generic Afterburner</item>
+		<item>Emergency Shield Booster</item>
+		<item>Medium Battery</item>
+		<item>Combat Droids</item>
+		<item>Cargo Pod</item>
+		<item>Medium Fuel Pod</item>
+		<item>Reactor Class I</item>
+		<item>GUI - Legacy</item>
+		<item>Hauler</item>
+		<item>Improved Generic Afterburner</item>
+		<item>Generic Jammer</item>
+		<item>Medium Cargo Pod</item>
+		<item>Reactor Class II</item>
+		<item>Large Fuel Pod</item>
+		<item>Reverse Thrusters</item>
+		<item>Whale</item>
+		<item>Large Battery</item>
+		<item>Large Cargo Pod</item>
+		<item>Reactor Class III</item>
+		<item>Terran Shield Booster</item>
+		<item>Terran Light Battery</item>
+		<item>Engine Reroute</item>
+		<item>Terran Medium Shield Booster</item>
+		<item>Terran Medium Battery</item>
+		<item>Zheng He</item>
+		<item>Argosy</item>
+		<item>Sunflower</item>
+		<item>Meryoch</item>
+		<item>Rioloch</item>
+		<item>Ardar Large Battery</item>
+		<item>Geldoch</item>
+		<item>Pelegrina</item>
+		<item>Exploration Battery</item>
+		<item>Medium Trade Pod</item>
+		<item>Medium Extended Fuel Pod</item>
+		<item>Carvela</item>
+		<item>Veniera</item>
+		<item>Medium Exploration Battery</item>
+		<item>Large Trade Pod</item>
+		<item>Betelgian Engine Rework</item>
+		<item>Solar Panel Array</item>
+		<item>Large Exploration Battery</item>
+		<item>Large Extended Fuel Pod</item>
+		<item>Concentrated Solar Panels</item>
 	</tech>
 	<tech name="All Commodities">
 		<item>Food</item>
@@ -45,12 +292,11 @@
 		<item>Small Composite Plating</item>
 		<item>Composite Plating</item>
 
-
+		<item>Mass Driver</item>
 		<item>Laser Cannon MK1</item>
-		<item>BioPlasma Organ Stage 1</item>
-		<item>Gauss Gun</item>
-		<item>Mass Driver MK1</item>
-
+		<item>Laser Cannon MK2</item>
+		<item>Laser Turret MK1</item>
+		<item>Javelin Torpedo</item>
 	</tech>
 	<tech name="Generic Military 2">
 		<item>Shark</item>
@@ -59,18 +305,14 @@
 		<item>Shield Capacitor</item>
 		<item>Small Shield Regenerator</item>
 
-		<item>Laser Turret MK1</item>
-		<item>Plasma Blaster MK1</item>
-		<item>Turreted Gauss Gun</item>
-		<item>Ion Cannon</item>
-		<item>Laser Cannon MK2</item>
-		<item>Plasma Cluster Cannon MK1</item>
-		<item>Plasma Turret MK1</item>
-		<item>BioPlasma Organ Stage 2</item>
-		<item>Mass Driver MK2</item>
-		<item>Plasma Blaster MK2</item>
-		<item>Plasma Cluster Cannon MK2</item>
-		<item>Shredder</item>
+		<item>Mass Driver Turret</item>
+		<item>Laser Cannon MK3</item>
+		<item>Laser Turret MK2</item>
+		<item>Light Ion Gun</item>
+
+		<item>Hunter Missile</item>
+		<item>Hunter Launcher</item>
+		<item>Javelin Tube</item>
 	</tech>
 	<tech name="Generic Military 3">
 		<item>Admonisher</item>
@@ -78,13 +320,12 @@
 
 		<item>Shield Capacitor II</item>
 		<item>Medium Shield Regenerator</item>
+		<item>Laser Turret MK3</item>
+		<item>Ion Gun</item>
+		<item>Ion Turret</item>
 
-
-		<item>Laser Turret MK2</item>
-		<item>Orion Beam</item>
-		<item>Laser Cannon MK3</item>
-		<item>Plasma Turret MK2</item>
-		<item>Plasma Cluster Cannon MK3</item>
+		<item>Upgraded Hunter Launcher</item>
+		<item>Turreted Javelin Tubes</item>
 	</tech>
 	<tech name="Generic Military 4">
 		<item>Delta</item>
@@ -102,12 +343,8 @@
 		<item>Lancelot</item>
 
 		<item>Marine Small Arms</item>
-
-		<item>Laser Cannon MK1</item>
-		<item>Laser Turret MK1</item>
 		<item>Plasma Blaster MK1</item>
-		<item>Razor Turret MK1</item>
-		<item>Turreted Gauss Gun</item>
+		<item>Plasma Turret</item>
 	</tech>
 	<tech name="Empire Military 2">
 		<item>Imperial Halley</item>
@@ -116,20 +353,9 @@
 		<item>Terran Navy Plating</item>
 		<item>Steering Thrusters</item>
 		<item>Civilian Scrambler</item>
-
-		<item>Lancelot</item>
-		<item>BioPlasma Organ Stage 1</item>
-		<item>Gauss Gun</item>
-		<item>Ion Cannon</item>
-		<item>Laser Cannon MK2</item>
-		<item>Laser Turret MK2</item>
-		<item>Mass Driver MK1</item>
-		<item>Orion Beam</item>
-		<item>Plasma Cluster Cannon MK1</item>
-		<item>Plasma Turret MK1</item>
-		<item>Razor MK1</item>
-		<item>Razor Turret MK2</item>
-		<item>Ripper Cannon</item>
+		<item>Plasma Blaster MK2</item>
+		<item>Plasma Cannon MK1</item>
+		<item>Marara Missile</item>
 	</tech>
 	<tech name="Empire Military 3">
 		<item>Imperial Asieneuve</item>
@@ -140,18 +366,12 @@
 		<item>Terran Navy Jammer</item>
 		<item>Large Terran Navy Plating</item>
 		<item>Forward Shock Absorbers</item>
-
-		<item>BioPlasma Organ Stage 2</item>
-		<item>Heavy Ion Cannon</item>
-		<item>Heavy Ion Turret</item>
-		<item>Laser Cannon MK3</item>
-		<item>Laser Turret MK3</item>
-		<item>Mass Driver MK2</item>
-		<item>Plasma Blaster MK2</item>
-		<item>Plasma Cluster Cannon MK2</item>
-		<item>Plasma Turret MK2</item>
-		<item>Razor MK2</item>
-		<item>Vulcan Gun</item>
+		<item>Plasma Blaster MK3</item>
+		<item>Plasma Cannon MK2</item>
+		<item>Plasma Cannon Turret</item>
+		<item>Marara Light Launcher</item>
+		<item>Marara Launcher</item>
+		<item>Narval Heavy Torpedo</item>
 	</tech>
 	<tech name="Empire Military 4">
 		<item>Imperial Jupiter</item>
@@ -164,12 +384,10 @@
 		<item>Advanced Terran Scrambler</item>
 		<item>Terran Navy Shield Capacitor</item>
 		<item>Terran Shield Regenerator</item>
-
-		<item>Heavy Ripper Cannon</item>
-		<item>Mass Driver MK3</item>
-		<item>Plasma Cluster Cannon MK3</item>
-		<item>Railgun</item>
-		<item>Turbolaser</item>
+		<item>Plasma Cannon MK3</item>
+		<item>Turreted Marara Launcher</item>
+		<item>Light Narval Torpedo Tube</item>
+		<item>Narval Torpedo Tube</item>
 	</tech>
 	<tech name="Empire Military 5">
 		<item>Imperial Valenderay</item>
@@ -177,10 +395,9 @@
 
 		<item>Integrated Targeting Array</item>
 		<item>Anti-Matter Reactor</item>
-
-
-		<item>Ragnarok Beam</item>
-		<item>Turreted Vulcan Gun</item>
+		<item>Heavy Plasma Turret</item>
+		<item>Ram Beam</item>
+		<item>Beam Turret</item>
 	</tech>
 	
 	
@@ -191,27 +408,16 @@
 	<tech name="Roidhunate Military 1">
 		<item>Ardar Roeth</item>
 		<item>Ardarshir Auxilliary, Class I</item>
-		<item>Laser Cannon MK1</item>
-		<item>Laser Turret MK1</item>
-		<item>Plasma Blaster MK1</item>
-		<item>Razor Turret MK1</item>
-		<item>Turreted Gauss Gun</item>
+		<item>Neutron Disruptor</item>
 	</tech>
 	<tech name="Roidhunate Military 2">
 		<item>Ardar Vach Rueth</item>
 		<item>Ardarshir Auxilliary, Class II</item>
-		<item>BioPlasma Organ Stage 1</item>
-		<item>Gauss Gun</item>
-		<item>Ion Cannon</item>
-		<item>Laser Cannon MK2</item>
-		<item>Laser Turret MK2</item>
-		<item>Mass Driver MK1</item>
-		<item>Orion Beam</item>
-		<item>Plasma Cluster Cannon MK1</item>
-		<item>Plasma Turret MK1</item>
-		<item>Razor MK1</item>
-		<item>Razor Turret MK2</item>
-		<item>Ripper Cannon</item>
+		<item>Improved Neutron Disruptor</item>
+		<item>Ion Cannon I</item>
+		<item>Yrioch Launcher</item>
+		<item>Yrioch Missile</item>		
+		<item>Telchan Torpedo</item>
 	</tech>
 	<tech name="Roidhunate Military 3">
 		<item>Ardar Brythioch</item>
@@ -219,21 +425,17 @@
 
 		<item>Ardar Jammer</item>
 		<item>Ardar Navy Scrambler</item>
-
-		<item>BioPlasma Organ Stage 2</item>
-		<item>Laser Cannon MK3</item>
-		<item>Laser Turret MK3</item>
-		<item>Mass Driver MK2</item>
-		<item>Plasma Blaster MK2</item>
-		<item>Plasma Cluster Cannon MK2</item>
-		<item>Plasma Turret MK2</item>
-		<item>Razor MK2</item>
-		<item>Vulcan Gun</item>
-		<item>Mass Driver MK3</item>
-		<item>Railgun</item>
+		<item>Heavy Neutron Disruptor</item>
+		<item>Turreted Neutron Disruptor</item>
+		<item>Ion Cannon II</item>
+		<item>Ion Cannon Turret</item>
+		<item>Ardar Lance</item>
+		<item>Ardar Beam</item>		
+		<item>Telchan Torpedo Tube</item>
 	</tech>
 	<tech name="Roidhunate Military 4">
 		<item>Ardar Mowyr</item>
+		<item>Merkhrioch</item>
 		<item>Ardarshir Auxilliary, Honourable</item>
 
 		<item>Ardar Hellburner</item>
@@ -243,13 +445,12 @@
 		<item>Improved Power Regulator</item>
 		<item>Naval Fusion Reactor</item>
 		<item>Ardar Navy Shield Capacitor</item>
-
-		<item>Merkhrioch</item>
-		<item>Heavy Ripper Cannon</item>
-		<item>Plasma Cluster Cannon MK3</item>
-		<item>Heavy Laser</item>
-		<item>Railgun Turret</item>
-		<item>Razor MK3</item>
+		<item>Turreted Heavy Neutron Disruptor</item>
+		<item>Ion Cannon III</item>
+		<item>Heavy Ion Cannon Turret</item>
+		<item>Breakshield Lance</item>
+		<item>Yrioch Heavy Launcher</item>
+		<item>Telchan Heavy Tube</item>
 	</tech>
 	<tech name="Roidhunate Military 5">
 		<item>Ardar Moloch</item>
@@ -259,10 +460,7 @@
 		<item>Ardar Shock Troops</item>
 		<item>Armour Repair Droids</item>
 		<item>Improved Trajectory Stabilizer</item>
-
-		<item>Turreted Vulcan Gun</item>
-		<item>Neutron Disruptor</item>
-		<item>Razor Turret MK3</item>
+		<item>Shattershield Lance</item>
 	</tech>
 
 
@@ -270,20 +468,14 @@
 	<tech name="Betelgeuse Military 1">
 		<item>Betelgian Alba</item>
 		<item>Betelgian Courier License</item>
-		<item>Ion Cannon</item>
-		<item>Razor MK1</item>
-		<item>Razor Turret MK1</item>
+
 	</tech>
 	<tech name="Betelgeuse Military 2">
 		<item>Betelgian Libera</item>
 		<item>Betelgian Trader License</item>
-		<item>Heavy Ion Cannon</item>
-		<item>Razor MK2</item>
-		<item>Razor MK3</item>
-		<item>Razor Turret MK2</item>
-		<item>Razor Turret MK3</item>
-		<item>Plasma Blaster MK1</item>
-		<item>Plasma Turret MK1</item>
+
+		<item>Railgun</item>
+		<item>Squalo Torpedo</item>
 	</tech>
 	<tech name="Betelgeuse Military 3">
 		<item>Betelgian Cassandra</item>
@@ -292,16 +484,9 @@
 
 		<item>Betelgian Jammer</item>
 		<item>Betelgian Scrambler</item>
-
-		<item>Heavy Ion Turret</item>
-		<item>Plasma Blaster MK2</item>
-		<item>Plasma Blaster MK3</item>
-		<item>Unicorp Banshee Launcher</item>
-		<item>Banshee Rocket</item>
-		<item>Unicorp Fury Launcher</item>
-		<item>Fury Missile</item>
-		<item>Unicorp Medusa Launcher</item>
-		<item>Medusa Missile</item>
+		<item>Medium Railgun</item>
+		<item>Turreted Railgun</item>
+		<item>Squalo Tube</item>
 	</tech>
 	<tech name="Betelgeuse Military 4">
 		<item>Betelgian Orsa</item>
@@ -310,22 +495,10 @@
 		<item>Betelgian Merchant Prince License</item>
 		<item>Impresa</item>
 
-
 		<item>Improved Turret Refrigeration Cycle</item>
-
-
-		<item>Plasma Turret MK2</item>
-		<item>Unicorp Headhunter Launcher</item>
-		<item>Headhunter Missile</item>
-		<item>Unicorp Mace Launcher</item>
-		<item>Mace Rocket</item>
-		<item>Unicorp Caesar IV Launcher</item>
-		<item>Caesar IV Torpedo</item>
-		<item>Enygma Systems Spearhead Launcher</item>
-		<item>Spearhead Missile</item>
-		<item>TeraCom Medusa Launcher</item>
-		<item>Medusa Missile</item>
-		<item>Enygma Systems Turreted Fury Launcher</item>
+		<item>Heavy Railgun</item>
+		<item>Turreted Medium Railgun</item>
+		<item>Turreted Heavy Railgun</item>
 	</tech>
 	<!--5 is too high even for Dandalo -->
 	<tech name="Betelgeuse Military 5">  
@@ -343,9 +516,13 @@
 	<tech name="Fringe Military 2">
 		<item>Large Steel Plating</item>
 		<item>Power Regulation Override</item>
+
+		<item>Upgraded Mass Driver</item>
 	</tech>
 	<tech name="Fringe Military 3">
 		<item>Space Mercenaries</item>
+		<item>Superior Mass Driver</item>
+		<item>Upgraded Mass Driver Turret</item>
 	</tech>
 	<tech name="Fringe Military 4">
 
@@ -355,6 +532,26 @@
 	</tech>
 
 
+	<!-- for now, available on worlds with low stability -->
+	<tech name="Pirate Military 1">
+		<item>Light EMP Gun</item>
+	</tech>
+	<tech name="Pirate Military 2">
+		<item>EMP Gun</item>
+		<item>Light EMP Turret</item>
+		<item>EMP Grenade</item>
+	</tech>
+	<tech name="Pirate Military 3">
+		<item>Powerful EMP Gun</item>
+		<item>EMP Turret</item>
+		<item>EMP Grenade Launcher</item>
+	</tech>
+	<tech name="Pirate Military 4">
+		<item>Powerful EMP Turret</item>
+	</tech>
+	<tech name="Pirate Military 5">
+
+	</tech>
 
 
 	<tech name="Barbarian Military 1">
@@ -362,45 +559,21 @@
 
 		<item>Steel Plating</item>
 
-
-		<item>Heavy Ripper Cannon</item>
-		<item>Gauss Gun</item>
-		<item>Turreted Gauss Gun</item>
-		<item>Mass Driver MK1</item>
+		<item>Shredder</item>
 	</tech>
 	<tech name="Barbarian Military 2">
 		<item>Barbarian Raider</item>
 
 		<item>Large Steel Plating</item>
+		<item>Improved Shredder</item>
+		<item>Improved Shredder Turret</item>
 
-
-
-		<item>Shredder</item>
-		<item>Mass Driver MK2</item>
-		<item>Mass Driver MK3</item>
-		<item>Unicorp Banshee Launcher</item>
-		<item>Banshee Rocket</item>
-		<item>Unicorp Fury Launcher</item>
-		<item>Fury Missile</item>
-		<item>Unicorp Medusa Launcher</item>
-		<item>Medusa Missile</item>
 	</tech>
 	<tech name="Barbarian Military 3">
 		<item>Barbarian Slaver</item>
-		<item>Railgun</item>
-		<item>Repeating Railgun</item>
-		<item>Railgun Turret</item>
-		<item>Unicorp Headhunter Launcher</item>
-		<item>Headhunter Missile</item>
-		<item>Unicorp Mace Launcher</item>
-		<item>Mace Rocket</item>
-		<item>Unicorp Caesar IV Launcher</item>
-		<item>Caesar IV Torpedo</item>
-		<item>Enygma Systems Spearhead Launcher</item>
-		<item>Spearhead Missile</item>
-		<item>TeraCom Medusa Launcher</item>
-		<item>Medusa Missile</item>
-		<item>Enygma Systems Turreted Fury Launcher</item>
+		
+		<item>Heavy Shredder</item>
+		<item>Heavy Shredder Turret</item>
 	</tech>
 	<tech name="Barbarian Military 4">
 		
@@ -417,29 +590,15 @@
 	<tech name="Royal Ixum Military 1">
 		<item>Ixumite Honorary Hunter</item>
 		<item>Royal Ixum Tunguska</item>
-		<item>Lancelot</item>
-		<item>Laser Cannon MK1</item>
-		<item>Laser Turret MK1</item>
-		<item>Plasma Blaster MK1</item>
-		<item>Razor Turret MK1</item>
-		<item>Turreted Gauss Gun</item>
+		<item>Ixum Laser Cannon MK1</item>
+		<item>Ixum Laser Turret MK1</item>
 	</tech>
 	<tech name="Royal Ixum Military 2">
 		<item>Ixumite Honorary Lancer</item>
 		<item>Royal Ixum Halley</item>
 		<item>Lancelot</item>
-		<item>BioPlasma Organ Stage 1</item>
-		<item>Gauss Gun</item>
-		<item>Ion Cannon</item>
-		<item>Laser Cannon MK2</item>
-		<item>Laser Turret MK2</item>
-		<item>Mass Driver MK1</item>
-		<item>Orion Beam</item>
-		<item>Plasma Cluster Cannon MK1</item>
-		<item>Plasma Turret MK1</item>
-		<item>Razor MK1</item>
-		<item>Razor Turret MK2</item>
-		<item>Ripper Cannon</item>
+		<item>Ixum Laser Cannon MK2</item>
+		<item>Ixum Laser Turret MK2</item>
 	</tech>
 	<tech name="Royal Ixum Military 3">
 		<item>Ixumite Knight</item>
@@ -447,36 +606,18 @@
 		<item>Buffel</item>
 
 		<item>Ixumite Targeting Array</item>
-
-		<item>BioPlasma Organ Stage 2</item>
-		<item>Heavy Ion Cannon</item>
-		<item>Heavy Ion Turret</item>
-		<item>Laser Cannon MK3</item>
-		<item>Laser Turret MK3</item>
-		<item>Mass Driver MK2</item>
-		<item>Plasma Blaster MK2</item>
-		<item>Plasma Cluster Cannon MK2</item>
-		<item>Plasma Turret MK2</item>
-		<item>Razor MK2</item>
-		<item>Vulcan Gun</item>
+		<item>Ixum Laser Cannon MK3</item>
 	</tech>
 	<tech name="Royal Ixum Military 4">
 		<item>Ixumite Baron</item>
 		<item>Royal Ixum Jupiter</item>
 		<item>Kestrel</item>
-		<item>Heavy Ripper Cannon</item>
-		<item>Mass Driver MK3</item>
-		<item>Plasma Cluster Cannon MK3</item>
-		<item>Railgun</item>
-		<item>Turbolaser</item>
+		<item>Ixum Laser Turret MK3</item>
 	</tech>
 	<tech name="Royal Ixum Military 5">
 		<item>Ixumite Earl</item>
-		<item>Ragnarok Beam</item>
-		<item>Turreted Vulcan Gun</item>
+
 	</tech>
-
-
 
 
 
@@ -485,66 +626,31 @@
 	<tech name="Holy Flame Military 1">
 		<item>Holy Flame Servant</item>
 		<item>Holy Flame Roeth</item>
-		<item>Laser Cannon MK1</item>
-		<item>Laser Turret MK1</item>
-		<item>Plasma Blaster MK1</item>
-		<item>Razor Turret MK1</item>
-		<item>Turreted Gauss Gun</item>
+
 	</tech>
 	<tech name="Holy Flame Military 2">
 		<item>Holy Flame Initiate</item>
 		<item>Holy Flame Vach Rueth</item>
 
 		<item>Holy Flame Plating</item>
-
-
-		<item>BioPlasma Organ Stage 1</item>
-		<item>Gauss Gun</item>
-		<item>Ion Cannon</item>
-		<item>Laser Cannon MK2</item>
-		<item>Laser Turret MK2</item>
-		<item>Mass Driver MK1</item>
-		<item>Orion Beam</item>
-		<item>Plasma Cluster Cannon MK1</item>
-		<item>Plasma Turret MK1</item>
-		<item>Razor MK1</item>
-		<item>Razor Turret MK2</item>
-		<item>Ripper Cannon</item>
+		<item>Holy Flame Storm</item>
 	</tech>
 	<tech name="Holy Flame Military 3">
 		<item>Holy Flame Brother</item>
 		<item>Holy Flame Brythioch</item>
 
 		<item>Large Holy Flame Plating</item>
-
-
-		<item>BioPlasma Organ Stage 2</item>
-		<item>Laser Cannon MK3</item>
-		<item>Laser Turret MK3</item>
-		<item>Mass Driver MK2</item>
-		<item>Plasma Blaster MK2</item>
-		<item>Plasma Cluster Cannon MK2</item>
-		<item>Plasma Turret MK2</item>
-		<item>Razor MK2</item>
-		<item>Vulcan Gun</item>
-		<item>Mass Driver MK3</item>
-		<item>Railgun</item>
+		<item>Holy Flame Hurricane</item>
+		<item>Turreted Hurricane</item>
 	</tech>
 	<tech name="Holy Flame Military 4">
 		<item>Holy Flame Warrior</item>
 		<item>Holy Flame Mowyr</item>
 		<item>Merkhrioch</item>
-		<item>Heavy Ripper Cannon</item>
-		<item>Plasma Cluster Cannon MK3</item>
-		<item>Heavy Laser</item>
-		<item>Railgun Turret</item>
-		<item>Razor MK3</item>
+
 	</tech>
 	<tech name="Holy Flame Military 5">
-		<item>Holy Flame Champion</item>
-		<item>Turreted Vulcan Gun</item>
-		<item>Neutron Disruptor</item>
-		<item>Razor Turret MK3</item>
+
 	</tech>
 
 
@@ -577,10 +683,9 @@
 		<item>Medium Fuel Pod</item>
 		<item>Reactor Class I</item>
 
-			
+		
 		<item>GUI - Brushed</item>
 		<item>GUI - Legacy</item>
-		<item>Unicorp Medusa Launcher</item>
 	</tech>
 	<tech name="Generic Civil 3">
 		<item>Hauler</item>
@@ -594,9 +699,6 @@
 		<item>Large Fuel Pod</item>
 		<item>Reverse Thrusters</item>	
 		
-		
-		<item>Lancelot Fighter Bay</item>
-		<item>Lancelot Fighter</item>
 	</tech>
 	<tech name="Generic Civil 4">
 		<item>Whale</item>

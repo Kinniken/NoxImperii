@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Shark">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Shark'>
  <base_type>Shark</base_type>
- <GFX>shark</GFX>
+ <GFX sx="8" sy="8">shark</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Fighter</class>
  <fabricator>Generic</fabricator>
  <description>Light fighters such as the infamous "shark" models have been in use in human space since the dawn of the interplanetary age. They remain popular today for their low price and widespread availability, though they cannot withstand military models.</description>
- 
-<price>200000</price>
+ <price>200000</price>
  <movement>
   <thrust>230</thrust>
   <turn>140</turn>
   <speed>240</speed>
+  <engine_limit>150</engine_limit>
  </movement>
  <health>
   <absorb>6</absorb>
@@ -34,13 +34,12 @@
 <stats>
   
 </stats>
-
- <slots>
-  <weapon size="small" x="-3" y="0" h="2"/>
-  <weapon size="small" x="3" y="0" h="2"/>
-  <utility size="small"/>
-  <structure size="small"/>
-  <structure size="small"/>
- </slots>
+<slots>
+<weapon size="small" x="-3" y="0" h="2" />
+<weapon size="small" x="3" y="0" h="2" />
+<utility size="small"/>
+<structure size="small"/>
+<structure size="small"/>
+</slots>
 
 </ship>

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Pirate Kestrel">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Pirate Kestrel'>
  <base_type>Kestrel</base_type>
  <GFX sx="10" sy="10">kestrel_pirate</GFX>
  <GUI>slim</GUI>
@@ -7,12 +7,12 @@
  <class>Destroyer</class>
  <fabricator>Pirate Shipyards</fabricator>
  <description>Retrofitted from kestrels stolen, captured or bought via back-handed channels, the pirate version of the ship packs even more punch than the factory one. Truly a ship to strike fear in passing traders.</description>
- 
-<price>5000000</price>
+ <price>5000000</price>
  <movement>
   <thrust>170</thrust>
   <turn>120</turn>
   <speed>200</speed>
+  <engine_limit>2000</engine_limit>
  </movement>
  <health>
   <absorb>30</absorb>
@@ -34,21 +34,19 @@
 <stats>
   
 </stats>
+<slots>
+<weapon size="large" x="-23" y="-15" h="5" />
+<weapon size="large" x="-23" y="15" h="5" />
+<weapon size="large" x="44" y="0" h="0" />
+<weapon prop="turret" size="large" x="-6" y="0" h="12" />
+<weapon prop="turret" size="large" x="-6" y="0" h="12" />
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<structure size="large"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
 
- <slots>
-  <weapon size="large" x="-23" y="-15" h="5"/>
-  <weapon size="large" x="-23" y="15" h="5"/>
-  <weapon size="large" x="44" y="0" h="0"/>
-  <weapon size="large" x="-6" y="0" h="12"/>
-  <weapon size="large" x="-6" y="0" h="12"/>
-
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-
-  <structure size="large"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
- </slots>
 </ship>

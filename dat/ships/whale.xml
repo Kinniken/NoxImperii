@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Whale">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Whale'>
  <base_type>Whale</base_type>
  <GFX sx="6" sy="6">llintir</GFX>
  <GUI>slim</GUI>
@@ -7,12 +7,12 @@
  <class>Freighter</class>
  <fabricator>Generic</fabricator>
  <description>Extended, more modular versions of fish bone designs, such ships are generally known as "whales" - or equivalent massive, long-spined animals of non-Terran origins. Much like their smaller variants, whales are prized more for their low cargo/price ratios than for their performance or looks.</description>
- 
-<price>2000000</price>
+ <price>2000000</price>
  <movement>
   <thrust>140</thrust>
   <turn>80</turn>
   <speed>150</speed>
+  <engine_limit>3000</engine_limit>
  </movement>
  <health>
   <absorb>25</absorb>
@@ -34,28 +34,23 @@
 <stats>
   
 </stats>
+<slots>
+<weapon prop="turret" size="medium" x="+50" y="0" h="0" />
+<weapon prop="turret" size="medium" x="-50" y="0" h="0" />
+<weapon prop="turret" size="small" x="+50" y="0" h="0" />
+<weapon prop="turret" size="small" x="-50" y="0" h="0" />
+<utility size="large"/>
+<utility size="large"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+</slots>
 
-
- <slots>
-
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="large"/>
-  <utility size="large"/>
-
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-
-  <weapon    size="medium"  x="+50"  y="0" h="0"/>
-  <weapon    size="medium"  x="-50"  y="0" h="0"/>
-  <weapon    size="medium"  x="+50"  y="0" h="0"/>
-  <weapon    size="medium"  x="-50"  y="0" h="0"/>
- </slots>
- 
 </ship>

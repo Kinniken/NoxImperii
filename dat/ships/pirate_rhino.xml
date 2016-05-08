@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Pirate Rhino">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Pirate Rhino'>
  <base_type>Rhino</base_type>
  <GFX sx="10" sy="10">rhino_pirate</GFX>
  <GUI>slim</GUI>
@@ -7,12 +7,12 @@
  <class>Armoured Transport</class>
  <fabricator>Pirate Shipyards</fabricator>
  <description>Adapted to pirate needs, the rhino trades some of its generous cargo hold in exchange for more armour and offensive capacity. A very capable ship indeed.</description>
-
-<price>2500000</price>
+ <price>2500000</price>
  <movement>
   <thrust>200</thrust>
   <turn>120</turn>
   <speed>180</speed>
+  <engine_limit></engine_limit>
  </movement>
  <health>
   <absorb>30</absorb>
@@ -34,23 +34,23 @@
 <stats>
   
 </stats>
-
-
- <slots>
-  <weapon size="large" x="25" y="-3" h="4"/>
-  <weapon size="large" x="25" y="3" h="4"/>
-  <weapon size="medium" x="-15" y="-3" h="4"/>
-  <weapon size="medium" x="-15" y="3" h="4"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="large"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="large"/>
-  <structure size="large"/>
- </slots>
+<slots>
+<weapon size="large" x="25" y="-3" h="4" />
+<weapon size="large" x="25" y="3" h="4" />
+<weapon prop="turret" size="medium" x="-15" y="-3" h="4" />
+<weapon prop="turret" size="medium" x="-15" y="3" h="4" />
+<weapon prop="turret" size="medium" x="-15" y="3" h="4" />
+<utility size="large"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
 
 </ship>

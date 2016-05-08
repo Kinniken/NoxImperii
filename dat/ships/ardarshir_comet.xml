@@ -1,17 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Ardar Vach Rueth">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Ardar Vach Rueth'>
  <base_type>Ardar Vach Rueth</base_type>
  <GFX sx="12" sy="12">ardarshir_comet</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Destroyer</class>
  <fabricator>Roidhunate Shipyards</fabricator>
- <description>Comet-class frigates by Terran standards, Vach Rueth ships are used more as support vessels by the Ardars. As such, they have lesser range and speed than their Imperial equivalents, but are somewhat better armed.</description>
-<price>900000</price>
+ <description>Comet-class frigates by Terran standards, Vach Rueth ships are used more as support vessels by the Ardars. As such, they have lesser range and speed than their Imperial equivalents, but are somewhat better armed</description>
+ <price>900000</price>
+ <license>Ardarshir Auxilliary, Class II</license>
  <movement>
   <thrust>190</thrust>
   <turn>120</turn>
   <speed>200</speed>
+  <engine_limit>400</engine_limit>
  </movement>
  <health>
   <absorb>25</absorb>
@@ -33,17 +35,19 @@
 <stats>
   
 </stats>
- <slots>
-  <weapon x="12" y="0" h="0" size="medium"/>
-  <weapon x="12" y="0" h="0" size="medium"/>
-  <weapon x="-3" y="0" h="2" size="small"/>
-  <weapon x="-3" y="0" h="2" size="small"/>
-  <weapon x="-3" y="0" h="2" size="small"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="small"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
- </slots>
+<slots>
+<weapon size="medium" x="12" y="0" h="0" />
+<weapon size="medium" x="-12" y="0" h="0" />
+<weapon size="small" x="3" y="0" h="2" />
+<weapon size="small" x="-3" y="0" h="2" />
+<weapon size="small" x="12" y="0" h="0" />
+<weapon prop="turret" size="small" x="-12" y="0" h="0" />
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="small"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
+
 </ship>

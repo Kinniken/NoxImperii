@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Kestrel">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Kestrel'>
  <base_type>Kestrel</base_type>
  <GFX sx="10" sy="10">kestrel</GFX>
  <GUI>slim</GUI>
@@ -7,12 +7,13 @@
  <class>Destroyer</class>
  <fabricator>Krain Industries</fabricator>
  <description>The Kestrel is a hard-to-classify ship; while its tonnage and defensive capacities mark it as a destroyer, its offensive capacities are in cruiser territory, and its speed and agility are excellent for a ship of its class. Outside of major standing navies, few ships can take it one-on-one.</description>
- 
-<price>4500000</price>
+ <price>4500000</price>
+ <license>Reserve Major License</license>
  <movement>
   <thrust>170</thrust>
   <turn>120</turn>
   <speed>180</speed>
+  <engine_limit>2000</engine_limit>
  </movement>
  <health>
   <absorb>30</absorb>
@@ -34,20 +35,18 @@
 <stats>
   
 </stats>
+<slots>
+<weapon size="large" x="-23" y="-15" h="5" />
+<weapon size="large" x="-23" y="15" h="5" />
+<weapon prop="turret" size="large" x="44" y="0" h="0" />
+<weapon prop="turret" size="large" x="-6" y="0" h="12" />
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<structure size="large"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
 
- <slots>
-  <weapon size="large" x="-23" y="-15" h="5"/>
-  <weapon size="large" x="-23" y="15" h="5"/>
-  <weapon size="large" x="44" y="0" h="0"/>
-  <weapon size="large" x="-6" y="0" h="12"/>
-
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-
-  <structure size="large"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
- </slots>
 </ship>

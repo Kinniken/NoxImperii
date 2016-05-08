@@ -806,6 +806,7 @@ local function generateCivilizedPlanetServices(planet)
 	local bestIndustry=0
 	local bestTechnology=0
 	local bestMilitary=0
+	local bestStability=0
 
 	for k,settlement in pairs(planet.lua.settlements) do
 		if (settlement.population>bestPop) then
@@ -819,6 +820,9 @@ local function generateCivilizedPlanetServices(planet)
 		end
 		if (settlement.military>bestMilitary) then
 			bestMilitary=settlement.military
+		end
+		if (settlement.stability>bestStability) then
+			bestStability=settlement.stability
 		end
 	end
 
@@ -900,7 +904,22 @@ local function generateCivilizedPlanetServices(planet)
   		generateTechnologiesMilitary(planet,bestIndustry,bestTechnology,bestMilitary,"Fringe")
   	end
 
-
+  	--special case of Pirate techs
+  	if bestStability<0.8 then
+  		planet.c:addTechGroup("Pirate Military 1")  		
+  	end
+  	if bestStability<0.8 and bestTechnology>0.5 then
+		planet.c:addTechGroup("Pirate Military 2")
+	end
+	if bestStability<0.6 and bestTechnology>0.5 then
+		planet.c:addTechGroup("Pirate Military 3")
+	end
+	if bestStability<0.6 and bestTechnology>0.8 then
+		planet.c:addTechGroup("Pirate Military 4")
+	end
+	if bestStability<0.6 and bestTechnology>1 then
+		planet.c:addTechGroup("Pirate Military 5")
+	end
 
   	if (bestTechnology<0.5) then
   		range=1
@@ -921,6 +940,14 @@ local function generateCivilizedPlanetServices(planet)
   end
 
   generateExtraPresences(planet,sectorStability)
+
+
+  if debugMode and planet.c:name()=="Luna" then
+  	planet.c:addTechGroup("All")
+  	planet.c:addService("o")
+  	planet.c:addService("s")
+  end
+
 end
 
 local function handleSettlementExtraDemandAndSupply(settlement,commodities)

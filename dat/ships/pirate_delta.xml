@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Pirate Delta">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Pirate Delta'>
  <base_type>Delta</base_type>
  <GFX sx="10" sy="10">phalanx_pirate</GFX>
  <GUI>slim</GUI>
@@ -7,12 +7,12 @@
  <class>Corvette</class>
  <fabricator>Pirate Shipyards</fabricator>
  <description>Delta designs used by pirates trade some cargo space for increased thrust and heavier armour, as they are intended primarily as strike ships against beefier merchant ships.</description>
- 
-<price>1100000</price>
+ <price>1100000</price>
  <movement>
   <thrust>220</thrust>
   <turn>120</turn>
   <speed>200</speed>
+  <engine_limit>800</engine_limit>
  </movement>
  <health>
   <absorb>18</absorb>
@@ -34,18 +34,17 @@
 <stats>
   
 </stats>
+<slots>
+<weapon size="large" x="4" y="5" h="-2" />
+<weapon size="medium" x="4" y="-5" h="-2" />
+<weapon size="medium" x="0" y="10" h="-2" />
+<weapon size="medium" x="0" y="-10" h="-2" />
+<weapon prop="turret" size="medium" x="0" y="-10" h="-2" />
+<utility size="medium"/>
+<utility size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
 
- <slots>
-  <weapon size="medium" x="4" y="5" h="-2"/>
-  <weapon size="medium" x="4" y="-5" h="-2"/>
-  <weapon size="medium" x="0" y="10" h="-2"/>
-  <weapon size="medium" x="0" y="-10" h="-2"/>  
-
-  <utility size="medium"/>
-  <utility size="medium"/>
-
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
- </slots>
 </ship>

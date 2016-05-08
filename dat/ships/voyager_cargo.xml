@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Voyager Cargo">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Voyager Cargo'>
  <base_type>Voyager</base_type>
  <GFX sx="6" sy="6">tkaltcargo</GFX>
  <GUI>slim</GUI>
@@ -7,12 +7,12 @@
  <class>Freighter</class>
  <fabricator>Generic</fabricator>
  <description>The general structure of Voyager spacecrafts predates human ultraluminous flights, and has been reused and re-adapted on many worlds. Cargo versions are particularly popular; not fancy, but reliable and fairly speedy for their size.</description>
- 
-<price>450000</price>
+ <price>450000</price>
  <movement>
   <thrust>180</thrust>
   <turn>100</turn>
   <speed>180</speed>
+  <engine_limit>700</engine_limit>
  </movement>
  <health>
   <absorb>8</absorb>
@@ -34,19 +34,17 @@
 <stats>
   
 </stats>
+<slots>
+<weapon prop="turret" size="small" x="+10" y="0" h="  0" />
+<weapon prop="turret" size="small" x="-10" y="0" h="  0" />
+<utility size="medium"/>
+<utility size="small"/>
+<utility size="small"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
 
- <slots>
-
-  <utility size="small"/>
-  <utility size="small"/>
-  <utility size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-
-  <weapon    size="small"  x="+10"  y="0" h="  0"/>
-  <weapon    size="small"  x="-10"  y="0" h="  0"/>
- </slots>
- </ship>
+</ship>

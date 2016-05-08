@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Vendetta">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Vendetta'>
  <base_type>Vendetta</base_type>
- <GFX>vendetta</GFX>
+ <GFX sx="8" sy="8">vendetta</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Destroyer</class>
  <fabricator>Generic</fabricator>
  <description>This simple and ancient design is built to maximise the amount of weapons that can be focused simultaneously on the primary target, even at the expense of defence and agility.</description>
- 
-<price>900000</price>
+ <price>900000</price>
  <movement>
   <thrust>180</thrust>
   <turn>100</turn>
   <speed>170</speed>
+  <engine_limit>600</engine_limit>
  </movement>
  <health>
   <absorb>15</absorb>
@@ -34,22 +34,19 @@
 <stats>
   
 </stats>
+<slots>
+<weapon size="medium" x="16" y="-9" h="0" />
+<weapon size="medium" x="16" y="9" h="0" />
+<weapon size="small" x="13" y="-13" h="0" />
+<weapon size="small" x="13" y="13" h="0" />
+<weapon size="small" x="19" y="0" h="-2" />
+<weapon size="small" x="3" y="0" h="2" />
+<utility size="medium"/>
+<utility size="small"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="small"/>
+<structure size="small"/>
+</slots>
 
- <slots>
-  <weapon size="medium" x="16" y="-9" h="0"/>
-  <weapon size="medium" x="16" y="9" h="0"/>
-  <weapon size="small" x="13" y="-13" h="0"/>
-  <weapon size="small" x="13" y="13" h="0"/>
-  <weapon size="small" x="19" y="0" h="-2"/>
-  <weapon size="small" x="3" y="0" h="2"/>
-
-  <utility size="medium"/>
-  <utility size="small"/>
-
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="small"/>
-  <structure size="small"/>
-
- </slots>
 </ship>

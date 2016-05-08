@@ -59,6 +59,7 @@
   <player>3</player>
   <spawn>imperial_trader</spawn>
   <standing>imperial_trader</standing>
+  <equip>empire</equip>
   <allies>
     <ally>Empire of Terra</ally>
   </allies>
@@ -75,6 +76,7 @@
   <player>0</player>
   <spawn>ardar_trader</spawn>
   <standing>ardar_trader</standing>
+  <equip>roidhunate</equip>
   <allies>
     <ally>Roidhunate of Ardarshir</ally>
   </allies>
@@ -91,6 +93,7 @@
   <player>3</player>
   <spawn>betelgian_trader</spawn>
   <standing>betelgian_trader</standing>
+  <equip>betelgeuse</equip>
   <allies>
     <ally>Oligarchy of Betelgeuse</ally>
   </allies>

@@ -7,130 +7,81 @@ include("dat/factions/equip/generic.lua")
 --    @param p Pilot to equip
 --]]
 function equip( p )
+   -- Start with an empty ship
+   p:rmOutfit("all")
+   p:rmOutfit("cores")
+
+
    -- Get ship info
    local shiptype, shipsize = equip_getShipBroad( p:ship():class() )
 
    -- Split by type
-   if shiptype == "military" then
-      equip_empireMilitary( p, shipsize )
-   else
-      equip_generic( p )
+   if shiptype == "civilian" then
+      equip_genericCivilian( p, shipsize )
+   elseif shiptype == "merchant"  then
+      equip_genericMerchant( p, shipsize )
+   elseif shiptype == "military" then
+      equip_military( p, shipsize )
    end
 end
 
 
--- Long Night change: now tied to slot size. Weapons must be of the level of the function
--- (or below), never above!
--- CANNONS
-function equip_forwardEmpLow ()
-   return { "Laser Cannon MK2", "Laser Cannon MK3" }
-end
-function equip_forwardEmpMed ()
-   return { "Laser Cannon MK3", "Ripper Cannon", "Heavy Ripper Cannon" }
-end
-function equip_forwardEmpHigh ()
-   return { "Railgun", "Heavy Ripper Cannon" }
-end
--- TURRETS
-function equip_turretEmpLow ()
-   return { "Laser PD MK2" }
-end
-function equip_turretEmpMed ()
-   return { "Laser Turret MK2", "Laser Turret MK3" }
-end
-function equip_turretEmpHig ()
-   return { "Heavy Laser", "Turbolaser" }
-end
--- RANGED
-function equip_secondaryEmpLow ()
-   return { "TeraCom Fury Launcher" }
-end
-function equip_secondaryEmpMed ()
-   return { "Unicorp Headhunter Launcher" }
-end
-function equip_secondaryEmpHig ()
-   return { "Unicorp Headhunter Launcher" }
-end
+function equip_military( p, shipsize )
+   local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(p:ship())
+   local nbTurrets,nbForwards,nbSecondaries,nbStructures,nbUtilities
 
+   nbTurrets=0
+   nbForwards=0
+   nbSecondaries=0
+   nbStructures=0
+   nbUtilities=0
 
-
---[[
--- @brief Equips a empire military type ship.
---]]
-function equip_empireMilitary( p, shipsize )
-   local medium, low
-   local use_medium, use_low
-   local use_secondary, use_forward, use_turrets
-   local nweapon, nmedium, nlow = p:ship():slots()
-   local scramble
-
-   -- Defaults
-   medium      = { "Civilian Scrambler" }
-   weapons     = {}
-   scramble    = false
-
-   --numbers of weapons of each type to use, regardless of size
-   use_forward=0
-   use_secondary=0
-   use_turrets=0
-
-   -- Equip by size and type
+   -- Number of each type of outfits
    if shipsize == "small" then
       local class = p:ship():class()
 
+      nbTurrets=rnd.rnd(nbSlotTurrets/2,nbSlotTurrets)
+
       -- Scout
       if class == "Scout" then
-         use_forward    = rnd.rnd(1,#nweapon)
-         medium         = { "Generic Afterburner", "Civilian Scrambler" }
-         use_medium     = 2
-         low            = { "Solar Panel" }
+         nbForwards    = rnd.rnd(1,nbSlotWeapons)
 
       -- Fighter
       elseif class == "Fighter" then
-         use_forward    = nweapon-1
-         use_secondary  = 1
-         medium         = equip_mediumLow()
-         low            = equip_lowLow()
+         nbForwards    = rnd.rnd(nbSlotWeapons/2,nbSlotWeapons)
 
       -- Bomber
       elseif class == "Bomber" then
-         use_forward    = rnd.rnd(1,2)
-         use_secondary  = nweapon - use_primary
-         medium         = equip_mediumLow()
-         low            = equip_lowLow()
+         nbSecondaries  = rnd.rnd(1,2)
+         nbForwards    = nbSlotWeapons-use_secondary
+
+      else
+         nbForwards    = rnd.rnd(nbSlotWeapons/2,nbSlotWeapons)
+
       end
 
    elseif shipsize == "medium" then
-      local class = p:ship():class()
       
-      -- Corvette
-      if class == "Corvette" then
-         use_secondary  = rnd.rnd(1,2)
-         use_forward    = nweapon - use_secondary
-         medium         = equip_mediumMed()
-         low            = equip_lowMed()
-      end
+      nbTurrets=rnd.rnd(nbSlotTurrets/2,nbSlotTurrets)
 
-      -- Destroyer
-      if class == "Destroyer" then
-         use_secondary  = 0
-         use_turrets    = nweapon
-         use_forward    = nweapon - use_secondary - use_turrets
-         medium         = equip_mediumMed()
-         low            = equip_lowMed()
-      end
+      nbSecondaries  = rnd.rnd(0,nbSlotWeapons/3)
+      nbForwards     = rnd.rnd(1,nbSlotWeapons-nbSecondaries)
+   else      
+      nbTurrets=rnd.rnd(nbSlotTurrets/2,nbSlotTurrets)
 
-   else -- "heavy"
-      use_secondary  = 2
-      use_turrets    = nweapon - use_secondary
-
-      medium         = equip_mediumHig()
-      low            = equip_lowHig()
+      nbSecondaries  = rnd.rnd(1,nbSlotWeapons/3)
+      nbForwards     = rnd.rnd(1,nbSlotWeapons-nbSecondaries)
    end
 
-   fillWeaponsBySlotSize(p,use_forward,use_secondary,use_turrets,{equip_forwardEmpLow,equip_forwardEmpMed,equip_forwardEmpHig},
-      {equip_secondaryEmpLow,equip_secondaryEmpMed,equip_secondaryEmpHig},{equip_turretEmpLow,equip_turretEmpMed,equip_turretEmpHig})
+   nbStructures  = rnd.rnd(nbSlotStructures/3,nbSlotStructures)
+   nbUtilities  = rnd.rnd(nSlotUtilities/3,nSlotUtilities)
 
-   equip_ship( p, scramble, weapons, medium, low, 
-               use_medium, use_low )
+   local outfits={}
+
+   equip_fillTurretsBySlotSize(p:ship(),outfits,nbTurrets,equip_defaultTurretsArdar())
+   equip_fillWeaponsBySlotSize(p:ship(),outfits,nbForwards,nbSecondaries,equip_defaultForwardArdar(),equip_defaultSecondaryArdar())
+   equip_fillUtilitiesBySlotSize(p:ship(),outfits,nbUtilities,equip_defaultUtilitiesArdar())
+   equip_fillStructuresBySlotSize(p:ship(),outfits,nbStructures,equip_defaultStructuresArdar())
+
+   equip_ship( p, outfits )
 end

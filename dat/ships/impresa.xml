@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Impresa">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Impresa'>
  <base_type>Impresa</base_type>
  <GFX sx="6" sy="6">sshilaan</GFX>
  <GUI>slim</GUI>
@@ -7,12 +7,13 @@
  <class>Cruiser</class>
  <fabricator>Maggiore Shipyards</fabricator>
  <description>Maybe the finest ship ever produced on Betelgeuse, the Impresa is a design unique in known space, that goes beyond variations on existing template to offer something genuinely new. While technically classified as a cruiser, the Impresa is really a deep space exploration and trade ship, intended to survey uncharted territories, collect masses of exotic goods, and come back through barbarian space with tales of uncharted worlds. No other known ship will travel so far through hostile space, and in the customary Betelgian style to boot.</description>
-
-<price>5000000</price>
+ <price>5000000</price>
+ <license>Betelgian Merchant Prince License</license>
  <movement>
   <thrust>180</thrust>
   <turn>100</turn>
   <speed>190</speed>
+  <engine_limit>5000</engine_limit>
  </movement>
  <health>
   <absorb>50</absorb>
@@ -34,29 +35,25 @@
 <stats>
   
 </stats>
- 
- <slots>
+<slots>
+<weapon prop="turret" size="large" x="+20" y="  0" h="  0" />
+<weapon prop="turret" size="large" x="-20" y="  0" h="  0" />
+<weapon prop="turret" size="medium" x="+40" y="+20" h="  0" />
+<weapon prop="turret" size="medium" x="+40" y="-20" h="  0" />
+<weapon prop="turret" size="medium" x="-40" y="+20" h="  0" />
+<weapon prop="turret" size="medium" x="-40" y="-20" h="  0" />
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+</slots>
 
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-
-  <weapon    size="large" x="+20" y="  0" h="  0"/>
-  <weapon    size="large" x="-20" y="  0" h="  0"/>
-  <weapon    size="large"  x="+40" y="+20" h="  0"/>
-  <weapon    size="large"  x="+40" y="-20" h="  0"/>
-  <weapon    size="medium"  x="-40" y="+20" h="  0"/>
-  <weapon    size="medium"  x="-40" y="-20" h="  0"/>
- </slots>
- 
 </ship>

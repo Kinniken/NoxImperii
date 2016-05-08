@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Barbarian Looter">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Barbarian Looter'>
  <base_type>Barbarian Looter</base_type>
  <GFX sx="12" sy="12">barbarian_continent</GFX>
  <GUI>slim</GUI>
@@ -9,11 +9,12 @@
  <description>Slow and with inferior technology and engines, this barbarian ship is only technically a Continent-class destroyer. But in numbers and against weak targets, it is more than able to plunder enough to fill its large cargo hauls.
  
 The striking steel spikes often added to its hull are mostly intended for effect, though there are stories in worlds on the fringe of barbarian captains wild enough to attempt ramming manoeuvres.</description>
-<price>1800000</price>
+ <price>1800000</price>
  <movement>
   <thrust>140</thrust>
   <turn>90</turn>
   <speed>150</speed>
+  <engine_limit>2000</engine_limit>
  </movement>
  <health>
   <absorb>45</absorb>
@@ -35,18 +36,17 @@ The striking steel spikes often added to its hull are mostly intended for effect
 <stats>
   
 </stats>
- <slots>
-  <weapon x="-15" y="-10" h="-10" size="large"/>
-  <weapon x="-15" y="10" h="-10" size="large"/>
-  <weapon x="-15" y="10" h="-10" size="large"/>
-  <weapon x="20" y="0" h="-10" size="medium"/>
-  <weapon x="4" y="-5" h="-10" size="medium"/>
-  <weapon x="4" y="5" h="-10" size="medium"/>
-  <utility size="large"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
- </slots>
+<slots>
+<weapon size="large" x="-15" y="-10" h="-10" />
+<weapon size="large" x="-15" y="10" h="-10" />
+<weapon prop="turret" size="medium" x="-15" y="10" h="-10" />
+<weapon prop="turret" size="medium" x="20" y="0" h="-10" />
+<utility size="large"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
+
 </ship>

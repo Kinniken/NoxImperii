@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Betelgian Cassandra">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Betelgian Cassandra'>
  <base_type>Betelgian Cassandra</base_type>
  <GFX sx="10" sy="10">preacher</GFX>
  <GUI>slim</GUI>
@@ -7,11 +7,13 @@
  <class>Destroyer</class>
  <fabricator>Betelgian State Shipyards</fabricator>
  <description>The Cassandra is an exception in the Betelgian navy: a ship with no civilian ancestor. The result is an unusually capable light destroyer, tougher than its gaudy Betelgian exterior would indicate.</description>
-<price>2500000</price>
+ <price>2500000</price>
+ <license>Betelgian Merchant License</license>
  <movement>
   <thrust>200</thrust>
   <turn>120</turn>
   <speed>180</speed>
+  <engine_limit>2000</engine_limit>
  </movement>
  <health>
   <absorb>40</absorb>
@@ -33,20 +35,19 @@
 <stats>
   
 </stats>
- <slots>
-  <weapon size="large" x="15" y="1" h="2"/>
-  <weapon size="large" x="15" y="-1" h="2"/>
-  <weapon size="large" x="-9" y="-10" h="2"/>
-  <weapon size="large" x="-9" y="10" h="2"/>
-  <weapon size="medium" x="-9" y="-3" h="2"/>
-  <weapon size="medium" x="-9" y="3" h="2"/>
-  <weapon size="medium" x="-9" y="-3" h="2"/>
-  <weapon size="medium" x="-9" y="3" h="2"/>
-  <utility size="large"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <structure size="large"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
- </slots>
+<slots>
+<weapon size="large" x="15" y="1" h="2" />
+<weapon size="large" x="15" y="-1" h="2" />
+<weapon prop="turret" size="medium" x="-9" y="-10" h="2" />
+<weapon prop="turret" size="medium" x="-9" y="10" h="2" />
+<weapon prop="turret" size="medium" x="-9" y="-3" h="2" />
+<weapon prop="turret" size="medium" x="-9" y="3" h="2" />
+<utility size="large"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<structure size="large"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
+
 </ship>

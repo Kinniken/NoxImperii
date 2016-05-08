@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Ardar Roeth">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Ardar Roeth'>
  <base_type>Ardar Roeth</base_type>
  <GFX sx="10" sy="10">ardarshir_meteor</GFX>
  <GUI>slim</GUI>
@@ -8,10 +8,12 @@
  <fabricator>Roidhunate Shipyards</fabricator>
  <description>Ardar Roeths are the most common fighters in the Roidhunate's navy. Smaller and lighter than the typical Terran meteor-class vessel, they are unusually fast and manoeuvrable.</description>
  <price>250000</price>
+ <license>Ardarshir Auxilliary, Class I</license>
  <movement>
   <thrust>280</thrust>
   <turn>155</turn>
   <speed>310</speed>
+  <engine_limit>120</engine_limit>
  </movement>
  <health>
   <absorb>7</absorb>
@@ -33,13 +35,14 @@
 <stats>
   
 </stats>
- <slots>
-  <weapon x="-3" y="0" h="2" size="small"/>
-  <weapon x="-3" y="0" h="2" size="small"/>
-  <weapon x="-3" y="0" h="2" size="small"/>
-  <utility size="small"/>
-  <utility size="small"/>
-  <structure size="small"/>
-  <structure size="small"/>
- </slots>
+<slots>
+<weapon size="small" x="-3" y="0" h="2" />
+<weapon size="small" x="-3" y="0" h="2" />
+<weapon size="small" x="-3" y="0" h="2" />
+<utility size="small"/>
+<utility size="small"/>
+<structure size="small"/>
+<structure size="small"/>
+</slots>
+
 </ship>

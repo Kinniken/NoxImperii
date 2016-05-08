@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Sunflower">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Sunflower'>
  <base_type>Sunflower</base_type>
  <GFX sx="6" sy="6">sunflower</GFX>
  <GUI>slim</GUI>
@@ -7,12 +7,12 @@
  <class>Freighter</class>
  <fabricator>Living Sun Staryards</fabricator>
  <description>While the Zheng He is an evolutionary design based on century-old plans, its direct competitor the Sunflower is a much more radical rethought of the bulk cargo concept. Its more compact shape allows it to pack even more cargo in a more structurally sound shape. It is however much more expensive and rather slower.</description>
- 
-<price>4000000</price>
+ <price>4000000</price>
  <movement>
   <thrust>150</thrust>
   <turn>80</turn>
   <speed>150</speed>
+  <engine_limit>5000</engine_limit>
  </movement>
  <health>
   <absorb>40</absorb>
@@ -34,33 +34,29 @@
 <stats>
   
 </stats>
+<slots>
+<weapon prop="turret" size="medium" x="+50" y="0" h="0" />
+<weapon prop="turret" size="medium" x="-50" y="0" h="0" />
+<weapon prop="turret" size="medium" x="+50" y="0" h="0" />
+<weapon prop="turret" size="medium" x="-50" y="0" h="0" />
+<weapon prop="turret" size="small" x="+50" y="0" h="0" />
+<weapon prop="turret" size="small" x="-50" y="0" h="0" />
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+</slots>
 
- <slots>
-
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-
-  <weapon    size="medium"  x="+50"  y="0" h="0"/>
-  <weapon    size="medium"  x="-50"  y="0" h="0"/>
-  <weapon    size="medium"  x="+50"  y="0" h="0"/>
-  <weapon    size="medium"  x="-50"  y="0" h="0"/>
-  <weapon    size="medium"  x="+50"  y="0" h="0"/>
-  <weapon    size="medium"  x="-50"  y="0" h="0"/>
- </slots>
- 
 </ship>

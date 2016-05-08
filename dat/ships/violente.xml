@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Violente">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Violente'>
  <base_type>Violente</base_type>
  <GFX sx="10" sy="10">vigilance</GFX>
  <GUI>slim</GUI>
@@ -7,12 +7,13 @@
  <class>Cruiser</class>
  <fabricator>Maggiore Shipyards</fabricator>
  <description>Despite the best efforts of the Doge and Great Council to restrain private militias in Betelgian space, tensions between leading families and the need for strong escorts for long-term trading fleets made the development of private cruisers unavoidable. The violente is among the most common one; in typical Betelgian fashion, its combat role does not prevent it from including luxurious living space and a large cargo hold.</description>
- 
-<price>3500000</price>
+ <price>3500000</price>
+ <license>Betelgian Explorer License</license>
  <movement>
   <thrust>150</thrust>
   <turn>100</turn>
   <speed>150</speed>
+  <engine_limit>3500</engine_limit>
  </movement>
  <health>
   <absorb>40</absorb>
@@ -34,24 +35,21 @@
 <stats>
   
 </stats>
+<slots>
+<weapon size="medium" x="28" y="-3" h="-0" />
+<weapon size="medium" x="28" y="3" h="-0" />
+<weapon prop="turret" size="large" x="10" y="-3" h="2" />
+<weapon prop="turret" size="large" x="10" y="3" h="2" />
+<utility size="large"/>
+<utility size="large"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
 
- <slots>
-  <weapon size="large" x="28" y="-3" h="-0"/>
-  <weapon size="large" x="28" y="3" h="-0"/>
-  <weapon size="medium" x="10" y="-3" h="2"/>
-  <weapon size="medium" x="10" y="3" h="2"/>
-
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
- </slots>
- 
 </ship>

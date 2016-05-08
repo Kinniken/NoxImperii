@@ -1,17 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Imperial Tunguska">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Imperial Tunguska'>
  <base_type>Imperial Tunguska</base_type>
- <GFX>empire_meteor</GFX>
+ <GFX sx="8" sy="8">empire_meteor</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Fighter</class>
  <fabricator>Imperial Shipyards</fabricator>
  <description>The Tunguska light fighter is the Meteor-class ship currently used in the Terran Navy for patrolling systems and for short-range recognition.</description>
  <price>280000</price>
+ <license>Reserve Sub-Lieutenant License</license>
  <movement>
   <thrust>250</thrust>
   <turn>145</turn>
   <speed>290</speed>
+  <engine_limit>150</engine_limit>
  </movement>
  <health>
   <absorb>10</absorb>
@@ -33,13 +35,14 @@
 <stats>
   
 </stats>
- <slots>
-  <weapon x="12" y="0" h="0" size="small"/>
-  <weapon x="-3" y="0" h="2" size="small"/>
-  <weapon x="3" y="0" h="2" size="small"/>
-  <utility size="small"/>
-  <utility size="small"/>
-  <structure size="small"/>
-  <structure size="small"/>
- </slots>
+<slots>
+<weapon size="small" x="12" y="0" h="0" />
+<weapon size="small" x="-3" y="0" h="2" />
+<weapon size="small" x="3" y="0" h="2" />
+<utility size="small"/>
+<utility size="small"/>
+<structure size="small"/>
+<structure size="small"/>
+</slots>
+
 </ship>

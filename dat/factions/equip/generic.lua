@@ -28,65 +28,53 @@ function equip_generic( p )
       equip_genericMerchant( p, shipsize )
    elseif shiptype == "military" then
       equip_genericMilitary( p, shipsize )
-   elseif shiptype == "robotic" then
-      equip_genericRobotic( p, shipsize )
    end
-end
-
--- Returns a default set of weapons for use with fillWeaponsBySlotSize
-function genericCivilianWeaponSets()
-   return {equip_forwardLow,equip_forwardMed,equip_forwardHig},{equip_rangedLow,equip_rangedMed,equip_rangedHig},{equip_turretLow,equip_turretMed,equip_turretHig}
 end
 
 --[[
 -- @brief Equips a generic civilian type ship.
 --]]
 function equip_genericCivilian( p, shipsize )
-   local medium, low
-   local use_forward,  use_secondary, use_medium, use_low
-   local nweapons, nmedium, nlow = p:ship():slots()
+   local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(p:ship())
+   local nbTurrets,nbForwards,nbSecondaries,nbStructures,nbUtilities
 
-   --numbers of weapons of each type to use, regardless of size
-   use_forward=0
-   use_secondary=0
-   use_turrets=0
+   nbTurrets=0
+   nbForwards=0
+   nbSecondaries=0
+   nbStructures=0
+   nbUtilities=0
 
-   -- Defaults
-   medium      = { "Civilian Scrambler" }
-   low = {}
-
-   weapons = {}
-
-   use_secondary = 0
-   use_medium  = 0
-   use_low     = 0
-
-   -- Per ship type
+   -- Number of each type of outfits
    if shipsize == "small" then
-      use_forward=rnd.rnd(1,nweapons)
+      local class = p:ship():class()
 
-      medium   = { "Civilian Scrambler" }
-      if rnd.rnd() > 0.8 then
-         use_medium = 1
-      end
-   else
-      use_turrets=rnd.rnd(nweapons)
+      nbTurrets=rnd.rnd(nbSlotTurrets/2,nbSlotTurrets)
+      nbForwards    = rnd.rnd(1,nbSlotWeapons)
 
-      medium   = { "Civilian Scrambler" }
-      if rnd.rnd() > 0.5 then
-         use_medium = 1
-      end
-      low      = { "Composite Plating" }
-      if rnd.rnd() > 0.5 then
-         use_low = 1
-      end
+   elseif shipsize == "medium" then
+      
+      nbTurrets=rnd.rnd(nbSlotTurrets/2,nbSlotTurrets)
+
+      nbSecondaries  = rnd.rnd(0,nbSlotWeapons/3)
+      nbForwards     = rnd.rnd(1,nbSlotWeapons-nbSecondaries)
+   else      
+      nbTurrets=rnd.rnd(nbSlotTurrets/2,nbSlotTurrets)
+
+      nbSecondaries  = rnd.rnd(1,nbSlotWeapons/3)
+      nbForwards     = rnd.rnd(1,nbSlotWeapons-nbSecondaries)
    end
 
-   local forwards,secondaries,turrets=genericCivilianWeaponSets()
-   fillWeaponsBySlotSize(p,use_forward,use_secondary,use_turrets,forwards,secondaries,turrets)
+   nbStructures  = rnd.rnd(nbSlotStructures/3,nbSlotStructures)
+   nbUtilities  = rnd.rnd(nSlotUtilities/3,nSlotUtilities)
 
-   equip_ship( p, true, weapons, medium, low,
-               use_medium, use_low )
+   local outfits={}
+
+   equip_fillTurretsBySlotSize(p:ship(),outfits,nbTurrets,equip_defaultTurrets())
+   equip_fillWeaponsBySlotSize(p:ship(),outfits,nbForwards,nbSecondaries,equip_defaultForward(),equip_defaultSecondary())
+   equip_fillUtilitiesBySlotSize(p:ship(),outfits,nbUtilities,equip_defaultUtilities())
+   equip_fillStructuresBySlotSize(p:ship(),outfits,nbStructures,equip_defaultStructures())
+
+   equip_ship( p, outfits )
 end
 
 
@@ -96,71 +84,46 @@ end
 -- @brief Equips a generic merchant type ship.
 --]]
 function equip_genericMerchant( p, shipsize )
-   local medium, low
-   local use_forward, use_secondary, use_turrets, use_medium, use_low
-   local nweapons, nmedium, nlow = p:ship():slots()
+   local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(p:ship())
+   local nbTurrets,nbForwards,nbSecondaries,nbStructures,nbUtilities
 
-   -- Defaults
-   medium      = { "Civilian Scrambler" }
-   low = {}
+   nbTurrets=0
+   nbForwards=0
+   nbSecondaries=0
+   nbStructures=0
+   nbUtilities=0
 
-   weapons     = {}
-
-   --numbers of weapons of each type to use, regardless of size
-   use_forward=0
-   use_secondary=0
-   use_turrets=0
-
-   -- Equip by size
+   -- Number of each type of outfits
    if shipsize == "small" then
-      r = rnd.rnd()
-      if r > 0.9 then -- 10% chance of all-turrets.
-         use_turrets = nweapons
-      elseif r > 0.2 then -- 70% chance of mixed loadout.
-         use_turrets = nweapons -1
-         use_forward = nweapons - use_turrets
-      else -- Poor guy gets no turrets.
-         use_forward = nweapons
-      end
+      local class = p:ship():class()
 
-      medium   = { "Civilian Scrambler" }
-      if rnd.rnd() > 0.8 then
-         use_medium = 1
-      end
+      nbTurrets=rnd.rnd(nbSlotTurrets/2,nbSlotTurrets)
+      nbForwards    = rnd.rnd(1,nbSlotWeapons)
+
    elseif shipsize == "medium" then
-      use_secondary = 1
+      
+      nbTurrets=rnd.rnd(nbSlotTurrets/2,nbSlotTurrets)
 
-      use_turrets = nweapons - use_secondary
+      nbSecondaries  = rnd.rnd(0,nbSlotWeapons/3)
+      nbForwards     = rnd.rnd(1,nbSlotWeapons-nbSecondaries)
+   else      
+      nbTurrets=rnd.rnd(nbSlotTurrets/2,nbSlotTurrets)
 
-      medium   = { "Civilian Scrambler" }
-      if rnd.rnd() > 0.6 then
-         use_medium = 1
-      end
-      low    = { "Composite Plating" }
-      if rnd.rnd() > 0.6 then
-         use_low = 1
-      end
-   else
-
-      use_secondary = 2
-
-      use_turrets = nweapons - use_secondary
-
-      medium = { "Civilian Scrambler" }
-      if rnd.rnd() > 0.4 then
-         use_medium = 1
-      end
-      low    = { "Composite Plating" }
-      if rnd.rnd() > 0.6 then
-         use_low = 1
-      end
+      nbSecondaries  = rnd.rnd(1,nbSlotWeapons/3)
+      nbForwards     = rnd.rnd(1,nbSlotWeapons-nbSecondaries)
    end
 
-   local forwards,secondaries,turrets=genericCivilianWeaponSets()
-   fillWeaponsBySlotSize(p,use_forward,use_secondary,use_turrets,forwards,secondaries,turrets)
+   nbStructures  = rnd.rnd(nbSlotStructures/3,nbSlotStructures)
+   nbUtilities  = rnd.rnd(nSlotUtilities/3,nSlotUtilities)
 
-   equip_ship( p, true, weapons, medium, low,
-               use_medium, use_low )
+   local outfits={}
+
+   equip_fillTurretsBySlotSize(p:ship(),outfits,nbTurrets,equip_defaultTurrets())
+   equip_fillWeaponsBySlotSize(p:ship(),outfits,nbForwards,nbSecondaries,equip_defaultForward(),equip_defaultSecondary())
+   equip_fillUtilitiesBySlotSize(p:ship(),outfits,nbUtilities,equip_defaultUtilities())
+   equip_fillStructuresBySlotSize(p:ship(),outfits,nbStructures,equip_defaultStructuresMerchant())
+
+   equip_ship( p, outfits )
 end
 
 
@@ -168,110 +131,66 @@ end
 -- @brief Equips a generic military type ship.
 --]]
 function equip_genericMilitary( p, shipsize )
-   local medium, low
-   local use_forward, use_secondary, use_turrets, use_medium, use_low
-   local nweapons, nmedium, nlow = p:ship():slots()
 
-   -- Defaults
-   medium      = { "Civilian Scrambler" }
-   low = {}
-   weapons     = {}
+   local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(p:ship())
+   local nbTurrets,nbForwards,nbSecondaries,nbStructures,nbUtilities
 
-   --numbers of weapons of each type to use, regardless of size
-   use_forward=0
-   use_secondary=0
-   use_turrets=0
+   nbTurrets=0
+   nbForwards=0
+   nbSecondaries=0
+   nbStructures=0
+   nbUtilities=0
 
-   -- Equip by size and type
+   -- Number of each type of outfits
    if shipsize == "small" then
       local class = p:ship():class()
 
+      nbTurrets=rnd.rnd(nbSlotTurrets/2,nbSlotTurrets)
+
       -- Scout
       if class == "Scout" then
-         use_forward    = rnd.rnd(1,nweapons)
-
-         medium         = { "Generic Afterburner", "Civilian Scrambler" }
-         use_medium     = 2
-         low            = { "Solar Panel" }
+         nbForwards    = rnd.rnd(1,nbSlotWeapons)
 
       -- Fighter
       elseif class == "Fighter" then
-         
-         use_secondary  = 1
-         use_forward    = nweapons-use_secondary
-
-         medium         = equip_mediumLow()
-         low            = equip_lowLow()
-
+         nbForwards    = rnd.rnd(nbSlotWeapons/2,nbSlotWeapons)
 
       -- Bomber
       elseif class == "Bomber" then
+         nbSecondaries  = rnd.rnd(1,2)
+         nbForwards    = nbSlotWeapons-use_secondary
 
-         use_secondary  = rnd.rnd(1,2)
-         use_forward    = nweapons-use_secondary
-
-         addWeapons( equip_forwardLow(), use_primary )
-         addWeapons( equip_rangedLow(), use_secondary )
-         medium         = equip_mediumLow()
-         low            = equip_lowLow()
+      else
+         nbForwards    = rnd.rnd(nbSlotWeapons/2,nbSlotWeapons)
 
       end
 
    elseif shipsize == "medium" then
       
-      use_secondary  = 1
-      use_turrets    = nweapons-use_secondary
+      nbTurrets=rnd.rnd(nbSlotTurrets/2,nbSlotTurrets)
 
-      medium         = equip_mediumMed()
-      low            = equip_lowMed()
+      nbSecondaries  = rnd.rnd(0,nbSlotWeapons/3)
+      nbForwards     = rnd.rnd(1,nbSlotWeapons-nbSecondaries)
+   else      
+      nbTurrets=rnd.rnd(nbSlotTurrets/2,nbSlotTurrets)
 
-
-   else
-      
-      use_secondary  = 2
-      use_turrets    = nweapons-use_secondary
-
-      medium         = equip_mediumHig()
-      low            = equip_lowHig()
-
+      nbSecondaries  = rnd.rnd(1,nbSlotWeapons/3)
+      nbForwards     = rnd.rnd(1,nbSlotWeapons-nbSecondaries)
    end
 
-   local forwards,secondaries,turrets=genericCivilianWeaponSets()
-   fillWeaponsBySlotSize(p,use_forward,use_secondary,use_turrets,forwards,secondaries,turrets)
+   nbStructures  = rnd.rnd(nbSlotStructures/3,nbSlotStructures)
+   nbUtilities  = rnd.rnd(nSlotUtilities/3,nSlotUtilities)
 
-   equip_ship( p, false, weapons, medium, low,
-               use_medium, use_low )
+   local outfits={}
+
+   equip_fillTurretsBySlotSize(p:ship(),outfits,nbTurrets,equip_defaultTurrets())
+   equip_fillWeaponsBySlotSize(p:ship(),outfits,nbForwards,nbSecondaries,equip_defaultForwardMil(),equip_defaultSecondary())
+   equip_fillUtilitiesBySlotSize(p:ship(),outfits,nbUtilities,equip_defaultUtilities())
+   equip_fillStructuresBySlotSize(p:ship(),outfits,nbStructures,equip_defaultStructures())
+
+   equip_ship( p, outfits )
 end
 
 
---[[
--- @brief Equips a generic robotic type ship.
---]]
-function equip_genericRobotic( p, shipsize )
-   equip_fillSlots( p, { "Neutron Disruptor" }, { }, { } )
-end
 
-function fillWeaponsBySlotSize(p,use_forward,use_secondary,use_turrets,forwards,secondaries,turrets)
-local slots=p:ship():getSlots()
-   for k,v in pairs(slots) do
-      if v.type=="weapon" then
-         local size=1
-         if v.size=="Medium" then
-            size=2
-         elseif v.size=="Large" then
-            size=3
-         end
 
-         if (use_turrets>0) then
-            addWeapons(turrets[size](),1)
-            use_turrets=use_turrets-1
-         elseif (use_secondary>0) then
-            addWeapons(secondaries[size](),1)
-            use_secondary=use_secondary-1
-         elseif (use_forward>0) then
-            addWeapons(forwards[size](),1)
-            use_forward=use_forward-1
-         end
-      end
-   end
-end

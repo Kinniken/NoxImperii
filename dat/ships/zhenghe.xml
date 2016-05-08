@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Zheng He">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Zheng He'>
  <base_type>Zheng He</base_type>
  <GFX sx="6" sy="6">iserlohn</GFX>
  <GUI>slim</GUI>
@@ -7,12 +7,12 @@
  <class>Freighter</class>
  <fabricator>Xiao Shipyards</fabricator>
  <description>A higher-end variant on the common "whales" design, the Zheng He is popular in the Empire for its increased cargo capacity, greater speed and stronger shields. Its vulnerability still limits it to core Terran space.</description>
- 
-<price>2500000</price>
+ <price>2500000</price>
  <movement>
   <thrust>150</thrust>
   <turn>90</turn>
   <speed>180</speed>
+  <engine_limit>3200</engine_limit>
  </movement>
  <health>
   <absorb>30</absorb>
@@ -34,28 +34,27 @@
 <stats>
   
 </stats>
- <slots>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
+<slots>
+<weapon prop="turret" size="medium" x="+50" y="0" h="0" />
+<weapon prop="turret" size="medium" x="-50" y="0" h="0" />
+<weapon prop="turret" size="small" x="+50" y="0" h="0" />
+<weapon prop="turret" size="small" x="-50" y="0" h="0" />
+<weapon prop="turret" size="small" x="+50" y="0" h="0" />
+<weapon prop="turret" size="small" x="-50" y="0" h="0" />
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+</slots>
 
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-
-  <weapon    size="medium"  x="+50"  y="0" h="0"/>
-  <weapon    size="medium"  x="-50"  y="0" h="0"/>
-  <weapon    size="medium"  x="+50"  y="0" h="0"/>
-  <weapon    size="medium"  x="-50"  y="0" h="0"/>
-  <weapon    size="medium"  x="+50"  y="0" h="0"/>
- </slots>
- 
 </ship>

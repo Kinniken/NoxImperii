@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Ardar Brythioch">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Ardar Brythioch'>
  <base_type>Ardar Brythioch</base_type>
  <GFX sx="12" sy="12">ardarshir_continent</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Destroyer</class>
  <fabricator>Roidhunate Shipyards</fabricator>
- <description>While classified by the Imperial Navy as Continent-class, the Brythioch destroyer is significantly more capable than the Terran Asieneuve in all but armor. Small fleets of Brythiochs frequently probe Imperial borders, mapping potential weaknesses.
-</description>
-<price>2200000</price>
+ <description>While classified by the Imperial Navy as Continent-class, the Brythioch destroyer is significantly more capable than the Terran Asieneuve in all but armor. Small fleets of Brythiochs frequently probe Imperial borders, mapping potential weaknesses.</description>
+ <price>2200000</price>
+ <license>Ardarshir Auxilliary, Class III</license>
  <movement>
   <thrust>190</thrust>
   <turn>120</turn>
   <speed>180</speed>
+  <engine_limit>1800</engine_limit>
  </movement>
  <health>
   <absorb>50</absorb>
@@ -34,21 +35,21 @@
 <stats>
   
 </stats>
- <slots>
-  <weapon x="-15" y="-10" h="-10" size="large"/>
-  <weapon x="-15" y="10" h="-10" size="large"/>
-  <weapon x="20" y="0" h="-10" size="large"/>
-  <weapon x="4" y="-5" h="-10" size="large"/>
-  <weapon x="4" y="5" h="-10" size="large"/>
-  <weapon x="4" y="5" h="-10" size="medium"/>
-  <weapon x="4" y="5" h="-10" size="medium"/>
-  <utility size="large"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <structure size="large"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
- </slots>
+<slots>
+<weapon size="large" x="-15" y="-10" h="-10" />
+<weapon size="large" x="-15" y="10" h="-10" />
+<weapon size="large" x="20" y="0" h="-10" />
+<weapon size="large" x="4" y="-5" h="-10" />
+<weapon prop="turret" size="medium" x="4" y="5" h="-10" />
+<weapon prop="turret" size="medium" x="4" y="5" h="-10" />
+<utility size="large"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<structure size="large"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
+
 </ship>

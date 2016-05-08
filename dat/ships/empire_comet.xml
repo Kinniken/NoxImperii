@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Imperial Halley">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Imperial Halley'>
  <base_type>Imperial Halley</base_type>
  <GFX sx="10" sy="10">empire_comet</GFX>
  <GUI>slim</GUI>
@@ -7,11 +7,13 @@
  <class>Destroyer</class>
  <fabricator>Imperial Shipyards</fabricator>
  <description>This Comet-class light frigate is one of the workhorse of the Terran Navy. It is used mainly as an interceptor and as a frontier scout ship, and is provided with the engines and fuel capacity needed for those roles.</description>
-<price>1100000</price>
+ <price>1100000</price>
+ <license>Reserve Lieutenant License</license>
  <movement>
   <thrust>200</thrust>
   <turn>125</turn>
   <speed>200</speed>
+  <engine_limit>500</engine_limit>
  </movement>
  <health>
   <absorb>29</absorb>
@@ -33,17 +35,18 @@
 <stats>
   
 </stats>
- <slots>
-  <weapon x="-15" y="-10" h="-10" size="medium"/>
-  <weapon x="-15" y="10" h="-10" size="medium"/>
-  <weapon x="20" y="0" h="-10" size="small"/>
-  <weapon x="4" y="-5" h="-10" size="small"/>
-  <weapon x="4" y="5" h="-10" size="small"/>
-  <utility size="medium"/>
-  <utility size="small"/>
-  <utility size="small"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
- </slots>
+<slots>
+<weapon size="medium" x="-15" y="-10" h="-10" />
+<weapon size="medium" x="-15" y="10" h="-10" />
+<weapon size="small" x="4" y="-5" h="-10" />
+<weapon prop="turret" size="small" x="4" y="5" h="-10" />
+<weapon prop="turret" size="small" x="20" y="0" h="-10" />
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="small"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
+
 </ship>

@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Lancelot">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Lancelot'>
  <base_type>Lancelot</base_type>
- <GFX>lancelot</GFX>
+ <GFX sx="8" sy="8">lancelot</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Fighter</class>
  <fabricator>Nexus Shipyards</fabricator>
  <description>The most capable fighter generally available to civilians in Imperial space, the Lancelot mixes decent offensive capacities with better defence than generic designs and boosted engines.</description>
- 
-<price>230000</price>
+ <price>230000</price>
  <movement>
   <thrust>260</thrust>
   <turn>150</turn>
   <speed>280</speed>
+  <engine_limit>150</engine_limit>
  </movement>
  <health>
   <absorb>8</absorb>
@@ -34,13 +34,12 @@
 <stats>
   
 </stats>
+<slots>
+<weapon size="small" x="12" y="0" h="0" />
+<weapon size="small" x="-3" y="0" h="2" />
+<weapon size="small" x="-3" y="0" h="2" />
+<utility size="small"/>
+<structure size="small"/>
+</slots>
 
- <slots>
-  <weapon size="small" x="12" y="0" h="0"/>
-  <weapon size="small" x="-3" y="0" h="2"/>
-  <weapon size="small" x="-3" y="0" h="2"/>
-  <utility size="small"/>
-  <structure size="small"/>
- </slots>
- 
 </ship>

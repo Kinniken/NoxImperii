@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Raptor">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Raptor'>
  <base_type>Raptor</base_type>
  <GFX sx="6" sy="6">alaith</GFX>
  <GUI>slim</GUI>
@@ -7,12 +7,12 @@
  <class>Destroyer</class>
  <fabricator>Generic</fabricator>
  <description>Raptor-based designs are classified somewhere between heavy frigates and light cruisers, depending on the equipment. They are popular with pirates and independent militaries, being among the heaviest military ships available outside the main galactic powers.</description>
- 
-<price>2800000</price>
+ <price>2800000</price>
  <movement>
   <thrust>130</thrust>
   <turn>90</turn>
   <speed>150</speed>
+  <engine_limit>1800</engine_limit>
  </movement>
  <health>
   <absorb>35</absorb>
@@ -34,23 +34,19 @@
 <stats>
   
 </stats>
-
- <slots>
-  
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-
-  <weapon    size="large"  x="+10"  y="0" h="0"/>
-  <weapon    size="large"  x="+10"  y="0" h="0"/>
-  <weapon    size="medium"  x="+10"  y="0" h="0"/>
-  <weapon    size="medium"  x="+10"  y="0" h="0"/>
- </slots>
+<slots>
+<weapon size="large" x="+10" y="0" h="0" />
+<weapon size="large" x="+10" y="0" h="0" />
+<weapon prop="turret" size="medium" x="+10" y="0" h="0" />
+<weapon prop="turret" size="medium" x="+10" y="0" h="0" />
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
 
 </ship>

@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Ardar Mowyr">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Ardar Mowyr'>
  <base_type>Ardar Mowyr</base_type>
  <GFX sx="12" sy="12">ardarshir_planet</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Cruiser</class>
  <fabricator>Roidhunate Shipyards</fabricator>
- <description>The Ardar equivalent of the Jupiter cruisers, Roidhunate Mowyrs have a somewhat more offensive design; they are intended not primarily as flagships, but as the shock elements of any large battles. And should the battle go the Roidhunate's way, they have the speed to finish off Imperial stragglers.
-</description>
-<price>8500000</price>
+ <description>The Ardar equivalent of the Jupiter cruisers, Roidhunate Mowyrs have a somewhat more offensive design; they are intended not primarily as flagships, but as the shock elements of any large battles. And should the battle go the Roidhunate's way, they have the speed to finish off Imperial stragglers.</description>
+ <price>8500000</price>
+ <license>Ardarshir Auxilliary, Honourable</license>
  <movement>
   <thrust>130</thrust>
   <turn>80</turn>
   <speed>130</speed>
+  <engine_limit>4500</engine_limit>
  </movement>
  <health>
   <absorb>60</absorb>
@@ -34,27 +35,27 @@
 <stats>
   
 </stats>
-  
- <slots>
-  <weapon x="-15" y="-10" h="-10" size="large"/>
-  <weapon x="-15" y="10" h="-10" size="large"/>
-  <weapon x="20" y="0" h="-10" size="large"/>
-  <weapon x="4" y="-5" h="-10" size="large"/>
-  <weapon x="4" y="-5" h="-10" size="large"/>
-  <weapon x="4" y="5" h="-10" size="large"/>
-  <weapon x="4" y="5" h="-10" size="large"/>
-  <weapon x="4" y="5" h="-10" size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="large"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="large"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
- </slots>
+<slots>
+<weapon size="large" x="-15" y="-10" h="-10" />
+<weapon size="large" x="-15" y="10" h="-10" />
+<weapon size="large" x="20" y="0" h="-10" />
+<weapon size="large" x="4" y="-5" h="-10" />
+<weapon prop="turret" size="large" x="4" y="-5" h="-10" />
+<weapon prop="turret" size="large" x="4" y="5" h="-10" />
+<weapon prop="turret" size="large" x="4" y="5" h="-10" />
+<weapon prop="turret" size="large" x="4" y="5" h="-10" />
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<utility size="large"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
+
 </ship>

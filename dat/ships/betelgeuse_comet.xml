@@ -1,17 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Betelgian Libera">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Betelgian Libera'>
  <base_type>Betelgian Libera</base_type>
- <GFX>shaman</GFX>
+ <GFX sx="8" sy="8">shaman</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Destroyer</class>
  <fabricator>Paoli Shipyards</fabricator>
  <description>The Libera is a bigger sister of the Alba (all Betelgian ships are considered female), stretched to near-frigate capacities. It remains weak by Terran standards, but is sufficient for its main role in the Betelgian Navy - protecting trade fleets from pirates.</description>
-<price>1000000</price>
+ <price>1000000</price>
+ <license>Betelgian Trader License</license>
  <movement>
   <thrust>200</thrust>
   <turn>110</turn>
   <speed>180</speed>
+  <engine_limit>500</engine_limit>
  </movement>
  <health>
   <absorb>20</absorb>
@@ -33,19 +35,20 @@
 <stats>
   
 </stats>
- <slots>
-    <weapon size="medium" x="4" y="0" h="0"/>
-  <weapon size="medium" x="4" y="0" h="0"/>
-  <weapon size="small" x="-2" y="4" h="-1"/>
-  <weapon size="small" x="-2" y="-4" h="-1"/>
-  
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="small"/>
-  <utility size="small"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
- </slots>
+<slots>
+<weapon size="medium" x="4" y="0" h="0" />
+<weapon size="medium" x="4" y="0" h="0" />
+<weapon size="medium" x="4" y="0" h="0" />
+<weapon size="small" x="-2" y="4" h="-1" />
+<weapon size="small" x="-2" y="-4" h="-1" />
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="small"/>
+<utility size="small"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
+
 </ship>

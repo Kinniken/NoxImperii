@@ -38,62 +38,58 @@ function trader_createEmpty( ship )
 end
 function trader_createKoala(  )
 
-   local p, s, olist
+   local p, s, outfits
 
-      p     = "Koala"
-      s     = ship.get(p)
-      olist = { }
+   p     = "Koala"
+   s     = ship.get(p)
+   outfits = { }
    
 
-   -- Equipment vars
-   local primary, secondary, medium, low
-   local use_primary, use_secondary, use_medium, use_low
-   local nhigh, nmedium, nlow = s:slots()
+   local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 
-   primary        = { "Laser Cannon MK1", "Ion Cannon" }
-   secondary      = { "Unicorp Fury Launcher" }
-   use_primary    = nhigh-2
-   use_secondary  = 2
-   addWeapons( primary, use_primary )
-   addWeapons( secondary, use_secondary )
-   medium         = equip_mediumHig()
-   low            = equip_lowHig()
+   local nbTurrets,nbForwards,nbSecondaries,nbStructures,nbUtilities
 
-   -- FInally add outfits
-   equip_ship( p, true, weapons, medium, low,
-               use_medium, use_low, olist )
+   -- light on weapons
+   nbTurrets=nbSlotTurrets/2
+   nbForwards=nbSlotWeapons/2
+   nbSecondaries=0
+   nbStructures=nbSlotStructures
+   nbUtilities=nSlotUtilities
 
-   return p,olist
+   equip_fillTurretsBySlotSize(s,outfits,nbTurrets,equip_defaultTurrets())
+   equip_fillWeaponsBySlotSize(s,outfits,nbForwards,nbSecondaries,equip_defaultForward(),equip_defaultSecondary())
+   equip_fillUtilitiesBySlotSize(s,outfits,nbUtilities,equip_defaultUtilities())
+   equip_fillStructuresBySlotSize(s,outfits,nbStructures,equip_defaultStructuresMerchant())
+
+   return p,outfits
 end
 
 function trader_createMule(  )
 
-   local p, s, olist
+   local p, s, outfits
 
-      p     = "Mule"
-      s     = ship.get(p)
-      olist = { }
+   p     = "Mule"
+   s     = ship.get(p)
+   outfits = { }
    
 
-   -- Equipment vars
-   local primary, secondary, medium, low
-   local use_primary, use_secondary, use_medium, use_low
-   local nhigh, nmedium, nlow = s:slots()
+   local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 
-   primary        = { "Razor Turret MK1", "Turreted Gauss Gun" }
-   secondary      = { "Unicorp Fury Launcher" }
-   use_primary    = nhigh-2
-   use_secondary  = 2
-   addWeapons( primary, use_primary )
-   addWeapons( secondary, use_secondary )
-   medium         = equip_mediumHig()
-   low            = equip_lowHig()
+   local nbTurrets,nbForwards,nbSecondaries,nbStructures,nbUtilities
 
-   -- FInally add outfits
-   equip_ship( p, true, weapons, medium, low,
-               use_medium, use_low, olist )
+   -- light on weapons
+   nbTurrets=nbSlotTurrets/2
+   nbForwards=nbSlotWeapons/2
+   nbSecondaries=0
+   nbStructures=nbSlotStructures
+   nbUtilities=nSlotUtilities
 
-   return p,olist
+   equip_fillTurretsBySlotSize(s,outfits,nbTurrets,equip_defaultTurrets())
+   equip_fillWeaponsBySlotSize(s,outfits,nbForwards,nbSecondaries,equip_defaultForward(),equip_defaultSecondary())
+   equip_fillUtilitiesBySlotSize(s,outfits,nbUtilities,equip_defaultUtilities())
+   equip_fillStructuresBySlotSize(s,outfits,nbStructures,equip_defaultStructuresMerchant())
+
+   return p,outfits
 end
 
 

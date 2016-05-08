@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Quicksilver">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Quicksilver'>
  <base_type>Quicksilver</base_type>
  <GFX sx="10" sy="10">quicksilver</GFX>
  <GUI>slim</GUI>
@@ -7,12 +7,12 @@
  <class>Courier</class>
  <fabricator>Melendez Corp.</fabricator>
  <description>Marketed as the "King of the Courier", the Quicksilver is a sleek ship indeed. Its speed, decent cargo hold, and reasonable protection for its class makes it an excellent if pricey courier on risky runs.</description>
-
-<price>500000</price>
+ <price>500000</price>
  <movement>
   <thrust>230</thrust>
   <turn>110</turn>
   <speed>260</speed>
+  <engine_limit>300</engine_limit>
  </movement>
  <health>
   <absorb>8</absorb>
@@ -34,17 +34,17 @@
 <stats>
   
 </stats>
+<slots>
+<weapon size="small" x="15" y="0" h="5" />
+<weapon size="small" x="-10" y="-3" h="0" />
+<weapon size="small" x="-10" y="3" h="0" />
+<utility size="small"/>
+<utility size="small"/>
+<utility size="small"/>
+<utility size="small"/>
+<structure size="medium"/>
+<structure size="small"/>
+<structure size="small"/>
+</slots>
 
- <slots>
-  <weapon size="small" x="15" y="0" h="5"/>
-  <weapon size="small" x="-10" y="-3" h="0"/>
-  <weapon size="small" x="-10" y="3" h="0"/>
-  <utility size="small"/>
-  <utility size="small"/>
-  <utility size="small"/>
-  <utility size="small"/>
-  <structure size="medium"/>
-  <structure size="small"/>
-  <structure size="small"/>
- </slots>
 </ship>

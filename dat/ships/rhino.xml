@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ship name="Rhino">
+<?xml version='1.0' encoding='UTF-8'?>
+<ship name='Rhino'>
  <base_type>Rhino</base_type>
  <GFX sx="10" sy="10">rhino</GFX>
  <GUI>slim</GUI>
@@ -7,12 +7,12 @@
  <class>Armoured Transport</class>
  <fabricator>Generic</fabricator>
  <description>Strengthened cargo ships have been around for a long time, and rhino derivatives are among the most popular. With decent fighting capacities and a generous cargo hold, it is a popular choice among people with precious cargo to ship - or planning to capture some.</description>
-
-<price>2000000</price>
+ <price>2000000</price>
  <movement>
   <thrust>200</thrust>
   <turn>120</turn>
   <speed>160</speed>
+  <engine_limit>2500</engine_limit>
  </movement>
  <health>
   <absorb>25</absorb>
@@ -34,23 +34,22 @@
 <stats>
   
 </stats>
-
-
- <slots>
-  <weapon size="large" x="25" y="-3" h="4"/>
-  <weapon size="medium" x="25" y="3" h="4"/>
-  <weapon size="medium" x="-15" y="-3" h="4"/>
-  <weapon size="medium" x="-15" y="3" h="4"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="medium"/>
-  <utility size="large"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="medium"/>
-  <structure size="large"/>
-  <structure size="large"/>
- </slots>
+<slots>
+<weapon size="large" x="25" y="-3" h="4" />
+<weapon prop="turret" size="medium" x="25" y="3" h="4" />
+<weapon prop="turret" size="medium" x="-15" y="-3" h="4" />
+<weapon prop="turret" size="medium" x="-15" y="3" h="4" />
+<utility size="large"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<utility size="medium"/>
+<structure size="large"/>
+<structure size="large"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+<structure size="medium"/>
+</slots>
 
 </ship>

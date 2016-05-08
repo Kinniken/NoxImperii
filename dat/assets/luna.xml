@@ -24,7 +24,7 @@
   </services>
   <commodities/>
   <description>Earliest body colonized by humans beyond Terra itself, Luna is the trade gateway to the imperial capital. Its luxurious domed cities are legendary, and while it never fully recovered from the sacks of Terra, it remains one of the most prosperous worlds in the Empire.</description>
-  <bar>Luxury of luxury, this bar is inside a serie of mock huts made entirely out of wood, in the middle of one of the largest park. Beyond the trees and the reassuring dome, the barren Lunar landscape is visible in the distance.</bar>
+  <bar>Luxury of luxury, this bar is inside a series of mock huts made entirely out of wood, in the middle of one of the largest park. Beyond the trees and the reassuring dome, the barren Lunar landscape is visible in the distance.</bar>
     <luadata>{
 	humanFertility = 0.1,
 	minerals = 0.5,

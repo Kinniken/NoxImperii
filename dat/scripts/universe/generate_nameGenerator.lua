@@ -158,5 +158,5 @@ function nameGenerator.generateNameOther()
 end
 
 --for i=1,200 do
---	print(nameGenerator.generateNameOther()) 
+--	print(nameGenerator.generateNameArdarshir()) 
 --end

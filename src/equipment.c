@@ -44,7 +44,7 @@
 #define  EQUIPMENT_OUTFIT_TAB "tabOutfits"
 #define  EQUIPMENT_OUTFITS    "iarAvailOutfits"
 #define  EQUIPMENT_FILTER     "inpFilterOutfits"
-#define  OUTFIT_TABS          5
+#define  OUTFIT_TABS          4
 
 
 /* global/main window */
@@ -1447,8 +1447,8 @@ static int equipment_outfitFilterUtility( const Outfit *o )
 static int equipment_outfitFilterStructure( const Outfit *o )
 { return ((o->slot.type == OUTFIT_SLOT_STRUCTURE) && !sp_required( o->slot.spid )); }
 
-static int equipment_outfitFilterCore( const Outfit *o )
-{ return sp_required( o->slot.spid ); }
+//static int equipment_outfitFilterCore( const Outfit *o )
+//{ return sp_required( o->slot.spid ); }
 
 
 /**
@@ -1464,11 +1464,10 @@ static void equipment_genOutfitList( unsigned int wid )
       NULL,
       equipment_outfitFilterWeapon,
       equipment_outfitFilterUtility,
-      equipment_outfitFilterStructure,
-      equipment_outfitFilterCore
+      equipment_outfitFilterStructure
    };
    const char *tabnames[] = {
-      "All", "\eb W ", "\eg U ", "\ep S ", "\eRCore"
+      "All", "\eb W ", "\eg U ", "\ep S "
    };
 
    int active, i, l, p, noutfits;

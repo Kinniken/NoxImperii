@@ -35,7 +35,7 @@
 #define  OUTFITS_IAR    "iarOutfits"
 #define  OUTFITS_TAB    "tabOutfits"
 #define  OUTFITS_FILTER "inpFilterOutfits"
-#define  OUTFITS_NTABS  6
+#define  OUTFITS_NTABS  5
 
 
 static iar_data_t *iar_data = NULL; /**< Stored image array positions. */
@@ -210,8 +210,8 @@ static int outfit_filterUtility( const Outfit *o )
 static int outfit_filterStructure( const Outfit *o )
 { return ((o->slot.type == OUTFIT_SLOT_STRUCTURE) && !sp_required( o->slot.spid )); }
 
-static int outfit_filterCore( const Outfit *o )
-{ return sp_required( o->slot.spid ); }
+//static int outfit_filterCore( const Outfit *o )
+//{ return sp_required( o->slot.spid ); }
 
 static int outfit_filterOther( const Outfit *o )
 {
@@ -231,11 +231,10 @@ static void outfits_genList( unsigned int wid )
       outfit_filterWeapon,
       outfit_filterUtility,
       outfit_filterStructure,
-      outfit_filterCore,
       outfit_filterOther
    };
    const char *tabnames[] = {
-      "All", "\eb W ", "\eg U ", "\ep S ", "\eRCore", "Other"
+      "All", "\eb W ", "\eg U ", "\ep S ", "Other"
    };
 
    int i, active, owned, len;
@@ -301,7 +300,9 @@ static void outfits_genList( unsigned int wid )
 
    if (noutfits <= 0) { /* No outfits */
       soutfits[0] = strdup("None");
-      toutfits[0] = NULL;
+      toutfits[0] = malloc( sizeof(glTexture*) );
+      toutfits[0][0] = NULL;
+      ntoutfits[0] = 0;
       noutfits    = 1;
    }
    else {

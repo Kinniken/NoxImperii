@@ -465,7 +465,7 @@ static void comm_bribePilot( unsigned int wid, char *unused )
 
    /* Mark as bribed and don't allow bribing again. */
    pilot_setFlag( comm_pilot, PILOT_BRIBED );
-   pilot_rmHostile( comm_pilot );
+   pilot_rmHostile( comm_pilot, 0 );
 
    /* Stop hyperspace if necessary. */
    pilot_rmFlag( comm_pilot, PILOT_HYP_PREP );

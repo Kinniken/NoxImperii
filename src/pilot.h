@@ -541,7 +541,7 @@ void pilot_distress( Pilot *p, Pilot *attacker, const char *msg, int ignore_int 
  * faction
  */
 void pilot_setHostile( Pilot *p );
-void pilot_rmHostile( Pilot *p );
+void pilot_rmHostile( Pilot *p, int pilot_free );
 void pilot_setFriendly( Pilot *p );
 void pilot_rmFriendly( Pilot *p );
 int pilot_isHostile( const Pilot *p );

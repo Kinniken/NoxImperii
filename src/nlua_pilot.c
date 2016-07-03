@@ -2027,7 +2027,7 @@ static int pilotL_setHostile( lua_State *L )
    pilot_setHostile(p);
    }
    else
-      pilot_rmHostile(p);
+      pilot_rmHostile(p , 0);
 
    return 0;
 }

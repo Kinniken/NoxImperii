@@ -1067,8 +1067,9 @@ void pilot_distress( Pilot *p, Pilot *attacker, const char *msg, int ignore_int 
  * @brief Unmarks a pilot as hostile to player.
  *
  *    @param p Pilot to mark as hostile to player.
+ *    @param pilot_free Whether this call is made while freeing the player
  */
-void pilot_rmHostile( Pilot* p )
+void pilot_rmHostile( Pilot* p, int pilot_free )
 {
    if (pilot_isFlag(p, PILOT_HOSTILE)) {
       if (!pilot_isDisabled(p))
@@ -1077,7 +1078,8 @@ void pilot_rmHostile( Pilot* p )
 
       /* Change music back to ambient if no more enemies. */
       if (player.enemies <= 0) {
-         music_choose("ambient");
+    	  if (!pilot_free)//if we are freeing the pilot don't try and change the music. Causes crash in some cases.
+    		  music_choose("ambient");
          player.enemies = 0;
       }
    }
@@ -1091,7 +1093,7 @@ void pilot_rmHostile( Pilot* p )
  */
 void pilot_setFriendly( Pilot* p )
 {
-   pilot_rmHostile(p);
+   pilot_rmHostile(p , 0);
    pilot_setFlag(p, PILOT_FRIENDLY);
 }
 
@@ -1353,7 +1355,7 @@ void pilot_updateDisable( Pilot* p, const unsigned int shooter )
 
       /* If hostile, must remove counter. */
       h = (pilot_isHostile(p)) ? 1 : 0;
-      pilot_rmHostile(p);
+      pilot_rmHostile(p, 0);
       if (h == 1) /* Horrible hack to make sure player.p can hit it if it was hostile. */
          /* Do not use pilot_setHostile here or music will change again. */
          pilot_setFlag(p,PILOT_HOSTILE);
@@ -2594,7 +2596,7 @@ void pilot_free( Pilot* p )
    pilot_clearHooks(p);
 
    /* If hostile, must remove counter. */
-   pilot_rmHostile(p);
+   pilot_rmHostile(p, 1);
 
    /* Free weapon sets. */
    pilot_weapSetFree(p);

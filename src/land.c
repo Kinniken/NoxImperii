@@ -1044,7 +1044,8 @@ void land_genWindows( int load, int changetab )
    land_createMainTab( land_getWid(LAND_WINDOW_MAIN) );
 
    /* Add local system map button. */
-   land_checkAddMap();
+   //Disabled in Long Night as we don't hide worlds
+   //land_checkAddMap();
 
    /* 2) Set as landed and run hooks. */
    if (!regen) {

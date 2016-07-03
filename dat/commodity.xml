@@ -54,7 +54,7 @@ The major oxygen-breathing races in the sector have broadly compatible dietary r
 	
 	<!-- Ores -->
 	<commodity name="Ore">
-		<description>Ore is a key material in many industries, a necessary input for everything from shipbuilding to domestic good production.</description>
+		<description>Ore is a key material in many industries, a necessary input for everything from shipbuilding to domestic goods production.</description>
 		<price>210</price>
 		<gfx_store>ln/ore</gfx_store>
 	</commodity>
@@ -95,7 +95,7 @@ The major oxygen-breathing races in the sector have broadly compatible dietary r
  
 	<!-- Weapons -->
 	<commodity name="Native Weapons">
-		<description>Modern weapons are of extraordinary effectiveness yet few people would hang a blaster on their wall. More primitive weapons are thus in high demands among aristocrats and officers, on human and Ardar worlds: spears that only a four-arm, three-metre centaur could yield, elegant assegais designed for use by tree-dwellers, nameless weapons with more blades than seem usable - if they look deadly, they will find a buyer.</description>
+		<description>Modern weapons are of extraordinary effectiveness yet few people would hang a blaster on their wall. More primitive weapons are thus in high demand among aristocrats and officers, on human and Ardar worlds: spears that only a four-arm, three-metre centaur could yield, elegant assegais designed for use by tree-dwellers, nameless weapons with more blades than seem usable - if they look deadly, they will find a buyer.</description>
 		<price>600</price>
 		<gfx_store>ln/native_weapons</gfx_store>	
 	</commodity>

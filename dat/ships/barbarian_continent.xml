@@ -5,7 +5,7 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Destroyer</class>
- <fabricator>Various barbarian shipyards</fabricator>
+ <fabricator>Barbarian shipyards</fabricator>
  <description>Slow and with inferior technology and engines, this barbarian ship is only technically a Continent-class destroyer. But in numbers and against weak targets, it is more than able to plunder enough to fill its large cargo hauls.
  
 The striking steel spikes often added to its hull are mostly intended for effect, though there are stories in worlds on the fringe of barbarian captains wild enough to attempt ramming manoeuvres.</description>

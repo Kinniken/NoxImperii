@@ -116,7 +116,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	adjustSectorStability(planet.c:system():getZone(),0.99)
 end
-event.eventMessage="NEWS ALERT: Increased pirate attacks on ${world} is hampering local trade."
+event.eventMessage="NEWS ALERT: Increased pirate attacks on ${world} are hampering local trade."
 
 event.worldHistoryMessage="An increase in pirate attacks has depressed local trade."
 

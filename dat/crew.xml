@@ -370,7 +370,6 @@
 				<fuel_efficiency>25</fuel_efficiency>
 			</stats>
 		</crew>
-
 	</position>
 	<position name="Weapon Officer">
 		<crew>
@@ -477,7 +476,7 @@
 		<crew>
 			<name>Ardar Fighter Gunner</name>
 			<level>2</level>
-			<description>This Ardar veteran served for some years in an Roidhunate cruiser, where he showed a solid grasp of turret tracking.</description>
+			<description>This Ardar veteran served on a Roidhunate cruiser for most of his service, where he showed a solid grasp of turret tracking.</description>
 			<portrait>dvaered/dv_civilian2</portrait>
 			<gender>male</gender>
 			<hiring_price>25000</hiring_price>

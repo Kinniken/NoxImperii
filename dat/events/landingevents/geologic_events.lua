@@ -55,7 +55,7 @@
 	event.startText=[[Your initial scans had picked up no signs of ${planetname} being settled by beings with advanced technology, and so it is with great surprise that you discover the results of surveys in a inhospitable region of dense forests: a few meters below the surface you discern the unmistakable outline of a spaceship! Further analysis confirms that it has been there for several millennia, long before the rise of the Empire or that of any of its rivals.
 
 		There is no way to predict what dangers lie in the ship, and yet it contains promises of great riches. Will you investigate?]]
-	event:addYesOption("Ancient Mechanisms",[[The soil is tightly-packed and the vegetation above it thick, but the modern tools aboard the ${shipname} make quick work of both. Soon the ancient ship is exposed to the air again. Signs point to an ancient crash, and much of the ship is destroyed beyond investigation. However you do manage to recover what looks like parts of the navigation systems. {crewJob}
+	event:addYesOption("Ancient Mechanisms",[[The soil is tightly-packed and the vegetation above it thick, but the modern tools aboard the ${shipname} make quick work of both. Soon the ancient ship is exposed to the air again. Signs point to an ancient crash, and much of the ship is destroyed beyond investigation. However you do manage to recover what looks like parts of the navigation systems. ${crewJob}
 
 					On board the ${shipname}, your men carefully store the ${quantity} tonnes of mechanisms recovered. No doubt some scientists somewhere will give you a good price for them.]],30,
 					{crewType=CW.ENGINEER,crewPresentText="${crewName}, your engineer, takes charge of guiding the work; he does a ${crewAdj} job, helping recover more devices.",crewAbsentText="Unfortunately, nobody in your team proves able to guide the recovery, limiting the quantities successfully recovered.",goodQuantity=1,goodQuantityBonus=2,goodType=C.ANCIENT_TECHNOLOGY})
@@ -76,7 +76,7 @@
 
 		Valuable technology might lie in that wreck, but it is in a dangerous orbit. And even inert-looking ancient technology can be more dangerous than it looks. Should you bring the ${shipname} closer to investigate?]]
 
-	event:addYesOption("Successful Rendez-vous",[[Lightly manoeuvring the ${shipname}, you settle in an orbit a hundred metres from the derelict station. Your men gingerly explore the ruin in the low light reflected from ${planetname}, loading into crates everything that looks like it was part of an ancient machine or computer before shipping it back to the ${shipname}. {crewJob}
+	event:addYesOption("Successful Rendez-vous",[[Lightly manoeuvring the ${shipname}, you settle in an orbit a hundred metres from the derelict station. Your men gingerly explore the ruin in the low light reflected from ${planetname}, loading into crates everything that looks like it was part of an ancient machine or computer before shipping it back to the ${shipname}. ${crewJob}
 
 					You settle your ship in a more stable orbit before doing a quick inventory; your men have recovered ${quantity} tonnes of mechanisms of various kinds. Now you just need to find a buyer.]],30,
 					{crewType=CW.PILOT,crewPresentText="${crewName}, your pilot, does a ${crewAdj} job of keeping the ${shipname} along the station while you monitor the search, providing more time to collect artefacts.",crewAbsentText="The lack of a skilled pilot unfortunately limits the time you can keep the ${shipname} along the station, as you are needed to monitor the search as well.",goodQuantity=1,goodQuantityBonus=2,goodType=C.ANCIENT_TECHNOLOGY})
@@ -100,7 +100,7 @@
 
 		Should you try and capture those rocks, at the risk of further damage?]]
 
-	event:addYesOption("An Easy Capture",[[You carefully compute a corrected trajectory for the ${shipname}, bringing the ship in close proximity to the revealed ores. {crewJob} A small team sorties to bring them in.
+	event:addYesOption("An Easy Capture",[[You carefully compute a corrected trajectory for the ${shipname}, bringing the ship in close proximity to the revealed ores. ${crewJob} A small team sorties to bring them in.
 
 					You've collected ${quantity} tonnes of ores, compensation for the ${damages} credits worth of damages suffered.]],70,
 					{crewType=CW.PILOT,crewPresentText="${crewName}, your pilot, is ${crewAdj} at following the ores.",crewAbsentText="Without a pilot, you have trouble keeping up with the ores.",goodQuantity=2,goodQuantityBonus=5,goodType=C.ORE,damages=500,damagesBonus=500})

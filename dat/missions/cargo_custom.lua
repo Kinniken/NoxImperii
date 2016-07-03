@@ -198,10 +198,14 @@ function accept()
     local osd_msg={}
     if urgency==0 then
       osd_msg[1] = gh.format(cargoType.osd_msg1,textData)
-      osd_msg[2] = gh.format(cargoType.osd_msg2,textData)
+      if (cargoType.osd_msg2 ~= "") then
+        osd_msg[2] = gh.format(cargoType.osd_msg2,textData)
+      end
     else
       osd_msg[1] = gh.format(cargoType.osd_msg1_urgent,textData)
-      osd_msg[2] = gh.format(cargoType.osd_msg2_urgent,textData)
+      if (cargoType.osd_msg2_urgent ~= "") then
+        osd_msg[2] = gh.format(cargoType.osd_msg2_urgent,textData)
+      end
     end
     local osd_title=gh.format(cargoType.osd_title,textData)
     misn.osdCreate(osd_title, osd_msg)

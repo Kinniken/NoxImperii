@@ -1067,9 +1067,9 @@ void pilot_distress( Pilot *p, Pilot *attacker, const char *msg, int ignore_int 
  * @brief Unmarks a pilot as hostile to player.
  *
  *    @param p Pilot to mark as hostile to player.
- *    @param pilot_free Whether this call is made while freeing the player
+ *    @param p_pilot_free Whether this call is made while freeing the player
  */
-void pilot_rmHostile( Pilot* p, int pilot_free )
+void pilot_rmHostile( Pilot* p, int p_pilot_free )
 {
    if (pilot_isFlag(p, PILOT_HOSTILE)) {
       if (!pilot_isDisabled(p))
@@ -1078,7 +1078,7 @@ void pilot_rmHostile( Pilot* p, int pilot_free )
 
       /* Change music back to ambient if no more enemies. */
       if (player.enemies <= 0) {
-    	  if (!pilot_free)//if we are freeing the pilot don't try and change the music. Causes crash in some cases.
+    	  if (!p_pilot_free)//if we are freeing the pilot don't try and change the music. Causes crash in some cases.
     		  music_choose("ambient");
          player.enemies = 0;
       }

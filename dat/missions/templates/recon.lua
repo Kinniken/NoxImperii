@@ -112,6 +112,7 @@ function template_accept ()
   misn.accept()
 
   target_systems_visited={}
+  target_systems_visited["__save"] = true
 
    -- Format and set osd message
    osd_msg[1] = gh.format(osd_msg[1],stringData)

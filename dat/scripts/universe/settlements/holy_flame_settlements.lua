@@ -68,6 +68,7 @@ settlement_generator.holyFlameSettlements[#settlement_generator.holyFlameSettlem
 	appliesTo="feudal",
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.holyflame:addTag("religiousminority")
+		planet.lua.settlements.holyflame.minorityReligion=nameGenerator.generateNameIxum()
 		planet.lua.settlements.holyflame:addGoodSupply(C.ARMAMENT,50,1)
 	end,
 	weightValidity=function(planet)

@@ -92,7 +92,12 @@ function give_rewards ()
    
    local planet=planet_class.load(start_planet)
 
-   planet.lua.settlements.humans.services=planet.lua.settlements.humans.services*1.2
+   if (planet.lua.settlements.humans) then
+      planet.lua.settlements.humans.services=planet.lua.settlements.humans.services*1.2
+   end
+   if (planet.lua.settlements.natives) then
+      planet.lua.settlements.natives.services=planet.lua.settlements.natives.services*1.2
+   end
    planet:addHistory("The killing of notorious pirate "..target_ship_name.." has boosted local trade.")
    generatePlanetServices(planet)
    planet:save()

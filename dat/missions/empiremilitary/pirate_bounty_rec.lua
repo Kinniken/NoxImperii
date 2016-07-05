@@ -29,6 +29,7 @@ include "universe/live/live_universe.lua"
    Common friend suggested your line of work.
    Contribution available to cover maintenance costs.]]
 
+   space_success_text="As you enter ${endSystem}, you beam proof of your 'investigation' back to ${endPlanet} on a secure line. Minutes later a coded acknowledgement is sent back along with your fee of ${credits} credits. Job done!"
 
 -- Scripts we need
 include("pilot/pirate.lua")
@@ -73,9 +74,14 @@ function give_rewards ()
    faction.modPlayerSingle( G.EMPIRE, 1 )
    faction.modPlayerSingle( G.PIRATES, -5 )
    
-   local planet=loadPlanetLuaData(start_planet)
+   local planet=planet_class.load(start_planet)
 
-   planet.lua.settlements.humans.services=planet.lua.settlements.humans.services*1.2
+   if (planet.lua.settlements.humans) then
+      planet.lua.settlements.humans.services=planet.lua.settlements.humans.services*1.2
+   end
+   if (planet.lua.settlements.natives) then
+      planet.lua.settlements.natives.services=planet.lua.settlements.natives.services*1.2
+   end
    planet:addHistory("The killing of notorious pirate "..target_ship_name.." has boosted local trade.")
    generatePlanetServices(planet)
    planet:save()

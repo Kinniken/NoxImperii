@@ -67,6 +67,7 @@ function create ()
    end
 
    target_systems={main_target_system,target_sys_2,target_sys_3}
+   target_systems["__save"] = true
 
    -- Get credits
    credits  = rnd.rnd(50,90) * 1000

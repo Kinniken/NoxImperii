@@ -48,7 +48,7 @@ function pir_generate ()
    -- Make sure to save the outfits.
    pir_outfits["__save"] = true
 
-   return pir_name, pir_ship, pir_outfits,G.PIRATES,G.PIRATES
+   return pir_name, pir_ship, pir_outfits,"pirate",G.PIRATES
 end
 function pir_easy ()
    if rnd.rnd() < 0.5 then

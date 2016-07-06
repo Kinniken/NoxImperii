@@ -231,8 +231,8 @@ static int time_create( lua_State *L )
  *
  * @usage new_time = time.get() + time.create( 0, 5, 0 ) -- Adds 5 STP to the current date
  *
- *    @luaparam t1 Time metatable to add to.
- *    @luaparam t2 Time metatable added.
+ *    @luatparam Time t1 Time metatable to add to.
+ *    @luatparam Time t2 Time metatable added.
  * @luafunc add( t1, t2)
  */
 static int time_add( lua_State *L )
@@ -272,8 +272,8 @@ static int time_add__( lua_State *L )
  *
  * @usage new_time = time.get() - time.create( 0, 3, 0 ) -- Subtracts 3 STP to the current date
  *
- *    @luaparam t1 Time metatable to subtract from.
- *    @luaparam t2 Time metatable subtracted.
+ *    @luatparam Time t1 Time metatable to subtract from.
+ *    @luatparam Time t2 Time metatable subtracted.
  * @luafunc sub( t1, t2)
  */
 static int time_sub( lua_State *L )
@@ -313,9 +313,9 @@ static int time_sub__( lua_State *L )
  *
  * @usage if time.create( 630, 5, 78) == time.get() then -- do something if they match
  *
- *    @luaparam t1 Time to compare for equality.
- *    @luaparam t2 Time to compare for equality.
- *    @luareturn true if they're equal.
+ *    @luatparam Time t1 Time to compare for equality.
+ *    @luatparam Time t2 Time to compare for equality.
+ *    @luatreturn boolean true if they're equal.
  * @luafunc __eq( t1, t2 )
  */
 static int time_eq( lua_State *L )
@@ -331,9 +331,9 @@ static int time_eq( lua_State *L )
  *
  * @usage if time.create( 630, 5, 78) < time.get() then -- do something if time is past UST 630:0005.78
  *
- *    @luaparam t1 Time to see if is is smaller than t2.
- *    @luaparam t2 Time see if is larger than t1.
- *    @luareturn true if t1 < t2
+ *    @luatparam Time t1 Time to see if is is smaller than t2.
+ *    @luatparam Time t2 Time see if is larger than t1.
+ *    @luatreturn boolean true if t1 < t2
  * @luafunc __lt( t1, t2 )
  */
 static int time_lt( lua_State *L )
@@ -349,9 +349,9 @@ static int time_lt( lua_State *L )
  *
  * @usage if time.create( 630, 5, 78) <= time.get() then -- do something if time is past UST 630:0005.78
  *
- *    @luaparam t1 Time to see if is is smaller or equal to than t2.
- *    @luaparam t2 Time see if is larger or equal to than t1.
- *    @luareturn true if t1 <= t2
+ *    @luatparam Time t1 Time to see if is is smaller or equal to than t2.
+ *    @luatparam Time t2 Time see if is larger or equal to than t1.
+ *    @luatreturn boolean true if t1 <= t2
  * @luafunc __le( t1, t2 )
  */
 static int time_le( lua_State *L )
@@ -367,7 +367,7 @@ static int time_le( lua_State *L )
  *
  * @usage t = time.get()
  *
- *    @luareturn Time in internal representation time.
+ *    @luatreturn Time Time in internal representation time.
  * @luafunc get()
  */
 static int time_get( lua_State *L )
@@ -419,7 +419,7 @@ static int time_str( lua_State *L )
  *
  * @usage time.inc( time.create(0,0,100) ) -- Increments the time by 100 STU.
  *
- *    @luaparam t Amount to increment or decrement the time by.
+ *    @luatparam Time t Amount to increment or decrement the time by.
  * @luafunc inc( t )
  */
 static int time_inc( lua_State *L )
@@ -436,8 +436,8 @@ static int time_inc( lua_State *L )
  *
  * @usage num = t:tonumber() -- Getting the number from a time t
  *
- *    @luaparam t Time to get number of.
- *    @luareturn Number representing time.
+ *    @luatparam Time t Time to get number of.
+ *    @luatreturn number Number representing time.
  * @luafunc tonumber( t )
  */
 static int time_tonumber( lua_State *L )
@@ -455,8 +455,8 @@ static int time_tonumber( lua_State *L )
  *
  * @usage t = time.fromnumber( t:tonumber() ) -- Should get the time t again
  *
- *    @luaparam num Number to get time from.
- *    @luareturn Time representing number.
+ *    @luatparam number num Number to get time from.
+ *    @luatreturn Time Time representing number.
  * @luafunc fromnumber( num )
  */
 static int time_fromnumber( lua_State *L )

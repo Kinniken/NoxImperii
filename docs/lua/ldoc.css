@@ -13,6 +13,15 @@ tt {
     font-family: "Andale Mono", monospace; margin-left: 0em;
 }
 
+<<<<<<< HEAD
+=======
+span.parameter { font-family:monospace; }
+span.parameter:after { content:":"; }
+span.types:before { content:"("; }
+span.types:after { content:")"; }
+.type { font-weight: bold; font-style:italic }
+
+>>>>>>> 8b3c0e9... Add types to lua api docs, and other documentation improvements
 body, td, th { font-size: 11pt; }
 
 h1, h2, h3, h4 { margin-left: 0em; }

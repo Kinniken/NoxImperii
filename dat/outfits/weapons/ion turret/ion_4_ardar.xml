@@ -10,7 +10,7 @@
   <cpu>-30</cpu>
   <level>4</level>
   <logo>ardarshir</logo>
-  <license>Ardarshir Auxilliary, Class III</license>
+  <license>Ardarshir Auxiliary, Class III</license>
  </general>
  <specific type="turret bolt">
   <gfx>razorS</gfx>

@@ -10,7 +10,7 @@
   <cpu>-5</cpu>
   <level>3</level>
   <logo>ardarshir</logo>
-  <license>Ardarshir Auxilliary, Class II</license>
+  <license>Ardarshir Auxiliary, Class II</license>
  </general>
  <specific type="launcher" secondary="1">
   <ammo>Yrioch Missile</ammo>

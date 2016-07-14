@@ -10,7 +10,7 @@
   <description>The Roidhunate has worked to compensate its weaknesses in shield technologies by improving armours beyond what has been achieved by Terran engineers; this self-repairing armour is the most striking result. Integrated between layers of alloys and composites, miniature repair bots can gradually repair damaged areas while the ship is still in space.</description>
   <level>5</level>
   <logo>ardarshir</logo>
-  <license>Ardarshir Auxilliary, Honourable</license>
+  <license>Ardarshir Auxiliary, Honourable</license>
 </general>
 <specific type="modification">
   <armour_mod>12</armour_mod>

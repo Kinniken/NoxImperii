@@ -70,7 +70,7 @@ function spawn_capship ()
        scom.addPilot( pilots, "Pirate Shark", 20 );
        scom.addPilot( pilots, "Pirate Vendetta", 25 );
        scom.addPilot( pilots, "Pirate Delta", 20 );
-       scom.addPilot( pilots, "Pirate Phalanx", 45 );
+       scom.addPilot( pilots, "Pirate Admonisher", 45 );
     else
        scom.addPilot( pilots, "Pirate Shark", 20 );
        scom.addPilot( pilots, "Pirate Vendetta", 25 );

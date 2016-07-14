@@ -62,6 +62,7 @@
   <equip>empire</equip>
   <allies>
     <ally>Empire of Terra</ally>
+    <ally>Empire of Terra Strike Forces</ally>
   </allies>
   <enemies>
    <enemy>Pirates</enemy>
@@ -79,6 +80,7 @@
   <equip>roidhunate</equip>
   <allies>
     <ally>Roidhunate of Ardarshir</ally>
+    <ally>Roidhunate of Ardarshir Strike Forces</ally>
   </allies>
   <enemies>
    <enemy>Pirates</enemy>
@@ -121,7 +123,9 @@
    <enemy>Ardar Traders</enemy>
    <enemy>Betelgian Traders</enemy>
    <enemy>Empire of Terra</enemy>
+   <enemy>Empire of Terra Strike Forces</enemy>
    <enemy>Roidhunate of Ardarshir</enemy>
+   <enemy>Roidhunate of Ardarshir Strike Forces</enemy>
    <enemy>Oligarchy of Betelgeuse</enemy>
    <enemy>Barbarians</enemy>
    <enemy>Kingdom of Ixum</enemy>
@@ -142,10 +146,33 @@
   <allies>
     <ally>Kingdom of Ixum</ally>
     <ally>Imperial Traders</ally>
+    <ally>Empire of Terra Strike Forces</ally>
   </allies>
   <enemies>
    <enemy>Pirates</enemy>
    <enemy>Barbarians</enemy>
+   <enemy>Roidhunate of Ardarshir Strike Forces</enemy>
+  </enemies>
+ </faction>
+
+ <faction name="Empire of Terra Strike Forces">
+  <known/>
+  <logo>empire</logo>
+  <colour>Yellow</colour>
+  <player>5</player>
+  <spawn>empire</spawn>
+  <standing>empire</standing>
+  <equip>empire</equip>
+  <allies>
+    <ally>Kingdom of Ixum</ally>
+    <ally>Imperial Traders</ally>
+    <ally>Empire of Terra</ally>
+  </allies>
+  <enemies>
+   <enemy>Pirates</enemy>
+   <enemy>Barbarians</enemy>
+   <enemy>Roidhunate of Ardarshir</enemy>
+   <enemy>Roidhunate of Ardarshir Strike Forces</enemy>
   </enemies>
  </faction>
  
@@ -160,10 +187,33 @@
   <allies>
     <ally>Holy Flame of Ixum</ally>
     <ally>Ardar Traders</ally>
+    <ally>Roidhunate of Ardarshir Strike Forces</ally>
   </allies>
   <enemies>
    <enemy>Pirates</enemy>
    <enemy>Barbarians</enemy>
+   <enemy>Empire of Terra Strike Forces</enemy>
+  </enemies>
+ </faction>
+
+ <faction name="Roidhunate of Ardarshir Strike Forces">
+  <known/>
+  <logo>roidhunate</logo>
+  <colour>green</colour>
+  <player>0</player>
+  <spawn>roidhunate</spawn>
+  <standing>roidhunate</standing>
+  <equip>roidhunate</equip>
+  <allies>
+    <ally>Holy Flame of Ixum</ally>
+    <ally>Ardar Traders</ally>
+    <ally>Roidhunate of Ardarshir</ally>
+  </allies>
+  <enemies>
+   <enemy>Pirates</enemy>
+   <enemy>Barbarians</enemy>
+   <enemy>Empire of Terra</enemy>
+   <enemy>Empire of Terra Strike Forces</enemy>
   </enemies>
  </faction>
 
@@ -194,6 +244,7 @@
   <equip>royalixum</equip>
   <allies>
     <ally>Empire of Terra</ally>
+    <ally>Empire of Terra Strike Forces</ally>
   </allies>
   <enemies>
    <enemy>Pirates</enemy>
@@ -212,6 +263,7 @@
   <equip>holyflame</equip>
   <allies>
     <ally>Roidhunate of Ardarshir</ally>
+    <ally>Roidhunate of Ardarshir Strike Forces</ally>
   </allies>
   <enemies>
    <enemy>Pirates</enemy>
@@ -237,7 +289,9 @@
    <enemy>Ardar Traders</enemy>
    <enemy>Betelgian Traders</enemy>
    <enemy>Empire of Terra</enemy>
+   <enemy>Empire of Terra Strike Forces</enemy>
    <enemy>Roidhunate of Ardarshir</enemy>
+   <enemy>Roidhunate of Ardarshir Strike Forces</enemy>
    <enemy>Oligarchy of Betelgeuse</enemy>
    <enemy>Kingdom of Ixum</enemy>
    <enemy>Holy Flame of Ixum</enemy>

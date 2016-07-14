@@ -9,7 +9,7 @@
 	cruiser or carrier of a major faction, will lower a bit less often, but
 	will lower more often than if he was using a purely pirate ship.
 
-	This event will not reduce the player’s fame below a given level.
+	This event will not reduce the player's fame below a given level.
 
 --]]
 
@@ -42,7 +42,7 @@ end
 
 --[[
 -- Returns a boolean indicating whether or not the player is using some kind
--- of monstruously powerfull or intimidating ship, like another’s faction
+-- of monstruously powerfull or intimidating ship, like another's faction
 -- cruiser or carrier.
 --]]
 local function using_impressive_ship()

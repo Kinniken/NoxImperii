@@ -328,35 +328,35 @@
  
  <!-- Ardarshir -->
  <fleet name="Ardar Meteor">
-  <ai>empire</ai>
+  <ai>roidhunate</ai>
   <faction>Roidhunate of Ardarshir</faction>
   <pilots>
    <pilot name="Ardar Roeth" ship="Ardar Roeth"></pilot>
   </pilots>
  </fleet>
  <fleet name="Ardar Comet">
-  <ai>empire</ai>
+  <ai>roidhunate</ai>
   <faction>Roidhunate of Ardarshir</faction>
   <pilots>
    <pilot name="Ardar Vach Rueth" ship="Ardar Vach Rueth"></pilot>
   </pilots>
   </fleet>
  <fleet name="Ardar Continent">
-  <ai>empire</ai>
+  <ai>roidhunate</ai>
   <faction>Roidhunate of Ardarshir</faction>
   <pilots>
    <pilot name="Ardar Brythioch" ship="Ardar Brythioch"></pilot>
   </pilots>
  </fleet>
   <fleet name="Ardar Planet">
-  <ai>empire</ai>
+  <ai>roidhunate</ai>
   <faction>Roidhunate of Ardarshir</faction>
   <pilots>
    <pilot name="Ardar Mowyr" ship="Ardar Mowyr"></pilot>
   </pilots>
  </fleet>
  <fleet name="Ardar Nova">
-  <ai>empire</ai>
+  <ai>roidhunate</ai>
   <faction>Roidhunate of Ardarshir</faction>
   <pilots>
    <pilot name="Ardar Moloch" ship="Ardar Moloch"></pilot>

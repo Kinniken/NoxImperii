@@ -24,7 +24,7 @@
   <commodities/>
   <description>A large, light planet of shallow seas and many islands, Harkan is unusual in being home to two sapient species: one land-based, though keen sailors, and one aquatic, though more at home in shallow seas than in oceanic depths.
 
-  Their ancestral if limited conflicts have taken a dangerous new turn with the arrival of the Empire and the Roidhunate on the world; having each chosen to support a client specie, the two realms are now engaged in a low-level proxy conflict that could degenerate at any moment.</description>
+Their ancestral if limited conflicts have taken a dangerous new turn with the arrival of the Empire and the Roidhunate on the world; having each chosen to support a client specie, the two realms are now engaged in a low-level proxy conflict that could degenerate at any moment.</description>
  	<bar>The Empire's military base might be small, but it has a small mess. The view over Harkan's oceans is spectacular.</bar>
     <luadata>{
 	humanFertility = 0.5,
@@ -35,7 +35,7 @@
 		civilized = false,
 		industry = 1,
 		military = 1,
-		name = "Toborkos",
+		name = "Tigarays",
 		population = 156893431,
 		services = 1,
 		stability = 1,

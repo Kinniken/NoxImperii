@@ -3,9 +3,9 @@
    include "jumpdist.lua"
 
 -- Gets a planet of a given faction
-function get_faction_planet( sys,factionName,minDist,maxDist)
+function get_faction_planet( around_sys,factionName,minDist,maxDist)
    local planets = {}
-    getsysatdistance(sys, minDist,maxDist,
+    getsysatdistance(around_sys, minDist,maxDist,
         function(s)
             for i, v in ipairs(s:planets()) do
                 if v:faction() == faction.get(factionName) then
@@ -24,8 +24,8 @@ function get_faction_planet( sys,factionName,minDist,maxDist)
     return planets[id][1],planets[id][2]
 end
 
-function get_empty_sys( sys, min, max)
-  local systems=getsysatdistance(system.cur(), min, max,
+function get_empty_sys( around_sys, min, max)
+  local systems=getsysatdistance(around_sys, min, max,
     function(s)
         for _,p in pairs(s:planets()) do
           if p:faction() and p:faction()~=faction.get(G.NATIVES) then
@@ -50,4 +50,32 @@ function has_system_faction_planet(sys,factionName)
   end
 
   return false
+end
+
+function generate_ship(target_ship_name, shipFunc, posCentre,minDistance,maxDistance,aggressive, factionOverride)
+
+  local target_ship, target_ship_outfits,target_ship_ai,target_ship_faction = shipFunc()
+
+  if factionOverride then
+    target_ship_faction = factionOverride
+  end
+
+  local pos = gh.randomPosAround(posCentre,minDistance,maxDistance)
+
+  -- Create the badass enemy
+  p     = pilot.addRaw( target_ship, target_ship_ai, pos, target_ship_faction )
+
+  local target_ship_pilot   = p[1]
+  target_ship_pilot:rename(target_ship_name)
+  target_ship_pilot:setVisplayer(true)
+  target_ship_pilot:setHilight(true)
+
+  if (aggressive) then
+    target_ship_pilot:setHostile()
+  end
+
+  target_ship_pilot:rmOutfit("all") -- Start naked
+  pilot_outfitAddSet( target_ship_pilot, target_ship_outfits )
+
+  return target_ship_pilot
 end

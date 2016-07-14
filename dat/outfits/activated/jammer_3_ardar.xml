@@ -11,7 +11,7 @@
   <cpu>-4</cpu>
   <level>3</level>
   <logo>ardarshir</logo>
-  <license>Ardarshir Auxilliary, Class II</license>
+  <license>Ardarshir Auxiliary, Class II</license>
  </general>
  <specific type="jammer" group="7">
   <range>170</range>

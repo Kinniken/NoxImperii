@@ -10,7 +10,7 @@
   <cpu>-12</cpu>
   <level>3</level>
   <logo>ardarshir</logo>
-  <license>Ardarshir Auxilliary, Class III</license>
+  <license>Ardarshir Auxiliary, Class III</license>
  </general>
  <specific type="beam" secondary="1">
   <delay>4</delay>

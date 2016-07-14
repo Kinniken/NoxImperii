@@ -4,7 +4,7 @@
   <mass>0</mass>
   <price>1000</price>
   <gfx_store>license</gfx_store>
-  <license>Ardarshir Auxilliary, Honourable</license>
+  <license>Ardarshir Auxiliary, Honourable</license>
   <description>This license recognises you as a proper ally and not a mere auxiliary.</description>
   <faction_needed>Roidhunate of Ardarshir</faction_needed>
   <faction_relation_needed>70</faction_relation_needed>

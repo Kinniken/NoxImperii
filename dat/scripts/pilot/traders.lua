@@ -1,29 +1,7 @@
 include("pilot/generic.lua")
 include("dat/factions/equip/helper.lua")
 include("dat/factions/equip/outfits.lua")
-
-function trader_createSmallBorderTrader(  )
-   -- Create by default
-   if trader_create == nil then
-      trader_create = true
-   end
-
-   -- Choose pirate type
-   local z = rnd.rnd()
-   local p, o
-   if z < 0.5 then
-      p,o = trader_createMuleArdarshir( trader_create )
-   else
-      p,o = trader_createKoalaArdarshir( trader_create )
-   end
-
-   -- Set name
-   if trader_create then
-      p:rename( trader_name() )
-   end
-   return p,o
-end
-
+include('universe/generate_nameGenerator.lua')
 
 -- Creates an empty ship for the pirate
 function trader_createEmpty( ship )
@@ -36,11 +14,11 @@ function trader_createEmpty( ship )
 
    return p
 end
-function trader_createKoala(  )
+function trader_createMeryoch(  )
 
    local p, s, outfits
 
-   p     = "Koala"
+   p     = "Meryoch"
    s     = ship.get(p)
    outfits = { }
    
@@ -64,11 +42,11 @@ function trader_createKoala(  )
    return p,outfits
 end
 
-function trader_createMule(  )
+function trader_createGeldoch(  )
 
    local p, s, outfits
 
-   p     = "Mule"
+   p     = "Geldoch"
    s     = ship.get(p)
    outfits = { }
    
@@ -77,10 +55,10 @@ function trader_createMule(  )
 
    local nbTurrets,nbForwards,nbSecondaries,nbStructures,nbUtilities
 
-   -- light on weapons
-   nbTurrets=nbSlotTurrets/2
-   nbForwards=nbSlotWeapons/2
-   nbSecondaries=0
+   -- heavy on weapons
+   nbTurrets=nbSlotTurrets
+   nbForwards=nbSlotWeapons-nbTurrets
+   nbSecondaries=1
    nbStructures=nbSlotStructures
    nbUtilities=nSlotUtilities
 
@@ -92,6 +70,24 @@ function trader_createMule(  )
    return p,outfits
 end
 
+function ardarshir_trader_name()
+
+
+   local randomArdarName=nameGenerator.generateNameArdarshir()
+
+   local descriptors = {
+      "Busy",
+      "Daring",
+      "Industrious",
+      "Ambitious",
+      "Mighty",
+      "Prosperous",
+      "Disciplined",
+      "Efficient"
+   }
+
+   return "The "..descriptors[ rnd.rnd(1,#descriptors) ].." "..randomArdarName
+end
 
 --[[
 -- @brief Generates pilot names
@@ -123,7 +119,7 @@ function trader_name ()
       "Merchant",
       "Trader",
       "Bohemian",
-      "Traveler",
+      "Traveller",
       "Caravel",
       "Cutter",
       "Vessel",

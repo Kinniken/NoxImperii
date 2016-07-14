@@ -209,3 +209,22 @@ end
 function gh.format(s, tab)
   return (s:gsub('($%b{})', function(w) return tab[w:sub(3, -2)] or w end)):gsub("\t", "")
 end
+
+function gh.formatAll(sarray, tab)
+  local res={}
+  for k,s in ipairs(sarray) do
+    res[k]=gh.format(s, tab)
+  end
+  return res
+end
+
+function gh.randomPosAround(pos,minDistance,maxDistance)
+  local x,y = pos:get()
+  local d = rnd.rnd( minDistance, maxDistance )
+  local a = math.atan2( y, x ) + math.pi
+  local offset = vec2.new()
+  offset:setP( d, a )
+  pos = pos + offset
+
+  return pos
+end

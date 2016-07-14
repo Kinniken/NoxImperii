@@ -70,6 +70,10 @@ function create()
 							duration = event.duration
 						end
 
+						if (type(duration) == "string") then
+							print("World event "..event.eventMessage.." has a string as news duration!")
+						end
+
 						news.add( v.faction, gh.format(v.title,textData), time.get():str(1).." - "..gh.format(v.message,textData), time.get() + duration )
 					end
 				end

@@ -95,17 +95,17 @@
 		<item>Ram Beam</item>
 		<item>Beam Turret</item>
 		<item>Ardar Roeth</item>
-		<item>Ardarshir Auxilliary, Class I</item>
+		<item>Ardarshir Auxiliary, Class I</item>
 		<item>Neutron Disruptor</item>
 		<item>Ardar Vach Rueth</item>
-		<item>Ardarshir Auxilliary, Class II</item>
+		<item>Ardarshir Auxiliary, Class II</item>
 		<item>Improved Neutron Disruptor</item>
 		<item>Ion Cannon I</item>
 		<item>Yrioch Launcher</item>
 		<item>Yrioch Missile</item>
 		<item>Telchan Torpedo</item>
 		<item>Ardar Brythioch</item>
-		<item>Ardarshir Auxilliary, Class III</item>
+		<item>Ardarshir Auxiliary, Class III</item>
 		<item>Ardar Jammer</item>
 		<item>Ardar Navy Scrambler</item>
 		<item>Heavy Neutron Disruptor</item>
@@ -117,7 +117,7 @@
 		<item>Telchan Torpedo Tube</item>
 		<item>Ardar Mowyr</item>
 		<item>Merkhrioch</item>
-		<item>Ardarshir Auxilliary, Honourable</item>
+		<item>Ardarshir Auxiliary, Honourable</item>
 		<item>Ardar Hellburner</item>
 		<item>Ardar Medium Shield Booster</item>
 		<item>Self-Repairing Plating</item>
@@ -266,6 +266,12 @@
 		<item>Large Exploration Battery</item>
 		<item>Large Extended Fuel Pod</item>
 		<item>Concentrated Solar Panels</item>
+		<item>Ardar Unobtainium Shield Capacitor</item>
+		<item>Ardar Unobtainium Shield Capacitor II</item>
+		<item>Ardar Unobtainium Shield Capacitor III</item>
+		<item>Terran Unobtainium Shield Capacitor</item>
+		<item>Terran Unobtainium Shield Capacitor II</item>
+		<item>Terran Unobtainium Shield Capacitor III</item>
 	</tech>
 	<tech name="All Commodities">
 		<item>Food</item>
@@ -372,6 +378,7 @@
 		<item>Marara Light Launcher</item>
 		<item>Marara Launcher</item>
 		<item>Narval Heavy Torpedo</item>
+		<item>Terran Unobtainium Shield Capacitor</item>
 	</tech>
 	<tech name="Empire Military 4">
 		<item>Imperial Jupiter</item>
@@ -388,6 +395,7 @@
 		<item>Turreted Marara Launcher</item>
 		<item>Light Narval Torpedo Tube</item>
 		<item>Narval Torpedo Tube</item>
+		<item>Terran Unobtainium Shield Capacitor II</item>
 	</tech>
 	<tech name="Empire Military 5">
 		<item>Imperial Valenderay</item>
@@ -398,6 +406,7 @@
 		<item>Heavy Plasma Turret</item>
 		<item>Ram Beam</item>
 		<item>Beam Turret</item>
+		<item>Terran Unobtainium Shield Capacitor III</item>
 	</tech>
 	
 	
@@ -407,12 +416,12 @@
 
 	<tech name="Roidhunate Military 1">
 		<item>Ardar Roeth</item>
-		<item>Ardarshir Auxilliary, Class I</item>
+		<item>Ardarshir Auxiliary, Class I</item>
 		<item>Neutron Disruptor</item>
 	</tech>
 	<tech name="Roidhunate Military 2">
 		<item>Ardar Vach Rueth</item>
-		<item>Ardarshir Auxilliary, Class II</item>
+		<item>Ardarshir Auxiliary, Class II</item>
 		<item>Improved Neutron Disruptor</item>
 		<item>Ion Cannon I</item>
 		<item>Yrioch Launcher</item>
@@ -421,7 +430,7 @@
 	</tech>
 	<tech name="Roidhunate Military 3">
 		<item>Ardar Brythioch</item>
-		<item>Ardarshir Auxilliary, Class III</item>
+		<item>Ardarshir Auxiliary, Class III</item>
 
 		<item>Ardar Jammer</item>
 		<item>Ardar Navy Scrambler</item>
@@ -432,11 +441,12 @@
 		<item>Ardar Lance</item>
 		<item>Ardar Beam</item>		
 		<item>Telchan Torpedo Tube</item>
+		<item>Ardar Unobtainium Shield Capacitor</item>
 	</tech>
 	<tech name="Roidhunate Military 4">
 		<item>Ardar Mowyr</item>
 		<item>Merkhrioch</item>
-		<item>Ardarshir Auxilliary, Honourable</item>
+		<item>Ardarshir Auxiliary, Honourable</item>
 
 		<item>Ardar Hellburner</item>
 		<item>Ardar Medium Shield Booster</item>
@@ -451,6 +461,7 @@
 		<item>Breakshield Lance</item>
 		<item>Yrioch Heavy Launcher</item>
 		<item>Telchan Heavy Tube</item>
+		<item>Ardar Unobtainium Shield Capacitor II</item>
 	</tech>
 	<tech name="Roidhunate Military 5">
 		<item>Ardar Moloch</item>
@@ -461,6 +472,7 @@
 		<item>Armour Repair Droids</item>
 		<item>Improved Trajectory Stabilizer</item>
 		<item>Shattershield Lance</item>
+		<item>Ardar Unobtainium Shield Capacitor III</item>
 	</tech>
 
 

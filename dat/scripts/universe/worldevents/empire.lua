@@ -207,12 +207,13 @@ event.weightValidity=function(planet)
 	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("hindu"))
 end
 event.weight=50--tag-specific so higher priority
+event.duration=time.create( 0,0,2, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 
 	textData.god=gh.randomObject({"Ganesh","Ram","Vishnu","Durga","Kali","Hanuman"})
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The ongoing mela is driving up demand for food and consumer goods.",
-		(time.get() + time.create( 0,0,2, 0, 0, 0 )):tonumber(), "mela" )
+		(time.get() + self.duration):tonumber(), "mela" )
 	planet.lua.settlements.humans:addGoodDemand(C.FOOD,100,5,effectId)
 	planet.lua.settlements.humans:addGoodDemand(C.CONSUMER_GOODS,100,5,effectId)
 end
@@ -243,7 +244,7 @@ event.eventMessage="NEWS ALERT: The famous carnival of ${world} has just started
 
 event.worldHistoryMessage="The famous carnival of Port ${world} was held."
 
-event:addBarNews(G.EMPIRE,"Samba! Carnival starts on ${world}","The streets of Port ${world} are ringing with music as the famous carnival starts. A month of festivities awaits locals and the numerous visitors as Imperial citizens enjoy the party of the year!","empire_carnival")
+event:addBarNews(G.EMPIRE,"Samba! Carnival starts on ${world}","The streets of Port ${world} are ringing with music as the famous carnival starts. A month of festivities awaits locals and the numerous visitors as Imperial citizens enjoy the party of the year!",event.duration,"empire_carnival")
 table.insert(world_events.events,event)
 
 
@@ -254,12 +255,13 @@ event.weightValidity=function(planet)
 	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("chinese"))
 end
 event.weight=50--tag-specific so higher priority
+event.duration=time.create( 0,0,2, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 
 	textData.sign=gh.randomObject({"Dragon","Goat","Monkey","Horse","Rat","Lama"})
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("New Year celebrations are driving up demand for consumer goods.",
-		(time.get() + time.create( 0,0,2, 0, 0, 0 )):tonumber() )
+		(time.get() + self.duration):tonumber() )
 	planet.lua.settlements.humans:addGoodDemand(C.CONSUMER_GOODS,100,5,effectId)
 	planet.lua.settlements.humans:addGoodDemand(C.LUXURY_GOODS,20,5,effectId)
 end

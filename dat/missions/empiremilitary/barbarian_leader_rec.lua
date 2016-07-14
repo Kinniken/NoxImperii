@@ -64,10 +64,10 @@ function give_rewards ()
    faction.modPlayerSingle( G.EMPIRE, 1 )
    faction.modPlayerSingle( G.PIRATES, -5 )
    
-  local planet=planet_class.load(target_planet)
+   local planet=planet_class.load(target_planet)
 
-   planet.settlements.barbarians.military=planet.settlements.barbarians.military*0.9
-   planet.settlements:addHistory("The death of "..target_ship_name.." started a civil war, diminishing the world's military potential.")
+   planet.lua.settlements.barbarians.military=planet.lua.settlements.barbarians.military*0.9
+   planet:addHistory("The death of "..target_ship_name.." started a civil war, diminishing the world's military potential.")
 
    planet:save()
 

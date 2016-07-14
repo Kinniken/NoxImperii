@@ -8,7 +8,7 @@
  <fabricator>Roidhunate Shipyards</fabricator>
  <description>Comet-class frigates by Terran standards, Vach Rueth ships are used more as support vessels by the Ardars. As such, they have lesser range and speed than their Imperial equivalents, but are somewhat better armed</description>
  <price>900000</price>
- <license>Ardarshir Auxilliary, Class II</license>
+ <license>Ardarshir Auxiliary, Class II</license>
  <movement>
   <thrust>190</thrust>
   <turn>120</turn>

@@ -347,6 +347,8 @@ typedef struct Outfit_ {
    int factionNeeded;
    int factionRelationNeeded;
 
+   char* cond; /**< optionally, condition that must be met (Lua). */
+
    glTexture* gfx_store; /**< Store graphic. */
    glTexture** gfx_store_layers; /**< Store graphic, with layers */
    int gfx_store_nlayers; /**< Store graphic, layer number */

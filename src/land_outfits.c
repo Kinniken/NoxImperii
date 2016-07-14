@@ -550,9 +550,23 @@ int outfits_filter( Outfit **outfits, glTexture ***toutfits, int *ntoutfits, int
       int(*filter)( const Outfit *o ), char *name )
 {
    int i, j;
+   int c;
 
    j = 0;
    for (i=0; i<n; i++) {
+
+	   //if there is a LUA condition, run it
+	  if (outfits[i]->cond != NULL) {
+			c = cond_check(outfits[i]->cond);
+			if (c < 0) {
+				WARN("Conditional for outfit '%s' failed to run", outfits[i]->cond);
+				continue;
+			}
+			else if (!c)
+				continue;
+		}
+
+
       if ((filter != NULL) && !filter(outfits[i]))
          continue;
 

@@ -36,6 +36,7 @@
 #include "damagetype.h"
 #include "slots.h"
 #include "mapData.h"
+#include "cond.h"h
 
 
 #define outfit_setProp(o,p)      ((o)->properties |= p) /**< Checks outfit property. */
@@ -2163,6 +2164,8 @@ static int outfit_parse( Outfit* temp, const char* file )
 				continue;
 			}
 			xmlr_int(cur, "faction_relation_needed", temp->factionRelationNeeded);
+
+			xmlr_strd(cur,"conditions",temp->cond);
 
             WARN("Outfit '%s' has unknown general node '%s'",temp->name, cur->name);
          } while (xml_nextNode(cur));

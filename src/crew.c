@@ -333,9 +333,11 @@ void crew_addToBar(const Planet* landPlanet) {
 
 				//only possible to have one crew of a "type", so shouldn't add other ones
 				if (player_getCrew(crew->name)==NULL) {
-					generatedName=crew_findName(crew->nameGenerator);
-
-
+					if (crew->nameGenerator != NULL)
+						generatedName=crew_findName(crew->nameGenerator);
+					else {//named characters, from missions
+						generatedName=crew->name;
+					}
 
 					if (crew->combatRatingNeeded>0) {
 						nsnprintf( bufRating, MAX_BAR_DESC, "\eDCombat Rating Required:\e0 %s\n",

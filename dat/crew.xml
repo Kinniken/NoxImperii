@@ -1,749 +1,784 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Positions>
-	<position name="Pilot">
-		<crew>
-			<name>Reformed Drunk</name>
-			<level>1</level>
-			<description>Kicked out of his previous post for drunkenness on the job, he has since changed his ways. No liquor on the job now, no sir! Before or after, that's another matter...</description>
-			<portrait>neutral/unique/drunkard</portrait>
-			<gender>male</gender>
-			<hiring_price>1000</hiring_price>
-			<location>bar</location>
-			<name_generator>HumanMale</name_generator>
-			<faction>Empire of Terra</faction>
-			<chance>70</chance>
-			<stats>
-				<speed_mod>-10</speed_mod>
-				<turn_mod>10</turn_mod>
-				<thrust_mod>10</thrust_mod>
-			</stats>
-		</crew>
-		<crew>
-			<name>Ardar Youth</name>
-			<level>1</level>
-			<description>Straight out of a decent Ardar pilot school, name has refused to join the Ardar navy, a rare act of defiance that cut him off from decent Ardar society. Not for him the ordered life of Ardar ships!</description>
-			<portrait>neutral/thief1</portrait>
-			<gender>male</gender>
-			<hiring_price>1500</hiring_price>
-			<location>bar</location>
-			<name_generator>Ardar</name_generator>
-			<faction>Roidhunate of Ardarshir</faction>
-			<chance>70</chance>
-			<stats>
-				<speed_mod>10</speed_mod>
-				<turn_mod>-5</turn_mod>
-				<thrust_mod>10</thrust_mod>
-			</stats>
-		</crew>
-		<crew>
-			<name>Self-educated Pilot</name>
-			<level>1</level>
-			<description>This pilot is humanoid, though you can't recognise his specie. Born in a non-industrial society on a world at the fringe of imperial space, he started as a stow away on a dingy freighter and ended up pilot. Sort of.</description>
-			<portrait>pirate/pirate_militia2</portrait>
-			<gender>male</gender>
-			<hiring_price>1200</hiring_price>
-			<location>bar</location>
-			<name_generator>Other</name_generator>
-			<faction>Independent Worlds</faction>
-			<chance>70</chance>
-			<stats>
-				<turn_mod>5</turn_mod>
-				<thrust_mod>5</thrust_mod>
-			</stats>
-		</crew>
-		<crew>
-			<name>Old Ixumite Exile</name>
-			<level>1</level>
-			<description>Before the war, this old Ixumite earned a decent livehood as owner and captain of a small cargo ship. Now he seaks empoyment beyond Ixumite, no matter how badly paid.</description>
-			<portrait>pirate/pirate_militia2</portrait>
-			<gender>male</gender>
-			<hiring_price>900</hiring_price>
-			<location>bar</location>
-			<name_generator>Ixumite</name_generator>
-			<faction>Kingdom of Ixum</faction>
-			<faction>Holy Flame of Ixum</faction>
-			<chance>70</chance>
-			<stats>
-				<speed_mod>5</speed_mod>
-				<thrust_mod>10</thrust_mod>
-			</stats>
-		</crew>
-		<crew>
-			<name>Dashing Courier</name>
-			<level>2</level>
-			<description>An entire life spend piloting speedy courier ships has made this pilot a very capable woman indeed, speeding in both normal and hyperspace.</description>
-			<portrait>neutral/unique/oldwoman</portrait>
-			<gender>female</gender>
-			<hiring_price>20000</hiring_price>
-			<location>bar</location>
-			<name_generator>HumanFemale</name_generator>
-			<faction>Empire of Terra</faction>
-			<chance>40</chance>
-			<combat_rating_needed>50</combat_rating_needed>
-			<stats>
-				<speed_mod>20</speed_mod>
-				<turn_mod>10</turn_mod>
-				<thrust_mod>15</thrust_mod>
-				<jump_delay>-10</jump_delay>
-			</stats>
-		</crew>
-		<crew>
-			<name>Express Trader</name>
-			<level>2</level>
-			<description>This gifted young Betelgian pilot was valued in all his jobs for his ability to deliver cargo quickly through hyperspace. He now wishes to see even more of the Galaxy that he did working for Betelgian companies</description>
-			<portrait>dvaered/unique/ka'def</portrait>
-			<gender>male</gender>
-			<hiring_price>25000</hiring_price>
-			<location>bar</location>
-			<name_generator>Betelgian</name_generator>
-			<faction>Oligarchy of Betelgeuse</faction>
-			<chance>40</chance>
-			<combat_rating_needed>50</combat_rating_needed>
-			<stats>
-				<speed_mod>20</speed_mod>
-				<turn_mod>0</turn_mod>
-				<thrust_mod>10</thrust_mod>
-				<jump_delay>-20</jump_delay>
-			</stats>
-		</crew>
-		<crew>
-			<name>Ardar Mercenary Pilot</name>
-			<level>2</level>
-			<description>Skilled Ardar pilots generally work for the Navy, a prestigious occupation. But not all Ardars crave military service; this pilot resigned his commission and went for private employment. His dogfighting skills are still just as sharp as before.</description>
-			<portrait>neutral/unique/reynir</portrait>
-			<gender>male</gender>
-			<hiring_price>20000</hiring_price>
-			<location>bar</location>
-			<name_generator>Ardar</name_generator>
-			<faction>Roidhunate of Ardarshir</faction>
-			<chance>40</chance>
-			<combat_rating_needed>100</combat_rating_needed>
-			<stats>
-				<speed_mod>10</speed_mod>
-				<turn_mod>25</turn_mod>
-				<thrust_mod>25</thrust_mod>
-			</stats>
-		</crew>
-		<crew>
-			<name>Ixumite Veteran Pilot</name>
-			<level>2</level>
-			<description>This Ixumite pilot has fought in the ongoing civil war since his teenage years, amassing war experience beyond his age. Since losing an eye to the conflict, he has decided to seak other employers.</description>
-			<portrait>pirate/pirate4</portrait>
-			<gender>male</gender>
-			<hiring_price>22000</hiring_price>
-			<location>bar</location>
-			<name_generator>Ixumite</name_generator>
-			<faction>Kingdom of Ixum</faction>
-			<faction>Holy Flame of Ixum</faction>
-			<chance>40</chance>
-			<combat_rating_needed>60</combat_rating_needed>
-			<stats>
-				<speed_mod>5</speed_mod>
-				<turn_mod>30</turn_mod>
-				<thrust_mod>30</thrust_mod>
-			</stats>
-		</crew>
-		<crew>
-			<name>Imperial Ace</name>
-			<level>3</level>
-			<description>Decorated for acts of bravery in multiple battles against pirates, this ex-Navy pilot's deadly skills and impressive sang-froid would greatly help you in tight battles.</description>
-			<portrait>neutral/thief3</portrait>
-			<gender>female</gender>
-			<hiring_price>110000</hiring_price>
-			<location>bar</location>
-			<name_generator>HumanFemale</name_generator>
-			<faction>Empire of Terra</faction>
-			<chance>20</chance>
-			<combat_rating_needed>1000</combat_rating_needed>
-			<faction_needed>Empire of Terra</faction_needed>
-			<faction_relation_needed>50</faction_relation_needed>
-			<stats>
-				<speed_mod>25</speed_mod>
-				<turn_mod>35</turn_mod>
-				<thrust_mod>35</thrust_mod>
-			</stats>
-		</crew>
-		<crew>
-			<name>Ardar Elite Pilot</name>
-			<level>3</level>
-			<description>He won't speak much about his past, but he is know to have been a member of an elite Ardar strike team used for infiltration missions deep within the Empire. He clearly learned much there.</description>
-			<portrait>pirate/pirate4</portrait>
-			<gender>male</gender>
-			<hiring_price>120000</hiring_price>
-			<location>bar</location>
-			<name_generator>Ardar</name_generator>
-			<faction>Roidhunate of Ardarshir</faction>
-			<chance>20</chance>
-			<combat_rating_needed>1000</combat_rating_needed>
-			<faction_needed>Roidhunate of Ardarshir</faction_needed>
-			<faction_relation_needed>50</faction_relation_needed>
-			<stats>
-				<speed_mod>30</speed_mod>
-				<turn_mod>20</turn_mod>
-				<thrust_mod>20</thrust_mod>
-				<jump_delay>-30</jump_delay>
-			</stats>
-		</crew>
-		<crew>
-			<name>Betelgian Expert Scout</name>
-			<level>3</level>
-			<description>This Betelgian has served in the legendary Betelgian scouting service, mapping star systems far into barbarian space. He zips from star to star with effortless grace to the sound of Betelgian orchestral symphonies.</description>
-			<portrait>pirate/pirate1</portrait>
-			<gender>male</gender>
-			<hiring_price>110000</hiring_price>
-			<location>bar</location>
-			<name_generator>Betelgian</name_generator>
-			<faction>Oligarchy of Betelgeuse</faction>
-			<chance>20</chance>
-			<combat_rating_needed>500</combat_rating_needed>
-			<faction_needed>Oligarchy of Betelgeuse</faction_needed>
-			<faction_relation_needed>50</faction_relation_needed>
-			<stats>
-				<speed_mod>30</speed_mod>
-				<turn_mod>10</turn_mod>
-				<thrust_mod>20</thrust_mod>
-				<jump_delay>-50</jump_delay>
-			</stats>
-		</crew>
-	</position>
-	<position name="Engineer">
-		<crew>
-			<name>Hobbyist Engineer</name>
-			<level>1</level>
-			<description>An accountant by trade, he set aside enough money to focus on his real passion: tinkering with engines. He'd love to have a go at improving your ship; so much to learn!</description>
-			<portrait>neutral/unique/shifty_merchant</portrait>
-			<gender>male</gender>
-			<hiring_price>1000</hiring_price>
-			<location>bar</location>
-			<name_generator>HumanMale</name_generator>
-			<faction>Empire of Terra</faction>
-			<chance>70</chance>
-			<stats>
-				<energy_mod>10</energy_mod>
-				<heat_dissipation>10</heat_dissipation>
-			</stats>
-		</crew>
-		<crew>
-			<name>Betelgian Technician</name>
-			<level>1</level>
-			<description>His career in the trading fleet of a Betelgian trade house never took off, but he did manage to learn a thing or two on improving fuel efficiency.</description>
-			<portrait>neutral/male1</portrait>
-			<gender>male</gender>
-			<hiring_price>900</hiring_price>
-			<location>bar</location>
-			<name_generator>Betelgian</name_generator>
-			<faction>Oligarchy of Betelgeuse</faction>
-			<chance>70</chance>
-			<stats>
-				<cpu_mod>-5</cpu_mod>
-				<fuel_efficiency>20</fuel_efficiency>
-			</stats>
-		</crew>
-		<crew>
-			<name>Frugal Technician</name>
-			<level>1</level>
-			<description>This technician learnt his trade on rickety ships whose power and CPU were never quite up to the job. He's learnt the hard way to get a bit more out of them.</description>
-			<portrait>neutral/miner1</portrait>
-			<gender>male</gender>
-			<hiring_price>1200</hiring_price>
-			<location>bar</location>
-			<name_generator>Other</name_generator>
-			<faction>Independent Worlds</faction>
-			<chance>70</chance>
-			<stats>
-				<energy_mod>10</energy_mod>
-				<cpu_max>10</cpu_max>
-			</stats>
-		</crew>
-		<crew>
-			<name>Ardar Civil Engineer</name>
-			<level>1</level>
-			<description>This Ardar engineer worked for an Ardar transport company, repairing ground transport vehicles. Working on a spaceship is something else... but at least he's motivated!</description>
-			<portrait>neutral/unique/shifty_merchant</portrait>
-			<gender>male</gender>
-			<hiring_price>1000</hiring_price>
-			<location>bar</location>
-			<name_generator>Ardar</name_generator>
-			<faction>Roidhunate of Ardarshir</faction>
-			<chance>70</chance>
-			<stats>
-				<cargo_inertia>10</cargo_inertia>
-				<energy_regen_mod>10</energy_regen_mod>
-				<heat_dissipation>10</heat_dissipation>
-			</stats>
-		</crew>
-		<crew>
-			<name>Terran Engineer</name>
-			<level>2</level>
-			<description>Educated on Terra itself, this engineer has worked on good, modern ships, and helped run them well.</description>
-			<portrait>neutral/unique/oldwoman</portrait>
-			<gender>female</gender>
-			<hiring_price>22000</hiring_price>
-			<location>bar</location>
-			<name_generator>HumanFemale</name_generator>
-			<faction>Empire of Terra</faction>
-			<chance>40</chance>
-			<combat_rating_needed>50</combat_rating_needed>
-			<stats>
-				<cpu_mod>10</cpu_mod>
-				<energy_mod>25</energy_mod>
-				<heat_dissipation>25</heat_dissipation>
-				<fuel_efficiency>10</fuel_efficiency>
-			</stats>
-		</crew>
-		<crew>
-			<name>Ardar Mainframe Specialist</name>
-			<level>2</level>
-			<description>This Ardar technician is specialised in ships' mainframes. He'll eke out all that can be gotten of your CPU modules.</description>
-			<portrait>neutral/scientist</portrait>
-			<gender>male</gender>
-			<hiring_price>20000</hiring_price>
-			<location>bar</location>
-			<name_generator>Ardar</name_generator>
-			<faction>Roidhunate of Ardarshir</faction>
-			<chance>40</chance>
-			<combat_rating_needed>50</combat_rating_needed>
-			<stats>
-				<cpu_mod>30</cpu_mod>
-				<energy_regen_mod>10</energy_regen_mod>
-			</stats>
-		</crew>
-		<crew>
-			<name>Eccentric Genius</name>
-			<level>3</level>
-			<description>Born on a remote human world with a 20th-century technology, he learned to code using a keyboard! Switching to modern technologies was easy for this genius, and he can make your ship do things you'd never have thought possible.</description>
-			<portrait>pirate/pirate1</portrait>
-			<gender>male</gender>
-			<hiring_price>100000</hiring_price>
-			<location>bar</location>
-			<name_generator>HumanMale</name_generator>
-			<faction>Independent Worlds</faction>
-			<chance>20</chance>
-			<combat_rating_needed>1000</combat_rating_needed>
-			<faction_needed>Independent Worlds</faction_needed>
-			<faction_relation_needed>50</faction_relation_needed>
-			<stats>
-				<cpu_mod>50</cpu_mod>
-				<energy_mod>50</energy_mod>
-				<heat_dissipation>30</heat_dissipation>
-			</stats>
-		</crew>
-		<crew>
-			<name>Expect Trade Engineer</name>
-			<level>3</level>
-			<description>This Betelgian engineer was still recently Head Engineer for a major trading house. Tired of office politics, he wishes to do what he does best again - deliver ships capable of going where none have gone before.</description>
-			<portrait>neutral/cyborg2</portrait>
-			<gender>male</gender>
-			<hiring_price>100000</hiring_price>
-			<location>bar</location>
-			<name_generator>Betelgian</name_generator>
-			<faction>Oligarchy of Betelgeuse</faction>
-			<chance>20</chance>
-			<combat_rating_needed>500</combat_rating_needed>
-			<faction_needed>Oligarchy of Betelgeuse</faction_needed>
-			<faction_relation_needed>50</faction_relation_needed>
-			<stats>
-				<cargo_inertia>50</cargo_inertia>
-				<heat_dissipation>20</heat_dissipation>
-				<fuel_efficiency>50</fuel_efficiency>
-			</stats>
-		</crew>
-		<crew>
-			<name>Ixumite Genius</name>
-			<level>3</level>
-			<description>Ixumites are not known for their mechanical abilities, but this sharp-looking young Ixumite is a clear exception. Before the war, he might have gotten fundings to get a Terran education and come back to work in the Royal shipyard; now he'll take anything to leave and avoid getting drafted.</description>
-			<portrait>neutral/cyborg2</portrait>
-			<gender>male</gender>
-			<hiring_price>90000</hiring_price>
-			<location>bar</location>
-			<name_generator>Ixumite</name_generator>
-			<faction>Kingdom of Ixum</faction>
-			<chance>20</chance>
-			<combat_rating_needed>500</combat_rating_needed>
-			<faction_needed>Kingdom of Ixum</faction_needed>
-			<faction_relation_needed>50</faction_relation_needed>
-			<stats>
-				<cpu_mod>30</cpu_mod>
-				<energy_mod>30</energy_mod>
-				<cpu_max>20</cpu_max>
-				<heat_dissipation>20</heat_dissipation>
-				<fuel_efficiency>25</fuel_efficiency>
-			</stats>
-		</crew>
-	</position>
-	<position name="Weapon Officer">
-		<crew>
-			<name>Would-Be Sniper</name>
-			<level>1</level>
-			<description>Having done competitive precision shooting, he prides himself on his accuracy with a laser. His rate of fire is another matter.</description>
-			<portrait>neutral/thief1</portrait>
-			<gender>male</gender>
-			<hiring_price>1000</hiring_price>
-			<location>bar</location>
-			<name_generator>HumanMale</name_generator>
-			<faction>Empire of Terra</faction>
-			<chance>70</chance>
-			<stats>
-				<fwd_damage>30</fwd_damage>
-				<fwd_firerate>-20</fwd_firerate>
-			</stats>
-		</crew>
-		<crew>
-			<name>Furious Gunner</name>
-			<level>1</level>
-			<description>Precision work is not for this imperious Ardar. He believes in closing-in before unleashing short-range volleys as fast as possible.</description>
-			<portrait>pirate/pirate_militia1</portrait>
-			<gender>male</gender>
-			<hiring_price>1000</hiring_price>
-			<location>bar</location>
-			<name_generator>Ardar</name_generator>
-			<faction>Roidhunate of Ardarshir</faction>
-			<chance>70</chance>
-			<stats>
-				<fwd_heat>-20</fwd_heat>
-				<fwd_firerate>10</fwd_firerate>
-			</stats>
-		</crew>
-		<crew>
-			<name>Turret Afficiendo</name>
-			<level>1</level>
-			<description>This gruff Betelgian has mostly served on freighters and is of little use with missiles or forward weapons, but he handles turrets just fine.</description>
-			<portrait>sirius/unique/patrek</portrait>
-			<gender>male</gender>
-			<hiring_price>1200</hiring_price>
-			<location>bar</location>
-			<name_generator>Betelgian</name_generator>
-			<faction>Oligarchy of Betelgeuse</faction>
-			<chance>70</chance>
-			<stats>
-				<fwd_damage>-10</fwd_damage>
-				<tur_heat>-10</tur_heat>
-				<tur_damage>10</tur_damage>
-				<tur_tracking>10</tur_tracking>
-			</stats>
-		</crew>
-		<crew>
-			<name>Ixumite Grunt</name>
-			<level>1</level>
-			<description>This tall and burly Ixumite served as an infantryman in the Royal Ixumite Army. He's solid in firefight and can handle basic artillery.</description>
-			<portrait>neutral/male1</portrait>
-			<gender>male</gender>
-			<hiring_price>900</hiring_price>
-			<location>bar</location>
-			<name_generator>Ixumite</name_generator>
-			<faction>Kingdom of Ixum</faction>
-			<chance>70</chance>
-			<stats>
-				<fwd_damage>10</fwd_damage>
-				<boarding_skills>10</boarding_skills>
-			</stats>
-		</crew>
-		<crew>
-			<name>Canon Enthusiast</name>
-			<level>1</level>
-			<description>On this humanoid's homeworld, turrets are unknown but the local kingdoms build massive guns. He's carried that passion in space; turrets are for wimps!</description>
-			<portrait>pirate/pirate_militia2</portrait>
-			<gender>male</gender>
-			<hiring_price>1100</hiring_price>
-			<location>bar</location>
-			<name_generator>Other</name_generator>
-			<faction>Independent Worlds</faction>
-			<chance>70</chance>
-			<stats>
-				<fwd_damage>20</fwd_damage>
-				<tur_damage>-20</tur_damage>
-			</stats>
-		</crew>
-		<crew>
-			<name>Imperial Gunner</name>
-			<level>2</level>
-			<description>This man served competently if not remarkably for some years in the Imperial navy before exiting the service for more lucrative positions.</description>
-			<portrait>neutral/male1</portrait>
-			<gender>male</gender>
-			<hiring_price>20000</hiring_price>
-			<location>bar</location>
-			<name_generator>HumanMale</name_generator>
-			<faction>Empire of Terra</faction>
-			<chance>40</chance>
-			<combat_rating_needed>50</combat_rating_needed>
-			<stats>
-				<fwd_heat>-10</fwd_heat>
-				<fwd_damage>15</fwd_damage>
-				<tur_heat>-10</tur_heat>
-				<tur_damage>20</tur_damage>
-			</stats>
-		</crew>
-		<crew>
-			<name>Ardar Fighter Gunner</name>
-			<level>2</level>
-			<description>This Ardar veteran served on a Roidhunate cruiser for most of his service, where he showed a solid grasp of turret tracking.</description>
-			<portrait>dvaered/dv_civilian2</portrait>
-			<gender>male</gender>
-			<hiring_price>25000</hiring_price>
-			<location>bar</location>
-			<name_generator>Ardar</name_generator>
-			<faction>Roidhunate of Ardarshir</faction>
-			<chance>40</chance>
-			<combat_rating_needed>50</combat_rating_needed>
-			<stats>
-				<tur_heat>-20</tur_heat>
-				<tur_damage>20</tur_damage>
-				<tur_tracking>20</tur_tracking>
-			</stats>
-		</crew>
-		<crew>
-			<name>Ixumite Gunner</name>
-			<level>2</level>
-			<description>This Ixumite has served many years in the Holy Flame Navy, mostly as a capital-ship gunner. Having lost faith in the civil war, he is looking for work elsewhere.</description>
-			<portrait>neutral/thief1</portrait>
-			<gender>male</gender>
-			<hiring_price>22000</hiring_price>
-			<location>bar</location>
-			<name_generator>Ixumite</name_generator>
-			<faction>Holy Flame of Ixum</faction>
-			<chance>40</chance>
-			<combat_rating_needed>50</combat_rating_needed>
-			<stats>
-				<fwd_damage>10</fwd_damage>
-				<fwd_firerate>10</fwd_firerate>
-				<tur_damage>20</tur_damage>
-				<tur_tracking>10</tur_tracking>
-			</stats>
-		</crew>
-		<crew>
-			<name>Tribal Chief</name>
-			<level>2</level>
-			<description>This solidly-built humanoid spend much of his life as chief of an iron-age native community on a remote world. Captured by raiders, he showed remarkable zero-gravity fighting skills.</description>
-			<portrait>pirate/pirate_militia2</portrait>
-			<gender>male</gender>
-			<hiring_price>22000</hiring_price>
-			<location>bar</location>
-			<name_generator>Other</name_generator>
-			<faction>Independent Worlds</faction>
-			<chance>40</chance>
-			<combat_rating_needed>50</combat_rating_needed>
-			<stats>
-				<fwd_damage>15</fwd_damage>
-				<fwd_firerate>10</fwd_firerate>
-				<boarding_skills>30</boarding_skills>
-			</stats>
-		</crew>
-		<crew>
-			<name>Ex-Commando Officer</name>
-			<level>3</level>
-			<description>You'll never know why this steely aristocrat left Imperial service, but his career in the Navy's elite commando unit is all the recommendation he needs - even if most of it is classified.</description>
-			<portrait>neutral/unique/aristocrat</portrait>
-			<gender>male</gender>
-			<hiring_price>125000</hiring_price>
-			<location>bar</location>
-			<name_generator>HumanMale</name_generator>
-			<faction>Empire of Terra</faction>
-			<chance>20</chance>
-			<combat_rating_needed>1000</combat_rating_needed>
-			<faction_needed>Empire of Terra</faction_needed>
-			<faction_relation_needed>50</faction_relation_needed>
-			<stats>
-				<fwd_damage>20</fwd_damage>
-				<tur_damage>20</tur_damage>
-				<tur_tracking>20</tur_tracking>
-				<boarding_skills>50</boarding_skills>
-			</stats>
-		</crew>
-		<crew>
-			<name>Disgraced Ardar Colonel</name>
-			<level>3</level>
-			<description>After years of service in the Ardar Navy, this decorated colonel had to resign over accusations of luxuriant behaviour - something taken far more seriously on Ardarshir than on Terra. His combat credentials remain impeccable.</description>
-			<portrait>neutral/male1</portrait>
-			<gender>male</gender>
-			<hiring_price>125000</hiring_price>
-			<location>bar</location>
-			<name_generator>Ardar</name_generator>
-			<faction>Roidhunate of Ardarshir</faction>
-			<chance>40</chance>
-			<combat_rating_needed>50</combat_rating_needed>
-			<faction_needed>Roidhunate of Ardarshir</faction_needed>
-			<faction_relation_needed>50</faction_relation_needed>
-			<stats>
-				<tur_heat>-20</tur_heat>
-				<tur_damage>30</tur_damage>
-				<tur_tracking>20</tur_tracking>
-				<boarding_skills>30</boarding_skills>
-			</stats>
-		</crew>
-	</position>
-	<position name="Defence Officer">
-		<crew>
-			<name>Shield Polisher</name>
-			<level>1</level>
-			<description>This engineer trained for service in the imperial navy and failed. Since there he's been working aboard freighters. You can count on him to keep your shield generators clean, and that's about it.</description>
-			<portrait>neutral/unique/reynir</portrait>
-			<gender>male</gender>
-			<hiring_price>1000</hiring_price>
-			<location>bar</location>
-			<name_generator>HumanMale</name_generator>
-			<faction>Empire of Terra</faction>
-			<chance>70</chance>
-			<stats>
-				<armour_mod>-5</armour_mod>
-				<shield_regen_mod>10</shield_regen_mod>
-			</stats>
-		</crew>
-		<crew>
-			<name>Former Smith</name>
-			<level>1</level>
-			<description>Raised on a backward colony in the fringes, this man started as a smith- an actual, history-book style smith, hammering metal by hand, making shovels and horseshoes. He's more than willing to straighten out your armour the same way.</description>
-			<portrait>neutral/barman</portrait>
-			<gender>male</gender>
-			<hiring_price>900</hiring_price>
-			<location>bar</location>
-			<name_generator>Other</name_generator>
-			<faction>Independent Worlds</faction>
-			<chance>70</chance>
-			<stats>
-				<armour_mod>10</armour_mod>
-				<stress_dissipation>5</stress_dissipation>
-			</stats>
-		</crew>
-		<crew>
-			<name>Failed Shield Technician</name>
-			<level>1</level>
-			<description>The Roidhunate still lags Terra in shield technology, and this Ardar technician's training illustrates that. Thankfully, he's better at armour maintenance.</description>
-			<portrait>dvaered/unique/ka'def</portrait>
-			<gender>male</gender>
-			<hiring_price>1000</hiring_price>
-			<location>bar</location>
-			<name_generator>Ardar</name_generator>
-			<faction>Roidhunate of Ardarshir</faction>
-			<chance>70</chance>
-			<stats>
-				<armour_mod>15</armour_mod>
-				<shield_regen_mod>-5</shield_regen_mod>
-			</stats>
-		</crew>
-		<crew>
-			<name>Ex-Holy Flame Tinkerer</name>
-			<level>1</level>
-			<description>Recruited young in the Holy Flame Navy, this Ixumite learnt how to maintain shields without much formal education.</description>
-			<portrait>pirate/pirate3</portrait>
-			<gender>male</gender>
-			<hiring_price>800</hiring_price>
-			<location>bar</location>
-			<name_generator>Ixumite</name_generator>
-			<faction>Holy Flame of Ixum</faction>
-			<chance>70</chance>
-			<stats>
-				<shield_mod>5</shield_mod>
-				<shield_regen_mod>5</shield_regen_mod>
-			</stats>
-		</crew>
-		<crew>
-			<name>Competent Shield Technician</name>
-			<level>2</level>
-			<description>While young and without much experience, this technician has a solid grasp of shield theory and will do a fine job keeping them up. Armour isn't her thing, however.</description>
-			<portrait>sirius/unique/joanne</portrait>
-			<gender>female</gender>
-			<hiring_price>20000</hiring_price>
-			<location>bar</location>
-			<name_generator>HumanFemale</name_generator>
-			<faction>Empire of Terra</faction>
-			<chance>40</chance>
-			<combat_rating_needed>50</combat_rating_needed>
-			<stats>
-				<shield_mod>15</shield_mod>
-				<shield_regen_mod>5</shield_regen_mod>
-			</stats>
-		</crew>
-		<crew>
-			<name>Ardar Armour Specialist</name>
-			<level>2</level>
-			<description>This young Ardar studied in an Ardar military institute. His grades were not quite sufficient for military postings, but he has served well on multiple freighters. Like most Ardar technicians, he is more at ease with armour.</description>
-			<portrait>neutral/thief1</portrait>
-			<gender>male</gender>
-			<hiring_price>22000</hiring_price>
-			<location>bar</location>
-			<name_generator>Ardar</name_generator>
-			<faction>Roidhunate of Ardarshir</faction>
-			<chance>40</chance>
-			<combat_rating_needed>50</combat_rating_needed>
-			<stats>
-				<armour_mod>25</armour_mod>
-				<shield_mod>10</shield_mod>
-			</stats>
-		</crew>
-		<crew>
-			<name>Survival Specialist</name>
-			<level>2</level>
-			<description>Used to fighting on easily-disabled ships, this man is amazing at getting a paralyzed ship running again. It has served him well on freighters operating in dangerous spaces.</description>
-			<portrait>pirate/pirate4</portrait>
-			<gender>male</gender>
-			<hiring_price>25000</hiring_price>
-			<location>bar</location>
-			<name_generator>HumanMale</name_generator>
-			<faction>Independent Worlds</faction>
-			<chance>40</chance>
-			<combat_rating_needed>50</combat_rating_needed>
-			<stats>
-				<armour_mod>20</armour_mod>
-				<stress_dissipation>25</stress_dissipation>
-			</stats>
-		</crew>
-		<crew>
-			<name>Shield Expert</name>
-			<level>3</level>
-			<description>This man does not just maintain shields - for years he developed new ones in a major Imperial research institute. It's your luck that he now wishes to conduct 'real-world trials', as he puts it.</description>
-			<portrait>neutral/scientist</portrait>
-			<gender>male</gender>
-			<hiring_price>110000</hiring_price>
-			<location>bar</location>
-			<name_generator>HumanMale</name_generator>
-			<faction>Empire of Terra</faction>
-			<chance>20</chance>
-			<combat_rating_needed>1000</combat_rating_needed>
-			<faction_needed>Empire of Terra</faction_needed>
-			<faction_relation_needed>50</faction_relation_needed>
-			<stats>
-				<shield_mod>40</shield_mod>
-				<shield_regen_mod>20</shield_regen_mod>
-			</stats>
-		</crew>
-		<crew>
-			<name>Master Armourer</name>
-			<level>3</level>
-			<description>Ardar ships are well-known for their heavy armour, and this man is an expert on it. He is in fact so good he is capable of doing emergency repairs in-flight, something most technicians never touch.</description>
-			<portrait>pirate/pirate_militia2</portrait>
-			<gender>male</gender>
-			<hiring_price>120000</hiring_price>
-			<location>bar</location>
-			<name_generator>Ardar</name_generator>
-			<faction>Roidhunate of Ardarshir</faction>
-			<chance>20</chance>
-			<combat_rating_needed>1000</combat_rating_needed>
-			<faction_needed>Roidhunate of Ardarshir</faction_needed>
-			<faction_relation_needed>50</faction_relation_needed>
-			<stats>
-				<armour_mod>30</armour_mod>
-				<armour_regen_flat>10</armour_regen_flat>
-			</stats>
-		</crew>
-		<crew>
-			<name>Recovery Genius</name>
-			<level>3</level>
-			<description>This eccentric humanoid from a fringe world is a true genius at keeping a ship in shape during the toughest battles. No matter what happens, he'll be there, repairing the armour, resetting disabled systems, and getting shields back online.</description>
-			<portrait>pirate/pirate2</portrait>
-			<gender>male</gender>
-			<hiring_price>150000</hiring_price>
-			<location>bar</location>
-			<name_generator>Other</name_generator>
-			<faction>Independent Worlds</faction>
-			<chance>20</chance>
-			<combat_rating_needed>1000</combat_rating_needed>
-			<faction_needed>Independent Worlds</faction_needed>
-			<faction_relation_needed>50</faction_relation_needed>
-			<stats>
-				<armour_regen_flat>10</armour_regen_flat>
-				<shield_regen_mod>20</shield_regen_mod>
-				<stress_dissipation>30</stress_dissipation>
-			</stats>
-		</crew>
-	</position>
+    <position name="Pilot">
+        <crew>
+            <name>Reformed Drunk</name>
+            <level>1</level>
+            <description>Kicked out of his previous post for drunkenness on the job, he has since changed his ways. No liquor on the job now, no sir! Before or after, that's another matter...</description>
+            <portrait>neutral/unique/drunkard</portrait>
+            <gender>male</gender>
+            <hiring_price>1000</hiring_price>
+            <location>bar</location>
+            <name_generator>HumanMale</name_generator>
+            <faction>Empire of Terra</faction>
+            <chance>70</chance>
+            <stats>
+                <speed_mod>-10</speed_mod>
+                <turn_mod>10</turn_mod>
+                <thrust_mod>10</thrust_mod>
+            </stats>
+        </crew>
+        <crew>
+            <name>Ardar Youth</name>
+            <level>1</level>
+            <description>Straight out of a decent Ardar pilot school, name has refused to join the Ardar navy, a rare act of defiance that cut him off from decent Ardar society. Not for him the ordered life of Ardar ships!</description>
+            <portrait>neutral/thief1</portrait>
+            <gender>male</gender>
+            <hiring_price>1500</hiring_price>
+            <location>bar</location>
+            <name_generator>Ardar</name_generator>
+            <faction>Roidhunate of Ardarshir</faction>
+            <chance>70</chance>
+            <stats>
+                <speed_mod>10</speed_mod>
+                <turn_mod>-5</turn_mod>
+                <thrust_mod>10</thrust_mod>
+            </stats>
+        </crew>
+        <crew>
+            <name>Self-educated Pilot</name>
+            <level>1</level>
+            <description>This pilot is humanoid, though you can't recognise his specie. Born in a non-industrial society on a world at the fringe of imperial space, he started as a stow away on a dingy freighter and ended up pilot. Sort of.</description>
+            <portrait>pirate/pirate_militia2</portrait>
+            <gender>male</gender>
+            <hiring_price>1200</hiring_price>
+            <location>bar</location>
+            <name_generator>Other</name_generator>
+            <faction>Independent Worlds</faction>
+            <chance>70</chance>
+            <stats>
+                <turn_mod>5</turn_mod>
+                <thrust_mod>5</thrust_mod>
+            </stats>
+        </crew>
+        <crew>
+            <name>Old Ixumite Exile</name>
+            <level>1</level>
+            <description>Before the war, this old Ixumite earned a decent livehood as owner and captain of a small cargo ship. Now he seaks empoyment beyond Ixumite, no matter how badly paid.</description>
+            <portrait>pirate/pirate_militia2</portrait>
+            <gender>male</gender>
+            <hiring_price>900</hiring_price>
+            <location>bar</location>
+            <name_generator>Ixumite</name_generator>
+            <faction>Kingdom of Ixum</faction>
+            <faction>Holy Flame of Ixum</faction>
+            <chance>70</chance>
+            <stats>
+                <speed_mod>5</speed_mod>
+                <thrust_mod>10</thrust_mod>
+            </stats>
+        </crew>
+        <crew>
+            <name>Dashing Courier</name>
+            <level>2</level>
+            <description>An entire life spend piloting speedy courier ships has made this pilot a very capable woman indeed, speeding in both normal and hyperspace.</description>
+            <portrait>neutral/unique/oldwoman</portrait>
+            <gender>female</gender>
+            <hiring_price>20000</hiring_price>
+            <location>bar</location>
+            <name_generator>HumanFemale</name_generator>
+            <faction>Empire of Terra</faction>
+            <chance>40</chance>
+            <combat_rating_needed>50</combat_rating_needed>
+            <stats>
+                <speed_mod>20</speed_mod>
+                <turn_mod>10</turn_mod>
+                <thrust_mod>15</thrust_mod>
+                <jump_delay>-10</jump_delay>
+            </stats>
+        </crew>
+        <crew>
+            <name>Express Trader</name>
+            <level>2</level>
+            <description>This gifted young Betelgian pilot was valued in all his jobs for his ability to deliver cargo quickly through hyperspace. He now wishes to see even more of the Galaxy that he did working for Betelgian companies</description>
+            <portrait>dvaered/unique/ka'def</portrait>
+            <gender>male</gender>
+            <hiring_price>25000</hiring_price>
+            <location>bar</location>
+            <name_generator>Betelgian</name_generator>
+            <faction>Oligarchy of Betelgeuse</faction>
+            <chance>40</chance>
+            <combat_rating_needed>50</combat_rating_needed>
+            <stats>
+                <speed_mod>20</speed_mod>
+                <turn_mod>0</turn_mod>
+                <thrust_mod>10</thrust_mod>
+                <jump_delay>-20</jump_delay>
+            </stats>
+        </crew>
+        <crew>
+            <name>Ardar Mercenary Pilot</name>
+            <level>2</level>
+            <description>Skilled Ardar pilots generally work for the Navy, a prestigious occupation. But not all Ardars crave military service; this pilot resigned his commission and went for private employment. His dogfighting skills are still just as sharp as before.</description>
+            <portrait>neutral/unique/reynir</portrait>
+            <gender>male</gender>
+            <hiring_price>20000</hiring_price>
+            <location>bar</location>
+            <name_generator>Ardar</name_generator>
+            <faction>Roidhunate of Ardarshir</faction>
+            <chance>40</chance>
+            <combat_rating_needed>100</combat_rating_needed>
+            <stats>
+                <speed_mod>10</speed_mod>
+                <turn_mod>25</turn_mod>
+                <thrust_mod>25</thrust_mod>
+            </stats>
+        </crew>
+        <crew>
+            <name>Ixumite Veteran Pilot</name>
+            <level>2</level>
+            <description>This Ixumite pilot has fought in the ongoing civil war since his teenage years, amassing war experience beyond his age. Since losing an eye to the conflict, he has decided to seak other employers.</description>
+            <portrait>pirate/pirate4</portrait>
+            <gender>male</gender>
+            <hiring_price>22000</hiring_price>
+            <location>bar</location>
+            <name_generator>Ixumite</name_generator>
+            <faction>Kingdom of Ixum</faction>
+            <faction>Holy Flame of Ixum</faction>
+            <chance>40</chance>
+            <combat_rating_needed>60</combat_rating_needed>
+            <stats>
+                <speed_mod>5</speed_mod>
+                <turn_mod>30</turn_mod>
+                <thrust_mod>30</thrust_mod>
+            </stats>
+        </crew>
+        <crew>
+            <name>Imperial Ace</name>
+            <level>3</level>
+            <description>Decorated for acts of bravery in multiple battles against pirates, this ex-Navy pilot's deadly skills and impressive sang-froid would greatly help you in tight battles.</description>
+            <portrait>neutral/thief3</portrait>
+            <gender>female</gender>
+            <hiring_price>110000</hiring_price>
+            <location>bar</location>
+            <name_generator>HumanFemale</name_generator>
+            <faction>Empire of Terra</faction>
+            <chance>20</chance>
+            <combat_rating_needed>1000</combat_rating_needed>
+            <faction_needed>Empire of Terra</faction_needed>
+            <faction_relation_needed>50</faction_relation_needed>
+            <stats>
+                <speed_mod>25</speed_mod>
+                <turn_mod>35</turn_mod>
+                <thrust_mod>35</thrust_mod>
+            </stats>
+        </crew>
+        <crew>
+            <name>Ardar Elite Pilot</name>
+            <level>3</level>
+            <description>He won't speak much about his past, but he is know to have been a member of an elite Ardar strike team used for infiltration missions deep within the Empire. He clearly learned much there.</description>
+            <portrait>pirate/pirate4</portrait>
+            <gender>male</gender>
+            <hiring_price>120000</hiring_price>
+            <location>bar</location>
+            <name_generator>Ardar</name_generator>
+            <faction>Roidhunate of Ardarshir</faction>
+            <chance>20</chance>
+            <combat_rating_needed>1000</combat_rating_needed>
+            <faction_needed>Roidhunate of Ardarshir</faction_needed>
+            <faction_relation_needed>50</faction_relation_needed>
+            <stats>
+                <speed_mod>30</speed_mod>
+                <turn_mod>20</turn_mod>
+                <thrust_mod>20</thrust_mod>
+                <jump_delay>-30</jump_delay>
+            </stats>
+        </crew>
+        <crew>
+            <name>Betelgian Expert Scout</name>
+            <level>3</level>
+            <description>This Betelgian has served in the legendary Betelgian scouting service, mapping star systems far into barbarian space. He zips from star to star with effortless grace to the sound of Betelgian orchestral symphonies.</description>
+            <portrait>pirate/pirate1</portrait>
+            <gender>male</gender>
+            <hiring_price>110000</hiring_price>
+            <location>bar</location>
+            <name_generator>Betelgian</name_generator>
+            <faction>Oligarchy of Betelgeuse</faction>
+            <chance>20</chance>
+            <combat_rating_needed>500</combat_rating_needed>
+            <faction_needed>Oligarchy of Betelgeuse</faction_needed>
+            <faction_relation_needed>50</faction_relation_needed>
+            <stats>
+                <speed_mod>30</speed_mod>
+                <turn_mod>10</turn_mod>
+                <thrust_mod>20</thrust_mod>
+                <jump_delay>-50</jump_delay>
+            </stats>
+        </crew>
+        <crew>
+            <name>Shadowlines</name>
+            <level>2</level>
+            <description>Having resigned her position as Queen, Shadowlines is looking for adventures beyond Harkan. With her quick mind and flying instincts, she has proven an excellent pilot.</description>
+            <portrait>dvaered/dv_civilian1</portrait>
+            <gender>female</gender>
+            <hiring_price>0</hiring_price>
+            <location>bar</location>
+            <faction>Roidhunate of Ardarshir</faction>
+            <chance>100</chance>
+            <conditions>var.peek ('harkan_roidhunate_win')==true and planet.cur()==planet.get('Harkan')</conditions>
+            <combat_rating_needed>0</combat_rating_needed>
+            <stats>
+                <speed_mod>15</speed_mod>
+                <turn_mod>20</turn_mod>
+                <thrust_mod>20</thrust_mod>
+            </stats>
+        </crew>
+    </position>
+    <position name="Engineer">
+        <crew>
+            <name>Hobbyist Engineer</name>
+            <level>1</level>
+            <description>An accountant by trade, he set aside enough money to focus on his real passion: tinkering with engines. He'd love to have a go at improving your ship; so much to learn!</description>
+            <portrait>neutral/unique/shifty_merchant</portrait>
+            <gender>male</gender>
+            <hiring_price>1000</hiring_price>
+            <location>bar</location>
+            <name_generator>HumanMale</name_generator>
+            <faction>Empire of Terra</faction>
+            <chance>70</chance>
+            <stats>
+                <energy_mod>10</energy_mod>
+                <heat_dissipation>10</heat_dissipation>
+            </stats>
+        </crew>
+        <crew>
+            <name>Betelgian Technician</name>
+            <level>1</level>
+            <description>His career in the trading fleet of a Betelgian trade house never took off, but he did manage to learn a thing or two on improving fuel efficiency.</description>
+            <portrait>neutral/male1</portrait>
+            <gender>male</gender>
+            <hiring_price>900</hiring_price>
+            <location>bar</location>
+            <name_generator>Betelgian</name_generator>
+            <faction>Oligarchy of Betelgeuse</faction>
+            <chance>70</chance>
+            <stats>
+                <cpu_mod>-5</cpu_mod>
+                <fuel_efficiency>20</fuel_efficiency>
+            </stats>
+        </crew>
+        <crew>
+            <name>Frugal Technician</name>
+            <level>1</level>
+            <description>This technician learnt his trade on rickety ships whose power and CPU were never quite up to the job. He's learnt the hard way to get a bit more out of them.</description>
+            <portrait>neutral/miner1</portrait>
+            <gender>male</gender>
+            <hiring_price>1200</hiring_price>
+            <location>bar</location>
+            <name_generator>Other</name_generator>
+            <faction>Independent Worlds</faction>
+            <chance>70</chance>
+            <stats>
+                <energy_mod>10</energy_mod>
+                <cpu_max>10</cpu_max>
+            </stats>
+        </crew>
+        <crew>
+            <name>Ardar Civil Engineer</name>
+            <level>1</level>
+            <description>This Ardar engineer worked for an Ardar transport company, repairing ground transport vehicles. Working on a spaceship is something else... but at least he's motivated!</description>
+            <portrait>neutral/unique/shifty_merchant</portrait>
+            <gender>male</gender>
+            <hiring_price>1000</hiring_price>
+            <location>bar</location>
+            <name_generator>Ardar</name_generator>
+            <faction>Roidhunate of Ardarshir</faction>
+            <chance>70</chance>
+            <stats>
+                <cargo_inertia>10</cargo_inertia>
+                <energy_regen_mod>10</energy_regen_mod>
+                <heat_dissipation>10</heat_dissipation>
+            </stats>
+        </crew>
+        <crew>
+            <name>Terran Engineer</name>
+            <level>2</level>
+            <description>Educated on Terra itself, this engineer has worked on good, modern ships, and helped run them well.</description>
+            <portrait>neutral/unique/oldwoman</portrait>
+            <gender>female</gender>
+            <hiring_price>22000</hiring_price>
+            <location>bar</location>
+            <name_generator>HumanFemale</name_generator>
+            <faction>Empire of Terra</faction>
+            <chance>40</chance>
+            <combat_rating_needed>50</combat_rating_needed>
+            <stats>
+                <cpu_mod>10</cpu_mod>
+                <energy_mod>25</energy_mod>
+                <heat_dissipation>25</heat_dissipation>
+                <fuel_efficiency>10</fuel_efficiency>
+            </stats>
+        </crew>
+        <crew>
+            <name>Ardar Mainframe Specialist</name>
+            <level>2</level>
+            <description>This Ardar technician is specialised in ships' mainframes. He'll eke out all that can be gotten of your CPU modules.</description>
+            <portrait>neutral/scientist</portrait>
+            <gender>male</gender>
+            <hiring_price>20000</hiring_price>
+            <location>bar</location>
+            <name_generator>Ardar</name_generator>
+            <faction>Roidhunate of Ardarshir</faction>
+            <chance>40</chance>
+            <combat_rating_needed>50</combat_rating_needed>
+            <stats>
+                <cpu_mod>30</cpu_mod>
+                <energy_regen_mod>10</energy_regen_mod>
+            </stats>
+        </crew>
+        <crew>
+            <name>Eccentric Genius</name>
+            <level>3</level>
+            <description>Born on a remote human world with a 20th-century technology, he learned to code using a keyboard! Switching to modern technologies was easy for this genius, and he can make your ship do things you'd never have thought possible.</description>
+            <portrait>pirate/pirate1</portrait>
+            <gender>male</gender>
+            <hiring_price>100000</hiring_price>
+            <location>bar</location>
+            <name_generator>HumanMale</name_generator>
+            <faction>Independent Worlds</faction>
+            <chance>20</chance>
+            <combat_rating_needed>1000</combat_rating_needed>
+            <faction_needed>Independent Worlds</faction_needed>
+            <faction_relation_needed>50</faction_relation_needed>
+            <stats>
+                <cpu_mod>50</cpu_mod>
+                <energy_mod>50</energy_mod>
+                <heat_dissipation>30</heat_dissipation>
+            </stats>
+        </crew>
+        <crew>
+            <name>Expect Trade Engineer</name>
+            <level>3</level>
+            <description>This Betelgian engineer was still recently Head Engineer for a major trading house. Tired of office politics, he wishes to do what he does best again - deliver ships capable of going where none have gone before.</description>
+            <portrait>neutral/cyborg2</portrait>
+            <gender>male</gender>
+            <hiring_price>100000</hiring_price>
+            <location>bar</location>
+            <name_generator>Betelgian</name_generator>
+            <faction>Oligarchy of Betelgeuse</faction>
+            <chance>20</chance>
+            <combat_rating_needed>500</combat_rating_needed>
+            <faction_needed>Oligarchy of Betelgeuse</faction_needed>
+            <faction_relation_needed>50</faction_relation_needed>
+            <stats>
+                <cargo_inertia>50</cargo_inertia>
+                <heat_dissipation>20</heat_dissipation>
+                <fuel_efficiency>50</fuel_efficiency>
+            </stats>
+        </crew>
+        <crew>
+            <name>Ixumite Genius</name>
+            <level>3</level>
+            <description>Ixumites are not known for their mechanical abilities, but this sharp-looking young Ixumite is a clear exception. Before the war, he might have gotten fundings to get a Terran education and come back to work in the Royal shipyard; now he'll take anything to leave and avoid getting drafted.</description>
+            <portrait>neutral/cyborg2</portrait>
+            <gender>male</gender>
+            <hiring_price>90000</hiring_price>
+            <location>bar</location>
+            <name_generator>Ixumite</name_generator>
+            <faction>Kingdom of Ixum</faction>
+            <chance>20</chance>
+            <combat_rating_needed>500</combat_rating_needed>
+            <faction_needed>Kingdom of Ixum</faction_needed>
+            <faction_relation_needed>50</faction_relation_needed>
+            <stats>
+                <cpu_mod>30</cpu_mod>
+                <energy_mod>30</energy_mod>
+                <cpu_max>20</cpu_max>
+                <heat_dissipation>20</heat_dissipation>
+                <fuel_efficiency>25</fuel_efficiency>
+            </stats>
+        </crew>
+    </position>
+    <position name="Weapon Officer">
+        <crew>
+            <name>Would-Be Sniper</name>
+            <level>1</level>
+            <description>Having done competitive precision shooting, he prides himself on his accuracy with a laser. His rate of fire is another matter.</description>
+            <portrait>neutral/thief1</portrait>
+            <gender>male</gender>
+            <hiring_price>1000</hiring_price>
+            <location>bar</location>
+            <name_generator>HumanMale</name_generator>
+            <faction>Empire of Terra</faction>
+            <chance>70</chance>
+            <stats>
+                <fwd_damage>30</fwd_damage>
+                <fwd_firerate>-20</fwd_firerate>
+            </stats>
+        </crew>
+        <crew>
+            <name>Furious Gunner</name>
+            <level>1</level>
+            <description>Precision work is not for this imperious Ardar. He believes in closing-in before unleashing short-range volleys as fast as possible.</description>
+            <portrait>pirate/pirate_militia1</portrait>
+            <gender>male</gender>
+            <hiring_price>1000</hiring_price>
+            <location>bar</location>
+            <name_generator>Ardar</name_generator>
+            <faction>Roidhunate of Ardarshir</faction>
+            <chance>70</chance>
+            <stats>
+                <fwd_heat>-20</fwd_heat>
+                <fwd_firerate>10</fwd_firerate>
+            </stats>
+        </crew>
+        <crew>
+            <name>Turret Afficiendo</name>
+            <level>1</level>
+            <description>This gruff Betelgian has mostly served on freighters and is of little use with missiles or forward weapons, but he handles turrets just fine.</description>
+            <portrait>sirius/unique/patrek</portrait>
+            <gender>male</gender>
+            <hiring_price>1200</hiring_price>
+            <location>bar</location>
+            <name_generator>Betelgian</name_generator>
+            <faction>Oligarchy of Betelgeuse</faction>
+            <chance>70</chance>
+            <stats>
+                <fwd_damage>-10</fwd_damage>
+                <tur_heat>-10</tur_heat>
+                <tur_damage>10</tur_damage>
+                <tur_tracking>10</tur_tracking>
+            </stats>
+        </crew>
+        <crew>
+            <name>Ixumite Grunt</name>
+            <level>1</level>
+            <description>This tall and burly Ixumite served as an infantryman in the Royal Ixumite Army. He's solid in firefight and can handle basic artillery.</description>
+            <portrait>neutral/male1</portrait>
+            <gender>male</gender>
+            <hiring_price>900</hiring_price>
+            <location>bar</location>
+            <name_generator>Ixumite</name_generator>
+            <faction>Kingdom of Ixum</faction>
+            <chance>70</chance>
+            <stats>
+                <fwd_damage>10</fwd_damage>
+                <boarding_skills>10</boarding_skills>
+            </stats>
+        </crew>
+        <crew>
+            <name>Canon Enthusiast</name>
+            <level>1</level>
+            <description>On this humanoid's homeworld, turrets are unknown but the local kingdoms build massive guns. He's carried that passion in space; turrets are for wimps!</description>
+            <portrait>pirate/pirate_militia2</portrait>
+            <gender>male</gender>
+            <hiring_price>1100</hiring_price>
+            <location>bar</location>
+            <name_generator>Other</name_generator>
+            <faction>Independent Worlds</faction>
+            <chance>70</chance>
+            <stats>
+                <fwd_damage>20</fwd_damage>
+                <tur_damage>-20</tur_damage>
+            </stats>
+        </crew>
+        <crew>
+            <name>Imperial Gunner</name>
+            <level>2</level>
+            <description>This man served competently if not remarkably for some years in the Imperial navy before exiting the service for more lucrative positions.</description>
+            <portrait>neutral/male1</portrait>
+            <gender>male</gender>
+            <hiring_price>20000</hiring_price>
+            <location>bar</location>
+            <name_generator>HumanMale</name_generator>
+            <faction>Empire of Terra</faction>
+            <chance>40</chance>
+            <combat_rating_needed>50</combat_rating_needed>
+            <stats>
+                <fwd_heat>-10</fwd_heat>
+                <fwd_damage>15</fwd_damage>
+                <tur_heat>-10</tur_heat>
+                <tur_damage>20</tur_damage>
+            </stats>
+        </crew>
+        <crew>
+            <name>Ardar Fighter Gunner</name>
+            <level>2</level>
+            <description>This Ardar veteran served on a Roidhunate cruiser for most of his service, where he showed a solid grasp of turret tracking.</description>
+            <portrait>dvaered/dv_civilian2</portrait>
+            <gender>male</gender>
+            <hiring_price>25000</hiring_price>
+            <location>bar</location>
+            <name_generator>Ardar</name_generator>
+            <faction>Roidhunate of Ardarshir</faction>
+            <chance>40</chance>
+            <combat_rating_needed>50</combat_rating_needed>
+            <stats>
+                <tur_heat>-20</tur_heat>
+                <tur_damage>20</tur_damage>
+                <tur_tracking>20</tur_tracking>
+            </stats>
+        </crew>
+        <crew>
+            <name>Ixumite Gunner</name>
+            <level>2</level>
+            <description>This Ixumite has served many years in the Holy Flame Navy, mostly as a capital-ship gunner. Having lost faith in the civil war, he is looking for work elsewhere.</description>
+            <portrait>neutral/thief1</portrait>
+            <gender>male</gender>
+            <hiring_price>22000</hiring_price>
+            <location>bar</location>
+            <name_generator>Ixumite</name_generator>
+            <faction>Holy Flame of Ixum</faction>
+            <chance>40</chance>
+            <combat_rating_needed>50</combat_rating_needed>
+            <stats>
+                <fwd_damage>10</fwd_damage>
+                <fwd_firerate>10</fwd_firerate>
+                <tur_damage>20</tur_damage>
+                <tur_tracking>10</tur_tracking>
+            </stats>
+        </crew>
+        <crew>
+            <name>Tribal Chief</name>
+            <level>2</level>
+            <description>This solidly-built humanoid spend much of his life as chief of an iron-age native community on a remote world. Captured by raiders, he showed remarkable zero-gravity fighting skills.</description>
+            <portrait>pirate/pirate_militia2</portrait>
+            <gender>male</gender>
+            <hiring_price>22000</hiring_price>
+            <location>bar</location>
+            <name_generator>Other</name_generator>
+            <faction>Independent Worlds</faction>
+            <chance>40</chance>
+            <combat_rating_needed>50</combat_rating_needed>
+            <stats>
+                <fwd_damage>15</fwd_damage>
+                <fwd_firerate>10</fwd_firerate>
+                <boarding_skills>30</boarding_skills>
+            </stats>
+        </crew>
+        <crew>
+            <name>Ex-Commando Officer</name>
+            <level>3</level>
+            <description>You'll never know why this steely aristocrat left Imperial service, but his career in the Navy's elite commando unit is all the recommendation he needs - even if most of it is classified.</description>
+            <portrait>neutral/unique/aristocrat</portrait>
+            <gender>male</gender>
+            <hiring_price>125000</hiring_price>
+            <location>bar</location>
+            <name_generator>HumanMale</name_generator>
+            <faction>Empire of Terra</faction>
+            <chance>20</chance>
+            <combat_rating_needed>1000</combat_rating_needed>
+            <faction_needed>Empire of Terra</faction_needed>
+            <faction_relation_needed>50</faction_relation_needed>
+            <stats>
+                <fwd_damage>20</fwd_damage>
+                <tur_damage>20</tur_damage>
+                <tur_tracking>20</tur_tracking>
+                <boarding_skills>50</boarding_skills>
+            </stats>
+        </crew>
+        <crew>
+            <name>Disgraced Ardar Colonel</name>
+            <level>3</level>
+            <description>After years of service in the Ardar Navy, this decorated colonel had to resign over accusations of luxuriant behaviour - something taken far more seriously on Ardarshir than on Terra. His combat credentials remain impeccable.</description>
+            <portrait>neutral/male1</portrait>
+            <gender>male</gender>
+            <hiring_price>125000</hiring_price>
+            <location>bar</location>
+            <name_generator>Ardar</name_generator>
+            <faction>Roidhunate of Ardarshir</faction>
+            <chance>40</chance>
+            <combat_rating_needed>50</combat_rating_needed>
+            <faction_needed>Roidhunate of Ardarshir</faction_needed>
+            <faction_relation_needed>50</faction_relation_needed>
+            <stats>
+                <tur_heat>-20</tur_heat>
+                <tur_damage>30</tur_damage>
+                <tur_tracking>20</tur_tracking>
+                <boarding_skills>30</boarding_skills>
+            </stats>
+        </crew>
+        <crew>
+            <name>Prince Hakka</name>
+            <level>2</level>
+            <description>Following the events on Harkan, Prince Hakka has decided to leave his native world behind and to explore the Galaxy as a warrior for hire. Grateful for your help, he does not request payment.</description>
+            <portrait>pirate/pirate_militia2</portrait>
+            <gender>male</gender>
+            <hiring_price>0</hiring_price>
+            <location>bar</location>
+            <conditions>var.peek ('harkan_empire_win')==true and planet.cur()==planet.get('Harkan')</conditions>
+            <faction>Empire of Terra</faction>
+            <chance>100</chance>
+            <stats>
+                <fwd_damage>10</fwd_damage>
+                <fwd_firerate>20</fwd_firerate>
+                <boarding_skills>40</boarding_skills>
+            </stats>
+        </crew>
+    </position>
+    <position name="Defence Officer">
+        <crew>
+            <name>Shield Polisher</name>
+            <level>1</level>
+            <description>This engineer trained for service in the imperial navy and failed. Since there he's been working aboard freighters. You can count on him to keep your shield generators clean, and that's about it.</description>
+            <portrait>neutral/unique/reynir</portrait>
+            <gender>male</gender>
+            <hiring_price>1000</hiring_price>
+            <location>bar</location>
+            <name_generator>HumanMale</name_generator>
+            <faction>Empire of Terra</faction>
+            <chance>70</chance>
+            <stats>
+                <armour_mod>-5</armour_mod>
+                <shield_regen_mod>10</shield_regen_mod>
+            </stats>
+        </crew>
+        <crew>
+            <name>Former Smith</name>
+            <level>1</level>
+            <description>Raised on a backward colony in the fringes, this man started as a smith- an actual, history-book style smith, hammering metal by hand, making shovels and horseshoes. He's more than willing to straighten out your armour the same way.</description>
+            <portrait>neutral/barman</portrait>
+            <gender>male</gender>
+            <hiring_price>900</hiring_price>
+            <location>bar</location>
+            <name_generator>Other</name_generator>
+            <faction>Independent Worlds</faction>
+            <chance>70</chance>
+            <stats>
+                <armour_mod>10</armour_mod>
+                <stress_dissipation>5</stress_dissipation>
+            </stats>
+        </crew>
+        <crew>
+            <name>Failed Shield Technician</name>
+            <level>1</level>
+            <description>The Roidhunate still lags Terra in shield technology, and this Ardar technician's training illustrates that. Thankfully, he's better at armour maintenance.</description>
+            <portrait>dvaered/unique/ka'def</portrait>
+            <gender>male</gender>
+            <hiring_price>1000</hiring_price>
+            <location>bar</location>
+            <name_generator>Ardar</name_generator>
+            <faction>Roidhunate of Ardarshir</faction>
+            <chance>70</chance>
+            <stats>
+                <armour_mod>15</armour_mod>
+                <shield_regen_mod>-5</shield_regen_mod>
+            </stats>
+        </crew>
+        <crew>
+            <name>Ex-Holy Flame Tinkerer</name>
+            <level>1</level>
+            <description>Recruited young in the Holy Flame Navy, this Ixumite learnt how to maintain shields without much formal education.</description>
+            <portrait>pirate/pirate3</portrait>
+            <gender>male</gender>
+            <hiring_price>800</hiring_price>
+            <location>bar</location>
+            <name_generator>Ixumite</name_generator>
+            <faction>Holy Flame of Ixum</faction>
+            <chance>70</chance>
+            <stats>
+                <shield_mod>5</shield_mod>
+                <shield_regen_mod>5</shield_regen_mod>
+            </stats>
+        </crew>
+        <crew>
+            <name>Competent Shield Technician</name>
+            <level>2</level>
+            <description>While young and without much experience, this technician has a solid grasp of shield theory and will do a fine job keeping them up. Armour isn't her thing, however.</description>
+            <portrait>sirius/unique/joanne</portrait>
+            <gender>female</gender>
+            <hiring_price>20000</hiring_price>
+            <location>bar</location>
+            <name_generator>HumanFemale</name_generator>
+            <faction>Empire of Terra</faction>
+            <chance>40</chance>
+            <combat_rating_needed>50</combat_rating_needed>
+            <stats>
+                <shield_mod>15</shield_mod>
+                <shield_regen_mod>5</shield_regen_mod>
+            </stats>
+        </crew>
+        <crew>
+            <name>Ardar Armour Specialist</name>
+            <level>2</level>
+            <description>This young Ardar studied in an Ardar military institute. His grades were not quite sufficient for military postings, but he has served well on multiple freighters. Like most Ardar technicians, he is more at ease with armour.</description>
+            <portrait>neutral/thief1</portrait>
+            <gender>male</gender>
+            <hiring_price>22000</hiring_price>
+            <location>bar</location>
+            <name_generator>Ardar</name_generator>
+            <faction>Roidhunate of Ardarshir</faction>
+            <chance>40</chance>
+            <combat_rating_needed>50</combat_rating_needed>
+            <stats>
+                <armour_mod>25</armour_mod>
+                <shield_mod>10</shield_mod>
+            </stats>
+        </crew>
+        <crew>
+            <name>Survival Specialist</name>
+            <level>2</level>
+            <description>Used to fighting on easily-disabled ships, this man is amazing at getting a paralyzed ship running again. It has served him well on freighters operating in dangerous spaces.</description>
+            <portrait>pirate/pirate4</portrait>
+            <gender>male</gender>
+            <hiring_price>25000</hiring_price>
+            <location>bar</location>
+            <name_generator>HumanMale</name_generator>
+            <faction>Independent Worlds</faction>
+            <chance>40</chance>
+            <combat_rating_needed>50</combat_rating_needed>
+            <stats>
+                <armour_mod>20</armour_mod>
+                <stress_dissipation>25</stress_dissipation>
+            </stats>
+        </crew>
+        <crew>
+            <name>Shield Expert</name>
+            <level>3</level>
+            <description>This man does not just maintain shields - for years he developed new ones in a major Imperial research institute. It's your luck that he now wishes to conduct 'real-world trials', as he puts it.</description>
+            <portrait>neutral/scientist</portrait>
+            <gender>male</gender>
+            <hiring_price>110000</hiring_price>
+            <location>bar</location>
+            <name_generator>HumanMale</name_generator>
+            <faction>Empire of Terra</faction>
+            <chance>20</chance>
+            <combat_rating_needed>1000</combat_rating_needed>
+            <faction_needed>Empire of Terra</faction_needed>
+            <faction_relation_needed>50</faction_relation_needed>
+            <stats>
+                <shield_mod>40</shield_mod>
+                <shield_regen_mod>20</shield_regen_mod>
+            </stats>
+        </crew>
+        <crew>
+            <name>Master Armourer</name>
+            <level>3</level>
+            <description>Ardar ships are well-known for their heavy armour, and this man is an expert on it. He is in fact so good he is capable of doing emergency repairs in-flight, something most technicians never touch.</description>
+            <portrait>pirate/pirate_militia2</portrait>
+            <gender>male</gender>
+            <hiring_price>120000</hiring_price>
+            <location>bar</location>
+            <name_generator>Ardar</name_generator>
+            <faction>Roidhunate of Ardarshir</faction>
+            <chance>20</chance>
+            <combat_rating_needed>1000</combat_rating_needed>
+            <faction_needed>Roidhunate of Ardarshir</faction_needed>
+            <faction_relation_needed>50</faction_relation_needed>
+            <stats>
+                <armour_mod>30</armour_mod>
+                <armour_regen_flat>10</armour_regen_flat>
+            </stats>
+        </crew>
+        <crew>
+            <name>Recovery Genius</name>
+            <level>3</level>
+            <description>This eccentric humanoid from a fringe world is a true genius at keeping a ship in shape during the toughest battles. No matter what happens, he'll be there, repairing the armour, resetting disabled systems, and getting shields back online.</description>
+            <portrait>pirate/pirate2</portrait>
+            <gender>male</gender>
+            <hiring_price>150000</hiring_price>
+            <location>bar</location>
+            <name_generator>Other</name_generator>
+            <faction>Independent Worlds</faction>
+            <chance>20</chance>
+            <combat_rating_needed>1000</combat_rating_needed>
+            <faction_needed>Independent Worlds</faction_needed>
+            <faction_relation_needed>50</faction_relation_needed>
+            <stats>
+                <armour_regen_flat>10</armour_regen_flat>
+                <shield_regen_mod>20</shield_regen_mod>
+                <stress_dissipation>30</stress_dissipation>
+            </stats>
+        </crew>
+    </position>
 </Positions>

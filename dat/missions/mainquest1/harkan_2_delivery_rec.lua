@@ -8,7 +8,7 @@ payment = 30000
 -- Mission Details
 misn_title = "Harkan: Weapon delivery"
 misn_reward = ""..payment.." cr"
-misn_desc = "Collect weapons from ${pickupPlanet} and deliver them to the Toborkos on Harkan."
+misn_desc = "Collect weapons from ${pickupPlanet} and deliver them to the Tigarays on Harkan."
 
 
 
@@ -25,8 +25,8 @@ title[1] = "${pickupPlanet} Spaceport"
 text[1] = [[As you land on ${pickupPlanet}, a shady-looking man is waiting for you. He signals you over, and dock workers start loading weapon crates in your ship. Time to head back to Harkan.]]
 
 
-title[2] = "City of Ujanka"
-text[2] = [[Once again, you land close to the city of Ujanka. Dragoika is waiting for you and supervises the unloading of the weapons while updating you of the latest conflicts. The death toil seems to be rising inexorably on both side, as Ardarshir and the Empire continue to supply weapons to their allies.
+title[2] = "City of Japor"
+text[2] = [[Once again, you land close to the city of Japor. Prince Hakka is waiting for you and supervises the unloading of the weapons while updating you of the latest conflicts. The death toil seems to be rising inexorably on both side, as Ardarshir and the Empire continue to supply weapons to their allies.
 
 You can feel an ashen taste in your mouth as you leave the city.]]
 
@@ -42,7 +42,7 @@ end
 
 function create ()
 
-	pickupPlanet=get_faction_planet(system.get("Saxo"),G.INDEPENDENT_WORLDS,2,7)
+	pickupPlanet=get_faction_planet(planet.get("Harkan"):system(),G.INDEPENDENT_WORLDS,2,7)
 
 	if not pickupPlanet then
 		misn.finish()
@@ -135,6 +135,8 @@ function land_final ()
 
       misn.cargoJet(carg_id)
       player.pay( payment )
+
+      faction.modPlayerSingle( G.EMPIRE, 2 )
 
       hook.rm(landhook)
       misn.finish( true )

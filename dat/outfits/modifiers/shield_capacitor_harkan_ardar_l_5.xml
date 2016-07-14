@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Ardar Unobtainium Shield Capacitor III">
+ <general>
+  <typename>Shield Power Modifier</typename>
+  <slot>structure</slot>
+  <size>large</size>
+  <mass>80</mass>
+  <price>1500000</price>
+  <description>Boosted by "unobtainium" sourced from Harkan, this shield capacitor is much stronger than previously-available models.</description>
+  <gfx_store>capacitor8</gfx_store>
+  <level>5</level>
+  <logo>ardarshir</logo>
+  <license>Ardarshir Ally</license>
+  <conditions>var.peek ("harkan_roidhunate_win")==true</conditions>
+ </general>
+ <specific type="modification">
+  <shield>580</shield>
+ </specific>
+</outfit>

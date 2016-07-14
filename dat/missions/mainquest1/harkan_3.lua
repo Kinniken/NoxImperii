@@ -3,9 +3,9 @@ include "dat/scripts/general_helper.lua"
 include "dat/missions/supportfiles/common.lua"
 
 -- Mission Details
-misn_title = "Meet Abrams on Harkan"
+misn_title = "Meet Suarez on Harkan"
 misn_reward = ""
-misn_desc = "Head to Harkan to meet Commander Abrams, who requires your services urgently."
+misn_desc = "Head to Harkan to meet Commander Suarez, who requires your services urgently."
 
 
 
@@ -18,7 +18,7 @@ title = {}  --stage titles
 text = {}   --mission text
 
 title[1] = "Incoming Message"
-text[1] = [[As your ship connects to the system's communication network, a coded message from Commander Abrams appears: "Your services are needed for an urgent mission. Hurry. Abrams.".
+text[1] = [[As your ship connects to the system's communication network, a coded message from Commander Suarez appears: "Your services are needed for an urgent mission. Hurry. Suarez.".
 
 Time to head for Harkan again, it seems.]]
 

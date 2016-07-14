@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Terran Unobtainium Shield Capacitor">
+ <general>
+  <typename>Shield Power Modifier</typename>
+  <slot>structure</slot>
+  <size>small</size>
+  <mass>9</mass>
+  <price>120000</price>
+  <description>Boosted by "unobtainium" sourced from Harkan, this shield capacitor is much stronger than previously-available models.</description>
+  <gfx_store>capacitor</gfx_store>
+  <level>3</level>
+  <logo>terra</logo>
+  <license>Reserve Captain License</license>
+  <conditions>var.peek ("harkan_empire_win")==true</conditions>
+ </general>
+ <specific type="modification">
+  <shield>60</shield>
+ </specific>
+</outfit>

@@ -15,8 +15,23 @@ include "dat/missions/supportfiles/traders.lua"
 
    -- Mission details
    misn_title  = "Intercept Ardar Convoy"
-   misn_desc   = [[We have information that an independent cargo ship is used to supply the Seatrolls with weapons. It will be passing in ${targetSystem}. Destroy it.]]
+   misn_desc   = [[We have information that an independent cargo ship is used to supply the Yrens with weapons. It will be passing in ${targetSystem}. Destroy it.]]
 
+   --Success message
+   space_success_text = "As you enter the ${startSystem} system, your computer sends proof of the destruction of the ${targetShipName} to Commander Suarez on ${startPlanet}. Your payment of ${credits} cr is immediately wired."
+
+-- Messages
+msg      = {}
+msg[1]   = "MISSION SUCCESS! Head to ${endPlanet} to report your success."
+msg[2]   = "Pursue ${targetShipName} to ${targetSystem}!"
+msg[3]   = "MISSION FAILURE! Somebody else eliminated ${targetShipName}."
+msg["__save"] = true
+
+osd_msg = {}
+osd_msg[1] = "Fly to the ${targetSystem} system"
+osd_msg[2] = "Kill ${targetShipName}"
+osd_msg[3] = "Head to ${endPlanet} to report your success"
+osd_msg["__save"] = true
 
 -- Scripts we need
 include("pilot/pirate.lua")
@@ -28,14 +43,14 @@ function create ()
    target_ship_name, target_ship, target_ship_outfits,target_ship_ai,target_ship_faction = trader_createSmallArdarBorderTrader()
 
    -- Get target system
-   target_system = get_suitable_system( system.cur() )
+   target_system = get_suitable_system( planet.get("Harkan"):system() )
 
    -- Get credits
    credits  = rnd.rnd(5,8) * 10000
 
-   template_create()
-
    end_planet=planet.get("Harkan")
+
+   template_create()  
 end
 
 
@@ -47,12 +62,12 @@ function accept ()
 end
 
 -- Gets a new suitable system
-function get_suitable_system( sys )
-   local newsys=get_empty_sys(sys,1,4)
+function get_suitable_system( around_sys )
+   local newsys=get_empty_sys(around_sys,1,4)
    if newsys then
       return newsys
    else
-      return sys
+      return around_sys
    end
 end
 
@@ -60,7 +75,7 @@ end
 function give_rewards ()
 
    -- Give factions
-   faction.modPlayerSingle( G.EMPIRE, 1 )
+   faction.modPlayerSingle( G.EMPIRE, 2 )
    
    template_give_rewards()
 end

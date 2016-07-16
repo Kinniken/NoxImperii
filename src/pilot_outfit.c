@@ -553,7 +553,7 @@ const char* pilot_checkSpaceworthy( Pilot *p )
    if (p->fuel_consumption < 0.)
       return "Insufficient Fuel Consumption";
    if (p->cargo_free < 0)
-      return "Insufficient Free Cargo Space";
+      return "Insufficient Free Cargo Space. You can discard some in the Information interface ('Cargo' tab).";
    
    /* Core Slots */
    if (!pilot_slotsCheckRequired(p))

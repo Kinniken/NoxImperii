@@ -98,6 +98,7 @@ static void standings_update( unsigned int wid, char* str );
 static void cargo_genList( unsigned int wid );
 static void cargo_update( unsigned int wid, char* str );
 static void cargo_jettison( unsigned int wid, char* str );
+static void cargo_discard( unsigned int wid, char* str );
 static void mission_menu_abort( unsigned int wid, char* str );
 static void mission_menu_genList( unsigned int wid, int first );
 static void mission_menu_update( unsigned int wid, char* str );
@@ -705,6 +706,10 @@ static void info_openCargo( unsigned int wid )
          BUTTON_WIDTH, BUTTON_HEIGHT, "btnJettisonCargo", "Jettison",
          cargo_jettison );
    window_disableButton( wid, "btnJettisonCargo" );
+   window_addButton( wid, -60 - BUTTON_WIDTH*2, 20,
+            BUTTON_WIDTH, BUTTON_HEIGHT, "btnDiscardCargo", "Discard 10",
+            cargo_discard );
+      window_disableButton( wid, "btnDiscardCargo" );
 
    /* Generate the list. */
    cargo_genList( wid );
@@ -764,7 +769,12 @@ static void cargo_update( unsigned int wid, char* str )
    if (landed)
       window_disableButton( wid, "btnJettisonCargo" );
    else
-      window_enableButton( wid, "btnJettisonCargo" );
+   	   window_enableButton( wid, "btnJettisonCargo" );
+
+   if (!landed)
+	   window_disableButton( wid, "btnDiscardCargo" );
+   else
+	   window_enableButton( wid, "btnDiscardCargo" );
 }
 /**
  * @brief Makes the player jettison the currently selected cargo.
@@ -826,10 +836,42 @@ static void cargo_jettison( unsigned int wid, char* str )
    }
    else {
       /* Remove the cargo */
-      commodity_Jettison( player.p->id, player.p->commodities[pos].commodity,
+	  if (!landed)
+		  commodity_Jettison( player.p->id, player.p->commodities[pos].commodity,
             player.p->commodities[pos].quantity );
       pilot_cargoRm( player.p, player.p->commodities[pos].commodity,
             player.p->commodities[pos].quantity );
+   }
+
+   /* We reopen the menu to recreate the list now. */
+   ship_update( info_windows[ INFO_WIN_SHIP ] );
+   cargo_genList( wid );
+}
+
+
+/**
+ * @brief Makes the player discard 10 of the current cargo
+ *    @param str Unused.
+ */
+static void cargo_discard( unsigned int wid, char* str )
+{
+   (void)str;
+   int pos;
+
+   if (player.p->ncommodities==0)
+      return; /* No cargo, redundant check */
+
+   pos = toolkit_getListPos( wid, "lstCargo" );
+
+   /* Special case mission cargo. */
+   if (player.p->commodities[pos].id != 0) {
+     dialogue_msg( "Mission Cargo",
+               "You cannot discard mission-related cargo. Try cancelling the mission instead." );
+         return;
+   }
+   else {
+      pilot_cargoRm( player.p, player.p->commodities[pos].commodity,
+            10 );
    }
 
    /* We reopen the menu to recreate the list now. */

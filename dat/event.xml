@@ -4,39 +4,44 @@
     <lua>landingevents/landing_events</lua>
     <trigger>land</trigger>
     <chance>100</chance>
- </event>
-    <event name="start_event">
-     <lua>start</lua>
-     <trigger>none</trigger>
-    </event>
- <event name="generate_systems_load">
-  <lua>generate_systems</lua>
-  <trigger>load</trigger>
-  <chance>100</chance>
- </event>
+  </event>
+  <event name="start_event">
+    <lua>start</lua>
+    <trigger>none</trigger>
+  </event>
+  <event name="generate_systems_load">
+    <lua>generate_systems</lua>
+    <trigger>load</trigger>
+    <chance>100</chance>
+  </event>
   <event name="generate_systems_enter">
-  <lua>generate_systems</lua>
-  <trigger>enter</trigger>
-  <chance>100</chance>
- </event>
- <event name="initialise_static_systems">
-  <lua>initialise_static_systems</lua>
-  <trigger>load</trigger>
-  <chance>100</chance>
- </event>
- <event name="world_events_enter">
- <lua>world_events</lua>
- <trigger>enter</trigger>
- <chance>100</chance>
-</event>
- <event name="world_events_clearEffects">
- <lua>world_events_clearEffects</lua>
- <trigger>enter</trigger>
- <chance>100</chance>
-</event>
- <event name="Generic News">
-  <lua>neutral/news</lua>
-  <trigger>land</trigger>
-  <chance>100</chance>
- </event>
+    <lua>generate_systems</lua>
+    <trigger>enter</trigger>
+    <chance>100</chance>
+  </event>
+  <event name="initialise_static_systems">
+    <lua>initialise_static_systems</lua>
+    <trigger>load</trigger>
+    <chance>100</chance>
+  </event>
+  <event name="world_events_enter">
+    <lua>world_events</lua>
+    <trigger>enter</trigger>
+    <chance>100</chance>
+  </event>
+  <event name="world_events_clearEffects">
+    <lua>world_events_clearEffects</lua>
+    <trigger>enter</trigger>
+    <chance>100</chance>
+  </event>
+  <event name="Generic News">
+    <lua>neutral/news</lua>
+    <trigger>land</trigger>
+    <chance>100</chance>
+  </event>
+  <event name="bonus_fuel">
+    <lua>bonus_fuel</lua>
+    <trigger>enter</trigger>
+    <chance>100</chance>
+  </event>
 </Events>

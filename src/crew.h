@@ -41,7 +41,8 @@ typedef struct Crew_ {
    int gender; /** 1=male, 2=female, 3=neutral **/
 
    /* Prices. */
-   credits_t hiringPrice; /**< Base price of the commodity. */
+   credits_t hiringPrice; /**< Hiring price of the crew member. */
+   credits_t monthlySalary; /**< Salary of the crew member. */
 
    int loc; /* factions where available (if from bars) */
    int chance; /** chance on 100 of it appearing (if bar) */
@@ -96,5 +97,9 @@ HiredCrew* crew_getActiveCrewForPosition(const char* position);
 void crew_generateCrewLists(unsigned int wid);
 
 char* crew_getGenderPronoun(const Crew* crew);
+
+void crew_checkForSalaryPayment(void);
+void crew_setCrewPaymentTime( ntime_t timeVal );
+ntime_t crew_getCrewPaymentTime( void );
 
 #endif /* SRC_CREW_H_ */

@@ -822,7 +822,7 @@ static void equipment_renderOverlaySlots( double bx, double by, double bw, doubl
       pos += snprintf( &alt[pos], sizeof(alt)-pos, "\n\n%s", o->desc_short );
    if ((o->mass > 0.) && (pos < (int)sizeof(alt)))
       snprintf( &alt[pos], sizeof(alt)-pos,
-            "\n%.0f Tons",
+            "\n%.0f Tonnes",
             o->mass );
 
    /* Draw the text. */
@@ -1590,7 +1590,7 @@ static void equipment_genOutfitList( unsigned int wid )
             p += snprintf( &alt[i][p], l-p, "\n%s", o->desc_short );
          if ((o->mass > 0.) && (p < l))
             snprintf( &alt[i][p], l-p,
-                  "\n%.0f Tons",
+                  "\n%.0f Tonnes",
                   o->mass );
       }
 

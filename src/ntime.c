@@ -42,6 +42,8 @@
 #include "hook.h"
 #include "economy.h"
 
+#include "crew.h"
+
 
 
 #define NT_GAME_TO_REAL_RATIO    (30)        /* Update rate, how many game seconds are in a real second. */
@@ -189,9 +191,9 @@ void ntime_prettyBuf( char *str, int max, ntime_t t, int dateOnly )
 	   nsnprintf( str, max, "%dm %dd  %dh %dm", month, day, hour, min );
    } else {//Date
 	   if (dateOnly) {
-		   nsnprintf( str, max, "%s %d, %d CE", ntime_monthName(month+1), day, year );
+		   nsnprintf( str, max, "%s %d, %d CE", ntime_monthName(month+1), day+1, year );
 	   } else {
-		   nsnprintf( str, max, "%s %d, %d CE  %02d:%02d", ntime_monthName(month+1), day, year, hour, min );
+		   nsnprintf( str, max, "%s %d, %d CE  %02d:%02d", ntime_monthName(month+1), day+1, year, hour, min );
 	   }
    }
 }
@@ -261,8 +263,9 @@ void ntime_inc( ntime_t t )
    naev_time += t;
 
    /* Run hooks. */
-   if (t > 0)
+   if (t > 0) {
       hooks_updateDate( t );
+   }
 }
 
 ntime_t ntime_create( int years, int months, int days, int hours, int minutes, int seconds )

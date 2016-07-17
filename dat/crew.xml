@@ -8,6 +8,7 @@
             <portrait>neutral/unique/drunkard</portrait>
             <gender>male</gender>
             <hiring_price>1000</hiring_price>
+            <monthly_salary>100</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Empire of Terra</faction>
@@ -25,6 +26,7 @@
             <portrait>neutral/thief1</portrait>
             <gender>male</gender>
             <hiring_price>1500</hiring_price>
+            <monthly_salary>150</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -42,6 +44,7 @@
             <portrait>pirate/pirate_militia2</portrait>
             <gender>male</gender>
             <hiring_price>1200</hiring_price>
+            <monthly_salary>120</monthly_salary>
             <location>bar</location>
             <name_generator>Other</name_generator>
             <faction>Independent Worlds</faction>
@@ -58,6 +61,7 @@
             <portrait>pirate/pirate_militia2</portrait>
             <gender>male</gender>
             <hiring_price>900</hiring_price>
+            <monthly_salary>90</monthly_salary>
             <location>bar</location>
             <name_generator>Ixumite</name_generator>
             <faction>Kingdom of Ixum</faction>
@@ -75,6 +79,7 @@
             <portrait>neutral/unique/oldwoman</portrait>
             <gender>female</gender>
             <hiring_price>20000</hiring_price>
+            <monthly_salary>1000</monthly_salary>
             <location>bar</location>
             <name_generator>HumanFemale</name_generator>
             <faction>Empire of Terra</faction>
@@ -94,6 +99,7 @@
             <portrait>dvaered/unique/ka'def</portrait>
             <gender>male</gender>
             <hiring_price>25000</hiring_price>
+            <monthly_salary>1250</monthly_salary>
             <location>bar</location>
             <name_generator>Betelgian</name_generator>
             <faction>Oligarchy of Betelgeuse</faction>
@@ -113,6 +119,7 @@
             <portrait>neutral/unique/reynir</portrait>
             <gender>male</gender>
             <hiring_price>20000</hiring_price>
+            <monthly_salary>1000</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -131,6 +138,7 @@
             <portrait>pirate/pirate4</portrait>
             <gender>male</gender>
             <hiring_price>22000</hiring_price>
+            <monthly_salary>1100</monthly_salary>
             <location>bar</location>
             <name_generator>Ixumite</name_generator>
             <faction>Kingdom of Ixum</faction>
@@ -150,6 +158,7 @@
             <portrait>neutral/thief3</portrait>
             <gender>female</gender>
             <hiring_price>110000</hiring_price>
+            <monthly_salary>2200</monthly_salary>
             <location>bar</location>
             <name_generator>HumanFemale</name_generator>
             <faction>Empire of Terra</faction>
@@ -170,6 +179,7 @@
             <portrait>pirate/pirate4</portrait>
             <gender>male</gender>
             <hiring_price>120000</hiring_price>
+            <monthly_salary>2400</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -191,6 +201,7 @@
             <portrait>pirate/pirate1</portrait>
             <gender>male</gender>
             <hiring_price>110000</hiring_price>
+            <monthly_salary>2200</monthly_salary>
             <location>bar</location>
             <name_generator>Betelgian</name_generator>
             <faction>Oligarchy of Betelgeuse</faction>
@@ -211,11 +222,12 @@
             <description>Having resigned her position as Queen, Shadowlines is looking for adventures beyond Harkan. With her quick mind and flying instincts, she has proven an excellent pilot.</description>
             <portrait>dvaered/dv_civilian1</portrait>
             <gender>female</gender>
-            <hiring_price>0</hiring_price>
+            <hiring_price>5000</hiring_price>
+            <monthly_salary>250</monthly_salary>
             <location>bar</location>
+            <conditions>var.peek ("harkan_roidhunate_win")==true and planet.cur()==planet.get("Harkan")</conditions>
             <faction>Roidhunate of Ardarshir</faction>
             <chance>100</chance>
-            <conditions>var.peek ('harkan_roidhunate_win')==true and planet.cur()==planet.get('Harkan')</conditions>
             <combat_rating_needed>0</combat_rating_needed>
             <stats>
                 <speed_mod>15</speed_mod>
@@ -232,6 +244,7 @@
             <portrait>neutral/unique/shifty_merchant</portrait>
             <gender>male</gender>
             <hiring_price>1000</hiring_price>
+            <monthly_salary>100</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Empire of Terra</faction>
@@ -248,6 +261,7 @@
             <portrait>neutral/male1</portrait>
             <gender>male</gender>
             <hiring_price>900</hiring_price>
+            <monthly_salary>90</monthly_salary>
             <location>bar</location>
             <name_generator>Betelgian</name_generator>
             <faction>Oligarchy of Betelgeuse</faction>
@@ -264,6 +278,7 @@
             <portrait>neutral/miner1</portrait>
             <gender>male</gender>
             <hiring_price>1200</hiring_price>
+            <monthly_salary>120</monthly_salary>
             <location>bar</location>
             <name_generator>Other</name_generator>
             <faction>Independent Worlds</faction>
@@ -280,6 +295,7 @@
             <portrait>neutral/unique/shifty_merchant</portrait>
             <gender>male</gender>
             <hiring_price>1000</hiring_price>
+            <monthly_salary>100</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -297,6 +313,7 @@
             <portrait>neutral/unique/oldwoman</portrait>
             <gender>female</gender>
             <hiring_price>22000</hiring_price>
+            <monthly_salary>1100</monthly_salary>
             <location>bar</location>
             <name_generator>HumanFemale</name_generator>
             <faction>Empire of Terra</faction>
@@ -316,6 +333,7 @@
             <portrait>neutral/scientist</portrait>
             <gender>male</gender>
             <hiring_price>20000</hiring_price>
+            <monthly_salary>1000</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -333,6 +351,7 @@
             <portrait>pirate/pirate1</portrait>
             <gender>male</gender>
             <hiring_price>100000</hiring_price>
+            <monthly_salary>2000</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Independent Worlds</faction>
@@ -353,6 +372,7 @@
             <portrait>neutral/cyborg2</portrait>
             <gender>male</gender>
             <hiring_price>100000</hiring_price>
+            <monthly_salary>2000</monthly_salary>
             <location>bar</location>
             <name_generator>Betelgian</name_generator>
             <faction>Oligarchy of Betelgeuse</faction>
@@ -373,6 +393,7 @@
             <portrait>neutral/cyborg2</portrait>
             <gender>male</gender>
             <hiring_price>90000</hiring_price>
+            <monthly_salary>1800</monthly_salary>
             <location>bar</location>
             <name_generator>Ixumite</name_generator>
             <faction>Kingdom of Ixum</faction>
@@ -397,6 +418,7 @@
             <portrait>neutral/thief1</portrait>
             <gender>male</gender>
             <hiring_price>1000</hiring_price>
+            <monthly_salary>100</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Empire of Terra</faction>
@@ -413,6 +435,7 @@
             <portrait>pirate/pirate_militia1</portrait>
             <gender>male</gender>
             <hiring_price>1000</hiring_price>
+            <monthly_salary>100</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -429,6 +452,7 @@
             <portrait>sirius/unique/patrek</portrait>
             <gender>male</gender>
             <hiring_price>1200</hiring_price>
+            <monthly_salary>120</monthly_salary>
             <location>bar</location>
             <name_generator>Betelgian</name_generator>
             <faction>Oligarchy of Betelgeuse</faction>
@@ -447,6 +471,7 @@
             <portrait>neutral/male1</portrait>
             <gender>male</gender>
             <hiring_price>900</hiring_price>
+            <monthly_salary>90</monthly_salary>
             <location>bar</location>
             <name_generator>Ixumite</name_generator>
             <faction>Kingdom of Ixum</faction>
@@ -463,6 +488,7 @@
             <portrait>pirate/pirate_militia2</portrait>
             <gender>male</gender>
             <hiring_price>1100</hiring_price>
+            <monthly_salary>110</monthly_salary>
             <location>bar</location>
             <name_generator>Other</name_generator>
             <faction>Independent Worlds</faction>
@@ -479,6 +505,7 @@
             <portrait>neutral/male1</portrait>
             <gender>male</gender>
             <hiring_price>20000</hiring_price>
+            <monthly_salary>1000</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Empire of Terra</faction>
@@ -498,6 +525,7 @@
             <portrait>dvaered/dv_civilian2</portrait>
             <gender>male</gender>
             <hiring_price>25000</hiring_price>
+            <monthly_salary>1250</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -516,6 +544,7 @@
             <portrait>neutral/thief1</portrait>
             <gender>male</gender>
             <hiring_price>22000</hiring_price>
+            <monthly_salary>1100</monthly_salary>
             <location>bar</location>
             <name_generator>Ixumite</name_generator>
             <faction>Holy Flame of Ixum</faction>
@@ -535,6 +564,7 @@
             <portrait>pirate/pirate_militia2</portrait>
             <gender>male</gender>
             <hiring_price>22000</hiring_price>
+            <monthly_salary>1100</monthly_salary>
             <location>bar</location>
             <name_generator>Other</name_generator>
             <faction>Independent Worlds</faction>
@@ -553,6 +583,7 @@
             <portrait>neutral/unique/aristocrat</portrait>
             <gender>male</gender>
             <hiring_price>125000</hiring_price>
+            <monthly_salary>2500</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Empire of Terra</faction>
@@ -574,6 +605,7 @@
             <portrait>neutral/male1</portrait>
             <gender>male</gender>
             <hiring_price>125000</hiring_price>
+            <monthly_salary>2500</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -591,12 +623,13 @@
         <crew>
             <name>Prince Hakka</name>
             <level>2</level>
-            <description>Following the events on Harkan, Prince Hakka has decided to leave his native world behind and to explore the Galaxy as a warrior for hire. Grateful for your help, he does not request payment.</description>
+            <description>Following the events on Harkan, Prince Hakka has decided to leave his native world behind and to explore the Galaxy as a warrior for hire. Grateful for your help, he does not charge much.</description>
             <portrait>pirate/pirate_militia2</portrait>
             <gender>male</gender>
-            <hiring_price>0</hiring_price>
+            <hiring_price>5000</hiring_price>
+            <monthly_salary>250</monthly_salary>
             <location>bar</location>
-            <conditions>var.peek ('harkan_empire_win')==true and planet.cur()==planet.get('Harkan')</conditions>
+            <conditions>var.peek ("harkan_empire_win")==true and planet.cur()==planet.get("Harkan")</conditions>
             <faction>Empire of Terra</faction>
             <chance>100</chance>
             <stats>
@@ -614,6 +647,7 @@
             <portrait>neutral/unique/reynir</portrait>
             <gender>male</gender>
             <hiring_price>1000</hiring_price>
+            <monthly_salary>100</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Empire of Terra</faction>
@@ -630,6 +664,7 @@
             <portrait>neutral/barman</portrait>
             <gender>male</gender>
             <hiring_price>900</hiring_price>
+            <monthly_salary>90</monthly_salary>
             <location>bar</location>
             <name_generator>Other</name_generator>
             <faction>Independent Worlds</faction>
@@ -646,6 +681,7 @@
             <portrait>dvaered/unique/ka'def</portrait>
             <gender>male</gender>
             <hiring_price>1000</hiring_price>
+            <monthly_salary>100</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -662,6 +698,7 @@
             <portrait>pirate/pirate3</portrait>
             <gender>male</gender>
             <hiring_price>800</hiring_price>
+            <monthly_salary>80</monthly_salary>
             <location>bar</location>
             <name_generator>Ixumite</name_generator>
             <faction>Holy Flame of Ixum</faction>
@@ -678,6 +715,7 @@
             <portrait>sirius/unique/joanne</portrait>
             <gender>female</gender>
             <hiring_price>20000</hiring_price>
+            <monthly_salary>1000</monthly_salary>
             <location>bar</location>
             <name_generator>HumanFemale</name_generator>
             <faction>Empire of Terra</faction>
@@ -695,6 +733,7 @@
             <portrait>neutral/thief1</portrait>
             <gender>male</gender>
             <hiring_price>22000</hiring_price>
+            <monthly_salary>1100</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -712,6 +751,7 @@
             <portrait>pirate/pirate4</portrait>
             <gender>male</gender>
             <hiring_price>25000</hiring_price>
+            <monthly_salary>1250</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Independent Worlds</faction>
@@ -729,6 +769,7 @@
             <portrait>neutral/scientist</portrait>
             <gender>male</gender>
             <hiring_price>110000</hiring_price>
+            <monthly_salary>2200</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Empire of Terra</faction>
@@ -748,6 +789,7 @@
             <portrait>pirate/pirate_militia2</portrait>
             <gender>male</gender>
             <hiring_price>120000</hiring_price>
+            <monthly_salary>2400</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -767,6 +809,7 @@
             <portrait>pirate/pirate2</portrait>
             <gender>male</gender>
             <hiring_price>150000</hiring_price>
+            <monthly_salary>3000</monthly_salary>
             <location>bar</location>
             <name_generator>Other</name_generator>
             <faction>Independent Worlds</faction>

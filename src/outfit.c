@@ -36,7 +36,7 @@
 #include "damagetype.h"
 #include "slots.h"
 #include "mapData.h"
-#include "cond.h"h
+#include "cond.h"
 
 
 #define outfit_setProp(o,p)      ((o)->properties |= p) /**< Checks outfit property. */

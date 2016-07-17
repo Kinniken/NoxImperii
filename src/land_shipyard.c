@@ -25,6 +25,7 @@
 #include "tk/toolkit_priv.h"
 #include "dialogue.h"
 #include "map_find.h"
+#include "slots.h"
 
 
 /*
@@ -42,7 +43,8 @@ static void shipyard_rmouse( unsigned int wid, char* widget_name );
 static void shipyard_renderSlots( double bx, double by, double bw, double bh, void *data );
 static void shipyard_renderSlotsRow( double bx, double by, double bw, char *str, ShipOutfitSlot *s, int n );
 static void shipyard_find( unsigned int wid, char* str );
-
+static const char *shipyard_slotSize( const OutfitSlotSize* size );
+static int shipyard_generateSlotDesc(int bx, int yStart, int nslots, ShipOutfitSlot *slots, const char *typeName);
 
 /**
  * @brief Opens the shipyard window.
@@ -102,11 +104,15 @@ void shipyard_open( unsigned int wid )
          SHIP_TARGET_W, SHIP_TARGET_H, "imgTarget", NULL, 1 );
 
    /* slot types */
-   window_addCust( wid, -20, -192, 148, 70, "cstSlots", 0.,
+   window_addCust( wid, -20, -192, 160, 200, "cstSlots", 0.,
          shipyard_renderSlots, NULL, NULL );
 
+
+   window_addText( wid, -40, -450, 128, 200, 0, "txtLStats",
+            &gl_smallFont, &cBlack, "Bonus stats:" );
+
    /* stat text */
-   window_addText( wid, -40, -240, 128, 200, 0, "txtStats",
+   window_addText( wid, -40, -470, 128, 200, 0, "txtStats",
          &gl_smallFont, &cBlack, NULL );
 
    /* text */
@@ -226,7 +232,11 @@ void shipyard_update( unsigned int wid, char* str )
    window_modifyImage( wid, "imgTarget", ship->gfx_store, 0, 0 );
 
    /* update text */
-   window_modifyText( wid, "txtStats", ship->desc_stats );
+   if (ship->desc_stats == NULL)
+	   window_modifyText( wid, "txtStats", "None" );
+   else
+	   window_modifyText( wid, "txtStats", ship->desc_stats );
+
    window_modifyText( wid, "txtDescription", ship->description );
    price2str( buf2, ship_buyPrice(ship), player.p->credits, 2 );
    credits2str( buf3, player.p->credits, 2 );
@@ -255,8 +265,8 @@ void shipyard_update( unsigned int wid, char* str )
          "%d\n"
          "\n"
          "%.0f teraflops\n"
-         "%.0f tons\n"
-         "%.0f kN/ton\n"
+         "%.0f tonnes\n"
+         "%.0f kN/tonne\n"
          "%.0f m/s\n"
          "%.0f deg/s\n"
          "\n"
@@ -264,7 +274,7 @@ void shipyard_update( unsigned int wid, char* str )
          "%.0f MJ (%.1f MW)\n"
          "%.0f MJ (%.1f MW)\n"
          "%.0f MJ (%.1f MW)\n"
-         "%.0f tons\n"
+         "%.0f tonnes\n"
          "%.0f units\n"
 		 "%d units (%.0f jumps)\n"
          "%s credits\n"
@@ -425,7 +435,7 @@ int can_swap( char* shipname )
    ship = ship_get( shipname );
 
    if (pilot_cargoUsed(player.p) > ship->cap_cargo) { /* Current ship has too much cargo. */
-      land_errDialogueBuild( "You have %g tons more cargo than the new ship can hold.",
+      land_errDialogueBuild( "You have %g tonnes more cargo than the new ship can hold.",
             pilot_cargoUsed(player.p) - ship->cap_cargo, ship->name );
       failure = 1;
    }
@@ -554,8 +564,8 @@ static void shipyard_renderSlots( double bx, double by, double bw, double bh, vo
    y -= 10;
    gl_print( &gl_smallFont, bx, y, &cBlack, "Slots:" );
 
-   x = bx + 10.;
    w = bw - 10.;
+   x = bx;
 
    /* Weapon slots. */
    y -= 20;
@@ -568,6 +578,61 @@ static void shipyard_renderSlots( double bx, double by, double bw, double bh, vo
    /* Structure slots. */
    y -= 20;
    shipyard_renderSlotsRow( x, y, w, "S", ship->outfit_structure, ship->outfit_nstructure );
+
+   y = shipyard_generateSlotDesc(bx,y,ship->outfit_nweapon,ship->outfit_weapon,"Weapon");
+
+   y = shipyard_generateSlotDesc(bx,y,ship->outfit_nutility,ship->outfit_utility,"Utility");
+
+   y = shipyard_generateSlotDesc(bx,y,ship->outfit_nstructure,ship->outfit_structure,"Structure");
+}
+
+int shipyard_generateSlotDesc(int bx, int yStart, int nslots, ShipOutfitSlot *slots, const char *typeName) {
+	int i;
+	int nb=0;
+	unsigned int type=-1;
+	int y=yStart;
+	OutfitSlotSize size=OUTFIT_SLOT_SIZE_NA;
+
+	for (i=0;i<nslots;i++) {
+		if (slots[i].slot.size != size || slots[i].slot.spid != type) {
+			if (nb>0) {
+				y -= 20;
+				if (type==0)
+					gl_print( &gl_smallFont, bx, y, &cBlack, "%d %s %s", nb, shipyard_slotSize(&size), typeName );
+				else
+					gl_print( &gl_smallFont, bx, y, &cBlack, "%d %s %s",nb, shipyard_slotSize(&size), sp_display(type) );
+			}
+			type=slots[i].slot.spid;
+			size=slots[i].slot.size;
+			nb=0;
+		}
+		nb++;
+	}
+	if (nb>0) {
+		y -= 20;
+		if (type==0)
+			gl_print( &gl_smallFont, bx, y, &cBlack, "%d %s %s", nb, shipyard_slotSize(&size), typeName );
+		else
+			gl_print( &gl_smallFont, bx, y, &cBlack, "%d %s %s",nb, shipyard_slotSize(&size), sp_display(type) );
+	}
+
+	return y;
+}
+
+const char *shipyard_slotSize( const OutfitSlotSize* size )
+{
+   switch(*size) {
+      case OUTFIT_SLOT_SIZE_NA:
+         return "NA";
+      case OUTFIT_SLOT_SIZE_LIGHT:
+         return "Small";
+      case OUTFIT_SLOT_SIZE_MEDIUM:
+         return "Medium";
+      case OUTFIT_SLOT_SIZE_HEAVY:
+         return "Large";
+      default:
+         return "Unknown";
+   }
 }
 
 

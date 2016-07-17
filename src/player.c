@@ -60,6 +60,7 @@
 #include "input.h"
 #include "news.h"
 #include "nstring.h"
+#include "crew.h"
 
 
 /*
@@ -264,6 +265,7 @@ void player_newTutorial (void)
 
 	/* Time. */
 	ntime_set( start_date() );
+	crew_setCrewPaymentTime( start_date() );
 
 	/* Welcome message - must be before space_init. */
 	player_message( "\egWelcome to "APPNAME" Tutorial!" );
@@ -400,6 +402,7 @@ static int player_newMake (void)
 
 	/* Time. */
 	ntime_set( start_date() );
+	crew_setCrewPaymentTime( start_date() );
 
 	/* Welcome message - must be before space_init. */
 	player_message( "\egWelcome to "APPNAME"!" );
@@ -3058,6 +3061,14 @@ int player_save( xmlTextWriterPtr writer )
 
 	xmlw_endElem(writer); /* "time" */
 
+
+	/* Crew Payment Time. */
+	xmlw_startElem(writer,"crew_payment_time");
+
+	ntime_saveNode(writer, crew_getCrewPaymentTime());
+
+	xmlw_endElem(writer); /* "time" */
+
 	/* Current ship. */
 	xmlw_elem(writer,"location","%s",land_planet->name);
 	player_saveShip( writer, player.p, NULL ); /* current ship */
@@ -3377,6 +3388,13 @@ static Planet* player_parse( xmlNodePtr parent )
 			continue;
 		}
 
+		/* Crew payment. */
+		if (xml_isNode(node,"crew_payment_time")) {
+			timeVal = ntime_parseNode(node,"Malformed crew payment time in save game!");
+			crew_setCrewPaymentTime( timeVal );
+			continue;
+		}
+
 		if (xml_isNode(node,"ship"))
 			player_parseShip(node, 1, planet);
 
@@ -3474,6 +3492,7 @@ static Planet* player_parse( xmlNodePtr parent )
 	if (!time_set) {
 		WARN("Save has no time information, setting to start information.");
 		ntime_set( start_date() );
+		crew_setCrewPaymentTime( start_date() );
 	}
 
 	/* set player in system */

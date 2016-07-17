@@ -30,6 +30,7 @@
 #include "dialogue.h"
 #include "map_find.h"
 #include "faction.h"
+#include "cond.h"
 
 
 #define  OUTFITS_IAR    "iarOutfits"
@@ -149,7 +150,7 @@ void outfits_open( unsigned int wid )
          "Price:\n"
          "Money:\n"
          "License:\n"
-		 "Faction:\n");
+		 "Relation:\n");
    window_addText( wid, 20 + iw + 20 + 60, -60-128-10,
          250, 160, 0, "txtDDesc", &gl_smallFont, &cBlack, NULL );
    window_addText( wid, 20 + iw + 20, -60-128-10-160,
@@ -452,7 +453,7 @@ void outfits_update( unsigned int wid, char* str )
          "\n"
          "%s\n"
          "%s\n"
-         "%.0f tons\n"
+         "%.0f tonnes\n"
          "\n"
          "%s credits\n"
          "%s credits\n"

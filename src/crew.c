@@ -68,6 +68,8 @@ static char* getColouredPrice(const Crew* crew,char* buf);
 static glTexture** getCrewLayers(const Crew* crew, int* nlayers);
 static void getCrewEmptyLayers(glTexture*** layers, int* nlayers);
 
+static ntime_t last_crew_payment = 0;
+
 static lua_State *crew_name_lua = NULL; /** Crew name generators */
 
 #define STATS_DESC_MAX 256 /**< Maximum length for statistics description. */
@@ -201,6 +203,7 @@ static int crew_parse( Crew *temp, xmlNodePtr parent, CrewPosition* position )
 		xmlr_strd(node, "name", temp->name);
 		xmlr_strd(node, "description", temp->description);
 		xmlr_long(node, "hiring_price", temp->hiringPrice);
+		xmlr_long(node, "monthly_salary", temp->monthlySalary);
 		xmlr_int(node, "level", temp->level);
 		xmlr_int(node, "chance", temp->chance);
 
@@ -354,12 +357,12 @@ void crew_addToBar(const Planet* landPlanet) {
 						nsnprintf( bufFaction, MAX_BAR_DESC,"");
 					}
 
-					nsnprintf( barDesc, MAX_BAR_DESC, "\eDName:\e0 %s\n\eDPosition:\e0 %s\n\eDHiring Cost:\e0 %s\n"
+					nsnprintf( barDesc, MAX_BAR_DESC, "\eDName:\e0 %s\n\eDPosition:\e0 %s\n\eDHiring Cost:\e0 %s\n\eDMonthly Salary:\e0 %"CREDITS_PRI"\n"
 							"\eDLevel:\e0 %s\n\n"
 							"%s"
 							"%s\n"
 							"%s\n\nEffects when hired:\n\n%s",
-							generatedName, crew->position, getColouredPrice(crew,buf), crew_getLevelName(crew->level),
+							generatedName, crew->position, getColouredPrice(crew,buf), crew->monthlySalary, crew_getLevelName(crew->level),
 							bufRating,bufFaction,
 							crew->description, crew->desc_stats );
 
@@ -726,11 +729,12 @@ void crew_open( unsigned int wid ) {
 			"Name:\n"
 			"Position:\n"
 			"Level:\n"
-			"Status:\n");
+			"Status:\n"
+			"Monthly Salary:\n");
 	window_addText( wid, -20, -210, 160, 120, 0,
 			"txtCrewZoom", &gl_smallFont, &cBlack, NULL );
 
-	window_addText( wid, -20, -270, 320, 200, 0,
+	window_addText( wid, -20, -285, 320, 200, 0,
 			"txtCrewZoomDesc", &gl_smallFont, &cBlack,
 			NULL);
 
@@ -845,10 +849,12 @@ static void display_crew(unsigned int wid, char* crewName) {
 				"%s\n"
 				"%s\n"
 				"%s\n"
-				"%s",hiredCrew->generatedName,
+				"%s\n"
+				"%"CREDITS_PRI" cr",hiredCrew->generatedName,
 				hiredCrew->crew->position,
 				crew_getLevelName(hiredCrew->crew->level),
-				crew_getStatusNameColoured(hiredCrew->status)
+				crew_getStatusNameColoured(hiredCrew->status),
+				hiredCrew->crew->monthlySalary
 		);
 		window_modifyText( wid, "txtCrewZoom", buf );
 
@@ -940,5 +946,43 @@ char* crew_getGenderPronoun(const Crew* crew) {
 	}
 }
 
+void crew_checkForSalaryPayment(void) {
+	int sec,min,hour,day,month,year;
+	int sec2,min2,hour2,day2,month2,year2;
+
+	int i;
+	credits_t totalSalaries = 0;
+
+
+	ntime_getBreakdown(ntime_get(), &year,&month,&day,&hour,&min,&sec);
+	ntime_getBreakdown(last_crew_payment, &year2,&month2,&day2,&hour2,&min2,&sec2);
+
+	if (year>year2 || month>month2) {
+		last_crew_payment=ntime_get();
+
+		const HiredCrew* allCrews;
+		int nAllCrews;
+
+		allCrews = player_getCrews(&nAllCrews);
+		for (i = 0; i < nAllCrews; i++) {
+			totalSalaries += allCrews[i].crew->monthlySalary;
+		}
+
+		if (totalSalaries > 0) {
+			dialogue_msg("Pay Day!",
+							"A new month is starting, and the crew of the %s is due its salaries. "
+							"The total comes to %"CREDITS_PRI" credits.",player.p->name,totalSalaries);
+			player_modCredits( (credits_t)round(-totalSalaries) );
+		}
+	}
+}
+
+void crew_setCrewPaymentTime( ntime_t timeVal ) {
+	last_crew_payment = timeVal;
+}
+
+ntime_t crew_getCrewPaymentTime( void ) {
+	return last_crew_payment;
+}
 
 

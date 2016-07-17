@@ -83,10 +83,10 @@ void commodity_exchange_open( unsigned int wid )
          "txtSInfo", &gl_smallFont, &cDConsole,
          "You have:\n"
          "Buying Price:\n"
-         "\n"
+         "Compared to base:\n"
          "Buyable:\n"
          "Selling Price:\n"
-         "\n"
+         "Compared to base:\n"
          "Sellable:\n"
          "Free Space:\n" );
    window_addText( wid, -20, -190, LAND_BUTTON_WIDTH/2, 120, 0,
@@ -139,10 +139,10 @@ void commodity_update( unsigned int wid, char* str )
    comname = toolkit_getImageArray( wid, "iarTrade" );
    if ((comname==NULL) || (strcmp( comname, "None" )==0)) {
       nsnprintf( buf, PATH_MAX,
-         "NA Tons\n"
-         "NA Cr./Ton\n"
+         "NA Tonnes\n"
+         "NA cr/t\n"
          "\n"
-         "%d Tons\n");
+         "NA Tonnes\n");
       window_modifyText( wid, "txtDInfo", buf );
       window_modifyText( wid, "txtDesc", "No commodities available." );
       window_disableButton( wid, "btnCommodityBuy" );
@@ -158,15 +158,15 @@ void commodity_update( unsigned int wid, char* str )
    /* modify text */
    if (tradeData->buyingQuantity==0) {//just selling
 	   nsnprintf( buf, PATH_MAX,
-	         "%d Tons\n"
+	         "%d Tonnes\n"
 	         "\n"
 	         "\n"
-			 "\n"
+			 "None\n"
 	         "%"CREDITS_PRI" cr/t\n"
-	         "(%+g%%)\n"
+	         "%+g%%\n"
 	         "%d/%d t\n"
 	         "\n"
-	         "%d Tons\n",
+	         "%d Tonnes\n",
 	         pilot_cargoOwned( player.p, comname ),
 	         planet_commodityPriceSelling( land_planet, com ),
 	         round((planet_commodityPriceSellingRatio( land_planet, com)-1.0)*100),
@@ -175,14 +175,14 @@ void commodity_update( unsigned int wid, char* str )
 	         pilot_cargoFree(player.p));
    } else if (tradeData->sellingQuantity==0) {//just buying
 	   nsnprintf( buf, PATH_MAX,
-	   	         "%d Tons\n"
+	   	         "%d Tonnes\n"
 	   	         "%"CREDITS_PRI" cr/t\n"
-	   	         "(%+g%%)\n"
+	   	         "%+g%%\n"
 	   	         "%d/%d t\n"
 	   	         "\n"
 	   	         "\n"
-	   	         "\n"
-	   	         "%d Tons\n",
+	   	         "None\n"
+	   	         "%d Tonnes\n",
 	   	         pilot_cargoOwned( player.p, comname ),
 	   	         planet_commodityPriceBuying( land_planet, com ),
 	   	         round((planet_commodityPriceBuyingRatio( land_planet, com )-1.0)*100),
@@ -191,15 +191,15 @@ void commodity_update( unsigned int wid, char* str )
 	   	         pilot_cargoFree(player.p));
    } else {//both
 	   nsnprintf( buf, PATH_MAX,
-	   	         "%d Tons\n"
+	   	         "%d Tonnes\n"
 	   	         "%"CREDITS_PRI" cr/t\n"
-	   	         "(%+g%%)\n"
+	   	         "%+g%%\n"
 	   	         "%d/%d t\n"
 	   	         "%"CREDITS_PRI" cr/t\n"
-	   	         "(%+g%%)\n"
+	   	         "%+g%%\n"
 	   	         "%d/%d t\n"
 	   	         "\n"
-	   	         "%d Tons\n",
+	   	         "%d Tonnes\n",
 	   	         pilot_cargoOwned( player.p, comname ),
 	   	         planet_commodityPriceBuying( land_planet, com ),
 	   	         round((planet_commodityPriceBuyingRatio( land_planet, com )-1.0)*100),

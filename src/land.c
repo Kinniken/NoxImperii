@@ -196,7 +196,7 @@ int can_swapEquipment( char* shipname )
       failure = 1;
    }
    if (pilot_cargoUsed(player.p) > (pilot_cargoFree(newship) + pilot_cargoUsed(newship))) { /* Current ship has too much cargo. */
-      land_errDialogueBuild( "You have %d tons more cargo than the new ship can hold.",
+      land_errDialogueBuild( "You have %d tonnes more cargo than the new ship can hold.",
             pilot_cargoUsed(player.p) - pilot_cargoFree(newship), shipname );
       failure = 1;
    }
@@ -734,7 +734,7 @@ static void misn_update( unsigned int wid, char* str )
 
    /* Update date stuff. */
    buf = ntime_pretty( 0, 0 );
-   nsnprintf( txt, sizeof(txt), "%s\n%d Tons", buf, player.p->cargo_free );
+   nsnprintf( txt, sizeof(txt), "%s\n%d Tonnes", buf, player.p->cargo_free );
    free(buf);
    window_modifyText( wid, "txtDate", txt );
 
@@ -864,6 +864,10 @@ void land_checkAddMap (void)
    /* Maps are only offered if the planet provides fuel. */
    if (!planet_hasService(land_planet, PLANET_SERVICE_REFUEL))
       return;
+
+   //Disabled in LN for now
+   if (1==1)
+	   return;
 
    o = outfit_get( LOCAL_MAP_NAME );
    if (o == NULL) {
@@ -1044,8 +1048,7 @@ void land_genWindows( int load, int changetab )
    land_createMainTab( land_getWid(LAND_WINDOW_MAIN) );
 
    /* Add local system map button. */
-   //Disabled in Long Night as we don't hide worlds
-   //land_checkAddMap();
+   land_checkAddMap();
 
    /* 2) Set as landed and run hooks. */
    if (!regen) {
@@ -1183,6 +1186,9 @@ void land( Planet* p, int load )
 
    /* Update the available trade goods */
    planet_updateQuantities(land_planet);
+
+   /* Check whether the crew should be paid */
+   crew_checkForSalaryPayment();
 
    /* Create all the windows. */
    land_genWindows( load, 0 );
@@ -1451,8 +1457,9 @@ void takeoff( int delay )
       dialogue_alert( "Failed to save game! You should exit and check the log to see what happened and then file a bug report!" );
 
    /* time goes by, triggers hook before takeoff */
-   if (delay)
+   if (delay) {
       ntime_inc( ntime_create( 0, 0, 0, 5, 0, 0 ) ); /* 5 hours */
+   }
    nt = ntime_pretty( 0, 0 );
    player_message("\epTaking off from %s on %s.", land_planet->name, nt);
    free(nt);
@@ -1587,4 +1594,18 @@ void land_exit (void)
    outfits_cleanup();
 }
 
+/**
+ * Refreshes the main landing screen, if landed
+ *
+ * (used in case events or missions have changed the world)
+ */
+void land_refresh_screen(void) {
+	if (landed) {
+		int wid = land_getWid(LAND_WINDOW_MAIN);
+
+		window_modifyText( wid, "txtPlanetDesc", land_planet->description );
+		window_modifyText( wid, "txtPlanetDescSettlements", land_planet->settlements_description );
+		window_modifyText( wid, "txtPlanetDescHistory", land_planet->history_description );
+	}
+}
 

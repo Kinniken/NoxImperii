@@ -33,6 +33,7 @@
 #include "nstring.h"
 #include "tech.h"
 #include "space.h"
+#include "land.h"
 
 
 /* Planet metatable methods */
@@ -605,6 +606,8 @@ static int planetL_setDesc( lua_State *L )
 
    p->description=strdup(desc);
 
+   land_refresh_screen();
+
    planet_setSaveFlag(p,PLANET_DESC_SAVE);//desc is now custom and must be saved
 
    return 0;
@@ -649,6 +652,8 @@ static int planetL_setDescSettlements( lua_State *L )
 
    planet_setSaveFlag(p,PLANET_DESC_SAVE);//desc is now custom and must be saved
 
+   land_refresh_screen();
+
    return 0;
 }
 
@@ -688,6 +693,8 @@ static int planetL_setDescHistory( lua_State *L )
 	   free(p->history_description);
 
    p->history_description=strdup(desc);
+
+   land_refresh_screen();
 
    planet_setSaveFlag(p,PLANET_DESC_SAVE);//desc is now custom and must be saved
 

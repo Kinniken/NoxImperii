@@ -3778,26 +3778,57 @@ void planets_render (void)
  */
 static void space_renderJumpPoint( JumpPoint *jp, int i )
 {
-   const glColour *c;
+	const glColour *c;
+	int j;
+	int totalPresence;
 
-   if (!jp_isUsable(jp))
-      return;
+	if (!jp_isUsable(jp))
+		return;
 
-   if ((player.p != NULL) && (i==player.p->nav_hyperspace) &&
-         (pilot_isFlag(player.p, PILOT_HYPERSPACE) || space_canHyperspace(player.p)))
-      c = &cGreen;
-   else if (jp_isFlag(jp, JP_HIDDEN))
-      c = &cRed;
-   else
-      c = NULL;
+	if ((player.p != NULL) && (i==player.p->nav_hyperspace) &&
+			(pilot_isFlag(player.p, PILOT_HYPERSPACE) || space_canHyperspace(player.p)))
+		c = &cGreen;
+	else if (jp_isFlag(jp, JP_HIDDEN))
+		c = &cRed;
+	else
+		c = NULL;
 
-   gl_blitSprite( jumppoint_gfx, jp->pos.x, jp->pos.y, jp->sx, jp->sy, c );
+	gl_blitSprite( jumppoint_gfx, jp->pos.x, jp->pos.y, jp->sx, jp->sy, c );
 
-   /* Draw buoys next to "highway" jump points. */
-   if (jp->hide == 0.) {
-      gl_blitSprite( jumpbuoy_gfx, jp->pos.x + 200 * jp->sina, jp->pos.y + 200 * jp->cosa, 0, 0, NULL ); /* Left */
-      gl_blitSprite( jumpbuoy_gfx, jp->pos.x + -200 * jp->sina, jp->pos.y + -200 * jp->cosa, 0, 0, NULL ); /* Right */
-   }
+	/* Draw buoys next to "highway" jump points. */
+	if (jp->hide == 0.) {
+
+		totalPresence=0;
+
+		for (j=0; j < cur_system->npresence; j++) {
+			totalPresence+=cur_system->presence[j].value;
+		}
+
+		for (j=0; j < jp->target->npresence; j++) {
+			totalPresence+=jp->target->presence[j].value;
+		}
+
+		if (totalPresence > 5000) { //6
+			gl_blitSprite( jumpbuoy_gfx, jp->pos.x +  200 * jp->sina + -30  * jp->cosa, jp->pos.y +  200 * jp->cosa - -30  * jp->sina, 0, 0, NULL ); /* Left */
+			gl_blitSprite( jumpbuoy_gfx, jp->pos.x +  150 * jp->sina +  120 * jp->cosa, jp->pos.y +  150 * jp->cosa -  120 * jp->sina, 0, 0, NULL ); /* Left */
+			gl_blitSprite( jumpbuoy_gfx, jp->pos.x +  150 * jp->sina + -180 * jp->cosa, jp->pos.y +  150 * jp->cosa - -180 * jp->sina, 0, 0, NULL ); /* Left */
+
+			gl_blitSprite( jumpbuoy_gfx, jp->pos.x + -200 * jp->sina + -30  * jp->cosa, jp->pos.y + -200 * jp->cosa - -30  * jp->sina, 0, 0, NULL ); /* Right */
+			gl_blitSprite( jumpbuoy_gfx, jp->pos.x + -150 * jp->sina +  120 * jp->cosa, jp->pos.y + -150 * jp->cosa -  120 * jp->sina, 0, 0, NULL ); /* Right */
+			gl_blitSprite( jumpbuoy_gfx, jp->pos.x + -150 * jp->sina + -180 * jp->cosa, jp->pos.y + -150 * jp->cosa - -180 * jp->sina, 0, 0, NULL ); /* Right */
+		} else if (totalPresence > 2000) {//4
+			gl_blitSprite( jumpbuoy_gfx, jp->pos.x +  200 * jp->sina +  100 * jp->cosa, jp->pos.y +  200 * jp->cosa -  100 * jp->sina, 0, 0, NULL ); /* Left */
+			gl_blitSprite( jumpbuoy_gfx, jp->pos.x +  200 * jp->sina + -160 * jp->cosa, jp->pos.y +  200 * jp->cosa - -160 * jp->sina, 0, 0, NULL ); /* Left */
+
+			gl_blitSprite( jumpbuoy_gfx, jp->pos.x + -200 * jp->sina +  100 * jp->cosa, jp->pos.y + -200 * jp->cosa -  100 * jp->sina, 0, 0, NULL ); /* Right */
+			gl_blitSprite( jumpbuoy_gfx, jp->pos.x + -200 * jp->sina + -160 * jp->cosa, jp->pos.y + -200 * jp->cosa - -160 * jp->sina, 0, 0, NULL ); /* Right */
+		} else if (totalPresence > 500) {//2
+			gl_blitSprite( jumpbuoy_gfx, jp->pos.x +  200 * jp->sina + -30  * jp->cosa, jp->pos.y +  200 * jp->cosa - -30  * jp->sina, 0, 0, NULL ); /* Left */
+			gl_blitSprite( jumpbuoy_gfx, jp->pos.x + -200 * jp->sina + -30  * jp->cosa, jp->pos.y + -200 * jp->cosa - -30  * jp->sina, 0, 0, NULL ); /* Right */
+		} else if (totalPresence > 100) {//1
+			gl_blitSprite( jumpbuoy_gfx, jp->pos.x +  160 * jp->sina + -30  * jp->cosa, jp->pos.y +  160 * jp->cosa - -30  * jp->sina, 0, 0, NULL ); /* Left */
+		}
+	}
 }
 
 

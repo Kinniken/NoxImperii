@@ -18,7 +18,7 @@ function create()
 		end
 	end
 
-	hook.timer(10000, "offer_fuel")	
+	hook.timer(5000, "offer_fuel")	
 end
 
 function offer_fuel()

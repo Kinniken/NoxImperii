@@ -360,11 +360,16 @@ function update_nav()
          services = { "missions", "outfits", "shipyard", "commodity" }
 
          -- "Spaceport" is nicer than "Land"
-         table.insert( planet.services, "Spaceport" )
+         --table.insert( planet.services, "Spaceport" )
          for k,v in ipairs(services) do
             table.insert( planet.services, pntflags[v] )
          end
          planet.nservices = #planet.services
+
+         if planet.nservices == 0 then
+            table.insert( planet.services, "None" )
+            planet.nservices = #planet.services
+         end
       end
    else
       gui.osdInit( 23, screen_h - 63, 150, 500 )
@@ -975,7 +980,7 @@ function render( dt, dt_mod )
       local x, y = target_dir:spriteFromDir( ta_pnt_dir, true )
       gfx.renderTex( target_dir, ta_pnt_pane_x + 12, ta_pnt_pane_y -24, x, y, col_txt_top )
 
-      gfx.print( true, planet.class, ta_pnt_pane_x + 130, ta_pnt_pane_y - 34, col_txt_top )
+      gfx.print( true, planet.class, ta_pnt_pane_x + 70, ta_pnt_pane_y - 34, col_txt_top )
       gfx.print( true, "SERVICES:", ta_pnt_pane_x + 14, ta_pnt_pane_y - 46, col_txt_top )
 
       -- Space out the text.

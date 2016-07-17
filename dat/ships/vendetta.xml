@@ -5,7 +5,7 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Destroyer</class>
- <fabricator>Generic</fabricator>
+ <fabricator>Various</fabricator>
  <description>This simple and ancient design is built to maximise the amount of weapons that can be focused simultaneously on the primary target, even at the expense of defence and agility.</description>
  <price>900000</price>
  <movement>

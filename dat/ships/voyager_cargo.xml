@@ -5,7 +5,7 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Freighter</class>
- <fabricator>Generic</fabricator>
+ <fabricator>Various</fabricator>
  <description>The general structure of Voyager spacecrafts predates human ultraluminous flights, and has been reused and re-adapted on many worlds. Cargo versions are particularly popular; not fancy, but reliable and fairly speedy for their size.</description>
  <price>450000</price>
  <movement>

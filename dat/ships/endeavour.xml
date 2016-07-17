@@ -5,7 +5,7 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Scout</class>
- <fabricator>Generic</fabricator>
+ <fabricator>Various</fabricator>
  <description>Generally referred to as "Endeavour shuttles", those sturdy little ships are among the cheapest and most common ships around. While this was originally a human design, it is now common in adapted forms throughout known space.</description>
  <price>150000</price>
  <movement>

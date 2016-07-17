@@ -5,7 +5,7 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Freighter</class>
- <fabricator>Generic</fabricator>
+ <fabricator>Various</fabricator>
  <description>Nicknamed "Scarabs" in the Empire, those odd little cargo ships are produced throughout human space, and beyond. They are cheap and effective at short-range deliveries, but make easy targets in more troubled areas.</description>
  <price>350000</price>
  <movement>

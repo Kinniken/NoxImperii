@@ -5,7 +5,7 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Fighter</class>
- <fabricator>Generic</fabricator>
+ <fabricator>Various</fabricator>
  <description>Light fighters such as the infamous "shark" models have been in use in human space since the dawn of the interplanetary age. They remain popular today for their low price and widespread availability, though they cannot withstand military models.</description>
  <price>200000</price>
  <movement>

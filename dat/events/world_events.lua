@@ -18,13 +18,18 @@ function create()
 
 	if (#possibleTargets>0) then
 
-		local nb=5
+		local nb=10
+		local max=1
 
-		if (debug) then
+		if (debug==true) then
 			nb=20
+			max=5
 		end
 
+		local nbDone=0
+
 		for i=1,nb do
+
 			local c_planet=possibleTargets[math.random(#possibleTargets)]
 			local planet=planet_class.load(c_planet)
 
@@ -76,7 +81,13 @@ function create()
 
 						news.add( v.faction, gh.format(v.title,textData), time.get():str(1).." - "..gh.format(v.message,textData), time.get() + duration )
 					end
+
+					nbDone=nbDone+1
 				end
+			end
+
+			if (nbDone>=max) then
+				break
 			end
 		end
 	end

@@ -9,7 +9,7 @@ include "dat/scripts/numstring.lua"
 lang = naev.lang()
 if lang == "es" then
 else -- default english
-    misn_desc = "%s in the %s system needs a delivery of %d tons of %s."
+    misn_desc = "%s in the %s system needs a delivery of %d tonnes of %s."
     misn_reward = "%s credits"
     
     cargosize = {}
@@ -27,13 +27,13 @@ else -- default english
     
     -- Note: please leave the trailing space on the line below! Needed to make the newline show up.
     title_p2 = [[ 
-Cargo: %s (%d tons)
+Cargo: %s (%d tonnes)
 Jumps: %d
 Travel distance: %d]]
 
     full = {}
     full[1] = "No room in ship"
-    full[2] = "You don't have enough cargo space to accept this mission. You need %d tons of free space (you need %d more)."
+    full[2] = "You don't have enough cargo space to accept this mission. You need %d tonnes of free space (you need %d more)."
 
    --=Landing=--
 

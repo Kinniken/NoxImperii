@@ -7,7 +7,7 @@ C.BORDEAUX="Bordeaux Grands Crus"
 C.TELLOCH="Roidhun Fine Telloch"
 
 C.PRIMITIVE_CONSUMER="Primitive Consumer Goods"
-C.CONSUMER_GOODS="Consumer Goods"
+C.CONSUMER_GOODS="Basic Consumer Goods"
 C.LUXURY_GOODS="Luxury Goods"
 
 C.EXOTIC_FURS="Exotic Furs"
@@ -27,7 +27,7 @@ C.MEDICINE="Medicine"
 C.NATIVE_WEAPONS="Native Weapons"
 C.BASIC_WEAPONS="Non-Industrial Weapons"
 C.PRIMITIVE_ARMAMENT="Primitive Armament"
-C.ARMAMENT="Armament"
+C.ARMAMENT="Conventional Armament"
 C.MODERN_ARMAMENT="Modern Armament"
 
 C.NATIVE_TECHNOLOGY="Native Technology"

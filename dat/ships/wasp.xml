@@ -5,7 +5,7 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Fighter</class>
- <fabricator>Generic</fabricator>
+ <fabricator>Various</fabricator>
  <description>Very light fighters of wasp design are mostly used for training or sport purposes, as their defensive capabilities are too limited to make them effective in serious fights. They are still known to be used for piracy against lightly-defended traders.</description>
  <price>150000</price>
  <movement>

@@ -5,7 +5,7 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Destroyer</class>
- <fabricator>Generic</fabricator>
+ <fabricator>Various</fabricator>
  <description>The light frigate variation of the voyager design remains a popular design, despite limited performance. It has been used both as a light combat ship and as a courier in fringe areas; its weak protection remains its chief weakness.</description>
  <price>720000</price>
  <movement>

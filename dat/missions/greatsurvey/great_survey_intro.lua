@@ -6,7 +6,7 @@ include('universe/objects/class_planets.lua')
 include "universe/live/live_universe.lua"
 include "dat/missions/greatsurvey/great_survey_utils.lua"
 
-bar_desc = "You see an old pilot sitting in a corner, studying people coming in.."
+bar_desc = "You see an old pilot sitting in a corner, studying people coming in."
 
 -- Mission Details
 misn_title = "The Great Survey"

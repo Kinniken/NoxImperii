@@ -11,7 +11,7 @@
   <level>3</level>
   <logo>pirates</logo>
  </general>
- <specific type="bolt">
+ <specific type="bolt" secondary="1">
   <gfx>razorS</gfx>
   <sound>ion</sound>
   <spfx_shield>ShiS</spfx_shield>

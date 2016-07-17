@@ -5,7 +5,7 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Freighter</class>
- <fabricator>Generic</fabricator>
+ <fabricator>Various</fabricator>
  <description>Less a ship that slapped-together components on a bare-bone structure, haulers are mass-produced in most of known space. They can resist minor attacks, and if some get destroyed, they are cheap to replace.</description>
  <price>900000</price>
  <movement>

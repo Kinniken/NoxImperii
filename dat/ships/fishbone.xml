@@ -5,7 +5,7 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Freighter</class>
- <fabricator>Generic</fabricator>
+ <fabricator>Various</fabricator>
  <description>Derisively nick-named fish bones, ungainly ships such as these are among the cheapest and simplest ways of shipping goods from systems to systems; no other ship in widespread use offers so much cargo capacity for so cheap a price. Of course, the downside of captaining one include terrible speed, weak shields and getting laughed out of pilots' bars.</description>
  <price>420000</price>
  <movement>

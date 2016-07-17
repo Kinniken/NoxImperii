@@ -5,7 +5,7 @@
  <GUI>slim</GUI>
  <sound>engine</sound>
  <class>Corvette</class>
- <fabricator>Generic</fabricator>
+ <fabricator>Various</fabricator>
  <description>Generally known as admonishers, those versatile heavy fighters are less agile than most, but pack more fire-power than shark or wasp-based designs.</description>
  <price>270000</price>
  <movement>

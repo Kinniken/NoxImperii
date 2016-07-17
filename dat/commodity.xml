@@ -39,7 +39,7 @@ The major oxygen-breathing races in the sector have broadly compatible dietary r
 		<price>50</price>
 		<gfx_store>ln/primitive_consumer_goods</gfx_store>
 	</commodity>
-	<commodity name="Consumer Goods">
+	<commodity name="Basic Consumer Goods">
 		<description>Everything from entertainment systems to clothes to private ground vehicles get traded from world to world. Not the most glamorous commodities, but central to the Imperial economy.</description>
 		<price>120</price>
 		<gfx_store>clothing</gfx_store>
@@ -109,7 +109,7 @@ The major oxygen-breathing races in the sector have broadly compatible dietary r
 		<price>250</price>
 		<gfx_store>gaussgun</gfx_store>	
 	</commodity> 
-	<commodity name="Armament">
+	<commodity name="Conventional Armament">
 		<description>Ranging from hand-blasters for infantry to large guns for spaceships, those weapons are the bread-and-butter of civilized fighting forces in this part of the galaxy.</description>
 		<price>500</price>
 		<gfx_store>ionturret</gfx_store>	

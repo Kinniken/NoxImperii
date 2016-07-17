@@ -153,3 +153,108 @@ settlement_generator.coreArdarSettlements[#settlement_generator.coreArdarSettlem
 	weight=5
 }
 
+settlement_generator.asteroidMoonArdarSettlements={}
+
+settlement_generator.asteroidMoonArdarSettlements[#settlement_generator.asteroidMoonArdarSettlements+1]={
+	appliesTo="ardars",
+	applyOnPlanet=function(planet)
+
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.ardars==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "Ardar ships use it as a convenient refuelling spot. "
+	end,
+	weight=10
+}
+
+settlement_generator.asteroidMoonArdarSettlements[#settlement_generator.asteroidMoonArdarSettlements+1]={
+	appliesTo="ardars",
+	applyOnPlanet=function(planet)
+		planet.lua.settlements.ardars.military=planet.lua.settlements.ardars.military*2
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.ardars==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "The moon has been heavily fortified by the Ardar Navy, which controls the surrounding space from it. "
+	end,
+	weight=20
+}
+
+settlement_generator.asteroidMoonArdarSettlements[#settlement_generator.asteroidMoonArdarSettlements+1]={
+	appliesTo="ardars",
+	applyOnPlanet=function(planet)
+		planet.lua.settlements.ardars.services=planet.lua.settlements.ardars.services*2
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.ardars==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "Ardar traders from #planetname# use it as a minor trading base. "
+	end,
+	weight=10
+}
+
+settlement_generator.worldMoonArdarSettlements={}
+
+settlement_generator.worldMoonArdarSettlements[#settlement_generator.worldMoonArdarSettlements+1]={
+	appliesTo="ardars",
+	applyOnPlanet=function(planet)
+		planet.lua.settlements.ardars.industry=planet.lua.settlements.ardars.industry*2
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.ardars==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "The Roidhunate has built up automated mining industries on the moon, exporting ore to #planetname# and nearby systems. "
+	end,
+	weight=10
+}
+
+settlement_generator.worldMoonArdarSettlements[#settlement_generator.worldMoonArdarSettlements+1]={
+	appliesTo="ardars",
+	applyOnPlanet=function(planet)
+		planet.lua.settlements.ardars.industry=planet.lua.settlements.ardars.industry*2
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.ardars==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "Ardars living in underground cities work in extensive low-gravity industries. "
+	end,
+	weight=10
+}
+
+settlement_generator.worldMoonArdarSettlements[#settlement_generator.worldMoonArdarSettlements+1]={
+	appliesTo="ardars",
+	applyOnPlanet=function(planet)
+		planet.lua.settlements.ardars.military=planet.lua.settlements.ardars.military*2
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.ardars==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "Abundant minerals and low gravity makes #moonname# a useful location for shipbuilding, something the Ardar Navy is taking full advantage of. "
+	end,
+	weight=30
+}

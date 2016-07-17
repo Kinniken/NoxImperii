@@ -18,7 +18,7 @@ ardar_specialities.specialityUniversity={
 		planet.lua.settlements.ardars:addGoodDemand(C.ANCIENT_TECHNOLOGY,10,1.5)
 	end,
 	getDesc=function(planet)
-		return "Ardars do not have universities in the human style, instead choosing to focus research in high technology production centers. #planetname# is an important one in armament and communication technology. "
+		return "Ardars do not have universities in the human style, instead choosing to focus research in high technology production centres. #planetname# is an important one in armament and communication technology. "
 	end
 }
 

@@ -71,15 +71,40 @@ function handleNames(star,nameTakenSystem,nameTakenPlanet)
 	star.name=generateUniqueName(star.nameGenerator,nameTakenSystem)
 
 	--planet generator has priority over star generator
-	for k,planet in pairs(star.planets) do 
-		if (planet.nameGenerator) then
-			planet.name=generateUniqueName(planet.nameGenerator,nameTakenPlanet)
-		else
-			planet.name=generateUniqueName(star.nameGenerator,nameTakenPlanet)
-		end
-		
+	for k,planet in pairs(star.planets) do
 
-		planet.baseDesc=planet.baseDesc:gsub("#planetname#", planet.name)
+		if planet.planet then--actually a moon
+
+			if star.nameGenerator ~= nameGenerator.generateNameEmpty then
+				--proper name generator, Moon gets a name of its own
+				planet.name=generateUniqueName(star.nameGenerator,nameTakenPlanet)
+			else
+				--no specific generator, let's go for the a b c moon system
+				local alphabet = 'abcdefghijklmnopqrstuvwxyz'
+				local id=1
+
+				while (id<=#alphabet and not planet.name) do
+					if not nameTakenPlanet(planet.planet.name..alphabet:sub(id, id)) then
+						planet.name=planet.planet.name..alphabet:sub(id, id)
+					end
+					id=id+1
+				end
+			end
+
+			planet.baseDesc=planet.baseDesc:gsub("#planetname#", planet.planet.name)
+			planet.baseDesc=planet.baseDesc:gsub("#moonname#", planet.name)
+
+			planet.lua.planet=planet.planet.name--for future reference
+		else
+			if (planet.nameGenerator) then
+				planet.name=generateUniqueName(planet.nameGenerator,nameTakenPlanet)
+			else
+				planet.name=generateUniqueName(star.nameGenerator,nameTakenPlanet)
+			end
+
+			planet.baseDesc=planet.baseDesc:gsub("#planetname#", planet.name)
+		end
+
 		planet.baseDesc=planet.baseDesc:gsub("#sunname#", star.name)
 	end
 
@@ -102,8 +127,8 @@ function generatePlanetCoords(star,planet)
 		local clash=false
 
 		--test if the coords are too close to an existing planet
-		for k,planet in pairs(star.planets) do 
-			if (gh.calculateDistance(planet,{x=x,y=y}) < 500) then
+		for k,planet in pairs(star.planets) do
+			if (gh.calculateDistance(planet,{x=x,y=y}) < 2000) then
 				clash=true
 			end
 		end
@@ -126,6 +151,50 @@ function generatePlanetCoords(star,planet)
 
 	planet.x=math.floor(x)
 	planet.y=math.floor(y)
+
+end
+
+function generateMoonCoords(star,planet,moon)
+
+	local minRadius=moon.template.minRadius
+	local maxRadius=moon.template.maxRadius
+
+	local attempts=0
+
+	while (attempts<30) do
+		local radius=minRadius+math.random(maxRadius-minRadius)
+		local angle=math.random()*math.pi*2
+
+		local x = radius * math.cos(angle);
+		local y = radius * math.sin(angle);
+
+		local clash=false
+
+		--test if the coords are too close to an existing planet
+		for k,aplanet in pairs(star.planets) do
+			if ((aplanet ~= planet) and gh.calculateDistance(aplanet,{x=x+planet.x,y=y+planet.y}) < 500) then
+				clash=true
+			end
+		end
+
+		if (not clash) then
+			moon.x=math.floor(x)+planet.x
+			moon.y=math.floor(y)+planet.y
+			return
+		end
+
+		attempts=attempts+1
+	end
+
+	--too bad, we'll return clashing coords
+	local radius=minRadius+math.random(maxRadius-minRadius)
+	local angle=math.random()*math.pi*2
+
+	local x = radius * math.cos(angle);
+	local y = radius * math.sin(angle);
+
+	moon.x=math.floor(x)+planet.x
+	moon.y=math.floor(y)+planet.y
 
 end
 
@@ -162,6 +231,37 @@ end
 
 		star.planets[#star.planets+1]=planet
 		planet.star=star
+
+		if (planet.template.moonTemplate) then
+
+			local nb=planet.template.nbMoons[ math.random(#planet.template.nbMoons)]
+
+			for i=1,nb do
+				local moonTemplate=gh.pickWeightedObject(planet.template.moonTemplate).template
+				local moon=planet_class.createNew()
+				moon.template=moonTemplate
+
+				for k,randomAttribute in pairs(planetRandomAttributes) do
+					if (moon.template[randomAttribute]~=nil) then
+						moon[randomAttribute]=gh.randomInRange(moon.template[randomAttribute])
+					else
+						moon[randomAttribute]=0
+					end
+				end
+
+				moon.spacePict=moon.template.spacePicts[ math.random(#moon.template.spacePicts)]
+				moon.exteriorPict=moon.template.exteriorPicts[ math.random(#moon.template.exteriorPicts)]
+
+				moon.lua.planetType=moon.template.id
+
+				generateMoonCoords(star,planet,moon)
+
+				star.planets[#star.planets+1]=moon
+				moon.star=star
+				moon.planet=planet
+			end
+		end
+
 	end
 
 	populateSystemNatives(star)
@@ -169,6 +269,7 @@ end
 
 	for k,planet in pairs(star.planets) do
 		planet.baseDesc=planet.template.descGenerator(planet)
+
 		if (planet.lua.natives) then
 			planet.baseDesc=planet.baseDesc.."\n\n"..planet.nativeType.getDesc(planet)
 			if (planet.nativeSpeciality) then
@@ -220,21 +321,25 @@ function populateSystemCivilized(star)
 	star.populationTemplate.generate(star)
 
 	if (star.populationTemplate.specialSettlement) then
-		for k,planet in pairs(star.planets) do			
-			local settlement=gh.pickConditionalWeightedObject(star.populationTemplate.specialSettlement,planet)
+		for k,planet in pairs(star.planets) do
 
-			if (settlement) then
-				settlement.applyOnPlanet(planet)
-				planet.settlementTypes[settlement.appliesTo]=settlement --needed later to generate desc
+			if (star.populationTemplate.specialSettlement[planet.template.classification]) then
 
-				if (settlement.specialities) then
-					local speciality=gh.pickConditionalWeightedObject(settlement.specialities,planet)
-					if (speciality) then
-						speciality.applyOnPlanet(planet)
-						planet.settlementSpecialities[settlement.appliesTo]=speciality --needed later to generate desc
+				local settlement=gh.pickConditionalWeightedObject(star.populationTemplate.specialSettlement[planet.template.classification],planet)
+
+				if (settlement) then
+					settlement.applyOnPlanet(planet)
+					planet.settlementTypes[settlement.appliesTo]=settlement --needed later to generate desc
+
+					if (settlement.specialities) then
+						local speciality=gh.pickConditionalWeightedObject(settlement.specialities,planet)
+						if (speciality) then
+							speciality.applyOnPlanet(planet)
+							planet.settlementSpecialities[settlement.appliesTo]=speciality --needed later to generate desc
+						end
 					end
 				end
-        	end
+			end
         end
 	end
 end

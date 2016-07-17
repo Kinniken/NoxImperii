@@ -96,7 +96,7 @@ end
 
 local function generate_human_population(star,planet,minFertility,settlementChance,populationRange,industryFactor,agricultureFactor,technologyFactor,militaryFactor,stabilityFactor,
 				factionName)
-	if (planet.lua.humanFertility>minFertility and math.random()<settlementChance) then
+	if (planet.template.classification=="Earth-like" and planet.lua.humanFertility>minFertility and math.random()<settlementChance) then
 		local settlement=settlement_class.createNew()
 		settlement.population=gh.randomInRange(populationRange)*planet.lua.humanFertility
 		settlement.industry=(planet.lua.humanFertility*0.2+planet.lua.minerals*0.5+0.3)*industryFactor
@@ -107,18 +107,54 @@ local function generate_human_population(star,planet,minFertility,settlementChan
 		settlement.stability=stabilityFactor
 
 		settlement:randomizeSettlementData(0.2)
-		
+
 		planet.lua.settlements.humans=settlement
 		planet.faction=factionName
 		planet.factionPresence=1
 		planet.factionRange=1
 
 		star.nameGenerator=nameGenerator.getEmpireNameGenerator()
+	elseif planet.planet and factionName==G.EMPIRE and planet.template.classification=="Asteroid" and planet.planet.lua.settlements and planet.planet.lua.settlements.humans then--Asteroid orbiting an Imperial settlement
+		if (math.random()*2<planet.planet.lua.settlements.humans.services) then--the higher the services, the more chance the moon will be used
+			local settlement=settlement_class.createNew()
+			settlement.population=gh.randomInRange(populationRange)*0.01
+			settlement.industry=planet.planet.lua.settlements.humans.industry/4
+			settlement.agriculture=0.1
+			settlement.technology=technologyFactor
+			settlement.services=planet.planet.lua.settlements.humans.services
+			settlement.military=planet.planet.lua.settlements.humans.military/2
+			settlement.stability=stabilityFactor
+
+			settlement:randomizeSettlementData(0.2)
+
+			planet.lua.settlements.humans=settlement
+			planet.faction=factionName
+			planet.factionPresence=1
+			planet.factionRange=1
+		end
+	elseif planet.planet and factionName==G.EMPIRE and planet.template.classification=="Barren Telluric" and planet.planet.lua.settlements and planet.planet.lua.settlements.humans then--Asteroid orbiting an Imperial settlement
+		if (math.random()*2<planet.planet.lua.settlements.humans.services) then--the higher the services, the more chance the moon will be used
+			local settlement=settlement_class.createNew()
+			settlement.population=gh.randomInRange(populationRange)*0.1
+			settlement.industry=planet.planet.lua.settlements.humans.industry/2
+			settlement.agriculture=0.1
+			settlement.technology=technologyFactor
+			settlement.services=planet.planet.lua.settlements.humans.services
+			settlement.military=planet.planet.lua.settlements.humans.military/2
+			settlement.stability=stabilityFactor
+
+			settlement:randomizeSettlementData(0.2)
+
+			planet.lua.settlements.humans=settlement
+			planet.faction=factionName
+			planet.factionPresence=1
+			planet.factionRange=1
+		end
 	end
 end
 
 local function generate_ardar_population(star,planet,minFertility,settlementChance,populationRange,industryFactor,agricultureFactor,technologyFactor,militaryFactor,stabilityFactor)
-	if (planet.lua.humanFertility>minFertility and math.random()<settlementChance) then
+	if (planet.template.classification=="Earth-like" and planet.lua.humanFertility>minFertility and math.random()<settlementChance) then
 		local settlement=settlement_class.createNew()
 		settlement.population=gh.randomInRange(populationRange)*planet.lua.humanFertility
 		settlement.industry=(planet.lua.humanFertility*0.2+planet.lua.minerals*0.5+0.7)*industryFactor
@@ -129,20 +165,56 @@ local function generate_ardar_population(star,planet,minFertility,settlementChan
 		settlement.stability=stabilityFactor
 
 		settlement:randomizeSettlementData(0.2)
-		
+
 		planet.lua.settlements.ardars=settlement
 		planet.faction=G.ROIDHUNATE
 		planet.factionPresence=1
 		planet.factionRange=1
 
 		star.nameGenerator=nameGenerator.generateNameArdarshir
+	elseif planet.planet and factionName==G.ROIDHUNATE and planet.template.classification=="Asteroid" and planet.planet.lua.settlements and planet.planet.lua.settlements.ardars then--Asteroid orbiting an Ardar settlement
+		if (math.random()*2<planet.planet.lua.settlements.ardars.services) then--the higher the services, the more chance the moon will be used
+			local settlement=settlement_class.createNew()
+			settlement.population=gh.randomInRange(populationRange)*0.01
+			settlement.industry=planet.planet.lua.settlements.ardars.industry/4
+			settlement.agriculture=0.1
+			settlement.technology=technologyFactor
+			settlement.services=planet.planet.lua.settlements.ardars.services
+			settlement.military=planet.planet.lua.settlements.ardars.military/2
+			settlement.stability=stabilityFactor
+
+			settlement:randomizeSettlementData(0.2)
+
+			planet.lua.settlements.ardars=settlement
+			planet.faction=factionName
+			planet.factionPresence=1
+			planet.factionRange=1
+		end
+	elseif planet.planet and factionName==G.ROIDHUNATE and planet.template.classification=="Barren Telluric" and planet.planet.lua.settlements and planet.planet.lua.settlements.ardars then--Asteroid orbiting an Ardar settlement
+		if (math.random()*2<planet.planet.lua.settlements.ardars.services) then--the higher the services, the more chance the moon will be used
+			local settlement=settlement_class.createNew()
+			settlement.population=gh.randomInRange(populationRange)*0.1
+			settlement.industry=planet.planet.lua.settlements.ardars.industry/2
+			settlement.agriculture=0.1
+			settlement.technology=technologyFactor
+			settlement.services=planet.planet.lua.settlements.ardars.services
+			settlement.military=planet.planet.lua.settlements.ardars.military/2
+			settlement.stability=stabilityFactor
+
+			settlement:randomizeSettlementData(0.2)
+
+			planet.lua.settlements.ardars=settlement
+			planet.faction=factionName
+			planet.factionPresence=1
+			planet.factionRange=1
+		end
 	end
 end
 
 --basically copied from the human one
 local function generate_ixumite_population(star,planet,minFertility,settlementChance,populationRange,industryFactor,agricultureFactor,technologyFactor,militaryFactor,stabilityFactor,
 				factionName)
-	if (planet.lua.humanFertility>minFertility and math.random()<settlementChance) then
+	if (planet.template.classification=="Earth-like" and planet.lua.humanFertility>minFertility and math.random()<settlementChance) then
 		local settlement=settlement_class.createNew()
 		settlement.population=gh.randomInRange(populationRange)*planet.lua.humanFertility
 		settlement.industry=(planet.lua.humanFertility*0.2+planet.lua.minerals*0.5+0.3)*industryFactor
@@ -169,7 +241,7 @@ end
 
 local function generate_barbarian_population(star,planet,minFertility,settlementChance,populationRange,industryFactor,agricultureFactor,technologyFactor,militaryFactor,stabilityFactor,
 				factionName)
-	if (planet.lua.nativeFertility>minFertility and math.random()<settlementChance) then
+	if (planet.template.classification=="Earth-like" and planet.lua.nativeFertility>minFertility and math.random()<settlementChance) then
 		local settlement=settlement_class.createNew()
 		settlement.population=gh.randomInRange(populationRange)*planet.lua.nativeFertility
 		settlement.industry=(planet.lua.humanFertility*0.2+planet.lua.minerals*0.5+0.3)*industryFactor
@@ -190,7 +262,7 @@ end
 
 local function betelgeuse_generate(star)
 	for k,planet in pairs(star.planets) do
-		if (planet.lua.humanFertility>0) then
+		if (planet.template.classification=="Earth-like" and planet.lua.humanFertility>0) then
 			local settlement=settlement_class.createNew()
 			settlement.population=1000+planet.lua.humanFertility*1000000000*math.random() --up to a billion
 			settlement.industry=planet.lua.humanFertility*0.2+planet.lua.minerals*0.3+0,5
@@ -211,6 +283,42 @@ local function betelgeuse_generate(star)
 			planet.factionRange=1
 
 			star.nameGenerator=nameGenerator.generateNameBetelgeuse
+		elseif planet.planet and planet.template.classification=="Asteroid" and planet.planet.lua.settlements and planet.planet.lua.settlements.betelgeuse then--Asteroid orbiting an Betelgian settlement
+			if (math.random()*2<planet.planet.lua.settlements.betelgeuse.services) then--the higher the services, the more chance the moon will be used
+				local settlement=settlement_class.createNew()
+				settlement.population=1000+planet.lua.humanFertility*10000*math.random()
+				settlement.industry=planet.planet.lua.settlements.betelgeuse.industry/4
+				settlement.agriculture=0.1
+				settlement.technology=0.7
+				settlement.services=planet.planet.lua.settlements.betelgeuse.services
+				settlement.military=planet.planet.lua.settlements.betelgeuse.military/2
+				settlement.stability=0.8
+
+				settlement:randomizeSettlementData(0.2)
+
+				planet.lua.settlements.betelgeuse=settlement
+				planet.faction=factionName
+				planet.factionPresence=1
+				planet.factionRange=1
+			end
+		elseif planet.planet and planet.template.classification=="Barren Telluric" and planet.planet.lua.settlements and planet.planet.lua.settlements.betelgeuse then--Asteroid orbiting an Betelgian settlement
+			if (math.random()*2<planet.planet.lua.settlements.betelgeuse.services) then--the higher the services, the more chance the moon will be used
+				local settlement=settlement_class.createNew()
+				settlement.population=1000+planet.lua.humanFertility*1000000*math.random()
+				settlement.industry=planet.planet.lua.settlements.betelgeuse.industry/2
+				settlement.agriculture=0.1
+				settlement.technology=0.7
+				settlement.services=planet.planet.lua.settlements.betelgeuse.services
+				settlement.military=planet.planet.lua.settlements.betelgeuse.military/2
+				settlement.stability=0.8
+
+				settlement:randomizeSettlementData(0.2)
+
+				planet.lua.settlements.betelgeuse=settlement
+				planet.faction=G.BETELGEUSE
+				planet.factionPresence=1
+				planet.factionRange=1
+			end
 		end
 	end
 end
@@ -310,35 +418,36 @@ end
 local outer_zone={name="outer_zone",priority=function() return 1 end,generate=function(star) end,nativeCivilization=0,nativeFaction=G.INDEPENDENT_WORLDS,zoneName=function(star) return "Great Beyond" end}
 local empire_inner={name="empire_inner",priority=function(star) return priority_distance(earth_pos,star,250,100) end,
 	generate=empire_inner_generate,
-	specialSettlement=settlement_generator.coreHumanSettlements,nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1},nativeFaction=G.EMPIRE,zoneName=function(star) return "Sector Sol" end}
-local empire_outer={name="empire_outer",priority=function(star) return priority_distance(earth_pos,star,600,50) end,generate=empire_outer_generate,specialSettlement=settlement_generator.outerHumanSettlements,nativeCivilization=0.9,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.7},nativeFaction=G.EMPIRE,zoneName=imperial_sector_names}
+	specialSettlement={["Earth-like"]=settlement_generator.coreHumanSettlements,["Asteroid"]=settlement_generator.asteroidMoonHumanSettlements,["Barren Telluric"]=settlement_generator.worldMoonHumanSettlements},nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1},nativeFaction=G.EMPIRE,zoneName=function(star) return "Sector Sol" end}
+
+local empire_outer={name="empire_outer",priority=function(star) return priority_distance(earth_pos,star,600,50) end,generate=empire_outer_generate,specialSettlement={["Earth-like"]=settlement_generator.outerHumanSettlements,["Asteroid"]=settlement_generator.asteroidMoonHumanSettlements},nativeCivilization=0.9,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.7},nativeFaction=G.EMPIRE,zoneName=imperial_sector_names}
 
 local empire_border={name="empire_border",priority=function(star) return priority_distance(earth_pos,star,900,20) end,generate=empire_fringe_generate,
-specialSettlement=gh.concatLists({settlement_generator.fringeEmpireSettlements,settlement_generator.fringeHumanIndependentSettlements}),
+specialSettlement={["Earth-like"]=gh.concatLists({settlement_generator.fringeEmpireSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Asteroid"]=settlement_generator.asteroidMoonHumanSettlements,["Barren Telluric"]=settlement_generator.worldMoonHumanSettlements},
 nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.5},nativeFaction=G.INDEPENDENT_WORLDS,zoneName=imperial_sector_names}
 
 local empire_ardarshir_border={name="empire_ardarshir_border",priority=function(star) return empire_ardarshir_border_priority(star,25) end,generate=empire_ardarshir_border_generate,
-specialSettlement=settlement_generator.fringeEmpireSettlements,
+specialSettlement={["Earth-like"]=settlement_generator.fringeEmpireSettlements,["Asteroid"]=settlement_generator.asteroidMoonHumanSettlements,["Barren Telluric"]=settlement_generator.worldMoonHumanSettlements},
 nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction=G.EMPIRE,zoneName=imperial_sector_names}
 
 local empire_fringe={name="empire_fringe",priority=function(star) return priority_distance(earth_pos,star,1200,10) end,generate=empire_outer_fringe_generate,
-specialSettlement=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),
+specialSettlement={["Earth-like"]=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Asteroid"]=settlement_generator.asteroidMoonHumanSettlements,["Barren Telluric"]=settlement_generator.worldMoonHumanSettlements},
 nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction=G.INDEPENDENT_WORLDS,zoneName=imperial_fringes_names}
 
-local barbarian_fringe={name="barbarian_fringe",priority=function(star) return barbarian_priority(star) end,generate=barbarian_fringe_generate,specialSettlement=settlement_generator.barbarianSettlements,nativeCivilization=0,nativeFactors={agriculture=0.5,industry=0.3,services=0.1,technology=0.2,military=1.2,stability=0.3},nativeFaction=G.NATIVES,zoneName=barbarian_fringes_names}
+local barbarian_fringe={name="barbarian_fringe",priority=function(star) return barbarian_priority(star) end,generate=barbarian_fringe_generate,specialSettlement={["Earth-like"]=settlement_generator.barbarianSettlements},nativeCivilization=0,nativeFactors={agriculture=0.5,industry=0.3,services=0.1,technology=0.2,military=1.2,stability=0.3},nativeFaction=G.NATIVES,zoneName=barbarian_fringes_names}
 
-local ardarshir_inner={name="ardarshir_inner",priority=function(star) return priority_distance(ardarshir_pos,star,250,100) end,generate=ardarshir_inner_generate,specialSettlement=settlement_generator.coreArdarSettlements,nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1.2},nativeFaction=G.ROIDHUNATE,zoneName=function(star) return "Inner Roidhunate" end}
+local ardarshir_inner={name="ardarshir_inner",priority=function(star) return priority_distance(ardarshir_pos,star,250,100) end,generate=ardarshir_inner_generate,specialSettlement={["Earth-like"]=settlement_generator.coreArdarSettlements,["Asteroid"]=settlement_generator.asteroidMoonArdarSettlements,["Barren Telluric"]=settlement_generator.worldMoonArdarSettlements},nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1.2},nativeFaction=G.ROIDHUNATE,zoneName=function(star) return "Inner Roidhunate" end}
 
 local ardarshir_outer={name="ardarshir_outer",priority=function(star) return priority_distance(ardarshir_pos,star,500,45) end,generate=ardarshir_outer_generate,nativeCivilization=0.5,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.9},nativeFaction=G.ROIDHUNATE,zoneName=function(star) return "Outer Roidhunate" end}
 
 local ardarshir_fringe={name="ardarshir_fringe",priority=function(star) return priority_distance(ardarshir_pos,star,700,18) end,generate=ardarshir_fringe_generate,nativeCivilization=0.1,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction=G.ROIDHUNATE,zoneName=function(star) return "Roidhunate Fringes" end}
 
-local betelgeuse={name="betelgeuse",priority=function(star) return priority_distance(betelgeuse_pos,star,200,100) end,generate=betelgeuse_generate,specialSettlement=settlement_generator.betelgeuseSettlements,nativeCivilization=0.8,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.8,stability=0.8},nativeFaction=G.BETELGEUSE,zoneName=function(star) return "Betelgeuse" end}
+local betelgeuse={name="betelgeuse",priority=function(star) return priority_distance(betelgeuse_pos,star,200,100) end,generate=betelgeuse_generate,specialSettlement={["Earth-like"]=settlement_generator.betelgeuseSettlements,["Asteroid"]=settlement_generator.asteroidMoonBetelgianSettlements,["Barren Telluric"]=settlement_generator.worldMoonBetelgianSettlements},nativeCivilization=0.8,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.8,stability=0.8},nativeFaction=G.BETELGEUSE,zoneName=function(star) return "Betelgeuse" end}
 
-local kingdom_of_ixum={name="kingdom_of_ixum",priority=function(star) return priority_distance(tigray_pos,star,200,1000) end,generate=royal_ixum_generate,specialSettlement=settlement_generator.royalIxumSettlements,
+local kingdom_of_ixum={name="kingdom_of_ixum",priority=function(star) return priority_distance(tigray_pos,star,200,1000) end,generate=royal_ixum_generate,specialSettlement={["Earth-like"]=settlement_generator.royalIxumSettlements},
 nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction=G.NATIVES,zoneName=function(star) return "Ixum" end}
 
-local holy_flame_of_ixum={name="holy_flame_of_ixum",priority=function(star) return priority_distance(gonder_pos,star,350,900) end,generate=holy_flame_generate,specialSettlement=settlement_generator.holyFlameSettlements,
+local holy_flame_of_ixum={name="holy_flame_of_ixum",priority=function(star) return priority_distance(gonder_pos,star,350,900) end,generate=holy_flame_generate,specialSettlement={["Earth-like"]=settlement_generator.holyFlameSettlements},
 nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction=G.NATIVES,zoneName=function(star) return "Ixum" end}
 
 base_populations.templates={outer_zone,barbarian_fringe,empire_inner,empire_outer,empire_border,empire_ardarshir_border,empire_fringe,ardarshir_inner,ardarshir_outer,ardarshir_fringe,betelgeuse,kingdom_of_ixum,holy_flame_of_ixum}

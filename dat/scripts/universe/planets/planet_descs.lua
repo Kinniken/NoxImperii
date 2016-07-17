@@ -46,7 +46,7 @@ function descModule.venusDesc(planet)
 	--convention: first desc has no criteria, to ensure at least one will be valid
 	descs[#descs+1]={weight=10, desc=
 		"Gripped by a strong greenhouse effect, #planetname# suffocates under a thick atmosphere. "..
-		"The planet's year lasts "..gh.floorTo(planet.yearLength,2).." Earth year, though seasons are barely marked. "..
+		"The planet's year lasts "..gh.floorTo(planet.yearLength,2).." Earth years, though seasons are barely marked. "..
 		"What little mineral wealth might hide in such an inhospitable environment is surely not worth the danger."
 	}
 
@@ -286,5 +286,47 @@ function descModule.jovianDesc(planet)
 	}
 
 	return gh.pickConditionalWeightedObject(descs,planet).desc
+end
+
+function descModule.moonAsteroidDesc(planet)
+
+	local descs={}
+
+	--convention: first desc has no criteria, to ensure at least one will be valid
+	descs[#descs+1]={weight=10, desc=
+		"In rapid orbit around #planetname#, #moonname# is little more than a captured asteroid."
+	}
+
+	descs[#descs+1]={weight=10, desc=
+		"Tumbling rapidly on itself, #moonname# offers a great view of #planetname# and little else."
+	}
+
+	descs[#descs+1]={weight=20, desc=
+		"#moonname#'s small landscape is dominated by huge craters, relics of long-gone collisions."
+	}
+
+	return gh.pickConditionalWeightedObject(descs,planet).desc
+
+end
+
+function descModule.moonWorldDesc(planet)
+
+	local descs={}
+
+	--convention: first desc has no criteria, to ensure at least one will be valid
+	descs[#descs+1]={weight=10, desc=
+		"#moonname# is large for the moon of a telluric planet, close in size to Luna itself. While it lacks an atmosphere, its mountain ranges and volcanic lowlands gives it the feel of a real world."
+	}
+
+	descs[#descs+1]={weight=10, desc=
+		"The moon of #moonname# is large enough to have a rounded shape and signs of ancient volcanic activity. Today however only the occasional impact affects its dead landscape."
+	}
+
+	descs[#descs+1]={weight=20, desc=
+		"#moonname#'s large size makes it a beautiful sight from #planetname#; its apparent diameter there is larger by some margin than Luna's on Terra."
+	}
+
+	return gh.pickConditionalWeightedObject(descs,planet).desc
+
 end
 

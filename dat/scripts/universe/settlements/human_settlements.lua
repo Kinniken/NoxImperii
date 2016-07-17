@@ -443,3 +443,112 @@ settlement_generator.fringeHumanIndependentSettlements[#settlement_generator.fri
 	specialities={settlements_specialities.specialityCraftBeer,settlements_specialities.specialityHam,settlements_specialities.specialityFrontierOre},
 	weight=10
 }
+
+
+settlement_generator.asteroidMoonHumanSettlements={}
+
+settlement_generator.asteroidMoonHumanSettlements[#settlement_generator.asteroidMoonHumanSettlements+1]={
+	appliesTo="humans",
+	applyOnPlanet=function(planet)
+
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "It is home to a small spaceport used for out-of-atmosphere refuelling and repairs. "
+	end,
+	weight=10
+}
+
+settlement_generator.asteroidMoonHumanSettlements[#settlement_generator.asteroidMoonHumanSettlements+1]={
+	appliesTo="humans",
+	applyOnPlanet=function(planet)
+		planet.lua.settlements.humans.military=planet.lua.settlements.humans.military*2
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "The Imperial Navy has established a small outpost on it, to protect and control #planetname# below. "
+	end,
+	weight=10
+}
+
+settlement_generator.asteroidMoonHumanSettlements[#settlement_generator.asteroidMoonHumanSettlements+1]={
+	appliesTo="humans",
+	applyOnPlanet=function(planet)
+		planet.lua.settlements.humans.services=planet.lua.settlements.humans.services*2
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "It has become a small hub for trade to and from #planetname#, with shuttle services connecting it to the world. "
+	end,
+	weight=10
+}
+
+
+
+settlement_generator.worldMoonHumanSettlements={}
+
+settlement_generator.worldMoonHumanSettlements[#settlement_generator.worldMoonHumanSettlements+1]={
+	appliesTo="humans",
+	applyOnPlanet=function(planet)
+		planet.lua.settlements.humans.industry=planet.lua.settlements.humans.industry*2
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "Automated mining of some value is conducted on it, exporting ore to #planetname# and nearby systems. "
+	end,
+	weight=10
+}
+
+settlement_generator.worldMoonHumanSettlements[#settlement_generator.worldMoonHumanSettlements+1]={
+	appliesTo="humans",
+	applyOnPlanet=function(planet)
+		planet.lua.settlements.humans.industry=planet.lua.settlements.humans.industry*2
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "Low-gravity industries are implanted on the moon, leading to the development of a few small domed cities. "
+	end,
+	weight=10
+}
+
+settlement_generator.worldMoonHumanSettlements[#settlement_generator.worldMoonHumanSettlements+1]={
+	appliesTo="humans",
+	applyOnPlanet=function(planet)
+		planet.lua.settlements.humans.military=planet.lua.settlements.humans.military*2
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "The Imperial Navy has built-up one of its major shipyard on #moonname#, using the abundant local minerals and the low gravity to build large warships. "
+	end,
+	weight=10
+}

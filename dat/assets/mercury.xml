@@ -9,7 +9,7 @@
   <exterior>ln/desert3.png</exterior>
  </GFX>
  <general>
-  <class>A</class>
+  <class>Warm Telluric</class>
   <population>0</population>
   <services>
      <land/>

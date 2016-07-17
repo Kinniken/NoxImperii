@@ -6,11 +6,11 @@ include('universe/objects/class_planets.lua')
 
 
 
-local function nameTakenSystem(name)	
+local function nameTakenSystem(name)
 	return (system.exists(name))
 end
 
-local function nameTakenPlanet(name)		
+local function nameTakenPlanet(name)
 	return (planet.exists(name))
 end
 
@@ -83,7 +83,7 @@ local function createAroundStar(c_sys,nextlevel,level,visited)
 				nextlevel[#nextlevel+1]=newsys
 			end
 		end
-	
+
 		sys.lua.generatedNearbySystems=true
 		sys:save()
 	else

@@ -28,7 +28,8 @@ desert: Trey Ratcliff, https://www.flickr.com/photos/stuckincustoms/7874912840
 desert2: Magic Nights Book, https://www.flickr.com/photos/74561832@N04/6773175887
 desert3: Dennis Stauffer, https://www.flickr.com/photos/zoomion/4968208871
 
-
+asteroid: NASA,  http://nssdc.gsfc.nasa.gov/photo_gallery/photogallery-asteroids.html
+barren_moon: NASA, http://www.nasa.gov/multimedia/imagegallery/image_feature_1249.html
 
 Authors of the photos used in commodities pictures
 (Long Night-specific)

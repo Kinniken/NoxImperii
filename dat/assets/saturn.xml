@@ -9,7 +9,7 @@
   <exterior>gas.png</exterior>
  </GFX>
  <general>
-  <class>A</class>
+  <class>Gas Giant</class>
   <population>0</population>
   <services>
      <land/>

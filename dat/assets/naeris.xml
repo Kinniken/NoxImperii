@@ -14,7 +14,7 @@
   <range>0</range>
  </presence>
  <general>
-  <class>A</class>
+  <class>Earth-like</class>
   <population>0</population>
   <hide>0.0</hide>
   <services>
@@ -23,9 +23,9 @@
    <bar/>
   </services>
   <commodities/>
-  <description>Naeris is a small, dry planet, poor in resources, that was only settled as a base for the study of native life on Dires. Its population remains low for a world settled so long ago. It is however a major scientific center for this part of the Empire, and its disciplined and resourceful population contributes heavily to the Imperial Navy. It is sometime said here, though rarely too loudly, that the Empire would go better if it was led by more Aeneans and less Terrans.
+  <description>Naeris is a small, dry planet, poor in resources, that was only settled as a base for the study of native life on Dires. Its population remains low for a world settled so long ago. It is however a major scientific centre for this part of the Empire, and its disciplined and resourceful population contributes heavily to the Imperial Navy. It is sometime said here, though rarely too loudly, that the Empire would go better if it was led by more Aeneans and less Terrans.
 
-A hundred year ago, the administrative centre of the Alphacrusis Sector was moved here, to the great annoyance of many bureaucrats used to more urbane and opulant settings.
+A hundred year ago, the administrative centre of the Alphacrusis Sector was moved here, to the great annoyance of many bureaucrats used to more urbane and opulent settings.
 </description>
   <bar>With its plain furniture and limited decorations, this bar does not look particularly fancy. But the beer is good, and the crowd cheerful.</bar>
     <luadata>{

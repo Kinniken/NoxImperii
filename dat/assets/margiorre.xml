@@ -14,7 +14,7 @@
   <range>2</range>
  </presence>
  <general>
-  <class>A</class>
+  <class>Earth-like</class>
   <population>3450000</population>
   <services>
    <land/>
@@ -48,7 +48,7 @@ Today Betelgians and Nizares live in close proximity and general harmony, with m
 				{
 							demand = 20,
 							price = 1.5,
-							type = "Armament",
+							type = "Conventional Armament",
 						},
 			},
 			extraGoodsSupply = {

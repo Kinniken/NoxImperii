@@ -50,3 +50,109 @@ settlement_generator.betelgeuseSettlements[#settlement_generator.betelgeuseSettl
 	weight=5
 }
 
+
+settlement_generator.asteroidMoonBetelgianSettlements={}
+
+settlement_generator.asteroidMoonBetelgianSettlements[#settlement_generator.asteroidMoonBetelgianSettlements+1]={
+	appliesTo="betelgeuse",
+	applyOnPlanet=function(planet)
+
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.betelgeuse==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "It is used as a fuel depot by ships from #planetname#. "
+	end,
+	weight=10
+}
+
+settlement_generator.asteroidMoonBetelgianSettlements[#settlement_generator.asteroidMoonBetelgianSettlements+1]={
+	appliesTo="betelgeuse",
+	applyOnPlanet=function(planet)
+		planet.lua.settlements.betelgeuse.military=planet.lua.settlements.betelgeuse.military*2
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.betelgeuse==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "The Betelgian navy maintains a small base on the rock, keeping a lookout for pirates. "
+	end,
+	weight=10
+}
+
+settlement_generator.asteroidMoonBetelgianSettlements[#settlement_generator.asteroidMoonBetelgianSettlements+1]={
+	appliesTo="betelgeuse",
+	applyOnPlanet=function(planet)
+		planet.lua.settlements.betelgeuse.services=planet.lua.settlements.betelgeuse.services*2
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.betelgeuse==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "Expeditions for far-away worlds are sometime assembled on the rock. "
+	end,
+	weight=30
+}
+
+settlement_generator.worldMoonBetelgianSettlements={}
+
+settlement_generator.worldMoonBetelgianSettlements[#settlement_generator.worldMoonBetelgianSettlements+1]={
+	appliesTo="betelgeuse",
+	applyOnPlanet=function(planet)
+		planet.lua.settlements.betelgeuse.industry=planet.lua.settlements.betelgeuse.industry*2
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.betelgeuse==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "Betelgian traders export ores from automated mines to #planetname# and nearby systems. "
+	end,
+	weight=10
+}
+
+settlement_generator.worldMoonBetelgianSettlements[#settlement_generator.worldMoonBetelgianSettlements+1]={
+	appliesTo="betelgeuse",
+	applyOnPlanet=function(planet)
+		planet.lua.settlements.betelgeuse.services=planet.lua.settlements.betelgeuse.services*1.5
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.betelgeuse==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "Massive exploration fleets assemble on #moonname# before embarking for deep space exploration journeys. "
+	end,
+	weight=20
+}
+
+settlement_generator.worldMoonBetelgianSettlements[#settlement_generator.worldMoonBetelgianSettlements+1]={
+	appliesTo="betelgeuse",
+	applyOnPlanet=function(planet)
+		planet.lua.settlements.betelgeuse.military=planet.lua.settlements.betelgeuse.military*2
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.betelgeuse==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "The Betelgian Navy assembles large warships on #moonname#, using local minerals and the shallow gravity well. "
+	end,
+	weight=10
+}

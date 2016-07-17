@@ -10,12 +10,12 @@ else -- default english
     message1 = [[Welcome to the basic combat tutorial.
 
 Combat is an important aspect of Naev, and you will have to fight off enemies sooner or later, no matter what career you decide to pursue. In this tutorial, you will learn the basic principles of combat.]]
-    message2 = [[For this tutorial, you will be flying a Lancelot fighter. It comes equipped with two advanced laser cannons. You can fire your weapons by pressing %s. Try this now.]]
+    message2 = [[For this tutorial, you will be flying a Shark fighter. It comes equipped with two advanced laser cannons. You can fire your weapons by pressing %s. Try this now.]]
     message3 = [[You may have noticed that as you fired your weapons, you depleted your energy gauge. Most energy weapons use energy while firing, and when you run out of energy you can no longer use them. Energy recharges automatically over time.
 
 Now we will examine another type of weapon that uses ammunition instead of energy. Ammunition does not automatically recharge, you will have to buy it on planets or stations.
 
-You have been equipped with a Mace rocket launcher, which is treated as a secondary weapon by default. Fire it now using %s and watch its ammunition deplete.]]
+You have been equipped with a Javelin rocket launcher, which is treated as a secondary weapon by default. Fire it now using %s and watch its ammunition deplete.]]
     message4 = [[Let's take a closer look at the difference between primary and secondary weapons.
 
 Open the info menu by pressing %s.]]
@@ -67,22 +67,16 @@ Congratulations! This concludes the basic combat tutorial.]]
         "My shields are holding fine!",
         "You'd be dead if I'd remembered to pack my weapons!",
         "I'll end you!",
-        "... Right after I finish eating this bucket of fried chicken!",
-        "Em 5 Fried Chicken. Eat only the best.",
         "This is your last chance to surrender!",
-        "Don't do school, stay in milk.",
         "I'm going to report you to the NPC Rights watchdog.",
         "Keep going, see what happens!",
         "You don't scare me!",
         "What do you think this is, knitting hour?",
-        "I mean, good lord, man.",
-        "It's been several minutes of non-stop banter!",
-        "Haven't I sufficiently annoyed you yet?",
         "Go on, shoot me.",
         "You can do it! I believe in you.",
         "Shoot me!",
         "Okay, listen. I'm doing this for attention.",
-        "But if you don't shoot me, I'll tell the galaxy your terrible secret.",
+        "If you don't shoot me, I'll tell the galaxy your terrible secret!",
     }
     armour31 = {
         "Okay, that's about enough.",
@@ -103,9 +97,6 @@ Congratulations! This concludes the basic combat tutorial.]]
         "I'm scared! Hold me.",
         "Make the bad ship go away, mommy!",
         "If you don't stop I'll cry!",
-        "Here I go, filling my cabin up with tears.",
-        "U- oh it a-pears my te-rs hav- da--age t-e co-mand cons-le.",
-        "I a- T. Pr-ct---! Y-- w--l fe-r m- na-e --- Bzzzt!"
     }
 end
 
@@ -120,11 +111,8 @@ function create()
 
     pp = player.pilot()
     pp:setPos(vec2.new(0, 0))
-    player.swapShip("Lancelot", "Lancelot", "Paul 2", true, true)
+    player.swapShip("Voyager Frigate", "Voyager Frigate", "Paul 2", true, true)
     pp:rmOutfit("all")
-    pp:addOutfit("Milspec Orion 2301 Core System", 1, true)
-    pp:addOutfit("Tricon Naga Mk3 Engine", 1, true)
-    pp:addOutfit("Schafer & Kane Light Combat Plating", 1, true)
     pp:setEnergy(100)
     pp:setHealth(100, 100)
     pp:addOutfit("Laser Cannon MK2", 2)
@@ -158,7 +146,7 @@ function flyUpdate()
             tk.msg(title1, message3:format(tutGetKey("secondary")))
 
             pp:rmOutfit("all")
-            pp:addOutfit("Unicorp Mace Launcher", 1)
+            pp:addOutfit("Javelin Tube", 1)
 
             flytime = 10
             omsg = player.omsgAdd(wepomsg:format(tutGetKey("secondary"), flytime), 0)
@@ -189,7 +177,7 @@ function input(inputname, inputpress)
     if inputname == "info" and inputpress and waitinfo then
         waitinfo = false
         pp:rmOutfit("all")
-        pp:addOutfit("Unicorp Mace Launcher", 2)
+        pp:addOutfit("Javelin Tube", 2)
         pp:addOutfit("Laser Cannon MK2", 2)
         
         player.omsgRm(omsg)
@@ -201,7 +189,7 @@ end
 
 -- Hooked function, initiates drone target practice.
 function dummypractice()
-    drone = pilot.add("FLF Lancelot", "dummy", pp:pos() + vec2.new(200, 0))[1]
+    drone = pilot.add("Independent Worlds Shark", "dummy", pp:pos() + vec2.new(200, 0))[1]
     drone:rename("Target drone")
     drone:setHostile()
     drone:setNodisable(true)
@@ -225,10 +213,10 @@ function captainpractice()
     tk.msg(title1, message8)
 
     pp:rmOutfit("all")
-    pp:addOutfit("Unicorp Mace Launcher", 2)
+    pp:addOutfit("Javelin Tube", 2)
     pp:addOutfit("Laser Cannon MK2", 2)
 
-    captainTP = pilot.add("Civilian Llama", "baddie_norun")[1]
+    captainTP = pilot.add("Independent Traders Endeavour", "baddie_norun")[1]
     captainTP:rename("Captain T. Practice")
     captainTP:setHostile()
     captainTP:rmOutfit("all")

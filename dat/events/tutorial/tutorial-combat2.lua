@@ -10,7 +10,7 @@ else -- default english
     message1 = [[Welcome to the missile combat tutorial.
 
 Guided missile weapons behave differently from other weapons. This tutorial explains the basic mechanics and teaches you how to handle such weapons.]]
-    message2 = [[You are currently equipped with a Unicorp Fury Launcher. Fury missiles are low-end interceptor missiles that excel at chasing down agile targets such as light fighters.
+    message2 = [[You are currently equipped with a Hunter Launcher. Hunter missiles are low-end interceptor missiles that excel at chasing down agile targets such as light fighters.
 
 In order to fire your missile weapon, you must first target the ship you want to shoot at, and then keep the target within an arc in front of your ship. The easiest way to do this is by holding down the auto-face button (%s). While the target is in the lockon arc, your missile weapon will gradually establish a lock. Until this process is complete, you cannot fire the weapon.
 
@@ -22,8 +22,8 @@ You may fire your missiles now. Note that missile launchers are treated as secon
 Destroy the target drone.]]
     message4 = [[Very good. Of course, this was just a target drone. A mobile target will give you a better idea of how missiles behave in real combat. Fortunately, we have an excellent pilot on hand who can help out there. He assured us that reports of his recent obliteration in another tutorial were highly exaggerated, and we trust him implicitly on that.
 
-You have been given two fully loaded Unicorp Fury Launchers. Engage Captain T. Practice with them. Notice how the missiles will actively seek out the target. It's possible to avoid guided missiles, even the fast Fury missiles, but it's not easy to do.]]
-    message5 = [[Hmm, that was over quick. Oh well. You should now have a solid grasp on how to use missile weapons. As a final tip, turreted missile launchers have a full 360 degree lockon arc, so all you have to do to acquire a lock is target an enemy.
+You have been given two fully loaded Hunter Launchers. Engage Captain T. Practice with them. Notice how the missiles will actively seek out the target. It's possible to avoid guided missiles, even the fast Hunter missiles, but it's not easy to do.]]
+    message5 = [[Hmm, that was over quick. Oh well. You should now have a solid grasp on how to use missile weapons. As a final tip, turreted missile launchers have a full 360 degree lock-on arc, so all you have to do to acquire a lock is target an enemy.
 
 Congratulations! This concludes the missile combat tutorial.]]
 
@@ -56,22 +56,16 @@ Congratulations! This concludes the missile combat tutorial.]]
         "My shields are holding fine!",
         "You'd be dead if I'd remembered to pack my weapons!",
         "I'll end you!",
-        "... Right after I finish eating this bucket of fried chicken!",
-        "Em 5 Fried Chicken. Eat only the best.",
         "This is your last chance to surrender!",
-        "Don't do school, stay in milk.",
         "I'm going to report you to the NPC Rights watchdog.",
         "Keep going, see what happens!",
         "You don't scare me!",
         "What do you think this is, knitting hour?",
-        "I mean, good lord, man.",
-        "It's been several minutes of non-stop banter!",
-        "Haven't I sufficiently annoyed you yet?",
         "Go on, shoot me.",
         "You can do it! I believe in you.",
         "Shoot me!",
         "Okay, listen. I'm doing this for attention.",
-        "But if you don't shoot me, I'll tell the galaxy your terrible secret.",
+        "If you don't shoot me, I'll tell the galaxy your terrible secret!",
     }
     armour31 = {
         "Okay, that's about enough.",
@@ -92,9 +86,6 @@ Congratulations! This concludes the missile combat tutorial.]]
         "I'm scared! Hold me.",
         "Make the bad ship go away, mommy!",
         "If you don't stop I'll cry!",
-        "Here I go, filling my cabin up with tears.",
-        "U- oh it a-pears my te-rs hav- da--age t-e co-mand cons-le.",
-        "I a- T. Pr-ct---! Y-- w--l fe-r m- na-e --- Bzzzt!"
     }
 end
 
@@ -109,12 +100,9 @@ function create()
 
     pp = player.pilot()
     pp:setPos(vec2.new(0, 0))
-    player.swapShip("Lancelot", "Lancelot", "Paul 2", true, true)
+    player.swapShip("Voyager Frigate", "Voyager Frigate", "Paul 2", true, true)
     pp:rmOutfit("all")
-    pp:addOutfit("Milspec Orion 2301 Core System", 1, true)
-    pp:addOutfit("Tricon Naga Mk3 Engine", 1, true)
-    pp:addOutfit("Schafer & Kane Light Combat Plating", 1, true)
-    pp:addOutfit("Unicorp Fury Launcher")
+    pp:addOutfit("Hunter Launcher")
     pp:setEnergy(100)
     pp:setHealth(100, 100)
     pp:setDir(90)
@@ -130,7 +118,7 @@ end
 
 -- Hooked function, initiates drone target practice.
 function dummypractice()
-    drone = pilot.add("Civilian Llama", "dummy", player.pilot():pos() + vec2.new(400, 0))[1]
+    drone = pilot.add("Independent Worlds Shark", "dummy", player.pilot():pos() + vec2.new(400, 0))[1]
     drone:rename("Target drone")
     drone:setHostile()
     drone:setNodisable(true)
@@ -161,13 +149,13 @@ end
 
 function captainpractice()
     pp:rmOutfit("all")
-    pp:addOutfit("Unicorp Fury Launcher", 2)
+    pp:addOutfit("Hunter Launcher", 2)
     tk.msg(title1, message4)
 
     TPangle = math.pi
     dist = 700
 
-    captainTP = pilot.add("Civilian Llama", "baddie_norun", player.pilot():pos() + vec2.new(math.cos(TPangle) * dist, math.sin(TPangle) * dist))[1]
+    captainTP = pilot.add("Independent Traders Endeavour", "baddie_norun", player.pilot():pos() + vec2.new(math.cos(TPangle) * dist, math.sin(TPangle) * dist))[1]
     captainTP:rename("Captain T. Practice")
     captainTP:setHostile()
     captainTP:rmOutfit("all")

@@ -9,7 +9,7 @@ else -- default english
     title1 = "Tutorial: Missions and Events"
     message1 = [[Welcome to the missions and events tutorial.
     
-This tutorial explains missions, which are the main driving force behind the game, as well as events, which give flavor to the game.
+This tutorial explains missions, which are the main driving force behind the game, as well as events, which give flavour to the game.
 
 Please note that this tutorial assumes you know how to pilot your ship. If you don't, you should consider playing the earlier tutorials first.]]
     message2 = [[A mission, as you might expect, is a task given to you, the player, to complete for some kind of reward. Missions come in two varieties, computer missions and NPC missions. Computer missions are exclusively obtained from the mission computer, and these missions are typically randomly generated. They serve to provide you with opportunities for work wherever you go.

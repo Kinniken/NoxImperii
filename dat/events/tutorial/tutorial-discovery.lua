@@ -23,7 +23,7 @@ Keep going.]]
 
 You now know where Tein and Rein are located. Their positions have been added to your ship's computer, so you won't have to search for them again. Even if you fly away from them again, you will still be able to see them on the map.
 
-There is still one thing left in this system for you to find: the jump point leading to the next system. Jump points are generally much more difficult to find than planets or moons, especialy in a high interference system such as this one. Look at your map, the marker is now toward the right hand side. Fly there.]]
+There is still one thing left in this system for you to find: the jump point leading to the next system. Jump points are generally much more difficult to find than planets or moons, especially in a high interference system such as this one. Look at your map, the marker is now toward the right hand side. Fly there.]]
    message6 = [[Well done, you have found the jump point. As you can see, you had to get pretty close to it before it appeared! Just like with planets though, jump points will always be visible to you once you know where they are.]]
    message7 = [[Jump points are vitally important to pilots who want to travel through the galaxy, yet they can be hard to find. Fortunately, there are a few things that make this easier:
 

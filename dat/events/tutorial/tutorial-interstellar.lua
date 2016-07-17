@@ -28,7 +28,7 @@ Note that the autonav can also be used to fly to a planet or station. Simply tar
 Select a hyperspace target and jump to another system.]]
     message6 = [[Well done! You've successfully performed a hyperspace jump to another system. From here you can jump to yet other systems to continue your exploration.
 
-But watch out! That jump just now has drained your fuel reserves, as the bottom bar will tell you. If you run out of fuel you can't jump anymore. You can get more fuel by refueling at a planet, by buying fuel off other ships, or by boarding disabled ships and stealing it fom them. Keep an eye on your fuel when traveling!
+But watch out! That jump just now has drained your fuel reserves, as the bottom bar will tell you. If you run out of fuel you can't jump anymore. You can get more fuel by refuelling at a planet, by buying fuel off other ships, or by boarding disabled ships and stealing it from them. Keep an eye on your fuel when travelling!
 
 For the remainder of this tutorial, you will have unlimited fuel. Continue to make hyperjumps until you reach system Navajo.]]
     message7 = [[Excellent. You have learned how to make hyperspace jumps and explore the galaxy. You may continue jumping around if you wish. Once you're ready to move on, land on either Rin in the Navajo system, or Paul 2 in the Mohawk system. As a final tip, you can hold down %s while clicking on the galaxy map to specify a manual path for the autonav.

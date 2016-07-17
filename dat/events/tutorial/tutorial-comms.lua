@@ -40,7 +40,7 @@ function create()
     
     pilot.clear()
     pilot.toggleSpawn(false)
-    commdrone = pilot.add("Civilian Llama", "dummy", pp:pos() + vec2.new(0, 250))[1]
+    commdrone = pilot.add("Independent Traders Whale", "dummy", pp:pos() + vec2.new(0, 250))[1]
     commdrone:setVisplayer()
     
     player.pilot():setNoLand()
@@ -61,7 +61,7 @@ function haildrone()
 
     tk.msg(title1, message3)
     tk.msg(title1, message4)
-    commship = pilot.add("Civilian Gawain", "dummy", planet.get("Paul 2"))[1]
+    commship = pilot.add("Independent Traders Rhino", "dummy", planet.get("Paul 2"))[1]
     commship:setVisplayer()
     commship:hailPlayer()
     hook.timer(4000, "shiptakeoff")

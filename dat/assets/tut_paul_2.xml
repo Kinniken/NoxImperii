@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Paul 2">
+ <pos>
+  <x>-3610.361825</x>
+  <y>-4237.848978</y>
+ </pos>
+ <GFX>
+  <space>M00.png</space>
+  <exterior>ln/forest_temperate2.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Independent Worlds</faction>
+  <value>500.000000</value>
+  <range>0</range>
+ </presence>
+ <general>
+  <class>M</class>
+  <population>100000000</population>  
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+   <missions/>
+   <commodity/>
+  </services>
+  <commodities>
+   <commodity>Food</commodity>
+   <commodity>Ore</commodity>
+   <commodity>Industrial Goods</commodity>
+  </commodities>
+  <description>Paul 2 is a planet of merchants and entrepreneurs. Though the planet doesn't have a global government as such, the population has agreed on a number of general rules that count as law of some sort. It works surprisingly well.</description>
+  <bar>Like many planets in the galaxy nowadays, Paul 2's economy relies heavily on interplanetary trade. The spaceport bar doubles as a trade centre, allowing traders to buy and sell wares without ever leaving the spaceport.</bar>
+  <luadata>{
+  humanFertility = 1,
+  minerals = 0.7,
+  nativeFertility = 0.8,
+  settlements = {
+    humans = {
+      agriculture = 0.7,
+      industry = 1.1,
+      population = 1250000000,
+      technology = 1.1,
+      services = 1.2,
+      military = 1.1,
+      stability = 0.7
+    },
+  },
+}</luadata>
+ </general>
+</asset>

@@ -1,6 +1,7 @@
 -- This is the tutorial: disabling.
 
 include("dat/events/tutorial/tutorial-common.lua")
+include "dat/scripts/general_helper.lua"
 include "fleethelper.lua"
 
 -- localization stuff, translators would work here
@@ -13,11 +14,11 @@ else -- default english
 During the game it is sometimes desirable or necessary to disable another ship, and other ships may end up disabling you as well. This tutorial shows you how disabling works and shows what happens when you yourself are disabled.]]
     message2 = [[The first thing you should know about disabling is that it cannot be done reliably with most weapons in the game. Each weapon deals two kinds of damage on each hit: regular damage and "stress" damage. Stress damage is what causes ships to become disabled.
 
-A target practice drone has been placed in the system near your location. Target it and fire at it using your Ion Cannons (they're secondary weapons by default). Pay close attention to the target's armour bar.]]
+A target practice drone has been placed in the system near your location. Target it and fire at it using your EMP guns (they're secondary weapons by default). Pay close attention to the target's armour bar.]]
     message3 = [[Good. As you will have noticed, the target's armour bar filled up with a different colour while you were shooting at it. This is how stress damage is represented in the game. Stress damage builds up in the armour bar until all remaining armour is filled with stress damage. Stress damage disappears from a ship at a constant rate, unless the ship is actually disabled. This means that to successfully disable a ship, you will need to keep dealing enough stress damage to overcome this falloff.
     
 A ship becomes disabled as soon as the total amount of stress it has accrued equals its remaining hit points. This means that the less armour the ship has, the easier it is to disable. In addition, dealing regular damage to a ship not only removes armour, it also proportionally reduces stress damage! What this means is that it's not possible to first deal stress damage, and then reduce the ship's armour to go below it.]]
-    message4 = [[You can disable enemies, but of course enemies can do the same to you. In a moment, some pirates will attack you with Ion Cannons. For the purpose of this tutorial you will not be able to fight back, but don't worry. You can't die from this attack.
+    message4 = [[You can disable enemies, but of course enemies can do the same to you. In a moment, some pirates will attack you with EMP guns. For the purpose of this tutorial you will not be able to fight back, but don't worry. You can't die from this attack.
 
 Close this message and observe.]]
     message5 = [[As you just saw, time compression automatically kicks in when you are disabled. The reason for this is simple: disabled ships don't stay disabled forever. Ships will eventually repair themselves and become mobile once again. When this happens to you, the player, time compression makes sure you don't have to wait too long. Of course, you can still be destroyed and boarded in the meantime!]]
@@ -37,12 +38,9 @@ function create()
 
     pp = player.pilot()
     pp:setPos(vec2.new(0, 0))
-    player.swapShip("Lancelot", "Lancelot", "Paul 2", true, true)
+    player.swapShip("Shark", "Shark", "Paul 2", true, true)
     pp:rmOutfit("all")
-    pp:addOutfit("Milspec Orion 2301 Core System", 1, true)
-    pp:addOutfit("Tricon Naga Mk3 Engine", 1, true)
-    pp:addOutfit("Schafer & Kane Light Combat Plating", 1, true)
-    pp:addOutfit("Ion Cannon", 2)
+    pp:addOutfit("Light EMP Gun", 2)
     pp:setEnergy(100)
     pp:setHealth(100, 100)
     pp:setDir(90)
@@ -58,7 +56,7 @@ end
 
 -- Hooked function, initiates drone target practice.
 function dummypractice()
-    drone = pilot.add("FLF Vendetta", "dummy", player.pilot():pos() + vec2.new(200, 0))[1]
+    drone = pilot.add("Independent Worlds Shark", "dummy", player.pilot():pos() + vec2.new(200, 0))[1]
     drone:rename("Target drone")
     drone:rmOutfit("all")
     drone:addOutfit("Shield Nullifier", 1)
@@ -94,13 +92,13 @@ function getdisabled()
     tk.msg(title1, message4)
     drone:rm()
     pp:control()
-    pirates = addRawShips( "Pirate Vendetta", G.PIRATES, pp:pos() + vec2.new(1000, 0), G.PIRATES, 2 )
+    pirates = addRawShips( "Pirate Vendetta", "pirate", pp:pos() + vec2.new(1000, 0), G.PIRATES, 2 )
     pirates[1]:rmOutfit("all")
     pirates[1]:addOutfit("Laser Cannon MK2", 2)
-    pirates[1]:addOutfit("Ion Cannon", 2)
+    pirates[1]:addOutfit("Light EMP Gun", 2)
     pirates[2]:rmOutfit("all")
     pirates[2]:addOutfit("Laser Cannon MK2", 2)
-    pirates[2]:addOutfit("Ion Cannon", 2)
+    pirates[2]:addOutfit("Light EMP Gun", 2)
     pirates[1]:control()
     pirates[2]:control()
     pirates[1]:attack(pp)

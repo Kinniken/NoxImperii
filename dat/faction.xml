@@ -28,6 +28,7 @@
   <player>3</player>
   <spawn>independent_trader</spawn>
   <standing>independent_trader</standing>
+  <invisible />
   <allies>
     <ally>Independent Worlds</ally>
   </allies>
@@ -43,6 +44,7 @@
   <colour>grey50</colour>
   <spawn>natives</spawn>
   <standing>natives</standing>
+  <invisible />
   <allies>
   </allies>
   <enemies>
@@ -59,6 +61,7 @@
   <player>3</player>
   <spawn>imperial_trader</spawn>
   <standing>imperial_trader</standing>
+  <invisible />
   <equip>empire</equip>
   <allies>
     <ally>Empire of Terra</ally>
@@ -77,6 +80,7 @@
   <player>0</player>
   <spawn>ardar_trader</spawn>
   <standing>ardar_trader</standing>
+  <invisible />
   <equip>roidhunate</equip>
   <allies>
     <ally>Roidhunate of Ardarshir</ally>
@@ -95,6 +99,7 @@
   <player>3</player>
   <spawn>betelgian_trader</spawn>
   <standing>betelgian_trader</standing>
+  <invisible />
   <equip>betelgeuse</equip>
   <allies>
     <ally>Oligarchy of Betelgeuse</ally>
@@ -156,7 +161,8 @@
  </faction>
 
  <faction name="Empire of Terra Strike Forces">
-  <known/>
+  <display>Empire of Terra</display>
+  <invisible />
   <logo>empire</logo>
   <colour>Yellow</colour>
   <player>5</player>
@@ -197,7 +203,8 @@
  </faction>
 
  <faction name="Roidhunate of Ardarshir Strike Forces">
-  <known/>
+  <display>Roidhunate of Ardarshir</display>
+  <invisible />
   <logo>roidhunate</logo>
   <colour>green</colour>
   <player>0</player>

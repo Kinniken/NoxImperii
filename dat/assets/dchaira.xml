@@ -9,7 +9,7 @@
   <exterior>mining2.png</exterior>
  </GFX>
  <general>
-  <class>Asteroidal</class>
+  <class>Asteroid Moon</class>
   <population>0</population>
   <hide>0.000000</hide>
   <services>

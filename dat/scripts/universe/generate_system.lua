@@ -84,8 +84,21 @@ function handleNames(star,nameTakenSystem,nameTakenPlanet)
 				local id=1
 
 				while (id<=#alphabet and not planet.name) do
-					if not nameTakenPlanet(planet.planet.name..alphabet:sub(id, id)) then
-						planet.name=planet.planet.name..alphabet:sub(id, id)
+					local name=planet.planet.name..alphabet:sub(id, id)
+					local taken=false
+					--outside system
+					if nameTakenPlanet(name) then
+						taken=true
+					end
+					--in-system
+					for k2,v in pairs(star.planets) do
+						if v.name==name then
+							taken=true
+						end
+					end
+
+					if not taken then
+						planet.name=name
 					end
 					id=id+1
 				end
@@ -246,6 +259,14 @@ end
 						moon[randomAttribute]=gh.randomInRange(moon.template[randomAttribute])
 					else
 						moon[randomAttribute]=0
+					end
+				end
+
+				for k,randomAttribute in pairs(planetLuaRandomAttributes) do
+					if (moon.template[randomAttribute]~=nil) then
+						moon.lua[randomAttribute]=gh.randomInRange(moon.template[randomAttribute])
+					else
+						moon.lua[randomAttribute]=0
 					end
 				end
 

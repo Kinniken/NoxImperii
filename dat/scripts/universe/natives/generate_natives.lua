@@ -62,3 +62,5 @@ natives_generator.noNatives={}
 natives_generator.warmTerranNatives={common.leonids,common.otters,common.avians,common.simians,common.octopuses,common.crabs,rare.symbionts,rare.hives,common.spiders}
 natives_generator.temperateTerranNatives={common.leonids,common.otters,common.bovines,common.avians,common.simians,common.carnivorousHumanoids,common.octopuses,common.crabs,rare.symbionts,rare.hives,common.spiders}
 natives_generator.coldTerranNatives={common.hibernatingReptiles,common.beavers,common.burrowers,common.crabs}
+
+natives_generator.lavaOasisNatives={rare.lavacrabs,common.lavaOasisHunters}

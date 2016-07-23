@@ -22,10 +22,12 @@ text = {}   --mission text
 
 finishedtitle = "One more entry added!"
 finishedtxt = [[You follow the usual survey procedure, scanning the world from orbit and taking samples. You feed the results to the survey computer and after a few seconds its preliminary analysis appears:
-Distance from Sol: ${rewardDistance} cr
+World class (${worldClass}): ${rewardWorldClass}
 Presence of native sapients: ${rewardNatives} cr
 Fertility for humans: ${rewardFertility} cr
 Mineral riches: ${rewardMinerals} cr
+
+Distance from Sol: x${rewardDistance}
 
 Grand total: ${rewardTotal} cr
 

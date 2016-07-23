@@ -557,7 +557,7 @@ all.spiders={
 	end,
 	getDesc=function(planet)
 		local desc= "The arachnid "..planet.lua.natives.name.." are fearsome looking eight-limbed carnivores, descended from cunning hunters similar to earth spiders - only a meter wide and much, much smarter. These creatures out of a nightmare have reached the early stages of metallic tool making; their civilization lacks cities due to their intensely solitary natures, and they do not have a human-like drive to expand. "
-		
+
 		return desc
 	end,
 	specialities={}
@@ -583,6 +583,64 @@ all.spiders.specialities[#all.spiders.specialities+1]={
 		return "Their diet of liquefied insects might seem repelling, but over centuries they have turned it into an art form. What terran aristocrat breed on a diet of live oysters could resist such a novelty as eating #planetname#'s shimmering insects alive - with a straw?"
 	end
 }
+
+
+all.lavaOasisHunters={
+	weight=10,
+	applyOnPlanet=function(planet)
+
+		planet.lua.natives=natives_class.createNew(natives_generator.genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({100000,500000}),planet:areNativeCivilized())
+
+		if (not planet.lua.natives.civilized) then
+			natives_generator.setNativeDemands(planet,0.5,1,0,1,1)
+		else
+			natives_generator.generateNativeCivilizedData(planet,0.3,1,0.3,1,1)
+		end
+	end,
+	getDesc=function(planet)
+		local desc= "The "..planet.lua.natives.name.." evolved from pack hunters, tough quadrupeds able to brave the terrible cold of the deserts between volcanic valleys in order to hunt from oasis to oasis. For millennia they remained at the edge of real tool use, handicapped by their constant nomadism; "
+
+		return desc
+	end,
+	specialities={}
+}
+all.lavaOasisHunters.specialities[#all.lavaOasisHunters.specialities+1]={
+	weight=10,
+	weightValidity=function(planet)
+		return (not planet.lua.natives.civilized)
+	end,
+	applyOnPlanet=function(planet)
+		planet.lua.natives:addGoodSupply(C.NATIVE_WEAPONS,gh.populationScore(planet.lua.natives.population)*5,1)
+	end,
+	getDesc=function(planet)
+		return "on some parts of #moonname# they have finally started to settle and have developed metallurgy using lava itself as a heat source, which they mainly use to produce fearsome-looking blades."
+	end
+}
+all.lavaOasisHunters.specialities[#all.lavaOasisHunters.specialities+1]={
+	weight=10,
+	weightValidity=function(planet)
+		return (not planet.lua.natives.civilized)
+	end,
+	applyOnPlanet=function(planet)
+		planet.lua.natives:addGoodSupply(C.EXOTIC_FOOD,gh.populationScore(planet.lua.natives.population)*5,0.5)
+	end,
+	getDesc=function(planet)
+		return "they have only recently developed a kind of hybrid of agriculture and ranching, carefully tendering to the biospheres of oasis under their controls. Many of the animals they keep are extremely appealing to human taste."
+	end
+}
+all.lavaOasisHunters.specialities[#all.lavaOasisHunters.specialities+1]={
+	weight=10,
+	weightValidity=function(planet)
+		return (planet.lua.natives.civilized)
+	end,
+	applyOnPlanet=function(planet)
+		planet.lua.natives:addGoodSupply(C.PRIMITIVE_INDUSTRIAL,gh.populationScore(planet.lua.natives.population)*50,0.5)
+	end,
+	getDesc=function(planet)
+		return "they have made rapid progress toward industrialisation since contact was made with more advanced species, using #moonname#'s volcanic energy to produce cheap industrial goods."
+	end
+}
+
 
 --copying the keys to an id value for future reference
 for k,v in pairs(all) do

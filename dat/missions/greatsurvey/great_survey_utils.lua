@@ -5,13 +5,39 @@ include "dat/scripts/general_helper.lua"
 include('universe/objects/class_planets.lua')
 include "universe/live/live_universe.lua"
 
+rewardsClass={["Asteroid Moon"]=100,
+["Silicate Moon"]=500,
+["Hot Telluric"]=1000,
+["Glasshouse"]=1500,
+["Hot Earth-like"]=1500,
+["Warm Earth-like"]=3000,
+["Earth-like"]=5000,
+["Cold Earth-like"]=3000,
+["Cold Telluric"]=1500,
+["Hot Jupiter"]=1000,
+["Gas Giant"]=1000,
+["Volcanic Moon"]=500,
+["Rocky Moon"]=500,
+["Ice Moon"]=1000,
+["Methane Moon"]=500,
+["Volcanic Oasis Moon"]=3000}
+
+
+
 function computePayement(surveyedPlanet)
 
    local reward={};
 
    local lx,ly=surveyedPlanet.c:system():coords()
-   reward.rewardDistance=(math.floor(math.max(0,(gh.calculateDistance({x=0,y=0},{x=lx,y=ly})-600)*50)))
-   reward.rewardDistance=math.min(reward.rewardDistance,40000)
+
+   reward.rewardWorldClass=rewardsClass[surveyedPlanet.c:class()]
+
+   if (reward.rewardWorldClass==nil) then
+      print("No reward for world class: "..surveyedPlanet.c:class())
+      reward.rewardWorldClass=0
+   end
+
+   reward.worldClass=surveyedPlanet.c:class()
 
    reward.rewardNatives=0
 
@@ -24,18 +50,27 @@ function computePayement(surveyedPlanet)
    end
 
    if (surveyedPlanet.lua.humanFertility>0.7) then
-      reward.rewardFertility=math.floor(surveyedPlanet.lua.humanFertility*10000)
+      reward.rewardFertility=math.floor(surveyedPlanet.lua.humanFertility*1000)
    else
       reward.rewardFertility=0
    end
 
    if (surveyedPlanet.lua.minerals>0.5) then
-      reward.rewardMinerals=math.floor(surveyedPlanet.lua.minerals*10000)
+      reward.rewardMinerals=math.floor(surveyedPlanet.lua.minerals*1000)
    else
       reward.rewardMinerals=0
    end
 
-   reward.rewardTotal=reward.rewardDistance+reward.rewardNatives+reward.rewardFertility+reward.rewardMinerals
+   distance=(math.floor(math.max(0,(gh.calculateDistance({x=0,y=0},{x=lx,y=ly})-1000))))
+   distance=math.min(distance,800)
+
+   reward.rewardDistance=1+(distance/800)*3
+
+   reward.rewardDistance=math.floor(reward.rewardDistance*10)/10
+
+   reward.rewardTotal=reward.rewardDistance*(reward.rewardWorldClass+reward.rewardNatives+reward.rewardFertility+reward.rewardMinerals)
+
+   reward.rewardTotal=math.floor(reward.rewardTotal)
 
    return reward
 

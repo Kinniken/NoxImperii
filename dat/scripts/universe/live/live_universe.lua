@@ -1,6 +1,7 @@
 include('dat/scripts/general_helper.lua')
 include('universe/objects/class_planets.lua')
 include('universe/live/live_desc.lua')
+include('universe/live/live_info.lua')
 
 --[[
 Main class for all the dynamic stuff happening on planets (random or not).
@@ -127,36 +128,8 @@ function initStatusVar()
 		var.push("universe_barbarian_activity_min_"..v.key,0.4)
 		var.push("universe_barbarian_activity_max_"..v.key,0.6)
 	end
-end
 
-function updateUniverseDesc()
-	local desc=[[The Empire is weak - damaged by corruption, hounded by barbarians, locked in a deadly rivalry with the Roidhunate.
-
-	Current Emperor: His Imperial Majesty, High Emperor ]]..var.peek("universe_emperor")..[[
-
-	Current stability of the Imperial Sectors:
-
-	]]
-
-	for _,v in ipairs(imperial_sectors) do
-		local stability=var.peek("universe_stability_"..v.key)
-		desc=desc..[[	]]..v.name..": "..gh.floorTo(100*stability)..'%\n'
-	end
-
-	desc=desc..[[
-
-	Beyond the Empire's borders, barbarians are rising to raid civilized worlds.
-
-	Current barbarian activity:
-
-	]]
-
-	for _,v in ipairs(imperial_barbarian_zones_array) do
-		local activity=var.peek("universe_barbarian_activity_"..v.key)
-		desc=desc..[[	]]..v.name..": "..gh.floorTo(100*activity)..'%\n'
-	end
-
-	var.push("universe_status",desc)
+	var.push("universe_balanceofpower",0)
 end
 
 function getSectorStability(sectorName)

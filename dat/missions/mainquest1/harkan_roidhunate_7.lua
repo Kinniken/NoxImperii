@@ -228,6 +228,12 @@ function land3()
 
 		var.push("harkan_roidhunate_win",true)
 
+		local bop=var.peek("universe_balanceofpower")
+
+		bop=bop-100
+
+		var.push("universe_balanceofpower",bop)
+
 		hook.rm(landhook)
 		misn.finish(true)
     end

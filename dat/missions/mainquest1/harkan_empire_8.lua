@@ -213,6 +213,16 @@ function land3()
 
       	var.push("harkan_empire_win",true)
 
+	    local bop=var.peek("universe_balanceofpower")
+
+		if bop==nil then
+			bop=0
+		end
+
+		bop=bop+100
+
+		var.push("universe_balanceofpower",bop)
+
       	hook.rm(landhook)
 		misn.finish(true)
     end

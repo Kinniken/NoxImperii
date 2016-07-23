@@ -1,4 +1,3 @@
-
 include "dat/scripts/general_helper.lua"
 include "dat/missions/supportfiles/common.lua"
 
@@ -6,7 +5,7 @@ title = {}  --stage titles
 text = {}   --mission text
 
 title[1] = "Incoming message"
-text[1] = [[As you enter the system, your ship automatically connects to the Imperial communication network. Along with the usual automated communications, a personal message flashes on your command center. "Pierre Beauval...", you mutter as you read the sender's identity. A cadet a year senior to you in navy school, brash and confidant, roguish but determined to shine in the Navy. He had graduated a year before and been deployed in some frontier world, you remember.
+text[1] = [[As you enter the system, your ship automatically connects to the Imperial communication network. Along with the usual automated communications, a personal message flashes on your command centre. "Pierre Beauval...", you mutter as you read the sender's identity. A cadet a year senior to you in navy school, brash and confidant, roguish but determined to shine in the Navy. He had graduated a year before and been deployed in some frontier world, you remember.
 
 "Greetings, ${playerName}. ", the message starts, after decryption with your standard key. "I heard about that incident with Lady Admiral Junior. Tough luck you had to get caught. Your father must have been livid. He seemed the kind. Also heard you have a ship of your own now. Life of wandering captain for you, eh? I know you wanted to be Navy, but to be blunt I think this will suit you better anyway. Have fun. Beauval."
 
@@ -48,32 +47,36 @@ function create ()
 
 	misn.accept()
 
+	hook.timer(3000, "displayMessage")
+end
+
+function displayMessage()
 	local stringData=getStringData()
 
-	   tk.msg( gh.format(title[1],stringData), gh.format(text[1],stringData) )
+	tk.msg( gh.format(title[1],stringData), gh.format(text[1],stringData) )
 
-	   landmarker = misn.markerAdd( planet.get("Harkan"):system(), "plot" )
+	landmarker = misn.markerAdd( planet.get("Harkan"):system(), "plot" )
 
-	  -- mission details
-	  misn.setTitle( misn_title )
-	  misn.setDesc( misn_desc )
+	-- mission details
+	misn.setTitle( misn_title )
+	misn.setDesc( misn_desc )
 
-	  osd_msg[1] = gh.format(osd_msg[1],stringData)
-	  misn.osdCreate(gh.format(misn_title,stringData), osd_msg)
+	osd_msg[1] = gh.format(osd_msg[1],stringData)
+	misn.osdCreate(gh.format(misn_title,stringData), osd_msg)
 
-	  -- hooks
-	  landhook = hook.land ("land")
+	-- hooks
+	landhook = hook.land ("land")
 end
 
 function land ()
 	local stringData=getStringData()
 
-   if planet.cur() == planet.get("Harkan") then
-   	tk.msg( gh.format(title[2],stringData), gh.format(text[2],stringData) )
+	if planet.cur() == planet.get("Harkan") then
+	tk.msg( gh.format(title[2],stringData), gh.format(text[2],stringData) )
 
-      hook.rm(landhook)
-      misn.finish( true )
-   end
+	hook.rm(landhook)
+	misn.finish( true )
+	end
 end
 
 function abort()

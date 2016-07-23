@@ -3,13 +3,15 @@
    include "jumpdist.lua"
 
 -- Gets a planet of a given faction
-function get_faction_planet( around_sys,factionName,minDist,maxDist)
+function get_faction_planet( around_sys,factionName,minDist,maxDist,validator)
    local planets = {}
     getsysatdistance(around_sys, minDist,maxDist,
         function(s)
             for i, v in ipairs(s:planets()) do
                 if v:faction() == faction.get(factionName) then
-                    planets[#planets + 1] = {v, s}
+                  if validator==nil or validator(v) then
+                      planets[#planets + 1] = {v, s}
+                  end
                 end
            end
            return true

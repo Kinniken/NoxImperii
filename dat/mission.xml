@@ -154,6 +154,43 @@
    <faction>Empire of Terra</faction>
   </avail>
  </mission>
+
+ <mission name="Intro 1">
+  <lua>introquest/intro_1</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>5</priority>
+   <chance>100</chance>
+   <location>Space</location>
+  </avail>
+ </mission>
+  <mission name="Intro 2">
+  <lua>introquest/intro_2</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>5</priority>
+   <chance>100</chance>
+   <done>Intro 1</done>
+   <location>Land</location>
+  </avail>
+ </mission>
+   <mission name="Intro 3">
+  <lua>introquest/intro_3</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>5</priority>
+   <chance>100</chance>
+   <done>Intro 2</done>
+   <location>Land</location>
+  </avail>
+ </mission>
+
  <mission name="Harkan 1">
   <lua>mainquest1/harkan_1</lua>
   <flags>
@@ -162,6 +199,7 @@
   <avail>
    <priority>5</priority>
    <chance>100</chance>
+   <done>Intro 3</done>
    <location>Space</location>
   </avail>
  </mission>

@@ -130,42 +130,42 @@
 
 <!-- Imperial Traders -->
  <fleet name="Imperial Traders Schroedinger">
-  <ai>trader</ai>
+  <ai>empire_traders</ai>
   <faction>Imperial Traders</faction>
   <pilots>
    <pilot name="Imperial Schroedinger" ship="Schroedinger"></pilot>
   </pilots>
  </fleet> 
  <fleet name="Imperial Traders Quicksilver">
-  <ai>trader</ai>
+  <ai>empire_traders</ai>
   <faction>Imperial Traders</faction>
   <pilots>
    <pilot name="Imperial Quicksilver" ship="Quicksilver"></pilot>
   </pilots>
  </fleet>
  <fleet name="Imperial Traders Fish Bone">
-  <ai>trader</ai>
+  <ai>empire_traders</ai>
   <faction>Imperial Traders</faction>
   <pilots>
    <pilot name="Imperial Fish Bone" ship="Fish Bone"></pilot>
   </pilots>
  </fleet>
  <fleet name="Imperial Traders Zheng He">
-  <ai>trader</ai>
+  <ai>empire_traders</ai>
   <faction>Imperial Traders</faction>
   <pilots>
    <pilot name="Imperial Zheng He" ship="Zheng He"></pilot>
   </pilots>
  </fleet>
  <fleet name="Imperial Traders Sunflower">
-  <ai>trader</ai>
+  <ai>empire_traders</ai>
   <faction>Imperial Traders</faction>
   <pilots>
    <pilot name="Imperial Sunflower" ship="Sunflower"></pilot>
   </pilots>
  </fleet>
  <fleet name="Imperial Traders Argosy">
-  <ai>trader</ai>
+  <ai>empire_traders</ai>
   <faction>Imperial Traders</faction>
   <pilots>
    <pilot name="Imperial Argosy" ship="Argosy"></pilot>
@@ -175,35 +175,35 @@
  
  <!-- Ardar Traders --> 
  <fleet name="Ardar Traders Endeavour">
-  <ai>trader</ai>
+  <ai>roidhunate_trader</ai>
   <faction>Ardar Traders</faction>
   <pilots>
    <pilot name="Ardar Endeavour" ship="Endeavour"></pilot>
   </pilots>
  </fleet>
  <fleet name="Ardar Traders Fish Bone">
-  <ai>trader</ai>
+  <ai>roidhunate_trader</ai>
   <faction>Ardar Traders</faction>
   <pilots>
    <pilot name="Ardar Fish Bone" ship="Fish Bone"></pilot>
   </pilots>
  </fleet>
  <fleet name="Ardar Traders Meryoch">
-  <ai>trader</ai>
+  <ai>roidhunate_trader</ai>
   <faction>Ardar Traders</faction>
   <pilots>
    <pilot name="Ardar Meryoch" ship="Meryoch"></pilot>
   </pilots>
  </fleet>
  <fleet name="Ardar Traders Rioloch">
-  <ai>trader</ai>
+  <ai>roidhunate_trader</ai>
   <faction>Ardar Traders</faction>
   <pilots>
    <pilot name="Ardar Rioloch" ship="Rioloch"></pilot>
   </pilots>
  </fleet>
  <fleet name="Ardar Traders Geldoch">
-  <ai>trader</ai>
+  <ai>roidhunate_trader</ai>
   <faction>Ardar Traders</faction>
   <pilots>
    <pilot name="Ardar Geldoch" ship="Geldoch"></pilot>
@@ -213,28 +213,28 @@
  
 <!-- Betelgian Traders -->
  <fleet name="Betelgian Traders Pelegrina">
-  <ai>trader</ai>
+  <ai>betelgeuse_trader</ai>
   <faction>Betelgian Traders</faction>
   <pilots>
    <pilot name="Betelgian Pelegrina" ship="Pelegrina"></pilot>
   </pilots>
  </fleet>
  <fleet name="Betelgian Traders Carvela">
-  <ai>trader</ai>
+  <ai>betelgeuse_trader</ai>
   <faction>Betelgian Traders</faction>
   <pilots>
    <pilot name="Betelgian Carvela" ship="Carvela"></pilot>
   </pilots>
  </fleet>
  <fleet name="Betelgian Traders Veniera">
-  <ai>trader</ai>
+  <ai>betelgeuse_trader</ai>
   <faction>Betelgian Traders</faction>
   <pilots>
    <pilot name="Betelgian Veniera" ship="Veniera"></pilot>
   </pilots>
  </fleet>
  <fleet name="Betelgian Traders Impresa">
-  <ai>trader</ai>
+  <ai>betelgeuse_trader</ai>
   <faction>Betelgian Traders</faction>
   <pilots>
    <pilot name="Betelgian Impresa" ship="Impresa"></pilot>
@@ -404,35 +404,35 @@
 <!-- Barbarians -->
    
  <fleet name="Barbarian Raider">
-  <ai>pirate</ai>
+  <ai>barbarians</ai>
   <faction>Barbarians</faction>
   <pilots>
    <pilot name="Barbarian Raider" ship="Barbarian Raider"></pilot>
   </pilots>
  </fleet>
   <fleet name="Barbarian Looter">
-  <ai>pirate</ai>
+  <ai>barbarians</ai>
   <faction>Barbarians</faction>
   <pilots>
    <pilot name="Barbarian Looter" ship="Barbarian Looter"></pilot>
   </pilots>
  </fleet>
  <fleet name="Barbarian Slaver">
-  <ai>pirate</ai>
+  <ai>barbarians</ai>
   <faction>Barbarians</faction>
   <pilots>
    <pilot name="Barbarian Slaver" ship="Barbarian Slaver"></pilot>
   </pilots>
  </fleet>
  <fleet name="Barbarian Vendetta">
-  <ai>pirate</ai>
+  <ai>barbarians</ai>
   <faction>Barbarians</faction>
   <pilots>
    <pilot name="Barbarian Vendetta" ship="Vendetta"></pilot>
   </pilots>
  </fleet>
  <fleet name="Barbarian Raptor">
-  <ai>pirate</ai>
+  <ai>barbarians</ai>
   <faction>Barbarians</faction>
   <pilots>
    <pilot name="Barbarian Raptor" ship="Raptor"></pilot>
@@ -441,28 +441,28 @@
  
  <!-- Kingdom of Ixum -->
  <fleet name="Royal Ixum Meteor">
-  <ai>empire</ai>
+  <ai>ixum_kingdom</ai>
   <faction>Kingdom of Ixum</faction>
   <pilots>
    <pilot name="Royal Ixum Tunguska" ship="Royal Ixum Tunguska"></pilot>
   </pilots>
  </fleet>
  <fleet name="Royal Ixum Comet">
-  <ai>empire</ai>
+  <ai>ixum_kingdom</ai>
   <faction>Kingdom of Ixum</faction>
   <pilots>
    <pilot name="Royal Ixum Halley" ship="Royal Ixum Halley"></pilot>
   </pilots>
  </fleet>
  <fleet name="Royal Ixum Continent">
-  <ai>empire</ai>
+  <ai>ixum_kingdom</ai>
   <faction>Kingdom of Ixum</faction>
   <pilots>
    <pilot name="Royal Ixum Asieneuve" ship="Royal Ixum Asieneuve"></pilot>
   </pilots>
  </fleet>
   <fleet name="Royal Ixum Planet">
-  <ai>empire</ai>
+  <ai>ixum_kingdom</ai>
   <faction>Kingdom of Ixum</faction>
   <pilots>
    <pilot name="Royal Ixum Jupiter" ship="Royal Ixum Jupiter"></pilot>
@@ -471,28 +471,28 @@
  
  <!-- Holy Flame of Ixum -->
  <fleet name="Holy Flame Meteor">
-  <ai>empire</ai>
+  <ai>holyflame</ai>
   <faction>Holy Flame of Ixum</faction>
   <pilots>
    <pilot name="Holy Flame Roeth" ship="Holy Flame Roeth"></pilot>
   </pilots>
  </fleet>
   <fleet name="Holy Flame Comet">
-  <ai>empire</ai>
+  <ai>holyflame</ai>
   <faction>Holy Flame of Ixum</faction>
   <pilots>
    <pilot name="Holy Flame Vach Rueth" ship="Holy Flame Vach Rueth"></pilot>
   </pilots>
   </fleet>
    <fleet name="Holy Flame Continent">
-  <ai>empire</ai>
+  <ai>holyflame</ai>
   <faction>Holy Flame of Ixum</faction>
   <pilots>
    <pilot name="Holy Flame Brythioch" ship="Holy Flame Brythioch"></pilot>
   </pilots>
  </fleet>
   <fleet name="Holy Flame Planet">
-  <ai>empire</ai>
+  <ai>holyflame</ai>
   <faction>Holy Flame of Ixum</faction>
   <pilots>
    <pilot name="Holy Flame Mowyr" ship="Holy Flame Mowyr"></pilot>

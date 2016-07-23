@@ -1047,7 +1047,7 @@ int conf_saveConfig ( const char* file )
    conf_saveEmptyLine();
 
    /* Fonts. */
-   conf_saveComment("Font sizes (in pixels) for NAEV");
+   conf_saveComment("Font sizes (in pixels) for Nox Imperii");
    conf_saveComment("Warning, setting to other than the default can cause visual glitches!");
    conf_saveComment("Console default: 10");
    conf_saveInt("font_size_console",conf.font_size_console);

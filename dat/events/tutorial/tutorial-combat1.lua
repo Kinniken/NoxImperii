@@ -9,7 +9,7 @@ else -- default english
     title1 = "Tutorial: Basic Combat"
     message1 = [[Welcome to the basic combat tutorial.
 
-Combat is an important aspect of Naev, and you will have to fight off enemies sooner or later, no matter what career you decide to pursue. In this tutorial, you will learn the basic principles of combat.]]
+Combat is an important aspect of Nox Imperii, and you will have to fight off enemies sooner or later, no matter what career you decide to pursue. In this tutorial, you will learn the basic principles of combat.]]
     message2 = [[For this tutorial, you will be flying a Shark fighter. It comes equipped with two advanced laser cannons. You can fire your weapons by pressing %s. Try this now.]]
     message3 = [[You may have noticed that as you fired your weapons, you depleted your energy gauge. Most energy weapons use energy while firing, and when you run out of energy you can no longer use them. Energy recharges automatically over time.
 

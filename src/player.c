@@ -405,7 +405,7 @@ static int player_newMake (void)
 	crew_setCrewPaymentTime( start_date() );
 
 	/* Welcome message - must be before space_init. */
-	player_message( "\egWelcome to "APPNAME"!" );
+	player_message( "\egWelcome to "APPLONGNAME"!" );
 	player_message( "\eg v%s", naev_version(0) );
 
 	/* Try to create the pilot, if fails reask for player name. */

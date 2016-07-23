@@ -68,8 +68,9 @@
 int menu_open = 0; /**< Stores the opened/closed menus. */
 
 
-static glTexture *main_naevLogo = NULL; /**< Naev Logo texture. */
-
+static glTexture *main_noxImperiiLogo = NULL; /**< Nox Imperii Logo texture. */
+static glTexture *main_naevLogo = NULL; /**< Powered by Naev Logo texture. */
+static glTexture *main_hoshikazeLogo = NULL; /**< Hoshikaze Logo texture. */
 
 /*
  * prototypes
@@ -167,8 +168,15 @@ void menu_main (void)
    music_choose("load");
 
    /* Load background and friends. */
+   tex = gl_newImage( GFX_PATH"NoxImperii.png", 0 );
+   main_noxImperiiLogo = tex;
+
    tex = gl_newImage( GFX_PATH"Naev.png", 0 );
    main_naevLogo = tex;
+
+   tex = gl_newImage( GFX_PATH"Hoshikaze.png", 0 );
+   main_hoshikazeLogo = tex;
+
    menu_main_bkg_system();
 
    /* Set dimensions */
@@ -195,7 +203,9 @@ void menu_main (void)
    bwid = window_create( "BG", -1, -1, -1, -1 );
    window_onClose( bwid, menu_main_cleanBG );
    window_setBorder( bwid, 0 );
-   window_addImage( bwid, (SCREEN_W-tex->sw)/2., offset_logo, 0, 0, "imgLogo", tex, 0 );
+   window_addImage( bwid, (SCREEN_W-main_noxImperiiLogo->sw)/2., offset_logo, 0, 0, "imgLogo", main_noxImperiiLogo, 0 );
+   window_addImage( bwid, SCREEN_W-main_naevLogo->sw-30, 30, 0, 0, "imgPoweredLogo", main_naevLogo, 0 );
+   window_addImage( bwid, 30, 30, 0, 0, "imgHoshikazeLogo", main_hoshikazeLogo, 0 );
    window_addText( bwid, 0, 10, SCREEN_W, 30., 1, "txtBG", NULL,
          &cWhite, naev_version(1) );
 
@@ -263,9 +273,9 @@ void menu_main_resize (void)
    window_dimWindow( menu_id, &w, &h );
    window_dimWindow( bg_id, &bgw, &bgh );
 
-   freespace = SCREEN_H - main_naevLogo->sh - h;
+   freespace = SCREEN_H - main_noxImperiiLogo->sh - h;
    if (freespace < 0) {
-      offset_logo = SCREEN_H - main_naevLogo->sh;
+      offset_logo = SCREEN_H - main_noxImperiiLogo->sh;
       offset_wdw  = 0;
    }
    else {
@@ -274,7 +284,13 @@ void menu_main_resize (void)
    }
 
    window_moveWidget( bg_id, "imgLogo",
-         (bgw - main_naevLogo->sw)/2., offset_logo );
+		   (bgw - main_noxImperiiLogo->sw)/2., offset_logo );
+
+   window_moveWidget( bg_id, "imgPoweredLogo",
+		   SCREEN_W-main_naevLogo->sw-30, 30 );
+
+   window_moveWidget( bg_id, "imgHoshikazeLogo",
+   		  30, 30 );
 
    window_dimWidget( bg_id, "txtBG", &tw, &th );
 
@@ -395,10 +411,21 @@ static void menu_main_cleanBG( unsigned int wid, char* str )
     * nor anything of the likes (nor toolkit to stop rendering) while
     * not leaking any texture.
     */
-   if (main_naevLogo != NULL)
-      gl_freeTexture(main_naevLogo);
-   main_naevLogo = NULL;
+   if (main_noxImperiiLogo != NULL)
+      gl_freeTexture(main_noxImperiiLogo);
+   main_noxImperiiLogo = NULL;
    window_modifyImage( wid, "imgLogo", NULL, 0, 0 );
+
+
+   if (main_naevLogo != NULL)
+         gl_freeTexture(main_naevLogo);
+   main_naevLogo = NULL;
+   window_modifyImage( wid, "imgPoweredLogo", NULL, 0, 0 );
+
+   if (main_hoshikazeLogo != NULL)
+		gl_freeTexture(main_hoshikazeLogo);
+   main_hoshikazeLogo = NULL;
+  window_modifyImage( wid, "imgHoshikazeLogo", NULL, 0, 0 );
 }
 
 

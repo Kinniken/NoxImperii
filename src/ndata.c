@@ -160,8 +160,8 @@ static int ndata_prompt( void *data )
 
    ret = SDL_ShowSimpleMessageBox( SDL_MESSAGEBOX_ERROR, "Missing Data",
          "Ndata could not be found. If you have the ndata file, drag\n"
-         "and drop it onto the 'NAEV - INSERT NDATA' window.\n\n"
-         "If you don't have the ndata, download it from naev.org", (SDL_Window*)data );
+         "and drop it onto the 'Nox Imperii - INSERT NDATA' window.\n\n"
+         "If you don't have the ndata, download it from noximperii.com", (SDL_Window*)data );
 
    return ret;
 }
@@ -180,7 +180,7 @@ static int ndata_notfound (void)
    SDL_Surface *sur;
    SDL_RWops *rw;
    npng_t *npng;
-   const char *title = "NAEV - INSERT NDATA";
+   const char *title = "Nox Imperii - INSERT NDATA";
    int found;
 
    /* Make sure it's initialized. */
@@ -206,7 +206,7 @@ static int ndata_notfound (void)
    }
 
    /* Set caption. */
-   SDL_WM_SetCaption( title, "NAEV" );
+   SDL_WM_SetCaption( title, "Nox Imperii" );
 #endif /* SDL_VERSION_ATLEAST(2,0,0) */
 
    /* Create the surface. */
@@ -458,7 +458,7 @@ static int ndata_openFile (void)
       if (!ndata_loadedfile) {
          WARN("Cannot find ndata file!");
          WARN("Please run with ndata path suffix or specify in conf.lua.");
-         WARN("E.g. naev ~/ndata or data = \"~/ndata\"");
+         WARN("E.g. Nox Imperii ~/ndata or data = \"~/ndata\"");
 
          /* Display the not found message. */
          if (!ndata_notfound())
@@ -503,7 +503,7 @@ static void ndata_testVersion (void)
 
    diff = naev_versionCompare( version );
    if (diff != 0) {
-      WARN( "ndata version inconsistancy with this version of Naev!" );
+      WARN( "ndata version inconsistancy with this version of Nox Imperii!" );
       WARN( "Expected ndata version %d.%d.%d got %d.%d.%d.",
             VMAJOR, VMINOR, VREV, version[0], version[1], version[2] );
 
@@ -511,7 +511,7 @@ static void ndata_testVersion (void)
          ERR( "Please get a compatible ndata version!" );
 
       if (ABS(diff) > 1)
-         WARN( "Naev will probably crash now as the versions are probably not compatible." );
+         WARN( "Nox Imperii will probably crash now as the versions are probably not compatible." );
    }
 }
 

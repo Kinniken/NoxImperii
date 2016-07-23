@@ -12,7 +12,7 @@ lang = naev.lang()
 if lang == "es" then
 else -- default english
     menutitle = "Tutorial Menu"
-    menutext = "Welcome to the Naev tutorial menu. Please select a tutorial module from the list below:"
+    menutext = "Welcome to the Nox Imperii tutorial menu. Please select a tutorial module from the list below:"
     
     menuall = "Play All"
 

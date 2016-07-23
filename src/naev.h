@@ -32,7 +32,8 @@
 #include <math.h>
 
 
-#define APPNAME            "Naev" /**< Application name. */
+#define APPNAME            "noximperii" /**< Application name. */
+#define APPLONGNAME        "Nox Imperii" /**< Application long name, for display purposes. */
 
 #define ABS(x)             (((x)<0)?-(x):(x)) /**< Returns absolute value. */
 #define FABS(x)            (((x)<0.)?-(x):(x)) /**< Returns float absolute value. */

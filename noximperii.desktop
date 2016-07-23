@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
-Name=Naev
-GenericName=Naev
+Name=Nox Imperii
+GenericName=Nox Imperii
 Comment=2D action/rpg space trading combat game
-Icon=naev
-Exec=naev
+Icon=noximperii
+Exec=Nox Imperii
 Categories=Game;AdventureGame;
 Terminal=false
 Keywords=2D;action;rpg;space;trading;combat;game;

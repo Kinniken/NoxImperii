@@ -414,7 +414,7 @@ int main( int argc, char** argv )
       home = SDL_getenv("HOME");
       ret = dialogue_YesNo( "Warning", "Your configuration files are in a deprecated location and must be migrated:\n"
             "   \er%s/.naev/\e0\n\n"
-            "The update script can likely be found in your Naev data directory:\n"
+            "The update script can likely be found in your Nox Imperii data directory:\n"
             "   \er%s\e0\n\n"
             "Would you like to run it automatically?", home, path );
 
@@ -443,11 +443,11 @@ int main( int argc, char** argv )
          /* Restart, as the script succeeded. */
          else if (!ret) {
             dialogue_msg( "Update Completed",
-                  "Configuration files were successfully migrated. Naev will now restart." );
+                  "Configuration files were successfully migrated. Nox Imperii will now restart." );
             execv(argv[0], argv);
          }
          else { /* I sincerely hope this else is never hit. */
-            dialogue_alert( "The update script encountered an error. Please exit Naev and move your config and save files manually:\n\n"
+            dialogue_alert( "The update script encountered an error. Please exit Nox Imperii and move your config and save files manually:\n\n"
                   "\er%s/%s\e0 =>\n   \eD%s\e0\n\n"
                   "\er%s/%s\e0 =>\n   \eD%s\e0\n\n"
                   "\er%s/%s\e0 =>\n   \eD%snebula/\e0\n\n",
@@ -1172,12 +1172,12 @@ static void window_caption (void)
    }
 
    /* Set caption. */
-   nsnprintf(buf, PATH_MAX ,APPNAME" - %s", ndata_name());
+   nsnprintf(buf, PATH_MAX ,APPLONGNAME);
 #if SDL_VERSION_ATLEAST(2,0,0)
    SDL_SetWindowTitle( gl_screen.window, buf );
    SDL_SetWindowIcon(  gl_screen.window, naev_icon );
 #else /* SDL_VERSION_ATLEAST(2,0,0) */
-   SDL_WM_SetCaption(buf, APPNAME);
+   SDL_WM_SetCaption(buf, APPLONGNAME);
    SDL_WM_SetIcon( naev_icon, NULL );
 #endif /* SDL_VERSION_ATLEAST(2,0,0) */
 }
@@ -1219,13 +1219,7 @@ char *naev_version( int long_version )
    if (long_version) {
       if (human_version[0] == '\0')
          nsnprintf( human_version, sizeof(human_version),
-               " "APPNAME" v%s%s - %s", short_version,
-#ifdef DEBUGGING
-               " debug",
-#else /* DEBUGGING */
-               "",
-#endif /* DEBUGGING */
-               ndata_name() );
+               " "APPLONGNAME" %s", short_version);
       return human_version;
    }
 
@@ -1439,7 +1433,7 @@ static void debug_sigHandler( int sig, siginfo_t *info, void *unused )
    num      = backtrace(buf, 64);
    symbols  = backtrace_symbols(buf, num);
 
-   DEBUG("Naev received %s!",
+   DEBUG("Nox Imperii received %s!",
          debug_sigCodeToStr(info->si_signo, info->si_code) );
    for (i=0; i<num; i++) {
       if (abfd != NULL)

@@ -10,7 +10,7 @@ else -- default english
     title1 = "Tutorial: Basic Operation"
     message1 = [[Welcome to the basic operation tutorial.
 
-This tutorial will teach you what Naev is about, and show you the elementary controls of your ship.]]
+This tutorial will teach you what Nox Imperii is about, and show you the elementary controls of your ship.]]
     message2 = [[We will start by flying around. Use %s and %s to turn, and %s to accelerate. Try flying around the planet.]]
     message3 = [[Flying is easy, but stopping is another thing. To stop, you will need to thrust in the opposite of the direction you're heading in. To make this task easier, you can use %s to reverse your direction. Once you have turned around completely, thrust to decrease your speed. Try this now.]]
     message4 = [[Well done. For convenience, it's also possible to automatically turn around and stop by pressing %s.

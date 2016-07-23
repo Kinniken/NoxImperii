@@ -1,10 +1,10 @@
 SUBDIRS = tk
 
-bin_PROGRAMS = naev
+bin_PROGRAMS = noximperii
 
-AM_CFLAGS = $(NAEV_CFLAGS)
-naev_LDADD = $(NAEV_LIBS)
-naev_DEPENDENCIES = $(NAEV_DEPENDENCIES)
+AM_CFLAGS = $(NOXIMPERII_CFLAGS)
+noximperii_LDADD = $(NOXIMPERII_LIBS)
+noximperii_DEPENDENCIES = $(NOXIMPERII_DEPENDENCIES)
 
 CODE_SOURCE = \
 	ai.c \
@@ -290,11 +290,11 @@ CODE_SOURCE = \
 
 if HAVE_WINDRES
 WINDOWS_RESOURCE = ../extras/resource.rc
-naev_SOURCES = $(CODE_SOURCE) $(WINDOWS_RESOURCE)
+noximperii_SOURCES = $(CODE_SOURCE) $(WINDOWS_RESOURCE)
 
 .rc.o:
 	@WINDRES@ $< -O coff $@
 else
-naev_SOURCES = $(CODE_SOURCE)
+noximperii_SOURCES = $(CODE_SOURCE)
 endif
 

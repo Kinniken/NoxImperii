@@ -18,13 +18,13 @@ BEGIN
 	BEGIN
 		BLOCK "040004b0"
 		BEGIN
-			VALUE "Comments", "http://naev.org/"
-			VALUE "CompanyName", "Naev Team"
-			VALUE "FileDescription", "Naev: Sea of Darkness"
-			VALUE "InternalName", "naev"
+			VALUE "Comments", "http://noximperii.com/"
+			VALUE "CompanyName", "Nox Imperii Team"
+			VALUE "FileDescription", "Nox Imperii"
+			VALUE "InternalName", "noximperii"
 			VALUE "LegalCopyright", "Copyright (C) 2006-2012"
-			VALUE "OriginalFilename", "naev.exe"
-			VALUE "ProductName", "Naev: Sea of Darkness"
+			VALUE "OriginalFilename", "noximperii.exe"
+			VALUE "ProductName", "Nox Imperii"
 			VALUE "ProductVersion", "0.5.3"
 		END
 	END

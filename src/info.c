@@ -271,7 +271,7 @@ static void info_setGui( unsigned int wid, char* str )
    /* In case there are none. */
    if (guis == NULL) {
       WARN("No GUI available.");
-      dialogue_alert( "There are no GUI available, this means something went wrong somewhere. Inform the Naev maintainer." );
+      dialogue_alert( "There are no GUI available, this means something went wrong somewhere. Inform the Nox Imperii maintainer." );
       return;
    }
 
@@ -1023,7 +1023,7 @@ static void info_openUniverse( unsigned int wid )
    str=var_read_str("universe_status");
 
    window_addText( wid, 40, -60, (w-80), h-110-BUTTON_HEIGHT, 0, "txtStatus",
-         &gl_smallFont, &cBlack, str );
+         &gl_tinyFont, &cBlack, str );
 }
 
 /**

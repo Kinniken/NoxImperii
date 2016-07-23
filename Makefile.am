@@ -8,32 +8,32 @@ SUBDIRS += utils
 endif
 
 appicondir = $(datadir)/pixmaps
-appicon_DATA = extras/logos/naev.png
+appicon_DATA = extras/logos/noximperii.png
 Graphicsdir = $(datadir)/applications
-Graphics_DATA = naev.desktop
+Graphics_DATA = noximperii.desktop
 appdatadir = $(datadir)/appdata
-appdata_DATA = naev.appdata.xml
-dist_pkgdata_DATA = naev-confupdate.sh
+appdata_DATA = noximperii.appdata.xml
+dist_pkgdata_DATA = noximperii-confupdate.sh
 
-dist_man6_MANS = naev.6
+dist_man6_MANS = noximperii.6
 dist_doc_DATA = AUTHORS README TODO LICENSE
 
 DATA_ARCHIVE = ndata.zip
 if HAVE_UTILS
 MKSPR      = utils/mkspr/mkspr$(EXEEXT)
 endif
-NAEV	     = naev$(EXEEXT)
+NOXIMPERII	     = "noximperii"$(EXEEXT)
 
-EXTRA_DIST = LICENSE extras naev.desktop naev.appdata.xml
-CLEANFILES = $(DATA_ARCHIVE) $(NAEV)
+EXTRA_DIST = LICENSE extras noximperii.desktop noximperii.appdata.xml
+CLEANFILES = $(DATA_ARCHIVE) $(NOXIMPERII)
 
 .PHONY: docs utils help install-ndata
 
-all-local: $(NAEV) VERSION
+all-local: $(NOXIMPERII) VERSION
 
-$(NAEV):
-	@echo "  LN    $(NAEV)"
-	$(LN_S) "src/$(NAEV)" "$(NAEV)"
+$(NOXIMPERII):
+	@echo "  LN    $(NOXIMPERII)"
+	$(LN_S) "src/$(NOXIMPERII)" "$(NOXIMPERII)"
 
 VERSION: src/config.h
 	echo $(VERSION) > $@
@@ -47,7 +47,7 @@ $(MKSPR):
 $(DATA_ARCHIVE): VERSION
 	@echo " ZIP   $(DATA_ARCHIVE)"
 	cd "$(top_srcdir)" && \
-    zip -0r "$(abs_top_builddir)/$(DATA_ARCHIVE)" AUTHORS VERSION naev-confupdate.sh dat/
+    zip -0r "$(abs_top_builddir)/$(DATA_ARCHIVE)" AUTHORS VERSION noximperii-confupdate.sh dat/
 else
 utils:
 
@@ -86,7 +86,7 @@ help:
 	@echo "  ndata.zip - creates the ndata file"
 	@echo "       docs - creates the doxygen documentation"
 	@echo "      clean - removes binaries and object files"
-	@echo "    install - installs naev"
+	@echo "    install - installs Nox Imperii"
 	@echo "  uninstall - removes previously installed files"
 	@echo "  dist-gzip - creates a source tarball with gzip compression"
 	@echo " dist-bzip2 - creates a source tarball with bzip2 compression"

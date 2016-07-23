@@ -426,9 +426,9 @@ static void load_menu_load( unsigned int wdw, char *str )
       naev_versionString( version, sizeof(version), ns[pos].version[0],
             ns[pos].version[1], ns[pos].version[2] );
          if (!dialogue_YesNo( "Save game version mismatch",
-                  "Save game '%s' version does not match Naev version:\n"
+                  "Save game '%s' version does not match Nox Imperii version:\n"
                   "   Save version: \er%s\e0\n"
-                  "   Naev version: \eD%s\e0\n"
+                  "   Nox Imperii version: \eD%s\e0\n"
                   "Are you sure you want to load this game? It may lose data.",
             save, version, naev_version(0) ))
             return;
@@ -560,7 +560,7 @@ int load_game( const char* file, int version_diff )
    player_cleanup();
 
    /* Welcome message - must be before space_init. */
-   player_message( "\egWelcome to "APPNAME"!" );
+   player_message( "\egWelcome to "APPLONGNAME"!" );
    player_message( "\eg v%s", naev_version(0) );
 
    /* Now begin to load. */

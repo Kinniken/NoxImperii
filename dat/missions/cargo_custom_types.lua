@@ -46,7 +46,7 @@ cargoCustom.commodities={C.ARMAMENT,C.MODERN_ARMAMENT}
 cargoCustom.misn_title = "Navy shipment to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_title_urgent = "${urgencyAdj} navy transport to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_desc = "The Imperial Navy needs ${quantity} tonnes of ${commodity} shipped to a base on ${targetWorld} in the ${targetSystem} system. The pay isn't great, but the Navy will be grateful."
-cargoCustom.misn_desc_urgent = "The Imperial Navy needs ${quantity} tonnes of ${commodity} shipped to a base on ${targetWorld} in the ${targetSystem} system. It must reach before his party on the ${deadline} (time left: ${timeRemaining}). The pay isn't great, but the Navy will be grateful."
+cargoCustom.misn_desc_urgent = "The Imperial Navy needs ${quantity} tonnes of ${commodity} shipped to a base on ${targetWorld} in the ${targetSystem} system. It must reach before the ${deadline} (time left: ${timeRemaining}). The pay isn't great, but the Navy will be grateful."
 cargoCustom.validStartPlanet=function(self,c_planet)
 		return c_planet:faction()==faction.get(G.EMPIRE)
 	end
@@ -94,7 +94,7 @@ cargoCustom:addFactionReward(G.ROIDHUNATE)
 cargoCustom.misn_title = "Ardar shipment to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_title_urgent = "${urgencyAdj} Ardar transport to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_desc = "An Ardar company needs ${quantity} tonnes of ${commodity} shipped to a client on ${targetWorld} in the ${targetSystem} system."
-cargoCustom.misn_desc_urgent = "An Ardar company needs ${quantity} tonnes of ${commodity} shipped to a client on ${targetWorld} in the ${targetSystem} system. It must reach before his party on the ${deadline} (time left: ${timeRemaining})."
+cargoCustom.misn_desc_urgent = "An Ardar company needs ${quantity} tonnes of ${commodity} shipped to a client on ${targetWorld} in the ${targetSystem} system. It must reach before the ${deadline} (time left: ${timeRemaining})."
 cargoCustom.land_msg={"The Ardars at the spaceport are clearly not used to dealing with independent couriers, an a human one at that. They process the delivery competently, but you can feel lingering unease."}
 cargoCustom.land_msg_late={"The Ardars at the spaceport are clearly not used to dealing with independent couriers, an a human one at that. When they realise that you are late, unease turns to hostility; they pay you ${paymentPartial} of the ${payment} credits promised, scornfully commenting on human unreliability."}
 table.insert(cargo_custom.types,cargoCustom)
@@ -117,7 +117,7 @@ cargoCustom:addFactionReward(G.ROIDHUNATE)
 cargoCustom.misn_title = "Ardar Navy shipment to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_title_urgent = "${urgencyAdj} Ardar Navy transport to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_desc = "The Ardar Navy needs ${quantity} tonnes of ${commodity} shipped to a base on ${targetWorld} in the ${targetSystem} system, and due to a lack of transport ships will even pay independent traders to do it."
-cargoCustom.misn_desc_urgent = "The Ardar Navy needs ${quantity} tonnes of ${commodity} shipped to a base on ${targetWorld} in the ${targetSystem} system, and due to a lack of transport ships will even pay independent traders to do it. It must reach before his party on the ${deadline} (time left: ${timeRemaining})."
+cargoCustom.misn_desc_urgent = "The Ardar Navy needs ${quantity} tonnes of ${commodity} shipped to a base on ${targetWorld} in the ${targetSystem} system, and due to a lack of transport ships will even pay independent traders to do it. It must reach before the ${deadline} (time left: ${timeRemaining})."
 cargoCustom.land_msg={"The Ardar Officer you deliver the cargo to is clearly angry at dealing with an independent contractor, and a human one at that. He proceeds the delivery and your payment well enough though, muttering under his breath about possible spies and saboteurs."}
 cargoCustom.land_msg_late={"The Ardar Officer you deliver the cargo to is clearly angry at dealing with an independent contractor, and a human one at that. When he realises you are late he turns hostile. But rules are rules, and Ardars generally respect them, so he pays you ${paymentPartial} of the ${payment} credits agreed, deducting the late fee without hesitation."}
 table.insert(cargo_custom.types,cargoCustom)
@@ -135,7 +135,7 @@ cargoCustom:addFactionReward(G.BETELGIAN_TRADERS)
 cargoCustom.misn_title = "Betelgian shipment to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_title_urgent = "${urgencyAdj} Betelgian transport to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_desc = "A Betelgian trading house needs ${quantity} tonnes of ${commodity} shipped to its base of ${targetWorld} in the ${targetSystem} system."
-cargoCustom.misn_desc_urgent = "A Betelgian trading house needs ${quantity} tonnes of ${commodity} shipped to its base of ${targetWorld} in the ${targetSystem} system. It must reach before his party on the ${deadline} (time left: ${timeRemaining})."
+cargoCustom.misn_desc_urgent = "A Betelgian trading house needs ${quantity} tonnes of ${commodity} shipped to its base of ${targetWorld} in the ${targetSystem} system. It must reach before the ${deadline} (time left: ${timeRemaining})."
 cargoCustom.land_msg={"As you land in the trading house's private spaceport, its efficient crew members waste no time discharging your cargo. You are paid immediately by a competent-looking minor clerk."}
 cargoCustom.land_msg_late={"As you land in the trading house's private spaceport, its efficient crew members waste no time discharging your cargo. The clerk in charge pays you ${paymentPartial} of the ${payment} credits agreed due to your tardy arrival."}
 cargoCustom.validStartPlanet=function(self,c_planet)
@@ -158,7 +158,7 @@ cargoCustom:addFactionReward(G.BETELGIAN_TRADERS)
 cargoCustom.misn_title = "Betelgian shipment to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_title_urgent = "${urgencyAdj} Betelgian transport to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_desc = "A Betelgian trading house needs ${quantity} tonnes of ${commodity} shipped to its branch on ${targetWorld} in the ${targetSystem} system."
-cargoCustom.misn_desc_urgent = "A Betelgian trading house needs ${quantity} tonnes of ${commodity} shipped to its branch on ${targetWorld} in the ${targetSystem} system. It must reach before his party on the ${deadline} (time left: ${timeRemaining})."
+cargoCustom.misn_desc_urgent = "A Betelgian trading house needs ${quantity} tonnes of ${commodity} shipped to its branch on ${targetWorld} in the ${targetSystem} system. It must reach before the ${deadline} (time left: ${timeRemaining})."
 cargoCustom.land_msg={"The section of ${targetWorld}'s dedicated to the trading house is well-run, and efficient crew members waste no time discharging your cargo. You are paid immediately by a competent-looking minor clerk."}
 cargoCustom.land_msg_late={"The section of ${targetWorld}'s dedicated to the trading house is well-run, and efficient crew members waste no time discharging your cargo. The clerk in charge pays you ${paymentPartial} of the ${payment} credits agreed due to your tardy arrival."}
 cargoCustom.validStartPlanet=function(self,c_planet)
@@ -549,7 +549,7 @@ cargoCustom.osd_title="Ardar Gourmet Food"
 cargoCustom.misn_title = "Festival food delivery to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_title_urgent = "${urgencyAdj} festival food transport to ${targetWorld} (${quantity} tonnes)"
 cargoCustom.misn_desc = "An Ardar noble on ${targetWorld} in the ${targetSystem} system has placed an order for ${quantity} tonnes of gourmet Ardar food from the festival."
-cargoCustom.misn_desc_urgent = "An Ardar noble on ${targetWorld} in the ${targetSystem} system has placed an order for ${quantity} tonnes of gourmet Ardar food from the festival. It must reach before his party on the ${deadline} (time left: ${timeRemaining})."
+cargoCustom.misn_desc_urgent = "An Ardar noble on ${targetWorld} in the ${targetSystem} system has placed an order for ${quantity} tonnes of gourmet Ardar food from the festival. It must reach before the ${deadline} (time left: ${timeRemaining})."
 cargoCustom.land_msg={"The Ardar noble's servants quickly and efficiently unload the crates and ship them to his estate."}
 cargoCustom.land_msg_late={"The Ardar noble's servants quickly and efficiently unload the crates and ship them to his estate. His household head is furious at the delay and pays only ${paymentPartial} of the ${payment} credits agreed."}
 cargoCustom.commodities={C.GOURMET_FOOD}

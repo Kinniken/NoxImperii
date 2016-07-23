@@ -402,7 +402,7 @@ function descModule.moonJovianMethaneDesc(planet)
 
 	--convention: first desc has no criteria, to ensure at least one will be valid
 	descs[#descs+1]={weight=10, desc=
-		"#moonname#’s surface might be over a 100 °C below 0, it still features a rich hydrological cycle. Lakes, clouds, rain, even a small ocean - it's all there, though nothing will ever swim in those methane seas."
+		"#moonname#'s surface might be over a 100 C below 0, it still features a rich hydrological cycle. Lakes, clouds, rain, even a small ocean - it's all there, though nothing will ever swim in those methane seas."
 	}
 
 	descs[#descs+1]={weight=10, desc=

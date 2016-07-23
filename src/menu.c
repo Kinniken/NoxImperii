@@ -190,12 +190,12 @@ void menu_main (void)
    /* Calculate Logo and window offset. */
    freespace = SCREEN_H - tex->sh - h;
    if (freespace < 0) { /* Not enough freespace, this can get ugly. */
-      offset_logo = SCREEN_W - tex->sh;
+      offset_logo = SCREEN_H - tex->sh;
       offset_wdw  = 0;
    }
    /* Otherwise space evenly. */
    else {
-      offset_logo = -freespace/4;
+      offset_logo = -30;
       offset_wdw  = freespace/2;
    }
 

@@ -104,13 +104,12 @@
 #define VERSION_FILE    "VERSION" /**< Version file by default. */
 
 #define NAEV_INIT_DELAY 3000 /**< Minimum amount of time_ms to wait with loading screen */
-static const int BCK_H = 1024;
-static const int BCK_W = 1280;
 static int quit               = 0; /**< For primary loop */
 static unsigned int time_ms   = 0; /**< used to calculate FPS and movement. */
 static char short_version[64]; /**< Contains version. */
 static char human_version[256]; /**< Human readable version. */
 static glTexture *loading     = NULL; /**< Loading screen. */
+static glTexture *loadingLogo     = NULL; /**< Loading screen logo. */
 static char *binary_path      = NULL; /**< argv[0] */
 static SDL_Surface *naev_icon = NULL; /**< Icon. */
 static int fps_skipped        = 0; /**< Skipped last frame? */
@@ -559,24 +558,47 @@ void loadscreen_load (void)
    unsigned int i;
    char file_path[PATH_MAX];
    char **loadscreens;
+   char loadingDir[1024];
    uint32_t nload;
+   char *chosen_background;
 
-   /* Count the loading screens */
-   loadscreens = ndata_list( GFX_PATH"loading/", &nload );
+   double screen_ratio=(double)SCREEN_W/SCREEN_H;
+
+   if (screen_ratio >= 1.77 ) {
+	   if (SCREEN_H>=1440) {
+	   	   snprintf(loadingDir, sizeof loadingDir, "%s%s", GFX_PATH, "loading_2560_1440/");
+	   } else {
+		   snprintf(loadingDir, sizeof loadingDir, "%s%s", GFX_PATH, "loading_1366_768/");
+	   }
+   } else if (screen_ratio >= 1.6 ) {
+	   snprintf(loadingDir, sizeof loadingDir, "%s%s", GFX_PATH, "loading_1680_1050/");
+   } else {
+	   snprintf(loadingDir, sizeof loadingDir, "%s%s", GFX_PATH, "loading_1280_1024/");
+   }
+
+   loadscreens = ndata_list( loadingDir, &nload );
 
    /* Must have loading screens */
    if (nload==0) {
-      WARN("No loading screens found!");
-      loading = NULL;
-      return;
+	   WARN("No loading screens found!");
+	   loading = NULL;
+	   return;
    }
+
+   chosen_background=loadscreens[ RNG_SANE(0,nload-1) ];
+
+   /* Load the logo texture */
+   nsnprintf( file_path, PATH_MAX, GFX_PATH"loading_logo/%s", chosen_background );
+   loadingLogo = gl_newImage( file_path, 0 );
+
+   /* Load the background */
+   nsnprintf( file_path, PATH_MAX, "%s%s", loadingDir, chosen_background );
+   loading = gl_newImage( file_path, 0 );
+
 
    /* Set the zoom. */
    cam_setZoom( conf.zoom_far );
 
-   /* Load the texture */
-   nsnprintf( file_path, PATH_MAX, GFX_PATH"loading/%s", loadscreens[ RNG_SANE(0,nload-1) ] );
-   loading = gl_newImage( file_path, 0 );
 
    /* Create the stars. */
    background_initStars( 0 );
@@ -597,10 +619,7 @@ void loadscreen_load (void)
 void loadscreen_render( double done, const char *msg )
 {
    glColour col;
-   double sw,sh;
-   double bx,by, bw,bh;
    double x,y, w,h, rh;
-   double scale;
    SDL_Event event;
 
    /* Clear background. */
@@ -609,28 +628,6 @@ void loadscreen_render( double done, const char *msg )
    /* Draw stars. */
    background_renderStars( 0. );
 
-   sw=SCREEN_W;
-   sh=SCREEN_H;
-
-   scale=1;
-
-   /*
-    * Dimensions.
-    */
-   /* Image. */
-	if (sw < BCK_W) {
-		scale=sw/BCK_W;
-	}
-
-	if (sh/BCK_H < scale) {
-		scale=sh/BCK_H;
-	}
-
-	bw=BCK_W*scale;
-	bh=BCK_H*scale;
-
-	bx = (sw - bw) / 2.;
-	by = (sh - bh) / 2.;
 
    /* Loading bar. */
    w  = gl_screen.w * 0.4;
@@ -641,7 +638,10 @@ void loadscreen_render( double done, const char *msg )
 
    /* Draw loading screen image. */
    if (loading != NULL)
-      gl_blitScale( loading, bx, by, bw, bh, NULL );
+      gl_blitScale( loading, (SCREEN_W-loading->sw)/2., (SCREEN_H-loading->sh)/2., loading->sw, loading->sh, NULL );
+
+   if (loadingLogo != NULL)
+         gl_blitScale( loadingLogo, SCREEN_W-(SCREEN_W-loading->sw)/2.-loadingLogo->sw-30,  SCREEN_H-loadingLogo->sh-30, loadingLogo->sw, loadingLogo->sh, NULL );
 
    /* Draw progress bar. */
    /* BG. */

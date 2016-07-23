@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Start>
- <name>Long Night</name>
+ <name>The Long Night is falling</name>
  <player>
-  <ship name="El Ego de Deiz">Imperial Halley</ship>
+  <ship name="El Ego de Deiz">Endeavour</ship>
   <credits>30000</credits>
   <system>
-   <name>Sol</name>
-   <x>-8000</x>
-   <y>-17000</y>
+   <name>Surya</name>
+   <x>-700</x>
+   <y>-3200</y>
   </system>
   <event>start_event</event>
  </player>

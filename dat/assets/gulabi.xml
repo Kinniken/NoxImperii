@@ -1,0 +1,26 @@
+<asset name="Gulabi">
+ <pos>
+    <x>-800.000000</x>
+    <y>2767.000000</y>
+ </pos>
+ <GFX>
+  <space>moon-X00.png</space>
+  <exterior>ln/desert3.png</exterior>
+ </GFX>
+ <general>
+  <class>Barren Moon</class>
+  <population>0</population>
+  <services>
+     <land/>
+  </services>
+  <luadata>{
+	humanFertility = 0,
+	minerals = 0,
+	nativeFertility = 0,
+	settlements = { },
+	tags = { },
+	worldHistory = { },
+}</luadata>
+<description>Namaste's only satellite, Gulabi is a bright little moon with an odd pink tint, lightening up the planet's nights. The tides it generates have been known to cause floods on Namaste's shores.</description>
+ </general>
+</asset>

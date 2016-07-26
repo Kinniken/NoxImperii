@@ -46,6 +46,8 @@ function create()
        misn.finish(false)
     end
 
+    cargoType["__save"] = true
+
     cargoTypeId=cargoType.id--to reload it afterwards
 
     -- Calculate the route, distance, jumps and cargo to take

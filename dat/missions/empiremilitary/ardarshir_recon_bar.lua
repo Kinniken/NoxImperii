@@ -21,7 +21,7 @@ misn_desc = "Perform a recon in Ardar systems ${targetSystem1}, ${targetSystem2}
 -- Text if mission from bar
 bar_desc   = "A short, squat humanoid is sitting in a corner of the bar, looking at you very intently."
 bar_accept_title = "Spaceport Bar"
-bar_accept_text  = [[As you look back at him, he gestures in your direction. His face is mostly humanoid, but with a strange rigid skin that looks like leather. His eyes are small and very deep-sited, and his expression is bland.
+bar_accept_text  = [[As you look back at him, he gestures in your direction. His face is mostly humanoid, but with a strange rigid skin that looks like leather. His eyes are small and very deep-seated, and his expression is bland.
 
 "Captain ${playerName}. I heard from you from a good friend. Your services to the Navy in the Fringe have proven valuable." he starts in a deep voice, below that of any human. "I work for the Intelligence Service.". Before you have time to express surprise, you realize he has beamed his credentials to your com device. Either he is the real thing or he is very, very good.
 

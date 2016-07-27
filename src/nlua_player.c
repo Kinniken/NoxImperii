@@ -459,7 +459,7 @@ static int playerL_jumps( lua_State *L )
  */
 static int playerL_fuel( lua_State *L )
 {
-   lua_pushnumber(L,player.p->fuel);
+   lua_pushnumber(L,floor(player.p->fuel));
    lua_pushnumber(L,player.p->fuel_consumption);
    return 2;
 }

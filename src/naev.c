@@ -565,7 +565,7 @@ void loadscreen_load (void)
    double screen_ratio=(double)SCREEN_W/SCREEN_H;
 
    if (screen_ratio >= 1.77 ) {
-	   if (SCREEN_H>=1440) {
+	   if (SCREEN_H<=1366) {
 	   	   snprintf(loadingDir, sizeof loadingDir, "%s%s", GFX_PATH, "loading_2560_1440/");
 	   } else {
 		   snprintf(loadingDir, sizeof loadingDir, "%s%s", GFX_PATH, "loading_1366_768/");
@@ -619,8 +619,9 @@ void loadscreen_load (void)
 void loadscreen_render( double done, const char *msg )
 {
    glColour col;
-   double x,y, w,h, rh;
+   double x,y, w,h, rh, ratio;
    SDL_Event event;
+   double bw,bh;
 
    /* Clear background. */
    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -636,9 +637,31 @@ void loadscreen_render( double done, const char *msg )
    x  = (SCREEN_W-w)/2.;
    y = 50;
 
+   ratio = loading->sw/loading->sh;
+
+   if (SCREEN_W==loading->sw && SCREEN_H==loading->sh) {
+	   bw=SCREEN_W;
+	   bh=SCREEN_H;
+   } else {
+	   if (loading->sw/SCREEN_W > loading->sh/SCREEN_H) {
+		   bw=SCREEN_W;
+		   bh=bw/ratio;
+
+		   //WARN("W-based: SW: %d SH: %d BW: %f BH: %f ratio: %f ",SCREEN_W,SCREEN_H,bw,bh,ratio);
+	   } else {
+		   bh=SCREEN_H;
+		   bw=bh*ratio;
+
+		   //WARN("H-based: SW: %d SH: %d BW: %f BH: %f ratio: %f ",SCREEN_W,SCREEN_H,bw,bh,ratio);
+	   }
+   }
+
+
+
+
    /* Draw loading screen image. */
    if (loading != NULL)
-      gl_blitScale( loading, (SCREEN_W-loading->sw)/2., (SCREEN_H-loading->sh)/2., loading->sw, loading->sh, NULL );
+      gl_blitScale( loading, (SCREEN_W-bw)/2., (SCREEN_H-bh)/2., bw, bh, NULL );
 
    if (loadingLogo != NULL)
          gl_blitScale( loadingLogo, SCREEN_W-(SCREEN_W-loading->sw)/2.-loadingLogo->sw-30,  SCREEN_H-loadingLogo->sh-30, loadingLogo->sw, loadingLogo->sh, NULL );

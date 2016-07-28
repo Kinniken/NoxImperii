@@ -56,6 +56,7 @@ static char* crew_findName( char* nameGenerator );
 static void display_crew(unsigned int wid, char* str);
 static void crew_setCrewActive( unsigned int wid, char* str );
 static void crew_setCrewReserve( unsigned int wid, char* str );
+static void crew_fireCrew( unsigned int wid, char* str );
 static char* crew_getLevelName(int level);
 static int crew_gender( char* genderName );
 static char* crew_getStatusNameColoured(int status);
@@ -71,6 +72,8 @@ static void getCrewEmptyLayers(glTexture*** layers, int* nlayers);
 static ntime_t last_crew_payment = 0;
 
 static lua_State *crew_name_lua = NULL; /** Crew name generators */
+
+static const HiredCrew* selectedCrew = NULL;
 
 #define STATS_DESC_MAX 256 /**< Maximum length for statistics description. */
 
@@ -738,13 +741,17 @@ void crew_open( unsigned int wid ) {
 			"txtCrewZoomDesc", &gl_smallFont, &cBlack,
 			NULL);
 
-	window_addButtonKey( wid, -20-170, 80,
-			150, 40, "btnCrewActivate",
-			"Active Service", crew_setCrewActive, SDLK_a );
+	window_addButtonKey( wid, -20-226, 80,
+			94, 40, "btnCrewActivate",
+			"Active", crew_setCrewActive, SDLK_a );
+
+	window_addButtonKey( wid, -20-113, 80,
+			93, 40, "btnCrewReserve",
+			"Reserve", crew_setCrewReserve, SDLK_r );
 
 	window_addButtonKey( wid, -20, 80,
-			150, 40, "btnCrewReserve",
-			"Make Reserve", crew_setCrewReserve, SDLK_r );
+				93, 40, "btnFireCrew",
+				"Fire", crew_fireCrew, SDLK_f );
 
 	window_setFocus( wid , "iarPositions" );
 }
@@ -796,6 +803,31 @@ static void crew_setCrewReserve( unsigned int wid, char* str ) {
 		pilot_calcStats( player.p );
 
 		crew_generateCrewLists(wid);
+	}
+}
+
+
+/**
+ * @brief fires a crew member
+ */
+static void crew_fireCrew( unsigned int wid, char* str ) {
+	(void)str;
+	int choice;
+
+
+	if (selectedCrew!=NULL) {
+
+		choice=dialogue_YesNo("Fire crew member?","Do you wish to fire %s?",selectedCrew->generatedName);
+
+		if (choice==1) {
+			player_rmCrew(selectedCrew->crew);
+
+			pilot_calcStats( player.p );
+
+			crew_generateCrewLists(wid);
+
+			display_crew(wid,"");
+		}
 	}
 }
 
@@ -880,6 +912,10 @@ static void display_crew(unsigned int wid, char* crewName) {
 			window_enableButton( wid, "btnCrewActivate");
 			window_disableButtonSoft( wid, "btnCrewReserve");
 		}
+		window_enableButton( wid, "btnFireCrew");
+
+		selectedCrew = hiredCrew;
+
 	} else {
 		window_modifyText( wid, "txtPortrait", "" );
 		window_modifyText( wid, "txtCrewZoom", "" );
@@ -894,6 +930,9 @@ static void display_crew(unsigned int wid, char* crewName) {
 
 		window_disableButtonSoft( wid, "btnCrewActivate");
 		window_disableButtonSoft( wid, "btnCrewReserve");
+		window_disableButtonSoft( wid, "btnFireCrew");
+
+		selectedCrew = NULL;
 	}
 }
 

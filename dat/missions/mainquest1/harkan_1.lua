@@ -13,7 +13,9 @@ You're about to dismiss the message as typical Beauval when you have a wild thou
 
 "An other thing - I'm posted on Harkan now, on the Ardar border. Check a map. We could use someone with your piloting skills and no official ties to the Imperial Navy. Be discreet. And bring a bottle of brandy. The navy mess is out of everything drinkable."
 
-Harkan... yes, you've heard of it. A barely-explored planet in the wilderness between the Empire and the Roidhunate, on which the two rivals have gotten embroiled in quarrels between two local sapient species. Typical Beauval to end up there."]]
+Harkan... yes, you've heard of it. A barely-explored planet in the wilderness between the Empire and the Roidhunate, on which the two rivals have gotten embroiled in quarrels between two local sapient species. Typical Beauval to end up there."
+
+]].."\027r[This mission chain requires a decent ship; a Delta or above is recommended.]\0270"
 
 title[2] = "Harkan Outpost"
 text[2] = [[You land at Harkan Outpost, the small military outpost maintained by the Empire on the shore of one of the local ocean. Beauval is waiting for you, proudly wearing a spotless Lieutenant uniform - though with a cap more rakishly angled than regulations permit.

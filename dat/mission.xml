@@ -162,7 +162,7 @@
   </flags>
   <avail>
    <priority>5</priority>
-   <chance>100</chance>
+   <chance>20</chance>
    <location>Space</location>
   </avail>
  </mission>
@@ -198,7 +198,7 @@
   </flags>
   <avail>
    <priority>5</priority>
-   <chance>100</chance>
+   <chance>10</chance>
    <done>Intro 3</done>
    <location>Space</location>
   </avail>

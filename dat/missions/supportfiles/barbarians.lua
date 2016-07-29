@@ -2,7 +2,7 @@
 -- Gets a barbarian planet
 function get_barbarian_planet( sys )
    local planets = {}
-    getsysatdistance(sys, 2,5,
+    getsysatdistance(sys, 2,10,
         function(s)
             for i, v in ipairs(s:planets()) do
                 if v:faction() == faction.get(G.BARBARIANS) then

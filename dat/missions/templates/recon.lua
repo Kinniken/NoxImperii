@@ -74,7 +74,7 @@ function template_create ()
   if (not mission_bar) then--computer
     misn.setDesc(gh.format(misn_desc,stringData))
     target_systems_markers={}
-    for k,v in pairs(target_systems) do
+    for k,v in ipairs(target_systems) do
       target_systems_markers[k]=misn.markerAdd( v, "computer" )
     end
   else
@@ -101,7 +101,7 @@ function template_accept ()
     end
 
     target_systems_markers={}
-    for k,v in pairs(target_systems) do
+    for k,v in ipairs(target_systems) do
       target_systems_markers[k]=misn.markerAdd( v, "low" )
     end
   end
@@ -139,7 +139,7 @@ function sys_enter()
    -- Check to see if reaching target system
    local systems_left=false
    
-   for k,v in pairs(target_systems) do
+   for k,v in ipairs(target_systems) do
     if (v==cur_sys and not target_systems_visited[k]) then
      target_systems_visited[k]=true
      misn.markerRm(target_systems_markers[k])

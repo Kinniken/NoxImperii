@@ -99,7 +99,7 @@ function land ()
 
       misn.cargoJet(carg_id)
 
-      var.push("harkan_5_start_time",time.tonumber(time.get() + time.create( 0,0,1, 0, 0, 0 )))
+      var.push("harkan_5_start_time",time.tonumber(time.get() + time.create( 0,0,15, 0, 0, 0 )))
 
       hook.rm(landhook)
       misn.finish( true )

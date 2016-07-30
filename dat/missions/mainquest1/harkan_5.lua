@@ -8,16 +8,22 @@ misn_title = "Decide Shadowlines' fate"
 misn_reward = "Unknown"
 misn_desc = "Bring Shadowlines to Harkan or betray the Empire and take her to an Ardar world."
 
-
+osd_msg_initial = {}
+osd_msg_initial[1] = "Head back to ${startPlanet} to pick up the alien."
+osd_msg_initial["__save"] = true
 
 -- Messages
 osd_msg = {}
-osd_msg[1] = "Bring back Shadowlines to Harkan [Side with the Empire]"
-osd_msg[2] = "Take Shadowlines to an Ardar world [Side with the Roidhunate]"
+osd_msg[1] = "Chose between:"
+osd_msg[2] = "Bring back Shadowlines to Harkan [Side with the Empire]"
+osd_msg[3] = "Take Shadowlines to an Ardar world [Side with the Roidhunate]"
 osd_msg["__save"] = true
 
 title = {}  --stage titles
 text = {}   --mission text
+
+title_space = "A Message from Fez"
+text_space = [[Your terminal suddenly beeps and a message from the Fez hospital complex is displayed on your comm screen; your passenger is ready to be picked up.]]
 
 title[1] = "${startPlanet} Hospital Complex"
 text[1] = [[You land on ${startPlanet} and head for the hospital complex where the alien is being treated. As you arrive, the head of the avian sophont medical team comes and meet you.
@@ -66,13 +72,41 @@ end
 
 function create ()
 
-	if not (planet.cur()==planet.get("Fez")) then
-		misn.finish(false)
+	if not has_system_faction_planet(system.cur(),G.EMPIRE) then
+		misn.finish()
 	end
+
+	misn.accept()
+
+	hook.timer(3000, "space_start")
+
+end
+
+function space_start()
 
 	start_planet=planet.get("Fez")
 
-	misn.accept()
+   local stringData=getStringData()
+
+   tk.msg( gh.format(title_space,stringData), gh.format(text_space,stringData) )
+
+	-- mission details
+   misn.setTitle( "Pick up the Alien" )
+   misn.setDesc( "Pick up the alien from the Fez hospital." )
+
+   osd_msg_initial = gh.formatAll(osd_msg_initial,stringData)
+   misn.osdCreate(gh.format("Pick up the Alien",stringData), osd_msg_initial)
+
+   landmarker = misn.markerAdd( start_planet:system(), "plot" )
+
+	landhook = hook.land ("land_start")
+end
+
+function land_start ()
+
+	if not (planet.cur()==start_planet) then
+		misn.finish(false)
+	end
 
 	local stringData=getStringData()
 
@@ -80,18 +114,17 @@ function create ()
 
 	carg_id = misn.cargoAdd( "Captured Avian", 0 )
 
-   landmarker = misn.markerAdd( planet.get("Harkan"):system(), "plot" )
-
-   -- mission details
-   misn.setTitle( misn_title )
-   misn.setDesc( misn_desc )
+	misn.markerRm(landmarker)
+	landmarker = misn.markerAdd( planet.get("Harkan"):system(), "plot" )
 
    -- hooks
+   hook.rm(landhook)
    spacehook = hook.enter ("enter_space")
-   landhook = hook.land ("land")
+   landhook = hook.land ("land_target")
+
 end
 
-function land ()
+function land_target ()
 	local stringData=getStringData()
 
     if planet.cur() == planet.get("Harkan") then
@@ -145,13 +178,17 @@ end
 function enter_space ()
 	local stringData=getStringData()
 
-		tk.msg( gh.format(title[2],stringData), gh.format(text[2],stringData) )
+	tk.msg( gh.format(title[2],stringData), gh.format(text[2],stringData) )
 
-		hook.rm(spacehook)
+	misn.osdDestroy()
+	osd_msg = gh.formatAll(osd_msg,stringData)
+    misn.osdCreate(gh.format(misn_title,stringData), osd_msg)
 
-		osd_msg[1] = gh.format(osd_msg[1],stringData)
-		osd_msg[2] = gh.format(osd_msg[2],stringData)
-		misn.osdCreate(gh.format(misn_title,stringData), osd_msg)
+    -- mission details
+   misn.setTitle( misn_title )
+   misn.setDesc( misn_desc )
+
+	hook.rm(spacehook)
 end
 
 function abort()

@@ -272,7 +272,7 @@
    <chance>100</chance>
    <done>Harkan 4</done>
    <cond>var.peek("harkan_5_start_time") ~= nil and time.get() &gt; time.fromnumber( var.peek("harkan_5_start_time") )</cond>
-   <location>Land</location>
+   <location>Space</location>
   </avail>
  </mission>
  <mission name="Harkan Empire 6">

@@ -664,7 +664,7 @@ void loadscreen_render( double done, const char *msg )
       gl_blitScale( loading, (SCREEN_W-bw)/2., (SCREEN_H-bh)/2., bw, bh, NULL );
 
    if (loadingLogo != NULL)
-         gl_blitScale( loadingLogo, SCREEN_W-(SCREEN_W-loading->sw)/2.-loadingLogo->sw-30,  SCREEN_H-loadingLogo->sh-30, loadingLogo->sw, loadingLogo->sh, NULL );
+         gl_blitScale( loadingLogo, SCREEN_W-loadingLogo->sw-30,  SCREEN_H-loadingLogo->sh-30, loadingLogo->sw, loadingLogo->sh, NULL );
 
    /* Draw progress bar. */
    /* BG. */

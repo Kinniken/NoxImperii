@@ -5,6 +5,7 @@ include "dat/missions/supportfiles/common.lua"
 include "dat/missions/supportfiles/traders.lua"
 include "pilot/pilots_ardarshir.lua"
 include "pilot/pilots_empire.lua"
+include "dat/scripts/universe/live/live_universe.lua"
 
 payment = 500000
 
@@ -233,6 +234,7 @@ function land3()
 		bop=bop-100
 
 		var.push("universe_balanceofpower",bop)
+		updateUniverseDesc()
 
 		hook.rm(landhook)
 		misn.finish(true)

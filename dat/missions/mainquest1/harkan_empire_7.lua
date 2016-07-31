@@ -21,6 +21,13 @@ osd_msg_2[2] = "Search for Colonel Syrnd in the ${targetSystem2} system"
 osd_msg_2[3] = "Hail Colonel Syrnd"
 osd_msg_2["__save"] = true
 
+osd_msg_3 = {}
+osd_msg_3[1] = "Search for Colonel Syrnd on ${targetPlanet} in the ${targetSystem} system"
+osd_msg_3[2] = "Search for Colonel Syrnd in the ${targetSystem2} system"
+osd_msg_3[3] = "Hail Colonel Syrnd"
+osd_msg_3[4] = "Return to Harkan"
+osd_msg_3["__save"] = true
+
 start_title = "Obtainable Unobtanium"
 start_text = [[You've been drinking and swapping stories with the base pilots' for an hour or two when you're called back to Suarez' office. He wastes no time in getting to the point.
 
@@ -134,12 +141,27 @@ function ship_dead()
 end
 
 function ship_hail()
+	local stringData=getStringData()
 	tk.msg( gh.format(end_title,stringData), gh.format(end_text,stringData) )
 
 	player.pay(payment)
 
 	faction.modPlayerSingle( G.EMPIRE, 2 )
 
-	misn.finish(true)
+	misn.osdDestroy()
+	osd_msg_3=gh.formatAll(osd_msg_3,stringData)
+	misn.osdCreate(gh.format(misn_title,stringData), osd_msg_3)
+	misn.osdActive(4)
+
+	hook.rm(spacehook)
+	landhook = hook.land ("land_final")
 end
+
+function land_final()
+	if (planet.cur()==planet.get("Harkan")) then
+		misn.finish(true)
+	end
+end
+
+
 

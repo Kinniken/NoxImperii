@@ -492,12 +492,18 @@ static void map_update( unsigned int wid )
       else if (t == 'R')
          t = 'S';
 
-      if (!hasPlanets)
-         p += nsnprintf( &buf[p], PATH_MAX-p, "\e%c%s\en",
-               t, sys->planets[i]->name );
-      else
-         p += nsnprintf( &buf[p], PATH_MAX-p, ",\n\e%c%s\en",
-               t, sys->planets[i]->name );
+      if (hasPlanets)
+         p += nsnprintf( &buf[p], PATH_MAX-p, ",\n");
+
+      if (sys->planets[i]->shortInfo == NULL) {
+    	  p += nsnprintf( &buf[p], PATH_MAX-p, "\e%c%s\en",
+    	                 t, sys->planets[i]->name );
+      } else {
+    	  p += nsnprintf( &buf[p], PATH_MAX-p, "\e%c%s (%s)\en",
+    	                 t, sys->planets[i]->name, sys->planets[i]->shortInfo );
+      }
+
+
       hasPlanets = 1;
       if (p > PATH_MAX)
          break;

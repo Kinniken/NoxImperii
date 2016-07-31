@@ -94,10 +94,44 @@ function handlePlanet(surveyedPlanet,successMessage)
          generatePlanetServices(surveyedPlanet)
          surveyedPlanet:save()
 
+         local shortInfo=planet.cur():shortInfo()
+
+         if shortInfo and shortInfo ~= "(null)" then
+            shortInfo=shortInfo..", surveyed"
+         else
+            shortInfo="Surveyed"
+         end
+
+         planet.cur():setShortInfo(shortInfo)
+
          local reward=computePayement(surveyedPlanet)
 
          tk.msg( finishedtitle, gh.format(successMessage,reward) )
          player.pay( reward.rewardTotal )
+
+         local planetClassCount=var.peek("survey_planet_"..surveyedPlanet.c:class())
+
+         if not planetClassCount then
+            planetClassCount=0
+         end
+
+         planetClassCount=planetClassCount+1
+
+         var.push("survey_planet_"..surveyedPlanet.c:class(),planetClassCount)
+
+         if (surveyedPlanet.lua.natives) then
+            local nativeClassCount=var.peek("survey_natives_"..surveyedPlanet.lua.natives.type)
+
+            if not nativeClassCount then
+               nativeClassCount=0
+            end
+
+            nativeClassCount=nativeClassCount+1
+
+            var.push("survey_natives_"..surveyedPlanet.lua.natives.type,nativeClassCount)
+         end
+
+         updateGreatSurveyDesc()
 
          return true
       end

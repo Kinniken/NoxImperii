@@ -1,3 +1,6 @@
+include "universe/planets/planet_templates.lua"
+include('universe/natives/generate_natives.lua')
+
 
 function updateUniverseDesc()
 
@@ -76,4 +79,105 @@ Current barbarian activity:
 
 	var.push("universe_status",desc)
 
+end
+
+
+function updateGreatSurveyDesc()
+
+	local updateGreatSurveyDesc = ""
+
+	local surveyDone=false
+
+	local planetCounters = {}
+
+	for _,v in ipairs(starTemplates.allPlanetsTemplateOrdered) do
+
+		if not v.classification then
+			print("Warning: planet without classification! Key: "..k)
+		else
+			local counter=var.peek("survey_planet_"..v.classification)
+
+			if not counter then
+				counter=0
+			else
+				surveyDone=true
+			end
+
+			planetCounters[#planetCounters+1]={v.classification,counter}
+		end
+	end
+
+	local moonCounters = {}
+
+	for _,v in ipairs(starTemplates.allMoonsTemplateOrdered) do
+
+		if not v.classification then
+			print("Warning: moon without classification! Key: "..k)
+		else
+			local counter=var.peek("survey_planet_"..v.classification)
+
+			if not counter then
+				counter=0
+			else
+				surveyDone=true
+			end
+
+			moonCounters[#moonCounters+1]={v.classification,counter}
+		end
+	end
+
+
+	local nativeCounters = {}
+
+	for _,v in ipairs(natives_generator.ordered) do
+		if not v.label then
+			print("Warning: natives without label! Key: "..k)
+		else
+			local counter=var.peek("survey_natives_"..v.id)
+
+			if not counter then
+				counter=0
+			else
+				surveyDone=true
+			end
+
+			nativeCounters[#nativeCounters+1]={v.label,counter}
+		end
+	end
+
+	if not surveyDone then
+		surveyDesc="You have not started the Great Survey. Speak to an old pilot on any Imperial world to start it."
+	else
+		surveyDesc="Explore more worlds outside the influence of the Empire, the Roidhunate, Betelgeuse or Ixum to progress in the Second Great Survey."
+
+		planetDesc=""
+		planetCount=""
+
+		for k,v in ipairs(planetCounters) do
+			planetDesc=planetDesc..v[1]..":\n"
+			planetCount=planetCount..v[2].."\n"
+		end
+
+		planetDesc=planetDesc.."\n"
+		planetCount=planetCount.."\n"
+
+		for k,v in ipairs(moonCounters) do
+			planetDesc=planetDesc..v[1]..":\n"
+			planetCount=planetCount..v[2].."\n"
+		end
+
+		nativesDes=""
+		nativesCount=""
+
+		for k,v in ipairs(nativeCounters) do
+			nativesDes=nativesDes..v[1]..":\n"
+			nativesCount=nativesCount..v[2].."\n"
+		end
+	end
+
+	var.push("great_survey_status",surveyDesc)
+	var.push("great_survey_status_worlds",planetDesc)
+	var.push("great_survey_status_worlds_count",planetCount)
+	var.push("great_survey_status_natives",nativesDes)
+	var.push("great_survey_status_natives_count",nativesCount)
 end

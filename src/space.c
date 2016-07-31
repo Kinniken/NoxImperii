@@ -1946,6 +1946,8 @@ static int planet_parse( Planet *planet, const xmlNodePtr parent )
             xmlr_strd(cur, "class", planet->class);
             xmlr_strd(cur, "bar", planet->bar_description);
             xmlr_strd(cur, "description", planet->description );
+            if (xml_isNode(cur, "shortInfo"))
+            	xmlr_strd(cur, "shortInfo", planet->shortInfo );
             xmlr_strd(cur, "settlements_description", planet->settlements_description );
             xmlr_strd(cur, "history_description", planet->history_description );
             xmlr_strd(cur, "luadata", planet->luaData );
@@ -2194,6 +2196,15 @@ static int planet_parseCustom( Planet *planet, const xmlNodePtr parent )
 		else if (xml_isNode(node,"general")) {
 			cur = node->children;
 			do {
+				if (xml_isNode(cur, "shortInfo")) {
+					tmp=xml_getStrd(cur);
+					if (tmp!=NULL) {
+						planet->shortInfo=strdup(tmp);
+						free(tmp);
+						tmp=NULL;
+					}
+				}
+
 				if (xml_isNode(cur, "description")) {
 					tmp=xml_getStrd(cur);
 					if (tmp!=NULL) {
@@ -3870,6 +3881,9 @@ void space_exit (void)
 
       free(pnt->name);
 
+      if (pnt->shortInfo!=NULL)
+    	  free(pnt->shortInfo);
+
       free(pnt->description);
       if (pnt->settlements_description!=NULL)
     	  free(pnt->settlements_description);
@@ -4814,6 +4828,9 @@ int planet_savePlanet( xmlTextWriterPtr writer, const Planet *p, int customDataO
 
     	 if (!customDataOnly && p->bar_description!=NULL)
             xmlw_elem( writer, "bar", "%s", p->bar_description );
+
+    	 if (!customDataOnly && p->shortInfo!=NULL)
+    		 xmlw_elem( writer, "shortInfo", "%s", p->shortInfo );
 
     	 if (planet_isBlackMarket(p))
     	             xmlw_elemEmpty( writer, "blackmarket" );

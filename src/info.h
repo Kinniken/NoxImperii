@@ -14,6 +14,8 @@
 #define INFO_CARGO      3 /**< Cargo info window. */
 #define INFO_MISSIONS   4 /**< Missions info window. */
 #define INFO_STANDINGS  5 /**< Standings info window. */
+#define INFO_UNIVERSE   6
+#define INFO_SURVEY     7
 
 
 /*

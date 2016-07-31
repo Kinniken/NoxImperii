@@ -7,11 +7,12 @@ natives_generator.common_natives=all
 
 all.leonids={
 	weight=10,
+	label="Leonids",
 	applyOnPlanet=function(planet)
 		local natives=natives_class.createNew(natives_generator.genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({1000000,10000000}),
 			planet:areNativeCivilized())
 		planet.lua.natives=natives
-		if (not natives.civilized) then			
+		if (not natives.civilized) then
 			natives_generator.setNativeDemands(planet,1,1,0.5,0,0.5)
 		else
 			natives_generator.generateNativeCivilizedData(planet,0.3,1,0.8,0.5,1)
@@ -26,6 +27,7 @@ all.leonids={
 	end,
 	specialities={}
 }
+natives_generator.ordered[#natives_generator.ordered+1]=all.leonids
 
 all.leonids.specialities[#all.leonids.specialities+1]={
 	weight=10,
@@ -68,6 +70,7 @@ all.leonids.specialities[#all.leonids.specialities+1]={
 
 all.otters={
 	weight=10,
+	label="Amphibians Mammals",
 	applyOnPlanet=function(planet)
 		planet.lua.natives=natives_class.createNew(natives_generator.genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({10000000,100000000}),planet:areNativeCivilized())
 
@@ -84,6 +87,7 @@ all.otters={
 	end,
 	specialities={}
 }
+natives_generator.ordered[#natives_generator.ordered+1]=all.otters
 all.otters.specialities[#all.otters.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
@@ -107,6 +111,7 @@ all.otters.specialities[#all.otters.specialities+1]={
 
 all.bovines={
 	weight=10,
+	label="Bovines",
 	applyOnPlanet=function(planet)
 		planet.lua.natives=natives_class.createNew(natives_generator.genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({50000000,500000000}),planet:areNativeCivilized())
 
@@ -127,6 +132,7 @@ all.bovines={
 	end,
 	specialities={}
 }
+natives_generator.ordered[#natives_generator.ordered+1]=all.bovines
 all.bovines.specialities[#all.bovines.specialities+1]={
 	weight=10,
 	weightValidity=function(planet)
@@ -157,6 +163,7 @@ all.bovines.specialities[#all.bovines.specialities+1]={
 
 all.avians={
 	weight=10,
+	label="Avians",
 	weightValidity=function(planet)
 		return (planet.planetRadius>1.1)
 	end,
@@ -182,6 +189,7 @@ all.avians={
 	end,
 	specialities={}
 }
+natives_generator.ordered[#natives_generator.ordered+1]=all.avians
 all.avians.specialities[#all.avians.specialities+1]={
 	weight=5,
 	weightValidity=function(planet)
@@ -211,6 +219,7 @@ all.avians.specialities[#all.avians.specialities+1]={
 
 all.simians={
 	weight=10,
+	label="Simians",
 	applyOnPlanet=function(planet)
 		planet.lua.natives=natives_class.createNew(natives_generator.genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({5000000,50000000}),planet:areNativeCivilized())
 
@@ -221,7 +230,7 @@ all.simians={
 		end
 	end,
 	getDesc=function(planet)
-		local desc= "Small humanoids like the "..planet.lua.natives.name.." are common in the galaxy. Tree-dwellers longer in their evolutionary history than men, they are still not consistent bipeds. Despite an aggressive nature and frequent small-scale wars between tribes, they have developed metallurgy and a productive agriculture centered on local fruit-bearing plants. "
+		local desc= "Small humanoids like the "..planet.lua.natives.name.." are common in the galaxy. Tree-dwellers longer in their evolutionary history than men, they are still not consistent bipeds. Despite an aggressive nature and frequent small-scale wars between tribes, they have developed metallurgy and a productive agriculture centred on local fruit-bearing plants. "
 		if (planet.lua.natives.civilized) then
 			desc=desc.."Their integration in modern society has been difficult, and conflict between them and the settlers are still frequent.  "
 		elseif (planet:isCivilized()) then
@@ -231,6 +240,7 @@ all.simians={
 	end,
 	specialities={}
 }
+natives_generator.ordered[#natives_generator.ordered+1]=all.simians
 all.simians.specialities[#all.simians.specialities+1]={
 	weight=10,
 	weightValidity=function(planet)
@@ -260,6 +270,7 @@ all.simians.specialities[#all.simians.specialities+1]={
 
 all.carnivorousHumanoids={
 	weight=100000,
+	label="Humanoids (Carnivorous)",
 	applyOnPlanet=function(planet)
 		planet.lua.natives=natives_class.createNew(natives_generator.genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({5000000,50000000}),planet:areNativeCivilized())
 
@@ -283,6 +294,7 @@ all.carnivorousHumanoids={
 	end,
 	specialities={}
 }
+natives_generator.ordered[#natives_generator.ordered+1]=all.carnivorousHumanoids
 all.carnivorousHumanoids.specialities[#all.carnivorousHumanoids.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
@@ -309,6 +321,7 @@ all.carnivorousHumanoids.specialities[#all.carnivorousHumanoids.specialities+1]=
 
 all.hibernatingReptiles={
 	weight=10,
+	label="Hibernating Reptiles",
 	applyOnPlanet=function(planet)
 		planet.lua.natives=natives_class.createNew(natives_generator.genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({100000,5000000}),false)
 
@@ -324,6 +337,7 @@ all.hibernatingReptiles={
 	end,
 	specialities={}
 }
+natives_generator.ordered[#natives_generator.ordered+1]=all.hibernatingReptiles
 all.hibernatingReptiles.specialities[#all.hibernatingReptiles.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
@@ -350,6 +364,7 @@ all.hibernatingReptiles.specialities[#all.hibernatingReptiles.specialities+1]={
 
 all.beavers={
 	weight=10,
+	label="Beaver-like",
 	applyOnPlanet=function(planet)
 
 		planet.lua.natives=natives_class.createNew(natives_generator.genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({1000000,5000000}),planet:areNativeCivilized())
@@ -373,6 +388,7 @@ all.beavers={
 	end,
 	specialities={}
 }
+natives_generator.ordered[#natives_generator.ordered+1]=all.beavers
 all.beavers.specialities[#all.beavers.specialities+1]={
 	weight=10,
 	weightValidity=function(planet)
@@ -402,6 +418,7 @@ all.beavers.specialities[#all.beavers.specialities+1]={
 
 all.octopuses={
 	weight=10,
+	label="Octopus-like",
 	applyOnPlanet=function(planet)
 
 		planet.lua.natives=natives_class.createNew(natives_generator.genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({100000000,500000000}),planet:areNativeCivilized())
@@ -419,6 +436,7 @@ all.octopuses={
 	end,
 	specialities={}
 }
+natives_generator.ordered[#natives_generator.ordered+1]=all.octopuses
 all.octopuses.specialities[#all.octopuses.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
@@ -444,6 +462,7 @@ all.octopuses.specialities[#all.octopuses.specialities+1]={
 
 all.burrowers={
 	weight=10,
+	label="Burrowing Rodents",
 	applyOnPlanet=function(planet)
 
 		planet.lua.natives=natives_class.createNew(natives_generator.genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({1000000,5000000}),planet:areNativeCivilized())
@@ -461,6 +480,7 @@ all.burrowers={
 	end,
 	specialities={}
 }
+natives_generator.ordered[#natives_generator.ordered+1]=all.burrowers
 all.burrowers.specialities[#all.burrowers.specialities+1]={
 	weight=10,
 	applyOnPlanet=function(planet)
@@ -488,6 +508,7 @@ all.burrowers.specialities[#all.burrowers.specialities+1]={
 
 all.crabs={
 	weight=10,
+	label="Crustaceans",
 	applyOnPlanet=function(planet)
 
 		planet.lua.natives=natives_class.createNew(natives_generator.genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({1000000,5000000}),planet:areNativeCivilized())
@@ -505,6 +526,7 @@ all.crabs={
 	end,
 	specialities={}
 }
+natives_generator.ordered[#natives_generator.ordered+1]=all.crabs
 all.crabs.specialities[#all.crabs.specialities+1]={
 	weight=10,
 	weightValidity=function(planet)
@@ -545,6 +567,7 @@ all.crabs.specialities[#all.crabs.specialities+1]={
 
 all.spiders={
 	weight=10,
+	label="Arachnoid",
 	applyOnPlanet=function(planet)
 
 		planet.lua.natives=natives_class.createNew(natives_generator.genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({10000000,50000000}),planet:areNativeCivilized())
@@ -562,6 +585,7 @@ all.spiders={
 	end,
 	specialities={}
 }
+natives_generator.ordered[#natives_generator.ordered+1]=all.spiders
 all.spiders.specialities[#all.spiders.specialities+1]={
 	weight=10,
 	weightValidity=function(planet)
@@ -587,6 +611,7 @@ all.spiders.specialities[#all.spiders.specialities+1]={
 
 all.lavaOasisHunters={
 	weight=10,
+	label="Migrating Quadrupeds",
 	applyOnPlanet=function(planet)
 
 		planet.lua.natives=natives_class.createNew(natives_generator.genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({100000,500000}),planet:areNativeCivilized())
@@ -604,6 +629,7 @@ all.lavaOasisHunters={
 	end,
 	specialities={}
 }
+natives_generator.ordered[#natives_generator.ordered+1]=all.lavaOasisHunters
 all.lavaOasisHunters.specialities[#all.lavaOasisHunters.specialities+1]={
 	weight=10,
 	weightValidity=function(planet)

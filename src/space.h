@@ -86,6 +86,7 @@ typedef struct TradeData_ {
 typedef struct Planet_ {
    int id; /**< Planet ID. */
    char* name; /**< planet name */
+   char* shortInfo; /**< optional short info to display next to name */
    Vector2d pos; /**< position in star system */
    double radius; /**< Radius of the planet. */
 

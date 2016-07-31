@@ -68,6 +68,8 @@ static int planetL_addService( lua_State *L );
 static int planetL_removeService( lua_State *L );
 static int planetL_addTechGroup( lua_State *L );
 static int planetL_removeTechGroup( lua_State *L );
+static int planetL_shortInfo( lua_State *L );
+static int planetL_setShortInfo( lua_State *L );
 static int planetL_desc( lua_State *L );
 static int planetL_setDesc( lua_State *L );
 static int planetL_descSettlements( lua_State *L );
@@ -114,6 +116,8 @@ static const luaL_reg planet_methods[] = {
    { "setFactionPresence", planetL_setFactionPresence },
    { "desc", planetL_desc },
    { "setDesc", planetL_setDesc },
+   { "shortInfo", planetL_shortInfo },
+   { "setShortInfo", planetL_setShortInfo },
    { "descSettlements", planetL_descSettlements },
    { "setDescSettlements", planetL_setDescSettlements },
    { "descHistory", planetL_descHistory },
@@ -156,6 +160,8 @@ static const luaL_reg planet_cond_methods[] = {
    { "addTechGroup", planetL_addTechGroup },
    { "removeTechGroup", planetL_removeTechGroup },
    { "setFactionPresence", planetL_setFactionPresence },
+   { "shortInfo", planetL_shortInfo },
+   { "setShortInfo", planetL_setShortInfo },
    { "desc", planetL_desc },
    { "setDesc", planetL_setDesc },
    { "descSettlements", planetL_descSettlements },
@@ -565,6 +571,47 @@ static int planetL_name( lua_State *L )
    p = luaL_validplanet(L,1);
    lua_pushstring(L,p->name);
    return 1;
+}
+
+
+/**
+ * @brief Gets the planet's short info text.
+ *
+ * @usage desc = p:shortInfo()
+ *    @luaparam p Planet to get the short info of.
+ *    @luareturn The short info of the planet.
+ * @luafunc shortInfo( p )
+ */
+static int planetL_shortInfo( lua_State *L )
+{
+   Planet *p;
+   p = luaL_validplanet(L,1);
+   lua_pushstring(L,p->shortInfo);
+   return 1;
+}
+
+/**
+ * @brief Sets a planets's short info.
+ *
+ * @usage p:setShortInfo( shortInfo )
+ *    @luaparam p Planet to set short info.
+ *    @luaparam shortInfo The short info
+ * @luafunc setShortInfo( p, shortInfo )
+ */
+static int planetL_setShortInfo( lua_State *L )
+{
+   const char* shortInfo;
+   Planet *p;
+
+   p = luaL_validplanet(L,1);
+   shortInfo = lua_tostring(L, 2);
+
+   if (p->shortInfo!=NULL)
+	   free(p->shortInfo);
+
+   p->shortInfo=strdup(shortInfo);
+
+   return 0;
 }
 
 

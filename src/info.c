@@ -36,13 +36,13 @@
 #define BUTTON_WIDTH    90 /**< Button width, standard across menus. */
 #define BUTTON_HEIGHT   30 /**< Button height, standard across menus. */
 
-#define SETGUI_WIDTH    400 /**< GUI selection window width. */
+#define SETGUI_WIDTH    600 /**< GUI selection window width. */
 #define SETGUI_HEIGHT   300 /**< GUI selection window height. */
 
 #define menu_Open(f)    (menu_open |= (f)) /**< Marks a menu as opened. */
 #define menu_Close(f)   (menu_open &= ~(f)) /**< Marks a menu as closed. */
 
-#define INFO_WINDOWS      7 /**< Amount of windows in the tab. */
+#define INFO_WINDOWS      8 /**< Amount of windows in the tab. */
 
 #define INFO_WIN_MAIN      0
 #define INFO_WIN_SHIP      1
@@ -51,6 +51,7 @@
 #define INFO_WIN_MISN      4
 #define INFO_WIN_STAND     5
 #define INFO_WIN_UNIVERSE  6
+#define INFO_WIN_SURVEY    7
 static const char *info_names[INFO_WINDOWS] = {
    "Main",
    "Ship",
@@ -58,7 +59,8 @@ static const char *info_names[INFO_WINDOWS] = {
    "Cargo",
    "Missions",
    "Standings",
-   "Universe"
+   "Universe",
+   "Great Survey"
 }; /**< Name of the tab windows. */
 
 
@@ -84,6 +86,7 @@ static void info_openWeapons( unsigned int wid );
 static void info_openCargo( unsigned int wid );
 static void info_openMissions( unsigned int wid );
 static void info_openUniverse( unsigned int wid );
+static void info_openSurvey( unsigned int wid );
 static void info_getDim( unsigned int wid, int *w, int *h, int *lw );
 static void standings_close( unsigned int wid, char *str );
 static void ship_update( unsigned int wid );
@@ -122,7 +125,7 @@ void menu_info( int window )
    }
 
    /* Dimensions. */
-   w = 600;
+   w = 900;
    h = 600;
 
    /* Create the window. */
@@ -141,6 +144,7 @@ void menu_info( int window )
    info_openMissions(   info_windows[ INFO_WIN_MISN ] );
    info_openStandings(  info_windows[ INFO_WIN_STAND ] );
    info_openUniverse(  info_windows[ INFO_WIN_UNIVERSE ] );
+   info_openSurvey(  info_windows[ INFO_WIN_SURVEY ] );
 
    menu_Open(MENU_INFO);
 
@@ -1011,7 +1015,7 @@ static void info_openUniverse( unsigned int wid )
 
    /* Buttons */
    window_addButton( wid, -20, 20, BUTTON_WIDTH, BUTTON_HEIGHT,
-         "closeMissions", "Close", info_close );
+         "closeUniverse", "Close", info_close );
 
    /* Graphics. */
    window_addImage( wid, 0, 0, 0, 0, "imgLogo", NULL, 0 );
@@ -1023,7 +1027,64 @@ static void info_openUniverse( unsigned int wid )
    str=var_read_str("universe_status");
 
    window_addText( wid, 40, -60, (w-80), h-110-BUTTON_HEIGHT, 0, "txtStatus",
-         &gl_tinyFont, &cBlack, str );
+         &gl_smallFont, &cBlack, str );
+}
+
+/**
+ * @brief Displays the Great Survey.
+ */
+static void info_openSurvey( unsigned int wid )
+{
+   char *str;
+   int w, h, lw;
+
+   /* Get dimensions. */
+   info_getDim( wid, &w, &h, &lw );
+
+   /* On close. */
+   window_onClose( wid, standings_close );
+
+   /* Buttons */
+   window_addButton( wid, -20, 20, BUTTON_WIDTH, BUTTON_HEIGHT,
+         "closeSurvey", "Close", info_close );
+
+   /* Graphics. */
+   window_addImage( wid, 0, 0, 0, 0, "imgLogo", NULL, 0 );
+
+   /* Text. */
+   window_addText( wid, 40, -30 , 250, 20, 0, "txtSurveyStatusTitle",
+         &gl_defFont, &cDConsole, "The Great Survey" );
+
+   str=var_read_str("great_survey_status");
+
+   window_addText( wid, 40, -60, (w-80), 20, 0, "txtSurveyStatus",
+         &gl_smallFont, &cBlack, str );
+
+   window_addText( wid, 40, -90 , (w-80)/2, 20, 0, "txtSurveyStatusTitleWorld",
+            &gl_smallFont, &cDConsole, "World types:" );
+
+   str=var_read_str("great_survey_status_worlds");
+
+   window_addText( wid, 40, -120, 200, h-120-BUTTON_HEIGHT, 0, "txtSurveyStatusWorlds",
+            &gl_smallFont, &cBlack, str );
+
+   str=var_read_str("great_survey_status_worlds_count");
+
+   window_addText( wid, 240, -120, 20, h-120-BUTTON_HEIGHT, 0, "txtSurveyStatusWorldsCount",
+            &gl_smallFont, &cBlack, str );
+
+   window_addText( wid, w/2, -90 , (w-80)/2, 20, 0, "txtSurveyStatusTitleNatives",
+               &gl_smallFont, &cDConsole, "Species types:" );
+
+   str=var_read_str("great_survey_status_natives");
+
+   window_addText( wid,  w/2, -120, 200, h-120-BUTTON_HEIGHT, 0, "txtSurveyStatusNatives",
+            &gl_smallFont, &cBlack, str );
+
+   str=var_read_str("great_survey_status_natives_count");
+
+      window_addText( wid,  w/2+200, -120, 20, h-120-BUTTON_HEIGHT, 0, "txtSurveyStatusNativesCount",
+               &gl_smallFont, &cBlack, str );
 }
 
 /**

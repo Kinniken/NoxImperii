@@ -37,8 +37,8 @@ function create()
    player.pilot():rename( name() ) -- Assign a random name to the player's ship.
    player.pilot():addOutfit( "Laser Cannon MK1", 2 )
 
-   
    initStatusVar()
    updateUniverseDesc()
+   updateGreatSurveyDesc()
    evt.finish( true )
 end

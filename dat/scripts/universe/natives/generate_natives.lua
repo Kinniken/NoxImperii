@@ -51,16 +51,25 @@ natives_generator.genericSpecieName=function()
 	return nameGenerator.generateNameNatives()
 end
 
+natives_generator.ordered={}
+
 include('universe/natives/common_natives.lua')
 include('universe/natives/rare_natives.lua')
 
 local common=natives_generator.common_natives
 local rare=natives_generator.rare_natives
 
-natives_generator.noNatives={}
+natives_generator.named={}
 
-natives_generator.warmTerranNatives={common.leonids,common.otters,common.avians,common.simians,common.octopuses,common.crabs,rare.symbionts,rare.hives,common.spiders}
-natives_generator.temperateTerranNatives={common.leonids,common.otters,common.bovines,common.avians,common.simians,common.carnivorousHumanoids,common.octopuses,common.crabs,rare.symbionts,rare.hives,common.spiders}
-natives_generator.coldTerranNatives={common.hibernatingReptiles,common.beavers,common.burrowers,common.crabs}
+for k,v in ipairs(natives_generator.ordered) do
+  natives_generator.named[v.id]=v
+end
 
-natives_generator.lavaOasisNatives={rare.lavacrabs,common.lavaOasisHunters}
+natives_generator.all={}
+natives_generator.all.noNatives={}
+
+natives_generator.all.warmTerranNatives={common.leonids,common.otters,common.avians,common.simians,common.octopuses,common.crabs,rare.symbionts,rare.hives,common.spiders}
+natives_generator.all.temperateTerranNatives={common.leonids,common.otters,common.bovines,common.avians,common.simians,common.carnivorousHumanoids,common.octopuses,common.crabs,rare.symbionts,rare.hives,common.spiders}
+natives_generator.all.coldTerranNatives={common.hibernatingReptiles,common.beavers,common.burrowers,common.crabs}
+
+natives_generator.all.lavaOasisNatives={rare.lavacrabs,common.lavaOasisHunters}

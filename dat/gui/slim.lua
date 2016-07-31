@@ -352,6 +352,7 @@ function update_nav()
          name = nav_pnt:name(),
          pos = nav_pnt:pos(),
          class = nav_pnt:class(),
+         shortInfo = nav_pnt:shortInfo(),
          col = nav_pnt:colour(),
          services = {}
       }
@@ -946,8 +947,14 @@ function render( dt, dt_mod )
    if nav_pnt then
       ta_pnt_dist = pp:pos():dist( planet.pos )
 
+      local infoHeight=0
+
+      if planet.shortInfo then
+         infoHeight=12
+      end
+
       -- Extend the pane depending on the services available.
-      services_h = 44
+      services_h = 44 + infoHeight
       if pntflags.land then
          services_h = services_h + (14 * planet.nservices)
       end
@@ -968,6 +975,10 @@ function render( dt, dt_mod )
       gfx.print( true, "DISTANCE:", ta_pnt_pane_x + 35, ta_pnt_pane_y - 14, col_txt_top )
       gfx.print( true, "CLASS:", ta_pnt_pane_x + 14, ta_pnt_pane_y - 34, col_txt_top )
 
+      if planet.shortInfo then
+         gfx.print( true, "INFO:", ta_pnt_pane_x + 14, ta_pnt_pane_y - 46, col_txt_top )
+      end
+
       if ta_pnt_faction_gfx then
          gfx.renderTex( ta_pnt_faction_gfx, ta_pnt_fact_x, ta_pnt_fact_y )
       end
@@ -981,18 +992,21 @@ function render( dt, dt_mod )
       gfx.renderTex( target_dir, ta_pnt_pane_x + 12, ta_pnt_pane_y -24, x, y, col_txt_top )
 
       gfx.print( true, planet.class, ta_pnt_pane_x + 70, ta_pnt_pane_y - 34, col_txt_top )
-      gfx.print( true, "SERVICES:", ta_pnt_pane_x + 14, ta_pnt_pane_y - 46, col_txt_top )
+      if planet.shortInfo then
+         gfx.print( true, planet.shortInfo, ta_pnt_pane_x + 70, ta_pnt_pane_y - 46, col_txt_top )
+      end
+      gfx.print( true, "SERVICES:", ta_pnt_pane_x + 14, ta_pnt_pane_y - 46 - infoHeight, col_txt_top )
 
       -- Space out the text.
-      services_h = 60
+      services_h = 60 + infoHeight
       if pntflags.land then
-         local services_h = 60
+         local services_h = 60 + infoHeight
          for k,v in ipairs(planet.services) do
-            gfx.print(true, v, ta_pnt_pane_x + 60, ta_pnt_pane_y - services_h, col_txt_top )
+            gfx.print(true, v, ta_pnt_pane_x + 72, ta_pnt_pane_y - services_h, col_txt_top )
             services_h = services_h + 14
          end
       else
-         gfx.print( true, "none", ta_pnt_pane_x + 110, ta_pnt_pane_y - 46, col_txt_una )
+         gfx.print( true, "none", ta_pnt_pane_x + 110, ta_pnt_pane_y - 60 - infoHeight, col_txt_una )
       end
 
       gfx.print( false, largeNumber( ta_pnt_dist, 1 ), ta_pnt_pane_x + 110, ta_pnt_pane_y - 15, col_txt_std, 63, false )

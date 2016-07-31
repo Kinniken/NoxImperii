@@ -7,6 +7,7 @@ natives_generator.rare_natives=all
 
 all.symbionts={
 	weight=2,
+	label="Symbionts",
 	applyOnPlanet=function(planet)
 		local natives=natives_class.createNew(natives_generator.genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({1000000,10000000}),
 			planet:areNativeCivilized())
@@ -28,9 +29,11 @@ all.symbionts={
 	end,
 	specialities={}
 }
+natives_generator.ordered[#natives_generator.ordered+1]=all.symbionts
 
 all.hives={
 	weight=2,
+	label="Hive-minds",
 	applyOnPlanet=function(planet)
 		local natives=natives_class.createNew(natives_generator.genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({10000000,100000000}),
 			planet:areNativeCivilized())
@@ -52,9 +55,11 @@ all.hives={
 	end,
 	specialities={}
 }
+natives_generator.ordered[#natives_generator.ordered+1]=all.hives
 
 all.lavacrabs={
 	weight=2,
+	label="Ceramic Crabs",
 	applyOnPlanet=function(planet)
 		local natives=natives_class.createNew(natives_generator.genericSpecieName(),planet.lua.nativeFertility*gh.randomInRange({1000000,10000000}),
 			planet:areNativeCivilized())
@@ -76,6 +81,7 @@ all.lavacrabs={
 	end,
 	specialities={}
 }
+natives_generator.ordered[#natives_generator.ordered+1]=all.lavacrabs
 
 --copying the keys to an id value for future reference
 for k,v in pairs(all) do

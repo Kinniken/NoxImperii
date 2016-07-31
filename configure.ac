@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.61])
-AC_INIT([noximperii], [0.4.4], [cedric@kstudio.net])
+AC_INIT([noximperii], [0.4.5], [cedric@kstudio.net])
 AC_CONFIG_SRCDIR([src/naev.c])
 AC_CONFIG_HEADERS([src/config.h])
 AC_CONFIG_MACRO_DIR([m4])

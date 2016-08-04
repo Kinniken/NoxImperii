@@ -10,7 +10,7 @@
   <cpu>-15</cpu>
   <level>5</level>
   <logo>terra</logo>
-  <license>Reserve Major License</license>
+  <license>Reserve Colonel</license>
  </general>
  <specific type="turret launcher" secondary="1">
   <ammo>Marara Missile</ammo>

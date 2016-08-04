@@ -19,6 +19,7 @@ misn_title  = "Investigate Barbarian activity."
 misn_desc   = "Investigate barbarians in systems ${mainTargetSystem}, ${targetSystem2} and ${targetSystem3}"
 
 -- Text if mission ends in space in starting system.
+space_success_title = "Recon Completed"
 space_success_text = "As you enter system ${startSystem}, your computer sends the result of your scouting mission to ${startPlanet}. Your payment of ${credits} cr is immediately wired."
 
 -- Messages
@@ -49,7 +50,7 @@ function create ()
    target_systems["__save"] = true
 
    -- Get credits
-   credits  = rnd.rnd(30,40) * 1000
+   credits  = rnd.rnd(30,40) * 10000
 
    template_create ()
 end

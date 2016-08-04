@@ -18,7 +18,8 @@ function empire_createMeteor()
 
    stype     = "Imperial Tunguska"
    s     = ship.get(stype)
-   outfits = { }   
+   outfits = { }
+   outfits["__save"] = true
 
    local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 
@@ -43,6 +44,7 @@ function empire_createComet()
    stype 	 = "Imperial Halley"
    s     = ship.get(stype)
    outfits = { }   
+   outfits["__save"] = true
 
    local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 
@@ -67,6 +69,7 @@ function empire_createContinent()
    stype     = "Imperial Asieneuve"
    s     = ship.get(stype)
    outfits = { }   
+   outfits["__save"] = true
 
    local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 
@@ -76,6 +79,32 @@ function empire_createContinent()
    nbTurrets=nbSlotTurrets
    nbForwards=nbSlotWeapons-nbTurrets
    nbSecondaries=2
+   nbStructures=nbSlotStructures
+   nbUtilities=nSlotUtilities
+
+   equipEmpireShip(s,outfits, nbForwards, nbTurrets, nbSecondaries,nbUtilities, nbStructures)
+
+   return stype,outfits,"empire",G.EMPIRE
+end
+
+
+function empire_createPlanet()
+   
+   local stype, s, outfits
+
+   stype     = "Imperial Jupiter"
+   s     = ship.get(stype)
+   outfits = { }   
+   outfits["__save"] = true
+
+   local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
+
+   local nbTurrets,nbForwards,nbSecondaries,nbStructures,nbUtilities
+
+   -- heavy on weapons
+   nbTurrets=nbSlotTurrets
+   nbForwards=nbSlotWeapons-nbTurrets
+   nbSecondaries=4
    nbStructures=nbSlotStructures
    nbUtilities=nSlotUtilities
 

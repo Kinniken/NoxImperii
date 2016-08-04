@@ -19,7 +19,7 @@ include "universe/live/live_universe.lua"
    -- Whether mission ends in bar (if not, it ends in space in start system)
    mission_return_to_bar=false
 
-   computer_title  = "CONFIDENTIAL : PIRATE ACTIVITY"
+   computer_title  = "NAVY: Pirate Activity"
 
    -- Mission details
    misn_title  = "Eliminate ${targetShipName}"
@@ -29,6 +29,7 @@ include "universe/live/live_universe.lua"
    Common friend suggested your line of work.
    Contribution available to cover maintenance costs.]]
 
+   space_success_title="One More Notch"
    space_success_text="As you enter ${endSystem}, you beam proof of your 'investigation' back to ${endPlanet} on a secure line. Minutes later a coded acknowledgement is sent back along with your fee of ${credits} credits. Job done!"
 
 -- Scripts we need
@@ -44,7 +45,7 @@ function create ()
    target_system = get_suitable_system( system.cur() )
 
    -- Get credits
-   credits  = rnd.rnd(5,10) * 10000
+   credits  = rnd.rnd(10,30) * 10000
 
    template_create()
 end

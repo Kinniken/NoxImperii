@@ -18,6 +18,7 @@ include "dat/missions/supportfiles/traders.lua"
    misn_desc   = [[We have information that an independent cargo ship is used to supply the Yrens with weapons. It will be passing in ${targetSystem}. Destroy it.]]
 
    --Success message
+   space_success_title = "Once more for the Empire"
    space_success_text = "As you enter the ${startSystem} system, your computer sends proof of the destruction of the ${targetShipName} to Commander Suarez on ${startPlanet}. Your payment of ${credits} cr is immediately wired."
 
 -- Messages

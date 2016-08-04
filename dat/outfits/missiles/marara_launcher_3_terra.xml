@@ -10,7 +10,7 @@
   <cpu>-4</cpu>
   <level>3</level>
   <logo>terra</logo>
-  <license>Reserve Lieutenant License</license>
+  <license>Reserve Lieutenant</license>
  </general>
  <specific type="launcher" secondary="1">
   <ammo>Marara Missile</ammo>

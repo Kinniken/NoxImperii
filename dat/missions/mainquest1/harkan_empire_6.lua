@@ -44,7 +44,7 @@ start_text = [[You're settled at the bar with Beauval, drinking what passes for 
 
 "The avian was very cooperative. My xenopsycologist adviser claims that going to such efforts to cure her makes us - and ${playerName}, you in particular - honorary tribe member or something of that kind. That it served our own purposes doesn't seem to matter. In any case, we now have some idea of why the damned crocodiles are so keen on this wretched place.". Beauval leans in, waiting for every word. "High in the mountains, in an area not far from Chicken's roaming grounds, Ardar teams are mining. And from her description it seems like whatever they are digging up is dangerous - toxic or radioactive or both. It's obviously valuable but we have no idea what it is and no way to reach there without making this conflict much hotter than it is now."
 
-"However...", continues Suarez, "our new friend had another interesting info for us. The Ardars are discreetly shipping this stuff in civilian cargo, with only limited escorts. We need someone to intercept one of them and figure out what's in them. Captain ${playerName}?"]]
+"However...", continues Suarez, "our new friend had another interesting info for us. The Ardars are discreetly shipping this stuff in civilian cargo, with only limited escorts. We need someone to intercept one of them and figure out what's in them. ${empireRank} ${playerName}?"]]
 
 
 

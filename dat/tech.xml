@@ -50,12 +50,12 @@
 		<item>Shield Capacitor III</item>
 		<item>Raptor</item>
 		<item>Imperial Tunguska</item>
-		<item>Reserve Sub-Lieutenant License</item>
+		<item>Reserve Ensign</item>
 		<item>Marine Small Arms</item>
 		<item>Plasma Blaster MK1</item>
 		<item>Plasma Turret</item>
 		<item>Imperial Halley</item>
-		<item>Reserve Lieutenant License</item>
+		<item>Reserve Lieutenant</item>
 		<item>Terran Navy Plating</item>
 		<item>Steering Thrusters</item>
 		<item>Civilian Scrambler</item>
@@ -63,7 +63,7 @@
 		<item>Plasma Cannon MK1</item>
 		<item>Marara Missile</item>
 		<item>Imperial Asieneuve</item>
-		<item>Reserve Captain License</item>
+		<item>Reserve Major</item>
 		<item>Buffel</item>
 		<item>Terran Hellburner</item>
 		<item>Terran Navy Jammer</item>
@@ -76,7 +76,7 @@
 		<item>Marara Launcher</item>
 		<item>Narval Heavy Torpedo</item>
 		<item>Imperial Jupiter</item>
-		<item>Reserve Colonel License</item>
+		<item>Reserve Admiral</item>
 		<item>Terran Navy Heavy Shield Booster</item>
 		<item>Armour Repair Equipment</item>
 		<item>Reworked Energy Lines</item>
@@ -88,7 +88,7 @@
 		<item>Light Narval Torpedo Tube</item>
 		<item>Narval Torpedo Tube</item>
 		<item>Imperial Valenderay</item>
-		<item>Reserve Major License</item>
+		<item>Reserve Colonel</item>
 		<item>Integrated Targeting Array</item>
 		<item>Anti-Matter Reactor</item>
 		<item>Heavy Plasma Turret</item>
@@ -139,13 +139,13 @@
 		<item>Improved Trajectory Stabilizer</item>
 		<item>Shattershield Lance</item>
 		<item>Betelgian Alba</item>
-		<item>Betelgian Courier License</item>
+		<item>Betelgian Courier</item>
 		<item>Betelgian Libera</item>
-		<item>Betelgian Trader License</item>
+		<item>Betelgian Trader</item>
 		<item>Railgun</item>
 		<item>Squalo Torpedo</item>
 		<item>Betelgian Cassandra</item>
-		<item>Betelgian Merchant License</item>
+		<item>Betelgian Merchant</item>
 		<item>Violente</item>
 		<item>Betelgian Jammer</item>
 		<item>Betelgian Scrambler</item>
@@ -154,8 +154,8 @@
 		<item>Squalo Tube</item>
 		<item>Betelgian Orsa</item>
 		<item>Betelgian Stella</item>
-		<item>Betelgian Explorer License</item>
-		<item>Betelgian Merchant Prince License</item>
+		<item>Betelgian Explorer</item>
+		<item>Betelgian Merchant Prince</item>
 		<item>Impresa</item>
 		<item>Improved Turret Refrigeration Cycle</item>
 		<item>Heavy Railgun</item>
@@ -345,7 +345,7 @@
 
 	<tech name="Empire Military 1">
 		<item>Imperial Tunguska</item>
-		<item>Reserve Sub-Lieutenant License</item>
+		<item>Reserve Ensign</item>
 		<item>Lancelot</item>
 
 		<item>Marine Small Arms</item>
@@ -354,7 +354,7 @@
 	</tech>
 	<tech name="Empire Military 2">
 		<item>Imperial Halley</item>
-		<item>Reserve Lieutenant License</item>
+		<item>Reserve Lieutenant</item>
 
 		<item>Terran Navy Plating</item>
 		<item>Steering Thrusters</item>
@@ -365,7 +365,7 @@
 	</tech>
 	<tech name="Empire Military 3">
 		<item>Imperial Asieneuve</item>
-		<item>Reserve Captain License</item>
+		<item>Reserve Major</item>
 		<item>Buffel</item>
 
 		<item>Terran Hellburner</item>
@@ -382,7 +382,7 @@
 	</tech>
 	<tech name="Empire Military 4">
 		<item>Imperial Jupiter</item>
-		<item>Reserve Colonel License</item>
+		<item>Reserve Admiral</item>
 		<item>Kestrel</item>
 
 		<item>Terran Navy Heavy Shield Booster</item>
@@ -399,7 +399,7 @@
 	</tech>
 	<tech name="Empire Military 5">
 		<item>Imperial Valenderay</item>
-		<item>Reserve Major License</item>
+		<item>Reserve Colonel</item>
 
 		<item>Integrated Targeting Array</item>
 		<item>Anti-Matter Reactor</item>
@@ -479,19 +479,19 @@
 
 	<tech name="Betelgeuse Military 1">
 		<item>Betelgian Alba</item>
-		<item>Betelgian Courier License</item>
+		<item>Betelgian Courier</item>
 
 	</tech>
 	<tech name="Betelgeuse Military 2">
 		<item>Betelgian Libera</item>
-		<item>Betelgian Trader License</item>
+		<item>Betelgian Trader</item>
 
 		<item>Railgun</item>
 		<item>Squalo Torpedo</item>
 	</tech>
 	<tech name="Betelgeuse Military 3">
 		<item>Betelgian Cassandra</item>
-		<item>Betelgian Merchant License</item>
+		<item>Betelgian Merchant</item>
 		<item>Violente</item>
 
 		<item>Betelgian Jammer</item>
@@ -503,8 +503,8 @@
 	<tech name="Betelgeuse Military 4">
 		<item>Betelgian Orsa</item>
 		<item>Betelgian Stella</item>
-		<item>Betelgian Explorer License</item>
-		<item>Betelgian Merchant Prince License</item>
+		<item>Betelgian Explorer</item>
+		<item>Betelgian Merchant Prince</item>
 		<item>Impresa</item>
 
 		<item>Improved Turret Refrigeration Cycle</item>

@@ -11,7 +11,7 @@
   <cpu>-8</cpu>
   <level>4</level>
   <logo>betelgeuse</logo>
-  <license>Betelgian Merchant License</license>
+  <license>Betelgian Merchant</license>
  </general>
  <specific type="jammer" group="7">
   <range>200</range>

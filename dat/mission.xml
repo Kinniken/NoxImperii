@@ -19,7 +19,7 @@
  <mission name="The Great Survey Intro">
   <lua>greatsurvey/great_survey_intro</lua>
   <avail>
-   <priority>5</priority>
+   <priority>50</priority>
    <chance>100</chance>
    <location>Bar</location>
    <faction>Empire of Terra</faction>
@@ -31,7 +31,7 @@
  <mission name="The Great Survey Rec">
   <lua>greatsurvey/great_survey_rec</lua>
   <avail>
-    <priority>5</priority>
+    <priority>50</priority>
     <chance>100</chance>
     <location>Space</location>
     <done>The Great Survey Intro</done>
@@ -43,7 +43,7 @@
  <mission name="Economy Student">
   <lua>intro/ardarshir</lua>
   <avail>
-   <priority>5</priority>
+   <priority>50</priority>
    <chance>100</chance>
    <location>Bar</location>
    <faction>Empire of Terra</faction>
@@ -55,7 +55,7 @@
  <mission name="Betelgeusan Trade">
   <lua>intro/betelgeuse</lua>
   <avail>
-   <priority>5</priority>
+   <priority>50</priority>
    <chance>100</chance>
    <location>Bar</location>
    <faction>Empire of Terra</faction>
@@ -64,30 +64,30 @@
    <unique />
   </flags>
  </mission>
- <mission name="Empire Pirate Elimination">
-  <lua>empiremilitary/pirate_bounty_bar</lua>
+ <mission name="Empire 1 Pirate Elimination">
+  <lua>empiremilitary/1_pirate_bounty_bar</lua>
   <flags>
    <unique />
   </flags>
   <avail>
-   <priority>5</priority>
+   <priority>50</priority>
    <chance>100</chance>
    <location>Bar</location>
    <faction>Empire of Terra</faction>
   </avail>
  </mission>
-<mission name="Empire Pirate Elimination Recuring">
-  <lua>empiremilitary/pirate_bounty_rec</lua>
+<mission name="Empire 1 Pirate Elimination Recuring">
+  <lua>empiremilitary/1_pirate_bounty_rec</lua>
   <avail>
-   <priority>5</priority>
-   <chance>100</chance>
-   <done>Empire Pirate Elimination</done>
+   <priority>50</priority>
+   <chance>80</chance>
+   <done>Empire 1 Pirate Elimination</done>
    <location>Computer</location>
    <faction>Empire of Terra</faction>
   </avail>
  </mission>
- <mission name="Empire Barbarian Scouting">
-  <lua>empiremilitary/barbarian_recon_bar</lua>
+ <mission name="Empire 1 Barbarian Scouting">
+  <lua>empiremilitary/1_barbarian_recon_bar</lua>
   <flags>
    <unique />
   </flags>
@@ -98,62 +98,153 @@
    <faction>Empire of Terra</faction>
   </avail>
  </mission>
- <mission name="Empire Barbarian Scouting Rec">
-  <lua>empiremilitary/barbarian_recon_rec</lua>
+ <mission name="Empire 1 Barbarian Scouting Rec">
+  <lua>empiremilitary/1_barbarian_recon_rec</lua>
   <avail>
-   <priority>5</priority>
-   <chance>100</chance>
-   <done>Empire Barbarian Scouting</done>
+   <priority>50</priority>
+   <chance>80</chance>
+   <done>Empire 1 Barbarian Scouting</done>
    <location>Computer</location>
    <faction>Empire of Terra</faction>
   </avail>
  </mission>
-   <mission name="Empire Barbarian Elimination">
-  <lua>empiremilitary/barbarian_leader_bar</lua>
-  <flags>
-   <unique />
-  </flags>
-  <avail>
-   <priority>5</priority>
-   <chance>100</chance>
-   <done>Empire Barbarian Scouting</done>
-   <location>Bar</location>
-   <faction>Empire of Terra</faction>
-  </avail>
- </mission>
-  <mission name="Empire Barbarian Elimination Rec">
-  <lua>empiremilitary/barbarian_leader_rec</lua>
-  <avail>
-   <priority>5</priority>
-   <chance>100</chance>
-   <done>Empire Barbarian Elimination</done>
-   <location>Computer</location>
-   <faction>Empire of Terra</faction>
-  </avail>
- </mission>
- <mission name="Empire Ardar Scouting">
-  <lua>empiremilitary/ardarshir_recon_bar</lua>
+ <mission name="Empire 2 Ardar Scouting">
+  <lua>empiremilitary/2_ardarshir_recon_bar</lua>
   <flags>
    <unique />
   </flags>
   <avail>
    <priority>15</priority>
    <chance>100</chance>
-   <done>Empire Barbarian Scouting</done>
+   <done>Empire 1 Barbarian Scouting</done>
    <location>Bar</location>
    <faction>Empire of Terra</faction>
   </avail>
  </mission>
- <mission name="Empire Ardar Scouting Rec">
-  <lua>empiremilitary/ardarshir_recon_rec</lua>
+ <mission name="Empire 2 Ardar Scouting Rec">
+  <lua>empiremilitary/2_ardarshir_recon_rec</lua>
   <avail>
-   <priority>5</priority>
-   <chance>100</chance>
-   <done>Empire Ardar Scouting</done>
+   <priority>50</priority>
+   <chance>70</chance>
+   <done>Empire 2 Ardar Scouting</done>
    <location>Computer</location>
    <faction>Empire of Terra</faction>
   </avail>
  </mission>
+   <mission name="Empire 3 Barbarian Elimination">
+  <lua>empiremilitary/3_barbarian_leader_bar</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>50</priority>
+   <chance>100</chance>
+   <done>Empire 2 Ardar Scouting</done>
+   <location>Bar</location>
+   <faction>Empire of Terra</faction>
+  </avail>
+ </mission>
+  <mission name="Empire 3 Barbarian Elimination Rec">
+  <lua>empiremilitary/3_barbarian_leader_rec</lua>
+  <avail>
+   <priority>50</priority>
+   <chance>50</chance>
+   <done>Empire 3 Barbarian Elimination</done>
+   <location>Computer</location>
+   <faction>Empire of Terra</faction>
+  </avail>
+ </mission>
+ <mission name="Empire 4 Barbarian Strikes">
+  <lua>empiremilitary/4_barbarian_strikes_bar</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>50</priority>
+   <chance>100</chance>
+   <done>Empire 3 Barbarian Elimination</done>
+   <location>Bar</location>
+   <faction>Empire of Terra</faction>
+  </avail>
+ </mission>
+  <mission name="Empire 4 Barbarian Strikes Rec">
+  <lua>empiremilitary/4_barbarian_strikes_rec</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>50</priority>
+   <chance>40</chance>
+   <done>Empire 4 Barbarian Strikes</done>
+   <location>Computer</location>
+   <faction>Empire of Terra</faction>
+  </avail>
+ </mission>
+ <mission name="Empire 5 Independent World Rescue">
+  <lua>empiremilitary/5_independent_world_rescue_init</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>50</priority>
+   <chance>100</chance>
+   <done>Empire 4 Barbarian Strikes</done>
+   <location>Land</location>
+   <faction>Empire of Terra</faction>
+  </avail>
+ </mission>
+   <mission name="Empire 5 Independent World Rescue Rec">
+  <lua>empiremilitary/5_independent_world_rescue_rec</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>50</priority>
+   <chance>30</chance>
+   <done>Empire 5 Independent World Rescue</done>
+   <location>Computer</location>
+   <faction>Empire of Terra</faction>
+  </avail>
+ </mission>
+
+
+
+<mission name="Ardar 1 Frontier Scouting">
+  <lua>ardarmilitary/1_border_recon_bar</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>15</priority>
+   <chance>100</chance>
+   <location>Bar</location>
+   <faction>Roidhunate of Ardarshir</faction>
+  </avail>
+ </mission>
+ <mission name="Ardar 1 Frontier Scouting Rec">
+  <lua>ardarmilitary/1_border_recon_rec</lua>
+  <avail>
+   <priority>50</priority>
+   <chance>80</chance>
+   <done>Ardar 1 Frontier Scouting</done>
+   <location>Computer</location>
+   <faction>Roidhunate of Ardarshir</faction>
+  </avail>
+ </mission>
+<mission name="Ardar 2 Native Investigation">
+  <lua>ardarmilitary/2_native_investigation_land</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>15</priority>
+   <chance>100</chance>
+   <done>Ardar 1 Frontier Scouting</done>
+   <location>Land</location>
+   <faction>Roidhunate of Ardarshir</faction>
+  </avail>
+ </mission>
+
 
  <mission name="Intro 1">
   <lua>introquest/intro_1</lua>
@@ -161,7 +252,7 @@
    <unique />
   </flags>
   <avail>
-   <priority>5</priority>
+   <priority>50</priority>
    <chance>20</chance>
    <location>Space</location>
   </avail>
@@ -172,7 +263,7 @@
    <unique />
   </flags>
   <avail>
-   <priority>5</priority>
+   <priority>50</priority>
    <chance>100</chance>
    <done>Intro 1</done>
    <location>Land</location>
@@ -184,7 +275,7 @@
    <unique />
   </flags>
   <avail>
-   <priority>5</priority>
+   <priority>50</priority>
    <chance>100</chance>
    <done>Intro 2</done>
    <location>Land</location>
@@ -197,7 +288,7 @@
    <unique />
   </flags>
   <avail>
-   <priority>5</priority>
+   <priority>50</priority>
    <chance>10</chance>
    <done>Intro 3</done>
    <location>Space</location>
@@ -209,7 +300,7 @@
    <unique />
   </flags>
   <avail>
-   <priority>5</priority>
+   <priority>50</priority>
    <chance>100</chance>
    <done>Harkan 1</done>
    <location>Land</location>
@@ -243,7 +334,7 @@
    <unique />
   </flags>
   <avail>
-   <priority>5</priority>
+   <priority>50</priority>
    <chance>100</chance>
    <done>Harkan 2</done>
    <cond>var.peek("harkan_3_start_time") ~= nil and time.get() &gt; time.fromnumber( var.peek("harkan_3_start_time") )</cond>
@@ -256,7 +347,7 @@
    <unique />
   </flags>
   <avail>
-   <priority>5</priority>
+   <priority>50</priority>
    <chance>100</chance>
    <done>Harkan 3</done>
    <location>Land</location>
@@ -268,7 +359,7 @@
    <unique />
   </flags>
   <avail>
-   <priority>5</priority>
+   <priority>50</priority>
    <chance>100</chance>
    <done>Harkan 4</done>
    <cond>var.peek("harkan_5_start_time") ~= nil and time.get() &gt; time.fromnumber( var.peek("harkan_5_start_time") )</cond>
@@ -281,7 +372,7 @@
    <unique />
   </flags>
   <avail>
-   <priority>5</priority>
+   <priority>50</priority>
    <chance>100</chance>
    <done>Harkan 5</done>
    <cond>var.peek("harkan_empire_choice")==true</cond>
@@ -294,7 +385,7 @@
    <unique />
   </flags>
   <avail>
-   <priority>5</priority>
+   <priority>50</priority>
    <chance>100</chance>
    <done>Harkan Empire 6</done>
    <location>Land</location>
@@ -306,7 +397,7 @@
    <unique />
   </flags>
   <avail>
-   <priority>5</priority>
+   <priority>50</priority>
    <chance>100</chance>
    <done>Harkan Empire 7</done>
    <location>Land</location>
@@ -318,7 +409,7 @@
    <unique />
   </flags>
   <avail>
-   <priority>5</priority>
+   <priority>50</priority>
    <chance>100</chance>
    <done>Harkan 5</done>
    <cond>var.peek("harkan_roidhunate_choice")==true and var.peek("harkan_roidhunate_6_start_time") ~= nil and time.get() &gt; time.fromnumber( var.peek("harkan_roidhunate_6_start_time") )</cond>
@@ -331,7 +422,7 @@
    <unique />
   </flags>
   <avail>
-   <priority>5</priority>
+   <priority>50</priority>
    <chance>100</chance>
    <done>Harkan Roidhunate 6</done>
    <cond>var.peek("harkan_roidhunate_7_start_time") ~= nil and time.get() &gt; time.fromnumber( var.peek("harkan_roidhunate_7_start_time") )</cond>

@@ -10,7 +10,7 @@
   <gfx_store>capacitor-g</gfx_store>
   <level>3</level>
   <logo>betelgeuse</logo>
-  <license>Betelgian Courier License</license>
+  <license>Betelgian Courier</license>
  </general>
  <specific type="modification">
   <energy>400</energy>

@@ -9,6 +9,7 @@ include "dat/missions/templates/ship_kill.lua"
 include "dat/missions/supportfiles/barbarians.lua"
 include("universe/generate_nameGenerator.lua")
 include('universe/objects/class_planets.lua')
+include "dat/scripts/universe/live/live_universe.lua"
 
    -- Whether mission starts in bar (if false, it starts in computer)
    mission_bar=false
@@ -23,6 +24,7 @@ include('universe/objects/class_planets.lua')
 
 
   -- Text if mission ends in space in starting system.
+  space_success_title = "Confirmed Kill"
 space_success_text = "You enter system ${startSystem} and transfer the data on the death of ${targetShipName} to the Navy base. Your payment of ${credits} cr is immediately wired."
 
 -- Scripts we need
@@ -62,13 +64,18 @@ function give_rewards ()
 
    -- Give factions
    faction.modPlayerSingle( G.EMPIRE, 1 )
-   faction.modPlayerSingle( G.PIRATES, -5 )
+   faction.modPlayerSingle( G.BARBARIANS, -1 )
+
+   local bop=var.peek("universe_balanceofpower")
+   bop=bop+1
+   var.push("universe_balanceofpower",bop)
+   updateUniverseDesc()
    
    local planet=planet_class.load(target_planet)
 
    planet.lua.settlements.barbarians.military=planet.lua.settlements.barbarians.military*0.9
    planet:addHistory("The death of "..target_ship_name.." started a civil war, diminishing the world's military potential.")
-
+   generatePlanetServices(planet)
    planet:save()
 
    template_give_rewards()

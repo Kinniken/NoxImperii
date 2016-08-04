@@ -29,7 +29,7 @@ osd_msg_2[4] = "Return to Harkan"
 osd_msg_2["__save"] = true
 
 start_title = "Shadow Conclaves"
-start_text = [[As you leave the ${shipName}, an ensign notifies you to report immediately to Commander Suarez. "You took your time, Captain ${playerName}. Colonel Syrnd has been here for two days already and things are moving fast. Beauval and him have reached Shadowlines' clan and are negotiating a truce between the Tigarays and them. If it works Shadowlines' people will let us slip task forces right up to the Ardar base and we'll have control of the planet before the Roidhunate has understood a thing.". Suarez takes a deep breath and continues. He looks a little ragged, but more animated than you've seen him in days. 
+start_text = [[As you leave the ${shipName}, an ensign notifies you to report immediately to Commander Suarez. "You took your time, ${empireRank} ${playerName}. Colonel Syrnd has been here for two days already and things are moving fast. Beauval and him have reached Shadowlines' clan and are negotiating a truce between the Tigarays and them. If it works Shadowlines' people will let us slip task forces right up to the Ardar base and we'll have control of the planet before the Roidhunate has understood a thing.". Suarez takes a deep breath and continues. He looks a little ragged, but more animated than you've seen him in days. 
 
 "It would help to have real commando equipment however, and that's not something we can get from anonymous third-party suppliers on neutral worlds. I'll need you to fetch it from the Navy base on ${targetPlanet}. Be careful, that's bound to attract some attention. Dismissed!"]]
 
@@ -39,7 +39,7 @@ target_title = "Pickup Boy"
 target_text = [[You land on ${targetPlanet} and report to the colonel in charge. He looks surprised and not very happy to supply such advanced weapons to an unknown reserve officer, but Suarez' request is in order and soon the crates are loaded in the ${shipName}.]]
 
 target_2_title = "Contact with the Enemy"
-target_2_text = [[You've barely landed, straight off the brush with the Ardar fighters, when Suarez in person appears at your airlock. "Get back in space immediately, Captain! Our plans have been leaked to the Ardars, they are bringing in reinforcement! I'm scrambling everything I've got and Beauval and Syrnd are rushing the ground assault. Give them hell!"]]
+target_2_text = [[You've barely landed, straight off the brush with the Ardar fighters, when Suarez in person appears at your airlock. "Get back in space immediately, ${empireRank}! Our plans have been leaked to the Ardars, they are bringing in reinforcement! I'm scrambling everything I've got and Beauval and Syrnd are rushing the ground assault. Give them hell!"]]
 
 end_title = "Peace on Harkan"
 end_text = [[The remains of the Imperial fleet land alongside you on Harkan under the cheers of the small staff of the naval base. The next days are a blur of celebration and activities; Beauval and Syrnd are busy wrapping up a peace treaty, Suarez is locked up in the communication room justifying his action to his superiors, and you alternate between sumptuous receptions in Tigaray cities and austere gatherings of the Yren clans.
@@ -57,6 +57,7 @@ function getStringData()
   stringData.targetPlanet=target_planet and target_planet:name() or ""
   stringData.targetSystem=target_planet and target_planet:system():name() or ""
   stringData.payment=payment
+  stringData.empireRank=emp_getRank()
   return stringData
 end
 
@@ -197,11 +198,11 @@ function land3()
 
     	local stringData=getStringData()
 
-    	if player.numOutfit( "Reserve Lieutenant License" )==0 then
-			player.addOutfit("Reserve Lieutenant License",1)
-			stringData.rankReward="And so I'm raising you to the rank of Lieutenant, a well-deserved promotion."
+    	if player.numOutfit( "Reserve Major" )==0 then
+			player.addOutfit("Reserve Major",1)
+			stringData.rankReward="And so I'm raising you to the rank of Major, a well-deserved promotion."
 		else
-			stringData.rankReward="I was prepared to raise you to the rank of Lieutenant, but it seems someone else got there before me."
+			stringData.rankReward="I was prepared to raise you to the rank of Major, but it seems someone else got there before me."
 		end
 
 		player.addOutfit("Terran Unobtainium Shield Capacitor",1)

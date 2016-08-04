@@ -8,7 +8,7 @@
  <fabricator>Imperial Shipyards</fabricator>
  <description>The Tunguska light fighter is the Meteor-class ship currently used in the Terran Navy for patrolling systems and for short-range recognition.</description>
  <price>280000</price>
- <license>Reserve Sub-Lieutenant License</license>
+ <license>Reserve Ensign</license>
  <movement>
   <thrust>250</thrust>
   <turn>145</turn>

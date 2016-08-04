@@ -56,7 +56,7 @@ local function using_impressive_ship()
 		"Soromid Arx",
 		"Soromid Ira",
 		"Dvaered Goddard",
-		-- Still impressive, but purely “civilian”
+		-- Still impressive, but purely "civilian"
 		"Goddard",
 		"Hawking",
 		"Kestrel"

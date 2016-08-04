@@ -10,7 +10,7 @@
   <cpu>-12</cpu>
   <level>4</level>
   <logo>betelgeuse</logo>
-  <license>Betelgian Trader License</license>
+  <license>Betelgian Trader</license>
  </general>
  <specific type="turret bolt">
   <gfx>massM</gfx>

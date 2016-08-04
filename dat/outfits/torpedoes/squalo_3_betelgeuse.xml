@@ -7,7 +7,7 @@
   <gfx_store>headhunter</gfx_store>
   <level>3</level>
   <logo>betelgeuse</logo>
-  <license>Betelgian Trader License</license>
+  <license>Betelgian Trader</license>
  </general>
  <specific type="ammo">
   <gfx>headhunter</gfx>

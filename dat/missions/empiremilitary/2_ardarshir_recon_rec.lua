@@ -1,6 +1,6 @@
 --[[
 
-   Unique version of Ardarshir recon
+   Rec version of Ardarshir recon
 
 --]]
 
@@ -9,26 +9,18 @@ include "dat/missions/supportfiles/ardarshir.lua"
 
 
 -- Whether mission starts in bar (if false, it starts in computer)
-mission_bar=true
+mission_bar=false
 -- Whether mission ends in bar (if not, it ends in space in start system)
 mission_return_to_bar=false
 
+computer_title ="NAVY: Investigate Ardar systems"
 
 -- Mission details
 misn_title  = "Investigate Ardar systems"
 misn_desc = "Perform a recon in Ardar systems ${targetSystem1}, ${targetSystem2}, ${targetSystem3} and ${targetSystem4}."
 
--- Text if mission from bar
-bar_desc   = "A short, squat humanoid is sitting in a corner of the bar, looking at you very intently."
-bar_accept_title = "Spaceport Bar"
-bar_accept_text  = [[As you look back at him, he gestures in your direction. His face is mostly humanoid, but with a strange rigid skin that looks like leather. His eyes are small and very deep-seated, and his expression is bland.
-
-"Captain ${playerName}. I heard from you from a good friend. Your services to the Navy in the Fringe have proven valuable." he starts in a deep voice, below that of any human. "I work for the Intelligence Service.". Before you have time to express surprise, you realize he has beamed his credentials to your com device. Either he is the real thing or he is very, very good.
-
-"We are in constant need of intelligence on the Roidhunate. Some of that is very targeted, secret gathering of information for which we use internal resources. But we also need regular updates simply on civilian and military activities in various systems. For this we generally use traders like you. Would you be interested?"]]
-bar_accept_text_extra = [["The mission is nothing complex. We just need you to fly through the following systems: ${targetSystem1}, ${targetSystem2}, ${targetSystem3} and ${targetSystem4}. Come back to this system and beam back the results."]]
-
   -- Text if mission ends in space in starting system.
+space_success_title = "Job Done"
 space_success_text = "You enter system ${startSystem} and transfer the data to the Navy base. Your payment of ${credits} cr is immediately wired."
 
 -- Messages
@@ -62,11 +54,7 @@ function create ()
    target_systems["__save"] = true
 
    -- Get credits
-   credits  = rnd.rnd(20,40) * 1000
-
-   -- Spaceport bar stuff
-   misn.setNPC( "Intelligence Officer", "empire/empire1" )
-   
+   credits  = rnd.rnd(20,40) * 10000
 
    template_create ()
 end

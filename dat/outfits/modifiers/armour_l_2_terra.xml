@@ -10,7 +10,7 @@
   <description>The Terran Navy has long privileged shields, seeing armour as a rather crude technology. Nevertheless, the Navy's internally-developed composite platings offer good protection for their weight.</description>
   <level>2</level>
   <logo>terra</logo>
-  <license>Reserve Lieutenant License</license>
+  <license>Reserve Lieutenant</license>
  </general>
  <specific type="modification">
   <armour_mod>15</armour_mod>

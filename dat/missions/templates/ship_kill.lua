@@ -18,6 +18,8 @@ mission_return_to_bar=true
 -- Whether mission ends when landing (if not, it ends in space in start system)
 mission_return_to_planet=false
 
+-- Whether the player has to be the main killer
+allied_kills_count = false
 
 -- Mission details
 misn_title  = ""
@@ -51,6 +53,10 @@ osd_msg[1] = "Fly to the ${targetSystem} system"
 osd_msg[2] = "Kill ${targetShipName}"
 osd_msg[3] = "Return to ${endPlanet}"
 osd_msg["__save"] = true
+
+
+hunters = {}
+hunter_hits = {}
 
 
 function template_getStringData()
@@ -212,6 +218,8 @@ function sys_enter()
       pilot_outfitAddSet( target_ship_pilot, target_ship_outfits )
       hook.pilot( target_ship_pilot, "death", "ship_dead" )
       hook.pilot( target_ship_pilot, "jump", "ship_jump" )
+      hook.pilot( target_ship_pilot, "attacked", "pilot_attacked" )
+      hook.pilot( target_ship_pilot, "disable", "pilot_disable" )
       misn.osdActive(2)
 
       if get_escorts~=nil then
@@ -267,38 +275,83 @@ function sys_enter()
    
 end
 
+function pilot_attacked( p, attacker, dmg )
+   if attacker ~= nil then
+      local found = false
+
+      for i, j in ipairs( hunters ) do
+         if j == attacker then
+            hunter_hits[i] = hunter_hits[i] + dmg
+            found = true
+         end
+      end
+
+      if not found then
+         local i = #hunters + 1
+         hunters[i] = attacker
+         hunter_hits[i] = dmg
+      end
+   end
+end
+
 -- Ship is dead
 function ship_dead( pilot, attacker )
-    local stringData=template_getStringData()
-   if attacker == player.pilot() or rnd.rnd() > 0.5 then
+   if attacker == player.pilot() or allied_kills_count then
       -- it was the player who killed the ship
-
-      if (success_title) then
-        tk.msg(gh.format( success_title,stringData),gh.format( success_text,stringData))
-      else
-        player.msg( gh.format(msg[1],stringData) )
-      end
-
-      misn.osdActive(3)
-      hook.rm(hook_sys_enter)
-      misn.markerMove(target_system_marker,end_planet:system())
-      if (mission_return_to_bar) then        
-        hook.land("land_reward","bar")
-      elseif (mission_return_to_planet) then        
-        hook.land("land_reward")
-      else
-        hook.enter("sys_enter_reward")
-      end
-
-      if (cargo_name) then
-        carg_id = misn.cargoAdd( cargo_name, cargo_quantity )
-      end
-
+      ship_dead_success()
    else
-      -- it was someone else
+
+    local top_hunter = nil
+    local top_hits = 0
+    local player_hits = 0
+    local total_hits = 0
+    for i, j in ipairs( hunters ) do
+       total_hits = total_hits + hunter_hits[i]
+       if j ~= nil then
+          if j == player.pilot() then
+             player_hits = player_hits + hunter_hits[i]
+          elseif j:exists() and hunter_hits[i] > top_hits then
+             top_hunter = j
+             top_hits = hunter_hits[i]
+          end
+       end
+    end
+
+    if top_hunter == nil or player_hits >= top_hits/2 then
+       ship_dead_success()
+    else
+      local stringData=template_getStringData()
+
+       -- it was someone else
       player.msg( gh.format( msg[3], stringData ) )
       misn.finish(false)
+    end
    end
+end
+
+function ship_dead_success()
+   local stringData=template_getStringData()
+
+  if (success_title) then
+    tk.msg(gh.format( success_title,stringData),gh.format( success_text,stringData))
+  else
+    player.msg( gh.format(msg[1],stringData) )
+  end
+
+  misn.osdActive(3)
+  hook.rm(hook_sys_enter)
+  misn.markerMove(target_system_marker,end_planet:system())
+  if (mission_return_to_bar) then        
+    hook.land("land_reward","bar")
+  elseif (mission_return_to_planet) then        
+    hook.land("land_reward")
+  else
+    hook.enter("sys_enter_reward")
+  end
+
+  if (cargo_name) then
+    carg_id = misn.cargoAdd( cargo_name, cargo_quantity )
+  end
 end
 
 -- Ship jumped away
@@ -343,6 +396,15 @@ function land_reward()
       give_rewards()
       if (carg_id) then
         misn.cargoJet(carg_id)
+      end
+   end
+end
+
+
+function pilot_disable ()
+   if rnd.rnd() < 0.7 then
+      for i, j in ipairs( pilot.get() ) do
+         j:taskClear()
       end
    end
 end

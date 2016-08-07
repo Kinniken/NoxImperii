@@ -61,6 +61,8 @@ function create ()
    -- Spaceport bar stuff
    misn.setNPC( "Colonel Zhongzheng", "empire/unique/soldner" )
 
+   allied_kills_count=true
+
    template_create()
 end
 

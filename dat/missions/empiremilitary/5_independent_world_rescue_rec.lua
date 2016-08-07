@@ -47,6 +47,8 @@ function create ()
    -- Get credits
    credits  = rnd.rnd(3,5) * 1000000
 
+   allied_kills_count=true
+
    template_create()
 end
 

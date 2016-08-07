@@ -86,6 +86,8 @@ function create ()
 
    end_planet=planet.get("Harkan")
 
+   allied_kills_count=true
+
    template_create()
 end
 

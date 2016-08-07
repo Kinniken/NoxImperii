@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<outfit name="Reserve Colonel">
+<outfit name="Reserve Major License">
  <general>
-  <license>Reserve Major</license>
+  <license>Reserve Captain License</license>
   <mass>0</mass>
   <price>200000</price>
   <gfx_store>license</gfx_store>

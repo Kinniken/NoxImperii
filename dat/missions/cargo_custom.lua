@@ -95,8 +95,8 @@ function create()
     end
 
 
-    jumpreward = 500
-    distreward = 0.6
+    jumpreward = 1000
+    distreward = 0.12
     reward     = math.floor(1.5^urgency * 1.2^cargoSizeTier * (numjumps * jumpreward + traveldist * distreward) * (1. + 0.05*rnd.twosigma())* cargoType.priceFactor)
 
     textData_targetWorld=destplanet:name()

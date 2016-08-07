@@ -21,7 +21,7 @@ function trader_createMeryoch(  )
    p     = "Meryoch"
    s     = ship.get(p)
    outfits = { }
-   outfits["__save"] = true
+   
 
    local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 
@@ -49,7 +49,7 @@ function trader_createGeldoch(  )
    p     = "Geldoch"
    s     = ship.get(p)
    outfits = { }
-   outfits["__save"] = true
+   
 
    local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 

@@ -47,7 +47,6 @@ function barbarian_createPlanet(  )
    p     = "Barbarian Slaver"
    s     = ship.get(p)
    outfits = { }
-   outfits["__save"] = true
 
    local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 
@@ -78,7 +77,6 @@ function barbarian_createContinent(  )
       p     = "Barbarian Looter"
       s     = ship.get(p)
       outfits = { }
-      outfits["__save"] = true
 
    local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 
@@ -100,12 +98,13 @@ function barbarian_createContinent(  )
 end
 
 function barbarian_createComet(  )
+
+
    -- Create the pirate ship
    local p, s, outfits
     = "Barbarian Raider"
       s     = ship.get(p)
       outfits = { } 
-      outfits["__save"] = true
 
    local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 

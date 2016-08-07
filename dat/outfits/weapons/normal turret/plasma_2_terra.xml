@@ -10,7 +10,7 @@
   <cpu>-5</cpu>
   <level>2</level>
   <logo>terra</logo>
-  <license>Reserve Lieutenant</license>
+  <license>Reserve Lieutenant License</license>
  </general>
  <specific type="turret bolt">
   <gfx>plasma</gfx>

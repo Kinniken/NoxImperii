@@ -1387,7 +1387,7 @@ void space_update( const double dt )
       for (i=0; i<cur_system->njumps; i++)
          if (( !jp_isKnown( &cur_system->jumps[i] )) && ( pilot_inRangeJump( player.p, i ))) {
             jp_setFlag( &cur_system->jumps[i], JP_KNOWN );
-            //player_message( "You discovered a Jump Point." );
+            player_message( "You discovered a Jump Point." );
             hparam[0].type  = HOOK_PARAM_STRING;
             hparam[0].u.str = "jump";
             hparam[1].type  = HOOK_PARAM_JUMP;

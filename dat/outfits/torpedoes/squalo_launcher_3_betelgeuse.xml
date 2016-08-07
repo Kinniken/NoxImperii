@@ -10,7 +10,7 @@
   <cpu>-3</cpu>
   <level>3</level>
   <logo>betelgeuse</logo>
-  <license>Betelgian Trader</license>
+  <license>Betelgian Trader License</license>
  </general>
  <specific type="launcher" secondary="1">
   <ammo>Squalo Torpedo</ammo>

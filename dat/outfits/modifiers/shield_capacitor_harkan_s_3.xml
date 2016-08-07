@@ -10,7 +10,7 @@
   <gfx_store>capacitor</gfx_store>
   <level>3</level>
   <logo>terra</logo>
-  <license>Reserve Major</license>
+  <license>Reserve Captain License</license>
   <conditions>var.peek ("harkan_empire_win")==true</conditions>
  </general>
  <specific type="modification">

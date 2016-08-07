@@ -34,14 +34,6 @@ function updateUniverseDesc()
 		desc=desc.." Increasing corruption and carelessness among noble-born officers is damaging Navy moral."
 	end
 
-	if var.peek("empire_missions_5")==true then
-		desc=desc.." In a surprising reversal, the Empire has started protecting independent worlds from barbarians again."
-	elseif var.peek("empire_missions_4")==true then
-		desc=desc.." Pre-emptive attacks against barbarian fleets are reducing raids."
-	elseif var.peek("empire_missions_3")==true then
-		desc=desc.." More aggressive tactics against barbarian leaders are showing promises."
-	end
-
 	if var.peek("harkan_empire_win")==true then
 		desc=desc.." The recent takeover of Harkan, and with it its precious supplies of Unobtainium, has given a new edge to the Navy. There is life yet in the old Empire!"
 	elseif var.peek("harkan_roidhunate_win")==true then
@@ -154,12 +146,12 @@ function updateGreatSurveyDesc()
 	end
 
 	if not surveyDone then
-		local surveyDesc="You have not started the Great Survey. Speak to an old pilot on any Imperial world to start it."
+		surveyDesc="You have not started the Great Survey. Speak to an old pilot on any Imperial world to start it."
 	else
-		local surveyDesc="Explore more worlds outside the influence of the Empire, the Roidhunate, Betelgeuse or Ixum to progress in the Second Great Survey."
+		surveyDesc="Explore more worlds outside the influence of the Empire, the Roidhunate, Betelgeuse or Ixum to progress in the Second Great Survey."
 
-		local planetDesc=""
-		local planetCount=""
+		planetDesc=""
+		planetCount=""
 
 		for k,v in ipairs(planetCounters) do
 			planetDesc=planetDesc..v[1]..":\n"

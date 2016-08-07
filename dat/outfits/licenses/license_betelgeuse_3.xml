@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<outfit name="Betelgian Merchant">
+<outfit name="Betelgian Merchant License">
  <general>
- 	<license>Betelgian Trader</license>
+ 	<license>Betelgian Trader License</license>
   <mass>0</mass>
   <price>50000</price>
   <gfx_store>license</gfx_store>

@@ -2277,7 +2277,7 @@ if (o) WARN("Outfit '%s' missing/invalid '"s"' element", temp->name) /**< Define
 	   layerpos++;
 	   if (temp->slot.type != OUTFIT_SLOT_NA) {
 		   if (temp->slot.spid>0) {
-			   nsnprintf( buf, bufsize, OUTFIT_GFX_PATH"store/layers/slot_special_%s.png",  sp_name(temp->slot.spid));
+			   nsnprintf( buf, bufsize, OUTFIT_GFX_PATH"store/layers/slot_special_%s.png",  sp_display(temp->slot.spid));
 			   temp->gfx_store_layers[layerpos]=gl_newImage( buf, OPENGL_TEX_MIPMAPS );
 		   } else if (temp->slot.type == OUTFIT_SLOT_UTILITY) {
 			   temp->gfx_store_layers[layerpos]=gl_newImage( OUTFIT_GFX_PATH"store/layers/slot_utility.png", OPENGL_TEX_MIPMAPS );

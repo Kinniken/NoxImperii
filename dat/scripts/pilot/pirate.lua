@@ -53,7 +53,6 @@ function pirate_createKestrel(  )
    p     = "Pirate Kestrel"
    s     = ship.get(p)
    outfits = { }
-   outfits["__save"] = true
    
 
    local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
@@ -85,7 +84,6 @@ function pirate_createAdmonisher( pirate_create )
    p     = "Pirate Admonisher"
    s     = ship.get(p)
    outfits = { }
-   outfits["__save"] = true
    
 
    local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
@@ -116,7 +114,6 @@ function pirate_createDelta( pirate_create )
       p     = "Pirate Delta"
       s     = ship.get(p)
       outfits = { }
-      outfits["__save"] = true
    
 
    local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
@@ -149,7 +146,6 @@ function pirate_createVendetta( pirate_create )
       p     = "Pirate Vendetta"
       s     = ship.get(p)
       outfits = { } 
-      outfits["__save"] = true
 
    local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 

@@ -180,17 +180,6 @@ const char *sp_display( unsigned int spid )
 
 
 /**
- * @brief Gets the internal name of a slot property.
- */
-const char *sp_name( unsigned int spid )
-{
-   if (sp_check(spid))
-      return NULL;
-   return sp_array[ spid-1 ].name;
-}
-
-
-/**
  * @brief Gets the description of a slot property.
  */
 const char *sp_description( unsigned int spid )

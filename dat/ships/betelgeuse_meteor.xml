@@ -8,7 +8,7 @@
  <fabricator>Paoli Shipyards</fabricator>
  <description>The Alba is a light fighter adapted from civilian recon crafts. Like most Betelgian ships, its fighting capacities do not match those of its nearest equivalent, the Tunguska. Its heritage however does leave it with a larger cargo hold than typical on fighters.</description>
  <price>220000</price>
- <license>Betelgian Courier</license>
+ <license>Betelgian Courier License</license>
  <movement>
   <thrust>220</thrust>
   <turn>130</turn>

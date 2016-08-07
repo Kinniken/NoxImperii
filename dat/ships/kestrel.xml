@@ -8,7 +8,7 @@
  <fabricator>Krain Industries</fabricator>
  <description>The Kestrel is a hard-to-classify ship; while its tonnage and defensive capacities mark it as a destroyer, its offensive capacities are in cruiser territory, and its speed and agility are excellent for a ship of its class. Outside of major standing navies, few ships can take it one-on-one.</description>
  <price>4500000</price>
- <license>Reserve Colonel</license>
+ <license>Reserve Major License</license>
  <movement>
   <thrust>170</thrust>
   <turn>120</turn>

@@ -19,7 +19,6 @@ function ardarshir_createMeteor()
    stype 	 = "Ardar Roeth"
    s     = ship.get(stype)
    outfits = { }   
-   outfits["__save"] = true
 
    local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 
@@ -45,7 +44,6 @@ function ardarshir_createComet()
    stype     = "Ardar Vach Rueth"
    s     = ship.get(stype)
    outfits = { }   
-   outfits["__save"] = true
 
    local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 
@@ -70,7 +68,6 @@ function ardarshir_createContinent()
    stype     = "Ardar Brythioch"
    s     = ship.get(stype)
    outfits = { }   
-   outfits["__save"] = true
 
    local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(s)
 

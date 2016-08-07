@@ -28,7 +28,7 @@ text_space = [[Your terminal suddenly beeps and a message from the Fez hospital 
 title[1] = "${startPlanet} Hospital Complex"
 text[1] = [[You land on ${startPlanet} and head for the hospital complex where the alien is being treated. As you arrive, the head of the avian sophont medical team comes and meet you.
 
-"${empireRank} ${playerName}, we have good news. Shadowlines - that's her name, as close as our linguists can translate it - has made a full recovery. And yes, she's female, though it seems to matter little in her species. Her biology is fascinating; her bones are the lightest and strongest we've seen on aviants so far. She's refused to tell us much about her people, but it's clear they've evolved as night hunters, something akin to our owls.  They seem less social than humans - I doubt they have true cities, probably just family settlements. One thing puzzles us however; the linguist says they live mainly in high mountain ranges, but that doesn't really fit with their biology. We would have thought them adapted more for sea-level flying." The scientist continues with long explanations on how they manufactured the needed drugs based on research on similar species from two dozen worlds, but you've stopped listening. In any case you've reached the room where she is hosted.
+"Captain ${playerName}, we have good news. Shadowlines - that's her name, as close as our linguists can translate it - has made a full recovery. And yes, she's female, though it seems to matter little in her species. Her biology is fascinating; her bones are the lightest and strongest we've seen on aviants so far. She's refused to tell us much about her people, but it's clear they've evolved as night hunters, something akin to our owls.  They seem less social than humans - I doubt they have true cities, probably just family settlements. One thing puzzles us however; the linguist says they live mainly in high mountain ranges, but that doesn't really fit with their biology. We would have thought them adapted more for sea-level flying." The scientist continues with long explanations on how they manufactured the needed drugs based on research on similar species from two dozen worlds, but you've stopped listening. In any case you've reached the room where she is hosted.
 
 As you enter the room, Shadowlines is moving back and forth behind a reinforced glass panel. The Yren is exchanging with the linguist with the aid of a vocalizer. She notices you entering and seems to recognize you, quickly calling out a greeting in her high-pitched language. "The Flyer in the Deep Night! Be thanked, ${playerName}. Your people have shown strange mercy to bring a captive so far to save him. We would have given only a clean death to a captive Crawler.", the vocalizer translates.
 
@@ -55,7 +55,7 @@ ${rankReward} And of course, here is your payment. ${payment} credits. I'll be i
 title[4] = "The Roidhunate"
 text[4] = [[Your decision taken, you head for the nearest Ardar world, land and head to the spaceport authorities. At first they do not believe you; then they struggle to find someone authorized to deal with someone like you.  Hours after you entered the facility, you are finally face to face with the local head of the military secret services.
 
-"So one more human chooses to leave the decrepit Empire and joins our expanding Roidhunate.", he starts in fluent Terran. "Though I undeserved your motivations are a little more complicated than most. It is good to see humans with noble aspirations - from time to time. You have rendered us an unexpected service, ${ardarRank} ${playerName}. You will find the Roidhunate generous with people that help it, no matter their race.
+"So one more human chooses to leave the decrepit Empire and joins our expanding Roidhunate.", he starts in fluent Terran. "Though I undeserved your motivations are a little more complicated than most. It is good to see humans with noble aspirations - from time to time. You have rendered us an unexpected service, Captain ${playerName}. You will find the Roidhunate generous with people that help it, no matter their race.
 
 ${rankReward} And as your kind is known for its cupidity, here is your first payment of ${payment} credits.
 
@@ -67,8 +67,6 @@ function getStringData()
   stringData.startPlanet=start_planet and start_planet:name() or ""
   stringData.startSystem=start_planet and start_planet:system():name() or ""
   stringData.payment=payment
-  stringData.empireRank=emp_getRank()
-  stringData.ardarRank=ardar_getRank()
   return stringData
 end
 
@@ -130,11 +128,11 @@ function land_target ()
 	local stringData=getStringData()
 
     if planet.cur() == planet.get("Harkan") then
-       if player.numOutfit( "Reserve Lieutenant" )==0 then
-			player.addOutfit("Reserve Lieutenant",1)
-			stringData.rankReward="I've pulled a few strings - you are a lieutenant now! Reserve status, of course. That means you won't be called. But you do get to buy basic Imperial supplies that are off-limit to civilians."
+       if player.numOutfit( "Reserve Sub-Lieutenant License" )==0 then
+			player.addOutfit("Reserve Sub-Lieutenant License",1)
+			stringData.rankReward="I've pulled a few strings - you are a sub-lieutenant now! Reserve status, of course. That means you won't be called. But you do get to buy basic Imperial supplies that are off-limit to civilians."
 		else
-			stringData.rankReward="I was planning to make you a reserve lieutenant - but I see someone got there before me."
+			stringData.rankReward="I was planning to make you a reserve sub-lieutenant - but Navy records says that you are already on the list. I won't ask how, son."
 		end
 
 		player.pay(payment)
@@ -153,9 +151,9 @@ function land_target ()
 
 		stringData.payment = payment
 
-		if player.numOutfit( "Ardarshir Auxiliary, Class II" )==0 then
-			player.addOutfit("Ardarshir Auxiliary, Class II",1)
-			stringData.rankReward="As such I grant you from now onwards the status of Auxiliary, class II."
+		if player.numOutfit( "Ardarshir Auxiliary, Class I" )==0 then
+			player.addOutfit("Ardarshir Auxiliary, Class I",1)
+			stringData.rankReward="As such I grant you from now onwards the status of Auxiliary, class I."
 		else
 			stringData.rankReward="I would have granted you Auxiliary status but our archives states that you are already on the list."
 		end

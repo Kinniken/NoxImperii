@@ -8,7 +8,7 @@
  <fabricator>Imperial Shipyards</fabricator>
  <description>This Comet-class light frigate is one of the workhorse of the Terran Navy. It is used mainly as an interceptor and as a frontier scout ship, and is provided with the engines and fuel capacity needed for those roles.</description>
  <price>1100000</price>
- <license>Reserve Lieutenant</license>
+ <license>Reserve Lieutenant License</license>
  <movement>
   <thrust>200</thrust>
   <turn>125</turn>

@@ -11,7 +11,7 @@
   <cpu>-10</cpu>
   <level>5</level>
   <logo>betelgeuse</logo>
-  <license>Betelgian Merchant Prince</license>
+  <license>Betelgian Merchant Prince License</license>
  </general>
  <specific type="modification">
   <energy_regen>25</energy_regen>

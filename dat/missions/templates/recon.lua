@@ -7,16 +7,12 @@
    include "numstring.lua"
    include "dat/scripts/general_helper.lua"
    include "jumpdist.lua"
-   include "dat/missions/supportfiles/common.lua"
 
 -- Whether mission starts in bar (if false, it starts in computer)
 mission_bar=true
---Whether it starts when landing
-mission_land=false
 -- Whether mission ends in bar (if not, it ends in space in start system)
 mission_return_to_bar=true
--- Whether mission ends when landing (if not, it ends in space in start system)
-mission_return_to_planet=false
+
 
 -- Mission details
 misn_title  = ""
@@ -27,7 +23,6 @@ misn_desc   = ""
 bar_desc = ""
 bar_accept_title = "Spaceport Bar"
 bar_accept_text  = [[]]
-bar_accept_title_extra = nil
 bar_accept_text_extra = nil
 
 -- Text if mission ends on starting bar
@@ -35,7 +30,6 @@ bar_success_title = "Spaceport Bar"
 bar_success_text = [[]]
 
 -- Text if mission ends in space in starting system.
-space_success_title = ""
 space_success_text = ""
 
 -- Messages
@@ -57,8 +51,6 @@ function template_getStringData()
   stringData.credits=credits
   stringData.mainTargetPlanet=main_target_planet and main_target_planet:name() or ""
   stringData.mainTargetSystem=main_target_system and main_target_system:name() or ""
-  stringData.empireRank=emp_getRank()
-  stringData.ardarRank=ardar_getRank()
 
   for k,v in ipairs(target_systems) do
     stringData['targetSystem'..k]=v:name()
@@ -99,25 +91,13 @@ function template_accept ()
 
    local stringData=template_getStringData()
 
-   if (mission_land) then
-
-    if not tk.yesno( gh.format( start_title,stringData),gh.format( start_text,stringData)) then
-        misn.finish()
-     end
-
-    template_accept ()
-
-
-  elseif (mission_bar) then
+   if (mission_bar) then
      if not tk.yesno( gh.format( bar_accept_title,stringData),gh.format( bar_accept_text,stringData)) then
       misn.finish()
     end
 
     if (bar_accept_text_extra) then
-      if not bar_accept_title_extra then
-        bar_accept_title_extra=bar_accept_title
-      end
-      tk.msg(gh.format( bar_accept_title_extra,stringData),gh.format( bar_accept_text_extra,stringData))
+      tk.msg(gh.format( bar_accept_title,stringData),gh.format( bar_accept_text_extra,stringData))
     end
 
     target_systems_markers={}
@@ -177,8 +157,6 @@ function sys_enter()
   misn.markerAdd( start_planet:system(), "low" )
   if (mission_return_to_bar) then        
     hook.land("land_reward","bar")
-  elseif (mission_return_to_planet) then        
-    hook.land("land_reward")
   else
     hook.enter("sys_enter_reward")
   end
@@ -186,14 +164,10 @@ end
 end
 
 function sys_enter_reward()
-  hook.timer(3000, "sys_enter_finish")
-end
-
-function sys_enter_finish()
   if (start_planet:system()==system.cur()) then
     local stringData=template_getStringData()
-      tk.msg(gh.format(space_success_title,template_getStringData()),gh.format(space_success_text,template_getStringData()) )
-      give_rewards()
+    player.msg(gh.format(space_success_text,template_getStringData()) )
+    give_rewards()
   end
 end
 

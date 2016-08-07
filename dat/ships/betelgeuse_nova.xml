@@ -10,7 +10,7 @@
 
 Intended as command ships for large fleets, and always commanded by prominent members of leading families, Stella dreadnoughts are not just formidable vessels but also provide luxurious accommodations worthy of the Doge himself.</description>
  <price>15000000</price>
- <license>Betelgian Merchant Prince</license>
+ <license>Betelgian Merchant Prince License</license>
  <movement>
   <thrust>100</thrust>
   <turn>60</turn>

@@ -119,6 +119,12 @@ function handleNames(star,nameTakenSystem,nameTakenPlanet)
 		end
 
 		planet.baseDesc=planet.baseDesc:gsub("#sunname#", star.name)
+    
+    if planet.barDescGenerators ~= nil then
+      planet.barDesc=gh.pickConditionalWeightedObject(planet.barDescGenerators,planet).getDesc(planet)
+    else
+      planet.barDesc=" "
+    end
 	end
 
 end
@@ -351,6 +357,7 @@ function populateSystemCivilized(star)
 				if (settlement) then
 					settlement.applyOnPlanet(planet)
 					planet.settlementTypes[settlement.appliesTo]=settlement --needed later to generate desc
+          planet.barDescGenerators=settlement.barDescGenerators
 
 					if (settlement.specialities) then
 						local speciality=gh.pickConditionalWeightedObject(settlement.specialities,planet)

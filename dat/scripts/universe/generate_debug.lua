@@ -1,34 +1,31 @@
 
-
-includeFolders={"live",G.NATIVES,"objects","planets","settlements",".."}
-
-package.path = package.path .. ";?.lua"
-
-for k,v in pairs(includeFolders) do
-	package.path=package.path..";"..v.."/?.lua"
-end
+package.path = package.path .. ';./scripts/?.lua;../?.lua'
 
 function include(file)
-	local path=file:match("([^/]+)%.lua")
+	local path=file:match("(.*).lua")
 	require(path)
 end
 
 commodity = {get=function(name) return name end}
 
 
-include('universe/generate_system.lua')
+include('scripts/universe/generate_system.lua')
 
-include('dat/scripts/general_helper.lua')
+include('scripts/general_helper.lua')
 
-include('universe/live/live_universe.lua')
+include('scripts/universe/live/live_universe.lua')
 
-include('universe/objects/class_planets.lua')
+include('scripts/universe/objects/class_planets.lua')
 
 
 function debugGenerateStar(x,y)
 
 	local star=starGenerator.generateStar(x,y,nameTaken,nameTaken)
+  
+  displayStar(star)
+end
 
+function displayStar(star)
 	print(star.name..":"..star.spacePict..":"..star.populationTemplate.name)
 
 	for k,planet in pairs(star.planets) do 
@@ -38,6 +35,8 @@ function debugGenerateStar(x,y)
 		print(dump.tostring(planet.lua))
 		print("---")
 		print(planet.baseDesc)
+		print("---")
+    print(planet.barDesc)
 		print("---")
 		print(generateLiveSettlementsDesc(planet))
 		print("---")
@@ -69,7 +68,7 @@ for i=0,2000 do
 end
 
 --a few samples
-for i=0,10 do
+for i=0,100 do
 	--debugGenerateStar(0,0)
 	
   --Ardar core
@@ -79,6 +78,6 @@ for i=0,10 do
   --debugGenerateStar(1000,460)
   
   --Great Beyond
-  debugGenerateStar(5000,5000)
+  --debugGenerateStar(5000,5000)
 end
 

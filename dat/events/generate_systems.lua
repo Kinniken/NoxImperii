@@ -49,9 +49,11 @@ local function createAroundStar(c_sys,nextlevel,level,visited)
 
           if p.baseDesc == nil or p.baseDesc=="" then
             print("Warning: planet with no baseDesc: "..p.name)
+            p.baseDesc="MISSING"
           end
           if p.barDesc == nil or p.barDesc=="" then
             print("Warning: planet with no barDesc: "..p.name)
+            p.barDesc=" "
           end
 
 					newsys:createPlanet(p.name,p.x,p.y,p.spacePict,p.exteriorPict,p.factionPresence,p.factionRange,p.faction,p.baseDesc," ","History",p.barDesc,0,0,p.template.classification,1,"",p.services.fuel,p.services.bar,p.services.missions,p.services.commodity,p.services.outfits,p.services.shipyard,known)

@@ -50,6 +50,10 @@ function updateUniverseDesc()
 
 	desc=desc.."\n\nRoidhunate of Ardarshir: disciplined and ambitious, the Roidhunate is dedicated to one goal: installing the Roidhun as overlord of the Galaxy. The young and determined rival of Terra cannot yet challenge the Imperial fleets in all-out war, but every year that passes the gap narrows."
 
+	if var.peek("roidhunate_missions_5") then
+		desc=desc.." Ardar fleets have started picking out isolated Imperial fleets, under the thin guise of mercenary activity."
+	end
+
 	if var.peek("harkan_empire_win")==true then
 		desc=desc.." The failure of the Ardar plans on Harkan have however delayed the Roidhunate's plans. Surely a temporary set back..."
 	elseif var.peek("harkan_roidhunate_win")==true then

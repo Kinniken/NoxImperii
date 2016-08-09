@@ -61,7 +61,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.holyflame.population=planet.lua.settlements.holyflame.population*0.95
 	textData.minorityReligion=planet.lua.settlements.holyflame.minorityReligion
 
-	local effectId=planet.lua.settlements.holyflame:addActiveEffect("Departure of skilled ${minorityReligion} Ixumites is reducing industrial production.",
+	local effectId=planet.lua.settlements.holyflame:addActiveEffect(gh.format("Departure of skilled ${minorityReligion} Ixumites is reducing industrial production.",textData),
 		(time.get() + self.duration):tonumber(), "holyflame_minoritydeparture" )
 	planet.lua.settlements.holyflame:reduceGoodSupply(C.INDUSTRIAL,50,3,effectId)
 	planet.lua.settlements.holyflame:reduceGoodSupply(C.MODERN_INDUSTRIAL,50,3,effectId)

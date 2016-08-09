@@ -82,6 +82,7 @@ function template_create ()
   if (not mission_bar) then--computer
     misn.setDesc(gh.format(misn_desc,stringData))
     target_systems_markers={}
+    target_systems_markers["__save"] = true
     for k,v in ipairs(target_systems) do
       target_systems_markers[k]=misn.markerAdd( v, "computer" )
     end
@@ -121,6 +122,7 @@ function template_accept ()
     end
 
     target_systems_markers={}
+    target_systems_markers["__save"] = true
     for k,v in ipairs(target_systems) do
       target_systems_markers[k]=misn.markerAdd( v, "low" )
     end

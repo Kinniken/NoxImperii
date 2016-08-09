@@ -410,7 +410,7 @@ royalixum[#royalixum+1]={
 royalixum[#royalixum+1]={
   weight=10,
   getDesc=function(planet)    
-    local desc="The ${name}'s decoration is a fancy take on the Imperial style… of a century ago. Clearly since then the local nobility has had higher priorities."
+    local desc="The ${name}'s decoration is a fancy take on the Imperial style... of a century ago. Clearly since then the local nobility has had higher priorities."
     
     local adj={"Imperial","Terran","French","Italian","Chinese","Japanese","Persian"}
     local noun={"Pavilion","Garden","Estate","Palace"}

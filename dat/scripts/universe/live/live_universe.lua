@@ -357,7 +357,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 
 	--Calculating tendency to depart from base price
 	--0 equals no departure, 1 max.
-	priceMouvement=1-(settlement.technology*settlement.services)/2
+	priceMouvement=1-(settlement.technology*settlement.services)
 
 	if (priceMouvement<0.1) then
 		priceMouvement=0.1

@@ -87,6 +87,8 @@ static int playerL_addShip( lua_State *L );
 static int playerL_swapShip( lua_State *L );
 static int playerL_misnActive( lua_State *L );
 static int playerL_misnDone( lua_State *L );
+static int playerL_misnAllActive( lua_State *L );
+static int playerL_misnAllDone( lua_State *L );
 static int playerL_evtActive( lua_State *L );
 static int playerL_evtDone( lua_State *L );
 static int playerL_teleport( lua_State *L );
@@ -130,6 +132,8 @@ static const luaL_reg playerL_methods[] = {
    { "swapShip", playerL_swapShip },
    { "misnActive", playerL_misnActive },
    { "misnDone", playerL_misnDone },
+   { "misnAllActive", playerL_misnAllActive },
+   { "misnAllDone", playerL_misnAllDone },
    { "evtActive", playerL_evtActive },
    { "evtDone", playerL_evtDone },
    { "teleport", playerL_teleport },
@@ -157,6 +161,8 @@ static const luaL_reg playerL_cond_methods[] = {
    { "numOutfit", playerL_numOutfit },
    { "misnActive", playerL_misnActive },
    { "misnDone", playerL_misnDone },
+   { "misnAllActive", playerL_misnAllActive },
+   { "misnAllDone", playerL_misnAllDone },
    { "evtActive", playerL_evtActive },
    { "evtDone", playerL_evtDone },
    {0,0}
@@ -1516,4 +1522,43 @@ static int playerL_setCrewStatus( lua_State *L )
 	}
 
    return 1;
+}
+
+static int playerL_misnAllActive( lua_State *L ) {
+	int i, key;
+	int nmissions;
+	const MissionData *missions;
+
+	missions=missions_getAllActiveMissions(&nmissions);
+
+	lua_newtable(L);
+	key = 0;
+	for (i=0; i<nmissions; i++) {
+		 key++;
+		 lua_pushnumber(L,key); /* key */
+		 lua_pushstring(L,missions[i].name); /* value */
+		 lua_rawset(L,-3);
+	}
+
+	return 1;
+}
+
+
+static int playerL_misnAllDone( lua_State *L ) {
+	int i, key;
+	int ndone;
+	const int *missionsDone;
+
+	missionsDone=player_getAllDoneMissions(&ndone);
+
+	lua_newtable(L);
+	key = 0;
+	for (i=0; i<ndone; i++) {
+		 key++;
+		 lua_pushnumber(L,key); /* key */
+		 lua_pushstring(L,mission_get(missionsDone[i])->name); /* value */
+		 lua_rawset(L,-3);
+	}
+
+	return 1;
 }

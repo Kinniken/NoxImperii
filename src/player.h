@@ -173,6 +173,7 @@ void player_soundPlayGUI( int sound, int once );
 void player_soundStop (void);
 void player_soundPause (void);
 void player_soundResume (void);
+const int* player_getAllDoneMissions( int *nb );
 
 
 /*

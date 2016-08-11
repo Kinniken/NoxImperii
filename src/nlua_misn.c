@@ -1017,5 +1017,3 @@ static int misn_claim( lua_State *L )
    return 1;
 }
 
-
-

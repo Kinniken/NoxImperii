@@ -38,7 +38,5 @@ function create()
    player.pilot():addOutfit( "Laser Cannon MK1", 2 )
 
    initStatusVar()
-   updateUniverseDesc()
-   updateGreatSurveyDesc()
    evt.finish( true )
 end

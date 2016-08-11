@@ -131,8 +131,6 @@ function handlePlanet(surveyedPlanet,successMessage)
             var.push("survey_natives_"..surveyedPlanet.lua.natives.type,nativeClassCount)
          end
 
-         updateGreatSurveyDesc()
-
          return true
       end
    end

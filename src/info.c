@@ -29,7 +29,11 @@
 #include "equipment.h"
 #include "gui.h"
 #include "player_gui.h"
+#include "ndata.h"
 #include "nlua_var.h"
+#include "nlua.h"
+#include "nluadef.h"
+#include "nlua_tk.h"
 #include "tk/toolkit_priv.h"
 
 
@@ -42,7 +46,7 @@
 #define menu_Open(f)    (menu_open |= (f)) /**< Marks a menu as opened. */
 #define menu_Close(f)   (menu_open &= ~(f)) /**< Marks a menu as closed. */
 
-#define INFO_WINDOWS      8 /**< Amount of windows in the tab. */
+#define INFO_WINDOWS      9 /**< Amount of windows in the tab. */
 
 #define INFO_WIN_MAIN      0
 #define INFO_WIN_SHIP      1
@@ -50,17 +54,20 @@
 #define INFO_WIN_CARGO     3
 #define INFO_WIN_MISN      4
 #define INFO_WIN_STAND     5
-#define INFO_WIN_UNIVERSE  6
+#define INFO_WIN_STORY     6
 #define INFO_WIN_SURVEY    7
+#define INFO_WIN_UNIVERSE  8
+
 static const char *info_names[INFO_WINDOWS] = {
    "Main",
    "Ship",
    "Weapons",
    "Cargo",
-   "Missions",
+   "Active Missions",
    "Standings",
-   "Universe",
-   "Great Survey"
+   "Story and Ranks",
+   "Great Survey",
+   "Universe"
 }; /**< Name of the tab windows. */
 
 
@@ -86,6 +93,7 @@ static void info_openWeapons( unsigned int wid );
 static void info_openCargo( unsigned int wid );
 static void info_openMissions( unsigned int wid );
 static void info_openUniverse( unsigned int wid );
+static void info_openStory( unsigned int wid );
 static void info_openSurvey( unsigned int wid );
 static void info_getDim( unsigned int wid, int *w, int *h, int *lw );
 static void standings_close( unsigned int wid, char *str );
@@ -105,8 +113,9 @@ static void cargo_discard( unsigned int wid, char* str );
 static void mission_menu_abort( unsigned int wid, char* str );
 static void mission_menu_genList( unsigned int wid, int first );
 static void mission_menu_update( unsigned int wid, char* str );
+static void info_status_refresh (void);
 
-
+static lua_State *status_refresh_L = NULL;
 /**
  * @brief Opens the information menu.
  */
@@ -143,8 +152,9 @@ void menu_info( int window )
    info_openCargo(      info_windows[ INFO_WIN_CARGO ] );
    info_openMissions(   info_windows[ INFO_WIN_MISN ] );
    info_openStandings(  info_windows[ INFO_WIN_STAND ] );
-   info_openUniverse(  info_windows[ INFO_WIN_UNIVERSE ] );
+   info_openStory(  info_windows[ INFO_WIN_STORY ] );
    info_openSurvey(  info_windows[ INFO_WIN_SURVEY ] );
+   info_openUniverse(  info_windows[ INFO_WIN_UNIVERSE ] );
 
    menu_Open(MENU_INFO);
 
@@ -186,6 +196,9 @@ static void info_openMain( unsigned int wid )
    int i;
    char *nt;
    int w, h;
+
+   /* refresh the various statues lua-side */
+   info_status_refresh();
 
    /* Get the dimensions. */
    window_dimWindow( wid, &w, &h );
@@ -1031,6 +1044,37 @@ static void info_openUniverse( unsigned int wid )
 }
 
 /**
+ * @brief Displays the status of the story.
+ */
+static void info_openStory( unsigned int wid )
+{
+   char *str;
+   int w, h, lw;
+
+   /* Get dimensions. */
+   info_getDim( wid, &w, &h, &lw );
+
+   /* On close. */
+   window_onClose( wid, standings_close );
+
+   /* Buttons */
+   window_addButton( wid, -20, 20, BUTTON_WIDTH, BUTTON_HEIGHT,
+         "closeStory", "Close", info_close );
+
+   /* Graphics. */
+   window_addImage( wid, 0, 0, 0, 0, "imgLogo", NULL, 0 );
+
+   /* Text. */
+   window_addText( wid, 40, -30 , 250, 20, 0, "txtStoryTitle",
+         &gl_defFont, &cDConsole, "Storyline & Ranks" );
+
+   str=var_read_str("missions_status");
+
+   window_addText( wid, 40, -60, (w-80), h-110-BUTTON_HEIGHT, 0, "txtStory",
+         &gl_smallFont, &cBlack, str );
+}
+
+/**
  * @brief Displays the Great Survey.
  */
 static void info_openSurvey( unsigned int wid )
@@ -1222,3 +1266,55 @@ static void mission_menu_abort( unsigned int wid, char* str )
    }
 }
 
+
+static void info_status_refresh (void)
+{
+   char *buf;
+   uint32_t bufsize;
+   const char *file = "dat/status.lua";
+   int errf;
+   lua_State *L;
+
+   /* Nothing to do if there's no rescue script. */
+   if (!ndata_exists(file))
+      return;
+
+   if (status_refresh_L == NULL) {
+	   status_refresh_L = nlua_newState();
+      nlua_loadStandard( status_refresh_L, 0 );
+      nlua_loadTk( status_refresh_L );
+
+      L = status_refresh_L;
+
+      buf = ndata_read( file, &bufsize );
+      if (luaL_dobuffer(L, buf, bufsize, file) != 0) {
+         WARN("Error loading file: %s\n"
+             "%s\n"
+             "Most likely Lua file has improper syntax, please check",
+               file, lua_tostring(L,-1));
+         free(buf);
+         return;
+      }
+      free(buf);
+   }
+   else
+      L = status_refresh_L;
+
+#if DEBUGGING
+   lua_pushcfunction(L, nlua_errTrace);
+   errf = -2;
+#else /* DEBUGGING */
+   errf = 0;
+#endif /* DEBUGGING */
+
+
+   /* Run Lua. */
+   lua_getglobal(L,"refreshStatus");
+   if (lua_pcall(L, 0, 0, errf)) { /* error has occurred */
+      WARN("Status refresh: 'refreshStatus' : '%s'", lua_tostring(L,-1));
+      lua_pop(L,1);
+   }
+#if DEBUGGING
+   lua_pop(L,1);
+#endif
+}

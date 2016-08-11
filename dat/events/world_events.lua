@@ -1,8 +1,9 @@
 include('universe/objects/class_planets.lua')
 include("universe/worldevents/worldevents_main.lua")
-include "dat/scripts/general_helper.lua"
+include "eneral_helper.lua"
 
 function create()
+
 	c_sys=system.cur()
 
 	possibleTargets={}
@@ -91,6 +92,6 @@ function create()
 			end
 		end
 	end
-
+	
 	evt.finish()
 end

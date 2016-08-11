@@ -69,25 +69,25 @@ Independent Worlds: on the fringes of Imperial space, small colonies of human se
 Barbarians: beyond the borders of the Empire, barbarian kingdoms are more active than ever. Armed with technology stolen or traded from more advanced species, they raid the fringes of human space with more daring every year. Only their lack of coordination prevents more serious inroad into Imperial space.]]
 
 
-	desc=desc.."\n\n"..[[Current stability of the Imperial Sectors:
+-- 	desc=desc.."\n\n"..[[Current stability of the Imperial Sectors:
 
-]]
+-- ]]
 
-	for _,v in ipairs(imperial_sectors) do
-		local stability=var.peek("universe_stability_"..v.key)
-		desc=desc..[[	]]..v.name..": "..gh.floorTo(100*stability)..'%\n'
-	end
+-- 	for _,v in ipairs(imperial_sectors) do
+-- 		local stability=var.peek("universe_stability_"..v.key)
+-- 		desc=desc..[[	]]..v.name..": "..gh.floorTo(100*stability)..'%\n'
+-- 	end
 
-	desc=desc..[[
+-- 	desc=desc..[[
 
-Current barbarian activity:
+-- Current barbarian activity:
 
-]]
+-- ]]
 
-	for _,v in ipairs(imperial_barbarian_zones_array) do
-		local activity=var.peek("universe_barbarian_activity_"..v.key)
-		desc=desc..[[	]]..v.name..": "..gh.floorTo(100*activity)..'%\n'
-	end
+-- 	for _,v in ipairs(imperial_barbarian_zones_array) do
+-- 		local activity=var.peek("universe_barbarian_activity_"..v.key)
+-- 		desc=desc..[[	]]..v.name..": "..gh.floorTo(100*activity)..'%\n'
+-- 	end
 
 	var.push("universe_status",desc)
 
@@ -157,13 +157,16 @@ function updateGreatSurveyDesc()
 		end
 	end
 
-	if not surveyDone then
-		local surveyDesc="You have not started the Great Survey. Speak to an old pilot on any Imperial world to start it."
-	else
-		local surveyDesc="Explore more worlds outside the influence of the Empire, the Roidhunate, Betelgeuse or Ixum to progress in the Second Great Survey."
+	local surveyDesc=""
+	local planetDesc=""
+	local planetCount=""
+	local nativesDes=""
+	local nativesCount=""
 
-		local planetDesc=""
-		local planetCount=""
+	if not surveyDone then
+		surveyDesc="You have not started the Great Survey. Speak to an old pilot on any Imperial world to start it."
+	else
+		surveyDesc="Explore more worlds outside the influence of the Empire, the Roidhunate, Betelgeuse or Ixum to progress in the Second Great Survey."
 
 		for k,v in ipairs(planetCounters) do
 			planetDesc=planetDesc..v[1]..":\n"

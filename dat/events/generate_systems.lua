@@ -106,7 +106,7 @@ end
 
 function create()
 	
-	local stepNumber=(debugMode and 10 or 3)
+	local stepNumber=(debugMode and 10 or 6)
 	
 	math.randomseed(os.time())
 	

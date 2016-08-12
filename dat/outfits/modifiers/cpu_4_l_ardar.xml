@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Ardar Mainframe">
+ <general>
+  <typename>CPU Modifier</typename>
+  <slot>utility</slot>
+  <size>large</size>
+  <mass>25</mass>
+  <price>380000</price>
+  <description>Ardar scientists remain behind Terran efforts in electronics, and this mainframe is more energy-hungry and not quite as powerful as Terran equivalents. It is still far beyond civilian models.</description>
+  <gfx_store>cpu_iii</gfx_store>
+  <level>4</level>
+  <logo>ardarshir</logo>
+  <license>Ardarshir Auxiliary, Class III</license>
+ </general>
+ <specific type="modification">
+  <cpu>192</cpu>
+  <energy_usage>50</energy_usage>
+ </specific>
+</outfit>

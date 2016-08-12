@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Onboard Mainframe">
+ <general>
+  <typename>CPU Modifier</typename>
+  <slot>utility</slot>
+  <size>large</size>
+  <mass>15</mass>
+  <price>260000</price>
+  <description>This large, energy-hungry mainframe provides CPU capacity to run complex weapon systems.</description>
+  <gfx_store>cpu_iii</gfx_store>
+  <level>3</level>
+ </general>
+ <specific type="modification">
+  <cpu>128</cpu>
+  <energy_usage>20</energy_usage>
+ </specific>
+</outfit>

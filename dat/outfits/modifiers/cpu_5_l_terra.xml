@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Terran Mainframe">
+ <general>
+  <typename>CPU Modifier</typename>
+  <slot>utility</slot>
+  <size>large</size>
+  <mass>18</mass>
+  <price>550000</price>
+  <description>The largest and most powerful computer available to the Imperial Navy, this mainframe equips Imperial capital ships.</description>
+  <gfx_store>cpu_iii</gfx_store>
+  <level>5</level>
+  <logo>terra</logo>
+  <license>Reserve Colonel</license>
+ </general>
+ <specific type="modification">
+  <cpu>256</cpu>
+  <energy_usage>30</energy_usage>
+ </specific>
+</outfit>

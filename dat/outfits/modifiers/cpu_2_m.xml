@@ -11,7 +11,7 @@
   <level>2</level>
  </general>
  <specific type="modification">
-  <cpu>64</cpu>
+  <cpu_max>64</cpu_max>
   <energy_usage>10</energy_usage>
  </specific>
 </outfit>

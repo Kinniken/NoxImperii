@@ -13,7 +13,7 @@
   <license>Reserve Major</license>
  </general>
  <specific type="modification">
-  <cpu>96</cpu>
+  <cpu_max>96</cpu_max>
   <energy_usage>5</energy_usage>
  </specific>
 </outfit>

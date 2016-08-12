@@ -13,7 +13,7 @@
   <license>Reserve Colonel</license>
  </general>
  <specific type="modification">
-  <cpu>256</cpu>
+  <cpu_max>256</cpu_max>
   <energy_usage>30</energy_usage>
  </specific>
 </outfit>

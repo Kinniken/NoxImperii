@@ -13,7 +13,7 @@
   <license>Ardarshir Auxiliary, Class III</license>
  </general>
  <specific type="modification">
-  <cpu>192</cpu>
+  <cpu_max>192</cpu_max>
   <energy_usage>50</energy_usage>
  </specific>
 </outfit>

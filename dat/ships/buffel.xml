@@ -8,7 +8,7 @@
  <fabricator>New Germania Shipyards</fabricator>
  <description>The Buffel Heavy Destroyer was developed under Imperial patronage for the use of client states and autonomous system militias. It cannot take on its Imperial Navy equivalent, the Asieneuve destroyers, but is more than adequate as a defence against pirates or smaller barbarian incursions.</description>
  <price>3100000</price>
- <license>Reserve Colonel</license>
+ <license>Reserve Major</license>
  <movement>
   <thrust>110</thrust>
   <turn>100</turn>

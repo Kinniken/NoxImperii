@@ -1,8 +1,8 @@
 event=worldevent_class.createNew()
 event.weight=10
-event.duration=time.create(0,0,2, 0, 0, 0 )
+event.duration=time.create(0,1,0, 0, 0, 0 )
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.BARBARIANS)>20)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.BARBARIANS)>20 and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 	textData.casualties=gh.prettyLargeNumber(planet.lua.settlements.humans.population*0.1)
@@ -25,7 +25,7 @@ table.insert(world_events.events,event)
 event=worldevent_class.createNew()
 event.weight=10
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans.services>0.8)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans.services>0.8 and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.humans.services=planet.lua.settlements.humans.services*0.7
@@ -51,7 +51,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.minerals>0.8)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.minerals>0.8 and planet.lua.planet==nil)
 end
 event.weight=10
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -79,7 +79,7 @@ table.insert(world_events.events,event)
 event=worldevent_class.createNew()
 event.weight=5
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The new governor's celebrations are driving up demands for various luxury goods.",
@@ -103,7 +103,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.PIRATES)>10)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.PIRATES)>10 and planet.lua.planet==nil)
 end
 event.weight=10
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -126,7 +126,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.BARBARIANS)>20)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.BARBARIANS)>20 and planet.lua.planet==nil)
 end
 event.weight=5
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -152,7 +152,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans.technology<0.8)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans.technology<0.8 and planet.lua.planet==nil)
 end
 event.weight=5
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -183,13 +183,13 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("french"))
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("french") and planet.lua.planet==nil)
 end
 event.weight=50--tag-specific so higher priority
 event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("A major wine festival is driving up the price of gourmet food.",
-		(time.get() + time.create( 0,0,2, 0, 0, 0 )):tonumber(),"winefair" )
+		(time.get() + time.create( 0,1,0, 0, 0, 0 )):tonumber(),"winefair" )
 	planet.lua.settlements.humans:addGoodDemand(C.GOURMET_FOOD,20,5,effectId)
 	planet.lua.settlements.humans:addGoodDemand(C.EXOTIC_FOOD,20,5,effectId)
 end
@@ -204,10 +204,10 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("hindu"))
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("hindu") and planet.lua.planet==nil)
 end
 event.weight=50--tag-specific so higher priority
-event.duration=time.create( 0,0,2, 0, 0, 0 )
+event.duration=time.create( 0,1,0, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 
 	textData.god=gh.randomObject({"Ganesh","Ram","Vishnu","Durga","Kali","Hanuman"})
@@ -228,10 +228,10 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("latinamerican"))
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("latinamerican") and planet.lua.planet==nil)
 end
 event.weight=50--tag-specific so higher priority
-event.duration=time.create( 0,0,2, 0, 0, 0 )
+event.duration=time.create( 0,1,0, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The carnival is increasing demand for food and alcohol.",
@@ -252,10 +252,10 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("chinese"))
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("chinese") and planet.lua.planet==nil)
 end
 event.weight=50--tag-specific so higher priority
-event.duration=time.create( 0,0,2, 0, 0, 0 )
+event.duration=time.create( 0,1,0, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 
 	textData.sign=gh.randomObject({"Dragon","Goat","Monkey","Horse","Rat","Lama"})

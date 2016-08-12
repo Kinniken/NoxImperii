@@ -1,6 +1,6 @@
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.humans and planet.c:system():presence(G.BARBARIANS)>0)
+	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.humans and planet.c:system():presence(G.BARBARIANS)>0 and planet.lua.planet==nil)
 end
 event.weight=5
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -25,7 +25,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.humans)
+	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.humans and planet.lua.planet==nil)
 end
 event.weight=10
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -48,7 +48,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.humans and planet.lua.minerals>0.8)
+	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.humans and planet.lua.minerals>0.8 and planet.lua.planet==nil)
 end
 event.weight=20
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -71,7 +71,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.natives and planet.lua.settlements.natives.stability<1 and planet.lua.settlements.humans)
+	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.natives and planet.lua.settlements.natives.stability<1 and planet.lua.settlements.humans and planet.lua.planet==nil)
 end
 event.weight=5
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -98,7 +98,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.humans and planet.lua.settlements.humans.technology<0.8 and planet.lua.nativeFertility>0.8)
+	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.humans and planet.lua.settlements.humans.technology<0.8 and planet.lua.nativeFertility>0.8 and planet.lua.planet==nil)
 end
 event.weight=20
 event.duration=time.create( 0,1, 0, 0, 0, 0 )

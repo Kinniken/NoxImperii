@@ -1,9 +1,9 @@
 event=worldevent_class.createNew()
 event.eventMessage="NEWS ALERT: Royalist strikes on ${world}; important infrastructure damage, casualties reported."
 event.weight=30
-event.duration=time.create(0,0,2, 0, 0, 0 )
+event.duration=time.create(0,1,0, 0, 0, 0 )
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.HOLY_FLAME) and planet.lua.settlements.holyflame and planet.c:system():presence(G.ROYAL_IXUM)>20)
+	return (planet.c:faction()==faction.get(G.HOLY_FLAME) and planet.lua.settlements.holyflame and planet.c:system():presence(G.ROYAL_IXUM)>20 and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 	textData.casualties=gh.prettyLargeNumber(planet.lua.settlements.holyflame.population*0.01)
@@ -30,9 +30,9 @@ table.insert(world_events.events,event)
 event=worldevent_class.createNew()
 event.eventMessage="NEWS ALERT: Mass protests rock ${world}; economy at standstill."
 event.weight=10
-event.duration=time.create(0,0,2, 0, 0, 0 )
+event.duration=time.create(0,1,0, 0, 0, 0 )
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.HOLY_FLAME) and planet.lua.settlements.holyflame and planet.lua.settlements.holyflame:hasTag("slums"))
+	return (planet.c:faction()==faction.get(G.HOLY_FLAME) and planet.lua.settlements.holyflame and planet.lua.settlements.holyflame:hasTag("slums") and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 	local effectId=planet.lua.settlements.holyflame:addActiveEffect("Protests against the war paralyse consumer goods production.",
@@ -53,7 +53,7 @@ event.eventMessage="NEWS ALERT: Religious persecutions on ${world}; people fleei
 event.weight=50
 event.duration=time.create(0,1,0, 0, 0, 0 )
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.HOLY_FLAME) and planet.lua.settlements.holyflame and planet.lua.settlements.holyflame:hasTag("religiousminority"))
+	return (planet.c:faction()==faction.get(G.HOLY_FLAME) and planet.lua.settlements.holyflame and planet.lua.settlements.holyflame:hasTag("religiousminority") and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 
@@ -79,7 +79,7 @@ event.eventMessage="NEWS ALERT: Major religious festival on ${world}; consumer g
 event.weight=10
 event.duration=time.create(0,1,0, 0, 0, 0 )
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.HOLY_FLAME))
+	return (planet.c:faction()==faction.get(G.HOLY_FLAME) and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 

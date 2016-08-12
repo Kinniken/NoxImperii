@@ -1,7 +1,7 @@
 event=worldevent_class.createNew()
 event.weight=10
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse)
+	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 
@@ -27,7 +27,7 @@ table.insert(world_events.events,event)
 event=worldevent_class.createNew()
 event.weight=10
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse)
+	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 
@@ -59,7 +59,7 @@ table.insert(world_events.events,event)
 event=worldevent_class.createNew()
 event.weight=10
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse)
+	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 
@@ -87,7 +87,7 @@ table.insert(world_events.events,event)
 event=worldevent_class.createNew()
 event.weight=10
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse)
+	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 
@@ -115,7 +115,7 @@ event=worldevent_class.createNew()
 event.eventMessage="NEWS ALERT: Lobbying for Council position heats up on ${world}, luxury goods in high demand."
 event.weight=10
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse)
+	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 
@@ -126,7 +126,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.betelgeuse:addGoodDemand(C.LUXURY_GOODS,30,3,effectId)
 	planet.lua.settlements.betelgeuse:addGoodDemand(C.GOURMET_FOOD,30,3,effectId)
 end
-event.duration=time.create( 0,0,2, 0, 0, 0 )
+event.duration=time.create( 0,1,0, 0, 0, 0 )
 
 event.worldHistoryMessage="Intense political lobbying preceded the election of a new Council member."
 

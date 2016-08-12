@@ -1,9 +1,9 @@
 event=worldevent_class.createNew()
 event.eventMessage="NEWS ALERT: Holy Flame bombing raids on ${world}; important casualties reported, food and medicine urgently needed."
 event.weight=10
-event.duration=time.create(0,0,2, 0, 0, 0 )
+event.duration=time.create(0,0,15, 0, 0, 0 )
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.ROYAL_IXUM) and planet.lua.settlements.royalixumites and planet.c:system():presence(G.HOLY_FLAME)>20)
+	return (planet.c:faction()==faction.get(G.ROYAL_IXUM) and planet.lua.settlements.royalixumites and planet.c:system():presence(G.HOLY_FLAME)>20 and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 	textData.casualties=gh.prettyLargeNumber(planet.lua.settlements.royalixumites.population*0.05)
@@ -28,9 +28,9 @@ table.insert(world_events.events,event)
 event=worldevent_class.createNew()
 event.eventMessage="NEWS ALERT: Riots against the King on ${world}; economy at standstill."
 event.weight=20
-event.duration=time.create(0,0,2, 0, 0, 0 )
+event.duration=time.create(0,1,0, 0, 0, 0 )
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.ROYAL_IXUM) and planet.lua.settlements.royalixumites and planet.lua.settlements.royalixumites:hasTag("slums"))
+	return (planet.c:faction()==faction.get(G.ROYAL_IXUM) and planet.lua.settlements.royalixumites and planet.lua.settlements.royalixumites:hasTag("slums") and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 	local effectId=planet.lua.settlements.royalixumites:addActiveEffect("Ongoing riots are reducing consumer goods supply.",
@@ -49,9 +49,9 @@ table.insert(world_events.events,event)
 event=worldevent_class.createNew()
 event.eventMessage="NEWS ALERT: Imperial military help reaches ${world}, armament to be distributed."
 event.weight=20
-event.duration=time.create(0,0,2, 0, 0, 0 )
+event.duration=time.create(0,1,0, 0, 0, 0 )
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.ROYAL_IXUM) and planet.lua.settlements.royalixumites and planet.lua.settlements.royalixumites:hasTag("weaponcentre"))
+	return (planet.c:faction()==faction.get(G.ROYAL_IXUM) and planet.lua.settlements.royalixumites and planet.lua.settlements.royalixumites:hasTag("weaponcentre") and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 	local effectId=planet.lua.settlements.royalixumites:addActiveEffect("Important Imperial military help is flooding the market with weapons.",

@@ -17,7 +17,7 @@
   <spfx_armour>ExpM</spfx_armour>
   <duration blowup="armour">40</duration>
   <thrust>75</thrust>
-  <speed>220</speed>
+  <speed>600</speed>
   <resist>60</resist>
   <damage>
    <type>impact</type>

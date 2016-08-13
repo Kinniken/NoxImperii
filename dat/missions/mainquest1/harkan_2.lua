@@ -7,7 +7,7 @@ payment = 100000
 
 -- Mission Details
 misn_title = "Deliver Weapons"
-misn_reward = ""..payment.." cr"
+misn_reward = gh.numstring(payment).." cr"
 misn_desc = "Collect weapons from ${pickupPlanet} and deliver them to the Toborkos on Harkan."
 
 

@@ -11,7 +11,7 @@ payment = 500000
 
 -- Mission Details
 misn_title = "Get weapons for the raid"
-misn_reward = ""..payment.." cr"
+misn_reward = gh.numstring(payment).." cr"
 misn_desc = "Bring back weapons for the raid on the Ardar base."
 
 

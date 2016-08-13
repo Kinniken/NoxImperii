@@ -6,8 +6,7 @@
 -- This file is used by the various faction missions, which must set the faction variable.
 --
 --]]
-
-include "dat/scripts/numstring.lua"
+include "dat/scripts/general_helper.lua"
 
 -- Localization, choosing a language if naev is translated for non-english-speaking locales.
 lang = naev.lang()
@@ -54,13 +53,13 @@ function create()
     setFine(rep)
     
     misn.setTitle(misn_title:format(fac:name()))
-    misn.setDesc(misn_desc:format(fac:name(), numstring(fine)))
+    misn.setDesc(misn_desc:format(fac:name(), gh.numstring(fine)))
     misn.setReward(misn_reward)
 end
 
 function accept()
     if player.credits() < fine then
-        tk.msg(lowmoneyformat(numstring(fine)))
+        tk.msg(lowmoneyformat(gh.numstring(fine)))
         misn.finish()
     end
     

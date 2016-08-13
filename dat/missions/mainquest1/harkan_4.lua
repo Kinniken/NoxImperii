@@ -5,7 +5,7 @@ payment = 50000
 
 -- Mission Details
 misn_title = "Capture Avian"
-misn_reward = ""..payment.." cr"
+misn_reward = gh.numstring(payment).." cr"
 misn_desc = "Take \"Chicken\", the Yren alien captured by Beauval, to ${targetPlanet} on ${targetSystem} for treatment."
 
 

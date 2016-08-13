@@ -1,6 +1,5 @@
 
 include "jumpdist.lua"
-include "numstring.lua"
 
 bar_desc = "You see a young student sipping a cheap beer at the bar, lost in his thoughts."
 
@@ -80,7 +79,7 @@ end
 
 function land ()
    if planet.cur() == planet.get("Ardarshir") then
-      tk.msg( finishedtitle, finishedtxt:format( numstring(payment) ) )
+      tk.msg( finishedtitle, finishedtxt:format( gh.numstring(payment) ) )
       player.pay( payment )
 
       misn.cargoJet(carg_id)

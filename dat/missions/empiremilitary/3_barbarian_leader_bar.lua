@@ -4,7 +4,6 @@
 
 --]]
 
-include "numstring.lua"
 include "dat/missions/templates/ship_kill.lua"
 include "dat/missions/supportfiles/barbarians.lua"
 include("pilot/barbarians.lua")

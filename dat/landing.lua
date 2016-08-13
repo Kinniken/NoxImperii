@@ -31,8 +31,6 @@ include('dat/scripts/general_helper.lua')
 
 --]]
 
-include "numstring.lua"
-
 -- Default function. Any asset that has no landing script explicitly defined will use this.
 function land( pnt )
 
@@ -170,7 +168,7 @@ function pir_clanworld( pnt )
    local can_bribe, bribe_price, bribe_msg, bribe_ack_msg
    if not can_land and standing >= -50 then
       bribe_price = (20 - standing) * 500 + 1000 -- 36K max, at -50 rep. Pirates are supposed to be cheaper than regular factions.
-      local str   = numstring( bribe_price )
+      local str   = gh.numstring( bribe_price )
       bribe_msg   = string.format(
             "\"Well, I think you're scum, but I'm willing to look the other way for %s credits. Deal?\"",
             str )
@@ -239,7 +237,7 @@ function land_civilian( pnt, land_floor, bribe_floor )
       bribe_price = getcost(fct, land_floor, bribe_floor, 1000) -- TODO: different rates for different factions.
    end
    if not can_land and type(bribe_price) == "number" then
-       local str      = numstring( bribe_price )
+       local str      = gh.numstring( bribe_price )
        bribe_msg      = string.format("\"I'll let you land for the modest price of %s credits.\"\n\nPay %s credits?", str, str )
        bribe_ack_msg  = "Make it quick."
    end

@@ -1,4 +1,3 @@
-include "numstring.lua"
 include "dat/missions/templates/ship_kill.lua"
 include('universe/objects/class_planets.lua')
 include "universe/live/live_universe.lua"
@@ -19,7 +18,7 @@ mission_return_to_bar=false
 
 -- Mission Details
 misn_title = "Intercept the mysterious cargo"
-misn_reward = ""..payment.." cr"
+misn_reward = gh.numstring(payment).." cr"
 misn_desc = "Destroy one of the mysterious cargo and analyse its debris."
 
 -- Messages

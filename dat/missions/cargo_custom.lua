@@ -103,8 +103,8 @@ function create()
     textData_targetSystem=destsys:name()
     textData_quantity=amount
     textData_commodity=cargo
-    textData_payment=numstring(reward)
-    textData_paymentPartial=numstring(reward*cargoType.lateRewardFactor)
+    textData_payment=gh.numstring(reward)
+    textData_paymentPartial=gh.numstring(reward*cargoType.lateRewardFactor)
     if (urgency>0) then
       textData_deadline=timelimit:str(0)
       textData_timeRemaining=(timelimit - time.get()):str(0)

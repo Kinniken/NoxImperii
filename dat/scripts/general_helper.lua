@@ -228,3 +228,14 @@ function gh.randomPosAround(pos,minDistance,maxDistance)
 
   return pos
 end
+
+function gh.numstring(number)
+    number = math.floor(number + 0.5)
+    local numberstring = ""
+    while number >= 1000 do
+        numberstring = string.format( ",%03d%s", number % 1000, numberstring )
+        number = math.floor(number / 1000)
+    end
+    numberstring = number % 1000 .. numberstring
+    return numberstring
+end

@@ -8,7 +8,6 @@
 
 --]]
 
-include "numstring.lua"
 include "dat/missions/templates/ship_kill.lua"
 include "dat/missions/supportfiles/pirates.lua"
 include('universe/objects/class_planets.lua')

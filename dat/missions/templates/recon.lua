@@ -4,7 +4,6 @@
 
    --]]
 
-   include "numstring.lua"
    include "dat/scripts/general_helper.lua"
    include "jumpdist.lua"
    include "dat/missions/supportfiles/common.lua"
@@ -20,7 +19,7 @@ mission_return_to_planet=false
 
 -- Mission details
 misn_title  = ""
-misn_reward = "${credits} credits"
+misn_reward = "${credits} cr"
 misn_desc   = ""
 
 -- Text if mission from bar
@@ -54,7 +53,7 @@ function template_getStringData()
   stringData.playerName=player:name()
   stringData.startPlanet=start_planet and start_planet:name() or ""
   stringData.startSystem=start_planet and start_planet:system():name() or ""
-  stringData.credits=credits
+  stringData.credits=gh.numstring(credits)
   stringData.mainTargetPlanet=main_target_planet and main_target_planet:name() or ""
   stringData.mainTargetSystem=main_target_system and main_target_system:name() or ""
   stringData.empireRank=emp_getRank()

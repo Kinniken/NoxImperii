@@ -1,7 +1,6 @@
 
 
 include "jumpdist.lua"
-include "numstring.lua"
 
 bar_desc = "You see a sharply-dressed business man, looking tense."
 
@@ -9,7 +8,7 @@ payment = 50000
 
 -- Mission Details
 misn_title = "Betelgeuse Luxury"
-misn_reward = ""..payment.." cr"
+misn_reward = gh.numstring(payment).." cr"
 misn_desc = "Take the luxury goods to Dandalo, in the Betelgeuse system."
 
 -- OSD
@@ -84,7 +83,7 @@ end
 
 function land ()
    if planet.cur() == planet.get("Dandalo") then
-      tk.msg( finishedtitle, finishedtxt:format( numstring(payment) ) )
+      tk.msg( finishedtitle, finishedtxt:format( gh.numstring(payment) ) )
       player.pay( payment )
 
       misn.cargoJet(carg_id)

@@ -1234,9 +1234,3 @@ static int missions_parseActive( xmlNodePtr parent )
 
    return 0;
 }
-
-const MissionData* missions_getAllActiveMissions( int *nb )
-{
-	*nb=mission_nstack;
-	return mission_stack;
-}

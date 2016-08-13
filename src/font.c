@@ -961,6 +961,8 @@ static const glColour* gl_fontGetColour( int ch )
       case 'C': col = &cConsole; break;
       case 'D': col = &cDConsole; break;
       case '0': col = NULL; break;
+      /* Nox Imperii extras */
+      case 'G': col = &cFontDarkGreen; break;
       default: col = NULL; break;
    }
    return col;

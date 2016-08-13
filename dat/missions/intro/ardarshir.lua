@@ -1,4 +1,4 @@
-
+include "dat/scripts/general_helper.lua"
 include "jumpdist.lua"
 
 bar_desc = "You see a young student sipping a cheap beer at the bar, lost in his thoughts."

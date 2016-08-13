@@ -224,7 +224,6 @@ function land3()
 		bop=bop+100
 
 		var.push("universe_balanceofpower",bop)
-		updateUniverseDesc()
 
       	hook.rm(landhook)
 		misn.finish(true)

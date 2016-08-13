@@ -1526,18 +1526,18 @@ static int playerL_setCrewStatus( lua_State *L )
 
 static int playerL_misnAllActive( lua_State *L ) {
 	int i, key;
-	int nmissions;
-	const MissionData *missions;
 
-	missions=missions_getAllActiveMissions(&nmissions);
 
 	lua_newtable(L);
 	key = 0;
-	for (i=0; i<nmissions; i++) {
-		 key++;
-		 lua_pushnumber(L,key); /* key */
-		 lua_pushstring(L,missions[i].name); /* value */
-		 lua_rawset(L,-3);
+
+	for (i=0; i<MISSION_MAX; i++) {
+		if (player_missions[i]->id != 0) {
+			 key++;
+			 lua_pushnumber(L,key); /* key */
+			 lua_pushstring(L,player_missions[i]->data->name); /* value */
+			 lua_rawset(L,-3);
+		}
 	}
 
 	return 1;

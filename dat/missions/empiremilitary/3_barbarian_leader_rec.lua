@@ -68,7 +68,6 @@ function give_rewards ()
    local bop=var.peek("universe_balanceofpower")
    bop=bop+1
    var.push("universe_balanceofpower",bop)
-   updateUniverseDesc()
    
    local planet=planet_class.load(target_planet)
 

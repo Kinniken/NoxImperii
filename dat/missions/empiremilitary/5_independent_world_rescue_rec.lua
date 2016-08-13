@@ -95,7 +95,6 @@ function give_rewards ()
    local bop=var.peek("universe_balanceofpower")
    bop=bop+2
    var.push("universe_balanceofpower",bop)
-   updateUniverseDesc()
 
    template_give_rewards()
 end

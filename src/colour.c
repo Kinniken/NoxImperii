@@ -106,6 +106,7 @@ const glColour cFontFriendly  =  { .r = 0.3, .g = 0.9, .b = 0.3, .a = 1.  }; /**
 const glColour cFontHostile   =  { .r = 0.9, .g = 0.2, .b = 0.2, .a = 1.  }; /**< Hostile font colour. */
 const glColour cFontNeutral   =  { .r = 1.0, .g = 0.9, .b = 0.0, .a = 1.  }; /**< Neutral font colour. */
 
+const glColour cFontDarkGreen     =  { .r = 0.0, .g = 0.7, .b = 0.0, .a = 1.  }; /**< Green font colour. */
 
 /**
  * @brief Changes colour space from HSV to RGB.

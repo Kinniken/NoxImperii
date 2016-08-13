@@ -109,7 +109,6 @@ function land ()
 		local bop=var.peek("universe_balanceofpower")
 		bop=bop-5
 		var.push("universe_balanceofpower",bop)
-		updateUniverseDesc()
 
 		misn.finish( true )
 	elseif planet.cur() == planet.get("Terra") then
@@ -133,7 +132,6 @@ function displayMessage()
 	local bop=var.peek("universe_balanceofpower")
 	bop=bop+5
 	var.push("universe_balanceofpower",bop)
-	updateUniverseDesc()
 
 	misn.finish( true )
 end

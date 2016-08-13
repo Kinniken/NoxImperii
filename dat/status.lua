@@ -1,10 +1,14 @@
-include "universe/live/live_info.lua"
-include "universe/live/live_missions.lua"
+include "dat/status/great_survey.lua"
+include "dat/status/storyline.lua"
+include "dat/status/universe.lua"
 
 
 function refreshStatus()
-	print("status refresh")
-	updateUniverseDesc()
-	updateMissionsDesc()
-	updateGreatSurveyDesc()
+	local universeDesc=getUniverseDesc()
+	local storyDesc=getMissionsDesc()
+	local surveyDesc,surveyWorlds,surveyWorldsCount,surveyNatives,surveyNativesCount=getGreatSurveyDesc()
+
+	return surveyNativesCount,surveyNatives,surveyWorldsCount,surveyWorlds,surveyDesc,storyDesc,universeDesc
+	--return surveyNativesCount,surveyNatives,surveyWorldsCount,surveyWorlds,storyDesc,universeDesc
+	--return universeDesc,storyDesc,surveyDesc,surveyWorlds,surveyWorldsCount,surveyNatives,surveyNativesCount
 end

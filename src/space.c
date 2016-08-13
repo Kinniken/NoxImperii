@@ -5337,6 +5337,8 @@ void planet_refreshPlanetPriceFactors(Planet* p) {
 
 	//Now simple to get adjusted price: just a factor to compute
 	for (i=0;i<nbcom;i++) {
+//		WARN("Commodity %s : weight %f, factor %f for world %s",p->tradedatas[i].commodity->name,weightTotals[i],factorTotals[i],p->name
+//				);
 		p->tradedatas[i].adjustedPriceFactor=factorTotals[i]/weightTotals[i];
 	}
 
@@ -5372,12 +5374,19 @@ static void planet_refreshPlanetPriceFactors_handleSystem(Planet* p,float* facto
 
 					//Then adjusted based on how far we are from target world:
 					if (level==0 && p!=sys->planets[i]) {
-						weight*=0.8;//same system but different world
+						weight*=0.6;//same system but different world
 					} else if (level==1) {
-						weight*=0.3;
+						weight*=0.2;
 					} else if (level==2) {
-						weight*=0.1;
+						weight*=0.05;
 					}
+
+//					if (p==sys->planets[i])
+//						WARN("Commodity %s : weight %f, factor %f for world %s (home) ",sys->planets[i]->tradedatas[j].commodity->name,
+//																											weight,sys->planets[i]->tradedatas[j].priceFactor,sys->planets[i]->name);
+//					else
+//						WARN("Commodity %s : weight %f, factor %f for world %s (level %d) ",sys->planets[i]->tradedatas[j].commodity->name,
+//																																	weight,sys->planets[i]->tradedatas[j].priceFactor,sys->planets[i]->name,level);
 
 					factorTotals[k]+=(weight*sys->planets[i]->tradedatas[j].priceFactor);
 					weightTotals[k]+=weight;

@@ -117,7 +117,7 @@ local function generate_human_population(star,planet,minFertility,settlementChan
 	elseif planet.planet and factionName==G.EMPIRE and planet.template.classification=="Asteroid Moon" and planet.planet.lua.settlements and planet.planet.lua.settlements.humans then--Asteroid orbiting an Imperial settlement
 		if (math.random()*2<planet.planet.lua.settlements.humans.services) then--the higher the services, the more chance the moon will be used
 			local settlement=settlement_class.createNew()
-			settlement.population=gh.randomInRange(populationRange)*0.01
+			settlement.population=gh.randomInRange(populationRange)*0.001
 			settlement.industry=planet.planet.lua.settlements.humans.industry/4
 			settlement.agriculture=0.1
 			settlement.technology=technologyFactor
@@ -135,7 +135,7 @@ local function generate_human_population(star,planet,minFertility,settlementChan
 	elseif planet.planet and factionName==G.EMPIRE and planet.template.classification=="Silicate Moon" and planet.planet.lua.settlements and planet.planet.lua.settlements.humans then--Asteroid orbiting an Imperial settlement
 		if (math.random()*2<planet.planet.lua.settlements.humans.services) then--the higher the services, the more chance the moon will be used
 			local settlement=settlement_class.createNew()
-			settlement.population=gh.randomInRange(populationRange)*0.1
+			settlement.population=gh.randomInRange(populationRange)*0.002
 			settlement.industry=planet.planet.lua.settlements.humans.industry/2
 			settlement.agriculture=0.1
 			settlement.technology=technologyFactor
@@ -175,7 +175,7 @@ local function generate_ardar_population(star,planet,minFertility,settlementChan
 	elseif planet.planet and factionName==G.ROIDHUNATE and planet.template.classification=="Asteroid Moon" and planet.planet.lua.settlements and planet.planet.lua.settlements.ardars then--Asteroid orbiting an Ardar settlement
 		if (math.random()*2<planet.planet.lua.settlements.ardars.services) then--the higher the services, the more chance the moon will be used
 			local settlement=settlement_class.createNew()
-			settlement.population=gh.randomInRange(populationRange)*0.01
+			settlement.population=gh.randomInRange(populationRange)*0.001
 			settlement.industry=planet.planet.lua.settlements.ardars.industry/4
 			settlement.agriculture=0.1
 			settlement.technology=technologyFactor
@@ -193,7 +193,7 @@ local function generate_ardar_population(star,planet,minFertility,settlementChan
 	elseif planet.planet and factionName==G.ROIDHUNATE and planet.template.classification=="Silicate Moon" and planet.planet.lua.settlements and planet.planet.lua.settlements.ardars then--Asteroid orbiting an Ardar settlement
 		if (math.random()*2<planet.planet.lua.settlements.ardars.services) then--the higher the services, the more chance the moon will be used
 			local settlement=settlement_class.createNew()
-			settlement.population=gh.randomInRange(populationRange)*0.1
+			settlement.population=gh.randomInRange(populationRange)*0.002
 			settlement.industry=planet.planet.lua.settlements.ardars.industry/2
 			settlement.agriculture=0.1
 			settlement.technology=technologyFactor

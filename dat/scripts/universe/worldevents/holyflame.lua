@@ -37,8 +37,8 @@ end
 event.applyOnWorldCustom=function(self,planet,textData)
 	local effectId=planet.lua.settlements.holyflame:addActiveEffect("Protests against the war paralyse consumer goods production.",
 		(time.get() + self.duration):tonumber(), "holyflame_protests" )
-	planet.lua.settlements.holyflame:reduceGoodSupply(C.CONSUMER_GOODS,50,3,effectId)
-	planet.lua.settlements.holyflame:reduceGoodSupply(C.PRIMITIVE_CONSUMER,50,3,effectId)
+	planet.lua.settlements.holyflame:reduceGoodSupply(C.CONSUMER_GOODS,500,3,effectId)
+	planet.lua.settlements.holyflame:reduceGoodSupply(C.PRIMITIVE_CONSUMER,500,3,effectId)
 end
 event.worldHistoryMessage="Mass protests against the war were severely repressed."
 
@@ -63,8 +63,8 @@ event.applyOnWorldCustom=function(self,planet,textData)
 
 	local effectId=planet.lua.settlements.holyflame:addActiveEffect(gh.format("Departure of skilled ${minorityReligion} Ixumites is reducing industrial production.",textData),
 		(time.get() + self.duration):tonumber(), "holyflame_minoritydeparture" )
-	planet.lua.settlements.holyflame:reduceGoodSupply(C.INDUSTRIAL,50,3,effectId)
-	planet.lua.settlements.holyflame:reduceGoodSupply(C.MODERN_INDUSTRIAL,50,3,effectId)
+	planet.lua.settlements.holyflame:reduceGoodSupply(C.INDUSTRIAL,500,3,effectId)
+	planet.lua.settlements.holyflame:reduceGoodSupply(C.MODERN_INDUSTRIAL,500,3,effectId)
 end
 event.worldHistoryMessage="Up to ${departures} ${minorityReligion} Ixumites left, fleeing religious persecution."
 

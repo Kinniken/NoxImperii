@@ -12,10 +12,10 @@ ardar_specialities.specialityUniversity={
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.ardars:addTag("hightechcenter")
 		planet.lua.settlements.ardars.technology=planet.lua.settlements.ardars.technology+0.5
-		planet.lua.settlements.ardars:addGoodDemand(C.NATIVE_TECHNOLOGY,10,3)
-		planet.lua.settlements.ardars:addGoodSupply(C.MODERN_ARMAMENT,30,1)
-		planet.lua.settlements.ardars:addGoodDemand(C.MODERN_INDUSTRIAL,30,1)
-		planet.lua.settlements.ardars:addGoodDemand(C.ANCIENT_TECHNOLOGY,10,1.5)
+		planet.lua.settlements.ardars:addGoodDemand(C.NATIVE_TECHNOLOGY,100,3)
+		planet.lua.settlements.ardars:addGoodSupply(C.MODERN_ARMAMENT,300,1)
+		planet.lua.settlements.ardars:addGoodDemand(C.MODERN_INDUSTRIAL,300,1)
+		planet.lua.settlements.ardars:addGoodDemand(C.ANCIENT_TECHNOLOGY,100,1.5)
 	end,
 	getDesc=function(planet)
 		return "Ardars do not have universities in the human style, instead choosing to focus research in high technology production centres. #planetname# is an important one in armament and communication technology. "
@@ -30,7 +30,7 @@ ardar_specialities.specialityNavalBase={
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.ardars:addTag("navalbase")
 		planet.lua.settlements.ardars.military=planet.lua.settlements.ardars.military+0.5
-		planet.lua.settlements.ardars:addGoodDemand(C.NATIVE_WEAPONS,20,3)
+		planet.lua.settlements.ardars:addGoodDemand(C.NATIVE_WEAPONS,200,3)
 	end,
 	getDesc=function(planet)
 		return "All Ardar worlds of any significance have a naval base, but the one on #planetname# is larger than most. From it the Roidhunate's fleet patrol the surrounding system, guarding the inner worlds. "
@@ -45,7 +45,7 @@ ardar_specialities.specialityHeavyIndustry={
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.ardars:addTag("chemistrycenter")
 		planet.lua.settlements.ardars.industry=planet.lua.settlements.ardars.industry+0.5
-		planet.lua.settlements.ardars:addGoodDemand(C.EXOTIC_ORGANIC,10,2)
+		planet.lua.settlements.ardars:addGoodDemand(C.EXOTIC_ORGANIC,100,2)
 	end,
 	getDesc=function(planet)
 		return "#planetname# is a major Ardar industrial world, specialized in chemistry and ship-building. "
@@ -60,9 +60,9 @@ ardar_specialities.specialityLuxuryResort={
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.ardars:addTag("huntingreserve")
 		planet.lua.settlements.ardars.services=planet.lua.settlements.ardars.services+0.5
-		planet.lua.settlements.ardars:addGoodDemand(C.LUXURY_GOODS,30,2)
-		planet.lua.settlements.ardars:addGoodDemand(C.EXOTIC_FURS,10,2)
-		planet.lua.settlements.ardars:addGoodDemand(C.NATIVE_WEAPONS,10,2)
+		planet.lua.settlements.ardars:addGoodDemand(C.LUXURY_GOODS,300,2)
+		planet.lua.settlements.ardars:addGoodDemand(C.EXOTIC_FURS,100,2)
+		planet.lua.settlements.ardars:addGoodDemand(C.NATIVE_WEAPONS,100,2)
 	end,
 	getDesc=function(planet)
 		return "Large tracks of #planetname# are kept as a hunting reserve for the Ardar nobility. "
@@ -76,7 +76,7 @@ ardar_specialities.specialityGourmetFood={
 	end,
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.ardars:addTag("gourmetfood")
-		planet.lua.settlements.ardars:addGoodSupply(C.GOURMET_FOOD,30,1)
+		planet.lua.settlements.ardars:addGoodSupply(C.GOURMET_FOOD,300,1)
 	end,
 	getDesc=function(planet)
 		return "While Ardar culture does not have quite the human tradition of fine food, parts of the Roidhunate elite has adopted the Imperial love of gourmet food. Entrepreneurs on #planetname# have seized the opportunity and now produce fancy versions of traditional Ardar food. "
@@ -91,7 +91,7 @@ ardar_specialities.specialityWeaponLab={
 	end,
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.ardars:addTag("hightechweapon")
-		planet.lua.settlements.ardars:addGoodSupply(C.MODERN_ARMAMENT,50,1)
+		planet.lua.settlements.ardars:addGoodSupply(C.MODERN_ARMAMENT,500,1)
 	end,
 	getDesc=function(planet)
 		return "The Roidhunate has setup a center for advanced weapon manufacture on the world. "
@@ -104,7 +104,7 @@ ardar_specialities.specialityFrontierBase={
 	weight=10,
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.ardars:addTag("bordernavalbase")
-		planet.lua.settlements.ardars:addGoodDemand(C.ARMAMENT,50,2)
+		planet.lua.settlements.ardars:addGoodDemand(C.ARMAMENT,500,2)
 		planet.lua.settlements.ardars.military=planet.lua.settlements.ardars.military*1.5
 	end,
 	getDesc=function(planet)
@@ -120,8 +120,8 @@ ardar_specialities.specialityFrontierIndustry={
 	end,
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.ardars:addTag("frontierindustry")
-		planet.lua.settlements.ardars:addGoodDemand(C.ORE,50,2)
-		planet.lua.settlements.ardars:addGoodSupply(C.INDUSTRIAL,50,1)
+		planet.lua.settlements.ardars:addGoodDemand(C.ORE,500,2)
+		planet.lua.settlements.ardars:addGoodSupply(C.INDUSTRIAL,500,1)
 		planet.lua.settlements.ardars.industry=planet.lua.settlements.ardars.industry*1.5
 	end,
 	getDesc=function(planet)
@@ -137,7 +137,7 @@ ardar_specialities.specialityFrontierOre={
 	end,
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.ardars:addTag("richores")
-		planet.lua.settlements.ardars:addGoodSupply(C.ORE,50,1)
+		planet.lua.settlements.ardars:addGoodSupply(C.ORE,500,1)
 		planet.lua.settlements.ardars.industry=planet.lua.settlements.ardars.industry*1.5
 	end,
 	getDesc=function(planet)

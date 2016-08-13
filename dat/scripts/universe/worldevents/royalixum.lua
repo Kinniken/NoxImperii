@@ -11,8 +11,8 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.royalixumites:addActiveEffect("The recent bombing is increasing demands for medicine and food.",
 		(time.get() + self.duration):tonumber(), "royalixum_bombingraid" )
-	planet.lua.settlements.royalixumites:addGoodDemand(C.MEDICINE,20,3,effectId)
-	planet.lua.settlements.royalixumites:addGoodDemand(C.FOOD,20,3,effectId)
+	planet.lua.settlements.royalixumites:addGoodDemand(C.MEDICINE,200,3,effectId)
+	planet.lua.settlements.royalixumites:addGoodDemand(C.FOOD,200,3,effectId)
 end
 event.worldHistoryMessage="Major bombing raids by the Holy Flame caused ${casualties} civilian casualties."
 
@@ -35,8 +35,8 @@ end
 event.applyOnWorldCustom=function(self,planet,textData)
 	local effectId=planet.lua.settlements.royalixumites:addActiveEffect("Ongoing riots are reducing consumer goods supply.",
 		(time.get() + self.duration):tonumber(), "royalixum_riots" )
-	planet.lua.settlements.royalixumites:reduceGoodSupply(C.CONSUMER_GOODS,50,3,effectId)
-	planet.lua.settlements.royalixumites:reduceGoodSupply(C.PRIMITIVE_CONSUMER,50,3,effectId)
+	planet.lua.settlements.royalixumites:reduceGoodSupply(C.CONSUMER_GOODS,500,3,effectId)
+	planet.lua.settlements.royalixumites:reduceGoodSupply(C.PRIMITIVE_CONSUMER,500,3,effectId)
 end
 event.worldHistoryMessage="Widespread riots erupted against the Monarchy."
 
@@ -56,8 +56,8 @@ end
 event.applyOnWorldCustom=function(self,planet,textData)
 	local effectId=planet.lua.settlements.royalixumites:addActiveEffect("Important Imperial military help is flooding the market with weapons.",
 		(time.get() + self.duration):tonumber(), "royalixum_imperialhelp" )
-	planet.lua.settlements.royalixumites:addGoodSupply(C.MODERN_ARMAMENT,30,0.5,effectId)
-	planet.lua.settlements.royalixumites:addGoodSupply(C.ARMAMENT,100,0.5,effectId)
+	planet.lua.settlements.royalixumites:addGoodSupply(C.MODERN_ARMAMENT,300,0.5,effectId)
+	planet.lua.settlements.royalixumites:addGoodSupply(C.ARMAMENT,1000,0.5,effectId)
 end
 event.worldHistoryMessage="Massive Imperial military help reaches the world."
 

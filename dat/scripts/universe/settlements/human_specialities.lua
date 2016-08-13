@@ -11,9 +11,9 @@ settlements_specialities.specialityUniversity={
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.humans:addTag("university")
 		planet.lua.settlements.humans.technology=planet.lua.settlements.humans.technology+0.5
-		planet.lua.settlements.humans:addGoodDemand(C.NATIVE_TECHNOLOGY,10,3)
-		planet.lua.settlements.humans:addGoodDemand(C.NATIVE_ARTWORK,10,2)
-		planet.lua.settlements.humans:addGoodDemand(C.ANCIENT_TECHNOLOGY,10,1.2)
+		planet.lua.settlements.humans:addGoodDemand(C.NATIVE_TECHNOLOGY,100,3)
+		planet.lua.settlements.humans:addGoodDemand(C.NATIVE_ARTWORK,100,2)
+		planet.lua.settlements.humans:addGoodDemand(C.ANCIENT_TECHNOLOGY,100,1.2)
 	end,
 	getDesc=function(planet)
 		return "The planet is famous for its university, founded early in the colony's history and today a major centre of learning for surrounding systems. "
@@ -28,7 +28,7 @@ settlements_specialities.specialityNavalBase={
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.humans:addTag("navalbase")
 		planet.lua.settlements.humans.military=planet.lua.settlements.humans.military+0.5
-		planet.lua.settlements.humans:addGoodDemand(C.NATIVE_WEAPONS,10,2)
+		planet.lua.settlements.humans:addGoodDemand(C.NATIVE_WEAPONS,100,2)
 	end,
 	getDesc=function(planet)
 		return "The #planetname# naval base is a major command centre for this area of space, and a large community of retired soldiers and officers has settled around it. "
@@ -43,7 +43,7 @@ settlements_specialities.specialityHeavyIndustry={
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.humans:addTag("shipyards")
 		planet.lua.settlements.humans.industry=planet.lua.settlements.humans.industry+0.5
-		planet.lua.settlements.humans:addGoodDemand(C.EXOTIC_ORGANIC,10,2)
+		planet.lua.settlements.humans:addGoodDemand(C.EXOTIC_ORGANIC,100,2)
 	end,
 	getDesc=function(planet)
 		return "#planetname# is now a major industrial world, famous for its massive shipyards. "
@@ -58,9 +58,9 @@ settlements_specialities.specialityLuxuryResort={
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.humans:addTag("resorts")
 		planet.lua.settlements.humans.services=planet.lua.settlements.humans.services+0.5
-		planet.lua.settlements.humans:addGoodDemand(C.LUXURY_GOODS,50,2)
-		planet.lua.settlements.humans:addGoodDemand(C.EXOTIC_FURS,10,3)
-		planet.lua.settlements.humans:addGoodDemand(C.EXOTIC_FOOD,10,2)
+		planet.lua.settlements.humans:addGoodDemand(C.LUXURY_GOODS,500,2)
+		planet.lua.settlements.humans:addGoodDemand(C.EXOTIC_FURS,100,3)
+		planet.lua.settlements.humans:addGoodDemand(C.EXOTIC_FOOD,100,2)
 	end,
 	getDesc=function(planet)
 		return "The leisure resorts of #planetname# are popular with the Empire's nobility. "
@@ -74,7 +74,7 @@ settlements_specialities.specialityCraftBeer={
 	end,
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.humans:addTag("craftbeers")
-		planet.lua.settlements.humans:addGoodSupply(C.GOURMET_FOOD,50,1)
+		planet.lua.settlements.humans:addGoodSupply(C.GOURMET_FOOD,500,1)
 	end,
 	getDesc=function(planet)
 		return "#planetname#'s craft beers are legendary for the religious care with which they are brewed by numerous small producers. "
@@ -88,7 +88,7 @@ settlements_specialities.specialityHam={
 	end,
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.humans:addTag("curatedham")
-		planet.lua.settlements.humans:addGoodSupply(C.GOURMET_FOOD,50,1)
+		planet.lua.settlements.humans:addGoodSupply(C.GOURMET_FOOD,500,1)
 	end,
 	getDesc=function(planet)
 		return "Porks brought from Earth thrive on #planetname#, and local plants give their meat a distinctive flavour. #planetname# curated hams are legendary among the empire's gourmets. "
@@ -103,7 +103,7 @@ settlements_specialities.specialityWeaponLab={
 	end,
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.humans:addTag("weaponlab")
-		planet.lua.settlements.humans:addGoodSupply(C.MODERN_ARMAMENT,50,1)
+		planet.lua.settlements.humans:addGoodSupply(C.MODERN_ARMAMENT,500,1)
 	end,
 	getDesc=function(planet)
 		return "The world is home to a major high-tech armament manufacturer whose products are renowned for their reliability. "
@@ -116,7 +116,7 @@ settlements_specialities.specialityFrontierBase={
 	weight=10,
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.humans:addTag("frontierbase")
-		planet.lua.settlements.humans:addGoodDemand(C.ARMAMENT,50,2)
+		planet.lua.settlements.humans:addGoodDemand(C.ARMAMENT,500,2)
 		planet.lua.settlements.humans.military=planet.lua.settlements.humans.military*1.5
 	end,
 	getDesc=function(planet)
@@ -132,8 +132,8 @@ settlements_specialities.specialityFrontierIndustry={
 		return (planet.lua.settlements.humans.industry>0.7)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.settlements.humans:addGoodDemand(C.ORE,50,2)
-		planet.lua.settlements.humans:addGoodSupply(C.INDUSTRIAL,50,1)
+		planet.lua.settlements.humans:addGoodDemand(C.ORE,500,2)
+		planet.lua.settlements.humans:addGoodSupply(C.INDUSTRIAL,500,1)
 		planet.lua.settlements.humans.industry=planet.lua.settlements.humans.industry*1.5
 	end,
 	getDesc=function(planet)
@@ -146,8 +146,8 @@ settlements_specialities.specialityFrontierNightLife={
 	weight=5,
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.humans:addTag("partytown")
-		planet.lua.settlements.humans:addGoodDemand(C.LUXURY_GOODS,30,3)
-		planet.lua.settlements.humans:addGoodDemand(C.EXOTIC_FOOD,30,3)
+		planet.lua.settlements.humans:addGoodDemand(C.LUXURY_GOODS,300,3)
+		planet.lua.settlements.humans:addGoodDemand(C.EXOTIC_FOOD,300,3)
 		planet.lua.settlements.humans.services=planet.lua.settlements.humans.services*1.5
 	end,
 	getDesc=function(planet)
@@ -163,7 +163,7 @@ settlements_specialities.specialityFrontierOre={
 		return (planet.lua.minerals>0.7)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.settlements.humans:addGoodSupply(C.ORE,50,1)
+		planet.lua.settlements.humans:addGoodSupply(C.ORE,500,1)
 		planet.lua.settlements.humans.industry=planet.lua.settlements.humans.industry*1.5
 	end,
 	getDesc=function(planet)

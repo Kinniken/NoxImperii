@@ -10,7 +10,7 @@
   <cpu>-8</cpu>
   <level>3</level>
   <logo>betelgeuse</logo>
-  <license>Betelgian Courier License</license>
+  <license>Betelgian Courier</license>
  </general>
  <specific type="bolt">
   <gfx>massM</gfx>

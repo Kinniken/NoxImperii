@@ -65,6 +65,7 @@ function getStringData()
   stringData.targetPlanet=target_planet and target_planet:name() or ""
   stringData.targetSystem=target_planet and target_planet:system():name() or ""
   stringData.payment=payment
+  stringData.ardarRank=ardar_getRank()
   return stringData
 end
 
@@ -212,11 +213,11 @@ function land3()
 
 		local stringData=getStringData()
 
-		if player.numOutfit( "Ardarshir Auxiliary, Class II" )==0 then
-			player.addOutfit("Ardarshir Auxiliary, Class II",1)
-			stringData.rankReward="You are thus raised to the rank of Class II Auxiliary, an honour for one of your race."
+		if player.numOutfit( "Ardarshir Auxiliary, Class III" )==0 then
+			player.addOutfit("Ardarshir Auxiliary, Class III",1)
+			stringData.rankReward="You are thus raised to the rank of Class III Auxiliary, an honour for one of your race."
 		else
-			stringData.rankReward="You would have been raised to Class II Auxiliary."
+			stringData.rankReward="You would have been raised to Class III Auxiliary."
 		end
 
 		player.addOutfit("Ardar Unobtainium Shield Capacitor",1)

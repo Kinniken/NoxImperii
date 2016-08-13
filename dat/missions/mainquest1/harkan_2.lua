@@ -22,7 +22,7 @@ title = {}  --stage titles
 text = {}   --mission text
 
 title[1] = "Commander Suarez' Office"
-text[1] = [["Captain ${playerName}. I am Commander Suarez, Imperial Naval Intelligence Corps, in charge of this garrison. Beauval had a lot to say about you, and not just about your little incident in Navy School.", the Commander starts as you enter his office. He is a stocky man, darkly tanned, with a permanent frown on his broad face. His uniform is rumpled, his collar open, and the bars of his ranks are tarnished on his shoulders.
+text[1] = [["${empireRank} ${playerName}. I am Commander Suarez, Imperial Naval Intelligence Corps, in charge of this garrison. Beauval had a lot to say about you, and not just about your little incident in Navy School.", the Commander starts as you enter his office. He is a stocky man, darkly tanned, with a permanent frown on his broad face. His uniform is rumpled, his collar open, and the bars of his ranks are tarnished on his shoulders.
 
 "I expect he briefed out about the general situation and his little adventures. The attack he helped push back is but one of many. Our allies need more weapons to help fight back, and yet I can't just ask for Imperial supplies - Ardarshir would know and use that as an excuse to escalate further. There's a nearby independent world, ${pickupPlanet}, that will serve as an intermediary. We just need you to pick up the weapons from there and deliver them directly to the nearby Tigaray city. Officially, the Empire isn't involved, understood?"]]
 
@@ -54,7 +54,7 @@ function getStringData()
 	stringData.pickupPlanet=pickupPlanet:name()
 	stringData.pickupSystem=pickupPlanet:system():name()
 	stringData.payment=payment
-
+  stringData.empireRank=emp_getRank()
 	return stringData
 end
 

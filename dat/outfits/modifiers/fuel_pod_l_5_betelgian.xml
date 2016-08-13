@@ -10,7 +10,7 @@
   <gfx_store>large_fuel_pod</gfx_store>
   <level>4</level>
   <logo>betelgeuse</logo>
-  <license>Betelgian Explorer License</license>
+  <license>Betelgian Explorer</license>
  </general>
  <specific type="modification">
   <fuel>1500</fuel>

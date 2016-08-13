@@ -11,7 +11,7 @@
   <cpu>-40</cpu>
   <level>5</level>
   <logo>betelgeuse</logo>
-  <license>Betelgian Merchant Prince License</license>
+  <license>Betelgian Merchant Prince</license>
  </general>
  <specific type="turret bolt">
   <gfx>massL</gfx>

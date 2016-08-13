@@ -7,7 +7,7 @@
   <gfx_store>fury</gfx_store>
   <level>3</level>
   <logo>terra</logo>
-  <license>Reserve Lieutenant License</license>
+  <license>Reserve Lieutenant</license>
  </general>
  <specific type="ammo">
   <gfx>fury</gfx>

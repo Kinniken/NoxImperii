@@ -127,7 +127,7 @@ table.insert(cargo_custom.types,cargoCustom)
 cargoCustom=cargomission_class.createNew()
 cargoCustom.id="betelgeuse_ingoing"
 cargoCustom.weight=10
-cargoCustom.priceFactor=2
+cargoCustom.priceFactor=3
 cargoCustom.minDistance=5
 cargoCustom.maxDistance=15
 cargoCustom.maxRushLevel=1--with pirates to fight more is impossible

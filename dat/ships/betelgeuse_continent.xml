@@ -8,7 +8,7 @@
  <fabricator>Betelgian State Shipyards</fabricator>
  <description>The Cassandra is an exception in the Betelgian navy: a ship with no civilian ancestor. The result is an unusually capable light destroyer, tougher than its gaudy Betelgian exterior would indicate.</description>
  <price>2500000</price>
- <license>Betelgian Merchant License</license>
+ <license>Betelgian Merchant</license>
  <movement>
   <thrust>200</thrust>
   <turn>120</turn>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<outfit name="Betelgian Merchant Prince License">
+<outfit name="Betelgian Merchant Prince">
  <general>
- 	<license>Betelgian Explorer License</license>
+ 	<license>Betelgian Explorer</license>
   <mass>0</mass>
   <price>500000</price>
   <gfx_store>license</gfx_store>

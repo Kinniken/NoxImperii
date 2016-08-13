@@ -7,12 +7,19 @@
 include "numstring.lua"
 include "dat/scripts/general_helper.lua"
 include "jumpdist.lua"
+include "dat/missions/supportfiles/common.lua"
 
 -- Whether mission starts in bar (if false, it starts in computer)
 mission_bar=true
+--Whether it starts when landing
+mission_land=false
 -- Whether mission ends in bar (if not, it ends in space in start system)
 mission_return_to_bar=true
+-- Whether mission ends when landing (if not, it ends in space in start system)
+mission_return_to_planet=false
 
+-- Whether the player has to be the main killer
+allied_kills_count = false
 
 -- Mission details
 misn_title  = ""
@@ -21,8 +28,9 @@ misn_desc   = ""
 
 -- Text if mission from bar
 bar_desc = ""
-bar_accept_title = "Spaceport Bar"
-bar_accept_text  = [[]]
+bar_accept_title = nil
+bar_accept_text  = nil
+bar_accept_title_extra = nil
 bar_accept_text_extra = nil
 
 -- Text if mission ends on starting bar
@@ -30,6 +38,7 @@ bar_success_title = "Spaceport Bar"
 bar_success_text = [[]]
 
 -- Text if mission ends in space in starting system.
+space_success_title = ""
 space_success_text = ""
 
 -- Messages
@@ -46,9 +55,14 @@ osd_msg[3] = "Return to ${endPlanet}"
 osd_msg["__save"] = true
 
 
+hunters = {}
+hunter_hits = {}
+
+
 function template_getStringData()
   local stringData={}
   stringData.playerName=player:name()
+  stringData.shipName=player:ship()
   stringData.startPlanet=start_planet and start_planet:name() or ""
   stringData.startSystem=start_planet and start_planet:system():name() or ""
   stringData.credits=credits
@@ -58,7 +72,9 @@ function template_getStringData()
   stringData.endPlanet=end_planet and end_planet:name() or ""
   stringData.targetShipName=target_ship_name
   stringData.targetShipType=target_ship
-
+  stringData.empireRank=emp_getRank()
+  stringData.ardarRank=ardar_getRank()
+  
   return stringData
 end
 
@@ -100,7 +116,7 @@ function template_create ()
 
   elseif (mission_bar) then
     misn.setDesc(gh.format(bar_desc,stringData))
- else
+  else
     target_system_marker=misn.markerAdd( target_system, "computer" )
     misn.setDesc(gh.format(misn_desc,stringData))
  end
@@ -121,7 +137,10 @@ function template_accept ()
      end
      
      if (bar_accept_text_extra) then
-      tk.msg(gh.format( bar_accept_title,stringData),gh.format( bar_accept_text_extra,stringData))
+        if not bar_accept_title_extra then
+          bar_accept_title_extra=bar_accept_title
+        end
+        tk.msg(gh.format( bar_accept_title,stringData),gh.format( bar_accept_text_extra,stringData))
      end
    end
 
@@ -167,15 +186,25 @@ function sys_enter()
    -- Check to see if reaching target system
    if cur_sys == target_system then
 
-      -- Choose position
-      local pos = player.pilot():pos()
+      if not target_ship_pos then
+        -- Choose position
+        local pos = player.pilot():pos()
 
-      local x,y = pos:get()
-      local d = rnd.rnd( 1500, 2500 )
-      local a = math.atan2( y, x ) + math.pi
-      local offset = vec2.new()
-      offset:setP( d, a )
-      pos = pos + offset
+        local x,y = pos:get()
+        local d = rnd.rnd( 1500, 2500 )
+        local a = math.atan2( y, x ) + math.pi
+        local offset = vec2.new()
+        offset:setP( d, a )
+        pos = pos + offset
+      else
+
+        local x,y = target_ship_pos:get()
+        local d = rnd.rnd( 50, 100 )
+        local a = math.atan2( y, x ) + math.pi
+        local offset = vec2.new()
+        offset:setP( d, a )
+        pos = target_ship_pos + offset
+      end
 
       -- Create the badass enemy
       p     = pilot.addRaw( target_ship, target_ship_ai, pos, target_ship_faction )
@@ -189,6 +218,8 @@ function sys_enter()
       pilot_outfitAddSet( target_ship_pilot, target_ship_outfits )
       hook.pilot( target_ship_pilot, "death", "ship_dead" )
       hook.pilot( target_ship_pilot, "jump", "ship_jump" )
+      hook.pilot( target_ship_pilot, "attacked", "pilot_attacked" )
+      hook.pilot( target_ship_pilot, "disable", "pilot_disable" )
       misn.osdActive(2)
 
       if get_escorts~=nil then
@@ -209,6 +240,30 @@ function sys_enter()
           local escort_ship   = escort_pilot[1]
           escort_ship:rename(v.ship_name)
           escort_ship:setHostile()
+          escort_ship:setVisplayer(true)
+          escort_ship:rmOutfit("all") -- Start naked
+          pilot_outfitAddSet( escort_ship, v.ship_outfits )
+
+        end
+      end
+
+      if get_allies~=nil then
+        local allies=get_allies()
+
+        for k,v in ipairs( allies ) do
+          pos = player.pilot():pos()
+          local x,y = pos:get()
+          local d = rnd.rnd( 50, 80 )
+          local a = math.atan2( y, x ) + math.pi
+          local offset = vec2.new()
+          offset:setP( d, a )
+          pos = pos + offset
+
+          local escort_pilot     = pilot.addRaw( v.ship, v.ship_ai, pos, v.ship_faction )
+
+          local escort_ship   = escort_pilot[1]
+          escort_ship:rename(v.ship_name)
+          escort_ship:setVisplayer(true)
           escort_ship:rmOutfit("all") -- Start naked
           pilot_outfitAddSet( escort_ship, v.ship_outfits )
 
@@ -220,38 +275,83 @@ function sys_enter()
    
 end
 
+function pilot_attacked( p, attacker, dmg )
+   if attacker ~= nil then
+      local found = false
+
+      for i, j in ipairs( hunters ) do
+         if j == attacker then
+            hunter_hits[i] = hunter_hits[i] + dmg
+            found = true
+         end
+      end
+
+      if not found then
+         local i = #hunters + 1
+         hunters[i] = attacker
+         hunter_hits[i] = dmg
+      end
+   end
+end
+
 -- Ship is dead
 function ship_dead( pilot, attacker )
-    local stringData=template_getStringData()
-   if attacker == player.pilot() or rnd.rnd() > 0.5 then
+   if attacker == player.pilot() or allied_kills_count then
       -- it was the player who killed the ship
-
-      if (success_title) then
-        tk.msg(gh.format( success_title,stringData),gh.format( success_text,stringData))
-      else
-        player.msg( gh.format(msg[1],stringData) )
-      end
-
-      misn.osdActive(3)
-      hook.rm(hook_sys_enter)
-      misn.markerMove(target_system_marker,end_planet:system())
-      if (mission_return_to_bar) then        
-        hook.land("land_reward","bar")
-      elseif (mission_return_to_planet) then        
-        hook.land("land_reward")
-      else
-        hook.enter("sys_enter_reward")
-      end
-
-      if (cargo_name) then
-        carg_id = misn.cargoAdd( cargo_name, cargo_quantity )
-      end
-
+      ship_dead_success()
    else
-      -- it was someone else
+
+    local top_hunter = nil
+    local top_hits = 0
+    local player_hits = 0
+    local total_hits = 0
+    for i, j in ipairs( hunters ) do
+       total_hits = total_hits + hunter_hits[i]
+       if j ~= nil then
+          if j == player.pilot() then
+             player_hits = player_hits + hunter_hits[i]
+          elseif j:exists() and hunter_hits[i] > top_hits then
+             top_hunter = j
+             top_hits = hunter_hits[i]
+          end
+       end
+    end
+
+    if top_hunter == nil or player_hits >= top_hits/2 then
+       ship_dead_success()
+    else
+      local stringData=template_getStringData()
+
+       -- it was someone else
       player.msg( gh.format( msg[3], stringData ) )
       misn.finish(false)
+    end
    end
+end
+
+function ship_dead_success()
+   local stringData=template_getStringData()
+
+  if (success_title) then
+    tk.msg(gh.format( success_title,stringData),gh.format( success_text,stringData))
+  else
+    player.msg( gh.format(msg[1],stringData) )
+  end
+
+  misn.osdActive(3)
+  hook.rm(hook_sys_enter)
+  misn.markerMove(target_system_marker,end_planet:system())
+  if (mission_return_to_bar) then        
+    hook.land("land_reward","bar")
+  elseif (mission_return_to_planet) then        
+    hook.land("land_reward")
+  else
+    hook.enter("sys_enter_reward")
+  end
+
+  if (cargo_name) then
+    carg_id = misn.cargoAdd( cargo_name, cargo_quantity )
+  end
 end
 
 -- Ship jumped away
@@ -275,9 +375,13 @@ function ship_jump (pilot, jump_point)
 end
 
 function sys_enter_reward()
+  hook.timer(3000, "sys_enter_finish")
+end
+
+function sys_enter_finish()
   if (end_planet:system()==system.cur()) then
     local stringData=template_getStringData()
-      player.msg(gh.format(space_success_text,template_getStringData()) )
+      tk.msg(gh.format(space_success_title,template_getStringData()),gh.format(space_success_text,template_getStringData()) )
       give_rewards()
       if (carg_id) then
         misn.cargoJet(carg_id)
@@ -292,6 +396,15 @@ function land_reward()
       give_rewards()
       if (carg_id) then
         misn.cargoJet(carg_id)
+      end
+   end
+end
+
+
+function pilot_disable ()
+   if rnd.rnd() < 0.7 then
+      for i, j in ipairs( pilot.get() ) do
+         j:taskClear()
       end
    end
 end

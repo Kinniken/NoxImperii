@@ -98,6 +98,7 @@ extern const glColour cFontPurple;
 extern const glColour cFontFriendly;
 extern const glColour cFontHostile;
 extern const glColour cFontNeutral;
+extern const glColour cFontDarkGreen;
 
 const glColour* col_fromName( const char* name );
 

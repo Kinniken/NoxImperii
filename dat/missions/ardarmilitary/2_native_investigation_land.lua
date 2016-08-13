@@ -58,7 +58,6 @@ function create ()
 	startPlanet=planet.cur()
 
 	if not targetPlanet then
-		print("no target!")
 		misn.finish(false)
 	end
 

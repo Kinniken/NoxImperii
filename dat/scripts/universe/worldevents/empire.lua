@@ -1,8 +1,8 @@
 event=worldevent_class.createNew()
 event.weight=10
-event.duration=time.create(0,0,2, 0, 0, 0 )
+event.duration=time.create(0,1,0, 0, 0, 0 )
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.BARBARIANS)>20)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.BARBARIANS)>20 and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 	textData.casualties=gh.prettyLargeNumber(planet.lua.settlements.humans.population*0.1)
@@ -10,7 +10,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("Urgent medical help is needed following the barbarian attack.",
 		(time.get() + self.duration):tonumber(), "empire_barbarian_raid" )
-	planet.lua.settlements.humans:addGoodDemand(C.MEDICINE,20,3,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.MEDICINE,2000,3,effectId)
 
 	adjustBarbarianActivity(get_nearest_barbarian_zone(system_class.load(planet.c:system())).name,1.01)
 end
@@ -25,7 +25,7 @@ table.insert(world_events.events,event)
 event=worldevent_class.createNew()
 event.weight=10
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans.services>0.8)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans.services>0.8 and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.humans.services=planet.lua.settlements.humans.services*0.7
@@ -33,8 +33,8 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The recent financial crisis has depressed demand for industrial goods.",
 		(time.get() + time.create( 0,1,0, 0, 0, 0 )):tonumber() )
-	planet.lua.settlements.humans:reduceGoodDemand(C.INDUSTRIAL,effectId,30,2)
-	planet.lua.settlements.humans:reduceGoodDemand(C.MODERN_INDUSTRIAL,effectId,30,2)
+	planet.lua.settlements.humans:reduceGoodDemand(C.INDUSTRIAL,effectId,3000,2)
+	planet.lua.settlements.humans:reduceGoodDemand(C.MODERN_INDUSTRIAL,effectId,3000,2)
 
 	adjustSectorStability(planet.c:system():getZone(),0.99)
 end
@@ -51,7 +51,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.minerals>0.8)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.minerals>0.8 and planet.lua.planet==nil)
 end
 event.weight=10
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -59,9 +59,9 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("A mining boom is fuelling industrial production.",
 		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber() )
-	planet.lua.settlements.humans:addGoodSupply(C.ORE,50,0.5,effectId)
-	planet.lua.settlements.humans:addGoodSupply(C.INDUSTRIAL,20,0.5,effectId)
-	planet.lua.settlements.humans:addGoodSupply(C.MODERN_INDUSTRIAL,10,0.5,effectId)
+	planet.lua.settlements.humans:addGoodSupply(C.ORE,5000,0.5,effectId)
+	planet.lua.settlements.humans:addGoodSupply(C.INDUSTRIAL,2000,0.5,effectId)
+	planet.lua.settlements.humans:addGoodSupply(C.MODERN_INDUSTRIAL,1000,0.5,effectId)
 end
 event.eventMessage="NEWS ALERT: The discovery of rich ore veins on ${world} drives an industrial boom."
 
@@ -79,15 +79,15 @@ table.insert(world_events.events,event)
 event=worldevent_class.createNew()
 event.weight=5
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The new governor's celebrations are driving up demands for various luxury goods.",
 		(time.get() + time.create( 0,0,10, 0, 0, 0 )):tonumber() )
-	planet.lua.settlements.humans:addGoodDemand(C.LUXURY_GOODS,20,3,effectId)
-	planet.lua.settlements.humans:addGoodDemand(C.GOURMET_FOOD,20,3,effectId)
-	planet.lua.settlements.humans:addGoodDemand(C.EXOTIC_FOOD,10,4,effectId)
-	planet.lua.settlements.humans:addGoodDemand(C.EXOTIC_FURS,10,4,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.LUXURY_GOODS,2000,3,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.GOURMET_FOOD,2000,3,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.EXOTIC_FOOD,1000,4,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.EXOTIC_FURS,1000,4,effectId)
 
 	adjustSectorStability(planet.c:system():getZone(),0.99)
 end
@@ -103,7 +103,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.PIRATES)>10)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.PIRATES)>10 and planet.lua.planet==nil)
 end
 event.weight=10
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -111,8 +111,8 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The production of industrial and consumer goods is currently slowed by lack of off-world inputs due to pirate attacks.",
 		(time.get() + time.create( 0,1,0, 0, 0, 0 )):tonumber() )
-	planet.lua.settlements.humans:reduceGoodSupply(C.INDUSTRIAL,20,3,effectId)
-	planet.lua.settlements.humans:reduceGoodSupply(C.CONSUMER_GOODS,20,3,effectId)
+	planet.lua.settlements.humans:reduceGoodSupply(C.INDUSTRIAL,2000,3,effectId)
+	planet.lua.settlements.humans:reduceGoodSupply(C.CONSUMER_GOODS,2000,3,effectId)
 	
 	adjustSectorStability(planet.c:system():getZone(),0.99)
 end
@@ -126,7 +126,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.BARBARIANS)>20)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.c:system():presence(G.BARBARIANS)>20 and planet.lua.planet==nil)
 end
 event.weight=5
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -135,8 +135,8 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The departure of many colonists is depressing the local economy.",
 		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber() )
-	planet.lua.settlements.humans:reduceGoodDemand(C.PRIMITIVE_CONSUMER,20,0.5,effectId)
-	planet.lua.settlements.humans:reduceGoodDemand(C.CONSUMER_GOODS,20,0.5,effectId)
+	planet.lua.settlements.humans:reduceGoodDemand(C.PRIMITIVE_CONSUMER,2000,0.5,effectId)
+	planet.lua.settlements.humans:reduceGoodDemand(C.CONSUMER_GOODS,2000,0.5,effectId)
 	
 	adjustSectorStability(planet.c:system():getZone(),0.98)
 end
@@ -152,7 +152,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans.technology<0.8)
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans.technology<0.8 and planet.lua.planet==nil)
 end
 event.weight=5
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -161,8 +161,8 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The ongoing plague is driving up the price of medicine while the quarantine depresses the cost of consumer goods.",
 		(time.get() + time.create( 0,1,0, 0, 0, 0 )):tonumber(), "empire_plague" )
-	planet.lua.settlements.humans:addGoodDemand(C.MEDICINE,20,5,effectId)
-	planet.lua.settlements.humans:reduceGoodDemand(C.CONSUMER_GOODS,50,0.5,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.MEDICINE,2000,5,effectId)
+	planet.lua.settlements.humans:reduceGoodDemand(C.CONSUMER_GOODS,5000,0.5,effectId)
 	
 	adjustSectorStability(planet.c:system():getZone(),0.98)
 end
@@ -183,15 +183,15 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("french"))
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("french") and planet.lua.planet==nil)
 end
 event.weight=50--tag-specific so higher priority
 event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("A major wine festival is driving up the price of gourmet food.",
-		(time.get() + time.create( 0,0,2, 0, 0, 0 )):tonumber(),"winefair" )
-	planet.lua.settlements.humans:addGoodDemand(C.GOURMET_FOOD,20,5,effectId)
-	planet.lua.settlements.humans:addGoodDemand(C.EXOTIC_FOOD,20,5,effectId)
+		(time.get() + time.create( 0,1,0, 0, 0, 0 )):tonumber(),"winefair" )
+	planet.lua.settlements.humans:addGoodDemand(C.GOURMET_FOOD,2000,5,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.EXOTIC_FOOD,2000,5,effectId)
 end
 event.eventMessage="NEWS ALERT: Great wine festival being organised on ${world}, millions of visitors expected. Demand for fine food going up."
 
@@ -204,18 +204,18 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("hindu"))
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("hindu") and planet.lua.planet==nil)
 end
 event.weight=50--tag-specific so higher priority
-event.duration=time.create( 0,0,2, 0, 0, 0 )
+event.duration=time.create( 0,1,0, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 
 	textData.god=gh.randomObject({"Ganesh","Ram","Vishnu","Durga","Kali","Hanuman"})
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The ongoing mela is driving up demand for food and consumer goods.",
 		(time.get() + self.duration):tonumber(), "mela" )
-	planet.lua.settlements.humans:addGoodDemand(C.FOOD,100,5,effectId)
-	planet.lua.settlements.humans:addGoodDemand(C.CONSUMER_GOODS,100,5,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.FOOD,10000,5,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.CONSUMER_GOODS,10000,5,effectId)
 end
 event.eventMessage="NEWS ALERT: Great ${god} Mela starting on Hindu world of ${world}; food and consumer goods in high demand."
 
@@ -228,17 +228,17 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("latinamerican"))
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("latinamerican") and planet.lua.planet==nil)
 end
 event.weight=50--tag-specific so higher priority
-event.duration=time.create( 0,0,2, 0, 0, 0 )
+event.duration=time.create( 0,1,0, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The carnival is increasing demand for food and alcohol.",
 		(time.get() + self.duration):tonumber() )
-	planet.lua.settlements.humans:addGoodDemand(C.FOOD,100,5,effectId)
-	planet.lua.settlements.humans:addGoodDemand(C.BORDEAUX,20,5,effectId)
-	planet.lua.settlements.humans:addGoodDemand(C.TELLOCH,20,5,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.FOOD,10000,5,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.BORDEAUX,2000,5,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.TELLOCH,2000,5,effectId)
 end
 event.eventMessage="NEWS ALERT: The famous carnival of ${world} has just started. Tourists and locals are celebrating while food and alcohol prices reach sky-high."
 
@@ -252,18 +252,18 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("chinese"))
+	return (planet.c:faction()==faction.get(G.EMPIRE) and planet.lua.settlements.humans and planet.lua.settlements.humans:hasTag("chinese") and planet.lua.planet==nil)
 end
 event.weight=50--tag-specific so higher priority
-event.duration=time.create( 0,0,2, 0, 0, 0 )
+event.duration=time.create( 0,1,0, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 
 	textData.sign=gh.randomObject({"Dragon","Goat","Monkey","Horse","Rat","Lama"})
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("New Year celebrations are driving up demand for consumer goods.",
 		(time.get() + self.duration):tonumber() )
-	planet.lua.settlements.humans:addGoodDemand(C.CONSUMER_GOODS,100,5,effectId)
-	planet.lua.settlements.humans:addGoodDemand(C.LUXURY_GOODS,20,5,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.CONSUMER_GOODS,10000,5,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.LUXURY_GOODS,2000,5,effectId)
 end
 event.eventMessage="NEWS ALERT: The Year of the ${sign} is starting! Massive festivities for the New Year on ${world}."
 

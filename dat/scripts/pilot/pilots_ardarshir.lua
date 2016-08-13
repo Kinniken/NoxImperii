@@ -4,12 +4,10 @@ include("dat/factions/equip/outfits.lua")
 include('universe/generate_nameGenerator.lua')
 
 local function equipArdarShip(s,outfits, nbForwards, nbTurrets,nbSecondaries, nbUtilities, nbStructures)
-
    equip_fillTurretsBySlotSize(s,outfits,nbTurrets,equip_defaultTurretsArdar())
    equip_fillWeaponsBySlotSize(s,outfits,nbForwards,nbSecondaries,equip_defaultForwardArdar(),equip_defaultSecondaryArdar())
    equip_fillUtilitiesBySlotSize(s,outfits,nbUtilities,equip_defaultUtilitiesArdar())
    equip_fillStructuresBySlotSize(s,outfits,nbStructures,equip_defaultStructuresArdar())
-
 end
 
 function ardarshir_createMeteor()

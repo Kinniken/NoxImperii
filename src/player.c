@@ -4105,4 +4105,8 @@ static int player_parseCrew( xmlNodePtr parent )
 	return 0;
 }
 
-
+const int* player_getAllDoneMissions( int *nb )
+{
+	*nb=missions_ndone;
+	return missions_done;
+}

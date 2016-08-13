@@ -13,7 +13,7 @@ betelgeuse_specialities.specialityUniversity={
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.betelgeuse:addTag("hightechcenter")
 		planet.lua.settlements.betelgeuse.technology=planet.lua.settlements.betelgeuse.technology+0.5
-		planet.lua.settlements.betelgeuse:addGoodSupply(C.MODERN_INDUSTRIAL,30,1)
+		planet.lua.settlements.betelgeuse:addGoodSupply(C.MODERN_INDUSTRIAL,300,1)
 	end,
 	getDesc=function(planet)
 		return "While the Oligarchy is not known for its scientific research, it has attempted to copy human-style universities. #planetname# is home to one such installation, originally set-up with Terran help and now the nexus of a small advanced industrial goods industry. "
@@ -28,8 +28,8 @@ betelgeuse_specialities.specialityNavalBase={
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.betelgeuse:addTag("navalbase")
 		planet.lua.settlements.betelgeuse.military=planet.lua.settlements.betelgeuse.military+0.5
-		planet.lua.settlements.betelgeuse:addGoodDemand(C.ARMAMENT,20,1.2)
-    planet.lua.settlements.betelgeuse:addGoodDemand(C.MODERN_ARMAMENT,10,1.5)
+		planet.lua.settlements.betelgeuse:addGoodDemand(C.ARMAMENT,200,1.2)
+    planet.lua.settlements.betelgeuse:addGoodDemand(C.MODERN_ARMAMENT,100,1.5)
 	end,
 	getDesc=function(planet)
 		return "#planetname# is home to one of the most public-minded of the Patrician families, who ensure that the local base of the Betelgian navy is unusually well-supplied, and its officers particularly loyal to Betelgeuse... and their local patrons. "
@@ -44,8 +44,8 @@ betelgeuse_specialities.specialityHeavyIndustry={
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.betelgeuse:addTag("industrialcenter")
 		planet.lua.settlements.betelgeuse.industry=planet.lua.settlements.betelgeuse.industry+0.5
-		planet.lua.settlements.betelgeuse:addGoodSupply(C.INDUSTRIAL,10,0.8)
-    planet.lua.settlements.betelgeuse:addGoodSupply(C.CONSUMER_GOODS,10,0.8)
+		planet.lua.settlements.betelgeuse:addGoodSupply(C.INDUSTRIAL,100,0.8)
+    planet.lua.settlements.betelgeuse:addGoodSupply(C.CONSUMER_GOODS,100,0.8)
 	end,
 	getDesc=function(planet)
 		return "While Betelgeuse is famous for its trading fleets, it does have industrial centres. On #planetname#, large factory complexes produce basic industrial and consumer goods for export to the rest of the Oligarchy. "
@@ -60,8 +60,8 @@ betelgeuse_specialities.specialityLuxuryResort={
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.betelgeuse:addTag("greatpalace")
 		planet.lua.settlements.betelgeuse.services=planet.lua.settlements.betelgeuse.services+0.5
-		planet.lua.settlements.betelgeuse:addGoodDemand(C.LUXURY_GOODS,30,2)
-		planet.lua.settlements.betelgeuse:addGoodDemand(C.EXOTIC_FURS,10,2)
+		planet.lua.settlements.betelgeuse:addGoodDemand(C.LUXURY_GOODS,300,2)
+		planet.lua.settlements.betelgeuse:addGoodDemand(C.EXOTIC_FURS,100,2)
 	end,
 	getDesc=function(planet)
 		return "In one of the lushest vales of #planetname#, a great palace has been built by one of Betelgeuse' leading family. Its elegant arches surrounded by acres of manicured gardens are famous throughout the Oligarchy, and its constant celebrations drive a strong interest in luxury goods. "
@@ -76,7 +76,7 @@ betelgeuse_specialities.specialityOre={
 	end,
 	applyOnPlanet=function(planet)
 		planet.lua.settlements.betelgeuse:addTag("richores")
-		planet.lua.settlements.betelgeuse:addGoodSupply(C.ORE,50,0.9)
+		planet.lua.settlements.betelgeuse:addGoodSupply(C.ORE,500,0.9)
 		planet.lua.settlements.betelgeuse.industry=planet.lua.settlements.betelgeuse.industry*1.5
 	end,
 	getDesc=function(planet)

@@ -1,4 +1,3 @@
-include "numstring.lua"
 include('universe/objects/class_planets.lua')
 include "universe/live/live_universe.lua"
 include "dat/missions/supportfiles/common.lua"
@@ -11,7 +10,7 @@ payment = 500000
 
 -- Mission Details
 misn_title = "Her Majesty Shadowlines"
-misn_reward = ""..payment.." cr"
+misn_reward = gh.numstring(payment).." cr"
 misn_desc = "Help the Roidhunate conquer Harkan in the name of Shadowlines."
 
 
@@ -235,7 +234,6 @@ function land3()
 		bop=bop-100
 
 		var.push("universe_balanceofpower",bop)
-		updateUniverseDesc()
 
 		hook.rm(landhook)
 		misn.finish(true)

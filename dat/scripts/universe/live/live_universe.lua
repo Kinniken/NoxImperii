@@ -154,8 +154,6 @@ function setSectorStability(sectorName,stability)
 			generatePlanetServices(planet_class.load(p))
 		end
 	end
-
-	updateUniverseDesc()
 end
 
 function adjustSectorStability(sectorName,change)
@@ -200,8 +198,6 @@ function setBarbarianActivity(sectorName,activity)
 			generatePlanetServices(planet_class.load(p))
 		end
 	end
-
-	updateUniverseDesc()
 end
 
 function adjustBarbarianActivity(sectorName,change)
@@ -296,6 +292,12 @@ end
 
 local function generateCommodity(settings,commodities,name,price,need,production,baseQuantity)
 
+	if price > 5 then
+		price = 5
+	elseif price < 0.2 then
+		price = 0.2
+	end
+
 	if (settings and settings[name] and settings[name].demand) then
 		need=need*settings[name].demand
 	end
@@ -355,16 +357,6 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 
 	planet.c:setTradeBuySellRation(buySellGap);
 
-	--Calculating tendency to depart from base price
-	--0 equals no departure, 1 max.
-	priceMouvement=1-(settlement.technology*settlement.services)/2
-
-	if (priceMouvement<0.1) then
-		priceMouvement=0.1
-	elseif (priceMouvement>1) then
-		priceMouvement=1
-	end
-
 	local price,need,production
 
 	populationScore=(math.log10(settlement.population)/10)
@@ -373,7 +365,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 	production=10*settlement.agriculture
 	price=settlement.services/(settlement.agriculture)
 
-	generateCommodity(settings,commodities,C.FOOD,price,need,production,100)
+	generateCommodity(settings,commodities,C.FOOD,price,need,production,1000)
 
 	need=0
 	if (settlement.services>0.7) then
@@ -385,7 +377,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 	end
 	price=(settlement.services+0.3)/(settlement.agriculture)+0.1
 
-	generateCommodity(settings,commodities,C.GOURMET_FOOD,price,need,production,20)
+	generateCommodity(settings,commodities,C.GOURMET_FOOD,price,need,production,200)
 
 	--Consumer Goods
 	need=0
@@ -397,7 +389,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=(settlement.services*2)
 	end
 	price=1/(settlement.technology/3+0.8)
-	generateCommodity(settings,commodities,C.PRIMITIVE_CONSUMER,price,need,production,100)
+	generateCommodity(settings,commodities,C.PRIMITIVE_CONSUMER,price,need,production,1000)
 
 	need=0
 	if (settlement.services>0.3) then
@@ -408,7 +400,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=settlement.services
 	end
 	price=1/(settlement.technology/2+0.7)
-	generateCommodity(settings,commodities,C.CONSUMER_GOODS,price,need,production,50)
+	generateCommodity(settings,commodities,C.CONSUMER_GOODS,price,need,production,1000)
 
 	need=0
 	if (settlement.services>0.8) then
@@ -419,7 +411,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=settlement.services/4
 	end
 	price=1/(settlement.technology+0.5)
-	generateCommodity(settings,commodities,C.LUXURY_GOODS,price,need,production,25)
+	generateCommodity(settings,commodities,C.LUXURY_GOODS,price,need,production,250)
 
 
 
@@ -430,7 +422,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=settlement.services/2
 	end
 	price=1/(settlement.technology*2+0.5)+0.5
-	generateCommodity(settings,commodities,C.MEDICINE,price,need,production,20)
+	generateCommodity(settings,commodities,C.MEDICINE,price,need,production,200)
 
 
 	--Industrial
@@ -443,7 +435,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=(planet.lua.minerals*2)
 	end
 	price=0.7+settlement.technology/3
-	generateCommodity(settings,commodities,C.ORE,price,need,production,100)
+	generateCommodity(settings,commodities,C.ORE,price,need,production,1000)
 
 
 	need=0
@@ -452,7 +444,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=(settlement.industry*2)
 	end
 	price=1/(settlement.technology/5+0.9)
-	generateCommodity(settings,commodities,C.BASIC_TOOLS,price,need,production,20)
+	generateCommodity(settings,commodities,C.BASIC_TOOLS,price,need,production,200)
 
 	need=0
 	if (settlement.technology<0.5) then
@@ -463,7 +455,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=(settlement.industry*2)
 	end
 	price=1/(settlement.technology/4+0.8)
-	generateCommodity(settings,commodities,C.PRIMITIVE_INDUSTRIAL,price,need,production,50)
+	generateCommodity(settings,commodities,C.PRIMITIVE_INDUSTRIAL,price,need,production,500)
 
 	need=0
 	if (settlement.technology>0.3 and settlement.technology<1) then
@@ -474,7 +466,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=settlement.industry
 	end
 	price=1/(settlement.technology/3+0.8)
-	generateCommodity(settings,commodities,C.INDUSTRIAL,price,need,production,50)
+	generateCommodity(settings,commodities,C.INDUSTRIAL,price,need,production,500)
 
 	need=0
 	if (settlement.technology>0.8) then
@@ -495,7 +487,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=(settlement.industry*2)
 	end
 	price=1/(settlement.technology/5+0.9)
-	generateCommodity(settings,commodities,C.BASIC_WEAPONS,price,need,production,20)
+	generateCommodity(settings,commodities,C.BASIC_WEAPONS,price,need,production,200)
 
 	need=0
 	if (settlement.technology<0.5) then
@@ -506,7 +498,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=(settlement.industry*2)
 	end
 	price=1/(settlement.technology/4+0.8)
-	generateCommodity(settings,commodities,C.PRIMITIVE_ARMAMENT,price,need,production,100)
+	generateCommodity(settings,commodities,C.PRIMITIVE_ARMAMENT,price,need,production,1000)
 
 	need=0
 	if (settlement.technology>0.3 and settlement.technology<1) then
@@ -517,7 +509,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=settlement.industry
 	end
 	price=1/(settlement.technology/3+0.8)
-	generateCommodity(settings,commodities,C.ARMAMENT,price,need,production,50)
+	generateCommodity(settings,commodities,C.ARMAMENT,price,need,production,500)
 
 	need=0
 	if (settlement.technology>0.8) then
@@ -528,7 +520,7 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		production=settlement.industry/4
 	end
 	price=1/(settlement.technology*2+1)+0.5
-	generateCommodity(settings,commodities,C.MODERN_ARMAMENT,price,need,production,25)
+	generateCommodity(settings,commodities,C.MODERN_ARMAMENT,price,need,production,250)
 
 
 
@@ -538,14 +530,14 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		need=populationScore*settlement.industry
 	end
 	price=0.8+settlement.technology*2
-	generateCommodity(settings,commodities,C.EXOTIC_ORGANIC,price,need,0,10)
+	generateCommodity(settings,commodities,C.EXOTIC_ORGANIC,price,need,0,100)
 
 	need=0
 	if (settlement.services>0.7) then
 		need=populationScore*(settlement.services-0.7)*2
 	end
 	price=0.8+settlement.technology
-	generateCommodity(settings,commodities,C.EXOTIC_FOOD,price,need,0,10)
+	generateCommodity(settings,commodities,C.EXOTIC_FOOD,price,need,0,100)
 
 	need=0
 	if (settlement.services>1) then
@@ -566,21 +558,21 @@ local function generateSettlementCommoditiesNeedsSupply(settings,planet,settleme
 		need=populationScore*(settlement.services-0.7)*2
 	end
 	price=0.7+settlement.technology*1.5
-	generateCommodity(settings,commodities,C.NATIVE_ARTWORK,price,need,0,10)
+	generateCommodity(settings,commodities,C.NATIVE_ARTWORK,price,need,0,100)
 
 	need=0
 	if (settlement.services>1) then
 		need=populationScore*(settlement.services-0.7)*2
 	end
 	price=0.8+settlement.technology*1.3
-	generateCommodity(settings,commodities,C.NATIVE_SCULPTURES,price,need,0,10)
+	generateCommodity(settings,commodities,C.NATIVE_SCULPTURES,price,need,0,100)
 
 	need=0
 	if (settlement.military>1) then
 		need=populationScore*(settlement.military-0.7)*2
 	end
 	price=0.8+settlement.technology
-	generateCommodity(settings,commodities,C.NATIVE_WEAPONS,price,need,0,10)
+	generateCommodity(settings,commodities,C.NATIVE_WEAPONS,price,need,0,100)
 
 	if (settlement.suppressGoodDemand) then
 		for k,good in pairs(settlement.suppressGoodDemand) do

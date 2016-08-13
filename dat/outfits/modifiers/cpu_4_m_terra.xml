@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Terran Computer">
+ <general>
+  <typename>CPU Modifier</typename>
+  <slot>utility</slot>
+  <size>medium</size>
+  <mass>8</mass>
+  <price>200000</price>
+  <description>The Imperial Navy has developped high-power, dense onboard computers suited for military work. This model is intended for frigates and light cruisers.</description>
+  <gfx_store>cpu_ii</gfx_store>
+  <level>4</level>
+  <logo>terra</logo>
+  <license>Reserve Major</license>
+ </general>
+ <specific type="modification">
+  <cpu_max>96</cpu_max>
+  <energy_usage>5</energy_usage>
+ </specific>
+</outfit>

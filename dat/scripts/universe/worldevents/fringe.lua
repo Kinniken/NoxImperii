@@ -1,6 +1,6 @@
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.humans and planet.c:system():presence(G.BARBARIANS)>0)
+	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.humans and planet.c:system():presence(G.BARBARIANS)>0 and planet.lua.planet==nil)
 end
 event.weight=5
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -9,8 +9,8 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The ravages of the recent barbarian raids is causing a humanitarian crisis.",
 		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber(), "fringe_barbarian_raid" )
-	planet.lua.settlements.humans:addGoodDemand(C.MEDICINE,20,3,effectId)
-	planet.lua.settlements.humans:addGoodDemand(C.FOOD,20,3,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.MEDICINE,200,3,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.FOOD,200,3,effectId)
 end
 event.eventMessage="NEWS ALERT: The independent world of ${world} is reeling under heavy barbarian raids."
 
@@ -25,7 +25,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.humans)
+	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.humans and planet.lua.planet==nil)
 end
 event.weight=10
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -33,8 +33,8 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("Isolation from the Empire is causing a drop in industrial production.",
 		(time.get() + time.create( 0,1,0, 0, 0, 0 )):tonumber() )
-	planet.lua.settlements.humans:reduceGoodSupply(C.INDUSTRIAL,20,1,effectId)
-	planet.lua.settlements.humans:reduceGoodSupply(C.MODERN_INDUSTRIAL,10,1,effectId)
+	planet.lua.settlements.humans:reduceGoodSupply(C.INDUSTRIAL,200,1,effectId)
+	planet.lua.settlements.humans:reduceGoodSupply(C.MODERN_INDUSTRIAL,100,1,effectId)
 end
 event.eventMessage="NEWS ALERT: The economy of ${world} badly hit as Imperial trade slows. Unexported industrial goods pile up."
 
@@ -48,7 +48,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.humans and planet.lua.minerals>0.8)
+	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.humans and planet.lua.minerals>0.8 and planet.lua.planet==nil)
 end
 event.weight=20
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -56,9 +56,9 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("A mining boom is fuelling industrial production.",
 		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber() )
-	planet.lua.settlements.humans:addGoodSupply(C.ORE,50,0.5,effectId)
-	planet.lua.settlements.humans:addGoodSupply(C.INDUSTRIAL,20,0.5,effectId)
-	planet.lua.settlements.humans:addGoodSupply(C.MODERN_INDUSTRIAL,10,0.5,effectId)
+	planet.lua.settlements.humans:addGoodSupply(C.ORE,500,0.5,effectId)
+	planet.lua.settlements.humans:addGoodSupply(C.INDUSTRIAL,200,0.5,effectId)
+	planet.lua.settlements.humans:addGoodSupply(C.MODERN_INDUSTRIAL,100,0.5,effectId)
 end
 event.eventMessage="NEWS ALERT: The discovery of rich ore veins on ${world} drives an industrial boom."
 
@@ -71,7 +71,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.natives and planet.lua.settlements.natives.stability<1 and planet.lua.settlements.humans)
+	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.natives and planet.lua.settlements.natives.stability<1 and planet.lua.settlements.humans and planet.lua.planet==nil)
 end
 event.weight=5
 event.applyOnWorldCustom=function(self,planet,textData)
@@ -84,7 +84,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.natives:addActiveEffect("Clashes between natives and human population lead to booming arm sales.",
 		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber() )
-	planet.lua.settlements.natives:addGoodDemand(C.BASIC_WEAPONS,20,3,effectId)
+	planet.lua.settlements.natives:addGoodDemand(C.BASIC_WEAPONS,200,3,effectId)
 end
 event.eventMessage="NEWS ALERT: Deadly clashes between natives and human settlers on ${world}, arm sales boom."
 
@@ -98,7 +98,7 @@ table.insert(world_events.events,event)
 
 event=worldevent_class.createNew()
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.humans and planet.lua.settlements.humans.technology<0.8 and planet.lua.nativeFertility>0.8)
+	return (planet.c:faction()==faction.get(G.INDEPENDENT_WORLDS) and planet.lua.settlements.humans and planet.lua.settlements.humans.technology<0.8 and planet.lua.nativeFertility>0.8 and planet.lua.planet==nil)
 end
 event.weight=20
 event.duration=time.create( 0,1, 0, 0, 0, 0 )
@@ -106,9 +106,9 @@ event.applyOnWorldCustom=function(self,planet,textData)
 
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The fungus attack on crops is greatly reducing supplies.",
 		(time.get() + self.duration):tonumber(),"fringe_alienfungus" )
-	planet.lua.settlements.humans:reduceGoodSupply(C.FOOD,100,5,effectId)
-	planet.lua.settlements.humans:reduceGoodSupply(C.GOURMET_FOOD,20,5,effectId)
-	planet.lua.settlements.humans:addGoodDemand(C.FOOD,50,5,effectId)
+	planet.lua.settlements.humans:reduceGoodSupply(C.FOOD,1000,5,effectId)
+	planet.lua.settlements.humans:reduceGoodSupply(C.GOURMET_FOOD,200,5,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.FOOD,500,5,effectId)
 end
 event.eventMessage="NEWS ALERT: Crops on ${world} under attack by native fungus, major food penury starting."
 

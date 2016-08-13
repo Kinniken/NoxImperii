@@ -244,7 +244,85 @@
    <faction>Roidhunate of Ardarshir</faction>
   </avail>
  </mission>
-
+<mission name="Ardar 2 Native Investigation Rec">
+  <lua>ardarmilitary/2_native_investigation_rec</lua>
+  <avail>
+   <priority>50</priority>
+   <chance>70</chance>
+   <done>Ardar 2 Native Investigation</done>
+   <location>Computer</location>
+   <faction>Roidhunate of Ardarshir</faction>
+  </avail>
+ </mission>
+<mission name="Ardar 3 Imperial Scout Kill">
+  <lua>ardarmilitary/3_imperial_scout_kill_land</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>15</priority>
+   <chance>100</chance>
+   <done>Ardar 2 Native Investigation</done>
+   <location>Land</location>
+   <faction>Roidhunate of Ardarshir</faction>
+  </avail>
+ </mission>
+ <mission name="Ardar 3 Imperial Scout Kill Rec">
+  <lua>ardarmilitary/3_imperial_scout_kill_rec</lua>
+  <avail>
+   <priority>50</priority>
+   <chance>70</chance>
+   <done>Ardar 3 Imperial Scout Kill</done>
+   <location>Computer</location>
+   <faction>Roidhunate of Ardarshir</faction>
+  </avail>
+ </mission>
+ <mission name="Ardar 4 Piracy Kill">
+  <lua>ardarmilitary/4_piracy_kill</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>15</priority>
+   <chance>100</chance>
+   <done>Ardar 3 Imperial Scout Kill</done>
+   <location>Land</location>
+   <faction>Roidhunate of Ardarshir</faction>
+  </avail>
+ </mission>
+  <mission name="Ardar 4 Piracy Kill Rec">
+  <lua>ardarmilitary/4_piracy_kill_rec</lua>
+  <avail>
+   <priority>50</priority>
+   <chance>40</chance>
+   <done>Ardar 4 Piracy Kill</done>
+   <location>Computer</location>
+   <faction>Roidhunate of Ardarshir</faction>
+  </avail>
+ </mission>
+  <mission name="Ardar 5 Imperial Battle">
+  <lua>ardarmilitary/5_imperial_battle</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>15</priority>
+   <chance>100</chance>
+   <done>Ardar 4 Piracy Kill</done>
+   <location>Land</location>
+   <faction>Roidhunate of Ardarshir</faction>
+  </avail>
+ </mission>
+  <mission name="Ardar 5 Imperial Battle Rec">
+  <lua>ardarmilitary/5_imperial_battle_rec</lua>
+  <avail>
+   <priority>50</priority>
+   <chance>40</chance>
+   <done>Ardar 5 Imperial Battle</done>
+   <location>Computer</location>
+   <faction>Roidhunate of Ardarshir</faction>
+  </avail>
+ </mission>
 
  <mission name="Intro 1">
   <lua>introquest/intro_1</lua>

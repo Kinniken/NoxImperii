@@ -94,7 +94,7 @@ function land()
 
     local effectId=curPlanet.lua.settlements.humans:addActiveEffect("The arrival of a new captain has increased demand for liquor.",
         (time.get() + time.create(0,1,0,0,0,0)):tonumber(), "new_captain" )
-    curPlanet.lua.settlements.humans:addGoodDemand(C.TELLOCH,20,3,effectId)
+    curPlanet.lua.settlements.humans:addGoodDemand(C.TELLOCH,200,3,effectId)
 
     curPlanet:addHistory("A young captain started his journey to the stars by following a quick tutorial.")
     generatePlanetServices(curPlanet)

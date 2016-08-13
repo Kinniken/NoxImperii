@@ -1,4 +1,3 @@
-include "numstring.lua"
 include('universe/objects/class_planets.lua')
 include "universe/live/live_universe.lua"
 include "dat/missions/supportfiles/common.lua"
@@ -9,7 +8,7 @@ payment = 50000
 
 -- Mission Details
 misn_title = "To Ardarshir"
-misn_reward = ""..payment.." cr"
+misn_reward = gh.numstring(payment).." cr"
 misn_desc = "Take Shadowlines to the Roidhunate's capital on Ardarshir."
 
 

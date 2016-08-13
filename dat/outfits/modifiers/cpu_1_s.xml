@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Basic Computer">
+ <general>
+  <typename>CPU Modifier</typename>
+  <slot>utility</slot>
+  <size>small</size>
+  <mass>3</mass>
+  <price>40000</price>
+  <description>A basic additional computer providing a small boost to onboard CPU.</description>
+  <gfx_store>cpu_i</gfx_store>
+  <level>1</level>
+ </general>
+ <specific type="modification">
+  <cpu_max>24</cpu_max>
+  <energy_usage>5</energy_usage>
+ </specific>
+</outfit>

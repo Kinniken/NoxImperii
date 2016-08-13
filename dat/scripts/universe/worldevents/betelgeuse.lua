@@ -1,7 +1,7 @@
 event=worldevent_class.createNew()
 event.weight=10
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse)
+	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 
@@ -9,9 +9,9 @@ event.applyOnWorldCustom=function(self,planet,textData)
 
 	local effectId=planet.lua.settlements.betelgeuse:addActiveEffect("The exploration fleet's purchases are driving up the price of basic goods.",
 		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber(), "betelgeuse_fleetleaving" )
-	planet.lua.settlements.betelgeuse:addGoodDemand(C.BASIC_TOOLS,50,3,effectId)
-	planet.lua.settlements.betelgeuse:addGoodDemand(C.BASIC_WEAPONS,50,3,effectId)
-	planet.lua.settlements.betelgeuse:addGoodDemand(C.PRIMITIVE_CONSUMER,30,3,effectId)
+	planet.lua.settlements.betelgeuse:addGoodDemand(C.BASIC_TOOLS,500,3,effectId)
+	planet.lua.settlements.betelgeuse:addGoodDemand(C.BASIC_WEAPONS,500,3,effectId)
+	planet.lua.settlements.betelgeuse:addGoodDemand(C.PRIMITIVE_CONSUMER,300,3,effectId)
 end
 event.duration=time.create( 0,0,2, 0, 0, 0 )
 event.eventMessage="NEWS ALERT: A Betelgian exploration fleet is assembling on ${world}, loading up goods to trade with natives."
@@ -27,7 +27,7 @@ table.insert(world_events.events,event)
 event=worldevent_class.createNew()
 event.weight=10
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse)
+	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 
@@ -36,12 +36,12 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	local effectId=planet.lua.settlements.betelgeuse:addActiveEffect("The exploration fleet is selling all kinds of native goods.",
 		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber(), "betelgeuse_fleetleaving" )
 
-	planet.lua.settlements.betelgeuse:addGoodSupply(C.NATIVE_ARTWORK,20,1,effectId)
-	if (math.random()<0.5) then planet.lua.settlements.betelgeuse:addGoodSupply(C.NATIVE_SCULPTURES,20,1,effectId) end
-	if (math.random()<0.5) then planet.lua.settlements.betelgeuse:addGoodSupply(C.NATIVE_TECHNOLOGY,20,1,effectId) end
-	if (math.random()<0.5) then planet.lua.settlements.betelgeuse:addGoodSupply(C.NATIVE_WEAPONS,20,1,effectId) end
-	if (math.random()<0.5) then planet.lua.settlements.betelgeuse:addGoodSupply(C.EXOTIC_FOOD,20,1,effectId) end
-	if (math.random()<0.5) then planet.lua.settlements.betelgeuse:addGoodSupply(C.EXOTIC_FURS,20,1,effectId) end
+	planet.lua.settlements.betelgeuse:addGoodSupply(C.NATIVE_ARTWORK,200,1,effectId)
+	if (math.random()<0.5) then planet.lua.settlements.betelgeuse:addGoodSupply(C.NATIVE_SCULPTURES,200,1,effectId) end
+	if (math.random()<0.5) then planet.lua.settlements.betelgeuse:addGoodSupply(C.NATIVE_TECHNOLOGY,200,1,effectId) end
+	if (math.random()<0.5) then planet.lua.settlements.betelgeuse:addGoodSupply(C.NATIVE_WEAPONS,200,1,effectId) end
+	if (math.random()<0.5) then planet.lua.settlements.betelgeuse:addGoodSupply(C.EXOTIC_FOOD,200,1,effectId) end
+	if (math.random()<0.5) then planet.lua.settlements.betelgeuse:addGoodSupply(C.EXOTIC_FURS,200,1,effectId) end
 end
 event.duration=time.create( 0,0,2, 0, 0, 0 )
 event.eventMessage="NEWS ALERT: A Betelgian exploration fleet has come back to ${world}, loaded with rare goods."
@@ -59,7 +59,7 @@ table.insert(world_events.events,event)
 event=worldevent_class.createNew()
 event.weight=10
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse)
+	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 
@@ -68,10 +68,10 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	local effectId=planet.lua.settlements.betelgeuse:addActiveEffect("The sale of the ${house} estate makes cheap luxury goods available.",
 		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber(), "betelgeuse_housecollapse" )
 	planet.lua.settlements.betelgeuse:addGoodSupply(C.LUXURY_GOODS,50,0.5,effectId)
-	if math.random()<0.5 then planet.lua.settlements.betelgeuse:addGoodSupply(C.BORDEAUX,10,0.5,effectId) end
-	if math.random()<0.5 then planet.lua.settlements.betelgeuse:addGoodSupply(C.TELLOCH,10,0.5,effectId) end
-	if math.random()<0.5 then planet.lua.settlements.betelgeuse:addGoodSupply(C.NATIVE_ARTWORK,10,0.5,effectId) end
-	if math.random()<0.5 then planet.lua.settlements.betelgeuse:addGoodSupply(C.NATIVE_SCULPTURES,10,0.5,effectId) end
+	if math.random()<0.5 then planet.lua.settlements.betelgeuse:addGoodSupply(C.BORDEAUX,100,0.5,effectId) end
+	if math.random()<0.5 then planet.lua.settlements.betelgeuse:addGoodSupply(C.TELLOCH,100,0.5,effectId) end
+	if math.random()<0.5 then planet.lua.settlements.betelgeuse:addGoodSupply(C.NATIVE_ARTWORK,100,0.5,effectId) end
+	if math.random()<0.5 then planet.lua.settlements.betelgeuse:addGoodSupply(C.NATIVE_SCULPTURES,100,0.5,effectId) end
 end
 event.duration=time.create( 0,0,2, 0, 0, 0 )
 event.eventMessage="NEWS ALERT: Family feudal causes trading house collapse on ${world}, estate put out on auction."
@@ -87,7 +87,7 @@ table.insert(world_events.events,event)
 event=worldevent_class.createNew()
 event.weight=10
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse)
+	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 
@@ -95,8 +95,8 @@ event.applyOnWorldCustom=function(self,planet,textData)
 
 	local effectId=planet.lua.settlements.betelgeuse:addActiveEffect("The ongoing political crisis is undermining the economy, causing a collapse in trade good prices.",
 		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber(), "betelgeuse_noblemurder" )
-	planet.lua.settlements.betelgeuse:reduceGoodDemand(C.LUXURY_GOODS,30,0.5,effectId)
-	planet.lua.settlements.betelgeuse:reduceGoodDemand(C.GOURMET_FOOD,30,0.5,effectId)
+	planet.lua.settlements.betelgeuse:reduceGoodDemand(C.LUXURY_GOODS,300,0.5,effectId)
+	planet.lua.settlements.betelgeuse:reduceGoodDemand(C.GOURMET_FOOD,300,0.5,effectId)
 end
 event.duration=time.create( 0,0,2, 0, 0, 0 )
 event.eventMessage="NEWS ALERT: Important Lord assassinated in intrigues over ${world}'s Council seat."
@@ -115,7 +115,7 @@ event=worldevent_class.createNew()
 event.eventMessage="NEWS ALERT: Lobbying for Council position heats up on ${world}, luxury goods in high demand."
 event.weight=10
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse)
+	return (planet.c:faction()==faction.get(G.BETELGEUSE) and planet.lua.settlements.betelgeuse and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 
@@ -123,10 +123,10 @@ event.applyOnWorldCustom=function(self,planet,textData)
 
 	local effectId=planet.lua.settlements.betelgeuse:addActiveEffect("Ongoing political lobbying is driving up the price of luxury and other rare goods.",
 		(time.get() + self.duration):tonumber(), "betelgeuse_lobbying" )
-	planet.lua.settlements.betelgeuse:addGoodDemand(C.LUXURY_GOODS,30,3,effectId)
-	planet.lua.settlements.betelgeuse:addGoodDemand(C.GOURMET_FOOD,30,3,effectId)
+	planet.lua.settlements.betelgeuse:addGoodDemand(C.LUXURY_GOODS,300,3,effectId)
+	planet.lua.settlements.betelgeuse:addGoodDemand(C.GOURMET_FOOD,300,3,effectId)
 end
-event.duration=time.create( 0,0,2, 0, 0, 0 )
+event.duration=time.create( 0,1,0, 0, 0, 0 )
 
 event.worldHistoryMessage="Intense political lobbying preceded the election of a new Council member."
 

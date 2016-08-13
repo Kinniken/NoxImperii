@@ -1,4 +1,3 @@
-   include "numstring.lua"
    include "dat/scripts/general_helper.lua"
    include "jumpdist.lua"
    include('universe/objects/class_planets.lua')
@@ -33,6 +32,7 @@ function get_native_planet( around_sys,minDist,maxDist,validator)
     getsysatdistance(around_sys, minDist,maxDist,
         function(s)
             for i, v in ipairs(s:planets()) do
+              if v:faction()==faction.get(G.NATIVES) then
                   if validator==nil or validator(v) then
 
                       local luaplanet=planet_class.load(v)
@@ -41,6 +41,7 @@ function get_native_planet( around_sys,minDist,maxDist,validator)
                         planets[#planets + 1] = {v, s}
                       end
                   end
+                end
            end
            return true
         end)
@@ -79,9 +80,12 @@ function get_adjacent_system( sys, sysTaken, factionName )
 end
 
 
-function get_empty_sys( around_sys, min, max)
+function get_empty_sys( around_sys, min, max,validator)
   local systems=getsysatdistance(around_sys, min, max,
     function(s)
+        if validator~=nil and (not validator(s)) then
+          return false
+        end
         for _,p in pairs(s:planets()) do
           if p:faction() and p:faction()~=faction.get(G.NATIVES) then
             return false

@@ -1234,5 +1234,3 @@ static int missions_parseActive( xmlNodePtr parent )
 
    return 0;
 }
-
-

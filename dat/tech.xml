@@ -345,7 +345,6 @@
 
 	<tech name="Empire Military 1">
 		<item>Imperial Tunguska</item>
-		<item>Reserve Ensign</item>
 		<item>Lancelot</item>
 
 		<item>Marine Small Arms</item>
@@ -354,7 +353,6 @@
 	</tech>
 	<tech name="Empire Military 2">
 		<item>Imperial Halley</item>
-		<item>Reserve Lieutenant</item>
 
 		<item>Terran Navy Plating</item>
 		<item>Steering Thrusters</item>
@@ -365,7 +363,6 @@
 	</tech>
 	<tech name="Empire Military 3">
 		<item>Imperial Asieneuve</item>
-		<item>Reserve Major</item>
 		<item>Buffel</item>
 
 		<item>Terran Hellburner</item>
@@ -382,7 +379,6 @@
 	</tech>
 	<tech name="Empire Military 4">
 		<item>Imperial Jupiter</item>
-		<item>Reserve Admiral</item>
 		<item>Kestrel</item>
 
 		<item>Terran Navy Heavy Shield Booster</item>
@@ -396,10 +392,10 @@
 		<item>Light Narval Torpedo Tube</item>
 		<item>Narval Torpedo Tube</item>
 		<item>Terran Unobtainium Shield Capacitor II</item>
+    <item>Terran Computer</item>
 	</tech>
 	<tech name="Empire Military 5">
 		<item>Imperial Valenderay</item>
-		<item>Reserve Colonel</item>
 
 		<item>Integrated Targeting Array</item>
 		<item>Anti-Matter Reactor</item>
@@ -407,21 +403,15 @@
 		<item>Ram Beam</item>
 		<item>Beam Turret</item>
 		<item>Terran Unobtainium Shield Capacitor III</item>
+    <item>Terran Mainframe</item>    
 	</tech>
-	
-	
-	
-
-
 
 	<tech name="Roidhunate Military 1">
 		<item>Ardar Roeth</item>
-		<item>Ardarshir Auxiliary, Class I</item>
 		<item>Neutron Disruptor</item>
 	</tech>
 	<tech name="Roidhunate Military 2">
 		<item>Ardar Vach Rueth</item>
-		<item>Ardarshir Auxiliary, Class II</item>
 		<item>Improved Neutron Disruptor</item>
 		<item>Ion Cannon I</item>
 		<item>Yrioch Launcher</item>
@@ -430,7 +420,6 @@
 	</tech>
 	<tech name="Roidhunate Military 3">
 		<item>Ardar Brythioch</item>
-		<item>Ardarshir Auxiliary, Class III</item>
 
 		<item>Ardar Jammer</item>
 		<item>Ardar Navy Scrambler</item>
@@ -446,7 +435,6 @@
 	<tech name="Roidhunate Military 4">
 		<item>Ardar Mowyr</item>
 		<item>Merkhrioch</item>
-		<item>Ardarshir Auxiliary, Honourable</item>
 
 		<item>Ardar Hellburner</item>
 		<item>Ardar Medium Shield Booster</item>
@@ -462,10 +450,10 @@
 		<item>Yrioch Heavy Launcher</item>
 		<item>Telchan Heavy Tube</item>
 		<item>Ardar Unobtainium Shield Capacitor II</item>
+    <item>Ardar Mainframe</item>
 	</tech>
 	<tech name="Roidhunate Military 5">
 		<item>Ardar Moloch</item>
-		<item>Ardarshir Ally</item>
 
 		<item>Large Self-Repairing Plating</item>
 		<item>Ardar Shock Troops</item>
@@ -694,6 +682,7 @@
 		<item>Cargo Pod</item>
 		<item>Medium Fuel Pod</item>
 		<item>Reactor Class I</item>
+    <item>Basic Computer</item>
 
 		
 		<item>GUI - Brushed</item>
@@ -710,6 +699,7 @@
 		<item>Reactor Class II</item>
 		<item>Large Fuel Pod</item>
 		<item>Reverse Thrusters</item>	
+    <item>Onboard Computer</item>
 		
 	</tech>
 	<tech name="Generic Civil 4">
@@ -719,6 +709,7 @@
 		<item>Large Battery</item>
 		<item>Large Cargo Pod</item>
 		<item>Reactor Class III</item>
+    <item>Onboard Mainframe</item>
 
 	</tech>
 	<tech name="Generic Civil 5">

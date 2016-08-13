@@ -6,7 +6,7 @@ payment = 100000
 
 -- Mission Details
 misn_title = "Locate Colonel Syrnd"
-misn_reward = ""..payment.." cr"
+misn_reward = gh.numstring(payment).." cr"
 misn_desc = "Find Colonel Syrnd and convince him to head to Harkan."
 
 

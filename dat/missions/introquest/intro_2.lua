@@ -24,7 +24,7 @@ text[2] = [["Right, I knew you would, you've never missed a chance to make a bit
 -- Mission Details
 misn_title = "Bearer of bad news"
 misn_desc = "Inform the family of Squad Leader Kert of his death."
-misn_reward = ""..payment.." cr"
+misn_reward = gh.numstring(payment).." cr"
 
 -- OSD
 osd_msg = {}

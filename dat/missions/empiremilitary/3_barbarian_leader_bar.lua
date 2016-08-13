@@ -4,7 +4,6 @@
 
 --]]
 
-include "numstring.lua"
 include "dat/missions/templates/ship_kill.lua"
 include "dat/missions/supportfiles/barbarians.lua"
 include("pilot/barbarians.lua")
@@ -94,7 +93,6 @@ function give_rewards ()
    local bop=var.peek("universe_balanceofpower")
    bop=bop+5
    var.push("universe_balanceofpower",bop)
-   updateUniverseDesc()
 
    template_give_rewards()
 end

@@ -4,7 +4,6 @@
 
    --]]
 
-   include "numstring.lua"
    include "dat/scripts/general_helper.lua"
    include "jumpdist.lua"
    include "dat/missions/supportfiles/common.lua"
@@ -20,7 +19,7 @@ mission_return_to_planet=false
 
 -- Mission details
 misn_title  = ""
-misn_reward = "${credits} credits"
+misn_reward = "${credits} cr"
 misn_desc   = ""
 
 -- Text if mission from bar
@@ -54,7 +53,7 @@ function template_getStringData()
   stringData.playerName=player:name()
   stringData.startPlanet=start_planet and start_planet:name() or ""
   stringData.startSystem=start_planet and start_planet:system():name() or ""
-  stringData.credits=credits
+  stringData.credits=gh.numstring(credits)
   stringData.mainTargetPlanet=main_target_planet and main_target_planet:name() or ""
   stringData.mainTargetSystem=main_target_system and main_target_system:name() or ""
   stringData.empireRank=emp_getRank()
@@ -82,6 +81,7 @@ function template_create ()
   if (not mission_bar) then--computer
     misn.setDesc(gh.format(misn_desc,stringData))
     target_systems_markers={}
+    target_systems_markers["__save"] = true
     for k,v in ipairs(target_systems) do
       target_systems_markers[k]=misn.markerAdd( v, "computer" )
     end
@@ -121,6 +121,7 @@ function template_accept ()
     end
 
     target_systems_markers={}
+    target_systems_markers["__save"] = true
     for k,v in ipairs(target_systems) do
       target_systems_markers[k]=misn.markerAdd( v, "low" )
     end

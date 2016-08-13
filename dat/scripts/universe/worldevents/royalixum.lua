@@ -1,9 +1,9 @@
 event=worldevent_class.createNew()
 event.eventMessage="NEWS ALERT: Holy Flame bombing raids on ${world}; important casualties reported, food and medicine urgently needed."
 event.weight=10
-event.duration=time.create(0,0,2, 0, 0, 0 )
+event.duration=time.create(0,0,15, 0, 0, 0 )
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.ROYAL_IXUM) and planet.lua.settlements.royalixumites and planet.c:system():presence(G.HOLY_FLAME)>20)
+	return (planet.c:faction()==faction.get(G.ROYAL_IXUM) and planet.lua.settlements.royalixumites and planet.c:system():presence(G.HOLY_FLAME)>20 and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 	textData.casualties=gh.prettyLargeNumber(planet.lua.settlements.royalixumites.population*0.05)
@@ -11,8 +11,8 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.royalixumites:addActiveEffect("The recent bombing is increasing demands for medicine and food.",
 		(time.get() + self.duration):tonumber(), "royalixum_bombingraid" )
-	planet.lua.settlements.royalixumites:addGoodDemand(C.MEDICINE,20,3,effectId)
-	planet.lua.settlements.royalixumites:addGoodDemand(C.FOOD,20,3,effectId)
+	planet.lua.settlements.royalixumites:addGoodDemand(C.MEDICINE,200,3,effectId)
+	planet.lua.settlements.royalixumites:addGoodDemand(C.FOOD,200,3,effectId)
 end
 event.worldHistoryMessage="Major bombing raids by the Holy Flame caused ${casualties} civilian casualties."
 
@@ -28,15 +28,15 @@ table.insert(world_events.events,event)
 event=worldevent_class.createNew()
 event.eventMessage="NEWS ALERT: Riots against the King on ${world}; economy at standstill."
 event.weight=20
-event.duration=time.create(0,0,2, 0, 0, 0 )
+event.duration=time.create(0,1,0, 0, 0, 0 )
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.ROYAL_IXUM) and planet.lua.settlements.royalixumites and planet.lua.settlements.royalixumites:hasTag("slums"))
+	return (planet.c:faction()==faction.get(G.ROYAL_IXUM) and planet.lua.settlements.royalixumites and planet.lua.settlements.royalixumites:hasTag("slums") and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 	local effectId=planet.lua.settlements.royalixumites:addActiveEffect("Ongoing riots are reducing consumer goods supply.",
 		(time.get() + self.duration):tonumber(), "royalixum_riots" )
-	planet.lua.settlements.royalixumites:reduceGoodSupply(C.CONSUMER_GOODS,50,3,effectId)
-	planet.lua.settlements.royalixumites:reduceGoodSupply(C.PRIMITIVE_CONSUMER,50,3,effectId)
+	planet.lua.settlements.royalixumites:reduceGoodSupply(C.CONSUMER_GOODS,500,3,effectId)
+	planet.lua.settlements.royalixumites:reduceGoodSupply(C.PRIMITIVE_CONSUMER,500,3,effectId)
 end
 event.worldHistoryMessage="Widespread riots erupted against the Monarchy."
 
@@ -49,15 +49,15 @@ table.insert(world_events.events,event)
 event=worldevent_class.createNew()
 event.eventMessage="NEWS ALERT: Imperial military help reaches ${world}, armament to be distributed."
 event.weight=20
-event.duration=time.create(0,0,2, 0, 0, 0 )
+event.duration=time.create(0,1,0, 0, 0, 0 )
 event.weightValidity=function(planet)
-	return (planet.c:faction()==faction.get(G.ROYAL_IXUM) and planet.lua.settlements.royalixumites and planet.lua.settlements.royalixumites:hasTag("weaponcentre"))
+	return (planet.c:faction()==faction.get(G.ROYAL_IXUM) and planet.lua.settlements.royalixumites and planet.lua.settlements.royalixumites:hasTag("weaponcentre") and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 	local effectId=planet.lua.settlements.royalixumites:addActiveEffect("Important Imperial military help is flooding the market with weapons.",
 		(time.get() + self.duration):tonumber(), "royalixum_imperialhelp" )
-	planet.lua.settlements.royalixumites:addGoodSupply(C.MODERN_ARMAMENT,30,0.5,effectId)
-	planet.lua.settlements.royalixumites:addGoodSupply(C.ARMAMENT,100,0.5,effectId)
+	planet.lua.settlements.royalixumites:addGoodSupply(C.MODERN_ARMAMENT,300,0.5,effectId)
+	planet.lua.settlements.royalixumites:addGoodSupply(C.ARMAMENT,1000,0.5,effectId)
 end
 event.worldHistoryMessage="Massive Imperial military help reaches the world."
 

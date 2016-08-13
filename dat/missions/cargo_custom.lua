@@ -95,16 +95,16 @@ function create()
     end
 
 
-    jumpreward = 500
-    distreward = 0.6
+    jumpreward = 200
+    distreward = 0.2
     reward     = math.floor(1.5^urgency * 1.2^cargoSizeTier * (numjumps * jumpreward + traveldist * distreward) * (1. + 0.05*rnd.twosigma())* cargoType.priceFactor)
 
     textData_targetWorld=destplanet:name()
     textData_targetSystem=destsys:name()
     textData_quantity=amount
     textData_commodity=cargo
-    textData_payment=numstring(reward)
-    textData_paymentPartial=numstring(reward*cargoType.lateRewardFactor)
+    textData_payment=gh.numstring(reward)
+    textData_paymentPartial=gh.numstring(reward*cargoType.lateRewardFactor)
     if (urgency>0) then
       textData_deadline=timelimit:str(0)
       textData_timeRemaining=(timelimit - time.get()):str(0)

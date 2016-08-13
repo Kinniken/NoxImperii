@@ -176,7 +176,6 @@ int misn_tryRun( Mission *misn, const char *func );
 lua_State *misn_runStart( Mission *misn, const char *func );
 int misn_runFunc( Mission *misn, const char *func, int nargs );
 int misn_run( Mission *misn, const char *func );
-
 /*
  * CLaims.
  */

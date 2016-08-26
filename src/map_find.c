@@ -791,6 +791,10 @@ static int map_findSearchOutfits( unsigned int parent, const char *name )
    n = 0;
    for (i=0; i<map_nknown; i++) {
 
+	   if (!planet_hasService(map_known_planets[i], PLANET_SERVICE_OUTFITS)) {
+		   continue;
+	   }
+
       /* Try to find the outfit in the planet. */
       olist = tech_getOutfit( map_known_techs[i], &nolist );
       for (j=0; j<nolist; j++)
@@ -944,6 +948,10 @@ static int map_findSearchShips( unsigned int parent, const char *name )
    found = NULL;
    n = 0;
    for (i=0; i<map_nknown; i++) {
+
+	   if (!planet_hasService(map_known_planets[i], PLANET_SERVICE_SHIPYARD)) {
+		   continue;
+	   }
 
       /* Try to find the ship in the planet. */
       slist = tech_getShip( map_known_techs[i], &nslist );

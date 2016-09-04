@@ -17,7 +17,7 @@ OSDtable = {}
 prevPlanets = {}
 prevPlanets.__save = true
 
-payment = 12000
+payment = 120000
 
 carg_type = "Student" 
 

@@ -3,7 +3,7 @@ include "jumpdist.lua"
 
 bar_desc = "You see a sharply-dressed business man, looking tense."
 
-payment = 50000
+payment = 250000
 
 -- Mission Details
 misn_title = "Betelgeuse Luxury"

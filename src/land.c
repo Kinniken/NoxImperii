@@ -1164,6 +1164,9 @@ void land( Planet* p, int load )
    /* refresh planet's prices */
    planet_refreshPlanetPriceFactors(p);
 
+   /* Update the available trade goods */
+   planet_updateQuantities(p);
+
    /* Resets the player's heat. */
    pilot_heatReset( player.p );
 
@@ -1183,9 +1186,6 @@ void land( Planet* p, int load )
 
    /* Clear the NPC. */
    npc_clear();
-
-   /* Update the available trade goods */
-   planet_updateQuantities(land_planet);
 
    /* Check whether the crew should be paid */
    crew_checkForSalaryPayment();

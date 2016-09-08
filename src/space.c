@@ -1464,6 +1464,12 @@ void space_init( const char* sysname )
       pnt->bribed = 0;
       pnt->land_override = 0;
       planet_updateLand( pnt );
+
+      /* refresh planet's prices (for map visualisation) */
+      planet_refreshPlanetPriceFactors(pnt);
+
+      /* Update the available trade goods (to be in sync with above) */
+      planet_updateQuantities(pnt);
    }
 
    /* Clear interference if you leave system with interference. */
@@ -1844,7 +1850,6 @@ static int planet_parse( Planet *planet, const xmlNodePtr parent )
    char str[PATH_MAX], *tmp;
    xmlNodePtr node, cur, ccur, cccur;
    unsigned int flags;
-   int i;
 
    /* Clear up memory for sane defaults. */
    flags          = 0;
@@ -2003,6 +2008,8 @@ static int planet_parse( Planet *planet, const xmlNodePtr parent )
             	do {
             		if (xml_isNode(ccur,"buySellGap")) {
             			planet->buySellGap=xml_getFloat(ccur);
+            		} else if (xml_isNode(ccur,"lastRefresh")) {
+            			planet->lastRefresh = ntime_parseNode(ccur,planet->name);
             		} else if (xml_isNode(ccur,"tradedata")) {
             			cccur = ccur->children;
 
@@ -2031,6 +2038,8 @@ static int planet_parse( Planet *planet, const xmlNodePtr parent )
             					            						commodity_get( xml_get(cccur) );
             				} else if (xml_isNode(cccur,"priceFactor")) {
             					planet->tradedatas[planet->ntradedatas-1].priceFactor=xml_getFloat(cccur);
+            				} else if (xml_isNode(cccur,"adjustedPriceFactor")) {
+            					planet->tradedatas[planet->ntradedatas-1].adjustedPriceFactor=xml_getFloat(cccur);
             				} else if (xml_isNode(cccur,"buyingQuantity")) {
             					planet->tradedatas[planet->ntradedatas-1].buyingQuantity=xml_getInt(cccur);
             					//At start the remaining is equal to the starting value
@@ -2039,35 +2048,6 @@ static int planet_parse( Planet *planet, const xmlNodePtr parent )
             					planet->tradedatas[planet->ntradedatas-1].sellingQuantity=xml_getInt(cccur);
             					//At start the remaining is equal to the starting value
             					planet->tradedatas[planet->ntradedatas-1].sellingQuantityRemaining=xml_getInt(cccur);
-            				}
-            			} while (xml_nextNode(cccur));
-            		}
-            	} while (xml_nextNode(ccur));
-            } else if (xml_isNode(cur, "tradeStatus")) {
-            	ccur = cur->children;
-            	do {
-            		if (xml_isNode(ccur,"lastRefresh")) {
-            			planet->lastRefresh = ntime_parseNode(ccur,planet->name);
-            		} else if (xml_isNode(ccur,"tradedata")) {
-            			cccur = ccur->children;
-
-            			Commodity* com=NULL;
-            			TradeData* tradeData=NULL;
-
-            			do {
-            				xml_onlyNodes(cccur);
-
-            				if (xml_isNode(cccur,"commodity")) {
-            					com = commodity_get( xml_get(cccur) );
-            					for (i=0;i<planet->ntradedatas && tradeData==NULL;i++) {
-            						if (planet->tradedatas[i].commodity==com) {
-            							tradeData=&(planet->tradedatas[i]);
-            						}
-            					}
-            				} else if (tradeData!=NULL && xml_isNode(cccur,"buyingQuantityRemaining")) {
-            					tradeData->buyingQuantityRemaining=xml_getInt(cccur);
-            				} else if (tradeData!=NULL && xml_isNode(cccur,"sellingQuantityRemaining")) {
-            					tradeData->sellingQuantityRemaining=xml_getInt(cccur);
             				}
             			} while (xml_nextNode(cccur));
             		}
@@ -2313,6 +2293,8 @@ static int planet_parseCustom( Planet *planet, const xmlNodePtr parent )
 											commodity_get( xml_get(cccur) );
 	            				} else if (xml_isNode(cccur,"priceFactor")) {
 	            					planet->tradedatas[planet->ntradedatas-1].priceFactor=xml_getFloat(cccur);
+	            				} else if (xml_isNode(cccur,"adjustedPriceFactor")) {
+	            					planet->tradedatas[planet->ntradedatas-1].adjustedPriceFactor=xml_getFloat(cccur);
 								} else if (xml_isNode(cccur,"buyingQuantity")) {
 									planet->tradedatas[planet->ntradedatas-1].buyingQuantity=xml_getInt(cccur);
 									//At start the remaining is equal to the starting value
@@ -4781,40 +4763,28 @@ int planet_savePlanet( xmlTextWriterPtr writer, const Planet *p, int customDataO
     	  if ((!customDataOnly || planet_isSaveFlag(p,PLANET_COMMODITIES_SAVE)) && p->ntradedatas>0) {
 			 xmlw_startElem( writer, "tradedatas" );
 			 xmlw_elem( writer, "buySellGap", "%f", p->buySellGap );
+
+			 /* Time. */
+			 xmlw_startElem(writer,"lastRefresh");
+
+			 ret=ntime_saveNode(writer, ntime_get());
+
+			 if (ret!=0)
+				 return ret;
+
+			 xmlw_endElem(writer); /* "time" */
+
 			 for (i=0; i<p->ntradedatas; i++) {
 				 xmlw_startElem( writer, "tradedata" );
 				 xmlw_elem( writer, "commodity", "%s", p->tradedatas[i].commodity->name );
 				 xmlw_elem( writer, "priceFactor", "%f", p->tradedatas[i].priceFactor );
+				 xmlw_elem( writer, "adjustedPriceFactor", "%f", p->tradedatas[i].adjustedPriceFactor );
 				 xmlw_elem( writer, "buyingQuantity", "%i", p->tradedatas[i].buyingQuantity );
 				 xmlw_elem( writer, "sellingQuantity", "%i", p->tradedatas[i].sellingQuantity );
 				 xmlw_endElem( writer ); /* "tradedata" */
 			 }
 
 			 xmlw_endElem( writer ); /* "tradedatas" */
-    	 }
-
-    	 if (p->ntradedatas>0 && p->lastRefresh>0) {
-    		 xmlw_startElem( writer, "tradeStatus" );
-
-    		 /* Time. */
-    		 xmlw_startElem(writer,"lastRefresh");
-
-    		 ret=ntime_saveNode(writer, ntime_get());
-
-			if (ret!=0)
-				return ret;
-
-    		 xmlw_endElem(writer); /* "time" */
-
-    		 for (i=0; i<p->ntradedatas; i++) {
-    			 xmlw_startElem( writer, "tradedata" );
-    			 xmlw_elem( writer, "commodity", "%s", p->tradedatas[i].commodity->name );
-    			 xmlw_elem( writer, "buyingQuantityRemaining", "%i", p->tradedatas[i].buyingQuantityRemaining );
-    			 xmlw_elem( writer, "sellingQuantityRemaining", "%i", p->tradedatas[i].sellingQuantityRemaining );
-    			 xmlw_endElem( writer ); /* "tradedata" */
-    		 }
-
-    		 xmlw_endElem( writer ); /* "tradedatas" */
     	 }
 
     	 if (!customDataOnly || planet_isSaveFlag(p,PLANET_DESC_SAVE)) {

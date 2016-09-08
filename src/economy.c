@@ -124,6 +124,48 @@ void price2str(char *str, credits_t price, credits_t credits, int decimals )
 }
 
 /**
+ * @brief returns an adjective describing the price level
+ */
+const char* commodity_price_adj(double price_factor) {
+	if (price_factor>2) {
+		return "extreme";
+	} else if (price_factor>1.5) {
+		return "very high";
+	} else if (price_factor>1.2) {
+		return "high";
+	} else if (price_factor>0.9) {
+		return "average";
+	} else if (price_factor>0.7) {
+		return "low";
+	} else if (price_factor>0.5) {
+		return "very low";
+	} else {
+		return "dirt cheap";
+	}
+}
+
+/**
+ * @brief returns a 1 to 7 level for the price, synced with the adjectives
+ */
+int commodity_price_level(double price_factor) {
+	if (price_factor>2) {
+		return 7;
+	} else if (price_factor>1.5) {
+		return 6;
+	} else if (price_factor>1.2) {
+		return 5;
+	} else if (price_factor>0.9) {
+		return 4;
+	} else if (price_factor>0.7) {
+		return 3;
+	} else if (price_factor>0.5) {
+		return 2;
+	} else {
+		return 1;
+	}
+}
+
+/**
  * @brief Gets a commodity by name.
  *
  *    @param name Name to match.
@@ -139,7 +181,6 @@ Commodity* commodity_get( const char* name )
    WARN("Commodity '%s' not found in stack", name);
    return NULL;
 }
-
 
 /**
  * @brief Gets a commodity by name without warning.
@@ -157,6 +198,13 @@ Commodity* commodity_getW( const char* name )
 }
 
 
+int commodity_getNumber(void) {
+	return commodity_nstack;
+}
+
+const Commodity* commodity_getAll(void) {
+	return commodity_stack;
+}
 
 /**
  * @brief Function meant for use with C89, C99 algorithm qsort().

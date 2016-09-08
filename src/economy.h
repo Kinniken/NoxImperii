@@ -42,6 +42,8 @@ typedef struct Commodity_ {
  */
 Commodity* commodity_get( const char* name );
 Commodity* commodity_getW( const char* name );
+int commodity_getNumber(void);
+const Commodity* commodity_getAll(void);
 int commodity_load (void);
 void commodity_free (void);
 
@@ -51,6 +53,8 @@ void commodity_free (void);
  */
 void credits2str( char *str, credits_t credits, int decimals );
 void price2str( char *str, credits_t price, credits_t credits, int decimals );
+const char* commodity_price_adj(double price_factor);
+int commodity_price_level(double price_factor);
 void commodity_Jettison( int pilot, Commodity* com, int quantity );
 int commodity_compareTech( const void *commodity1, const void *commodity2 );
 

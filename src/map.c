@@ -38,6 +38,18 @@
 #define MAP_LOOP_PROT   1000 /**< Number of iterations max in pathfinding before
                                  aborting. */
 
+#define MAP_WINDOWS      2 /**< Amount of windows in the tab. */
+
+#define MAP_WIN_MAIN      0
+#define MAP_WIN_TRADE      1
+
+static const char *map_names[MAP_WINDOWS] = {
+		"Galaxy",
+		"Trade Map"
+}; /**< Name of the tab windows. */
+
+static unsigned int map_wid = 0;
+static unsigned int *map_windows = NULL;
 
 static double map_zoom        = 1.; /**< Zoom of the map. */
 static double map_xpos        = 0.; /**< Map X position. */
@@ -48,6 +60,9 @@ static int *map_path  = NULL; /**< The path to current selected system. */
 int map_npath                 = 0; /**< Number of systems in map_path. */
 glTexture *gl_faction_disk    = NULL; /**< Texture of the disk representing factions. */
 glTexture *gl_map_circle      = NULL; /**< Texture of the circle used for systems. */
+
+static void map_openMain( unsigned int wid );
+static void map_openTrade( unsigned int wid );
 
 /* VBO. */
 static gl_vbo *map_vbo = NULL; /**< Map VBO. */
@@ -67,6 +82,8 @@ extern int faction_nstack;
  */
 /* Update. */
 static void map_update( unsigned int wid );
+static void map_update_main( unsigned int wid );
+static void map_update_trade(unsigned int wid);
 /* Render. */
 static void map_render( double bx, double by, double w, double h, void *data );
 static void map_renderPath( double x, double y, double a );
@@ -138,18 +155,16 @@ static int map_keyHandler( unsigned int wid, SDLKey key, SDLMod mod )
  */
 void map_open (void)
 {
-   unsigned int wid;
-   StarSystem *cur;
-   int w, h, x, y, rw;
+   int w, h;
 
    /* Not under manual control. */
    if (pilot_isFlag( player.p, PILOT_MANUAL_CONTROL ))
       return;
 
    /* Destroy window if exists. */
-   wid = window_get(MAP_WDWNAME);
-   if (wid > 0) {
-      window_destroy( wid );
+   map_wid = window_get(MAP_WDWNAME);
+   if (map_wid > 0) {
+      window_destroy( map_wid );
       return;
    }
 
@@ -164,18 +179,33 @@ void map_open (void)
    if (map_selected == -1)
       map_selectCur();
 
-   /* get the selected system. */
-   cur = system_getIndex( map_selected );
-
    /* Set up window size. */
    w = MAX(600, SCREEN_W - 100);
    h = MAX(540, SCREEN_H - 100);
 
    /* create the window. */
-   wid = window_create( MAP_WDWNAME, -1, -1, w, h );
-   window_setCancel( wid, window_close );
-   window_handleKeys( wid, map_keyHandler );
+   map_wid = window_create( MAP_WDWNAME, -1, -1, w, h );
+   window_setCancel( map_wid, window_close );
+   window_handleKeys( map_wid, map_keyHandler );
 
+   /* Create tabbed window. */
+   	map_windows = window_addTabbedWindow( map_wid, -1, -1, -1, -1, "tabMap",
+   	MAP_WINDOWS, map_names, 0 );
+
+   	/* Open the subwindows. */
+   	map_openMain(       map_windows[ MAP_WIN_MAIN ] );
+   	map_openTrade(      map_windows[ MAP_WIN_TRADE ] );
+
+   	/* Set active window. */
+   	window_tabWinSetActive( map_wid, "tabMap", MAP_WIN_MAIN );
+
+}
+
+/**
+ * @brief Opens the main map window.
+ */
+static void map_openMain( unsigned int wid )
+{
    /*
     * SIDE TEXT
     *
@@ -198,6 +228,16 @@ void map_open (void)
     * [ Find ]
     * [ Close ]
     */
+
+   StarSystem *cur;
+   int w, h, x, y, rw;
+
+   /* get the selected system. */
+  cur = system_getIndex( map_selected );
+
+  /* Set up window size. */
+  w = MAX(600, SCREEN_W - 100);
+  h = MAX(540, SCREEN_H - 100);
 
    x  = -70; /* Right column X offset. */
    y  = -20;
@@ -236,7 +276,7 @@ void map_open (void)
    /* Planets */
    window_addText( wid, x, y, 90, 20, 0, "txtSPlanets",
          &gl_smallFont, &cDConsole, "Planets:" );
-   window_addText( wid, x + 50, y-gl_smallFont.h-5, rw, 150, 0, "txtPlanets",
+   window_addText( wid, x + 50, y-gl_smallFont.h-5, rw, 500, 0, "txtPlanets",
          &gl_smallFont, &cBlack, NULL );
    y -= 2 * gl_smallFont.h + 5 + 15;
 
@@ -256,13 +296,13 @@ void map_open (void)
 
    /* Close button */
    window_addButton( wid, -20, 20, BUTTON_WIDTH, BUTTON_HEIGHT,
-            "btnClose", "Close", window_close );
+            "btnClose", "Close", map_close );
    /* Find button */
    window_addButton( wid, -20 - (BUTTON_WIDTH+20), 20, BUTTON_WIDTH, BUTTON_HEIGHT,
             "btnFind", "Find", map_inputFind );
    /* Autonav button */
    window_addButton( wid, -20 - 2*(BUTTON_WIDTH+20), 20, BUTTON_WIDTH, BUTTON_HEIGHT,
-            "btnAutonav", "Autonav", player_autonavStartWindow );
+            "btnAutonav", "Autonav", map_autonav );
 
    /*
     * Bottom stuff
@@ -279,7 +319,7 @@ void map_open (void)
    /*
     * The map itself.
     */
-   map_show( wid, 20, -40, w-200, h-100, 1. ); /* Reset zoom. */
+   map_show( wid, 20, -40, w-200, h-100-30, 1. ); /* Reset zoom. */
 
    map_update( wid );
 
@@ -292,294 +332,569 @@ void map_open (void)
 }
 
 /**
+ * @brief Opens the trade map window.
+ */
+static void map_openTrade( unsigned int wid )
+{
+
+	 StarSystem *cur;
+   int w, h, x, y, col_width;
+
+   /* get the selected system. */
+  cur = system_getIndex( map_selected );
+
+  /* Set up window size. */
+  w = MAX(600, SCREEN_W - 100);
+  h = MAX(540, SCREEN_H - 100);
+
+  x  = -20;
+  y  = -20;
+  col_width = 420;
+
+   /* System Name */
+   window_addText( wid, x, y, col_width, 20, 1, "txtSysname",
+		 &gl_defFont, &cDConsole, cur->name );
+   y -= 10;
+
+   /* Faction image */
+   window_addImage( wid, x - col_width/2 - 24, y + 24, 0, 0, "imgFaction", NULL, 0 );
+   y -= 64 + 10;
+
+   /* Refresh Date */
+  window_addText( wid, x, y, col_width, 20, 0, "txtSRefreshDate",
+		&gl_smallFont, &cDConsole, "Data refreshed on:" );
+  window_addText( wid, x, y-gl_smallFont.h-5, col_width-50, 100, 0, "txtRefreshDate",
+		&gl_smallFont, &cBlack, NULL );
+  y -= 2 * gl_smallFont.h + 5 + 15;
+
+   window_addText( wid, x, y, col_width, 20, 0, "txtSGoods",
+   		 &gl_smallFont, &cDConsole, "Trade Goods: (price, buyable, sellable)" );
+   window_addText( wid, x, y-gl_smallFont.h-5, col_width, h-300, 0, "txtGoods",
+   		 &gl_smallFont, &cBlack, NULL );
+   window_addText( wid, x, y-gl_smallFont.h-5, 250, h-300, 0, "txtGoodsPrices",
+      		 &gl_smallFont, &cBlack, NULL );
+   window_addText( wid, x, y-gl_smallFont.h-5, 100, h-300, 0, "txtGoodsBuy",
+      		 &gl_smallFont, &cBlack, NULL );
+   window_addText( wid, x, y-gl_smallFont.h-5, 50, h-300, 0, "txtGoodsSell",
+      		 &gl_smallFont, &cBlack, NULL );
+
+   y -= 2 * gl_smallFont.h + 5 + 15 ;
+
+
+	/* Close button */
+   window_addButton( wid, -20, 20, BUTTON_WIDTH, BUTTON_HEIGHT,
+			"btnClose", "Close", map_close );
+   /* Autonav button */
+   window_addButton( wid, -20 - (BUTTON_WIDTH+20), 20, BUTTON_WIDTH, BUTTON_HEIGHT,
+			"btnAutonav", "Autonav", map_autonav );
+
+
+
+   /*
+	* Bottom stuff
+	*
+	* [+] [-]  Nebula, Interference
+	*/
+   /* Zoom buttons */
+   window_addButton( wid, 40, 20, 30, 30, "btnZoomIn", "+", map_buttonZoom );
+   window_addButton( wid, 80, 20, 30, 30, "btnZoomOut", "-", map_buttonZoom );
+
+	/*
+	* The map itself.
+	*/
+   map_show( wid, 20, -40, w-col_width-70, h-100-30, 1. ); /* Reset zoom. */
+
+   map_update( wid );
+
+   /*
+   * Disable Autonav button if player lacks fuel or if target is not a valid hyperspace target.
+   */
+  if ((player.p->fuel < player.p->fuel_consumption) || pilot_isFlag( player.p, PILOT_NOJUMP)
+		|| map_selected == cur_system - systems_stack || map_npath == 0)
+	 window_disableButton( wid, "btnAutonav" );
+}
+
+/**
  * @brief Updates the map window.
  *
  *    @param wid Window id.
  */
 static void map_update( unsigned int wid )
 {
-   int i;
-   StarSystem* sys;
-   int f, h, x, y;
-   unsigned int services;
-   int l;
-   int hasPresence, hasPlanets;
-   char t;
-   char buf[PATH_MAX];
-   int p;
-   glTexture *logo;
-   double w;
-   double unknownPresence;
+	/* Needs map to update. */
+	if (!map_isOpen())
+		return;
 
-   /* Needs map to update. */
-   if (!map_isOpen())
-      return;
+	if (wid == map_windows[MAP_WIN_MAIN]) {
+		map_update_main(wid);
+	} else {
+		map_update_trade(wid);
+	}
 
-   /* Get selected system. */
-   sys = system_getIndex( map_selected );
+}
 
-   /* Not known and no markers. */
-   if (!(sys_isFlag(sys, SYSTEM_MARKED | SYSTEM_CMARKED)) &&
-         !sys_isKnown(sys) && !space_sysReachable(sys)) {
-      map_selectCur();
-      sys = system_getIndex( map_selected );
-   }
+static void map_update_main( unsigned int wid ) {
+	int i;
+	StarSystem* sys;
+	int f, h, x, y;
+	unsigned int services;
+	int l;
+	int hasPresence, hasPlanets;
+	char t;
+	char buf[PATH_MAX];
+	int p;
+	glTexture *logo;
+	double w;
+	double unknownPresence;
 
-   /*
-    * Right Text
-    */
+	/* Get selected system. */
+	sys = system_getIndex( map_selected );
 
-   x = -70; /* Side bar X offset. */
-   w = ABS(x) + 60; /* Width of the side bar. */
-   y = -20 - 20 - 64 - gl_defFont.h; /* Initialized to position for txtSFaction. */
+	/* Not known and no markers. */
+	if (!(sys_isFlag(sys, SYSTEM_MARKED | SYSTEM_CMARKED)) &&
+			!sys_isKnown(sys) && !space_sysReachable(sys)) {
+		map_selectCur();
+		sys = system_getIndex( map_selected );
+	}
 
-   if (!sys_isKnown(sys)) { /* System isn't known, erase all */
-      /*
-       * Right Text
-       */
-      if (sys_isFlag(sys, SYSTEM_MARKED | SYSTEM_CMARKED))
-         window_modifyText( wid, "txtSysname", sys->name );
-      else
-         window_modifyText( wid, "txtSysname", "Unknown" );;
+	/*
+	 * Right Text
+	 */
 
-      /* Faction */
-      window_modifyImage( wid, "imgFaction", NULL, 0, 0 );
-      window_moveWidget( wid, "txtSFaction", x, y);
-      window_moveWidget( wid, "txtFaction", x + 50, y - gl_smallFont.h - 5 );
-      window_modifyText( wid, "txtFaction", "Unknown" );
-      y -= 2 * gl_smallFont.h + 5 + 15;
+	x = -70; /* Side bar X offset. */
 
-      /* Standing */
-      window_moveWidget( wid, "txtSStanding", x, y );
-      window_moveWidget( wid, "txtStanding", x + 50, y - gl_smallFont.h - 5 );
-      window_modifyText( wid, "txtStanding", "Unknown" );
-      y -= 2 * gl_smallFont.h + 5 + 15;
+	w = ABS(x) + 60; /* Width of the side bar. */
+	y = -20 - 20 - 64 - gl_defFont.h; /* Initialized to position for txtSFaction. */
 
-      /* Presence. */
-      window_moveWidget( wid, "txtSPresence", x, y );
-      window_moveWidget( wid, "txtPresence",  x + 50, y - gl_smallFont.h - 5 );
-      window_modifyText( wid, "txtPresence", "Unknown" );
-      y -= 2 * gl_smallFont.h + 5 + 15;
+	if (!sys_isKnown(sys)) { /* System isn't known, erase all */
+		/*
+		 * Right Text
+		 */
+		if (sys_isFlag(sys, SYSTEM_MARKED | SYSTEM_CMARKED))
+			window_modifyText( wid, "txtSysname", sys->name );
+		else
+			window_modifyText( wid, "txtSysname", "Unknown" );;
 
-      /* Planets */
-      window_moveWidget( wid, "txtSPlanets", x, y );
-      window_moveWidget( wid, "txtPlanets", x + 50, y - gl_smallFont.h - 5 );
-      window_modifyText( wid, "txtPlanets", "Unknown" );
-      y -= 2 * gl_smallFont.h + 5 + 15;
+		/* Faction */
+		window_modifyImage( wid, "imgFaction", NULL, 0, 0 );
+		window_moveWidget( wid, "txtSFaction", x, y);
+		window_moveWidget( wid, "txtFaction", x + 50, y - gl_smallFont.h - 5 );
+		window_modifyText( wid, "txtFaction", "Unknown" );
+		y -= 2 * gl_smallFont.h + 5 + 15;
 
-      /* Services */
-      window_moveWidget( wid, "txtSServices", x, y );
-      window_moveWidget( wid, "txtServices", x + 50, y -gl_smallFont.h - 5 );
-      window_modifyText( wid, "txtServices", "Unknown" );
-      y -= 2 * gl_smallFont.h + 5 + 15;
+		/* Standing */
+		window_moveWidget( wid, "txtSStanding", x, y );
+		window_moveWidget( wid, "txtStanding", x + 50, y - gl_smallFont.h - 5 );
+		window_modifyText( wid, "txtStanding", "Unknown" );
+		y -= 2 * gl_smallFont.h + 5 + 15;
 
-      /* Zone */
-      window_moveWidget( wid, "txtSZone", x, y);
+		/* Presence. */
+		window_moveWidget( wid, "txtSPresence", x, y );
+		window_moveWidget( wid, "txtPresence",  x + 50, y - gl_smallFont.h - 5 );
+		window_modifyText( wid, "txtPresence", "Unknown" );
+		y -= 2 * gl_smallFont.h + 5 + 15;
+
+		/* Planets */
+		window_moveWidget( wid, "txtSPlanets", x, y );
+		window_moveWidget( wid, "txtPlanets", x + 50, y - gl_smallFont.h - 5 );
+		window_modifyText( wid, "txtPlanets", "Unknown" );
+		y -= 2 * gl_smallFont.h + 5 + 15;
+
+		/* Services */
+		window_moveWidget( wid, "txtSServices", x, y );
+		window_moveWidget( wid, "txtServices", x + 50, y -gl_smallFont.h - 5 );
+		window_modifyText( wid, "txtServices", "Unknown" );
+		y -= 2 * gl_smallFont.h + 5 + 15;
+
+		/* Zone */
+		window_moveWidget( wid, "txtSZone", x, y);
 		window_moveWidget( wid, "txtZone", x + 50, y - gl_smallFont.h - 5 );
 		window_modifyText( wid, "txtZone", "Unknown" );
 		y -= 2 * gl_smallFont.h + 5 + 15;
 
-      /*
-       * Bottom Text
-       */
-      window_modifyText( wid, "txtSystemStatus", NULL );
-      return;
-   }
+		/*
+		 * Bottom Text
+		 */
+		window_modifyText( wid, "txtSystemStatus", NULL );
 
-   /* System is known */
-   window_modifyText( wid, "txtSysname", sys->name );
-   window_modifyText( wid, "txtZone", sys->zone );
+		return;
+	}
 
-   f         = -1;
-   for (i=0; i<sys->nplanets; i++) {
-      if (sys->planets[i]->real != ASSET_REAL)
-         continue;
-      if (!planet_isKnown(sys->planets[i]))
-         continue;
+	/* System is known */
+	window_modifyText( wid, "txtSysname", sys->name );
+	if (wid == map_windows[MAP_WIN_MAIN])
+		window_modifyText( wid, "txtZone", sys->zone );
 
-      if ((f==-1) && (sys->planets[i]->faction>0)) {
-         f = sys->planets[i]->faction;
-      }
-      else if (f != sys->planets[i]->faction && /** @todo more verbosity */
-               (sys->planets[i]->faction>0)) {
-         nsnprintf( buf, PATH_MAX, "Multiple" );
-         break;
-      }
-   }
-   if (f == -1) {
-      window_modifyImage( wid, "imgFaction", NULL, 0, 0 );
-      window_modifyText( wid, "txtFaction", "N/A" );
-      window_modifyText( wid, "txtStanding", "N/A" );
-      h = gl_smallFont.h;
-   }
-   else {
-      if (i==sys->nplanets) /* saw them all and all the same */
-         nsnprintf( buf, PATH_MAX, "%s", faction_longname(f) );
+	f         = -1;
+	for (i=0; i<sys->nplanets; i++) {
+		if (sys->planets[i]->real != ASSET_REAL)
+			continue;
+		if (!planet_isKnown(sys->planets[i]))
+			continue;
 
-      /* Modify the image. */
-      logo = faction_logoSmall(f);
-      window_modifyImage( wid, "imgFaction", logo, 0, 0 );
-      if (logo != NULL)
-         window_moveWidget( wid, "imgFaction",
-               -90 + logo->w/2, -20 - 32 - 10 - gl_defFont.h + logo->h/2);
+		if ((f==-1) && (sys->planets[i]->faction>0)) {
+			f = sys->planets[i]->faction;
+		}
+		else if (f != sys->planets[i]->faction && /** @todo more verbosity */
+				(sys->planets[i]->faction>0)) {
+			nsnprintf( buf, PATH_MAX, "Multiple" );
+			break;
+		}
+	}
+	if (f == -1) {
+		window_modifyImage( wid, "imgFaction", NULL, 0, 0 );
+		window_modifyText( wid, "txtFaction", "N/A" );
+		window_modifyText( wid, "txtStanding", "N/A" );
+		h = gl_smallFont.h;
+	}
+	else {
+		if (i==sys->nplanets) /* saw them all and all the same */
+			nsnprintf( buf, PATH_MAX, "%s", faction_longname(f) );
 
-      /* Modify the text */
-      window_modifyText( wid, "txtFaction", buf );
-      window_modifyText( wid, "txtStanding",
-            faction_getStandingText( f ) );
+		/* Modify the image. */
+		logo = faction_logoSmall(f);
+		window_modifyImage( wid, "imgFaction", logo, 0, 0 );
+		if (logo != NULL)
+			window_moveWidget( wid, "imgFaction",
+					-90 + logo->w/2, -20 - 32 - 10 - gl_defFont.h + logo->h/2);
 
-      h = gl_printHeightRaw( &gl_smallFont, w, buf );
-   }
+		/* Modify the text */
+		window_modifyText( wid, "txtFaction", buf );
+		window_modifyText( wid, "txtStanding",
+				faction_getStandingText( f ) );
 
-   /* Faction */
-   window_moveWidget( wid, "txtSFaction", x, y);
-   window_moveWidget( wid, "txtFaction", x + 50, y - gl_smallFont.h - 5 );
-   y -= gl_smallFont.h + h + 5 + 15;
+		h = gl_printHeightRaw( &gl_smallFont, w, buf );
+	}
 
-   /* Standing */
-   window_moveWidget( wid, "txtSStanding", x, y );
-   window_moveWidget( wid, "txtStanding", x + 50, y - gl_smallFont.h - 5 );
-   y -= 2 * gl_smallFont.h + 5 + 15;
+	/* Faction */
+	window_moveWidget( wid, "txtSFaction", x, y);
+	window_moveWidget( wid, "txtFaction", x + 50, y - gl_smallFont.h - 5 );
+	y -= gl_smallFont.h + h + 5 + 15;
 
-   /* Get presence. */
-   hasPresence = 0;
-   buf[0]      = '\0';
-   l           = 0;
-   unknownPresence = 0;
-   for (i=0; i < sys->npresence; i++) {
-      if (sys->presence[i].value <= 0)
-         continue;
-      hasPresence = 1;
-      if (faction_isKnown( sys->presence[i].faction )) {
-         t           = faction_getColourChar(sys->presence[i].faction);
-         /* Use map grey instead of default neutral colour */
-         l += nsnprintf( &buf[l], PATH_MAX-l, "%s\e0%s: \e%c%.0f",
-                        (l==0)?"":"\n", faction_shortname(sys->presence[i].faction),
-                        (t=='N')?'M':t, sys->presence[i].value);
-      }
-      else
-         unknownPresence += sys->presence[i].value;
-      if (l > PATH_MAX)
-         break;
-   }
-   if (unknownPresence != 0)
-      l += nsnprintf( &buf[l], PATH_MAX-l, "%s\e0%s: \e%c%.0f",
-                     (l==0)?"":"\n", "Unknown", 'M', unknownPresence);
-   if (hasPresence == 0)
-      nsnprintf(buf, PATH_MAX, "N/A");
-   window_moveWidget( wid, "txtSPresence", x, y );
-   window_moveWidget( wid, "txtPresence", x + 50, y-gl_smallFont.h-5 );
-   window_modifyText( wid, "txtPresence", buf );
-   /* Scroll down. */
-   h  = gl_printHeightRaw( &gl_smallFont, w, buf );
-   y -= 40 + (h - gl_smallFont.h);
+	/* Standing */
+	window_moveWidget( wid, "txtSStanding", x, y );
+	window_moveWidget( wid, "txtStanding", x + 50, y - gl_smallFont.h - 5 );
+	y -= 2 * gl_smallFont.h + 5 + 15;
 
-   /* Get planets */
-   hasPlanets = 0;
-   p = 0;
-   buf[0] = '\0';
-   for (i=0; i<sys->nplanets; i++) {
-      if (sys->planets[i]->real != ASSET_REAL)
-         continue;
-      if (!planet_isKnown(sys->planets[i]))
-         continue;
+	/* Get presence. */
+	hasPresence = 0;
+	buf[0]      = '\0';
+	l           = 0;
+	unknownPresence = 0;
+	for (i=0; i < sys->npresence; i++) {
+		if (sys->presence[i].value <= 0)
+			continue;
+		hasPresence = 1;
+		if (faction_isKnown( sys->presence[i].faction )) {
+			t           = faction_getColourChar(sys->presence[i].faction);
+			/* Use map grey instead of default neutral colour */
+			l += nsnprintf( &buf[l], PATH_MAX-l, "%s\e0%s: \e%c%.0f",
+					(l==0)?"":"\n", faction_shortname(sys->presence[i].faction),
+							(t=='N')?'M':t, sys->presence[i].value);
+		}
+		else
+			unknownPresence += sys->presence[i].value;
+		if (l > PATH_MAX)
+			break;
+	}
+	if (unknownPresence != 0)
+		l += nsnprintf( &buf[l], PATH_MAX-l, "%s\e0%s: \e%c%.0f",
+				(l==0)?"":"\n", "Unknown", 'M', unknownPresence);
+	if (hasPresence == 0)
+		nsnprintf(buf, PATH_MAX, "N/A");
+	window_moveWidget( wid, "txtSPresence", x, y );
+	window_moveWidget( wid, "txtPresence", x + 50, y-gl_smallFont.h-5 );
+	window_modifyText( wid, "txtPresence", buf );
+	/* Scroll down. */
+	h  = gl_printHeightRaw( &gl_smallFont, w, buf );
+	y -= 40 + (h - gl_smallFont.h);
 
-      /* Colourize output. */
-      planet_updateLand(sys->planets[i]);
-      t = planet_getColourChar(sys->planets[i]);
-      if (t == 'N')
-         t = 'M';
-      else if (t == 'R')
-         t = 'S';
+	/* Get planets */
+	hasPlanets = 0;
+	p = 0;
+	buf[0] = '\0';
+	for (i=0; i<sys->nplanets; i++) {
+		if (sys->planets[i]->real != ASSET_REAL)
+			continue;
+		if (!planet_isKnown(sys->planets[i]))
+			continue;
 
-      if (hasPlanets)
-         p += nsnprintf( &buf[p], PATH_MAX-p, ",\n");
+		/* Colourize output. */
+		planet_updateLand(sys->planets[i]);
+		t = planet_getColourChar(sys->planets[i]);
+		if (t == 'N')
+			t = 'M';
+		else if (t == 'R')
+			t = 'S';
 
-      if (sys->planets[i]->shortInfo == NULL) {
-    	  p += nsnprintf( &buf[p], PATH_MAX-p, "\e%c%s\en",
-    	                 t, sys->planets[i]->name );
-      } else {
-    	  p += nsnprintf( &buf[p], PATH_MAX-p, "\e%c%s (%s)\en",
-    	                 t, sys->planets[i]->name, sys->planets[i]->shortInfo );
-      }
+		if (hasPlanets)
+			p += nsnprintf( &buf[p], PATH_MAX-p, ",\n");
+
+		if (sys->planets[i]->shortInfo == NULL) {
+			p += nsnprintf( &buf[p], PATH_MAX-p, "\e%c%s\en",
+					t, sys->planets[i]->name );
+		} else {
+			p += nsnprintf( &buf[p], PATH_MAX-p, "\e%c%s (%s)\en",
+					t, sys->planets[i]->name, sys->planets[i]->shortInfo );
+		}
 
 
-      hasPlanets = 1;
-      if (p > PATH_MAX)
-         break;
-   }
-   if(hasPlanets == 0)
-      strncpy( buf, "None", PATH_MAX );
-   /* Update text. */
-   window_modifyText( wid, "txtPlanets", buf );
-   window_moveWidget( wid, "txtSPlanets", x, y );
-   window_moveWidget( wid, "txtPlanets", x + 50, y-gl_smallFont.h-5 );
-   /* Scroll down. */
-   h  = gl_printHeightRaw( &gl_smallFont, w, buf );
-   y -= 40 + (h - gl_smallFont.h);
+		hasPlanets = 1;
+		if (p > PATH_MAX)
+			break;
+	}
+	if(hasPlanets == 0)
+		strncpy( buf, "None", PATH_MAX );
+	/* Update text. */
+	window_modifyText( wid, "txtPlanets", buf );
+	window_moveWidget( wid, "txtSPlanets", x, y );
+	window_moveWidget( wid, "txtPlanets", x + 50, y-gl_smallFont.h-5 );
+	/* Scroll down. */
+	h  = gl_printHeightRaw( &gl_smallFont, w, buf );
+	y -= 40 + (h - gl_smallFont.h);
 
-   /* Get the services */
-   window_moveWidget( wid, "txtSServices", x, y );
-   window_moveWidget( wid, "txtServices", x + 50, y-gl_smallFont.h-5 );
-   services = 0;
-   for (i=0; i<sys->nplanets; i++)
-      if (planet_isKnown(sys->planets[i]))
-         services |= sys->planets[i]->services;
-   buf[0] = '\0';
-   p = 0;
-   /*nsnprintf(buf, sizeof(buf), "%f\n", sys->prices[0]);*/ /*Hack to control prices. */
-   for (i=PLANET_SERVICE_MISSIONS; i<=PLANET_SERVICE_SHIPYARD; i<<=1)
-      if (services & i)
-         p += nsnprintf( &buf[p], PATH_MAX-p, "%s\n", planet_getServiceName(i) );
-   if (buf[0] == '\0')
-      p += nsnprintf( &buf[p], PATH_MAX-p, "None");
-   window_modifyText( wid, "txtServices", buf );
+	/* Get the services */
+	window_moveWidget( wid, "txtSServices", x, y );
+	window_moveWidget( wid, "txtServices", x + 50, y-gl_smallFont.h-5 );
+	services = 0;
+	for (i=0; i<sys->nplanets; i++)
+		if (planet_isKnown(sys->planets[i]))
+			services |= sys->planets[i]->services;
+	buf[0] = '\0';
+	p = 0;
+	/*nsnprintf(buf, sizeof(buf), "%f\n", sys->prices[0]);*/ /*Hack to control prices. */
+	for (i=PLANET_SERVICE_MISSIONS; i<=PLANET_SERVICE_SHIPYARD; i<<=1)
+		if (services & i)
+			p += nsnprintf( &buf[p], PATH_MAX-p, "%s\n", planet_getServiceName(i) );
+	if (buf[0] == '\0')
+		p += nsnprintf( &buf[p], PATH_MAX-p, "None");
+	window_modifyText( wid, "txtServices", buf );
 
-   /* Scroll down. */
-   h  = gl_printHeightRaw( &gl_smallFont, w, buf );
-   y -= 40 + (h - gl_smallFont.h);
+	/* Scroll down. */
+	h  = gl_printHeightRaw( &gl_smallFont, w, buf );
+	y -= 40 + (h - gl_smallFont.h);
 
-   window_moveWidget( wid, "txtSZone", x, y );
-   window_moveWidget( wid, "txtZone", x + 50, y-gl_smallFont.h-5 );
+	window_moveWidget( wid, "txtSZone", x, y );
+	window_moveWidget( wid, "txtZone", x + 50, y-gl_smallFont.h-5 );
 
-   /*
-    * System Status
-    */
-   buf[0] = '\0';
-   p = 0;
-   /* Nebula. */
-   if (sys->nebu_density > 0.) {
+	/*
+	 * System Status
+	 */
+	buf[0] = '\0';
+	p = 0;
+	/* Nebula. */
+	if (sys->nebu_density > 0.) {
 
-      /* Volatility */
-      if (sys->nebu_volatility > 700.)
-         p += nsnprintf(&buf[p], PATH_MAX-p, " Volatile");
-      else if (sys->nebu_volatility > 300.)
-         p += nsnprintf(&buf[p], PATH_MAX-p, " Dangerous");
-      else if (sys->nebu_volatility > 0.)
-         p += nsnprintf(&buf[p], PATH_MAX-p, " Unstable");
+		/* Volatility */
+		if (sys->nebu_volatility > 700.)
+			p += nsnprintf(&buf[p], PATH_MAX-p, " Volatile");
+		else if (sys->nebu_volatility > 300.)
+			p += nsnprintf(&buf[p], PATH_MAX-p, " Dangerous");
+		else if (sys->nebu_volatility > 0.)
+			p += nsnprintf(&buf[p], PATH_MAX-p, " Unstable");
 
-      /* Density */
-      if (sys->nebu_density > 700.)
-         p += nsnprintf(&buf[p], PATH_MAX-p, " Dense");
-      else if (sys->nebu_density < 300.)
-         p += nsnprintf(&buf[p], PATH_MAX-p, " Light");
-      p += nsnprintf(&buf[p], PATH_MAX-p, " Nebula");
-   }
-   /* Interference. */
-   if (sys->interference > 0.) {
+		/* Density */
+		if (sys->nebu_density > 700.)
+			p += nsnprintf(&buf[p], PATH_MAX-p, " Dense");
+		else if (sys->nebu_density < 300.)
+			p += nsnprintf(&buf[p], PATH_MAX-p, " Light");
+		p += nsnprintf(&buf[p], PATH_MAX-p, " Nebula");
+	}
+	/* Interference. */
+	if (sys->interference > 0.) {
 
-      if (buf[0] != '\0')
-         p += nsnprintf(&buf[p], PATH_MAX-p, ",");
+		if (buf[0] != '\0')
+			p += nsnprintf(&buf[p], PATH_MAX-p, ",");
 
-      /* Density. */
-      if (sys->interference > 700.)
-         p += nsnprintf(&buf[p], PATH_MAX-p, " Dense");
-      else if (sys->interference < 300.)
-         p += nsnprintf(&buf[p], PATH_MAX-p, " Light");
+		/* Density. */
+		if (sys->interference > 700.)
+			p += nsnprintf(&buf[p], PATH_MAX-p, " Dense");
+		else if (sys->interference < 300.)
+			p += nsnprintf(&buf[p], PATH_MAX-p, " Light");
 
-      p += nsnprintf(&buf[p], PATH_MAX-p, " Interference");
-   }
-   window_modifyText( wid, "txtSystemStatus", buf );
+		p += nsnprintf(&buf[p], PATH_MAX-p, " Interference");
+	}
+	window_modifyText( wid, "txtSystemStatus", buf );
+}
+
+static void map_update_trade(unsigned int wid) {
+	char buf[256];
+	char buf_names[2048];
+	char buf_prices[2048];
+	char buf_buy[2048];
+	char buf_sell[2048];
+	char buf2[128];
+	int p_names=0,p_prices=0,p_buy=0,p_sell=0;
+
+	TradeData* cur_trade_data,*planet_trade_data;
+	const Commodity* all_commodities;
+
+	int sys_ndata=commodity_getNumber();
+	TradeData sys_data[sys_ndata];
+
+	int i,j,k;
+
+	StarSystem* sys;
+
+	int f, x, y;
+	glTexture *logo;
+
+	ntime_t refresh_date=0;
+
+	/* Get selected system. */
+	sys = system_getIndex( map_selected );
+
+	/* Not known and no markers. */
+	if (!(sys_isFlag(sys, SYSTEM_MARKED | SYSTEM_CMARKED)) &&
+			!sys_isKnown(sys) && !space_sysReachable(sys)) {
+		map_selectCur();
+		sys = system_getIndex( map_selected );
+	}
+
+	/*
+	 * Right Text
+	 */
+
+
+	x = -20;
+	y = -20 - 20 - 64 - gl_defFont.h; /* Initialized to position for txtSFaction. */
+
+	if (!sys_isKnown(sys)) { /* System isn't known, erase all */
+		/*
+		 * Right Text
+		 */
+		if (sys_isFlag(sys, SYSTEM_MARKED | SYSTEM_CMARKED))
+			window_modifyText( wid, "txtSysname", sys->name );
+		else
+			window_modifyText( wid, "txtSysname", "Unknown" );;
+
+		/* Faction */
+		window_modifyImage( wid, "imgFaction", NULL, 0, 0 );
+
+		window_moveWidget( wid, "txtSRefreshDate", x, y );
+		window_moveWidget( wid, "txtRefreshDate", x, y - gl_smallFont.h - 5 );
+		window_modifyText( wid, "txtRefreshDate", "Unknown" );
+		y -= 2 * gl_smallFont.h + 5 + 15;
+
+		window_moveWidget( wid, "txtSGoods", x, y );
+		window_moveWidget( wid, "txtGoods", x, y - gl_smallFont.h - 5 );
+		window_modifyText( wid, "txtGoods", "Unknown" );
+		window_modifyText( wid, "txtGoodsPrices", "" );
+		window_modifyText( wid, "txtGoodsBuy", "" );
+		window_modifyText( wid, "txtGoodsSell", "" );
+		y -= 2 * gl_smallFont.h + 5 + 15;
+
+		return;
+	}
+
+	/* System is known */
+	window_modifyText( wid, "txtSysname", sys->name );
+
+	f         = -1;
+	for (i=0; i<sys->nplanets; i++) {
+		if (sys->planets[i]->real != ASSET_REAL)
+			continue;
+		if (!planet_isKnown(sys->planets[i]))
+			continue;
+
+		if ((f==-1) && (sys->planets[i]->faction>0)) {
+			f = sys->planets[i]->faction;
+		}
+		else if (f != sys->planets[i]->faction && /** @todo more verbosity */
+				(sys->planets[i]->faction>0)) {
+			nsnprintf( buf, PATH_MAX, "Multiple" );
+			break;
+		}
+	}
+	if (f == -1) {
+		window_modifyImage( wid, "imgFaction", NULL, 0, 0 );
+	}
+	else {
+		if (i==sys->nplanets) /* saw them all and all the same */
+			nsnprintf( buf, PATH_MAX, "%s", faction_longname(f) );
+
+		/* Modify the image. */
+		logo = faction_logoSmall(f);
+		window_modifyImage( wid, "imgFaction", logo, 0, 0 );
+		if (logo != NULL)
+			window_moveWidget( wid, "imgFaction",
+					x - 420/2 + 24, -20 - 32 - 10 - gl_defFont.h + logo->h/2);
+	}
+
+	all_commodities=commodity_getAll();
+
+	for (i=0;i<sys_ndata;i++) {
+		cur_trade_data=&(sys_data[i]);
+		cur_trade_data->commodity = &(all_commodities[i]);
+		cur_trade_data->adjustedPriceFactor=0;
+		cur_trade_data->buyingQuantity=0;
+		cur_trade_data->sellingQuantity=0;
+
+		for (j=0;j<sys->nplanets;j++) {
+			if (refresh_date<sys->planets[j]->lastRefresh) {
+				refresh_date=sys->planets[j]->lastRefresh;
+			}
+
+			for (k=0;k<sys->planets[j]->ntradedatas;k++) {
+				planet_trade_data=&(sys->planets[j]->tradedatas[k]);
+
+				if (planet_trade_data->commodity == cur_trade_data->commodity
+						&& planet_trade_data->buyingQuantity+planet_trade_data->sellingQuantity > 0) {
+					cur_trade_data->adjustedPriceFactor=(cur_trade_data->adjustedPriceFactor*(cur_trade_data->buyingQuantity+cur_trade_data->sellingQuantity)
+							+planet_trade_data->adjustedPriceFactor*(planet_trade_data->buyingQuantity+planet_trade_data->sellingQuantity))/
+									(cur_trade_data->buyingQuantity+cur_trade_data->sellingQuantity+planet_trade_data->buyingQuantity+planet_trade_data->sellingQuantity);
+
+					cur_trade_data->buyingQuantity+=sys->planets[j]->tradedatas[k].buyingQuantity;
+					cur_trade_data->sellingQuantity+=sys->planets[j]->tradedatas[k].sellingQuantity;
+				}
+			}
+		}
+	}
+
+	buf[0]='\0';
+
+	for (i=0;i<sys_ndata;i++) {
+		if (sys_data[i].commodity->price>0) {//price=0 : mission commodities
+			if (sys_data[i].adjustedPriceFactor>0) {
+
+				p_names += nsnprintf( &buf_names[p_names], 2048-p_names, "%s\n",sys_data[i].commodity->name);
+
+				p_prices += nsnprintf( &buf_prices[p_prices], 2048-p_prices, "%s cr (%s)\n",
+						round(sys_data[i].commodity->price*sys_data[i].adjustedPriceFactor),
+						commodity_price_adj(sys_data[i].adjustedPriceFactor));
+
+				p_buy += nsnprintf( &buf_buy[p_buy], 2048-p_buy, "%d\n",
+						(int)round(sys_data[i].buyingQuantity));
+
+				p_sell += nsnprintf( &buf_sell[p_sell], 2048-p_sell, "%d\n",
+						(int)round(sys_data[i].sellingQuantity));
+			} else {
+				p_names += nsnprintf( &buf_names[p_names], 2048-p_names, "%s\n",sys_data[i].commodity->name);
+
+				p_prices += nsnprintf( &buf_prices[p_prices], 2048-p_prices, "n/a\n");
+
+				p_buy += nsnprintf( &buf_buy[p_buy], 2048-p_buy, "0\n");
+
+				p_sell += nsnprintf( &buf_sell[p_sell], 2048-p_sell, "0\n");
+			}
+		}
+	}
+
+	ntime_prettyBuf(buf2,128,refresh_date,1);
+	window_moveWidget( wid, "txtSRefreshDate", x, y );
+	window_moveWidget( wid, "txtRefreshDate", x, y - gl_smallFont.h - 5 );
+	window_modifyText( wid, "txtRefreshDate", buf2 );
+	y -= 2 * gl_smallFont.h + 5 + 15;
+
+	window_modifyText( wid, "txtGoods", buf_names );
+	window_modifyText( wid, "txtGoodsPrices", buf_prices );
+	window_modifyText( wid, "txtGoodsBuy", buf_buy );
+	window_modifyText( wid, "txtGoodsSell", buf_sell );
+	window_moveWidget( wid, "txtSGoods", x, y );
+	window_moveWidget( wid, "txtGoods", x, y-gl_smallFont.h-5 );
+	window_moveWidget( wid, "txtGoodsPrices", x, y-gl_smallFont.h-5 );
+	window_moveWidget( wid, "txtGoodsBuy", x, y-gl_smallFont.h-5 );
+	window_moveWidget( wid, "txtGoodsSell", x, y-gl_smallFont.h-5 );
 }
 
 
@@ -1305,21 +1620,8 @@ static void map_buttonZoom( unsigned int wid, char* str )
  */
 void map_cleanup (void)
 {
-   map_close();
+   map_close(0, NULL);
    map_clear();
-}
-
-
-/**
- * @brief Closes the map.
- */
-void map_close (void)
-{
-   unsigned int wid;
-
-   wid = window_get(MAP_WDWNAME);
-   if (wid > 0)
-      window_destroy(wid);
 }
 
 
@@ -1430,14 +1732,12 @@ void map_jump (void)
  */
 void map_select( StarSystem *sys, char shifted )
 {
-   unsigned int wid;
    int i;
-
-   wid = window_get(MAP_WDWNAME);
 
    if (sys == NULL) {
       map_selectCur();
-      window_disableButton( wid, "btnAutonav" );
+      window_disableButton( map_windows[MAP_WIN_MAIN], "btnAutonav" );
+      window_disableButton( map_windows[MAP_WIN_TRADE], "btnAutonav" );
    }
    else {
       map_selected = sys - systems_stack;
@@ -1473,7 +1773,8 @@ void map_select( StarSystem *sys, char shifted )
             player_hyperspacePreempt(0);
             player_targetHyperspaceSet( -1 );
             player_autonavAbortJump(NULL);
-            window_disableButton( wid, "btnAutonav" );
+            window_disableButton( map_windows[MAP_WIN_MAIN], "btnAutonav" );
+            window_disableButton( map_windows[MAP_WIN_TRADE], "btnAutonav" );
          }
          else  {
         	 map_path=malloc(map_npath*sizeof(int));
@@ -1489,17 +1790,20 @@ void map_select( StarSystem *sys, char shifted )
                   break;
                }
             }
-            window_enableButton( wid, "btnAutonav" );
+            window_enableButton( map_windows[MAP_WIN_MAIN], "btnAutonav" );
+            window_enableButton( map_windows[MAP_WIN_TRADE], "btnAutonav" );
          }
       }
       else { /* unreachable. */
          player_targetHyperspaceSet( -1 );
          player_autonavAbortJump(NULL);
-         window_disableButton( wid, "btnAutonav" );
+         window_disableButton( map_windows[MAP_WIN_MAIN], "btnAutonav" );
+         window_disableButton( map_windows[MAP_WIN_TRADE], "btnAutonav" );
       }
    }
 
-   map_update(wid);
+   map_update(map_windows[MAP_WIN_MAIN]);
+   map_update(map_windows[MAP_WIN_TRADE]);
    gui_setNav();
 }
 
@@ -1995,4 +2299,26 @@ void map_clearSelection() {
 
 void map_selectCurrentSystem() {
 	map_selected=cur_system->id;
+}
+
+/**
+ * @brief Closes the information menu.
+ *    @param str Unused.
+ */
+void map_close( unsigned int wid, char* str )
+{
+	(void) wid;
+	if (map_wid > 0) {
+		window_close( map_wid, str );
+		map_wid = 0;
+	}
+}
+
+void map_autonav( unsigned int wid, char* str )
+{
+	(void) wid;
+	if (map_wid > 0) {
+		player_autonavStartWindow( map_wid, str );
+		map_wid = 0;
+	}
 }

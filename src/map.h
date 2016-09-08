@@ -17,7 +17,8 @@ void map_exit (void);
 
 /* open the map window */
 void map_open (void);
-void map_close (void);
+void map_close( unsigned int wid, char* str );
+void map_autonav( unsigned int wid, char* str );
 int map_isOpen (void);
 
 /* misc */

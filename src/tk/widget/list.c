@@ -96,6 +96,37 @@ void window_addList( const unsigned int wid,
 }
 
 
+void window_modifyList( const unsigned int wid,
+		const char* name, char** newitems, int nitems )
+{
+	Widget *wgt;
+	int i;
+
+	/* Get the widget. */
+	wgt = window_getwgt(wid,name);
+	if (wgt == NULL)
+		return;
+
+	/* Check type. */
+	if (wgt->type != WIDGET_LIST) {
+		WARN("Not modifying list on non-list widget '%s'.", name);
+		return;
+	}
+
+
+	if (wgt->dat.lst.options) {
+		for (i=0; i<wgt->dat.lst.noptions; i++)
+			if (wgt->dat.lst.options[i])
+				free(wgt->dat.lst.options[i]);
+		free( wgt->dat.lst.options );
+	}
+
+	/* Set text. */
+	wgt->dat.lst.options    = newitems;
+	wgt->dat.lst.noptions   = nitems;
+}
+
+
 /**
  * @brief Renders a list widget.
  *

@@ -40,11 +40,12 @@ static int commodity_mod = 10;
 void commodity_exchange_open( unsigned int wid )
 {
    int i, ngoods;
-   glTexture **tgoods;
+   int* ntgoods;
+   glTexture ***tgoods;
    char **goods;
    int w, h;
    int iw, ih;
-
+   char buf[PATH_MAX];
   
    /* Mark as generated. */
    land_tabGenerate(LAND_WINDOW_COMMODITY);
@@ -72,26 +73,32 @@ void commodity_exchange_open( unsigned int wid )
    window_addCust( wid, -40-((LAND_BUTTON_WIDTH-20)/2), 60+ 2*LAND_BUTTON_HEIGHT,
          (LAND_BUTTON_WIDTH-20)/2, LAND_BUTTON_HEIGHT, "cstMod", 0, commodity_renderMod, NULL, NULL );
 
+   window_addText( wid, -20, -40, LAND_BUTTON_WIDTH, 120, 0,
+            "txtName", &gl_defFont, &cBlack,
+            "");
+
    /* store gfx */
-   window_addRect( wid, 20+iw+20+(LAND_BUTTON_WIDTH-128)/2, -40,
+   window_addRect( wid, 20+iw+20+(LAND_BUTTON_WIDTH-128)/2, -60,
          128, 128, "rctStore", &cBlack, 0 );
-   window_addImage( wid, 20+iw+20+(LAND_BUTTON_WIDTH-128)/2, -40,
+   window_addImage( wid, 20+iw+20+(LAND_BUTTON_WIDTH-128)/2, -60,
          128, 128, "imgStore", NULL, 1 );
 
+   window_addText( wid, -20, -190, LAND_BUTTON_WIDTH, 20, 1,
+               "txtPrice", &gl_smallFont, &cBlack,
+               "");
+
    /* text */
-   window_addText( wid, -20, -190, LAND_BUTTON_WIDTH, 120, 0,
+   window_addText( wid, -20, -230, LAND_BUTTON_WIDTH, 120, 0,
          "txtSInfo", &gl_smallFont, &cDConsole,
          "You have:\n"
          "Buying Price:\n"
-         "Compared to base:\n"
          "Buyable:\n"
          "Selling Price:\n"
-         "Compared to base:\n"
          "Sellable:\n"
          "Free Space:\n" );
-   window_addText( wid, -20, -190, LAND_BUTTON_WIDTH/2, 120, 0,
+   window_addText( wid, -20, -230, LAND_BUTTON_WIDTH/2, 120, 0,
          "txtDInfo", &gl_smallFont, &cBlack, NULL );
-   window_addText( wid, -40, -320, LAND_BUTTON_WIDTH-20,
+   window_addText( wid, -40, -360, LAND_BUTTON_WIDTH-20,
          h-140-LAND_BUTTON_HEIGHT, 0,
          "txtDesc", &gl_smallFont, &cBlack, NULL );
 
@@ -100,25 +107,45 @@ void commodity_exchange_open( unsigned int wid )
 
 	  ngoods = land_planet->ntradedatas;
       goods = malloc(sizeof(char*) * ngoods);
-      tgoods    = malloc(sizeof(glTexture*) * ngoods);
+      ntgoods = malloc(sizeof(int*)* ngoods);
+      tgoods    = malloc(sizeof(glTexture**) * ngoods);
       for (i=0; i<ngoods; i++) {
     	  goods[i]=strdup(land_planet->tradedatas[i].commodity->name);
-    	  
-    	  tgoods[i] = land_planet->tradedatas[i].commodity->gfx_store;
+
+    	  ntgoods[i] = 3;
+    	  tgoods[i] = malloc(sizeof(glTexture*) * 3);
+    	  tgoods[i][0] = land_planet->tradedatas[i].commodity->gfx_store;
+
+    	  if (land_planet->tradedatas[i].buyingQuantity>0 && land_planet->tradedatas[i].sellingQuantity>0) {
+    		  nsnprintf( buf, PATH_MAX, COMMODITY_GFX_PATH"layers/buysell.png");
+    		  tgoods[i][1] = gl_newImage( buf, OPENGL_TEX_MIPMAPS );
+    	  } else if (land_planet->tradedatas[i].buyingQuantity>0) {
+    		  nsnprintf( buf, PATH_MAX, COMMODITY_GFX_PATH"layers/buy.png");
+    		  tgoods[i][1] = gl_newImage( buf, OPENGL_TEX_MIPMAPS );
+    	  } else {
+    		  nsnprintf( buf, PATH_MAX, COMMODITY_GFX_PATH"layers/sell.png");
+    		  tgoods[i][1] = gl_newImage( buf, OPENGL_TEX_MIPMAPS );
+    	  }
+
+    	  nsnprintf( buf, PATH_MAX, COMMODITY_GFX_PATH"layers/price_%d.png",commodity_price_level(land_planet->tradedatas[i].adjustedPriceFactor));
+    	  tgoods[i][2] = gl_newImage( buf, OPENGL_TEX_MIPMAPS );
       }
    }
    else {
 	   goods    = malloc( sizeof(char*) );
 	   goods[0] = strdup("None");
-	  tgoods    = malloc(sizeof(glTexture*));
-      tgoods[0] = NULL;
+	   ntgoods = malloc(sizeof(int*));
+	   ntgoods[0] = 1;
+	  tgoods    = malloc(sizeof(glTexture**));
+      tgoods[0] = malloc(sizeof(glTexture*));
+      tgoods[0][0] = NULL;
       ngoods   = 1;
    }
 
    /* set up the goods to buy/sell */
-   window_addImageArray( wid, 20, 20,
+   window_addImageLayeredArray( wid, 20, 20,
          iw, ih, "iarTrade", 128, 128,
-         tgoods, goods, ngoods, commodity_update, commodity_update );
+         tgoods, ntgoods, goods, ngoods, commodity_update, commodity_update );
 
    /* Set default keyboard focuse to the list */
    window_setFocus( wid , "iarTrade" );
@@ -136,14 +163,15 @@ void commodity_update( unsigned int wid, char* str )
    Commodity *com;
    TradeData *tradeData;
 
-   comname = toolkit_getImageArray( wid, "iarTrade" );
+   comname = toolkit_getImageLayeredArray( wid, "iarTrade" );
    if ((comname==NULL) || (strcmp( comname, "None" )==0)) {
       nsnprintf( buf, PATH_MAX,
          "NA Tonnes\n"
          "NA cr/t\n"
-         "\n"
          "NA Tonnes\n");
       window_modifyText( wid, "txtDInfo", buf );
+      window_modifyText( wid, "txtName", "None" );
+      window_modifyText( wid, "txtPrice", "" );
       window_modifyText( wid, "txtDesc", "No commodities available." );
       window_disableButton( wid, "btnCommodityBuy" );
       window_disableButton( wid, "btnCommoditySell" );
@@ -152,24 +180,27 @@ void commodity_update( unsigned int wid, char* str )
    com = commodity_get( comname );
    tradeData = planet_getTradeData(land_planet,com);
 
+   window_modifyText( wid, "txtName", com->name );
+
    /* modify image */
    window_modifyImage( wid, "imgStore", com->gfx_store, 128, 128 );
+
+   nsnprintf( buf, PATH_MAX,
+   	         "Price level: %s",commodity_price_adj(tradeData->adjustedPriceFactor));
+
+   window_modifyText( wid, "txtPrice", buf);
 
    /* modify text */
    if (tradeData->buyingQuantity==0) {//just selling
 	   nsnprintf( buf, PATH_MAX,
 	         "%d Tonnes\n"
 	         "\n"
-	         "\n"
 			 "None\n"
 	         "%"CREDITS_PRI" cr/t\n"
-	         "%+g%%\n"
 	         "%d/%d t\n"
-	         "\n"
 	         "%d Tonnes\n",
 	         pilot_cargoOwned( player.p, comname ),
 	         planet_commodityPriceSelling( land_planet, com ),
-	         round((planet_commodityPriceSellingRatio( land_planet, com)-1.0)*100),
 	         tradeData->sellingQuantityRemaining,
 	         tradeData->sellingQuantity,
 	         pilot_cargoFree(player.p));
@@ -177,15 +208,12 @@ void commodity_update( unsigned int wid, char* str )
 	   nsnprintf( buf, PATH_MAX,
 	   	         "%d Tonnes\n"
 	   	         "%"CREDITS_PRI" cr/t\n"
-	   	         "%+g%%\n"
 	   	         "%d/%d t\n"
-	   	         "\n"
 	   	         "\n"
 	   	         "None\n"
 	   	         "%d Tonnes\n",
 	   	         pilot_cargoOwned( player.p, comname ),
 	   	         planet_commodityPriceBuying( land_planet, com ),
-	   	         round((planet_commodityPriceBuyingRatio( land_planet, com )-1.0)*100),
 	   	         tradeData->buyingQuantityRemaining,
 	   	         tradeData->buyingQuantity,
 	   	         pilot_cargoFree(player.p));
@@ -193,20 +221,15 @@ void commodity_update( unsigned int wid, char* str )
 	   nsnprintf( buf, PATH_MAX,
 	   	         "%d Tonnes\n"
 	   	         "%"CREDITS_PRI" cr/t\n"
-	   	         "%+g%%\n"
 	   	         "%d/%d t\n"
 	   	         "%"CREDITS_PRI" cr/t\n"
-	   	         "%+g%%\n"
 	   	         "%d/%d t\n"
-	   	         "\n"
 	   	         "%d Tonnes\n",
 	   	         pilot_cargoOwned( player.p, comname ),
 	   	         planet_commodityPriceBuying( land_planet, com ),
-	   	         round((planet_commodityPriceBuyingRatio( land_planet, com )-1.0)*100),
 	   	         tradeData->buyingQuantityRemaining,
 	   	         tradeData->buyingQuantity,
 	   	         planet_commodityPriceSelling( land_planet, com ),
-	   	         round((planet_commodityPriceSellingRatio( land_planet, com )-1.0)*100),
 	   	         tradeData->sellingQuantityRemaining,
 	   	         tradeData->sellingQuantity,
 	   	         pilot_cargoFree(player.p));
@@ -301,7 +324,7 @@ void commodity_buy( unsigned int wid, char* str )
    /* Get selected. */
    q     = commodity_getMod();
 
-   comname = toolkit_getImageArray( wid, "iarTrade" );
+   comname = toolkit_getImageLayeredArray( wid, "iarTrade" );
 
    com   = commodity_get( comname );
    tradeData = planet_getTradeData(land_planet,com);
@@ -356,7 +379,7 @@ void commodity_sell( unsigned int wid, char* str )
 
    /* Get parameters. */
    q     = commodity_getMod();
-   comname = toolkit_getImageArray( wid, "iarTrade" );
+   comname = toolkit_getImageLayeredArray( wid, "iarTrade" );
 
    com   = commodity_get( comname );
    tradeData = planet_getTradeData(land_planet,com);
@@ -434,3 +457,4 @@ void commodity_renderMod( double bx, double by, double w, double h, void *data )
    nsnprintf( buf, 8, "%dx", q );
    gl_printMid( &gl_smallFont, w, bx, by, &cBlack, buf );
 }
+

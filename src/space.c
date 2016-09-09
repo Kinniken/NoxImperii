@@ -2024,11 +2024,11 @@ static int planet_parse( Planet *planet, const xmlNodePtr parent )
             			}
 
             			/* default values */
-            			planet->tradedatas[planet->ntradedatas-1].buyingQuantity=1000;
-            			planet->tradedatas[planet->ntradedatas-1].sellingQuantity=1000;
-            			planet->tradedatas[planet->ntradedatas-1].buyingQuantityRemaining=1000;
-            			planet->tradedatas[planet->ntradedatas-1].sellingQuantityRemaining=1000;
-            			planet->tradedatas[planet->ntradedatas-1].priceFactor=1;
+            			planet->tradedatas[planet->ntradedatas-1].buyingQuantity=0;
+            			planet->tradedatas[planet->ntradedatas-1].sellingQuantity=0;
+            			planet->tradedatas[planet->ntradedatas-1].buyingQuantityRemaining=0;
+            			planet->tradedatas[planet->ntradedatas-1].sellingQuantityRemaining=0;
+            			planet->tradedatas[planet->ntradedatas-1].priceFactor=0;
 
             			do {
             				xml_onlyNodes(cccur);

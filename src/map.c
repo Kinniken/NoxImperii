@@ -851,16 +851,19 @@ static void map_update_trade(unsigned int wid) {
 		}
 	}
 
-	buf[0]='\0';
+	buf_names[0]='\0';
+	buf_prices[0]='\0';
+	buf_buy[0]='\0';
+	buf_sell[0]='\0';
 
 	for (i=0;i<sys_ndata;i++) {
 		if (sys_data[i].commodity->price>0) {//price=0 : mission commodities
-			if (sys_data[i].adjustedPriceFactor>0) {
+			if (sys_data[i].adjustedPriceFactor != 0) {
 
 				p_names += nsnprintf( &buf_names[p_names], 2048-p_names, "%s\n",sys_data[i].commodity->name);
 
-				p_prices += nsnprintf( &buf_prices[p_prices], 2048-p_prices, "%s cr (%s)\n",
-						round(sys_data[i].commodity->price*sys_data[i].adjustedPriceFactor),
+				p_prices += nsnprintf( &buf_prices[p_prices], 2048-p_prices, "%d cr (%s)\n",
+						(int)round(sys_data[i].commodity->price*sys_data[i].adjustedPriceFactor),
 						commodity_price_adj(sys_data[i].adjustedPriceFactor));
 
 				p_buy += nsnprintf( &buf_buy[p_buy], 2048-p_buy, "%d\n",
@@ -880,10 +883,16 @@ static void map_update_trade(unsigned int wid) {
 		}
 	}
 
-	ntime_prettyBuf(buf2,128,refresh_date,1);
 	window_moveWidget( wid, "txtSRefreshDate", x, y );
 	window_moveWidget( wid, "txtRefreshDate", x, y - gl_smallFont.h - 5 );
-	window_modifyText( wid, "txtRefreshDate", buf2 );
+
+	if (refresh_date!=0) {
+		ntime_prettyBuf(buf2,128,refresh_date,1);
+		window_modifyText( wid, "txtRefreshDate", buf2 );
+	} else {
+		window_modifyText( wid, "txtRefreshDate", "" );
+	}
+
 	y -= 2 * gl_smallFont.h + 5 + 15;
 
 	window_modifyText( wid, "txtGoods", buf_names );

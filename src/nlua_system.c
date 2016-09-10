@@ -713,9 +713,9 @@ static int systemL_withinradius( lua_State *L )
     
     double centreX = luaL_checknumber(L,1);
     double centreY = luaL_checknumber(L,2);
-    int radius = luaL_checknumber(L,3);
+    long radius = luaL_checknumber(L,3);
 
-    int distX,distY;
+    long distX,distY;
     
     /* Push all adjacent systems. */
     lua_newtable(L);
@@ -723,12 +723,14 @@ static int systemL_withinradius( lua_State *L )
     for (i=0; i<systems_nstack; i++) {
         distX=systems_stack[i].pos.x-centreX;
         distY=systems_stack[i].pos.y-centreY;
-        if (distX*distX+distY*distY<radius*radius) {
-            sysp = system_index(&systems_stack[i]);
-            lua_pushnumber(L,id); /* key. */
-            lua_pushsystem(L,sysp); /* value. */
-            lua_rawset(L,-3);
-            id++;
+        if (abs(distX)<radius && abs(distY)<radius) {//safety in case of overflow on very large squared distances
+        	if (distX*distX+distY*distY<radius*radius) {
+        		sysp = system_index(&systems_stack[i]);
+        		lua_pushnumber(L,id); /* key. */
+        		lua_pushsystem(L,sysp); /* value. */
+        		lua_rawset(L,-3);
+        		id++;
+        	}
         }
     }
     

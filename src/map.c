@@ -1741,78 +1741,88 @@ void map_jump (void)
  */
 void map_select( StarSystem *sys, char shifted )
 {
-   int i;
+	int i;
 
-   if (sys == NULL) {
-      map_selectCur();
-      window_disableButton( map_windows[MAP_WIN_MAIN], "btnAutonav" );
-      window_disableButton( map_windows[MAP_WIN_TRADE], "btnAutonav" );
-   }
-   else {
-      map_selected = sys - systems_stack;
+	if (sys == NULL) {
+		map_selectCur();
+		if (map_windows != NULL) {
+			window_disableButton( map_windows[MAP_WIN_MAIN], "btnAutonav" );
+			window_disableButton( map_windows[MAP_WIN_TRADE], "btnAutonav" );
+		}
+	}
+	else {
+		map_selected = sys - systems_stack;
 
-      /* select the current system and make a path to it */
-      if (!shifted) {
-          if (map_path)
-             free(map_path);
-          map_path  = NULL;
-          map_npath = 0;
-      }
+		/* select the current system and make a path to it */
+		if (!shifted) {
+			if (map_path)
+				free(map_path);
+			map_path  = NULL;
+			map_npath = 0;
+		}
 
-      /* Try to make path if is reachable. */
-      if (space_sysReachable(sys)) {
+		/* Try to make path if is reachable. */
+		if (space_sysReachable(sys)) {
 
-    	 StarSystem** new_path;
+			StarSystem** new_path;
 
-         if (!shifted)
-        	 new_path= map_getJumpPath( &map_npath,
-                  cur_system->name, sys->name, 0, 1, NULL );
-         else {
-        	 new_path=malloc(map_npath*sizeof(StarSystem*));
+			if (!shifted)
+				new_path= map_getJumpPath( &map_npath,
+						cur_system->name, sys->name, 0, 1, NULL );
+			else {
+				new_path=malloc(map_npath*sizeof(StarSystem*));
 
-        	 for (i=0;i<map_npath;i++)
-        		 new_path[i]=&systems_stack[map_path[i]];
+				for (i=0;i<map_npath;i++)
+					new_path[i]=&systems_stack[map_path[i]];
 
-        	 new_path = map_getJumpPath( &map_npath,
-                  cur_system->name, sys->name, 0, 1, new_path );
-         }
+				new_path = map_getJumpPath( &map_npath,
+						cur_system->name, sys->name, 0, 1, new_path );
+			}
 
-         if (map_npath==0) {
-        	map_path  = NULL;
-            player_hyperspacePreempt(0);
-            player_targetHyperspaceSet( -1 );
-            player_autonavAbortJump(NULL);
-            window_disableButton( map_windows[MAP_WIN_MAIN], "btnAutonav" );
-            window_disableButton( map_windows[MAP_WIN_TRADE], "btnAutonav" );
-         }
-         else  {
-        	 map_path=malloc(map_npath*sizeof(int));
+			if (map_npath==0) {
+				map_path  = NULL;
+				player_hyperspacePreempt(0);
+				player_targetHyperspaceSet( -1 );
+				player_autonavAbortJump(NULL);
+				if (map_windows != NULL) {
+					window_disableButton( map_windows[MAP_WIN_MAIN], "btnAutonav" );
+					window_disableButton( map_windows[MAP_WIN_TRADE], "btnAutonav" );
+				}
+			}
+			else  {
+				map_path=malloc(map_npath*sizeof(int));
 
-        	 for (i=0;i<map_npath;i++)
-        		 map_path[i]=new_path[i]->id;
+				for (i=0;i<map_npath;i++)
+					map_path[i]=new_path[i]->id;
 
-            /* see if it is a valid hyperspace target */
-            for (i=0; i<cur_system->njumps; i++) {
-               if (&systems_stack[map_path[0]] == cur_system->jumps[i].target) {
-                  player_hyperspacePreempt(1);
-                  player_targetHyperspaceSet( i );
-                  break;
-               }
-            }
-            window_enableButton( map_windows[MAP_WIN_MAIN], "btnAutonav" );
-            window_enableButton( map_windows[MAP_WIN_TRADE], "btnAutonav" );
-         }
-      }
-      else { /* unreachable. */
-         player_targetHyperspaceSet( -1 );
-         player_autonavAbortJump(NULL);
-         window_disableButton( map_windows[MAP_WIN_MAIN], "btnAutonav" );
-         window_disableButton( map_windows[MAP_WIN_TRADE], "btnAutonav" );
-      }
-   }
+				/* see if it is a valid hyperspace target */
+				for (i=0; i<cur_system->njumps; i++) {
+					if (&systems_stack[map_path[0]] == cur_system->jumps[i].target) {
+						player_hyperspacePreempt(1);
+						player_targetHyperspaceSet( i );
+						break;
+					}
+				}
+				if (map_windows != NULL) {
+					window_enableButton( map_windows[MAP_WIN_MAIN], "btnAutonav" );
+					window_enableButton( map_windows[MAP_WIN_TRADE], "btnAutonav" );
+				}
+			}
+		}
+		else { /* unreachable. */
+			player_targetHyperspaceSet( -1 );
+			player_autonavAbortJump(NULL);
+			if (map_windows != NULL) {
+				window_disableButton( map_windows[MAP_WIN_MAIN], "btnAutonav" );
+				window_disableButton( map_windows[MAP_WIN_TRADE], "btnAutonav" );
+			}
+		}
+	}
 
-   map_update(map_windows[MAP_WIN_MAIN]);
-   map_update(map_windows[MAP_WIN_TRADE]);
+	if (map_windows != NULL) {
+		map_update(map_windows[MAP_WIN_MAIN]);
+		map_update(map_windows[MAP_WIN_TRADE]);
+	}
    gui_setNav();
 }
 

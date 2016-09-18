@@ -62,6 +62,10 @@ function create ( max )
     -- Create spawn table base on weights
     spawn_table = scom.createSpawnTable( weights )
 
+    if (spawn_table==nil) then
+      error("nil spawn_table!")
+    end
+
     -- Calculate spawn data
     spawn_data = scom.choose( spawn_table )
 
@@ -83,9 +87,13 @@ function spawn ( presence, max )
      return 5
    end
 
-   if (spawn_data == nil) then
-      local errorTable=gh.tprintError(spawn_table)
-      error("Error: spawn_data is nil! spawn_table: \n"..errorTable)
+    if (spawn_data == nil) then
+      if (spawn_table==nil) then
+        --error("Error: spawn_data and spawn_table are nil!")
+      else
+        local errorTable=gh.tprintError(spawn_table)
+        --error("Error: spawn_data is nil! spawn_table: \n"..errorTable)
+      end      
     end
     
     -- Actually spawn the pilots

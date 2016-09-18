@@ -74,6 +74,11 @@ end
 -- @brief Actually spawns the pilots
 scom.spawn = function( pilots )
    local spawned = {}
+
+   if pilots==nil then
+    return spawned
+   end
+
    for k,v in ipairs(pilots) do
       local p
       if type(v["pilot"])=='function' then

@@ -8,6 +8,7 @@ include('universe/settlements/royal_ixum_settlements.lua')
 include('universe/settlements/holy_flame_settlements.lua')
 include('universe/objects/class_settlements.lua')
 include("universe/live/live_universe.lua")
+include("universe/locations.lua")
 
 --[[
 Defines "templates" for populating systems. They have criteria to be valid
@@ -15,84 +16,9 @@ Defines "templates" for populating systems. They have criteria to be valid
 used to actually populate the matching systems based on the selected template.
 ]]
 
-base_populations= {} --public interface
+population_templates = {} --public interface
 
-local function imperial_sector_names(star)
 
-	local sector=nil
-	local bestdist=nil
-
-	for _,v in pairs(imperial_sectors) do
-		if not sector then
-			sector=v.name
-			bestdist=gh.calculateDistance(v.center,star)
-		else
-			if (gh.calculateDistance(v.center,star)<bestdist) then
-				sector=v.name
-				bestdist=gh.calculateDistance(v.center,star)
-			end
-		end
-	end
-
-	return sector
-end
-
-local function imperial_fringes_names(star)
-
-	local dx=star.x-earth_pos.x
-	local dy=star.y-earth_pos.y
-
-	if math.abs(dx)>math.abs(dy) then
-		if (dx>0) then
-			return "Spinward Fringes"
-		else
-			return "Anti-spinward Fringes"
-		end
-	else
-		if (dy>0) then
-			return "Coreward Fringes"
-		else
-			return "Rimward Fringes"
-		end
-	end
-end
-
-local function barbarian_fringes_names(star)
-	return get_nearest_barbarian_zone(star).name
-end
-
-local function outer_zone_generate(star)
-
-end
-
-local function barbarian_priority(star)
-	if (gh.calculateDistance(earth_pos,star)<1500 or gh.calculateDistance(ardarshir_pos,star)<1000) then
-		return 5
-	end
-
-	return 0
-end
-
-local function empire_ardarshir_border_priority(star,priority)
-	local distanceEarth=gh.calculateDistance(earth_pos,star)
-	local distanceArdarshir=gh.calculateDistance(ardarshir_pos,star)
-
-	if (distanceEarth<1000 and distanceArdarshir<1200) then
-		return priority
-	end
-
-	return 0
-end
-
-local function priority_distance(centre,star,radius,priority)
-	local distance=gh.calculateDistance(centre,star)
-
-	if (distance<radius) then
-		return priority
-	end
-
-	return 0
-end
 
 local function generate_human_population(star,planet,minFertility,settlementChance,populationRange,industryFactor,agricultureFactor,technologyFactor,militaryFactor,stabilityFactor,
 				factionName)
@@ -329,9 +255,21 @@ local function empire_inner_generate(star)
 	end
 end
 
+local function empire_hyades_generate(star)
+	for k,planet in pairs(star.planets) do
+		generate_human_population(star,planet,0.2,1,{1000000,200000000},0.8,1.5,0.8,0.8,0.9,G.EMPIRE);
+	end
+end
+
 local function empire_outer_generate(star)
 	for k,planet in pairs(star.planets) do
 		generate_human_population(star,planet,0.3,0.7,{100000,100000000},1,1,0.6,1,0.7,G.EMPIRE);
+	end
+end
+
+local function empire_blessed_generate(star)
+	for k,planet in pairs(star.planets) do
+		generate_human_population(star,planet,0.3,0.7,{500000,500000000},1,1,0.6,1,1,G.EMPIRE);
 	end
 end
 
@@ -348,13 +286,10 @@ local function empire_fringe_generate(star)
 end
 
 local function empire_ardarshir_border_generate(star)
-	for k,planet in pairs(star.planets) do
-		generate_human_population(star,planet,0.5,0.7,{50000,20000000},0.8,0.7,0.5,5,0.7,G.EMPIRE);
-	end
+	
 end
 
 local function empire_outer_fringe_generate(star)
-
 	if (math.random()<0.5) then
 		for k,planet in pairs(star.planets) do
 			generate_human_population(star,planet,0.5,0.7,{50000,10000000},0.5,0.8,0.2,1.5,0.3,G.INDEPENDENT_WORLDS);
@@ -371,6 +306,23 @@ local function empire_outer_fringe_generate(star)
 	end
 end
 
+local function empire_orion_fringe_generate(star)
+	if (math.random()<0.3) then
+		for k,planet in pairs(star.planets) do
+			generate_human_population(star,planet,0.5,0.7,{50000,10000000},0.5,0.8,0.2,1.5,0.3,G.INDEPENDENT_WORLDS);
+		end
+	else
+		for k,planet in pairs(star.planets) do
+			if (math.random()<0.6) then-- barbarian colony
+				generate_barbarian_population(star,planet,0.5,0.4,{500000,2000000},0.3,0.5,0.2,3,0.8,G.BARBARIANS);
+			else-- barbarian "home world"
+				planet.lua.natives=nil
+				generate_barbarian_population(star,planet,0.5,0.4,{5000000,500000000},0.3,0.8,0.3,3,0.8,G.BARBARIANS);
+			end
+		end
+	end
+end
+
 local function barbarian_fringe_generate(star)
 	for k,planet in pairs(star.planets) do
 		if (math.random()<0.6) then-- barbarian colony
@@ -378,6 +330,17 @@ local function barbarian_fringe_generate(star)
 		else-- barbarian "home world"
 			planet.lua.natives=nil
 			generate_barbarian_population(star,planet,0.5,0.4,{5000000,500000000},0.3,0.8,0.3,3,0.8,G.BARBARIANS);
+		end
+	end
+end
+
+local function barbarian_heavy_generate(star)
+	for k,planet in pairs(star.planets) do
+		if (math.random()<0.3) then-- barbarian colony
+			generate_barbarian_population(star,planet,0.5,0.4,{500000,2000000},0.3,0.5,0.2,4,0.8,G.BARBARIANS);
+		else-- barbarian "home world"
+			planet.lua.natives=nil
+			generate_barbarian_population(star,planet,0.5,0.4,{5000000,500000000},0.3,0.8,0.3,4,0.8,G.BARBARIANS);
 		end
 	end
 end
@@ -415,39 +378,48 @@ end
 
 
 --the templates themselves
-local outer_zone={name="outer_zone",priority=function() return 1 end,generate=function(star) end,nativeCivilization=0,nativeFaction=G.INDEPENDENT_WORLDS,zoneName=function(star) return "Great Beyond" end}
-local empire_inner={name="empire_inner",priority=function(star) return priority_distance(earth_pos,star,250,100) end,
-	generate=empire_inner_generate,
-	specialSettlement={["Earth-like"]=settlement_generator.coreHumanSettlements,["Cold Earth-like"]=settlement_generator.coreHumanSettlements,["Warm Earth-like"]=settlement_generator.coreHumanSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1},nativeFaction=G.EMPIRE,zoneName=function(star) return "Sector Sol" end}
+population_templates.great_outer={name="great_outer",generate=function(star) end,nativeCivilization=0,nativeFaction=G.INDEPENDENT_WORLDS}
 
-local empire_outer={name="empire_outer",priority=function(star) return priority_distance(earth_pos,star,600,50) end,generate=empire_outer_generate,specialSettlement={["Earth-like"]=settlement_generator.outerHumanSettlements,["Warm Earth-like"]=settlement_generator.outerHumanSettlements,["Cold Earth-like"]=settlement_generator.outerHumanSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},nativeCivilization=0.9,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.7},nativeFaction=G.EMPIRE,zoneName=imperial_sector_names}
+population_templates.empire_inner={name="empire_inner",generate=empire_inner_generate,specialSettlement={["Earth-like"]=settlement_generator.coreHumanSettlements,["Cold Earth-like"]=settlement_generator.coreHumanSettlements,["Warm Earth-like"]=settlement_generator.coreHumanSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1},nativeFaction=G.EMPIRE}
 
-local empire_border={name="empire_border",priority=function(star) return priority_distance(earth_pos,star,900,20) end,generate=empire_fringe_generate,
+population_templates.empire_hyades={name="empire_hyades",generate=empire_hyades_generate,
+	specialSettlement={["Earth-like"]=settlement_generator.hyadesSettlements,["Cold Earth-like"]=settlement_generator.hyadesSettlements,["Warm Earth-like"]=settlement_generator.hyadesSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1},nativeFaction=G.EMPIRE}
+
+population_templates.empire_outer={name="empire_outer",generate=empire_outer_generate,specialSettlement={["Earth-like"]=settlement_generator.outerHumanSettlements,["Warm Earth-like"]=settlement_generator.outerHumanSettlements,["Cold Earth-like"]=settlement_generator.outerHumanSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},nativeCivilization=0.9,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.7},nativeFaction=G.EMPIRE}
+
+population_templates.empire_blessed={name="empire_blessed",generate=empire_blessed_generate,specialSettlement={["Earth-like"]=settlement_generator.blessedSettlements,["Warm Earth-like"]=settlement_generator.blessedSettlements,["Cold Earth-like"]=settlement_generator.blessedSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},nativeCivilization=0.9,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.7},nativeFaction=G.EMPIRE}
+
+
+population_templates.empire_border={name="empire_border",generate=empire_fringe_generate,
 specialSettlement={["Earth-like"]=gh.concatLists({settlement_generator.fringeEmpireSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Warm Earth-like"]=gh.concatLists({settlement_generator.fringeEmpireSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Cold Earth-like"]=gh.concatLists({settlement_generator.fringeEmpireSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},
-nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.5},nativeFaction=G.INDEPENDENT_WORLDS,zoneName=imperial_sector_names}
+nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.5},nativeFaction=G.INDEPENDENT_WORLDS}
 
-local empire_ardarshir_border={name="empire_ardarshir_border",priority=function(star) return empire_ardarshir_border_priority(star,25) end,generate=empire_ardarshir_border_generate,
+population_templates.empire_ardarshir_border={name="empire_ardarshir_border",generate=empire_ardarshir_border_generate,
 specialSettlement={["Earth-like"]=settlement_generator.fringeEmpireSettlements,["Warm Earth-like"]=settlement_generator.fringeEmpireSettlements,["Cold Earth-like"]=settlement_generator.fringeEmpireSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},
-nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction=G.EMPIRE,zoneName=imperial_sector_names}
+nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction=G.EMPIRE}
 
-local empire_fringe={name="empire_fringe",priority=function(star) return priority_distance(earth_pos,star,1200,10) end,generate=empire_outer_fringe_generate,
+population_templates.empire_fringe={name="empire_fringe",generate=empire_outer_fringe_generate,
 specialSettlement={["Earth-like"]=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Warm Earth-like"]=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Cold Earth-like"]=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},
-nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction=G.INDEPENDENT_WORLDS,zoneName=imperial_fringes_names}
+nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction=G.INDEPENDENT_WORLDS}
 
-local barbarian_fringe={name="barbarian_fringe",priority=function(star) return barbarian_priority(star) end,generate=barbarian_fringe_generate,specialSettlement={["Earth-like"]=settlement_generator.barbarianSettlements,["Warm Earth-like"]=settlement_generator.barbarianSettlements,["Cold Earth-like"]=settlement_generator.barbarianSettlements},nativeCivilization=0,nativeFactors={agriculture=0.5,industry=0.3,services=0.1,technology=0.2,military=1.2,stability=0.3},nativeFaction=G.NATIVES,zoneName=barbarian_fringes_names}
+population_templates.empire_orion_fringe={name="empire_orion_fringe",generate=empire_orion_fringe_generate,
+specialSettlement={["Earth-like"]=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Warm Earth-like"]=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Cold Earth-like"]=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},
+nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.3},nativeFaction=G.INDEPENDENT_WORLDS}
 
-local ardarshir_inner={name="ardarshir_inner",priority=function(star) return priority_distance(ardarshir_pos,star,250,100) end,generate=ardarshir_inner_generate,specialSettlement={["Earth-like"]=settlement_generator.coreArdarSettlements,["Warm Earth-like"]=settlement_generator.coreArdarSettlements,["Cold Earth-like"]=settlement_generator.coreArdarSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonArdarSettlements,["Silicate Moon"]=settlement_generator.worldMoonArdarSettlements},nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1.2},nativeFaction=G.ROIDHUNATE,zoneName=function(star) return "Inner Roidhunate" end}
+population_templates.barbarian_fringe={name="barbarian_fringe",generate=barbarian_fringe_generate,specialSettlement={["Earth-like"]=settlement_generator.barbarianSettlements,["Warm Earth-like"]=settlement_generator.barbarianSettlements,["Cold Earth-like"]=settlement_generator.barbarianSettlements},nativeCivilization=0,nativeFactors={agriculture=0.5,industry=0.3,services=0.1,technology=0.2,military=1.2,stability=0.3},nativeFaction=G.NATIVES}
 
-local ardarshir_outer={name="ardarshir_outer",priority=function(star) return priority_distance(ardarshir_pos,star,500,45) end,generate=ardarshir_outer_generate,nativeCivilization=0.5,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.9},nativeFaction=G.ROIDHUNATE,zoneName=function(star) return "Outer Roidhunate" end}
+population_templates.barbarian_heavy={name="barbarian_heavy",generate=barbarian_heavy_generate,specialSettlement={["Earth-like"]=settlement_generator.barbarianSettlements,["Warm Earth-like"]=settlement_generator.barbarianSettlements,["Cold Earth-like"]=settlement_generator.barbarianSettlements},nativeCivilization=0,nativeFactors={agriculture=0.5,industry=0.3,services=0.1,technology=0.2,military=1.5,stability=0.3},nativeFaction=G.NATIVES}
 
-local ardarshir_fringe={name="ardarshir_fringe",priority=function(star) return priority_distance(ardarshir_pos,star,700,18) end,generate=ardarshir_fringe_generate,nativeCivilization=0.1,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction=G.ROIDHUNATE,zoneName=function(star) return "Roidhunate Fringes" end}
+population_templates.ardarshir_inner={name="ardarshir_inner",generate=ardarshir_inner_generate,specialSettlement={["Earth-like"]=settlement_generator.coreArdarSettlements,["Warm Earth-like"]=settlement_generator.coreArdarSettlements,["Cold Earth-like"]=settlement_generator.coreArdarSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonArdarSettlements,["Silicate Moon"]=settlement_generator.worldMoonArdarSettlements},nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1.2},nativeFaction=G.ROIDHUNATE}
 
-local betelgeuse={name="betelgeuse",priority=function(star) return priority_distance(betelgeuse_pos,star,200,100) end,generate=betelgeuse_generate,specialSettlement={["Earth-like"]=settlement_generator.betelgeuseSettlements,["Warm Earth-like"]=settlement_generator.betelgeuseSettlements,["Cold Earth-like"]=settlement_generator.betelgeuseSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonBetelgianSettlements,["Silicate Moon"]=settlement_generator.worldMoonBetelgianSettlements},nativeCivilization=0.8,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.8,stability=0.8},nativeFaction=G.BETELGEUSE,zoneName=function(star) return "Betelgeuse" end}
+population_templates.ardarshir_outer={name="ardarshir_outer",generate=ardarshir_outer_generate,nativeCivilization=0.5,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.9},nativeFaction=G.ROIDHUNATE}
 
-local kingdom_of_ixum={name="kingdom_of_ixum",priority=function(star) return priority_distance(tigray_pos,star,200,1000) end,generate=royal_ixum_generate,specialSettlement={["Earth-like"]=settlement_generator.royalIxumSettlements,["Warm Earth-like"]=settlement_generator.royalIxumSettlements,["Cold Earth-like"]=settlement_generator.royalIxumSettlements},
-nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction=G.NATIVES,zoneName=function(star) return "Ixum" end}
+population_templates.ardarshir_fringe={name="ardarshir_fringe",generate=ardarshir_fringe_generate,nativeCivilization=0.1,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction=G.ROIDHUNATE}
 
-local holy_flame_of_ixum={name="holy_flame_of_ixum",priority=function(star) return priority_distance(gonder_pos,star,350,900) end,generate=holy_flame_generate,specialSettlement={["Earth-like"]=settlement_generator.holyFlameSettlements,["Warm Earth-like"]=settlement_generator.holyFlameSettlements,["Cold Earth-like"]=settlement_generator.holyFlameSettlements},
-nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction=G.NATIVES,zoneName=function(star) return "Ixum" end}
+population_templates.betelgeuse={name="betelgeuse",generate=betelgeuse_generate,specialSettlement={["Earth-like"]=settlement_generator.betelgeuseSettlements,["Warm Earth-like"]=settlement_generator.betelgeuseSettlements,["Cold Earth-like"]=settlement_generator.betelgeuseSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonBetelgianSettlements,["Silicate Moon"]=settlement_generator.worldMoonBetelgianSettlements},nativeCivilization=0.8,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.8,stability=0.8},nativeFaction=G.BETELGEUSE}
 
-base_populations.templates={outer_zone,barbarian_fringe,empire_inner,empire_outer,empire_border,empire_ardarshir_border,empire_fringe,ardarshir_inner,ardarshir_outer,ardarshir_fringe,betelgeuse,kingdom_of_ixum,holy_flame_of_ixum}
+population_templates.kingdom_of_ixum={name="kingdom_of_ixum",generate=royal_ixum_generate,specialSettlement={["Earth-like"]=settlement_generator.royalIxumSettlements,["Warm Earth-like"]=settlement_generator.royalIxumSettlements,["Cold Earth-like"]=settlement_generator.royalIxumSettlements},
+nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction=G.NATIVES}
+
+population_templates.holy_flame_of_ixum={name="holy_flame_of_ixum",generate=holy_flame_generate,specialSettlement={["Earth-like"]=settlement_generator.holyFlameSettlements,["Warm Earth-like"]=settlement_generator.holyFlameSettlements,["Cold Earth-like"]=settlement_generator.holyFlameSettlements},
+nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction=G.NATIVES}

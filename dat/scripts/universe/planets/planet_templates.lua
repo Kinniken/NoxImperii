@@ -1,16 +1,19 @@
 
-starTemplates = {} 
+stellar_templates = {}
+
+sun_templates = {} 
 
 include('universe/planets/planet_descs.lua')
 include('universe/natives/generate_natives.lua')
+include('universe/locations.lua')
 
 local all={}
 local allOrdered={}
 local allMoonOrdered={}
 
-starTemplates.allPlanetsTemplate = all
-starTemplates.allPlanetsTemplateOrdered = allOrdered
-starTemplates.allMoonsTemplateOrdered = allMoonOrdered
+sun_templates.allPlanetsTemplate = all
+sun_templates.allPlanetsTemplateOrdered = allOrdered
+sun_templates.allMoonsTemplateOrdered = allMoonOrdered
 
 --[[
 	Note: the world's physical charactistic attributes and scores (mass,dayLength, fertility...) are typically expressed compared to Earth. Exceptions:
@@ -76,14 +79,33 @@ local classMars={{template=all.planetTemplateMars,weight=1}}
 local classHotJupiter={{template=all.planetHotJupiter,weight=1}}
 local classJovian={{template=all.planetJovian,weight=1}}
 
-local starGiant ={spacePicts={"redgiant01.png","redgiant02.png"},radius=40000,weight=1,nbPlanets={4,10},planets={{planetClass=classHotJupiter,weight=15},{planetClass=classMercury,weight=10},{planetClass=classVenus,weight=10},{planetClass=classEarth,weight=30},{planetClass=classMars,weight=10},{planetClass=classJovian,weight=20}}}
-local starBright ={spacePicts={"blue01.png","blue02.png"},radius=20000,weight=2,nbPlanets={2,8},planets={{planetClass=classHotJupiter,weight=10},{planetClass=classMercury,weight=10},{planetClass=classVenus,weight=10},{planetClass=classEarth,weight=30},{planetClass=classMars,weight=10},{planetClass=classJovian,weight=20}}}
-local starNormal ={spacePicts={"yellow01.png","yellow02.png"},radius=20000,weight=5,nbPlanets={0,6},planets={{planetClass=classHotJupiter,weight=5},{planetClass=classMercury,weight=10},{planetClass=classVenus,weight=10},{planetClass=classEarth,weight=30},{planetClass=classMars,weight=10},{planetClass=classJovian,weight=20}}}
-local starDwarf ={spacePicts={"orange01.png","orange02.png"},radius=15000,weight=2,nbPlanets={0,4},planets={{planetClass=classMercury,weight=5},{planetClass=classVenus,weight=5},{planetClass=classEarth,weight=30},{planetClass=classMars,weight=10},{planetClass=classJovian,weight=20}}}
+local starGiant ={spacePicts={"redgiant01.png","redgiant02.png"},radius=40000,weight=1,nbPlanets={6,15},planets={{planetClass=classHotJupiter,weight=15},{planetClass=classMercury,weight=10},{planetClass=classVenus,weight=10},{planetClass=classEarth,weight=30},{planetClass=classMars,weight=10},{planetClass=classJovian,weight=20}}}
+local starBright ={spacePicts={"blue01.png","blue02.png"},radius=20000,weight=2,nbPlanets={4,10},planets={{planetClass=classHotJupiter,weight=10},{planetClass=classMercury,weight=10},{planetClass=classVenus,weight=10},{planetClass=classEarth,weight=50},{planetClass=classMars,weight=10},{planetClass=classJovian,weight=20}}}
+local starNormal ={spacePicts={"yellow01.png","yellow02.png"},radius=20000,weight=5,nbPlanets={0,8},planets={{planetClass=classHotJupiter,weight=5},{planetClass=classMercury,weight=10},{planetClass=classVenus,weight=10},{planetClass=classEarth,weight=50},{planetClass=classMars,weight=10},{planetClass=classJovian,weight=20}}}
+local starDwarf ={spacePicts={"orange01.png","orange02.png"},radius=15000,weight=2,nbPlanets={0,6},planets={{planetClass=classMercury,weight=5},{planetClass=classVenus,weight=5},{planetClass=classEarth,weight=50},{planetClass=classMars,weight=10},{planetClass=classJovian,weight=20}}}
+local starDead ={spacePicts={"orange01.png","orange02.png"},radius=15000,weight=2,nbPlanets={0,0},planets={}}
 
-starTemplates.starsTemplate={starGiant ,starBright ,starNormal ,starDwarf }
+sun_templates.starsTemplate={starGiant ,starBright ,starNormal ,starDwarf }
+
+sun_templates.starsTemplateCluster={starGiant, starBright}
+
+sun_templates.starsTemplateDead={starDead}
 
 --copying the keys to an id value for future reference
 for k,v in pairs(all) do
   v.id=k
 end
+
+stellar_templates.default={radius=function() return 80+math.random(40) end,minDistance=function() return 80 end,starNumbers=function() return 500 end,interference=function() return 0 end,nebuVolatility=function() return 0 end,nebuDensity=function() return 0 end,background=function() return "" end,templates=sun_templates.starsTemplate}
+
+
+stellar_templates.rift={radius=function() return 0 end,minDistance=function() return 5000 end,starNumbers=function() return 500 end,interference=function() return 0 end,nebuVolatility=function() return 0 end,nebuDensity=function() return 0 end,background=function() return "" end,templates={}}
+
+stellar_templates.cluster={radius=function() return 50+math.random(20) end,minDistance=function() return 50 end,starNumbers=function() return 1000 end,interference=function() return 10+math.random(100) end,nebuVolatility=function() return 0 end,nebuDensity=function() return 0 end,background=function() return "nebula10.png" end,templates=sun_templates.starsTemplateCluster}
+
+stellar_templates.dead_suns={radius=function() return 80+math.random(40) end,minDistance=function() return 80 end,starNumbers=function() return 500 end,interference=function() return 0 end,nebuVolatility=function() return 0 end,nebuDensity=function() return 0 end,background=function() return "" end,templates=sun_templates.starsTemplateDead}
+
+stellar_templates.nebula_outer={radius=function() return 80+math.random(40) end,minDistance=function() return 80 end,starNumbers=function() return 500 end,interference=function() return 50+math.random(100) end,nebuVolatility=function() return 0 end,nebuDensity=function() return 50+math.random(100) end,background=function() return "" end,templates=sun_templates.starsTemplate}
+
+stellar_templates.nebula_inner={radius=function() return 80+math.random(40) end,minDistance=function() return 80 end,starNumbers=function() return 500 end,interference=function() return 100+math.random(100) end,nebuVolatility=function() return 100+math.random(100) end,nebuDensity=function() return 200+math.random(200) end,background=function() return "" end,templates=sun_templates.starsTemplate}
+

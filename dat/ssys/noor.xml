@@ -8,13 +8,14 @@
   <nebula volatility="0.000000">0.000000</nebula>
  </general>
  <pos>
-  <x>342.533120</x>
-  <y>-574.988800</y>
+  <x>250</x>
+  <y>-280</y>
  </pos>
  <assets>
   <asset>Fez</asset>
   <asset>Dchaira</asset>
   <asset>Icht</asset>
+
  </assets>
  <jumps/>
 </ssys>

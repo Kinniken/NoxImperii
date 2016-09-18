@@ -751,6 +751,7 @@ void load_all (void)
    loadscreen_render( 13./LOADING_STAGES, "Populating Maps..." );
    outfit_mapParse();
    background_init();
+   map_load();
    player_init(); /* Initialize player stuff. */
    loadscreen_render( 1., "Loading Completed!" );
 }

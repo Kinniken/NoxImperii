@@ -582,3 +582,190 @@ settlement_generator.worldMoonHumanSettlements[#settlement_generator.worldMoonHu
 	weight=10,
   barDescGenerators=bar_desc.imperial
 }
+
+
+settlement_generator.hyadesSettlements={}
+
+settlement_generator.hyadesSettlements[#settlement_generator.hyadesSettlements+1]={
+	appliesTo="humans",
+	applyOnPlanet=function(planet)
+		planet.nameGenerator=nameGenerator.generateNameArab
+		planet.lua.settlements.humans:addTag("iran")
+		planet.lua.settlements.humans.industry=planet.lua.settlements.humans.industry+0.5
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.lua.minerals < 1) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "Like many worlds in the Hyades Cluster, #planetname#  was populated mainly by Iranians fleeing an increasingly unlivable Middle East in the 22nd century. They used the abundant mineral resources to their advantage, turning the planet into one of the industrial powerhouses that dominate the Cluster. "
+	end,
+	specialities={settlements_specialities.specialityUniversity,settlements_specialities.specialityNavalBase,settlements_specialities.specialityHeavyIndustry,settlements_specialities.specialityWeaponLab},
+	weight=10,
+  barDescGenerators=bar_desc.imperial
+}
+
+settlement_generator.hyadesSettlements[#settlement_generator.hyadesSettlements+1]={
+	appliesTo="humans",
+	applyOnPlanet=function(planet)
+		planet.nameGenerator=nameGenerator.generateNameArab
+		planet.lua.settlements.humans:addTag("arab")
+		planet.lua.settlements.humans.services=planet.lua.settlements.humans.services+0.5
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "#planetname#'s original population was mainly from the Near East, and the local architecture still plays tribute to it; golden domes dominate the skyline of most cities. The population today is however very mixed, reflecting its status as a major trade centre in the Cluster's tightly-woven hyperspace lanes. "
+	end,
+	specialities={settlements_specialities.specialityUniversity,settlements_specialities.specialityNavalBase,settlements_specialities.specialityHeavyIndustry,settlements_specialities.specialityWeaponLab},
+	weight=10,
+  barDescGenerators=bar_desc.imperial
+}
+
+settlement_generator.hyadesSettlements[#settlement_generator.hyadesSettlements+1]={
+	appliesTo="humans",
+	applyOnPlanet=function(planet)
+		planet.nameGenerator=nameGenerator.generateNameArab
+		planet.lua.settlements.humans:addTag("arab")
+		planet.lua.settlements.humans.agriculture=planet.lua.settlements.humans.agriculture+0.5
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil or planet.lua.humanFertility > 1) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "Less rich in minerals than most worlds in the Cluster, #planetname# quickly specialised in agriculture; its fertile lands are cultivated by farmers of mostly Egyptian origins, who have stayed closer to their culture than most of the Cluster's industrial masses. "
+	end,
+	specialities={settlements_specialities.specialityUniversity,settlements_specialities.specialityNavalBase,settlements_specialities.specialityWeaponLab},
+	weight=10,
+  barDescGenerators=bar_desc.imperial
+}
+
+settlement_generator.hyadesSettlements[#settlement_generator.hyadesSettlements+1]={
+	appliesTo="humans",
+	applyOnPlanet=function(planet)
+		planet.nameGenerator=nameGenerator.generateNameArab
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "Even by the standards of the Cluster, #planetname# is home to an odd mix of cultures - the original Hebrew settlers have been joined by colons not only from the rest of the Middle East but also from South America and former India. The local fusion cooking is famous as far as Terra, a rarity for a region more known for heavy industry. "
+	end,
+	specialities={settlements_specialities.specialityUniversity,settlements_specialities.specialityNavalBase,settlements_specialities.specialityHeavyIndustry,settlements_specialities.specialityWeaponLab},
+	weight=10,
+  barDescGenerators=bar_desc.imperial
+}
+
+settlement_generator.hyadesSettlements[#settlement_generator.hyadesSettlements+1]={
+	appliesTo="humans",
+	applyOnPlanet=function(planet)
+		planet.nameGenerator=nameGenerator.generateNameChinese
+		planet.lua.settlements.humans:addTag("chinese")
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "When the extent of the mineral riches of the Cluster became apparent, states that had neglected the area tried to quickly lay claim to what was left. #planetname# thus became one of the only Cluster world populated mainly by Chinese immigrants. "
+	end,
+	specialities={settlements_specialities.specialityUniversity,settlements_specialities.specialityNavalBase,settlements_specialities.specialityHeavyIndustry,settlements_specialities.specialityWeaponLab},
+	weight=10,
+  barDescGenerators=bar_desc.imperial
+}
+
+settlement_generator.blessedSettlements={}
+
+settlement_generator.blessedSettlements[#settlement_generator.blessedSettlements+1]={
+	appliesTo="humans",
+	applyOnPlanet=function(planet)
+		planet.nameGenerator=nameGenerator.generateNameHindi
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "The human colony on #planetname# started as a religious community of a syncretic Hindu-Buddhist movement, briefly fashionable in the 23rd century among jaded Terran elites. While the movement has been in decline for a century at least, it still shapes life on #planetname#: contemplative, laid-back, and a little away from the bustle of the rest of the Empire. "
+	end,
+	specialities={},
+	weight=10,
+  barDescGenerators=bar_desc.imperial
+}
+
+settlement_generator.blessedSettlements[#settlement_generator.blessedSettlements+1]={
+	appliesTo="humans",
+	applyOnPlanet=function(planet)
+		planet.nameGenerator=nameGenerator.generateNameHindi
+		planet.lua.settlements.humans.agriculture=planet.lua.settlements.humans.agriculture+0.5
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "Like many of the Blessed Worlds, #planetname#'s population is mainly of South Asian origin. Sheltered from barbarians by the Rift, but also cut out from the main lines of Imperial trade, #planetname# has evolved as a quiet world focused on agriculture and light industry. "
+	end,
+	specialities={},
+	weight=10,
+  barDescGenerators=bar_desc.imperial
+}
+
+settlement_generator.blessedSettlements[#settlement_generator.blessedSettlements+1]={
+	appliesTo="humans",
+	applyOnPlanet=function(planet)
+		planet.nameGenerator=nameGenerator.generateNameHindi
+		planet.lua.settlements.humans.population=planet.lua.settlements.humans.population+1000000000
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "#planetname# stayed a quiet backwater for two centuries after its foundation, too remote from Terra and the main centres of the Empire to attract much settlers. The increase in barbarian activity in the Empire's outlying sectors has changed things; the population of the main cities is now booming as people relocate from more exposed worlds. "
+	end,
+	specialities={},
+	weight=10,
+  barDescGenerators=bar_desc.imperial
+}
+
+settlement_generator.blessedSettlements[#settlement_generator.blessedSettlements+1]={
+	appliesTo="humans",
+	applyOnPlanet=function(planet)
+		planet.lua.settlements.humans:addTag("hindu")
+		planet.nameGenerator=nameGenerator.generateNameHindi
+		planet.lua.settlements.humans.population=planet.lua.settlements.humans.population+1000000000
+	end,
+	weightValidity=function(planet)
+		if (planet.lua.settlements==nil or planet.lua.settlements.humans==nil) then
+			return false
+		end
+		return true
+	end,
+	getDesc=function(planet)
+		return "#planetname# is heavily populated for a Blessed World, a legacy of a large-scale settlement programme that shifted millions of Bengalis threatened by rising seas. "
+	end,
+	specialities={},
+	weight=10,
+  barDescGenerators=bar_desc.imperial
+}

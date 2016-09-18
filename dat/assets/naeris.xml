@@ -47,7 +47,7 @@ A hundred year ago, the administrative centre of the Alphacrusis Sector was move
 			suppressGoodSupply = { },
 			extraGoodsDemand = {
         {
-          demand = 10,
+          demand = 50,
           price = 3,
           type = "Native Technology",
         },

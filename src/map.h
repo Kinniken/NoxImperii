@@ -10,6 +10,11 @@
 
 #include "space.h"
 
+typedef struct MapDecorator_ {
+	glTexture* picture;
+	double x,y;
+	int detection_radius;
+} MapDecorator;
 
 /* init/exit */
 int map_init (void);
@@ -48,6 +53,7 @@ int map_center( const char *sys );
 void map_renderParams( double bx, double by, double xpos, double ypos,
       double w, double h, double zoom, double *x, double *y, double *r );
 void map_renderFactionDisks( double x, double y, int editor);
+void map_renderDecorators( double x, double y);
 void map_renderJumps( double x, double y, int editor);
 void map_renderSystems( double bx, double by, double x, double y,
       double w, double h, double r, int editor );
@@ -56,6 +62,9 @@ void map_renderNames( double bx, double by, double x, double y,
 
 void map_clearSelection(void);
 void map_selectCurrentSystem(void);
+
+int map_load (void);
+
 
 #endif /* MAP_H */
 

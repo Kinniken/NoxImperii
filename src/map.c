@@ -27,6 +27,8 @@
 #include "mapData.h"
 #include "nstring.h"
 #include "nmath.h"
+#include "nxml.h"
+#include "ndata.h"
 
 
 #define MAP_WDWNAME     "Star Map" /**< Map window name. */
@@ -42,6 +44,10 @@
 
 #define MAP_WIN_MAIN      0
 #define MAP_WIN_TRADE      1
+
+/* map decorator stack */
+static MapDecorator* decorator_stack = NULL; /**< Contains all the map decorators. */
+static int decorator_nstack       = 0; /**< Number of map decorators in the stack. */
 
 static const char *map_names[MAP_WINDOWS] = {
 		"Galaxy",
@@ -1064,6 +1070,8 @@ static void map_render( double bx, double by, double w, double h, void *data )
    /* background */
    gl_renderRect( bx, by, w, h, &cBlack );
 
+   map_renderDecorators( x, y );
+
    /* Render faction disks. */
    map_renderFactionDisks( x, y, 0 );
 
@@ -1126,6 +1134,48 @@ void map_renderParams( double bx, double by, double xpos, double ypos,
    *r = round(CLAMP(6., 20., 8.*zoom));
    *x = round((bx - xpos + w/2) * 1.);
    *y = round((by - ypos + h/2) * 1.);
+}
+
+void map_renderDecorators( double x, double y)
+{
+   int i,j;
+   int sw, sh;
+   double tx, ty;
+   int visible;
+   MapDecorator *decorator;
+   StarSystem *sys;
+
+   for (i=0; i<decorator_nstack; i++) {
+
+	   decorator=&decorator_stack[i];
+
+	   visible=0;
+
+	   for (j=0; j<systems_nstack && visible==0; j++) {
+	         sys = system_getIndex( j );
+
+	         if (!sys_isKnown(sys))
+	        	 continue;
+
+	         if (decorator->x < sys->pos.x + decorator->detection_radius && decorator->x > sys->pos.x - decorator->detection_radius
+	        		 && decorator->y < sys->pos.y + decorator->detection_radius && decorator->y > sys->pos.y - decorator->detection_radius) {
+	        	 visible=1;
+	         }
+	   }
+
+	   if (visible==1) {
+
+		   tx = x + decorator->x*map_zoom;
+		   ty = y + decorator->y*map_zoom;
+
+		   sw = decorator->picture->sw*map_zoom;
+		   sh = decorator->picture->sh*map_zoom;
+
+		   gl_blitScale(
+				   decorator->picture,
+				   tx - sw/2, ty - sh/2, sw, sh, &cWhite );
+	   }
+   }
 }
 
 
@@ -1613,7 +1663,7 @@ static void map_buttonZoom( unsigned int wid, char* str )
    }
    else if (strcmp(str,"btnZoomOut")==0) {
       map_zoom *= 0.8;
-      map_zoom = MAX(0.5, map_zoom);
+      map_zoom = MAX(0.2, map_zoom);
    }
 
    map_setZoom(map_zoom);
@@ -1854,6 +1904,7 @@ static SysNode* A_rm( SysNode *first, StarSystem *cur );
 static SysNode* A_in( SysNode *first, StarSystem *cur );
 static SysNode* A_lowest( SysNode *first );
 static void A_freeList( SysNode *first );
+static int map_decorator_parse( MapDecorator *temp, xmlNodePtr parent );
 /** @brief Creates a new node link to star system. */
 static SysNode* A_newNode( StarSystem* sys )
 {
@@ -2340,4 +2391,90 @@ void map_autonav( unsigned int wid, char* str )
 		player_autonavStartWindow( map_wid, str );
 		map_wid = 0;
 	}
+}
+
+/**
+ * @brief Loads all the map decorators.
+ *
+ *    @return 0 on success.
+ */
+int map_load (void)
+{
+   uint32_t bufsize;
+   char *buf;
+   xmlNodePtr node;
+   xmlDocPtr doc;
+
+   /* Load the file. */
+   buf = ndata_read( MAP_DECORATOR_DATA_PATH, &bufsize);
+   if (buf == NULL)
+      return -1;
+
+   /* Handle the XML. */
+   doc = xmlParseMemory( buf, bufsize );
+   if (doc == NULL) {
+      WARN("'%s' is not valid XML.", MAP_DECORATOR_DATA_PATH);
+      return -1;
+   }
+
+   node = doc->xmlChildrenNode; /* map node */
+   if (strcmp((char*)node->name,"map")) {
+      ERR("Malformed "MAP_DECORATOR_DATA_PATH" file: missing root element 'map'");
+      return -1;
+   }
+
+   node = node->xmlChildrenNode;
+   if (node == NULL) {
+      ERR("Malformed "MAP_DECORATOR_DATA_PATH" file: does not contain elements");
+      return -1;
+   }
+
+   do {
+      xml_onlyNodes(node);
+      if (xml_isNode(node, "decorator")) {
+
+         /* Make room for decorators. */
+         decorator_stack = realloc(decorator_stack,
+               sizeof(MapDecorator)*(++decorator_nstack));
+
+         /* Load decorator. */
+         map_decorator_parse(&decorator_stack[decorator_nstack-1], node);
+
+      }
+      else
+         WARN("'"MAP_DECORATOR_DATA_PATH"' has unknown node '%s'.", node->name);
+   } while (xml_nextNode(node));
+
+   xmlFreeDoc(doc);
+   free(buf);
+
+   DEBUG("Loaded %d map decorators.", decorator_nstack);
+
+   return 0;
+}
+
+static int map_decorator_parse( MapDecorator *temp, xmlNodePtr parent ) {
+	xmlNodePtr node;
+
+	   /* Clear memory. */
+	   memset( temp, 0, sizeof(MapDecorator) );
+
+	   temp->detection_radius=10;
+
+	   /* Parse body. */
+	   node = parent->xmlChildrenNode;
+	   do {
+	      xml_onlyNodes(node);
+	      xmlr_float(node, "x", temp->x);
+	      xmlr_float(node, "y", temp->y);
+	      xmlr_int(node, "detection_radius", temp->detection_radius);
+	      if (xml_isNode(node,"pict")) {
+	         temp->picture = xml_parseTexture( node,
+	        		 MAP_DECORATOR_GFX_PATH"%s.png", 1, 1, OPENGL_TEX_MIPMAPS );
+	         continue;
+	      }
+	      WARN("Map decorator has unknown node '%s'.", node->name);
+	   } while (xml_nextNode(node));
+
+	   return 0;
 }

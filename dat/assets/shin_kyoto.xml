@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Shin Kyoto">
+ <pos>
+  <x>-5620.011317</x>
+  <y>-3560.221503</y>
+ </pos>
+ <GFX>
+  <space>M13.png</space>
+  <exterior>ln/forest_snow.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Empire of Terra</faction>
+  <value>300.000000</value>
+  <range>2</range>
+ </presence>
+ <general>
+  <class>Earth-like</class>
+  <population>0</population>
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+  </services>
+  <commodities/>
+  <description>Shin Kyoto is on the colder side of the habitable range, with large inhospitable Arctic areas and seasonal sea ice extending almost to the equator. It is still a strikingly beautiful world, famed for its rugged mountain ranges and its craggy coastlines.
+
+ Settled by Japanese intellectuals fleeing purges in the dark days of the early 23nd century, it has established itself as a major technology and education centre despite its low population. Despite the arrival of Imperial bureaucrats and Navy officers following its designation as the capital of Sector Arcturus, it remains a rare Imperial world where knowledge is valued above money.</description>
+  <bar>The "Zen Garden" models itself on the lovely traditional bars of the university area, but is far too tacky and commercial to be more than a crude imitation.</bar>
+    <luadata>{
+	humanFertility = 0.8,
+	minerals = 0.7,
+	nativeFertility = 0.9,
+	settlements = {
+		humans = {
+			agriculture = 0.8,
+			industry = 0.7,
+			military = 0.9,
+			population = 486123,
+			services = 1.1,
+			stability = 1.0,
+			technology = 1.4,
+			activeEffects = { },
+			lesserGoodsDemand = { },
+			lesserGoodsSupply = { },
+			suppressGoodSupply = { },
+			extraGoodsDemand = { {type="Ancient Technology",demand=20,price=1.5} },
+			extraGoodsDemand = { {type="Native Technology",demand=50,price=3} },
+			extraGoodsSupply = {
+			},
+			suppressGoodDemand = {
+			},
+		},
+	},
+}</luadata>
+ </general>
+</asset>

@@ -281,7 +281,7 @@
  
   <faction name="Barbarians">
   <known/>
-  <logo>pirate</logo>
+  <logo>barbarians</logo>
   <longname>Barbarians</longname>
   <player>-20</player>
   <colour>DarkRed</colour>

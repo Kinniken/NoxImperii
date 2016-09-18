@@ -24,9 +24,11 @@ function create()
 		local pos={}
 		pos.x,pos.y = c_system:coords()
 
-		local population_template=pickPopulationTemplate(pos)
+		if c_system:getZone()==nil or c_system:getZone()=="" then
+			local zone=get_zone(pos)
 
-		c_system:setZone(population_template.zoneName(pos))
+			c_system:setZone(zone.zoneName(pos))
+		end
 	end
 
 	evt.finish()

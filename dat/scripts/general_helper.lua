@@ -172,6 +172,10 @@ function gh.calculateDistance(coord1,coord2)
   return math.sqrt((coord1.x-coord2.x)^2 + (coord1.y-coord2.y)^2)
 end
 
+function gh.calculateDistanceSquare(coord1,coord2)
+  return (coord1.x-coord2.x)^2 + (coord1.y-coord2.y)^2
+end
+
 function gh.prettyLargeNumber(number)
   if (number<100000) then
     return gh.floorTo(number,-3)

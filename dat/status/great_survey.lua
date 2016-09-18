@@ -6,7 +6,7 @@ function getGreatSurveyDesc()
 
 	local planetCounters = {}
 
-	for _,v in ipairs(starTemplates.allPlanetsTemplateOrdered) do
+	for _,v in ipairs(sun_templates.allPlanetsTemplateOrdered) do
 
 		if not v.classification then
 			print("Warning: planet without classification! Key: "..k)
@@ -25,7 +25,7 @@ function getGreatSurveyDesc()
 
 	local moonCounters = {}
 
-	for _,v in ipairs(starTemplates.allMoonsTemplateOrdered) do
+	for _,v in ipairs(sun_templates.allMoonsTemplateOrdered) do
 
 		if not v.classification then
 			print("Warning: moon without classification! Key: "..k)

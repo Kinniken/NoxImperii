@@ -1071,13 +1071,16 @@ static int systemL_mrkRm( lua_State *L )
 /**
  * @brief Adds a system.
  *
- * @usage system.createSystem( "name", posX, posY, stars,radius,"gfx_BackgroundSpaceName",known) -- Creates a system.
+ * @usage system.createSystem( "name", posX, posY, stars,radius,interference,nebu_volatility,nebu_density,"gfx_BackgroundSpaceName",known) -- Creates a system.
  *
  *    @luaparam name Name of the system. Must not be already taken.
  *    @luaparam posX X coordinate on the map
  *    @luaparam posY Y coordinate on the map
  *    @luaparam stars Star density
  *    @luaparam radius Radius of the system
+ *    @luaparam interference
+ *    @luaparam nebu_volatility
+ *    @luaparam nebu_density
  *    @luaparam gfx_BackgroundSpaceName Optional background picture to use
  *    @luaparam known Whether the system is known to the player
  *    @luareturn The ID of the NPC to pass to npcRm.
@@ -1089,7 +1092,7 @@ static int systemL_createSystem( lua_State *L )
     const char* name;
     double posX,posY;
     int stars;
-    double radius;
+    double radius,interference,nebu_volatility,nebu_density;
     const char* background;
     const char* zone;
     int known;
@@ -1100,9 +1103,12 @@ static int systemL_createSystem( lua_State *L )
     posY = luaL_checknumber(L, 3);
     stars = luaL_checknumber(L, 4);
     radius = luaL_checknumber(L, 5);
-    background = luaL_checkstring(L, 6);
-    zone = luaL_checkstring(L, 7);
-    known = lua_toboolean(L, 8);
+    interference = luaL_checknumber(L, 6);
+    nebu_volatility = luaL_checknumber(L, 7);
+    nebu_density = luaL_checknumber(L, 8);
+    background = luaL_checkstring(L, 9);
+    zone = luaL_checkstring(L, 10);
+    known = lua_toboolean(L, 11);
     
     
     sys = system_createNewSystem(name);
@@ -1117,6 +1123,10 @@ static int systemL_createSystem( lua_State *L )
     sys->pos.y=posY;
     sys->stars=stars;
     sys->radius=radius;
+    sys->interference=interference;
+    sys->nebu_volatility=nebu_volatility;
+    sys->nebu_density=nebu_density;
+
     if (background!=NULL)
         sys->gfx_BackgroundSpaceName=strdup(background);
     

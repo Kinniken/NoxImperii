@@ -23,9 +23,9 @@
    <bar/>
   </services>
   <commodities/>
-  <description>Fez' eccentric orbit drives its wild seasons, though its native life is widespread and edible by humans. Though the initial human community was of North African origin, via one of the Inner Worlds, the current population is very mixed - human and non-human both. In fact, Fez is known for the unusual presence of Ardar colons, whose settlement on the world predates tensions between the Empire and the Rodhunate. They are believed loyal to the Emperor, though the Imperial secret police is thought to discreetly monitor their communications with Ardarshir.
-  
-Its strategic position close to the border has made it the capital of the Taurus sector, leading to a heavy presence of Terran bureaucrats and naval personnels.</description>
+  <description>Fez' eccentric orbit drives its wild seasons, though its native life is widespread and edible by humans. Settled early in the rush to populate the Hyades Cluster, it has gradually emerged as one of the Cluster’s main trade centre, and was naturally selected as the administrative capital of the region.
+
+Now the indisputable commercial and administrative nexus of one of the richest region of the Empire, it is widely recognised as among the most dynamic world in human space. However, its focus on industry and trade and its distance from Terra ensures that inhabitants of the Inner Worlds continue to look down on the planet, something much resented on Fez.</description>
   <bar>This could be any bar in any old-fashioned world, save for its unique cocktails based on local vodka mixed with traditional Ardar liqueurs.</bar>
     <luadata>{
 	humanFertility = 0.8,

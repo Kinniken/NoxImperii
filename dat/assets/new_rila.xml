@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="New Rila">
+ <pos>
+  <x>12322.011317</x>
+  <y>-7022.221503</y>
+ </pos>
+ <GFX>
+  <space>M05.png</space>
+  <exterior>ln/forest_pine.png</exterior>
+ </GFX>
+ <presence>
+  <faction>Empire of Terra</faction>
+  <value>300.000000</value>
+  <range>2</range>
+ </presence>
+ <general>
+  <class>Earth-like</class>
+  <population>0</population>
+  <services>
+   <land/>
+   <refuel/>
+   <bar/>
+  </services>
+  <commodities/>
+  <description>Originally settled by Bulgarian immigrants from the inner worlds, New Rila quickly developed into an industrial powerhouse, supplying much of the sector's high-end industrial capacities. While the lowlands are now bustling and heavily populated, the planet's numerous mountains are still home to a more rural lifestyle.
+
+New Rila is known for the unusual presence of Ardar colons, whose settlement on the world predates tensions between the Empire and the Roidhunate. They are believed loyal to the Emperor, though the Imperial secret police is thought to discreetly monitor their communications with Ardarshir. Its strategic position close to the border has made it the capital of the Taurus March, leading to a heavy presence of Terran bureaucrats and naval personnels.</description>
+  <bar>The "Old Country" is a large and rather ordinary-looking airport bar, though it does serve local rakia alongside the more typical industrial alcohols.</bar>
+    <luadata>{
+	humanFertility = 1.1,
+	minerals = 1.5,
+	nativeFertility = 1.2,
+	settlements = {
+		humans = {
+			agriculture = 1.1,
+			industry = 1.5,
+			military = 1.2,
+			population = 6245000,
+			services = 1.1,
+			stability = 0.9,
+			technology = 1.2,
+			activeEffects = { },
+			lesserGoodsDemand = { },
+			lesserGoodsSupply = { },
+			suppressGoodSupply = { },
+			extraGoodsDemand = {
+			},
+			extraGoodsSupply = { {type="Modern Industrial Goods",supply=200,price=0.6} },
+			suppressGoodDemand = {
+			},
+		},
+	},
+}</luadata>
+ </general>
+</asset>

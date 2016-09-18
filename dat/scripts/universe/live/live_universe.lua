@@ -2,50 +2,13 @@ include('dat/scripts/general_helper.lua')
 include('universe/objects/class_planets.lua')
 include('universe/live/live_desc.lua')
 include('universe/live/live_info.lua')
+include("universe/locations.lua")
 
 --[[
 Main class for all the dynamic stuff happening on planets (random or not).
 Used to dynamically calculate available tech groups, commodity prices and quantities,
 and faction presence (including pirates and barbarians).
 ]]
-
-
-earth_pos={x=0,y=0}
-ardarshir_pos={x=1800,y=-100}
-betelgeuse_pos={x=1000,y=460}
-tigray_pos={x=900,y=-500}
-gonder_pos={x=1200,y=-600}
-
-local acturus_sector={x=2,y=893}--Diadomes
-local taurus_sector={x=340,y=574}--Fez
-local antares_sector={x=-346,y=-206}--Kashi
-local alphacrusis_sector={x=-685,y=131}--Naeris
-local leo_sector={x=700,y=-50}
-local sol_sector={x=0,y=0}
-
-imperial_sectors={{center=sol_sector,name="Sector Sol",key="sol"},
-{center=acturus_sector,name="Sector Acturus",key="acturus"},
-{center=taurus_sector,name="Sector Taurus",key="taurus"},
-{center=antares_sector,name="Sector Antares",key="antares"},
-{center=alphacrusis_sector,name="Sector Alpha Crucis",key="alphacrucis"},
-{center=leo_sector,name="Sector Leo",key="leo"}}
-
-imperial_barbarian_zones={	coreward_barb={name="Coreward Barbarian Wastes",key="coreward_barb"},
-rimward_barb={name="Rimward Barbarian Wastes",key="rimward_barb"},
-spinward_barb={name="Spinward Barbarian Wastes",key="spinward_barb"},
-anti_barb={name="Anti-spinward Barbarian Wastes",key="anti_barb"}}
-
-imperial_barbarian_zones_array={imperial_barbarian_zones.coreward_barb,imperial_barbarian_zones.rimward_barb,imperial_barbarian_zones.spinward_barb,imperial_barbarian_zones.anti_barb}
-
-
-roidhunate_barbarian_zones={	coreward_barb={name="Coreward Roidhunate Barbarian Wastes",key="coreward_barb"},
-rimward_barb={name="Rimward Roidhunate Barbarian Wastes",key="rimward_barb"},
-spinward_barb={name="Spinward Roidhunate Barbarian Wastes",key="spinward_barb"},
-anti_barb={name="Anti-spinward Roidhunate Barbarian Wastes",key="anti_barb"}}
-
-roidhunate_barbarian_zones_array={roidhunate_barbarian_zones.coreward_barb,roidhunate_barbarian_zones.rimward_barb,roidhunate_barbarian_zones.spinward_barb,roidhunate_barbarian_zones.anti_barb}
-
-
 
 --factors to apply to base calculations to change good supply and demand
 local productionFactors={}
@@ -116,12 +79,11 @@ function initStatusVar()
 
 	var.push("universe_emperor","George Michel Ramanendra IV")
 
-	for _,v in pairs(imperial_sectors) do
-		var.push("universe_stability_"..v.key,0.9)
-		var.push("universe_stability_min_"..v.key,0.8)
-		var.push("universe_stability_max_"..v.key,1)
+	for _,v in pairs(imperial_stability_zones) do
+		var.push("universe_stability_"..v,0.9)
+		var.push("universe_stability_min_"..v,0.8)
+		var.push("universe_stability_max_"..v,1)
 	end
-	var.push("universe_stability_sol",1)
 
 	for _,v in pairs(imperial_barbarian_zones_array) do
 		var.push("universe_barbarian_activity_"..v.key,0.5)
@@ -133,9 +95,9 @@ function initStatusVar()
 end
 
 function getSectorStability(sectorName)
-	for _,v in pairs(imperial_sectors) do
-		if sectorName==v.name then
-			return var.peek("universe_stability_"..v.key),var.peek("universe_stability_min_"..v.key),var.peek("universe_stability_max_"..v.key)
+	for _,v in pairs(imperial_stability_zones) do
+		if sectorName==v then
+			return var.peek("universe_stability_"..v),var.peek("universe_stability_min_"..v),var.peek("universe_stability_max_"..v)
 		end
 	end
 
@@ -143,9 +105,9 @@ function getSectorStability(sectorName)
 end
 
 function setSectorStability(sectorName,stability)
-	for _,v in pairs(imperial_barbarian_zones) do
-		if sectorName==v.name then
-			var.push("universe_stability_"..v.key,stability)
+	for _,v in pairs(imperial_stability_zones) do
+		if sectorName==v then
+			var.push("universe_stability_"..v,stability)
 		end
 	end
 	
@@ -216,49 +178,6 @@ function adjustBarbarianActivity(sectorName,change)
 		
 		print("Adjusting to: "..activity*change)
 		setBarbarianActivity(sectorName,activity*change)
-	end
-end
-
-function get_nearest_barbarian_zone(star)
-
-	local dist_earth=gh.calculateDistance(earth_pos,star)
-	local dist_ardarshir=gh.calculateDistance(ardarshir_pos,star)
-
-	if (dist_earth<dist_ardarshir) then
-
-		local dx=star.x-earth_pos.x
-		local dy=star.y-earth_pos.y
-
-		if math.abs(dx)>math.abs(dy) then
-			if (dx>0) then
-				return imperial_barbarian_zones.spinward_barb
-			else
-				return imperial_barbarian_zones.anti_barb
-			end
-		else
-			if (dy>0) then
-				return imperial_barbarian_zones.coreward_barb
-			else
-				return imperial_barbarian_zones.rimward_barb
-			end
-		end
-	else
-		local dx=star.x-ardarshir_pos.x
-		local dy=star.y-ardarshir_pos.y
-
-		if math.abs(dx)>math.abs(dy) then
-			if (dx>0) then
-				return roidhunate_barbarian_zones.spinward_barb
-			else
-				return roidhunate_barbarian_zones.anti_barb
-			end
-		else
-			if (dy>0) then
-				return roidhunate_barbarian_zones.coreward_barb
-			else
-				return roidhunate_barbarian_zones.rimward_barb
-			end
-		end
 	end
 end
 

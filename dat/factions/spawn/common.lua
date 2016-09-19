@@ -49,6 +49,8 @@ scom.createSpawnTable = function( weights )
       v["chance"] = v["chance"] / max
    end
 
+   --error("Created spawn table with items: "..(#spawn_table))
+
    -- Job done
    return spawn_table
 end

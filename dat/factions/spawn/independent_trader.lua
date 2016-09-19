@@ -53,6 +53,7 @@ end
 
 -- @brief Creation hook.
 function create ( max )
+
   local weights = {}
 
     -- Create weights for spawn table
@@ -62,17 +63,8 @@ function create ( max )
     -- Create spawn table base on weights
     spawn_table = scom.createSpawnTable( weights )
 
-    if (spawn_table==nil) then
-      error("nil spawn_table!")
-    end
-
     -- Calculate spawn data
     spawn_data = scom.choose( spawn_table )
-
-    if (spawn_data == nil) then
-      error("Error: spawn_data is nil! spawn_table: ")
-      gh.tprint(spawn_table)
-    end
 
     return scom.calcNextSpawn( 0, scom.presence(spawn_data), max )
   end
@@ -80,6 +72,13 @@ function create ( max )
 
 -- @brief Spawning hook
 function spawn ( presence, max )
+
+  --safety if create() was not called
+   --(can happen in border cases in Nox, unlike Naev)
+   if spawn_data==nil then
+      return 10000,nil
+    end
+
   local pilots
 
     -- Over limit

@@ -66,6 +66,17 @@ end
 
 -- @brief Spawning hook
 function spawn ( presence, max )
+
+  --safety if create() was not called
+   --(can happen in border cases in Nox, unlike Naev)
+   if spawn_data==nil then
+      return 10000,nil
+    end
+
+    if spawn_data==nil then
+      return presence
+    end
+
     local pilots
 
     -- Over limit

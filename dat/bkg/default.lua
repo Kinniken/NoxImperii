@@ -1,15 +1,9 @@
 include("dat/scripts/prng.lua")
 
-nebulae = {
+clouds = {
    "nebula02.png",
    "nebula04.png",
-   "nebula10.png",
    "nebula12.png",
-   "nebula16.png",
-   "nebula17.png",
-   "nebula19.png",
-   "nebula20.png",
-   "nebula21.png",
    "nebula22.png",
    "nebula23.png",
    "nebula24.png",
@@ -25,6 +19,22 @@ nebulae = {
    "nebula34.png",
 }
 
+distant_objects = {
+   "galaxy1.png",
+   "galaxy2.png",
+   "galaxy3.png",
+   "galaxy4.png",
+   "galaxy6.png",
+}
+
+nebulae = {--not used currently
+   "nebula10.png",
+   "nebula16.png",
+   "nebula17.png",
+   "nebula19.png",
+   "nebula20.png",
+   "nebula21.png",
+}
 
 stars = {
    "blue01.png",
@@ -55,24 +65,29 @@ function background ()
    -- Start up PRNG based on system name for deterministic nebula
    prng.initHash( cur_sys:name() )
 
-   -- Generate nebula
-   background_nebula()
+   local r = prng.num()
+
+   if (r>0.8 or (cur_sys:backgroundSpaceName() ~= nil and cur_sys:backgroundSpaceName() ~= "")) then
+      background_cloud()
+   elseif (r>0.3) then
+      background_distant_objects()
+   end
 
    -- Generate stars
    background_stars()
 end
 
 
-function background_nebula ()
+function background_cloud ()
    -- Set up parameters
    local path  = "dat/gfx/bkg/"
-   local nebula
+   local cloud
    if (cur_sys:backgroundSpaceName() == nil or cur_sys:backgroundSpaceName() == '') then
-   	nebula = nebulae[ prng.range(1,#nebulae) ]
+   	cloud = clouds[ prng.range(1,#clouds) ]
    else
-   	nebula = cur_sys:backgroundSpaceName();
+   	cloud = cur_sys:backgroundSpaceName();
    end
-   local img   = tex.open( path .. nebula )
+   local img   = tex.open( path .. cloud )
    local w,h   = img:dim()
    local r     = prng.num() * cur_sys:radius()/2
    local a     = 2*math.pi*prng.num()
@@ -84,11 +99,28 @@ function background_nebula ()
    bkg.image( img, x, y, move, scale )
 end
 
+function background_distant_objects ()
+   -- Set up parameters
+   local path  = "dat/gfx/bkg/"
+   local object
+
+   object = distant_objects[ prng.range(1,#distant_objects) ]
+
+   local img   = tex.open( path .. object )
+   local w,h   = img:dim()
+   local r     = prng.num() * cur_sys:radius()
+   local a     = 2*math.pi*prng.num()
+   local x     = r*math.cos(a)
+   local y     = r*math.sin(a)
+   local move  = 0.01 + prng.num()*0.01
+   local scale = 0.5 + (prng.num()*0.5 + 0.5)*((250+250)/(w+h))
+   if scale > 1.9 then scale = 1.9 end
+   bkg.image( img, x, y, move, scale )
+
+end
+
 
 function background_stars ()
-
-
-
    -- Chose number to generate
    local n
    
@@ -99,18 +131,8 @@ function background_stars ()
 		  n = 3
 	   elseif r > 0.94 then
 		  n = 2
-	   elseif r > 0.1 then
+	   else
 		  n = 1
-	   end
-   
-		  -- If there is an inhabited planet we'll need at least one star
-	   if not n then
-		  for k,v in ipairs( cur_sys:planets() ) do
-			 if v:services().land then
-				n = 1
-				break
-			 end
-		  end
 	   end
    
 	   -- Generate the stars

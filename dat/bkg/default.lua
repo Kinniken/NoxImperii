@@ -1,4 +1,5 @@
 include("dat/scripts/prng.lua")
+include("general_helper.lua")
 
 clouds = {
    "nebula02.png",
@@ -24,7 +25,6 @@ distant_objects = {
    "galaxy2.png",
    "galaxy3.png",
    "galaxy4.png",
-   "galaxy6.png",
 }
 
 nebulae = {--not used currently
@@ -34,6 +34,18 @@ nebulae = {--not used currently
    "nebula19.png",
    "nebula20.png",
    "nebula21.png",
+}
+
+distant_stars = {
+   "star1.png",
+   "star2.png",
+   "star3.png",
+   "star4.png",
+   "star5.png",
+   "star6.png",
+   "star7.png",
+   "star8.png",
+   "star9.png",
 }
 
 stars = {
@@ -52,6 +64,16 @@ stars = {
    "yellow02.png"
 }
 
+local x,y=system.get("Noor"):coords()
+local fez_pos={x=x,y=y}
+
+map_objects = {
+   {pict="orion.png",x=-330,y=1110,view_distance=600,in_distance=0.1},
+   {pict="hyades.png",x=fez_pos.x,y=fez_pos.y,view_distance=600,min_scale=0.1},
+   {pict="eagle.png",x=2350,y=-960,view_distance=600,in_distance=0.1},
+   {pict="pleiades.png",x=1980,y=350,view_distance=600,min_scale=0.1},
+}
+
 
 function background ()
 
@@ -62,14 +84,18 @@ function background ()
       return
    end
 
-   -- Start up PRNG based on system name for deterministic nebula
+   background_map_objects()
+
+   background_distant_stars()
+
+      -- Start up PRNG based on system name for deterministic nebula
    prng.initHash( cur_sys:name() )
 
    local r = prng.num()
 
    if (r>0.8 or (cur_sys:backgroundSpaceName() ~= nil and cur_sys:backgroundSpaceName() ~= "")) then
       background_cloud()
-   elseif (r>0.3) then
+   elseif (r>0.3) then      
       background_distant_objects()
    end
 
@@ -77,6 +103,30 @@ function background ()
    background_stars()
 end
 
+function background_map_objects()
+
+   local path  = "dat/gfx/bkg/"
+   local sx,sy=cur_sys:coords()
+
+   for k,v in ipairs(map_objects) do
+
+      local dist=gh.calculateDistance({x=sx,y=sy},v)
+
+      if (dist<v.view_distance) then
+
+         local img   = tex.open( path .. v.pict )
+         local w,h   = img:dim()
+         local x     = (v.x-sx)*150
+         local y     = (v.y-sy)*150
+         local move  = 0.01
+         local scale = 0.05+1.5*((v.view_distance-dist)/v.view_distance)
+         bkg.image( img, x, y, move, scale )
+
+      end
+
+   end
+
+end
 
 function background_cloud ()
    -- Set up parameters
@@ -93,7 +143,7 @@ function background_cloud ()
    local a     = 2*math.pi*prng.num()
    local x     = r*math.cos(a)
    local y     = r*math.sin(a)
-   local move  = 0.01 + prng.num()*0.01
+   local move  = 0.02 + prng.num()*0.02
    local scale = 1 + (prng.num()*0.5 + 0.5)*((2000+2000)/(w+h))
    if scale > 1.9 then scale = 1.9 end
    bkg.image( img, x, y, move, scale )
@@ -112,11 +162,38 @@ function background_distant_objects ()
    local a     = 2*math.pi*prng.num()
    local x     = r*math.cos(a)
    local y     = r*math.sin(a)
-   local move  = 0.01 + prng.num()*0.01
+   local move  = 0
    local scale = 0.5 + (prng.num()*0.5 + 0.5)*((250+250)/(w+h))
    if scale > 1.9 then scale = 1.9 end
    bkg.image( img, x, y, move, scale )
 
+end
+
+function background_distant_stars()
+   -- Set up parameters
+   local path  = "dat/gfx/bkg/distant_stars/"
+   local object
+
+   local n=50-- +20*prng.num()
+   local i=0
+
+   while n and i < n do
+
+      object = distant_stars[ prng.range(1,#distant_stars) ]
+
+      local img   = tex.open( path .. object )
+      local w,h   = img:dim()
+      local r     = prng.num() * cur_sys:radius()*5
+      local a     = 2*math.pi*prng.num()
+      local x     = r*math.cos(a)
+      local y     = r*math.sin(a)
+      local move  = 0.005+prng.num()*0.01
+      local scale = 0.5 + 0.5*prng.num()
+      if scale > 1.9 then scale = 1.9 end
+      bkg.image( img, x, y, move, scale )
+
+      i=i+1
+   end
 end
 
 

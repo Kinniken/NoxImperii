@@ -1081,10 +1081,10 @@ static int systemL_mrkRm( lua_State *L )
  *    @luaparam interference
  *    @luaparam nebu_volatility
  *    @luaparam nebu_density
- *    @luaparam gfx_BackgroundSpaceName Optional background picture to use
+ *    @luaparam background Optional background script to use
  *    @luaparam known Whether the system is known to the player
  *    @luareturn The ID of the NPC to pass to npcRm.
- * @luafunc createSystem( name, posX, posY, stars,radius,gfx_BackgroundSpaceName,known )
+ * @luafunc createSystem( name, posX, posY, stars,radius,background,known )
  */
 static int systemL_createSystem( lua_State *L )
 {
@@ -1127,10 +1127,10 @@ static int systemL_createSystem( lua_State *L )
     sys->nebu_volatility=nebu_volatility;
     sys->nebu_density=nebu_density;
 
-    if (background!=NULL)
-        sys->gfx_BackgroundSpaceName=strdup(background);
+    if (background!=NULL && strlen(background)>0)
+        sys->background=strdup(background);
     
-    if (zone!=NULL)
+    if (zone!=NULL && strlen(zone)>0)
         sys->zone=strdup(zone);
 
     if (known)

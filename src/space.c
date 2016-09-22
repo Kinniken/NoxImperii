@@ -3193,7 +3193,6 @@ static StarSystem* system_parse( StarSystem *sys, const xmlNodePtr parent )
    if (sys->name == NULL) WARN("Star System '%s' missing 'name' tag", sys->name);
    MELEMENT((flags&FLAG_XSET)==0,"x");
    MELEMENT((flags&FLAG_YSET)==0,"y");
-   MELEMENT(sys->stars==0,"stars");
    MELEMENT(sys->radius==0.,"radius");
    MELEMENT((flags&FLAG_INTERFERENCESET)==0,"inteference");
 #undef MELEMENT

@@ -187,7 +187,7 @@ locations.hyades={
 		return priority_distance(fez_pos,star,150,1000)
 	end,
 	zoneName=function(star) return "Hyades Cluster" end,
-	star_template="cluster",
+	star_template="hyades",
 	pop_template="empire_hyades"
 }
 
@@ -195,7 +195,7 @@ locations.pleiades={priority=function(star)
 	return priority_distance({x=1980,y=350},star,150,1000)
 	end,
 	zoneName=function(star) return "The Pleiades" end,
-	star_template="cluster",
+	star_template="pleiades",
 	pop_template="ardarshir_outer"
 }
 

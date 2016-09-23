@@ -64,13 +64,12 @@ static lua_State *bkg_def_L = NULL; /**< Default Lua state. */
 #define STAR_BUF     250 /**< Area to leave around screen for stars, more = less repetition */
 static gl_vbo *star_vertexVBO = NULL; /**< Star Vertex VBO. */
 static gl_vbo *star_colourVBO = NULL; /**< Star Colour VBO. */
+static GLfloat *star_original_pos = NULL; /** original position of the stars **/
+static double *star_moves = NULL; /* move value of each star */
 static GLfloat *star_vertex = NULL; /**< Vertex of the stars. */
-static GLfloat *star_colour = NULL; /**< Brightness of the stars. */
+static GLfloat *star_colour = NULL; /**< Brightness and colour of the stars. */
 static unsigned int nstars = 0; /**< Total stars. */
 static unsigned int mstars = 0; /**< Memory stars are taking. */
-static GLfloat star_x = 0.; /**< Star X movement. */
-static GLfloat star_y = 0.; /**< Star Y movement. */
-
 
 /*
  * Prototypes.
@@ -92,42 +91,50 @@ static void bkg_sort( background_image_t *arr );
 void background_initStars( int n )
 {
    unsigned int i;
-   GLfloat w, h, hw, hh;
-   double size;
+   double r;
 
-   /* Calculate size. */
-   size  = SCREEN_W*SCREEN_H+STAR_BUF*STAR_BUF;
-   size /= pow2(conf.zoom_far);
-
-   /* Calculate star buffer. */
-   w  = (SCREEN_W + 2.*STAR_BUF);
-   w += conf.zoom_stars * (w / conf.zoom_far - 1.);
-   h  = (SCREEN_H + 2.*STAR_BUF);
-   h += conf.zoom_stars * (h / conf.zoom_far - 1.);
-   hw = w / 2.;
-   hh = h / 2.;
-
-   /* Calculate stars. */
-   size  *= n;
-   nstars = (unsigned int)(size/(800.*600.));
+   nstars = n;
 
    if (mstars < nstars) {
       /* Create data. */
       star_vertex = realloc( star_vertex, nstars * sizeof(GLfloat) * 4 );
       star_colour = realloc( star_colour, nstars * sizeof(GLfloat) * 8 );
+      star_original_pos = realloc( star_original_pos, nstars * sizeof(GLfloat) * 2 );
+      star_moves = realloc( star_moves, nstars * sizeof(double) );
       mstars = nstars;
    }
    for (i=0; i < nstars; i++) {
       /* Set the position. */
-      star_vertex[4*i+0] = RNGF()*w - hw;
-      star_vertex[4*i+1] = RNGF()*h - hh;
+	  star_moves[i] = 0.01+RNGF()*0.02;
+	  star_original_pos[2*i+0] = (RNGF()*2-1)*3000;
+	  star_original_pos[2*i+1] = (RNGF()*2-1)*3000;
+      star_vertex[4*i+0] = star_original_pos[2*i+0];
+      star_vertex[4*i+1] = star_original_pos[2*i+1];
       star_vertex[4*i+2] = 0.;
       star_vertex[4*i+3] = 0.;
       /* Set the colour. */
-      star_colour[8*i+0] = 1.;
-      star_colour[8*i+1] = 1.;
-      star_colour[8*i+2] = 1.;
-      star_colour[8*i+3] = RNGF()*0.6 + 0.2;
+      r=RNGF();
+      if (r<0.4) {//white
+    	  star_colour[8*i+0] = 1;
+    	  star_colour[8*i+1] = 1;
+    	  star_colour[8*i+2] = 1;
+    	  star_colour[8*i+3] = RNGF()*0.8 + 0.2;
+      } else if (r<0.6) {//red
+    	  star_colour[8*i+0] = 1;
+    	  star_colour[8*i+1] = 0.9;
+    	  star_colour[8*i+2] = 0.9;
+    	  star_colour[8*i+3] = RNGF()*0.6 + 0.2;
+      } else if (r<0.8) {//blueish
+    	  star_colour[8*i+0] = 0.8;
+    	  star_colour[8*i+1] = 1;
+    	  star_colour[8*i+2] = 1;
+    	  star_colour[8*i+3] = RNGF()*0.8 + 0.2;
+      } else {//yellowish
+    	  star_colour[8*i+0] = 1;
+    	  star_colour[8*i+1] = 1;
+    	  star_colour[8*i+2] = 0.8;
+    	  star_colour[8*i+3] = RNGF()*0.8 + 0.2;
+      }
       star_colour[8*i+4] = 1.;
       star_colour[8*i+5] = 1.;
       star_colour[8*i+6] = 1.;
@@ -157,8 +164,8 @@ void background_initStars( int n )
  */
 void background_moveStars( double x, double y )
 {
-   star_x += (GLfloat) x;
-   star_y += (GLfloat) y;
+   //star_x += (GLfloat) x;
+   //star_y += (GLfloat) y;
 
    /* Puffs also need moving. */
    nebu_movePuffs( x, y );
@@ -178,14 +185,11 @@ void background_renderStars( const double dt )
 {
    (void) dt;
    unsigned int i;
-   GLfloat hh, hw, h, w;
-   GLfloat x, y, m, b;
+   GLfloat h, w;
+   GLfloat x, y, m;
    GLfloat brightness;
-   double z;
-   double sx, sy;
    int shade_mode;
-   int j, n;
-
+   double px,py, z;
 
    /*
     * gprof claims it's the slowest thing in the game!
@@ -195,8 +199,8 @@ void background_renderStars( const double dt )
    z = cam_getZoom();
    z = 1. * (1. - conf.zoom_stars) + z * conf.zoom_stars;
    gl_matrixPush();
-      gl_matrixTranslate( SCREEN_W/2., SCREEN_H/2. );
-      gl_matrixScale( z, z );
+   gl_matrixTranslate( SCREEN_W/2., SCREEN_H/2. );
+   gl_matrixScale( z, z );
 
    if (!paused && (player.p != NULL) && !player_isFlag(PLAYER_DESTROYED) &&
          !player_isFlag(PLAYER_CREATING)) { /* update position */
@@ -206,39 +210,19 @@ void background_renderStars( const double dt )
       w += conf.zoom_stars * (w / conf.zoom_far - 1.);
       h  = (SCREEN_H + 2.*STAR_BUF);
       h += conf.zoom_stars * (h / conf.zoom_far - 1.);
-      hw = w/2.;
-      hh = h/2.;
 
-      /* Calculate multiple updates in the case the ship is moving really ridiculously fast. */
-      if ((star_x > SCREEN_W) || (star_y > SCREEN_H)) {
-         sx = ceil( star_x / SCREEN_W );
-         sy = ceil( star_y / SCREEN_H );
-         n  = MAX( sx, sy );
-         star_x /= (double)n;
-         star_y /= (double)n;
-      }
-      else
-         n = 1;
+      cam_getPos( &px, &py );
+
 
       /* Calculate new star positions. */
-      for (j=0; j < n; j++) {
-         for (i=0; i < nstars; i++) {
+      for (i=0; i < nstars; i++) {
 
-            /* Calculate new position */
-            b = 1./(9. - 10.*star_colour[8*i+3]);
-            star_vertex[4*i+0] = star_vertex[4*i+0] + star_x*b;
-            star_vertex[4*i+1] = star_vertex[4*i+1] + star_y*b;
+    	  x  = star_original_pos[2*i+0] - px * star_moves[i];
+    	  y  = star_original_pos[2*i+1] - py * star_moves[i];
 
-            /* check boundaries */
-            if (star_vertex[4*i+0] > hw)
-               star_vertex[4*i+0] -= w;
-            else if (star_vertex[4*i+0] < -hw)
-               star_vertex[4*i+0] += w;
-            if (star_vertex[4*i+1] > hh)
-               star_vertex[4*i+1] -= h;
-            else if (star_vertex[4*i+1] < -hh)
-               star_vertex[4*i+1] += h;
-         }
+    	  /* Calculate new position */
+    	  star_vertex[4*i+0] = x;
+    	  star_vertex[4*i+1] = y;
       }
 
       /* Upload the data. */
@@ -290,6 +274,11 @@ void background_renderStars( const double dt )
    }
 
    /* Render. */
+   glPointSize(3.0f);
+   glLineWidth(3.0f);
+   glEnable( GL_POINT_SMOOTH );
+   glEnable( GL_LINE_SMOOTH );
+
    gl_vboActivate( star_vertexVBO, GL_VERTEX_ARRAY, 2, GL_FLOAT, 2 * sizeof(GLfloat) );
    gl_vboActivate( star_colourVBO, GL_COLOR_ARRAY,  4, GL_FLOAT, 4 * sizeof(GLfloat) );
    if (shade_mode) {
@@ -300,9 +289,8 @@ void background_renderStars( const double dt )
    else
       glDrawArrays( GL_POINTS, 0, nstars );
 
-   /* Clear star movement. */
-   star_x = 0.;
-   star_y = 0.;
+   glPointSize(1.0f);
+   glLineWidth(1.0f);
 
    /* Disable vertex array. */
    gl_vboDeactivate();
@@ -485,10 +473,15 @@ int background_load( const char *name )
 
    /* Load default. */
    if (name == NULL)
-      bkg_cur_L = bkg_def_L;
+	   bkg_cur_L = background_create( "default" );
+	   //bkg_cur_L = bkg_def_L;
    /* Load new script. */
    else
       bkg_cur_L = background_create( name );
+
+   int TODO_RESTORE_CACHED_BACKGROUND;
+
+
 
    /* Comfort. */
    L = bkg_cur_L;
@@ -613,6 +606,14 @@ void background_free (void)
    if (star_colour != NULL) {
       free(star_colour);
       star_colour = NULL;
+   }
+   if (star_original_pos != NULL) {
+	   free(star_original_pos);
+	   star_original_pos = NULL;
+   }
+   if (star_moves != NULL) {
+	   free(star_moves);
+	   star_moves = NULL;
    }
    nstars = 0;
    mstars = 0;

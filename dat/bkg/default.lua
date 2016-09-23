@@ -86,7 +86,7 @@ function background ()
 
    background_map_objects()
 
-   background_distant_stars()
+   --background_distant_stars()
 
       -- Start up PRNG based on system name for deterministic nebula
    prng.initHash( cur_sys:name() )
@@ -95,7 +95,7 @@ function background ()
 
    if (r>0.8 or (cur_sys:backgroundSpaceName() ~= nil and cur_sys:backgroundSpaceName() ~= "")) then
       background_cloud()
-   elseif (r>0.3) then      
+   elseif (r>0.2) then      
       background_distant_objects()
    end
 
@@ -146,7 +146,7 @@ function background_cloud ()
    local move  = 0.02 + prng.num()*0.02
    local scale = 1 + (prng.num()*0.5 + 0.5)*((2000+2000)/(w+h))
    if scale > 1.9 then scale = 1.9 end
-   bkg.image( img, x, y, move, scale )
+   bkg.image( img, x, y, move, scale, 1 )
 end
 
 function background_distant_objects ()
@@ -162,8 +162,8 @@ function background_distant_objects ()
    local a     = 2*math.pi*prng.num()
    local x     = r*math.cos(a)
    local y     = r*math.sin(a)
-   local move  = 0
-   local scale = 0.5 + (prng.num()*0.5 + 0.5)*((250+250)/(w+h))
+   local move  = 0.01
+   local scale = 0.5 + (prng.num()*0.5)*((250+250)/(w+h))
    if scale > 1.9 then scale = 1.9 end
    bkg.image( img, x, y, move, scale )
 

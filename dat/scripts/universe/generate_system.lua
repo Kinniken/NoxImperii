@@ -57,7 +57,7 @@ function starGenerator.createAroundStar(c_sys,nextlevel,level,visited)
 						error("Nil zone name for "..get_zone(star).id)
 					end
 
-					system.createSystem(star.name,targetx,targety,0,star.template.radius,stellarTemplate.interference(),stellarTemplate.nebuVolatility(),stellarTemplate.nebuDensity(),stellarTemplate.background(),zoneName,known)
+					system.createSystem(star.name,targetx,targety,stellarTemplate.starNumbers(),star.template.radius,stellarTemplate.interference(),stellarTemplate.nebuVolatility(),stellarTemplate.nebuDensity(),stellarTemplate.background(),zoneName,known)
 
 					local newsys=system.get(star.name)
 

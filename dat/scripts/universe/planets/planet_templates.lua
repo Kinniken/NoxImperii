@@ -96,16 +96,16 @@ for k,v in pairs(all) do
   v.id=k
 end
 
-stellar_templates.default={radius=function() return 80+math.random(40) end,minDistance=function() return 80 end,starNumbers=function() return 500 end,interference=function() return 0 end,nebuVolatility=function() return 0 end,nebuDensity=function() return 0 end,background=function() return "" end,templates=sun_templates.starsTemplate}
+stellar_templates.default={radius=function() return 80+math.random(40) end,minDistance=function() return 80 end,starNumbers=function() return 2000 end,interference=function() return 0 end,nebuVolatility=function() return 0 end,nebuDensity=function() return 0 end,background=function() return "" end,templates=sun_templates.starsTemplate}
 
 
-stellar_templates.rift={radius=function() return 0 end,minDistance=function() return 5000 end,starNumbers=function() return 500 end,interference=function() return 0 end,nebuVolatility=function() return 0 end,nebuDensity=function() return 0 end,background=function() return "" end,templates={}}
+stellar_templates.rift={radius=function() return 0 end,minDistance=function() return 5000 end,starNumbers=function() return 2000 end,interference=function() return 0 end,nebuVolatility=function() return 0 end,nebuDensity=function() return 0 end,background=function() return "" end,templates={}}
 
-stellar_templates.hyades={radius=function() return 50+math.random(20) end,minDistance=function() return 50 end,starNumbers=function() return 1000 end,interference=function() return 10+math.random(100) end,nebuVolatility=function() return 0 end,nebuDensity=function() return 0 end,background=function() return "hyades" end,templates=sun_templates.starsTemplateCluster}
+stellar_templates.hyades={radius=function() return 50+math.random(20) end,minDistance=function() return 50 end,starNumbers=function() return 5000 end,interference=function() return 10+math.random(100) end,nebuVolatility=function() return 0 end,nebuDensity=function() return 0 end,background=function() return "hyades" end,templates=sun_templates.starsTemplateCluster}
 
-stellar_templates.pleiades={radius=function() return 50+math.random(20) end,minDistance=function() return 50 end,starNumbers=function() return 1000 end,interference=function() return 10+math.random(100) end,nebuVolatility=function() return 0 end,nebuDensity=function() return 0 end,background=function() return "pleiades" end,templates=sun_templates.starsTemplateCluster}
+stellar_templates.pleiades={radius=function() return 50+math.random(20) end,minDistance=function() return 50 end,starNumbers=function() return 5000 end,interference=function() return 10+math.random(100) end,nebuVolatility=function() return 0 end,nebuDensity=function() return 0 end,background=function() return "pleiades" end,templates=sun_templates.starsTemplateCluster}
 
-stellar_templates.dead_suns={radius=function() return 80+math.random(40) end,minDistance=function() return 80 end,starNumbers=function() return 500 end,interference=function() return 0 end,nebuVolatility=function() return 0 end,nebuDensity=function() return 0 end,background=function() return "" end,templates=sun_templates.starsTemplateDead}
+stellar_templates.dead_suns={radius=function() return 80+math.random(40) end,minDistance=function() return 80 end,starNumbers=function() return 2000 end,interference=function() return 0 end,nebuVolatility=function() return 0 end,nebuDensity=function() return 0 end,background=function() return "" end,templates=sun_templates.starsTemplateDead}
 
 stellar_templates.nebula_outer={radius=function() return 80+math.random(40) end,minDistance=function() return 80 end,starNumbers=function() return 500 end,interference=function() return 50+math.random(100) end,nebuVolatility=function() return 0 end,nebuDensity=function() return 50+math.random(100) end,background=function() return "" end,templates=sun_templates.starsTemplate}
 

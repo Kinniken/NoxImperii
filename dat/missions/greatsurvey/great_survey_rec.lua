@@ -4,6 +4,7 @@ include "dat/scripts/general_helper.lua"
 include('universe/objects/class_planets.lua')
 include "universe/live/live_universe.lua"
 include "dat/missions/greatsurvey/great_survey_utils.lua"
+include "universe/natives/generate_natives.lua"
 
 -- Mission Details
 misn_title = "The Great Survey"

@@ -21,11 +21,23 @@ rewardsClass={["Asteroid Moon"]=100,
 ["Methane Moon"]=500,
 ["Volcanic Oasis Moon"]=3000}
 
+local planet_bonus=[[${worldName} is the first "${worldClass}" world you have surveyed.
 
+As a result, the Great Survey grants you a bonus of ${bonus} credits!
+
+You can check the list of world types and how many you have discovered in the "Great Survey" tab of the Info panel.]]
+
+local specie_bonus=[[The ${specieName} are the first ${specieType} species you have discovered.
+
+As a result, the Great Survey grants you a bonus of ${bonus} credits!
+
+You can check the list of specie types and how many you have discovered in the "Great Survey" tab of the Info panel.]]
 
 function computePayement(surveyedPlanet)
 
    local reward={};
+
+   reward.worldName=surveyedPlanet.c:name()
 
    local lx,ly=surveyedPlanet.c:system():coords()
 
@@ -114,6 +126,13 @@ function handlePlanet(surveyedPlanet,successMessage)
             planetClassCount=0
          end
 
+         if planetClassCount==0 and rewardsClass[surveyedPlanet.c:class()] ~= nil then
+            local bonus=rewardsClass[surveyedPlanet.c:class()]*10
+            reward.bonus=bonus           
+            tk.msg( "Bonus!", gh.format(planet_bonus,reward) )
+            player.pay( bonus )
+         end
+
          planetClassCount=planetClassCount+1
 
          var.push("survey_planet_"..surveyedPlanet.c:class(),planetClassCount)
@@ -123,6 +142,23 @@ function handlePlanet(surveyedPlanet,successMessage)
 
             if not nativeClassCount then
                nativeClassCount=0
+            end
+
+            if nativeClassCount==0 then
+               local bonus
+
+               if surveyedPlanet.lua.natives:hasTag("rare") then
+                  bonus=250000
+               else
+                  bonus=100000
+               end
+
+               reward.bonus=bonus
+
+               reward.specieName=surveyedPlanet.lua.natives.name
+               reward.specieType=natives_generator.common_natives[surveyedPlanet.lua.natives.type].label
+               tk.msg( "Bonus!", gh.format(specie_bonus,reward) )
+               player.pay( bonus )
             end
 
             nativeClassCount=nativeClassCount+1

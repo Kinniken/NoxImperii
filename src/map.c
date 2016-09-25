@@ -2460,6 +2460,7 @@ static int map_decorator_parse( MapDecorator *temp, xmlNodePtr parent ) {
 	   memset( temp, 0, sizeof(MapDecorator) );
 
 	   temp->detection_radius=10;
+	   temp->auto_fade=0;
 
 	   /* Parse body. */
 	   node = parent->xmlChildrenNode;
@@ -2467,6 +2468,7 @@ static int map_decorator_parse( MapDecorator *temp, xmlNodePtr parent ) {
 	      xml_onlyNodes(node);
 	      xmlr_float(node, "x", temp->x);
 	      xmlr_float(node, "y", temp->y);
+	      xmlr_int(node, "auto_fade", temp->auto_fade);
 	      xmlr_int(node, "detection_radius", temp->detection_radius);
 	      if (xml_isNode(node,"pict")) {
 	         temp->picture = xml_parseTexture( node,

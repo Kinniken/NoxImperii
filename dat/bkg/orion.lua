@@ -27,17 +27,17 @@ function background ()
       return
    end
 
-   background_hyades()
+   background_pleiades()
 
    -- Generate stars
    background_stars()
 end
 
-function background_hyades()
+function background_pleiades()
 
    local path  = "dat/gfx/bkg/"
 
-   local img   = tex.open( path .. "hyades.png" )
+   local img   = tex.open( path .. "orion.png" )
    local w,h   = img:dim()
    local x     = 0
    local y     = 0

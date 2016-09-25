@@ -14,6 +14,7 @@ typedef struct MapDecorator_ {
 	glTexture* picture;
 	double x,y;
 	int detection_radius;
+	int auto_fade;
 } MapDecorator;
 
 /* init/exit */

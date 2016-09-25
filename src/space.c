@@ -3124,8 +3124,6 @@ static StarSystem* system_parse( StarSystem *sys, const xmlNodePtr parent )
       /* Only handle nodes. */
       xml_onlyNodes(node);
 
-      xmlr_strd( node, "backgroundSpaceName", sys->gfx_BackgroundSpaceName );
-
       xmlr_strd( node, "luadata", sys->luaData );
       xmlr_strd( node, "zone", sys->zone );
 
@@ -4849,11 +4847,6 @@ int system_saveSystem( xmlTextWriterPtr writer, StarSystem *sys, int customDataO
 			xmlw_endElem( writer );
 		}
 		xmlw_endElem( writer ); /* "starGraphics" */
-
-		if (sys->gfx_BackgroundSpaceName != NULL)
-			xmlw_elem( writer, "backgroundSpaceName", "%s", sys->gfx_BackgroundSpaceName );
-
-
 
 	   /* General. */
 	   xmlw_startElem( writer, "general" );

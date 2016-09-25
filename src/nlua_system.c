@@ -37,7 +37,6 @@ static int systemL_eq( lua_State *L );
 static int systemL_name( lua_State *L );
 static int systemL_coords( lua_State *L );
 static int systemL_sunSpaceNames( lua_State *L );
-static int systemL_backgroundSpaceName( lua_State *L );
 static int systemL_faction( lua_State *L );
 static int systemL_nebula( lua_State *L );
 static int systemL_jumpdistance( lua_State *L );
@@ -63,6 +62,8 @@ static int systemL_getLuaData( lua_State *L );
 static int systemL_setLuaData( lua_State *L );
 static int systemL_getZone( lua_State *L );
 static int systemL_setZone( lua_State *L );
+static int systemL_setBackground( lua_State *L );
+static int systemL_setStars( lua_State *L );
 
 ;
 static const luaL_reg system_methods[] = {
@@ -74,7 +75,6 @@ static const luaL_reg system_methods[] = {
    { "name", systemL_name },
    { "coords", systemL_coords },
     { "sunSpaceNames", systemL_sunSpaceNames },
-    { "backgroundSpaceName", systemL_backgroundSpaceName },
    { "faction", systemL_faction },
    { "nebula", systemL_nebula },
    { "jumpDist", systemL_jumpdistance },
@@ -100,6 +100,8 @@ static const luaL_reg system_methods[] = {
     { "setLuaData", systemL_setLuaData },
     { "getZone", systemL_getZone },
     { "setZone", systemL_setZone },
+	{ "setBackground", systemL_setBackground },
+	{ "setStars", systemL_setStars },
 {0,0}
 }; /**< System metatable methods. */
 static const luaL_reg system_cond_methods[] = {
@@ -111,7 +113,6 @@ static const luaL_reg system_cond_methods[] = {
    { "name", systemL_name },
    { "coords", systemL_coords },
    { "sunSpaceNames", systemL_sunSpaceNames },
-   { "backgroundSpaceName", systemL_backgroundSpaceName },
    { "faction", systemL_faction },
    { "nebula", systemL_nebula },
    { "jumpDist", systemL_jumpdistance },
@@ -133,6 +134,8 @@ static const luaL_reg system_cond_methods[] = {
     { "setLuaData", systemL_setLuaData },
     { "getZone", systemL_getZone },
     { "setZone", systemL_setZone },
+	{ "setBackground", systemL_setBackground },
+	{ "setStars", systemL_setStars },
    {0,0}
 }; /**< Read only system metatable methods. */
 
@@ -456,27 +459,6 @@ static int systemL_sunSpaceNames( lua_State *L )
         lua_pushstring(L,s->gfx_SunSpaceNames[i]); /* value */
         lua_rawset(L,-3);
     }
-    
-    return 1;
-}
-
-/**
- * @brief Returns the system's gfx_BackgroundSpaceName.
- *
- * @usage name = sys:backgroundSpaceName()
- *
- *    @luaparam s System to get gfx_BackgroundSpaceName of.
- *    @luareturn The name of the system.
- * @luafunc name( s )
- */
-static int systemL_backgroundSpaceName( lua_State *L )
-{
-    
-    StarSystem *s;
-    
-    s = luaL_validsystem(L,1);
-    
-    lua_pushstring(L, s->gfx_BackgroundSpaceName);
     
     return 1;
 }
@@ -1336,6 +1318,38 @@ static int systemL_setZone( lua_State *L )
 {
    StarSystem *sys = luaL_validsystem(L, 1);
    sys->zone=strdup(lua_tostring(L, 2));
+
+   return 0;
+}
+
+/**
+ * @brief Sets a system's background script.
+ *
+ * @usage p:setBackground( zone ) sets zone
+ *    @luaparam p System to set background for.
+ *    @luaparam b background
+ * @luafunc setZone( s, b )
+ */
+static int systemL_setBackground( lua_State *L )
+{
+   StarSystem *sys = luaL_validsystem(L, 1);
+   sys->background=strdup(lua_tostring(L, 2));
+
+   return 0;
+}
+
+/**
+ * @brief Sets a system's background star number.
+ *
+ * @usage p:setStars( number ) sets star number
+ *    @luaparam p System to set star number for.
+ *    @luaparam n star number
+ * @luafunc setStars( s, n )
+ */
+static int systemL_setStars( lua_State *L )
+{
+   StarSystem *sys = luaL_validsystem(L, 1);
+   sys->stars=(int)luaL_checknumber(L, 2);
 
    return 0;
 }

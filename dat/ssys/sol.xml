@@ -3,7 +3,6 @@
     <starGraphics>
      <star name="orange05.png"/>
     </starGraphics>
-    <backgroundSpaceName>nebula33.png</backgroundSpaceName>
  <general>
   <radius>20000.000000</radius>
   <stars>0</stars>

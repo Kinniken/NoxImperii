@@ -263,7 +263,7 @@ end
 
 local function empire_outer_generate(star)
 	for k,planet in pairs(star.planets) do
-		generate_human_population(star,planet,0.3,0.7,{100000,100000000},1,1,0.6,1,0.7,G.EMPIRE);
+		generate_human_population(star,planet,0.3,0.7,{100000,100000000},1,1,0.6,1,0.6,G.EMPIRE);
 	end
 end
 
@@ -385,7 +385,7 @@ population_templates.empire_inner={name="empire_inner",generate=empire_inner_gen
 population_templates.empire_hyades={name="empire_hyades",generate=empire_hyades_generate,
 	specialSettlement={["Earth-like"]=settlement_generator.hyadesSettlements,["Cold Earth-like"]=settlement_generator.hyadesSettlements,["Warm Earth-like"]=settlement_generator.hyadesSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},nativeCivilization=1,nativeFactors={agriculture=1,industry=1,services=1,technology=1,military=0.5,stability=1},nativeFaction=G.EMPIRE}
 
-population_templates.empire_outer={name="empire_outer",generate=empire_outer_generate,specialSettlement={["Earth-like"]=settlement_generator.outerHumanSettlements,["Warm Earth-like"]=settlement_generator.outerHumanSettlements,["Cold Earth-like"]=settlement_generator.outerHumanSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},nativeCivilization=0.9,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.7},nativeFaction=G.EMPIRE}
+population_templates.empire_outer={name="empire_outer",generate=empire_outer_generate,specialSettlement={["Earth-like"]=settlement_generator.outerHumanSettlements,["Warm Earth-like"]=settlement_generator.outerHumanSettlements,["Cold Earth-like"]=settlement_generator.outerHumanSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},nativeCivilization=0.9,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.6},nativeFaction=G.EMPIRE}
 
 population_templates.empire_blessed={name="empire_blessed",generate=empire_blessed_generate,specialSettlement={["Earth-like"]=settlement_generator.blessedSettlements,["Warm Earth-like"]=settlement_generator.blessedSettlements,["Cold Earth-like"]=settlement_generator.blessedSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},nativeCivilization=0.9,nativeFactors={agriculture=0.8,industry=0.7,services=0.5,technology=0.7,military=0.7,stability=0.7},nativeFaction=G.EMPIRE}
 
@@ -395,8 +395,7 @@ specialSettlement={["Earth-like"]=gh.concatLists({settlement_generator.fringeEmp
 nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.5},nativeFaction=G.INDEPENDENT_WORLDS}
 
 population_templates.empire_ardarshir_border={name="empire_ardarshir_border",generate=empire_ardarshir_border_generate,
-specialSettlement={["Earth-like"]=settlement_generator.fringeEmpireSettlements,["Warm Earth-like"]=settlement_generator.fringeEmpireSettlements,["Cold Earth-like"]=settlement_generator.fringeEmpireSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},
-nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction=G.EMPIRE}
+specialSettlement={},nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction=G.INDEPENDENT_WORLDS}
 
 population_templates.empire_fringe={name="empire_fringe",generate=empire_outer_fringe_generate,
 specialSettlement={["Earth-like"]=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Warm Earth-like"]=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Cold Earth-like"]=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},

@@ -40,8 +40,18 @@ imperial_sectors={{key="arcturus",centre=shin_kyoto_pos,innerName="Sector Arctur
 						{key="antares",centre=kashi_pos,innerName="Sector Antares",outerName="Outer Antares",fringeName="Antares Fringe"},
 						{key="alphacrucis",centre=naeris_pos,innerName="Sector Alphacrucis",outerName="Outer Alphacrucis",fringeName="Alphacrucis Fringe"}}
 
-imperial_stability_zones={"Sector Sol","Hyades Cluster","Blessed Worlds","Sector Arcturus","Outer Arcturus","Taurus March","Outer Taurus","Sector Antares","Outer Antares","Sector Alphacrucis","Outer Alphacrucis"}
-
+imperial_stability_zones={}
+imperial_stability_zones["Sector Sol"]={initStability=1}
+imperial_stability_zones["Hyades Cluster"]={initStability=0.9}
+imperial_stability_zones["Blessed Worlds"]={initStability=0.9}
+imperial_stability_zones["Sector Arcturus"]={initStability=0.9}
+imperial_stability_zones["Outer Arcturus"]={initStability=0.8}
+imperial_stability_zones["Taurus March"]={initStability=0.9}
+imperial_stability_zones["Outer Taurus"]={initStability=0.8}
+imperial_stability_zones["Sector Antares"]={initStability=0.9}
+imperial_stability_zones["Outer Antares"]={initStability=0.8}
+imperial_stability_zones["Sector Alphacrucis"]={initStability=0.9}
+imperial_stability_zones["Outer Alphacrucis"]={initStability=0.8}
 
 local function get_closest_imperial_sector(star)
 
@@ -207,7 +217,7 @@ locations.orion_outer={priority=function(star)
 				priority_distance({x=-550,y=1310},star,130,1000)
 	end,
 	zoneName=function(star) return "Outer Orion Nebula" end,
-	star_template="nebula_outer",
+	star_template="orion_outer",
 	pop_template="barbarian_heavy"
 }
 
@@ -218,7 +228,7 @@ locations.orion_inner={priority=function(star)
 				priority_distance({x=-240,y=1110},star,75,10000)
 	end,
 	zoneName=function(star) return "Inner Orion Nebula" end,
-	star_template="nebula_inner",
+	star_template="orion_inner",
 	pop_template="barbarian_heavy"
 }
 
@@ -229,7 +239,7 @@ locations.eagle_outer={priority=function(star)
 				priority_distance({x=2560,y=-750},star,260,1000)
 	end,
 	zoneName=function(star) return "Outer Eagle Nebula" end,
-	star_template="nebula_outer",
+	star_template="eagle_outer",
 	pop_template="barbarian_heavy"
 }
 
@@ -239,7 +249,7 @@ locations.eagle_inner={priority=function(star)
 				priority_distance({x=2480,y=-830},star,150,10000)
 	end,
 	zoneName=function(star) return "Inner Eagle Nebula" end,
-	star_template="nebula_inner",
+	star_template="eagle_inner",
 	pop_template="barbarian_heavy"
 }
 
@@ -263,7 +273,8 @@ locations.blessed={priority=function(star)
 		priority_distance({x=-800,y=-50},star,200,1000) + 
 		priority_distance({x=-700,y=-200},star,200,1000) + 
 		priority_distance({x=-600,y=-350},star,200,1000) +
-		priority_distance({x=-500,y=-500},star,200,1000)
+		priority_distance({x=-500,y=-500},star,200,1000) +
+		priority_distance({x=-840,y=65},star,20,10000)--Namaste
 	end,
 	zoneName=function(star) return "Blessed Worlds" end,
 	star_template="default",
@@ -329,7 +340,7 @@ locations.empire_inner_sectors={
 }
 
 locations.empire_outer_sectors={
-	priority=function(star) return priority_distance(earth_pos,star,900,20) end,
+	priority=function(star) return priority_distance(earth_pos,star,1000,20) end,
 	zoneName=function(star)
 		local sector=get_closest_imperial_sector(star)
 
@@ -340,7 +351,7 @@ locations.empire_outer_sectors={
 }
 
 locations.empire_fringe={
-	priority=function(star) return priority_distance(earth_pos,star,1200,10) end,
+	priority=function(star) return priority_distance(earth_pos,star,1400,10) end,
 	zoneName=function(star)
 		local sector=get_closest_imperial_sector(star)
 
@@ -353,7 +364,7 @@ locations.empire_fringe={
 locations.orion_fringe={
 	priority=function(star)
 		if star.y>0 and star.y>star.x and star.y>-star.x then
-			return priority_distance(earth_pos,star,1200,15)--above normal fringe
+			return priority_distance(earth_pos,star,1400,15)--above normal fringe
 		end
 		return 0
 	end,
@@ -367,8 +378,8 @@ locations.empire_ardarshir_border={
 		local distanceEarthSq=gh.calculateDistanceSquare(earth_pos,star)
 		local distanceArdarshirSq=gh.calculateDistanceSquare(ardarshir_pos,star)
 
-		if (distanceEarthSq<1200^2 and distanceArdarshirSq<1200^2) then
-			return 15
+		if (distanceEarthSq<1200^2 and distanceArdarshirSq<1100^2) then
+			return 50
 		end
 		return 0
 	end,

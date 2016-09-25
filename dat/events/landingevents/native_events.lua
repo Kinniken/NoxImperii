@@ -67,7 +67,7 @@ local event
 
 				Only lightening-quick fire from your men prevents the weapon from hitting you dead-centre. The spear instead glances on your shoulder before hitting ${woundedCrewName} behind you; your men fall back while the native ignites under the beams of half a dozen blasters. Two minutes later, all the ${nativesname} are dead, felled while rushing your men. You are carried back to the ship half-delirious.
 
-				Your damaged shoulder is quickly rebuilt by the medical bay, though it does cost you ${damages} cr in supplies. What happened is harder to tell. Did the ${nativesname} feel dishonoured by your intervention? Were they so xenophobic they despised you despite your rescue? Or where they simply afraid of your men and you? One more mystery to add for the xenoethnologues.]],40,{woundCrew=true})
+				Your damaged shoulder is quickly rebuilt by the medical bay, though it does cost you ${damages} cr in supplies. What happened is harder to tell. Did the ${nativesname} feel dishonoured by your intervention? Were they so xenophobic they despised you despite your rescue? Or where they simply afraid of your men and you? One more mystery to add for the xenoethnologues.]],40,{woundCrew=true,damages=500,damagesBonus=1000})
 
 	landing_events.nativesAndMonster=event
 

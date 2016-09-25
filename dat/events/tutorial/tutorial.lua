@@ -47,17 +47,22 @@ function create()
         end
     end
 
-    --only for the zone name
     for k,c_system in pairs(system.getAll()) do
         local pos={}
         pos.x,pos.y = c_system:coords()
 
-        local population_template=pickPopulationTemplate(pos)
+        local zone=get_zone(pos)
 
-        c_system:setZone(population_template.zoneName(pos))
+        if c_system:getZone()==nil or c_system:getZone()=="" then
+            c_system:setZone(zone.zoneName(pos))
+        end
+
+        if stellar_templates[zone.star_template].background() ~= "" then
+            c_system:setBackground(stellar_templates[zone.star_template].background())
+        end
+
+        c_system:setStars(stellar_templates[zone.star_template].starNumbers())
     end
-
-
 
 
     -- Set defaults just in case.

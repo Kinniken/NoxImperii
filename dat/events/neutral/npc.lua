@@ -222,7 +222,7 @@ else --default english
    }
    msg_lore.betelgeuse.traders={
 "I've been to Terra once, quite a profitable run. And to Ardarshir twice. See the world, make money, that's my motto!",
-"I traveled with an exploration fleet once, greatest time of my life! Unknown worlds, weird natives, great trading opportunities... that's the way to live!",
+"I travelled with an exploration fleet once, greatest time of my life! Unknown worlds, weird natives, great trading opportunities... that's the way to live!",
 "If you are ever lucky enough to be admitted in a Betelgian trading house, you'll get opportunities for riches you'd never have thought possible!",
 "I'm glad I'm a Betelgian trader, best place to do business.",
    }

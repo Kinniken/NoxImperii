@@ -79,16 +79,16 @@ function initStatusVar()
 
 	var.push("universe_emperor","George Michel Ramanendra IV")
 
-	for _,v in pairs(imperial_stability_zones) do
-		var.push("universe_stability_"..v,0.9)
-		var.push("universe_stability_min_"..v,0.8)
-		var.push("universe_stability_max_"..v,1)
+	for k,v in pairs(imperial_stability_zones) do
+		var.push("universe_stability_"..k,v.initStability)
+		var.push("universe_stability_min_"..k,v.initStability-0.1)
+		var.push("universe_stability_max_"..k,v.initStability+0.1)
 	end
 
 	for _,v in pairs(imperial_barbarian_zones_array) do
-		var.push("universe_barbarian_activity_"..v.key,0.5)
-		var.push("universe_barbarian_activity_min_"..v.key,0.4)
-		var.push("universe_barbarian_activity_max_"..v.key,0.6)
+		var.push("universe_barbarian_activity_"..v.key,0.6)
+		var.push("universe_barbarian_activity_min_"..v.key,0.5)
+		var.push("universe_barbarian_activity_max_"..v.key,0.7)
 	end
 
 	var.push("universe_balanceofpower",0)
@@ -182,6 +182,15 @@ function adjustBarbarianActivity(sectorName,change)
 end
 
 local function addCommodity(commodities,commodity,price,supply,demand)
+
+	if supply>0 and supply<5 then
+		supply=5
+	end
+
+	if demand>0 and demand<5 then
+		demand=5
+	end
+
 	if (not commodities[commodity]) then
 		commodities[commodity]={price=price,supply=supply,demand=demand}
 	else
@@ -530,6 +539,10 @@ local function generateExtraPresences(planet,sectorStability)
 			range=3
 		end
 
+		if amount<5 then
+			amount=5
+		end
+
 		if (factionName==G.EMPIRE) then
 			planet.c:setFactionExtraPresence(G.IMPERIAL_TRADERS,amount,range)
 			planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount/2,range)
@@ -537,9 +550,14 @@ local function generateExtraPresences(planet,sectorStability)
 			planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount,range)
 		end
 
-		if (settlement.stability<0.5) then
-			local amount=100*(1-settlement.stability*2)/sectorStability
+		if (settlement.stability<0.6) then
+			local amount=100*(1.2-settlement.stability*2)/sectorStability
 			local range=2
+
+			if amount<5 then
+				amount=5
+			end
+
 			planet.c:setFactionExtraPresence(G.PIRATES,amount,range)
 		end
 	end
@@ -556,11 +574,20 @@ local function generateExtraPresences(planet,sectorStability)
 			range=3
 		end
 
+		if amount<5 then
+			amount=5
+		end
+
 		planet.c:setFactionExtraPresence(G.ARDAR_TRADERS,amount,range)
 
-		if (settlement.stability<0.3) then
-			local amount=30*(1-settlement.stability*3)/sectorStability
+		if (settlement.stability<0.5) then
+			local amount=30*(1-settlement.stability*2)/sectorStability
 			local range=2
+
+			if amount<5 then
+				amount=5
+			end
+
 			planet.c:setFactionExtraPresence(G.PIRATES,amount,range)
 		end
 	end
@@ -577,11 +604,20 @@ local function generateExtraPresences(planet,sectorStability)
 			range=3
 		end
 
+		if amount<5 then
+			amount=5
+		end
+
 		planet.c:setFactionExtraPresence(G.BETELGIAN_TRADERS,amount,range)
 
 		if (settlement.stability<0.3) then
 			local amount=40*(1-settlement.stability*3)/sectorStability
 			local range=2
+
+			if amount<5 then
+				amount=5
+			end
+
 			planet.c:setFactionExtraPresence(G.PIRATES,amount,range)
 		end
 	end
@@ -599,6 +635,10 @@ local function generateExtraPresences(planet,sectorStability)
 			range=3
 		end
 
+		if amount<5 then
+			amount=5
+		end
+
 		planet.c:setFactionExtraPresence(G.IMPERIAL_TRADERS,amount,range)
 		planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount/2,range)
 		planet.c:setFactionExtraPresence(G.ARDAR_TRADERS,-1000,1)
@@ -606,6 +646,11 @@ local function generateExtraPresences(planet,sectorStability)
 		if (settlement.stability<0.5) then
 			local amount=100*(1-settlement.stability*2)/sectorStability
 			local range=2
+
+			if amount<5 then
+				amount=5
+			end
+
 			planet.c:setFactionExtraPresence(G.PIRATES,amount,range)
 		end
 	end
@@ -622,12 +667,21 @@ local function generateExtraPresences(planet,sectorStability)
 			range=3
 		end
 
+		if amount<5 then
+			amount=5
+		end
+
 		planet.c:setFactionExtraPresence(G.ARDAR_TRADERS,amount,range)
 		planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount/2,range)
 
 		if (settlement.stability<0.5) then
 			local amount=100*(1-settlement.stability*2)/sectorStability
 			local range=2
+
+			if amount<5 then
+				amount=5
+			end
+
 			planet.c:setFactionExtraPresence(G.PIRATES,amount,range)
 		end
 	end

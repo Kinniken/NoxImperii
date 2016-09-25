@@ -9,7 +9,7 @@ text = {}   --mission text
 payment = 20000
 
 title[1] = "The City in the Cliff"
-text[1] = [[During the flight, you've had a bit of time to read on Kert's specie. They are small, compact humanoids, natives to a world on the Imperial fringes. Many of them have dispersed elsewhere in the Empire, fleeing barbarian attacks on their home-world. And as Lieutenant Breton-Smith alluded to, they do prefer underground dwellings. The database has little else to say; there are too many species in the Empire to keep track of all of them.
+text[1] = [[During the flight, you've had a bit of time to read on Kert's specie. They are small, compact humanoids, native to a world on the Imperial fringes. Many of them have dispersed elsewhere in the Empire, fleeing barbarian attacks on their home-world. And as Lieutenant Breton-Smith alluded to, they do prefer underground dwellings. The database has little else to say; there are too many species in the Empire to keep track of all of them.
 
 You land on ${startPlanet} and are quickly directed to Kert's family dwelling. Far from the claustrophobic caves you were fearing, it's a bright and airy complex of halls built in a white cliff overlooking a little sea.
 

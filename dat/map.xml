@@ -4,7 +4,6 @@
     <pict>galaxy</pict>
     <x>0</x>
     <y>0</y>
-    <auto_fade>1</auto_fade>
     <detection_radius>10000</detection_radius>
   </decorator>
   <decorator>

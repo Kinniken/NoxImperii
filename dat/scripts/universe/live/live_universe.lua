@@ -1,7 +1,6 @@
 include('dat/scripts/general_helper.lua')
 include('universe/objects/class_planets.lua')
 include('universe/live/live_desc.lua')
-include('universe/live/live_info.lua')
 include("universe/locations.lua")
 
 --[[

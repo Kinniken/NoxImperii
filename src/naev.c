@@ -238,6 +238,8 @@ int main( int argc, char** argv )
    /* Input must be initialized for config to work. */
    input_init();
 
+   lua_init(); /* initializes lua */
+
    conf_setDefaults(); /* set the default config values */
 
    /*
@@ -523,6 +525,7 @@ int main( int argc, char** argv )
    joystick_exit(); /* Releases joystick */
    input_exit(); /* Cleans up keybindings */
    nebu_exit(); /* Destroys the nebula */
+   lua_exit(); /* Closes Lua state. */
    gl_exit(); /* Kills video output */
    sound_exit(); /* Kills the sound */
    news_exit(); /* Destroys the news. */

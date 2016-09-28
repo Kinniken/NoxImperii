@@ -71,7 +71,7 @@ static void getCrewEmptyLayers(glTexture*** layers, int* nlayers);
 
 static ntime_t last_crew_payment = 0;
 
-static lua_State *crew_name_lua = NULL; /** Crew name generators */
+static nlua_env crew_name_env = LUA_NOREF;  /** Crew name generators */
 
 static const HiredCrew* selectedCrew = NULL;
 
@@ -135,17 +135,15 @@ int crewPosition_load (void)
 
 	/* Load crew name generators. */
 
-	lua_State *L;
+	crew_name_env = nlua_newEnv(1);
+	nlua_loadStandard(crew_name_env);
 
-	crew_name_lua = nlua_newState();
-	L           = crew_name_lua;
-	nlua_loadStandard(L, 1);
 	buf         = ndata_read( CREW_NAME_DATA_PATH, &bufsize );
-	if (luaL_dobuffer(crew_name_lua, buf, bufsize, CREW_NAME_DATA_PATH) != 0) {
+	if (nlua_dobufenv(crew_name_env, buf, bufsize, CREW_NAME_DATA_PATH) != 0) {
 		WARN( "Failed to load crew name file: %s\n"
 				"%s\n"
 				"Most likely Lua file has improper syntax, please check",
-				CREW_NAME_DATA_PATH, lua_tostring(L,-1));
+				CREW_NAME_DATA_PATH, lua_tostring(naevL,-1));
 	}
 	free(buf);
 
@@ -547,38 +545,32 @@ static int crew_location( const char* loc )
 
 static char* crew_findName( char* nameGenerator )
 {
-	int ret,errf;
+	int ret;
 	char func[MAX_FUNC_NAME];
 	char* name;
 	const char *err;
-	lua_State *L;
-
-
-	L = crew_name_lua;
-
-   errf = 0;
 
 	/* Set up function. */
 
 	nsnprintf(func, MAX_FUNC_NAME, "get%sName", nameGenerator);
 
-	lua_getglobal( L, func );
+	nlua_getenv(crew_name_env,func);
+	ret = nlua_pcall(crew_name_env, 0, 1);
 
-	ret = lua_pcall(L, 0, 1, errf);
    if (ret != 0) { /* error has occurred */
-	  err = (lua_isstring(L,-1)) ? lua_tostring(L,-1) : NULL;
+	  err = (lua_isstring(naevL,-1)) ? lua_tostring(naevL,-1) : NULL;
 	  WARN("Crew getName -> '%s' : %s",func,
 			(err) ? err : "unknown error");
-	  lua_pop(L, 1);
+	  lua_pop(naevL, 1);
    }
 
-	if (lua_isstring(L,-1))
-		name = strdup( lua_tostring(L,-1) );
+	if (lua_isstring(naevL,-1))
+		name = strdup( lua_tostring(naevL,-1) );
 	else {
 		WARN( "Crew name generator: %s -> return parameter 1 is not a string!", func );
 	}
 
-	lua_pop(L,1);
+	lua_pop(naevL,1);
 
 	return name;
 }

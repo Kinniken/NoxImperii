@@ -116,7 +116,7 @@ static void mission_menu_genList( unsigned int wid, int first );
 static void mission_menu_update( unsigned int wid, char* str );
 static void info_status_refresh (void);
 
-static lua_State *status_refresh_L = NULL;
+static nlua_env info_status_env = LUA_NOREF;
 /**
  * @brief Opens the information menu.
  */
@@ -1256,108 +1256,93 @@ static void info_status_refresh (void)
 	char *buf;
 	uint32_t bufsize;
 	const char *file = "dat/status.lua";
-	int errf;
-	lua_State *L;
 
 	/* Nothing to do if there's no status script. */
 	if (!ndata_exists(file))
 		return;
 
 	//if (status_refresh_L == NULL) {
-		status_refresh_L = nlua_newState();
-		nlua_loadStandard( status_refresh_L, 0 );
-		nlua_loadTk( status_refresh_L );
+	info_status_env = nlua_newEnv(1);
+	nlua_loadStandard(info_status_env);
 
-		L = status_refresh_L;
+	nlua_loadTk( info_status_env );
 
-		buf = ndata_read( file, &bufsize );
-		if (luaL_dobuffer(L, buf, bufsize, file) != 0) {
-			WARN("Error loading file: %s\n"
-					"%s\n"
-					"Most likely Lua file has improper syntax, please check",
-					file, lua_tostring(L,-1));
-			free(buf);
-			return;
-		}
-
+	buf = ndata_read( file, &bufsize );
+	if (nlua_dobufenv(info_status_env, buf, bufsize, file) != 0) {
+		WARN("Error loading file: %s\n"
+				"%s\n"
+				"Most likely Lua file has improper syntax, please check",
+				file, lua_tostring(naevL,-1));
 		free(buf);
-	//}
-	//else
-	//	L = status_refresh_L;
+		return;
+	}
 
-#if DEBUGGING
-	lua_pushcfunction(L, nlua_errTrace);
-	errf = -2;
-#else /* DEBUGGING */
-	errf = 0;
-#endif /* DEBUGGING */
-
-
-
+	free(buf);
 
 	/* Run Lua. */
-	lua_getglobal(L,"refreshStatus");
-	if (lua_pcall(L, 0, 7, errf)) { /* error has occurred */
-		WARN("Status refresh: 'refreshStatus' : '%s'", lua_tostring(L,-1));
-		lua_pop(L,7);
+	nlua_getenv(info_status_env,"refreshStatus");
+
+	if (nlua_pcall(info_status_env, 0, 7)) { /* error has occurred */
+		WARN("Status refresh: 'refreshStatus' : '%s'", lua_tostring(naevL,-1));
+		lua_pop(naevL,7);
 	}
 
 	/* Parse return. */
-	if ( !lua_isstring( L, -1 ) )
+	if ( !lua_isstring( naevL, -1 ) )
 	{
 		WARN( "Lua script for world status did not return universe desc." );
 		universeDesc = "???";
 	}
 	else
-		universeDesc = lua_tostring( L, -1 );
+		universeDesc = lua_tostring( naevL, -1 );
 
-	if ( !lua_isstring( L, -2 ) )
+	if ( !lua_isstring( naevL, -2 ) )
 	{
 		WARN( "Lua script for world status did not return story desc." );
 		storyDesc = "???";
 	}
 	else
-		storyDesc = lua_tostring( L, -2 );
+		storyDesc = lua_tostring( naevL, -2 );
 
-	if ( !lua_isstring( L, -3 ) )
+	if ( !lua_isstring( naevL, -3 ) )
 	{
 		WARN( "Lua script for world status did not return survey desc." );
 		surveyStatus = "???";
 	}
 	else
-		surveyStatus = lua_tostring( L, -3 );
+		surveyStatus = lua_tostring( naevL, -3 );
 
-	if ( !lua_isstring( L, -4 ) )
+	if ( !lua_isstring( naevL, -4 ) )
 	{
 		WARN( "Lua script for world status did not return survey world desc." );
 		surveyWorlds = "???";
 	}
 	else
-		surveyWorlds = lua_tostring( L, -4 );
+		surveyWorlds = lua_tostring( naevL, -4 );
 
-	if ( !lua_isstring( L, -5 ) )
+	if ( !lua_isstring( naevL, -5 ) )
 	{
 		WARN( "Lua script for world status did not return survey worlds count desc." );
 		surveyWorldsCount = "???";
 	}
 	else
-		surveyWorldsCount = lua_tostring( L, -5 );
+		surveyWorldsCount = lua_tostring( naevL, -5 );
 
-	if ( !lua_isstring( L, -6 ) )
+	if ( !lua_isstring( naevL, -6 ) )
 	{
 		WARN( "Lua script for world status did not return survey natives desc." );
 		surveyNatives = "???";
 	}
 	else
-		surveyNatives = lua_tostring( L, -6 );
+		surveyNatives = lua_tostring( naevL, -6 );
 
-	if ( !lua_isstring( L, -7 ) )
+	if ( !lua_isstring( naevL, -7 ) )
 	{
 		WARN( "Lua script for world status did not return survey natives count desc." );
 		surveyNativesCount = "???";
 	}
 	else
-		surveyNativesCount = lua_tostring( L, -7 );
+		surveyNativesCount = lua_tostring( naevL, -7 );
 
-	lua_pop(L,7);
+	lua_pop(naevL,7);
 }

@@ -4,6 +4,7 @@ include("dat/factions/spawn/common.lua")
 -- @brief Spawns a small patrol fleet.
 function spawn_patrol ()
    local pilots = {}
+   pilots.__fleet = true
    local r = rnd.rnd()
 
    if r < 0.5 then
@@ -22,6 +23,7 @@ end
 -- @brief Spawns a medium sized squadron.
 function spawn_squad ()
    local pilots = {}
+   pilots.__fleet = true
    local r = rnd.rnd()
 
    if r < 0.5 then
@@ -44,6 +46,7 @@ end
 -- @brief Spawns a capship with escorts.
 function spawn_capship ()
    local pilots = {}
+   pilots.__fleet = true
    local r = rnd.rnd()
 
    -- Generate the capship

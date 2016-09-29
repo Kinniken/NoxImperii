@@ -80,6 +80,7 @@ static int planetL_setFactionPresence( lua_State *L );
 static int planetL_addOrUpdateTradeData( lua_State *L );
 static int planetL_setTradeBuySellRation( lua_State *L );
 static int planetL_setFactionExtraPresence( lua_State *L );
+static int planetL_refreshAllTradeInfo( lua_State *L );
 static const luaL_reg planet_methods[] = {
    { "cur", planetL_cur },
    { "get", planetL_get },
@@ -125,7 +126,7 @@ static const luaL_reg planet_methods[] = {
    { "addOrUpdateTradeData", planetL_addOrUpdateTradeData },
    { "setTradeBuySellRation", planetL_setTradeBuySellRation },
    { "setFactionExtraPresence", planetL_setFactionExtraPresence },
-
+   { "refreshAllTradeInfo", planetL_refreshAllTradeInfo },
    {0,0}
 }; /**< Planet metatable methods. */
 static const luaL_reg planet_cond_methods[] = {
@@ -1449,6 +1450,15 @@ static int planetL_setTradeBuySellRation( lua_State *L )
 	planet_setSaveFlag(p,PLANET_COMMODITIES_SAVE);//trade datas are now custom and must be saved
 
 	//space_refresh();
+
+	return 0;
+}
+
+static int planetL_refreshAllTradeInfo( lua_State *L ) {
+
+	(void)L;
+
+	planet_refreshAllPlanetAdjustedPrices();
 
 	return 0;
 }

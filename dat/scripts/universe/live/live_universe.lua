@@ -947,17 +947,16 @@ function generatePlanetServices(planet)
 			comData.supply=0
 		end
 
-		if (debugMode) then
-			if (comData.price<0.1) then
-				--error("Extreme low price factor for "..name.." on "..planet.c:name()..": "..comData.price)
-				comData.price=0.1
-			elseif (comData.price>10) then
-				--error("Extreme high price factor for "..name.." on "..planet.c:name()..": "..comData.price)
-				comData.price=10
-			end
-		end
-
 		if (comData.supply>0 or comData.demand>0) then
+
+			if (comData.price<0.2) then
+				warn("Extreme low price factor for "..name.." on "..planet.c:name()..": "..comData.price)
+				comData.price=0.2
+			elseif (comData.price>5) then
+				warn("Extreme high price factor for "..name.." on "..planet.c:name()..": "..comData.price)
+				comData.price=5
+			end
+
 			planet.c:addOrUpdateTradeData(commodity.get(name),comData.price,comData.supply,comData.demand)
 		end
 	end

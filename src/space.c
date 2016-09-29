@@ -5299,9 +5299,12 @@ void planet_refreshPlanetPriceFactors(Planet* p) {
 
 	//Now simple to get adjusted price: just a factor to compute
 	for (i=0;i<nbcom;i++) {
-//		WARN("Commodity %s : weight %f, factor %f for world %s",p->tradedatas[i].commodity->name,weightTotals[i],factorTotals[i],p->name
-//				);
 		p->tradedatas[i].adjustedPriceFactor=factorTotals[i]/weightTotals[i];
+
+		if (p->tradedatas[i].adjustedPriceFactor>5 || p->tradedatas[i].adjustedPriceFactor<0.2) {
+			WARN("Commodity %s : price factor %f on world %s",p->tradedatas[i].commodity->name,p->tradedatas[i].adjustedPriceFactor,p->name);
+		}
+
 	}
 
 	free(factorTotals);
@@ -5382,7 +5385,7 @@ static void planet_refreshPlanetPriceFactors_handleSystem(Planet* p,float* facto
 /**
  * @brief Refresh adjusted prices for all planets in the world
  *
- * Currently not used (it's done per-planet on landing instead)
+ * Currently only used for testing (called via Lua API)
  * @return
  */
 void planet_refreshAllPlanetAdjustedPrices() {

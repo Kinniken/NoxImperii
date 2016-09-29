@@ -355,7 +355,7 @@
   <lua>betelgeuse/2_trade_mission_rec</lua>
   <avail>
    <priority>15</priority>
-   <chance>300</chance>
+   <chance>80</chance>
    <location>Computer</location>
    <done>Betelgeuse 2 Trader</done>
    <faction>Oligarchy of Betelgeuse</faction>

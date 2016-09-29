@@ -46,9 +46,9 @@ end
 
 function create ()
 
-   targetPlanet=get_faction_planet(system.cur(),G.BETELGEUSE,2,7)
+   targetPlanet=get_faction_planet(system.cur(),G.BETELGEUSE,1,7)
 
-   if not pickupPlanet then
+   if not targetPlanet then
       misn.finish()
    end
 

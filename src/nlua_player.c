@@ -93,6 +93,7 @@ static int playerL_evtActive( lua_State *L );
 static int playerL_evtDone( lua_State *L );
 static int playerL_teleport( lua_State *L );
 static int playerL_addCargo( lua_State *L );
+static int playerL_quantityCargo( lua_State *L );
 static int playerL_getCrewByPosition( lua_State *L );
 static int playerL_getCrews( lua_State *L );
 static int playerL_getCrew( lua_State *L );
@@ -137,6 +138,7 @@ static const luaL_reg playerL_methods[] = {
    { "evtActive", playerL_evtActive },
    { "evtDone", playerL_evtDone },
    { "teleport", playerL_teleport },
+   { "quantityCargo", playerL_quantityCargo },
    { "addCargo", playerL_addCargo },
    { "crewByPosition", playerL_getCrewByPosition },
    { "crews", playerL_getCrews },
@@ -1347,6 +1349,30 @@ static int playerL_teleport( lua_State *L )
 
    return 0;
 }
+
+/**
+ * @brief Gets the quantity the player has of a given cargo
+ *
+ * @usage q = player.quantityCargo( "Food" ) -- Number of tonnes of food in the player's ship
+ *
+ *    @luatparam string name Name of the commodity to give.
+ *    @luatreturn number The quantity the player owns.
+ * @luafunc quantityCargo( name )
+ */
+static int playerL_quantityCargo( lua_State *L )
+{
+   const char *str;
+   int q;
+
+   /* Handle parameters. */
+   str = luaL_checkstring(L, 1);
+
+   q = pilot_cargoOwned( player.p, str );
+   lua_pushnumber( L, q );
+
+   return 1;
+}
+
 
 /**
  * @brief Adds cargo to the player's ship

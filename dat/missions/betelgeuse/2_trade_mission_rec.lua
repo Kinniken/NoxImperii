@@ -10,8 +10,11 @@ misn_desc = "Supply ${quantity} tonnes of ${commodity} to ${startPlanet}."
 
 -- Messages
 osd_msg = {}
-osd_msg[1] = "Deliver ${quantity}t of ${commodity} to ${startPlanet} on ${startSystem}."
+osd_msg[1] = "Supply ${quantity}t of ${commodity} to ${startPlanet} on ${startSystem}."
 osd_msg["__save"] = true
+
+title = {}  --stage titles
+text = {}   --mission text
 
 title[1] = "Profitable Trade"
 text[1] = [[The Betelgian trader in charge of receiving the order does a quick inspection of the ${quantity} tonnes of ${commodity} and judges the quality acceptable. Your payment of ${payment} credits clears quickly, and the trader and you toast the good deal with a bottle of good Betelgian wine.]]
@@ -36,13 +39,15 @@ function create ()
 
   commodityName=commodities[math.floor(#commodities*math.random())+1]
 
-  payment=commodity.get(commodityName):price*2*quantity
+  payment = commodity.get(commodityName):price()*2*quantity
   misn_reward = gh.numstring(payment).." cr"
 
   startPlanet = planet.cur()
 
-  misn.setTitle( gh.format(misn_title,textData))
-  misn.setDesc(gh.format(misn_desc,textData))
+  local stringData=getStringData()
+
+  misn.setTitle( gh.format(misn_title,stringData))
+  misn.setDesc(gh.format(misn_desc,stringData))
   misn.markerAdd(startPlanet:system(), "computer")
 
   misn.setReward(misn_reward)
@@ -62,13 +67,13 @@ function accept()
 end
 
 function land ()
-   if planet.cur() == startPlanet and player.cargoQuantity(commodityName) >= quantity then
+   if planet.cur() == startPlanet and player.quantityCargo(commodityName) >= quantity then
       local stringData=getStringData()
 
       tk.msg( gh.format(title[1],stringData), gh.format(text[1],stringData) )
 
       player.pay( payment )
-      player.cargoAdd(commodityName,-quantity)
+      player.addCargo(commodityName,-quantity)
 
       faction.modPlayerSingle( G.BETELGEUSE, 2 )
 

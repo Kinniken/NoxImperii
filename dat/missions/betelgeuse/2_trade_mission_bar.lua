@@ -13,7 +13,7 @@ bar_desc="You notice Rastapopoulos sitting at one of the bar's tables, agitated 
 
 -- Messages
 osd_msg = {}
-osd_msg[1] = "Deliver 20t of gourmet food to ${startPlanet} on ${startSystem}."
+osd_msg[1] = "Supply 20t of gourmet food to ${startPlanet} on ${startSystem}."
 osd_msg["__save"] = true
 
 title = {}  --stage titles
@@ -45,6 +45,8 @@ function create ()
 end
 
 function accept()
+  startPlanet=planet.cur()
+
    local stringData=getStringData()
 
    if not tk.yesno( gh.format(title[1],stringData), gh.format(text[1],stringData) ) then
@@ -68,7 +70,7 @@ function accept()
 end
 
 function land ()
-   if planet.cur() == startPlanet and player.cargoQuantity(C.GOURMET_FOOD) >= 20 then
+   if planet.cur() == startPlanet and player.quantityCargo(C.GOURMET_FOOD) >= 20 then
       local stringData=getStringData()
 
       tk.msg( gh.format(title[2],stringData), gh.format(text[2],stringData) )
@@ -76,7 +78,7 @@ function land ()
       misn.markerRm(landmarker)
 
       player.pay( payment )
-      player.cargoAdd(C.GOURMET_FOOD,-20)
+      player.addCargo(C.GOURMET_FOOD,-20)
 
       faction.modPlayerSingle( G.BETELGEUSE, 5 )
       player.addOutfit("Betelgian Trader",1)

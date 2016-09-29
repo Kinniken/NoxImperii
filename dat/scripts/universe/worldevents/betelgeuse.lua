@@ -65,7 +65,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 
 	textData.house=nameGenerator.generateNameBetelgeuse()
 
-	local effectId=planet.lua.settlements.betelgeuse:addActiveEffect("The sale of the ${house} estate makes cheap luxury goods available.",
+	local effectId=planet.lua.settlements.betelgeuse:addActiveEffect(gh.format("The sale of the ${house} estate makes cheap luxury goods available.",textData),
 		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber(), "betelgeuse_housecollapse" )
 	planet.lua.settlements.betelgeuse:addGoodSupply(C.LUXURY_GOODS,50,0.5,effectId)
 	if math.random()<0.5 then planet.lua.settlements.betelgeuse:addGoodSupply(C.BORDEAUX,100,0.5,effectId) end

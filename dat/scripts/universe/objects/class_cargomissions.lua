@@ -9,6 +9,9 @@ local cargomission_prototype = {
 	validEndPlanet=function(self,c_planet)
 		return true
 	end,
+	valid=function(self)
+		return true
+	end,
 	addFactionReward=function(self,factionName,rewardFactor,rewardLimit)
 		local factionReward={}
 

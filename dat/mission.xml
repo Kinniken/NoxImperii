@@ -317,12 +317,51 @@
   <lua>ardarmilitary/5_imperial_battle_rec</lua>
   <avail>
    <priority>50</priority>
-   <chance>40</chance>
+   <chance>80</chance>
    <done>Ardar 5 Imperial Battle</done>
    <location>Computer</location>
    <faction>Roidhunate of Ardarshir</faction>
   </avail>
  </mission>
+
+
+
+<mission name="Betelgeuse 1 Courier">
+  <lua>betelgeuse/1_courier_mission_bar</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>15</priority>
+   <chance>100</chance>
+   <location>Bar</location>
+   <faction>Oligarchy of Betelgeuse</faction>
+  </avail>
+ </mission>
+ <mission name="Betelgeuse 2 Trader">
+  <lua>betelgeuse/2_trade_mission_bar</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>15</priority>
+   <chance>100</chance>
+   <location>Bar</location>
+   <done>Betelgeuse 1 Courier</done>
+   <faction>Oligarchy of Betelgeuse</faction>
+  </avail>
+ </mission>
+ <mission name="Betelgeuse 2 Trader Rec">
+  <lua>betelgeuse/2_trade_mission_rec</lua>
+  <avail>
+   <priority>15</priority>
+   <chance>300</chance>
+   <location>Computer</location>
+   <done>Betelgeuse 2 Trader</done>
+   <faction>Oligarchy of Betelgeuse</faction>
+  </avail>
+ </mission>
+
 
  <mission name="Intro 1">
   <lua>introquest/intro_1</lua>

@@ -301,7 +301,7 @@ function findMatchingType()
   local validTypes={}
 
   for k,v in ipairs(cargo_custom.types) do
-    if (v:validStartPlanet(planet.cur())) then
+    if (v:valid() and v:validStartPlanet(planet.cur())) then
       table.insert(validTypes,v)
     end
   end

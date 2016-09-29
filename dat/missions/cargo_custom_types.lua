@@ -138,6 +138,9 @@ cargoCustom.misn_desc = "A Betelgian trading house needs ${quantity} tonnes of $
 cargoCustom.misn_desc_urgent = "A Betelgian trading house needs ${quantity} tonnes of ${commodity} shipped to its base of ${targetWorld} in the ${targetSystem} system. It must reach before the ${deadline} (time left: ${timeRemaining})."
 cargoCustom.land_msg={"As you land in the trading house's private spaceport, its efficient crew members waste no time discharging your cargo. You are paid immediately by a competent-looking minor clerk."}
 cargoCustom.land_msg_late={"As you land in the trading house's private spaceport, its efficient crew members waste no time discharging your cargo. The clerk in charge pays you ${paymentPartial} of the ${payment} credits agreed due to your tardy arrival."}
+cargoCustom.valid=function(self)
+	return var.peek("betelgeuse_1_done")
+end
 cargoCustom.validStartPlanet=function(self,c_planet)
 		return c_planet:faction()==faction.get(G.EMPIRE) or c_planet:faction()==faction.get(G.INDEPENDENT_WORLDS) or c_planet:faction()==faction.get(G.ROIDHUNATE) or c_planet:faction()==faction.get(G.ROYAL_IXUM) or c_planet:faction()==faction.get(G.HOLY_FLAME)
 	end
@@ -161,6 +164,9 @@ cargoCustom.misn_desc = "A Betelgian trading house needs ${quantity} tonnes of $
 cargoCustom.misn_desc_urgent = "A Betelgian trading house needs ${quantity} tonnes of ${commodity} shipped to its branch on ${targetWorld} in the ${targetSystem} system. It must reach before the ${deadline} (time left: ${timeRemaining})."
 cargoCustom.land_msg={"The section of ${targetWorld}'s dedicated to the trading house is well-run, and efficient crew members waste no time discharging your cargo. You are paid immediately by a competent-looking minor clerk."}
 cargoCustom.land_msg_late={"The section of ${targetWorld}'s dedicated to the trading house is well-run, and efficient crew members waste no time discharging your cargo. The clerk in charge pays you ${paymentPartial} of the ${payment} credits agreed due to your tardy arrival."}
+cargoCustom.valid=function(self)
+	return var.peek("betelgeuse_1_done")
+end
 cargoCustom.validStartPlanet=function(self,c_planet)
 	return c_planet:faction()==faction.get(G.BETELGEUSE)
 	end

@@ -87,6 +87,7 @@ int logprintf( FILE *stream, const char *fmt, ... )
    return fprintf( stream, "%s", &buf[2] );
 }
 
+
 /**
  * @brief Redirects stdout and stderr to files.
  *

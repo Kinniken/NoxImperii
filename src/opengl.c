@@ -61,6 +61,7 @@
 glInfo gl_screen; /**< Gives data of current opengl settings. */
 static int gl_activated = 0; /**< Whether or not a window is activated. */
 
+static int disable_buffer_warning = 0; /** ugly hack to stop invalid buffer spamming **/
 
 /*
  * Viewport offsets
@@ -345,12 +346,20 @@ void gl_checkHandleError( const char *func, int line )
       case GL_TABLE_TOO_LARGE:
          errstr = "GL table too large";
          break;
+      case 1286:
+    	  if (disable_buffer_warning==0) {
+    		  errstr = "Invalid framebuffer operation (?). Disabling further such warnings.";
+    		  disable_buffer_warning=1;
+    	  }
+    	  break;
 
       default:
-         errstr = "GL unknown error";
+    	 WARN("OpenGL error [%s:%d]: GL unknown error:", func, line, err);
+         errstr = NULL;
          break;
    }
-   WARN("OpenGL error [%s:%d]: %s", func, line, errstr);
+   if (errstr!= NULL)
+	   WARN("OpenGL error [%s:%d]: %s", func, line, errstr);
 }
 #endif /* DEBUGGING */
 

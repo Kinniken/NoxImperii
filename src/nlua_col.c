@@ -152,9 +152,9 @@ int lua_iscolour( lua_State *L, int ind )
 /**
  * @brief Compares two colours to see if they are the same.
  *
- *    @luaparam c1 Colour 1 to compare.
- *    @luaparam c2 Colour 2 to compare.
- *    @luareturn true if both colours are the same.
+ *    @luatparam Colour c1 Colour 1 to compare.
+ *    @luatparam Colour c2 Colour 2 to compare.
+ *    @luatreturn boolean true if both colours are the same.
  * @luafunc __eq( c1, c2 )
  */
 static int colL_eq( lua_State *L )

@@ -316,7 +316,7 @@ int gl_vendorIsIntel (void)
 void gl_checkHandleError( const char *func, int line )
 {
    GLenum err;
-   const char* errstr;
+   char* errstr = NULL;
 
    err = glGetError();
 

@@ -137,7 +137,7 @@ else --default english
 	"I don't care what the admiralty says, every day we are losing ground against the barbarians, and that's a fact.",
 "Those damned greentails are more disciplined than us, that's true, and they have better officers, that's true to, and their Roidhun knows what he is doing, sure as hell, but we're better than them, that's for sure. ",
 "I've fought long on the border mate, those barbarian ships are scary-looking but really badly crewed.",
-"Our lieutenant served as “instructor” for the Ixumites, he told us the royalists are close to collapse.",
+"Our lieutenant served as 'instructor' for the Ixumites, he told us the royalists are close to collapse.",
 "If only the admiralty was not made up of such cowards, we could really hit those crocodiles on the snout. We still have the bigger navy, not that they use it!",
    }
    msg_lore.empire.traders={
@@ -154,7 +154,7 @@ else --default english
 "The Emperor is naked, they say. And not just during his orgies.",
 "My family moved here from a safe Imperial world a century ago. Opportunity of a lifetime, grandpa said. Last we saw him he was being dragged into a barbarian slave ship.",
 "The future of the human race is here, on the fringes. Not in your decadent Empire.",
-"You look like you've traveled! Have you been to Terra? I want to see it one day! If I ever leave this dump.",
+"You look like you've travelled! Have you been to Terra? I want to see it one day! If I ever leave this dump.",
 "Barbarian raids are getting worse and worse... don't tell anyone I said that, but we were doing better when the Empire was more present here!",
 "If the Roidhunate wins, they'll respect our neutrality, I'm sure.",
    }
@@ -168,7 +168,7 @@ else --default english
    msg_lore.independent.traders={
 "Trade's on the frontier isn't easy, but that's where the money is. ",
 "I took some pirate fire on my last run, but I made a tidy profit too!",
-"My mum never wanted me to be a trader, “it's too dangerous”, she would say. Maybe it is, but I'm earning for my entire family.",
+"My mum never wanted me to be a trader, 'it's too dangerous', she would say. Maybe it is, but I'm earning for my entire family.",
 "The trick to trading here is to keep an eye on the news. There's always stuff happening, and reacting fast gets you big rewards.",
 "Barbarians, pirates... I've met them all in space, I'm still trading. Cheers!",
 "I have a brother working in the local militia. I sometime wish I had a safe job like that.",
@@ -207,14 +207,14 @@ else --default english
       msg_lore.betelgeuse={}
    msg_lore.betelgeuse.civilians={
 	"I wish I could have joined a trading house... Get rich, see the Galaxy...",
-"We Betelgians are great explorers, the best in the Galaxy! Well, I've never been off this rock, but still, explorers’ blood, you know?",
+"We Betelgians are great explorers, the best in the Galaxy! Well, I've never been off this rock, but still, explorers' blood, you know?",
 "Why can't the Roidhunate and you guys just focus on making money and not threaten war all the time?",
 "I hope our Doge does the right thing and stays out of that conflict of yours. Trade and neutrality, that's our way.",
 "You humans are great inventors, but you don't understand anything about trade.",
 "Betelgeuse is an open society, if you're rich, your species doesn't matter!",
    }
    msg_lore.betelgeuse.military={
-	"I wish I was born in the Empire or the Roidhunate, soldiers are respected there! Here it's all “do you know how much taxes you pay for your stupid ships?”.",
+	"I wish I was born in the Empire or the Roidhunate, soldiers are respected there! Here it's all 'do you know how much taxes you pay for your stupid ships?'.",
 "I'm in the Betelgian Navy. Yes, really. And no, not ALL our ships are converted freighters!",
 "People think the Betelgian Navy is useless and costs too much, but who do they call when barbarians threaten trade routes, you think?",
 "I was part of a naval training exercise with the Imperial Navy once, such fine warships!",

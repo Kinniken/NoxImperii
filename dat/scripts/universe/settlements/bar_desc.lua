@@ -182,7 +182,7 @@ independent[#independent+1]={
 independent[#independent+1]={
   weight=10,
   getDesc=function(planet)		
-    local desc="The \"${name}\" seems to be the headquarter of the local militia; most of the tables are held by drunken tough guys in patchy-looking ${planet} “navy” uniforms. They might hold their own against local pirates, but you wouldn't bet on them against barbarians."
+    local desc="The \"${name}\" seems to be the headquarter of the local militia; most of the tables are held by drunken tough guys in patchy-looking ${planet} 'navy' uniforms. They might hold their own against local pirates, but you wouldn't bet on them against barbarians."
     
     local noun={"Tough Guy","Hard Head","Broken Bones","Death Wish","Stone Fists"}
 

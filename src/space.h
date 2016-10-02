@@ -244,6 +244,7 @@ struct StarSystem_ {
    double nebu_volatility; /**< Nebula volatility (0. - 1000.) */
    double radius; /**< Default system radius for standard jump points. */
    char *background; /**< Background script. */
+   int backgroundSeed; /** Random seed for background script (optional, if NULL name used) **/
 
    /* Planets. */
    Planet **planets; /**< planets */

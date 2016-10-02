@@ -8,6 +8,7 @@
     <stars>2000</stars>
     <interference>0.000000</interference>
     <nebula volatility="0.000000">0.000000</nebula>
+    <background_seed>500</background_seed>
    </general>
    <pos>
     <x>-840</x>

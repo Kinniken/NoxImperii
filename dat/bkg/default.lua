@@ -82,10 +82,13 @@ function background ()
 
    background_map_objects()
 
-   --background_distant_stars()
+   local seed = cur_sys:backgroundSeed()
 
-      -- Start up PRNG based on system name for deterministic nebula
-   prng.initHash( cur_sys:name() )
+   if (seed == 0) then
+      prng.initHash( cur_sys:name() )
+   else
+      prng.initHash( seed )
+   end
 
    local r = prng.num()
 

@@ -64,6 +64,7 @@ static int systemL_getZone( lua_State *L );
 static int systemL_setZone( lua_State *L );
 static int systemL_setBackground( lua_State *L );
 static int systemL_setStars( lua_State *L );
+static int systemL_backgroundSeed( lua_State *L );
 
 ;
 static const luaL_reg system_methods[] = {
@@ -102,6 +103,7 @@ static const luaL_reg system_methods[] = {
     { "setZone", systemL_setZone },
 	{ "setBackground", systemL_setBackground },
 	{ "setStars", systemL_setStars },
+	{ "backgroundSeed", systemL_backgroundSeed },
 {0,0}
 }; /**< System metatable methods. */
 static const luaL_reg system_cond_methods[] = {
@@ -136,6 +138,7 @@ static const luaL_reg system_cond_methods[] = {
     { "setZone", systemL_setZone },
 	{ "setBackground", systemL_setBackground },
 	{ "setStars", systemL_setStars },
+	{ "backgroundSeed", systemL_backgroundSeed },
    {0,0}
 }; /**< Read only system metatable methods. */
 
@@ -1355,3 +1358,25 @@ static int systemL_setStars( lua_State *L )
    return 0;
 }
 
+/**
+ * @brief Gets the background seed
+ *
+ * This is the seed for generating the background.
+ * 0 if not specified.
+ *
+ * @usage r = s:backgroundSeed()
+ *
+ *    @luatparam System s System to get the background seed of.
+ *    @luatreturn number The background seed of the system.
+ * @luafunc radius( s )
+ */
+static int systemL_backgroundSeed( lua_State *L )
+{
+   StarSystem *sys;
+
+   /* Get parameters. */
+   sys = luaL_validsystem(L, 1);
+
+   lua_pushnumber( L, sys->backgroundSeed );
+   return 1;
+}

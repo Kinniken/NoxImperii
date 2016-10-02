@@ -3146,6 +3146,7 @@ static StarSystem* system_parse( StarSystem *sys, const xmlNodePtr parent )
          do {
             xmlr_strd( cur, "background", sys->background );
             xmlr_int( cur, "stars", sys->stars );
+            xmlr_int( cur, "background_seed", sys->backgroundSeed );
             xmlr_float( cur, "radius", sys->radius );
             if (xml_isNode(cur,"interference")) {
                flags |= FLAG_INTERFERENCESET;
@@ -4854,6 +4855,7 @@ int system_saveSystem( xmlTextWriterPtr writer, StarSystem *sys, int customDataO
 		  xmlw_elem( writer, "background", "%s", sys->background );
 	   xmlw_elem( writer, "radius", "%f", sys->radius );
 	   xmlw_elem( writer, "stars", "%d", sys->stars );
+	   xmlw_elem( writer, "background_seed", "%d", sys->backgroundSeed );
 	   xmlw_elem( writer, "interference", "%f", sys->interference );
 	   xmlw_startElem( writer, "nebula" );
 	   xmlw_attr( writer, "volatility", "%f", sys->nebu_volatility );

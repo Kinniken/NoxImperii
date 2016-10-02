@@ -46,7 +46,7 @@ function create ()
 
   local stringData=getStringData()
 
-  misn.setTitle( gh.format(misn_title,stringData))
+  misn.setTitle( gh.format(computer_title,stringData))
   misn.setDesc(gh.format(misn_desc,stringData))
   misn.markerAdd(startPlanet:system(), "computer")
 
@@ -61,6 +61,8 @@ function accept()
 
   osd_msg = gh.formatAll(osd_msg,stringData)
   misn.osdCreate(gh.format(misn_title,stringData), osd_msg)
+
+  misn.setTitle( gh.format(misn_title,stringData))
 
      -- hooks
    landhook = hook.land ("land")

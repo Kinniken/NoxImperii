@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<asset name="Kaznor">
+   <pos>
+    <x>-2300.000000</x>
+    <y>8383.000000</y>
+   </pos>
+   <GFX>
+    <space>P03.png</space>
+    <exterior>ln/coast_ice.png</exterior>
+   </GFX>
+   <presence>
+    <faction>Barbarians</faction>
+    <value>7.195182</value>
+    <range>3</range>
+   </presence>
+   <general>
+    <class>Cold Earth-like</class>
+    <population>0</population>
+    <hide>0.000000</hide>
+    <services>
+     <land/>
+     <refuel/>
+     <bar/>
+     <missions/>
+     <commodity/>
+    </services>    
+    <description>The cold and wind-swept world of Kaznor is home to a tough humanoid race, smaller than men but burly and protected by thick fur. They had reached a medieval level civilization when they were first raided by more advanced races; they however learned fast, and quickly started raids of their own.
+
+Gradually, and uniquely among barbarian species, they specialised not in warfare but in serving as intermediaries between rival factions in the Orion nebula. While much of Kraznor is stuck with medieval technology, the main city is now a bustling spaceport that serves as hub for the traffics of the entire nebula.</description>
+    <bar>The small and smoke-filled "Smiling Raider" is filled with burly-looking humanoids drinking heavily and occasionally fighting. The armed guards at the entrance intervene when things get out of hand - but not too early so as not to spoil the fun.</bar>
+    <luadata>{
+	humanFertility = 0.5,
+  minerals = 0.8,
+  nativeFertility = 0.8,
+	settlements = {
+		barbarians = {
+			agriculture = 0.7,
+			industry = 0.4,
+			military = 6,
+			population = 1124985,
+			services = 0.2,
+			stability = 0.7,
+			technology = 0.5,
+			activeEffects = { },
+			extraGoodsDemand = { },
+			extraGoodsSupply = { },
+			lesserGoodsDemand = { },
+			lesserGoodsSupply = { },
+			suppressGoodDemand = { },
+			suppressGoodSupply = { },
+			tags = { },
+		},
+	},
+	tags = { },
+	worldHistory = { },
+}</luadata>
+   </general>
+  </asset>

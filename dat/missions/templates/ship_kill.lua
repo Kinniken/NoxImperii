@@ -139,7 +139,7 @@ function template_accept ()
         if not bar_accept_title_extra then
           bar_accept_title_extra=bar_accept_title
         end
-        tk.msg(gh.format( bar_accept_title,stringData),gh.format( bar_accept_text_extra,stringData))
+        tk.msg(gh.format( bar_accept_title_extra,stringData),gh.format( bar_accept_text_extra,stringData))
      end
    end
 

@@ -8,7 +8,7 @@
  <fabricator>Maggiore Shipyards</fabricator>
  <description>The Orsa is a proud descendent of the long Betelgian tradition of capital trade ships, able to ply distant trade routes without fear of barbarian or pirates. Light for a cruiser by Terran standard, it still packs a formidable punch and has kept its generous cargo hold.</description>
  <price>7000000</price>
- <license>Betelgian Explorer</license>
+ <license>Betelgian Protector</license>
  <movement>
   <thrust>130</thrust>
   <turn>80</turn>

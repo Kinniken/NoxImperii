@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ssys name="Kaznor">
+ <starGraphics>
+	<star name="redgiant01.png"/>
+ </starGraphics>
+ <general>
+  <radius>20000.000000</radius>
+  <stars>2000</stars>
+  <interference>300.000000</interference>
+    <nebula volatility="0.000000">100.000000</nebula>
+ </general>
+ <pos>
+  <x>-250</x>
+  <y>1050</y>
+ </pos>
+ <assets>
+  <asset>Kaznor</asset>
+ </assets>
+</ssys>

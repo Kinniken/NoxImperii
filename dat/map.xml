@@ -181,6 +181,12 @@
     <detection_radius>300</detection_radius>
   </decorator>
   <decorator>
+    <pict>kaznor</pict>
+    <x>-250</x>
+    <y>1050</y>
+    <detection_radius>10</detection_radius>
+  </decorator>
+  <decorator>
     <pict>sea_dead_suns</pict>
     <x>-800</x>
     <y>600</y>

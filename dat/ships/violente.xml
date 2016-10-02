@@ -8,7 +8,7 @@
  <fabricator>Maggiore Shipyards</fabricator>
  <description>Despite the best efforts of the Doge and Great Council to restrain private militias in Betelgian space, tensions between leading families and the need for strong escorts for long-term trading fleets made the development of private cruisers unavoidable. The violente is among the most common one; in typical Betelgian fashion, its combat role does not prevent it from including luxurious living space and a large cargo hold.</description>
  <price>3500000</price>
- <license>Betelgian Explorer</license>
+ <license>Betelgian Protector</license>
  <movement>
   <thrust>150</thrust>
   <turn>100</turn>

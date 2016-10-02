@@ -361,7 +361,75 @@
    <faction>Oligarchy of Betelgeuse</faction>
   </avail>
  </mission>
-
+ <mission name="Betelgeuse 3 Rescue">
+  <lua>betelgeuse/3_missing_trader_bar</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>15</priority>
+   <chance>100</chance>
+   <location>Bar</location>
+   <done>Betelgeuse 2 Trader</done>
+   <faction>Oligarchy of Betelgeuse</faction>
+  </avail>
+ </mission>
+ <mission name="Betelgeuse 3 Rescue Rec">
+  <lua>betelgeuse/3_missing_trader_rec</lua>
+  <avail>
+   <priority>15</priority>
+   <chance>50</chance>
+   <location>Computer</location>
+   <done>Betelgeuse 3 Rescue</done>
+   <faction>Oligarchy of Betelgeuse</faction>
+  </avail>
+ </mission>
+ <mission name="Betelgeuse 4 Rival Fleet">
+  <lua>betelgeuse/4_rival_fleet_bar</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>15</priority>
+   <chance>100</chance>
+   <location>Bar</location>
+   <done>Betelgeuse 3 Rescue</done>
+   <faction>Oligarchy of Betelgeuse</faction>
+  </avail>
+ </mission>
+<mission name="Betelgeuse 4 Rival Fleet Rec">
+  <lua>betelgeuse/4_rival_fleet_rec</lua>
+  <avail>
+   <priority>15</priority>
+   <chance>50</chance>
+   <location>Computer</location>
+   <done>Betelgeuse 4 Rival Fleet</done>
+   <faction>Oligarchy of Betelgeuse</faction>
+  </avail>
+ </mission>
+ <mission name="Betelgeuse 5 Barbarian Captive">
+  <lua>betelgeuse/5_barbarian_captive_bar</lua>
+  <flags>
+   <unique />
+  </flags>
+  <avail>
+   <priority>15</priority>
+   <chance>100</chance>
+   <location>Bar</location>
+   <done>Betelgeuse 4 Rival Fleet</done>
+   <faction>Oligarchy of Betelgeuse</faction>
+  </avail>
+ </mission>
+ <mission name="Betelgeuse 5 Barbarian Captive Rec">
+  <lua>betelgeuse/5_barbarian_captive_rec</lua>
+  <avail>
+   <priority>15</priority>
+   <chance>30</chance>
+   <location>Computer</location>
+   <done>Betelgeuse 5 Barbarian Captive</done>
+   <faction>Oligarchy of Betelgeuse</faction>
+  </avail>
+ </mission>
 
  <mission name="Intro 1">
   <lua>introquest/intro_1</lua>

@@ -1,26 +1,3 @@
---[[
-package.path = package.path .. ';./scripts/?.lua;../?.lua'
-
-function include(file)
-	local path=file:match("(.*).lua")
-	require(path)
-end
-
-vars={["harkan_empire_choice"]=false,["harkan_roidhunate_choice"]=false,["intro_2_planet"]="World1",["intro_3_planet"]="World2"}
-
-var={}
-var.peek=function(v) return vars[v] end
-
-nbOutfits={["Reserve Ensign"]=1,["Ardarshir Auxiliary, Class III"]=1}
-player={}
-player.numOutfit=function(outfit)
-player.misnAllDone=function() return {"Intro 3","Empire 5 sfsg","Ardar 5 sfsg"} end
-player.misnAllActive=function() return {} end
-
-if not nbOutfits[outfit] then return 0
-else return nbOutfits[outfit] end end
-]]
-
 include('dat/scripts/general_helper.lua')
 include('universe/live/live_desc.lua')
 include('universe/live/live_info.lua')
@@ -32,7 +9,7 @@ function getMissionsDesc()
   
   local doneIndex={}
   local ipIndex={}
-  local sections={"Empire","Ardar","Intro","Harkan","Harkan Empire","Harkan Roidhunate"}
+  local sections={"Empire","Ardar","Betelgeuse","Intro","Harkan","Harkan Empire","Harkan Roidhunate"}
   
   for _,sectionName in ipairs(sections) do
     doneIndex[sectionName]=0
@@ -148,7 +125,14 @@ function getMissionsDesc()
   end
   
   desc=desc.."\n\n\027GBetelgeuse rank:\0270 "..betelgeuse_getRank()
-  desc=desc.."\n\nThere are currently no missions for Betelgeuse. Ranks can be purchased instead."
+
+  if doneIndex["Betelgeuse"]<ipIndex["Betelgeuse"] then
+    desc=desc.."\n\nYou are currently doing a mission that will raise your rank."
+  elseif doneIndex["Betelgeuse"]<5 then
+    desc=desc.."\n\nThe next mission is available from Rastapopoulos in the bar of any Betelgian world!"
+  else
+    desc=desc.."\n\nYou have done all the Betelgian missions and have reached the highest rank."
+  end
   
   desc=desc.."\n\n\027GKingdom of Ixum rank:\0270 "..royalixum_getRank()
   desc=desc.."\n\nThere are currently no missions for the Kingdom of Ixum. Ranks can be purchased instead."
@@ -195,25 +179,9 @@ end
 function betelgeuse_getRank()
 if player.numOutfit( "Betelgian Merchant Prince" )>0 then
       return "Merchant Prince"
-    elseif player.numOutfit( "Betelgian Explorer" )>0 then
-      return "Explorer"
-   elseif player.numOutfit( "Betelgian Merchant" )>0 then
-      return "Merchant"
-   elseif player.numOutfit( "Betelgian Trader" )>0 then
-      return "Trader"
-   elseif player.numOutfit( "Betelgian Courier" )>0 then
-      return "Courier"
-  else
-    return "None"
-  end
-end
-
-function betelgeuse_getRank()
-if player.numOutfit( "Betelgian Merchant Prince" )>0 then
-      return "Merchant Prince"
-    elseif player.numOutfit( "Betelgian Explorer" )>0 then
-      return "Explorer"
-   elseif player.numOutfit( "Betelgian Merchant" )>0 then
+    elseif player.numOutfit( "Betelgian Protector" )>0 then
+      return "Protector"
+   elseif player.numOutfit( "Betelgian Explorer" )>0 then
       return "Merchant"
    elseif player.numOutfit( "Betelgian Trader" )>0 then
       return "Trader"

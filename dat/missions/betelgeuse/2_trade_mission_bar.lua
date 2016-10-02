@@ -82,6 +82,7 @@ function land ()
 
       faction.modPlayerSingle( G.BETELGEUSE, 5 )
       player.addOutfit("Betelgian Trader",1)
+      var.push("betelgeuse_missions_2",true)
 
       hook.rm(landhook)
       misn.finish( true )

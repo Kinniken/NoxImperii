@@ -145,7 +145,7 @@
 		<item>Railgun</item>
 		<item>Squalo Torpedo</item>
 		<item>Betelgian Cassandra</item>
-		<item>Betelgian Merchant</item>
+		<item>Betelgian Explorer</item>
 		<item>Violente</item>
 		<item>Betelgian Jammer</item>
 		<item>Betelgian Scrambler</item>
@@ -154,7 +154,7 @@
 		<item>Squalo Tube</item>
 		<item>Betelgian Orsa</item>
 		<item>Betelgian Stella</item>
-		<item>Betelgian Explorer</item>
+		<item>Betelgian Protector</item>
 		<item>Betelgian Merchant Prince</item>
 		<item>Impresa</item>
 		<item>Improved Turret Refrigeration Cycle</item>
@@ -467,19 +467,16 @@
 
 	<tech name="Betelgeuse Military 1">
 		<item>Betelgian Alba</item>
-		<item>Betelgian Courier</item>
 
 	</tech>
 	<tech name="Betelgeuse Military 2">
 		<item>Betelgian Libera</item>
-		<item>Betelgian Trader</item>
 
 		<item>Railgun</item>
 		<item>Squalo Torpedo</item>
 	</tech>
 	<tech name="Betelgeuse Military 3">
 		<item>Betelgian Cassandra</item>
-		<item>Betelgian Merchant</item>
 		<item>Violente</item>
 
 		<item>Betelgian Jammer</item>
@@ -491,8 +488,6 @@
 	<tech name="Betelgeuse Military 4">
 		<item>Betelgian Orsa</item>
 		<item>Betelgian Stella</item>
-		<item>Betelgian Explorer</item>
-		<item>Betelgian Merchant Prince</item>
 		<item>Impresa</item>
 
 		<item>Improved Turret Refrigeration Cycle</item>

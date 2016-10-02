@@ -5,15 +5,15 @@ include "dat/missions/supportfiles/common.lua"
 payment = 10000
 
 -- Mission Details
-misn_title = "Complete Betelegian courier mission"
+misn_title = "Complete Betelgian courier mission"
 misn_reward = gh.numstring(payment).." cr"
 misn_desc = "Deliver the wine cargo to the Rialto family on ${targetPlanet}."
 
-bar_desc="The famous Betelegian trader Rastapopoulos is sitting at a small table, surrounded by harassed-looking pilots."
+bar_desc="The famous Betelgian trader Rastapopoulos is sitting at a small table, surrounded by harassed-looking pilots."
 
 -- Messages
 osd_msg = {}
-osd_msg[1] = "Deliver wine to ${targetPlanet} on ${targetSystem}."
+osd_msg[1] = "Deliver wine to ${targetPlanet} in ${targetSystem} system."
 osd_msg["__save"] = true
 
 title = {}  --stage titles
@@ -40,7 +40,7 @@ function getStringData()
    stringData.playerName=player:name()
    stringData.targetPlanet=targetPlanet:name()
    stringData.targetSystem=targetPlanet:system():name()
-   stringData.payment=payment
+   stringData.payment=gh.numstring(payment)
    return stringData
 end
 
@@ -100,6 +100,7 @@ function land ()
       player.addOutfit("Betelgian Courier",1)
 
       var.push("betelgeuse_1_done",true)
+      var.push("betelgeuse_missions_1",true)
 
       hook.rm(landhook)
       misn.finish( true )

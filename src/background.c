@@ -107,13 +107,10 @@ void background_initStars( int n )
 
    /* Calculate size. */
    size  = SCREEN_W*SCREEN_H+STAR_BUF*STAR_BUF;
-   size /= pow2(conf.zoom_far);
 
    /* Calculate star buffer. */
    w  = (SCREEN_W + 2.*STAR_BUF);
-   w += conf.zoom_stars * (w / conf.zoom_far - 1.);
    h  = (SCREEN_H + 2.*STAR_BUF);
-   h += conf.zoom_stars * (h / conf.zoom_far - 1.);
    hw = w / 2.;
    hh = h / 2.;
 
@@ -261,19 +258,15 @@ void background_renderStars( const double dt )
    GLfloat x, y, m;
    GLfloat brightness;
    int shade_mode;
-   double px,py, z;
+   double px,py;
    int vertex_change=0;
 
    /*
     * gprof claims it's the slowest thing in the game!
     */
 
-   /* Do some scaling for now. */
-   z = cam_getZoom();
-   z = 1. * (1. - conf.zoom_stars) + z * conf.zoom_stars;
    gl_matrixPush();
    gl_matrixTranslate( SCREEN_W/2., SCREEN_H/2. );
-   gl_matrixScale( z, z );
 
    if (!paused && (player.p != NULL) && !player_isFlag(PLAYER_DESTROYED) &&
          !player_isFlag(PLAYER_CREATING)) { /* update position */
@@ -285,13 +278,12 @@ void background_renderStars( const double dt )
       h += conf.zoom_stars * (h / conf.zoom_far - 1.);
 
       cam_getPos( &px, &py );
-      z = cam_getZoom();
 
       /* Calculate new star positions. */
       for (i=0; i < nstars; i++) {
 
-    	  x  = (star_original_pos[2*i+0] - px * star_moves[i])*z;
-    	  y  = (star_original_pos[2*i+1] - py * star_moves[i])*z;
+    	  x  = (star_original_pos[2*i+0] - px * star_moves[i]);
+    	  y  = (star_original_pos[2*i+1] - py * star_moves[i]);
 
     	  /* Calculate new position */
     	  star_vertex[4*i+0] = x;
@@ -550,15 +542,10 @@ int background_load( const char *name )
 
    /* Load default. */
    if (name == NULL)
-	   bkg_cur_L = background_create( "default" );
-	   //bkg_cur_L = bkg_def_L;
+	   bkg_cur_L = bkg_def_L;
    /* Load new script. */
    else
       bkg_cur_L = background_create( name );
-
-   int TODO_RESTORE_CACHED_BACKGROUND;
-
-
 
    /* Comfort. */
    L = bkg_cur_L;

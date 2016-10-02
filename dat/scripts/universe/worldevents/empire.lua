@@ -33,8 +33,8 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The recent financial crisis has depressed demand for industrial goods.",
 		(time.get() + time.create( 0,1,0, 0, 0, 0 )):tonumber() )
-	planet.lua.settlements.humans:reduceGoodDemand(C.INDUSTRIAL,effectId,3000,2)
-	planet.lua.settlements.humans:reduceGoodDemand(C.MODERN_INDUSTRIAL,effectId,3000,2)
+	planet.lua.settlements.humans:reduceGoodDemand(C.INDUSTRIAL,3000,2,effectId)
+	planet.lua.settlements.humans:reduceGoodDemand(C.MODERN_INDUSTRIAL,3000,2,effectId)
 
 	adjustSectorStability(planet.c:system():getZone(),0.99)
 end

@@ -95,9 +95,9 @@ function initStatusVar()
 end
 
 function getSectorStability(sectorName)
-	for _,v in pairs(imperial_stability_zones) do
-		if sectorName==v then
-			return var.peek("universe_stability_"..v),var.peek("universe_stability_min_"..v),var.peek("universe_stability_max_"..v)
+	for k,v in pairs(imperial_stability_zones) do
+		if sectorName==k then
+			return var.peek("universe_stability_"..k),var.peek("universe_stability_min_"..k),var.peek("universe_stability_max_"..k)
 		end
 	end
 
@@ -105,9 +105,9 @@ function getSectorStability(sectorName)
 end
 
 function setSectorStability(sectorName,stability)
-	for _,v in pairs(imperial_stability_zones) do
-		if sectorName==v then
-			var.push("universe_stability_"..v,stability)
+	for k,v in pairs(imperial_stability_zones) do
+		if sectorName==k then
+			var.push("universe_stability_"..k,stability)
 		end
 	end
 	

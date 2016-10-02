@@ -66,7 +66,7 @@ function getStringData()
   stringData.playerName=player:name()
   stringData.startPlanet=start_planet and start_planet:name() or ""
   stringData.startSystem=start_planet and start_planet:system():name() or ""
-  stringData.payment=payment
+  stringData.payment=gh.numstring(payment)
   stringData.empireRank=emp_getRank()
   stringData.ardarRank=ardar_getRank()
   return stringData

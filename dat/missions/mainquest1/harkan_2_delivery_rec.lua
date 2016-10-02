@@ -35,7 +35,7 @@ function getStringData()
 	stringData.playerName=player:name()
 	stringData.pickupPlanet=pickupPlanet:name()
 	stringData.pickupSystem=pickupPlanet:system():name()
-	stringData.payment=payment
+	stringData.payment=gh.numstring(payment)
 
 	return stringData
 end

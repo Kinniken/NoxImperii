@@ -39,7 +39,7 @@ function getStringData()
 	stringData.targetPlanet=targetPlanet:name()
 	stringData.targetSystem=targetPlanet:system():name()
 	stringData.ardarRank=ardar_getRank()
-	stringData.credits=credits
+	stringData.credits=gh.numstring(credits)
 
 	local luaplanet=planet_class.load(targetPlanet)
 

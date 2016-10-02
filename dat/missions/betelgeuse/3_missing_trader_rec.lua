@@ -39,7 +39,7 @@ function getStringData()
    stringData.startPlanet=startPlanet:name()
    stringData.startSystem=startPlanet:system():name()
    stringData.nativesName=nativesName
-   stringData.payment=payment
+   stringData.payment=gh.numstring(payment)
    return stringData
 end
 

@@ -64,7 +64,7 @@ function getStringData()
    stringData.targetSystem=targetPlanet:system():name()
    stringData.returnPlanet=returnPlanet:name()
    stringData.returnSystem=returnPlanet:system():name()
-   stringData.payment=payment
+   stringData.payment=gh.numstring(payment)
    return stringData
 end
 

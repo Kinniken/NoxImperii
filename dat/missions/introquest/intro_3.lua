@@ -45,7 +45,7 @@ text[5] = [[You have almost forgotten about Breton-Smith and his lacking sense o
 -- Mission Details
 misn_title = "A Case of Conscience"
 misn_desc = "Decide between delivering the petition to Terra or handing it over to Lieutenant Breton-Smith for a likely reward."
-misn_reward = ""..payment.." cr on Terra; unknown on Luna"
+misn_reward = ""..gh.numstring(payment).." cr on Terra; unknown on Luna"
 
 -- OSD
 osd_msg = {}
@@ -59,7 +59,7 @@ function getStringData()
 	stringData.shipName=player:ship()
 	stringData.startPlanet=startPlanet:name()
 	stringData.startSystem=startPlanet:system():name()
-	stringData.payment=payment
+	stringData.payment=gh.numstring(payment)
 
 	return stringData
 end

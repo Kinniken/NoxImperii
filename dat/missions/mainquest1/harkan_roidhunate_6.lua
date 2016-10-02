@@ -45,7 +45,7 @@ function getStringData()
   stringData.startSystem=start_planet and start_planet:system():name() or ""
   stringData.targetPlanet=target_planet and target_planet:name() or ""
   stringData.targetSystem=target_planet and target_planet:system():name() or ""
-  stringData.payment=payment
+  stringData.payment=gh.numstring(payment)
   return stringData
 end
 

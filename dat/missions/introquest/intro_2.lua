@@ -36,7 +36,7 @@ function getStringData()
 	stringData.shipName=player:ship()
 	stringData.targetPlanet=targetPlanet:name()
 	stringData.targetSystem=targetPlanet:system():name()
-	stringData.payment=payment
+	stringData.payment=gh.numstring(payment)
 
 	return stringData
 end

@@ -1343,21 +1343,29 @@ void player_targetPlanetSet( int id )
 void player_targetPlanet (void)
 {
 	int id, i;
+	int inhabited_only=0;
 
 	/* Not under manual control. */
 	if (pilot_isFlag( player.p, PILOT_MANUAL_CONTROL ))
 		return;
 
+	/* if any planet is inhabited, we'll want to select only those */
+	for (i=0; i<cur_system->nplanets && inhabited_only==0; i++) {
+		if (planet_hasService(cur_system->planets[i],PLANET_SERVICE_INHABITED)) {
+			inhabited_only=1;
+		}
+	}
+
 	/* Find next planet target. */
 	for (id=player.p->nav_planet+1; id<cur_system->nplanets; id++)
-		if (planet_isKnown( cur_system->planets[id] ))
+		if (planet_isKnown( cur_system->planets[id] ) && (!inhabited_only || planet_hasService(cur_system->planets[id],PLANET_SERVICE_INHABITED)))
 			break;
 
 	/* Try to select the lowest-indexed valid planet. */
 	if (id >= cur_system->nplanets ) {
 		id = -1;
 		for (i=0; i<cur_system->nplanets; i++)
-			if (planet_isKnown( cur_system->planets[i] )) {
+			if (planet_isKnown( cur_system->planets[i]) && (!inhabited_only || planet_hasService(cur_system->planets[i],PLANET_SERVICE_INHABITED))) {
 				id = i;
 				break;
 			}

@@ -26,6 +26,7 @@
 typedef struct FleetPilot_ {
    Ship *ship; /**< Ship the pilot is flying. */
    char *name; /**< Used if they have a special name like uniques. */
+   char *name_generator;
    char *ai; /**< AI different of fleet's global AI. */
 } FleetPilot;
 

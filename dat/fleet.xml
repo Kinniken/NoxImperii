@@ -6,49 +6,49 @@
   <ai>independent_trader</ai>
   <faction>Independent Traders</faction>
   <pilots>
-   <pilot name="Independent Endeavour" ship="Endeavour"></pilot>
+   <pilot name_generator="human_civilian" ship="Endeavour"></pilot>
   </pilots>
  </fleet>
  <fleet name="Independent Traders Scarab">
   <ai>independent_trader</ai>
   <faction>Independent Traders</faction>
   <pilots>
-   <pilot name="Independent Scarab" ship="Scarab"></pilot>
+   <pilot name_generator="human_civilian" ship="Scarab"></pilot>
   </pilots>
  </fleet>
  <fleet name="Independent Traders Fish Bone">
   <ai>independent_trader</ai>
   <faction>Independent Traders</faction>
   <pilots>
-   <pilot name="Independent Fish Bone" ship="Fish Bone"></pilot>
+   <pilot name_generator="human_civilian" ship="Fish Bone"></pilot>
   </pilots>
  </fleet>
  <fleet name="Independent Traders Voyager Cargo">
   <ai>independent_trader</ai>
   <faction>Independent Traders</faction>
   <pilots>
-   <pilot name="Independent Voyager Cargo" ship="Voyager Cargo"></pilot>
+   <pilot name_generator="human_civilian" ship="Voyager Cargo"></pilot>
   </pilots>
  </fleet>
  <fleet name="Independent Traders Hauler">
   <ai>independent_trader</ai>
   <faction>Independent Traders</faction>
   <pilots>
-   <pilot name="Independent Hauler" ship="Hauler"></pilot>
+   <pilot name_generator="human_civilian" ship="Hauler"></pilot>
   </pilots>
  </fleet>
  <fleet name="Independent Traders Whale">
   <ai>independent_trader</ai>
   <faction>Independent Traders</faction>
   <pilots>
-   <pilot name="Independent Whale" ship="Whale"></pilot>
+   <pilot name_generator="human_civilian" ship="Whale"></pilot>
   </pilots>
  </fleet>
  <fleet name="Independent Traders Rhino">
   <ai>independent_trader</ai>
   <faction>Independent Traders</faction>
   <pilots>
-   <pilot name="Independent Rhino" ship="Rhino"></pilot>
+   <pilot name_generator="human_civilian" ship="Rhino"></pilot>
   </pilots>
  </fleet>
  
@@ -133,42 +133,42 @@
   <ai>empire_traders</ai>
   <faction>Imperial Traders</faction>
   <pilots>
-   <pilot name="Imperial Schroedinger" ship="Schroedinger"></pilot>
+   <pilot name_generator="human_civilian" ship="Schroedinger"></pilot>
   </pilots>
  </fleet> 
  <fleet name="Imperial Traders Quicksilver">
   <ai>empire_traders</ai>
   <faction>Imperial Traders</faction>
   <pilots>
-   <pilot name="Imperial Quicksilver" ship="Quicksilver"></pilot>
+   <pilot name_generator="human_civilian" ship="Quicksilver"></pilot>
   </pilots>
  </fleet>
  <fleet name="Imperial Traders Fish Bone">
   <ai>empire_traders</ai>
   <faction>Imperial Traders</faction>
   <pilots>
-   <pilot name="Imperial Fish Bone" ship="Fish Bone"></pilot>
+   <pilot name_generator="human_civilian" ship="Fish Bone"></pilot>
   </pilots>
  </fleet>
  <fleet name="Imperial Traders Zheng He">
   <ai>empire_traders</ai>
   <faction>Imperial Traders</faction>
   <pilots>
-   <pilot name="Imperial Zheng He" ship="Zheng He"></pilot>
+   <pilot name_generator="human_civilian" ship="Zheng He"></pilot>
   </pilots>
  </fleet>
  <fleet name="Imperial Traders Sunflower">
   <ai>empire_traders</ai>
   <faction>Imperial Traders</faction>
   <pilots>
-   <pilot name="Imperial Sunflower" ship="Sunflower"></pilot>
+   <pilot name_generator="human_civilian" ship="Sunflower"></pilot>
   </pilots>
  </fleet>
  <fleet name="Imperial Traders Argosy">
   <ai>empire_traders</ai>
   <faction>Imperial Traders</faction>
   <pilots>
-   <pilot name="Imperial Argosy" ship="Argosy"></pilot>
+   <pilot name_generator="human_civilian" ship="Argosy"></pilot>
   </pilots>
  </fleet>
  
@@ -246,42 +246,42 @@
   <ai>pirate</ai>
   <faction>Pirates</faction>
   <pilots>
-   <pilot name="Pirate Shark" ship="Pirate Shark"></pilot>
+   <pilot name_generator="pirate" ship="Pirate Shark"></pilot>
   </pilots>
  </fleet>
  <fleet name="Pirate Admonisher">
   <ai>pirate</ai>
   <faction>Pirates</faction>
   <pilots>
-   <pilot name="Pirate Admonisher" ship="Pirate Admonisher"></pilot>
+   <pilot name_generator="pirate" ship="Pirate Admonisher"></pilot>
   </pilots>
  </fleet>
  <fleet name="Pirate Vendetta">
   <ai>pirate</ai>
   <faction>Pirates</faction>
   <pilots>
-   <pilot name="Pirate Vendetta" ship="Pirate Vendetta"></pilot>
+   <pilot name_generator="pirate" ship="Pirate Vendetta"></pilot>
   </pilots>
  </fleet>
  <fleet name="Pirate Rhino">
   <ai>pirate</ai>
   <faction>Pirates</faction>
   <pilots>
-   <pilot name="Pirate Rhino" ship="Pirate Rhino"></pilot>
+   <pilot name_generator="pirate" ship="Pirate Rhino"></pilot>
   </pilots>
  </fleet>
  <fleet name="Pirate Kestrel">
   <ai>pirate</ai>
   <faction>Pirates</faction>
   <pilots>
-   <pilot name="Pirate Kestrel" ship="Pirate Kestrel"></pilot>
+   <pilot name_generator="pirate" ship="Pirate Kestrel"></pilot>
   </pilots>
  </fleet>
  <fleet name="Pirate Delta">
   <ai>pirate</ai>
   <faction>Pirates</faction>
   <pilots>
-   <pilot name="Pirate Delta" ship="Pirate Delta"></pilot>
+   <pilot name_generator="pirate" ship="Pirate Delta"></pilot>
   </pilots>
  </fleet>
  
@@ -294,35 +294,35 @@
   <ai>empire</ai>
   <faction>Empire of Terra</faction>
   <pilots>
-   <pilot name="Imperial Tunguska" ship="Imperial Tunguska"></pilot>
+   <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska"></pilot>
   </pilots>
  </fleet>
  <fleet name="Imperial Comet">
   <ai>empire</ai>
   <faction>Empire of Terra</faction>
   <pilots>
-   <pilot name="Imperial Halley" ship="Imperial Halley"></pilot>
+   <pilot name_generator="imperial_navy_comet" ship="Imperial Halley"></pilot>
   </pilots>
  </fleet>
  <fleet name="Imperial Continent">
   <ai>empire</ai>
   <faction>Empire of Terra</faction>
   <pilots>
-   <pilot name="Imperial Asieneuve" ship="Imperial Asieneuve"></pilot>
+   <pilot name_generator="imperial_navy_continent" ship="Imperial Asieneuve"></pilot>
   </pilots>
  </fleet>
   <fleet name="Imperial Planet">
   <ai>empire</ai>
   <faction>Empire of Terra</faction>
   <pilots>
-   <pilot name="Imperial Jupiter" ship="Imperial Jupiter"></pilot>
+   <pilot name_generator="imperial_navy_planet" ship="Imperial Jupiter"></pilot>
   </pilots>
  </fleet>
 <fleet name="Imperial Nova">
   <ai>empire</ai>
   <faction>Empire of Terra</faction>
   <pilots>
-   <pilot name="Imperial Valenderay" ship="Imperial Valenderay"></pilot>
+   <pilot name_generator="imperial_navy_nova" ship="Imperial Valenderay"></pilot>
   </pilots>
  </fleet>
  

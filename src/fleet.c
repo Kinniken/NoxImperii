@@ -25,21 +25,24 @@
 #include "pilot.h"
 #include "ndata.h"
 #include "rng.h"
-
+#include "nluadef.h"
 
 
 #define CHUNK_SIZE      32 /**< Size to allocate memory by. */
-
+static const int MAX_FUNC_NAME = 128;
 
 /* stack of fleets */
 static Fleet* fleet_stack = NULL; /**< Fleet stack. */
 static int nfleets = 0; /**< Number of fleets. */
 
+static lua_State *fleet_name_lua = NULL; /** Fleet name generators */
 
 /*
  * Prototypes.
  */
 static int fleet_parse( Fleet *temp, const xmlNodePtr parent );
+static void fleet_load_name_generators();
+static char* fleet_findName( char* nameGenerator );
 
 
 /**
@@ -80,8 +83,16 @@ unsigned int fleet_createPilot( Fleet *flt, FleetPilot *plt, double dir,
       const int systemFleet )
 {
    unsigned int p;
+   char* name;
+
+   if (plt->name_generator != NULL) {
+	   name=fleet_findName(plt->name_generator);
+   } else {
+	   name=plt->name;
+   }
+
    p = pilot_create( plt->ship,
-         plt->name,
+		   name,
          flt->faction,
          (ai != NULL) ? ai :
                (plt->ai != NULL) ? plt->ai :
@@ -166,6 +177,9 @@ static int fleet_parse( Fleet *temp, const xmlNodePtr parent )
                /* Check for name override */
                xmlr_attr(cur,"name",c);
                pilot->name = c; /* No need to free since it will have to later */
+
+               xmlr_attr(cur,"name_generator",c);
+               pilot->name_generator = c;
 
                /* Check for AI override */
                xmlr_attr(cur,"ai",pilot->ai);
@@ -268,6 +282,8 @@ int fleet_load (void)
    if (fleet_loadFleets())
       return -1;
 
+	fleet_load_name_generators();
+
    DEBUG("Loaded %d Fleet%s", nfleets, (nfleets==1) ? "" : "s" );
 
    return 0;
@@ -287,6 +303,8 @@ void fleet_free (void)
          for (j=0; j<fleet_stack[i].npilots; j++) {
             if (fleet_stack[i].pilots[j].name)
                free(fleet_stack[i].pilots[j].name);
+            if (fleet_stack[i].pilots[j].name_generator)
+            	free(fleet_stack[i].pilots[j].name_generator);
             if (fleet_stack[i].pilots[j].ai)
                free(fleet_stack[i].pilots[j].ai);
          }
@@ -300,3 +318,55 @@ void fleet_free (void)
    nfleets = 0;
 }
 
+static void fleet_load_name_generators() {
+	uint32_t bufsize;
+	char *buf;
+
+	lua_State *L;
+
+	fleet_name_lua = nlua_newState();
+	L           = fleet_name_lua;
+	nlua_loadStandard(L, 1);
+	buf         = ndata_read( FLEET_NAME_DATA_PATH, &bufsize );
+	if (luaL_dobuffer(fleet_name_lua, buf, bufsize, FLEET_NAME_DATA_PATH) != 0) {
+		WARN( "Failed to load fleet name file: %s\n"
+				"%s\n"
+				"Most likely Lua file has improper syntax, please check",
+				FLEET_NAME_DATA_PATH, lua_tostring(L,-1));
+	}
+	free(buf);
+}
+
+static char* fleet_findName( char* nameGenerator )
+{
+	int ret,errf;
+	char* name;
+	const char *err;
+	lua_State *L;
+
+	L = fleet_name_lua;
+
+	errf = 0;
+
+	/* Set up function. */
+
+	lua_getglobal( L, nameGenerator );
+
+	ret = lua_pcall(L, 0, 1, errf);
+	if (ret != 0) { /* error has occurred */
+		err = (lua_isstring(L,-1)) ? lua_tostring(L,-1) : NULL;
+		WARN("Fleet getName -> '%s' : %s",nameGenerator,
+				(err) ? err : "unknown error");
+		lua_pop(L, 1);
+	}
+
+	if (lua_isstring(L,-1))
+		name = strdup( lua_tostring(L,-1) );
+	else {
+		WARN( "Fleet name generator: %s -> return parameter 1 is not a string!", nameGenerator );
+	}
+
+	lua_pop(L,1);
+
+	return name;
+}

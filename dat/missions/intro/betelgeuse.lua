@@ -26,18 +26,28 @@ title = {}  --stage titles
 text = {}   --mission text
 
 title[1] = "Business man in a hurry"
-text[1] = [[    You can tell the man is worried about something - and your second sense tells you there might be money to be made. You approach him and offer him a beer. He looks at you suspiciously, but seems interested when he realizes you are a captain. "You've obviously realized I'm in some trouble - yes I am, and maybe you can help. I have a lucrative deal with one of the most important Merchant Prince of the Oligarchy - I ship him the latest Terran fashion as soon as it appears at the Imperial court so he gets it before his peers. And as you probably guessed, I have the latest creation of Sylvie Sainte-Clemence and my pilot has deserted. Interested in the job? Betelgeuse is far but I'll make it worth your while."
+text[1] = [[You can tell the man is worried about something - and your second sense tells you there might be money to be made. You approach him and offer him a beer. He looks at you suspiciously, but seems interested when he realizes you are a captain. "You've obviously realized I'm in some trouble - yes I am, and maybe you can help. I have a lucrative deal with one of the most important Merchant Prince of the Oligarchy - I ship him the latest Terran fashion as soon as it appears at the Imperial court so he gets it before his peers. And as you probably guessed, I have the latest creation of Sylvie Sainte-Clemence and my pilot has deserted. Interested in the job? Betelgeuse is far but I'll make it worth your while."
 
-Out of habit, you bargain with him. He must be really desperate - he's willing to pay 50000 for a single delivery, of a costume weighting two kilos at most!]]
+Out of habit, you bargain with him. He must be really desperate - he's willing to pay ${payment} for a single delivery, of a costume weighting two kilos at most!]]
 
 title[2] = "Accept"
-text[2] = [[    "It's a rip-of, but still better than losing that deal! Now hurry, at least."]]
+text[2] = [["It's a rip-of, but still better than losing that deal! Now hurry, at least."]]
 
 title[3] = "Refuse"
-text[3] = [[    "Why did you waste my time with your idle bargaining if you're not even willing to take the deal? Get lost!"]]
+text[3] = [["Why did you waste my time with your idle bargaining if you're not even willing to take the deal? Get lost!"]]
 
 finishedtitle = "Arrival"
-finishedtxt = [[    Even before you land, the crew of the Merchant Prince has positioned itself. In less than ten minutes the goods have been offloaded. Apparently there is a major festival tomorrow and the Betelgian noble wants to be dressed in the new creations.]]
+finishedtxt = [[Even before you land, the crew of the Merchant Prince has positioned itself. In less than ten minutes the goods have been offloaded. Apparently there is a major festival tomorrow and the Betelgian noble wants to be dressed in the new creations.]]
+
+function getStringData()
+   local stringData={}
+   stringData.playerName=player:name()
+   stringData.shipName=player:ship()
+   stringData.targetPlanet=targetPlanet:name()
+   stringData.targetSystem=targetPlanet:system():name()
+   stringData.payment=gh.numstring(payment)
+   return stringData
+end
 
 function create ()
    -- Note: this mission does not make any system claims.
@@ -48,15 +58,17 @@ function create ()
 
    startplanet, startsys = planet.cur()
 
-
+   targetPlanet = planet.get("Dandalo")
 
    prevPlanets[1] = startplanet
    prevPlanets.__save = true
 end
 
 function accept ()
-   if not tk.yesno( title[1], text[1] ) then
-      tk.msg( title[3], text[3] )
+   local stringData=getStringData()
+
+   if not tk.yesno( gh.format(title[1],stringData), gh.format(text[1],stringData) ) then
+      tk.msg( gh.format(title[3],stringData), gh.format(text[3],stringData) )
       misn.finish()
 
    else
@@ -69,7 +81,7 @@ function accept ()
       misn.setReward( misn_reward )
       misn.setDesc( misn_desc )
 
-      tk.msg( title[2], text[2] )
+      tk.msg( gh.format(title[2],stringData), gh.format(text[2],stringData) )
 
       carg_id = misn.cargoAdd( carg_type, 0 )
 

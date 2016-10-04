@@ -26,7 +26,7 @@
     <pict>terra_sector</pict>
     <x>0</x>
     <y>0</y>
-    <detection_radius>300</detection_radius>
+    <detection_radius>200</detection_radius>
   </decorator>
   <decorator>
     <pict>fez</pict>
@@ -37,7 +37,7 @@
     <pict>fez_sector</pict>
     <x>250</x>
     <y>-280</y>
-    <detection_radius>300</detection_radius>
+    <detection_radius>200</detection_radius>
   </decorator>
   <decorator>
     <pict>kashi</pict>
@@ -48,7 +48,7 @@
     <pict>kashi_sector</pict>
     <x>-320</x>
     <y>-280</y>
-    <detection_radius>300</detection_radius>
+    <detection_radius>250</detection_radius>
   </decorator>
   <decorator>
     <pict>naeris</pict>
@@ -59,7 +59,7 @@
     <pict>naeris_sector</pict>
     <x>-485.406720</x>
     <y>131.462720</y>
-    <detection_radius>300</detection_radius>
+    <detection_radius>250</detection_radius>
   </decorator>
   <decorator>
     <pict>shin_kyoto</pict>
@@ -70,7 +70,7 @@
     <pict>shin_kyoto_sector</pict>
     <x>-86</x>
     <y>360</y>
-    <detection_radius>300</detection_radius>
+    <detection_radius>250</detection_radius>
   </decorator>
   <decorator>
     <pict>new_rila</pict>
@@ -81,7 +81,7 @@
     <pict>new_rila_sector</pict>
     <x>610</x>
     <y>-20</y>
-    <detection_radius>300</detection_radius>
+    <detection_radius>200</detection_radius>
   </decorator>
   <decorator>
     <pict>harkan</pict>
@@ -92,7 +92,7 @@
     <pict>harkan_sector</pict>
     <x>979.000000</x>
     <y>-140.000000</y>
-    <detection_radius>300</detection_radius>
+    <detection_radius>250</detection_radius>
   </decorator>
   <decorator>
     <pict>ardarshir</pict>
@@ -103,7 +103,7 @@
     <pict>ardarshir_sector</pict>
     <x>1800.968640</x>
     <y>-100.963520</y>
-    <detection_radius>300</detection_radius>
+    <detection_radius>150</detection_radius>
   </decorator>
   <decorator>
     <pict>betelgeuse</pict>
@@ -114,7 +114,7 @@
     <pict>betelgeuse_sector</pict>
     <x>1000.218240</x>
     <y>460.642880</y>
-    <detection_radius>300</detection_radius>
+    <detection_radius>200</detection_radius>
   </decorator>
   <decorator>
     <pict>gonder</pict>
@@ -136,13 +136,13 @@
     <pict>tigray_sector</pict>
     <x>900.218240</x>
     <y>-500.642880</y>
-    <detection_radius>300</detection_radius>
+    <detection_radius>250</detection_radius>
   </decorator>
   <decorator>
     <pict>outer_roidhunate</pict>
     <x>1470</x>
     <y>-80</y>
-    <detection_radius>300</detection_radius>
+    <detection_radius>150</detection_radius>
   </decorator>
   <decorator>
     <pict>trans_claw_fringe</pict>
@@ -190,7 +190,7 @@
     <pict>sea_dead_suns</pict>
     <x>-800</x>
     <y>600</y>
-    <detection_radius>300</detection_radius>
+    <detection_radius>250</detection_radius>
   </decorator>
   <decorator>
     <pict>rift</pict>
@@ -208,7 +208,7 @@
     <pict>pleiades</pict>
     <x>1950</x>
     <y>350</y>
-    <detection_radius>300</detection_radius>
+    <detection_radius>150</detection_radius>
   </decorator>
   <decorator>
     <pict>eagle_nebula</pict>

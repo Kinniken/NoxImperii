@@ -1253,22 +1253,22 @@ void map_renderJumps( double x, double y, int editor)
             continue;
 
          /* Choose colours. */
-         cole = &cBlue;
+         cole = &cGrey80;
          for (k = 0; k < jsys->njumps; k++) {
             if (jsys->jumps[k].target == sys) {
                if (jp_isFlag(&jsys->jumps[k], JP_EXITONLY))
-                  cole = &cWhite;
+                  cole = &cBlue;
                else if (jp_isFlag(&jsys->jumps[k], JP_HIDDEN))
                   cole = &cRed;
                break;
             }
          }
          if (jp_isFlag(&sys->jumps[j], JP_EXITONLY))
-            col = &cWhite;
+            col = &cBlue;
          else if (jp_isFlag(&sys->jumps[j], JP_HIDDEN))
             col = &cRed;
          else
-            col = &cBlue;
+            col = &cGrey80;
 
          /* Draw the lines. */
          vertex[0]  = x + sys->pos.x * map_zoom;

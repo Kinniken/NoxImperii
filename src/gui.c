@@ -923,9 +923,9 @@ void gui_render( double dt )
    if (pilot_isFlag(player.p, PILOT_HYPERSPACE) &&
          (player.p->ptimer < HYPERSPACE_FADEOUT)) {
       x = (HYPERSPACE_FADEOUT-player.p->ptimer) / HYPERSPACE_FADEOUT;
-      col.r = 1.;
-      col.g = 1.;
-      col.b = 1.;
+      col.r = 0.;
+      col.g = 0.;
+      col.b = 0.;
       col.a = x;
       gl_renderRect( 0., 0., SCREEN_W, SCREEN_H, &col );
    }

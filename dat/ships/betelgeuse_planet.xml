@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Betelgian Orsa'>
  <base_type>Betelgian Orsa</base_type>
+ <short_name>Orsa</short_name>
  <GFX sx="12" sy="12">dogma</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

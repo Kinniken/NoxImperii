@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Barbarian Raider'>
  <base_type>Barbarian Raider</base_type>
+ <short_name>Raider</short_name>
  <GFX sx="10" sy="10">barbarian_comet</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

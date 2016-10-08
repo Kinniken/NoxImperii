@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Ardar Mowyr'>
  <base_type>Ardar Mowyr</base_type>
+ <short_name>Mowyr</short_name>
  <GFX sx="12" sy="12">ardarshir_planet</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

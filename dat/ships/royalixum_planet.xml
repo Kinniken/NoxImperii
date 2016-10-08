@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Royal Ixum Jupiter'>
  <base_type>Royal Ixum Jupiter</base_type>
+ <short_name>Jupiter</short_name>
  <GFX sx="12" sy="12">royalixum_planet</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

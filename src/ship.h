@@ -84,6 +84,7 @@ typedef struct ShipOutfitSlot_ {
 typedef struct Ship_ {
    char* name;       /**< Ship name */
    char* base_type;  /**< Ship's base type, basically used for figuring out what ships are related. */
+   char* short_name; /** Optional short name, used on radar for example **/
    ShipClass class;  /**< Ship class */
 
    /* store stuff */

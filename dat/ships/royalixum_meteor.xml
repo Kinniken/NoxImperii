@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Royal Ixum Tunguska'>
  <base_type>Royal Ixum Tunguska</base_type>
+ <short_name>Tunguska</short_name>
  <GFX sx="8" sy="8">royalixum_meteor</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

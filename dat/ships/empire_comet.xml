@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Imperial Halley'>
  <base_type>Imperial Halley</base_type>
+ <short_name>Halley</short_name>
  <GFX sx="10" sy="10">empire_comet</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

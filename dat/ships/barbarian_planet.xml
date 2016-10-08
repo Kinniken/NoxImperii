@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Barbarian Slaver'>
  <base_type>Barbarian Slaver</base_type>
+ <short_name>Slaver</short_name>
  <GFX sx="12" sy="12">barbarian_planet</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

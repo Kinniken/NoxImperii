@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Imperial Tunguska'>
  <base_type>Imperial Tunguska</base_type>
+ <short_name>Tunguska</short_name>
  <GFX sx="8" sy="8">empire_meteor</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

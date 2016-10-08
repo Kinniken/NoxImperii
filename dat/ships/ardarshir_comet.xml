@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Ardar Vach Rueth'>
  <base_type>Ardar Vach Rueth</base_type>
+ <short_name>Vach Rueth</short_name>
  <GFX sx="12" sy="12">ardarshir_comet</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

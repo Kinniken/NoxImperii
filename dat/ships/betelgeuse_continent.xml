@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Betelgian Cassandra'>
  <base_type>Betelgian Cassandra</base_type>
+ <short_name>Cassandra</short_name>
  <GFX sx="10" sy="10">preacher</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

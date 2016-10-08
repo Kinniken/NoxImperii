@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Betelgian Stella'>
  <base_type>Betelgian Stella</base_type>
+ <short_name>Stella</short_name>
  <GFX sx="12" sy="12">divinity</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

@@ -745,6 +745,7 @@ static int ship_parse( Ship *temp, xmlNodePtr parent )
       xmlr_long(node,"price",temp->price);
       xmlr_strd(node,"license",temp->license);
       xmlr_strd(node,"fabricator",temp->fabricator);
+      xmlr_strd(node,"short_name",temp->short_name);
       xmlr_strd(node,"description",temp->description);
       if (xml_isNode(node,"movement")) {
          cur = node->children;
@@ -872,6 +873,9 @@ static int ship_parse( Ship *temp, xmlNodePtr parent )
    temp->dmg_absorb   /= 100.;
    temp->turn         *= M_PI / 180.; /* Convert to rad. */
 
+   if (temp->short_name == NULL)
+	   temp->short_name = strdup(temp->name);
+
    /* ship validator */
 #define MELEMENT(o,s)      if (o) WARN("Ship '%s' missing '"s"' element", temp->name)
    MELEMENT(temp->name==NULL,"name");
@@ -991,6 +995,7 @@ void ships_free (void)
       free(s->gui);
       free(s->base_type);
       free(s->fabricator);
+      free(s->short_name);
       free(s->license);
       free(s->desc_stats);
 

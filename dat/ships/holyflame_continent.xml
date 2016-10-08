@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Holy Flame Brythioch'>
  <base_type>Holy Flame Brythioch</base_type>
+ <short_name>Brythioch</short_name>
  <GFX sx="12" sy="12">holyflame_continent</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

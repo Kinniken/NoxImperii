@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Ardar Moloch'>
  <base_type>Ardar Moloch</base_type>
+ <short_name>Moloch</short_name>
  <GFX sx="12" sy="12">ardarshir_nova</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

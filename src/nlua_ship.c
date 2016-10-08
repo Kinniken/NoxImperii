@@ -28,6 +28,7 @@ static int shipL_eq( lua_State *L );
 static int shipL_get( lua_State *L );
 static int shipL_name( lua_State *L );
 static int shipL_baseType( lua_State *L );
+static int shipL_shortName( lua_State *L );
 static int shipL_class( lua_State *L );
 static int shipL_slots( lua_State *L );
 static int shipL_getSlots( lua_State *L );
@@ -40,6 +41,7 @@ static const luaL_reg shipL_methods[] = {
    { "__eq", shipL_eq },
    { "get", shipL_get },
    { "name", shipL_name },
+   { "shortName", shipL_shortName },
    { "baseType", shipL_baseType },
    { "class", shipL_class },
    { "slots", shipL_slots },
@@ -253,6 +255,27 @@ static int shipL_name( lua_State *L )
 
    /** Return the ship name. */
    lua_pushstring(L, s->name);
+   return 1;
+}
+
+/**
+ * @brief Gets the short name of the ship.
+ *
+ * @usage shipname = s:shortName()
+ *
+ *    @luatparam Ship s Ship to get ship short name.
+ *    @luatreturn string The short name of the ship.
+ * @luafunc shortName( s )
+ */
+static int shipL_shortName( lua_State *L )
+{
+   Ship *s;
+
+   /* Get the ship. */
+   s  = luaL_validship(L,1);
+
+   /** Return the ship name. */
+   lua_pushstring(L, s->short_name);
    return 1;
 }
 

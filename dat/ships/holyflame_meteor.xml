@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Holy Flame Roeth'>
  <base_type>Holy Flame Roeth</base_type>
+ <short_name>Roeth</short_name>
  <GFX sx="10" sy="10">holyflame_meteor</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

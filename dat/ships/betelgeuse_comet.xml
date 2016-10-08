@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Betelgian Libera'>
  <base_type>Betelgian Libera</base_type>
+ <short_name>Libera</short_name>
  <GFX sx="8" sy="8">shaman</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

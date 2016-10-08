@@ -27,7 +27,7 @@ function background ()
       return
    end
 
-   background_hyades()
+   --background_hyades()
 
    -- Generate stars
    background_stars()

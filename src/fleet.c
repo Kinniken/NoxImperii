@@ -41,7 +41,7 @@ static lua_State *fleet_name_lua = NULL; /** Fleet name generators */
  * Prototypes.
  */
 static int fleet_parse( Fleet *temp, const xmlNodePtr parent );
-static void fleet_load_name_generators();
+static void fleet_load_name_generators(void);
 static char* fleet_findName( char* nameGenerator );
 
 
@@ -318,7 +318,7 @@ void fleet_free (void)
    nfleets = 0;
 }
 
-static void fleet_load_name_generators() {
+static void fleet_load_name_generators(void) {
 	uint32_t bufsize;
 	char *buf;
 

@@ -44,7 +44,7 @@ title[3] = "Refuse"
 text[3] = [["I see you already have much to do. If you ever change your mind, you know where to find me. Fly far, my boy!"]]
 
 finishedtitle = "Exploring a new world"
-finishedtxt = [[You orbit the world several times, scanning its surface and atmosphere, letting your systems analyse the geology and any living presence, before landing and taking samples. You enter the report into the survey computer provided by the old pilot, and it immediately computes your reward: ${rewardTotal} credits. You have just added your first little stone to the new Great Survey!]]
+finishedtxt = [[You orbit the world several times, scanning its surface and atmosphere, letting your systems analyse the geology and any living presence, before landing and taking samples. You enter the report into the survey computer provided by the old pilot, and it immediately computes your reward: ${rewardTotalStr} credits. You have just added your first little stone to the new Great Survey!]]
 
 function create ()
    -- Note: this mission does not make any system claims.

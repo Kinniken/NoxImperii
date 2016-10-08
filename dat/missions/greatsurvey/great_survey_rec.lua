@@ -29,7 +29,7 @@ Mineral riches: ${rewardMinerals} cr
 
 Distance from Sol: x${rewardDistance}
 
-Grand total: ${rewardTotal} cr
+Grand total: ${rewardTotalStr} cr
 
 You have added one more line to the great enterprise, and boosted your bank account to boot!]]
 

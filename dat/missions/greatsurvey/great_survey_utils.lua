@@ -81,7 +81,14 @@ function computePayement(surveyedPlanet)
 
    reward.rewardTotal=reward.rewardDistance*(reward.rewardWorldClass+reward.rewardNatives+reward.rewardFertility+reward.rewardMinerals)
 
+   reward.rewardDistance=gh.numstring(reward.rewardDistance)
+   reward.rewardWorldClass=gh.numstring(reward.rewardWorldClass)
+   reward.rewardNatives=gh.numstring(reward.rewardNatives)
+   reward.rewardFertility=gh.numstring(reward.rewardFertility)
+   reward.rewardMinerals=gh.numstring(reward.rewardMinerals)
+
    reward.rewardTotal=math.floor(reward.rewardTotal)
+   reward.rewardTotalStr=gh.numstring(reward.rewardTotal)
 
    return reward
 
@@ -128,7 +135,7 @@ function handlePlanet(surveyedPlanet,successMessage)
 
          if planetClassCount==0 and rewardsClass[surveyedPlanet.c:class()] ~= nil then
             local bonus=rewardsClass[surveyedPlanet.c:class()]*10
-            reward.bonus=bonus           
+            reward.bonus=gh.numstring(bonus)          
             tk.msg( "Bonus!", gh.format(planet_bonus,reward) )
             player.pay( bonus )
          end
@@ -153,7 +160,7 @@ function handlePlanet(surveyedPlanet,successMessage)
                   bonus=100000
                end
 
-               reward.bonus=bonus
+               reward.bonus=gh.numstring(bonus)
 
                reward.specieName=surveyedPlanet.lua.natives.name
                reward.specieType=natives_generator.common_natives[surveyedPlanet.lua.natives.type].label

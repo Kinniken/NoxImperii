@@ -832,7 +832,7 @@ function render( dt, dt_mod )
          ta_speed = ptarget:vel():mod()
 
          --Title
-         gfx.print( false, "TARGETED", ta_pane_x + 14, ta_pane_y + 190, col_txt_top )
+         gfx.print( false, "TARGETED", ta_pane_x + 14, ta_pane_y + 204, col_txt_top )
 
          --Text, warning light & other texts
          local htspeed = round(ta_speed / ta_stats.speed_max * 100,0)
@@ -899,7 +899,8 @@ function render( dt, dt_mod )
             else
                col = ptarget:colour()
             end
-            gfx.print( true, ptarget:name(), ta_pane_x + 14, ta_pane_y + 176, col, ta_pane_w - 28 )
+            gfx.print( true, ptarget:name(), ta_pane_x + 14, ta_pane_y + 190, col, ta_pane_w - 28 )
+            gfx.print( true, ptarget:faction():adjective().." "..ptarget:ship():shortName(), ta_pane_x + 14, ta_pane_y + 176, col, ta_pane_w - 28 )
          else
             -- Unset stats.
             shi, ene, arm = nil

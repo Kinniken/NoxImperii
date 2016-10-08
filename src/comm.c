@@ -50,7 +50,7 @@ extern int pilot_nstack;
  */
 /* Static. */
 static unsigned int comm_open( glTexture *gfx, int faction,
-      int override, int bribed, char *name );
+      int override, int bribed, char *name, char *description );
 static unsigned int comm_openPilotWindow (void);
 static void comm_addPilotSpecialButtons( unsigned int wid );
 static void comm_close( unsigned int wid, char *unused );
@@ -177,13 +177,16 @@ int comm_openPilot( unsigned int pilot )
 static unsigned int comm_openPilotWindow (void)
 {
    unsigned int wid;
+   char buff[128];
+
+   sprintf(buff,"%s %s",faction_adjective(comm_pilot->faction),comm_pilot->ship->short_name);
 
    /* Create the generic comm window. */
    wid = comm_open( ship_loadCommGFX( comm_pilot->ship ),
          comm_pilot->faction,
          pilot_isHostile(comm_pilot) ? -1 : pilot_isFriendly(comm_pilot) ? 1 : 0,
          pilot_isFlag(comm_pilot, PILOT_BRIBED),
-         comm_pilot->name );
+         comm_pilot->name, buff );
 
    /* Add special buttons. */
    comm_addPilotSpecialButtons( wid );
@@ -249,7 +252,7 @@ int comm_openPlanet( Planet *planet )
 
    /* Create the generic comm window. */
    wid = comm_open( gl_dupTexture( comm_planet->gfx_space ),
-         comm_planet->faction, 0, 0, comm_planet->name );
+         comm_planet->faction, 0, 0, comm_planet->name, NULL );
 
    /* Add special buttons. */
    if (!planet->can_land && !planet->bribed && (planet->bribe_msg != NULL))
@@ -268,13 +271,14 @@ int comm_openPlanet( Planet *planet )
  *    @param override If positive sets to ally, if negative sets to hostile.
  *    @param bribed Whether or not the target is bribed.
  *    @param name Name of object talking to.
+ *    @param description Optional description of object (faction plus ship type for ships)
  *    @return The comm window id.
  */
 static unsigned int comm_open( glTexture *gfx, int faction,
-      int override, int bribed, char *name )
+      int override, int bribed, char *name, char *description )
 {
-   int namex, standx, logox, y;
-   int namew, standw, logow, width;
+   int namex, descriptionx, standx, logox, y, ty;
+   int namew, descriptionw, standw, logow, width;
    glTexture *logo;
    const char *stand;
    unsigned int wid;
@@ -309,19 +313,35 @@ static unsigned int comm_open( glTexture *gfx, int faction,
    standw = gl_printWidthRaw( NULL, stand );
    width  = MAX(namew, standw);
 
+   if (description != NULL) {
+	   descriptionw =  gl_printWidthRaw( NULL, description );
+	   width  = MAX(width, descriptionw);
+   }
+
+
    logow = logo == NULL ? 0 : logo->w;
 
    if (width + logow > GRAPHIC_WIDTH) {
       font = &gl_smallFont;
       namew  = MIN(gl_printWidthRaw( font, name ), GRAPHIC_WIDTH - logow);
       standw = MIN(gl_printWidthRaw( font, stand ), GRAPHIC_WIDTH - logow);
+
       width  = MAX(namew, standw);
+
+      if (description != NULL) {
+    	  descriptionw =  MIN(gl_printWidthRaw( font, description ), GRAPHIC_WIDTH - logow);
+    	  width  = MAX(width, descriptionw);
+      }
    }
    else
       font = &gl_defFont;
 
    namex  = GRAPHIC_WIDTH/2 -  namew/2 + logow/2;
    standx = GRAPHIC_WIDTH/2 - standw/2 + logow/2;
+
+   if (description != NULL) {
+	   descriptionx = GRAPHIC_WIDTH/2 - descriptionw/2 + logow/2;
+   }
 
    if (logo != NULL) {
       y  = MAX( font->h*2 + 15, logo->h );
@@ -366,13 +386,24 @@ static unsigned int comm_open( glTexture *gfx, int faction,
       y -= (logo->h - (gl_defFont.h*2 + 15)) / 2;
    }
 
-   /* Name. */
-   window_addText( wid, 19 + namex, -30 - GRAPHIC_HEIGHT - y + font->h*2 + 10,
-         GRAPHIC_WIDTH - logow, 20, 0, "txtName", font, &cDConsole, name );
+   ty = font->h + 5;
+
+   if (description != NULL) {
+	  window_addText( wid, 19 + descriptionx, -30 - GRAPHIC_HEIGHT - y + ty,
+			GRAPHIC_WIDTH - logow, 20, 0, "txtDescription", font, c, description );
+
+	  ty += font->h + 5;
+   }
 
    /* Standing. */
-   window_addText( wid, 19 + standx, -30 - GRAPHIC_HEIGHT - y + font->h + 5,
+   window_addText( wid, 19 + standx, -30 - GRAPHIC_HEIGHT - y + ty,
          GRAPHIC_WIDTH - logow, 20, 0, "txtStanding", font, c, stand );
+
+   ty += font->h + 5;
+
+   /* Name. */
+   window_addText( wid, 19 + namex, -30 - GRAPHIC_HEIGHT - y + ty,
+         GRAPHIC_WIDTH - logow, 20, 0, "textName", font, &cDConsole, name );
 
    /* Buttons. */
    window_addButton( wid, -20, 20, BUTTON_WIDTH, BUTTON_HEIGHT,

@@ -11,6 +11,7 @@
  <faction name="Independent Worlds">
   <known/>
   <player>3</player>
+  <adjective>Independent</adjective>
   <colour>blue</colour>
   <spawn>independent_worlds</spawn>
   <standing>independent_worlds</standing>
@@ -26,6 +27,7 @@
  <faction name="Independent Traders">
   <known/>
   <player>3</player>
+  <adjective>Independent</adjective>
   <spawn>independent_trader</spawn>
   <standing>independent_trader</standing>
   <invisible />
@@ -41,6 +43,7 @@
  <faction name="Natives">
   <known/>
   <player>0</player>
+  <adjective>Native</adjective>
   <colour>grey50</colour>
   <spawn>natives</spawn>
   <standing>natives</standing>
@@ -58,6 +61,7 @@
   <known/>
   <logo>empire</logo>
   <longname>Imperial Traders</longname>
+  <adjective>Imperial</adjective>
   <player>3</player>
   <spawn>imperial_trader</spawn>
   <standing>imperial_trader</standing>
@@ -77,6 +81,7 @@
   <known/>
   <logo>roidhunate</logo>
   <longname>Ardar Traders</longname>
+  <adjective>Ardar</adjective>
   <player>0</player>
   <spawn>ardar_trader</spawn>
   <standing>ardar_trader</standing>
@@ -96,6 +101,7 @@
   <known/>
   <logo>betelgeuse</logo>
   <longname>Betelgian Traders</longname>
+  <adjective>Betelgian</adjective>
   <player>3</player>
   <spawn>betelgian_trader</spawn>
   <standing>betelgian_trader</standing>
@@ -115,6 +121,7 @@
   <known/>
   <logo>pirate</logo>
   <longname>Galactic Pirates</longname>
+  <adjective>Pirate</adjective>
   <player>-20</player>
   <colour>darkred</colour>
   <spawn>pirate</spawn>
@@ -143,6 +150,7 @@
  <faction name="Empire of Terra">
   <known/>
   <logo>empire</logo>
+  <adjective>Imperial</adjective>
   <colour>Yellow</colour>
   <player>5</player>
   <spawn>empire</spawn>
@@ -162,6 +170,7 @@
 
  <faction name="Empire of Terra Strike Forces">
   <display>Empire of Terra</display>
+  <adjective>Imperial</adjective>
   <invisible />
   <logo>empire</logo>
   <colour>Yellow</colour>
@@ -185,6 +194,7 @@
   <faction name="Roidhunate of Ardarshir">
   <known/>
   <logo>roidhunate</logo>
+  <adjective>Ardar</adjective>
   <colour>green</colour>
   <player>0</player>
   <spawn>roidhunate</spawn>
@@ -204,6 +214,7 @@
 
  <faction name="Roidhunate of Ardarshir Strike Forces">
   <display>Roidhunate of Ardarshir</display>
+  <adjective>Ardar</adjective>
   <invisible />
   <logo>roidhunate</logo>
   <colour>green</colour>
@@ -227,6 +238,7 @@
 <faction name="Oligarchy of Betelgeuse">
   <known/>
   <logo>betelgeuse</logo>
+  <adjective>Betelgian</adjective>
   <colour>purple</colour>
   <player>1</player>
   <spawn>betelgeuse</spawn>
@@ -244,6 +256,7 @@
   <faction name="Kingdom of Ixum">
   <known/>
   <logo>royalixum</logo>
+  <adjective>Royal Ixum</adjective>
   <colour>Red</colour>
   <player>5</player>
   <spawn>royalixum</spawn>
@@ -263,6 +276,7 @@
   <faction name="Holy Flame of Ixum">
   <known/>
   <logo>holyflame</logo>
+  <adjective>Holy Flame</adjective>
   <colour>white</colour>
   <player>0</player>
   <spawn>holyflame</spawn>
@@ -282,6 +296,7 @@
   <faction name="Barbarians">
   <known/>
   <logo>barbarians</logo>
+  <adjective>Barbarian</adjective>
   <longname>Barbarians</longname>
   <player>-20</player>
   <colour>DarkRed</colour>

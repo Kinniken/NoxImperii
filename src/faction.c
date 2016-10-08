@@ -53,6 +53,7 @@ typedef struct Faction_ {
    char *name; /**< Normal Name. */
    char *longname; /**< Long Name. */
    char *displayname; /**< Display name. */
+   char *adjective; /** adjective form **/
 
    /* Graphics. */
    glTexture *logo_small; /**< Small logo. */
@@ -245,6 +246,29 @@ char* faction_shortname( int f )
    /* Possibly get display name. */
    if (faction_stack[f].displayname != NULL)
       return faction_stack[f].displayname;
+
+   return faction_stack[f].name;
+}
+
+/**
+ * @brief Gets a factions adjective, or failing that, its short name.
+ *
+ *    @param f Faction to get the adjective of.
+ *    @return adjective of the faction.
+ */
+char* faction_adjective( int f )
+{
+   if (!faction_isFaction(f)) {
+      WARN("Faction id '%d' is invalid.",f);
+      return NULL;
+   }
+   /* Don't want player to see their escorts as "Player" faction. */
+   if (f == FACTION_PLAYER)
+      return "Escort";
+
+   /* Possibly get adjective. */
+   if (faction_stack[f].adjective != NULL)
+      return faction_stack[f].adjective;
 
    return faction_stack[f].name;
 }
@@ -1116,6 +1140,7 @@ static int faction_parse( Faction* temp, xmlNodePtr parent )
 
       xmlr_strd(node,"longname",temp->longname);
       xmlr_strd(node,"display",temp->displayname);
+      xmlr_strd(node,"adjective",temp->adjective);
       if (xml_isNode(node, "colour")) {
          ctmp = xml_get(node);
          if (ctmp != NULL)
@@ -1441,6 +1466,8 @@ void factions_free (void)
          free(faction_stack[i].longname);
       if (faction_stack[i].displayname != NULL)
          free(faction_stack[i].displayname);
+      if (faction_stack[i].adjective != NULL)
+    	  free(faction_stack[i].adjective);
       if (faction_stack[i].logo_small != NULL)
          gl_freeTexture(faction_stack[i].logo_small);
       if (faction_stack[i].logo_tiny != NULL)

@@ -29,6 +29,7 @@ static int factionL_get( lua_State *L );
 static int factionL_eq( lua_State *L );
 static int factionL_name( lua_State *L );
 static int factionL_longname( lua_State *L );
+static int factionL_adjective( lua_State *L );
 static int factionL_areenemies( lua_State *L );
 static int factionL_areallies( lua_State *L );
 static int factionL_modplayer( lua_State *L );
@@ -49,6 +50,7 @@ static const luaL_reg faction_methods[] = {
    { "__tostring", factionL_name },
    { "name", factionL_name },
    { "longname", factionL_longname },
+   { "adjective", factionL_adjective },
    { "areEnemies", factionL_areenemies },
    { "areAllies", factionL_areallies },
    { "modPlayer", factionL_modplayer },
@@ -71,6 +73,7 @@ static const luaL_reg faction_methods_cond[] = {
    { "__tostring", factionL_name },
    { "name", factionL_name },
    { "longname", factionL_longname },
+   { "adjective", factionL_adjective },
    { "areEnemies", factionL_areenemies },
    { "areAllies", factionL_areallies },
    { "playerStanding", factionL_playerstanding },
@@ -278,6 +281,24 @@ static int factionL_longname( lua_State *L )
    int f;
    f = luaL_validfaction(L,1);
    lua_pushstring(L, faction_longname(f));
+   return 1;
+}
+
+/**
+ * @brief Gets the faction's adjective.
+ *
+ * (if not available, its name)
+ *
+ * @usage adjective = adjective()
+ *    @luatparam Faction f Faction to get adjective of.
+ *    @luatreturn string The adjective of the faction.
+ * @luafunc longname( f )
+ */
+static int factionL_adjective( lua_State *L )
+{
+   int f;
+   f = luaL_validfaction(L,1);
+   lua_pushstring(L, faction_adjective(f));
    return 1;
 }
 

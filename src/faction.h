@@ -24,6 +24,7 @@ int faction_isKnown( int id );
 char* faction_name( int f );
 char* faction_shortname( int f );
 char* faction_longname( int f );
+char* faction_adjective( int f );
 lua_State *faction_getScheduler( int f );
 lua_State *faction_getEquipper( int f );
 glTexture* faction_logoSmall( int f );

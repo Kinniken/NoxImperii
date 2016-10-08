@@ -1251,9 +1251,10 @@ static int playerL_evtDone( lua_State *L )
  */
 static int playerL_teleport( lua_State *L )
 {
-   Planet *pnt;
    StarSystem *sys;
+   Planet *planet;
    const char *name, *pntname;
+   char *planet_name = NULL;
 
    /* Must not be landed. */
    if (landed)
@@ -1263,7 +1264,7 @@ static int playerL_teleport( lua_State *L )
    if (player_isBoarded())
       NLUA_ERROR(L,"Can not teleport the player while they are boarded!");
 
-   pnt = NULL;
+   planet_name = NULL;
 
    /* Get a system. */
    if (lua_issystem(L,1)) {
@@ -1272,10 +1273,12 @@ static int playerL_teleport( lua_State *L )
    }
    /* Get a planet. */
    else if (lua_isplanet(L,1)) {
-      pnt   = luaL_validplanet(L,1);
-      name  = planet_getSystem( pnt->name );
+      planet   = luaL_validplanet(L,1);
+      //Copy of planet name because pointer can be lost later
+      planet_name = strdup(planet->name);
+      name  = planet_getSystem( planet->name );
       if (name == NULL) {
-         NLUA_ERROR( L, "Planet '%s' does not belong to a system..", pnt->name );
+         NLUA_ERROR( L, "Planet '%s' does not belong to a system..", planet_name );
          return 0;
       }
    }
@@ -1291,7 +1294,8 @@ static int playerL_teleport( lua_State *L )
          /* No system found, assume destination string is the name of a planet. */
          pntname = name;
          name = planet_getSystem( name );
-         pnt  = planet_get( pntname );
+         planet  = planet_get( pntname );
+         planet_name = strdup(name);
          if (name == NULL) {
             NLUA_ERROR( L, "Planet '%s' does not belong to a system..", pntname );
             return 0;
@@ -1300,6 +1304,11 @@ static int playerL_teleport( lua_State *L )
    }
    else
       NLUA_INVALID_PARAMETER(L);
+
+   /* Reseting pointers as the hooks can cause systems and planets
+    * to be created, and hence stack to be reallocated. */
+   planet = NULL;
+   sys = NULL;
 
    /* Check if system exists. */
    if (!system_exists( name )) {
@@ -1344,8 +1353,8 @@ static int playerL_teleport( lua_State *L )
    missions_run( MIS_AVAIL_SPACE, -1, NULL, NULL );
 
    /* Move to planet. */
-   if (pnt != NULL)
-      player.p->solid->pos = pnt->pos;
+   if (planet_name != NULL)
+      player.p->solid->pos = planet_get( pntname )->pos;
 
    return 0;
 }

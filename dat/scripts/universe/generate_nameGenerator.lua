@@ -27,6 +27,12 @@ rawData.other2="Sang-thong May-par-kngum Phong-sa-ly May Khoua Sam-phanh Boun-Ne
 
 rawData.other3="Faaa Pu-na-au-ia Pa-pee-te Moo-rea Ma-iao Ma-hi-na Pi-rae Pae-a Ta-ia-ra-pu Pa-pa-ra A-ru-e Hi-ti-a-a Bo-ra-Bo-ra Te-va Ta-ia-ra-pu Hu-a-hi-ne Ta-ha-a Ta-pu-ta-pu-a-te-a Tu-ma-ra-a U-tu-ro-a Ran-gi-ro-a Nu-ku Hi-va Ru-ru-tu Hi-va-O-a U-a-Po-u Tu-bu-a-i Fa-ka-ra-va Ma-ke-mo A-ru-tu-a Gam-bi-er Ha-o Ta-ka-ro-a Ma-ni-hi Mau-pi-ti Ra-i-va-vae A-na-a Ri-ma-ta-ra Ta-hu-a-ta U-a-Hu-ka Fa-tu-Hi-va Re-a-o Ra-pa Na-pu-ka Nu-ku-ta-va-ke Tu-re-ia Fan-ga-tau Ta-ta-ko-to Hi-ku-e-ru Pu-ka-pu-ka "
 
+rawData.barbarian1="A-dal-funs a-dal-rik a-la-ric a-la-ri-ca al-hreiks al-hva-ha-ryis a-ma-la-reiks an-da-gis an-si-la a-ra-reiks a-tha-la-gild a-tha-la-reiks a-tha-la-ric a-tha-na-gild a-tha-na-reiks a-tha-na-ric at-ta au-do au-doa-cer au-dvakr au-stra-gu-ta aus-vin-thus a-va-gis ba-dwi-la be-re-mud bo-the-ric chil-de-fon-sus chin-das-vinth chin-das-win-tha dag e-bo-ric e-bri-muth e-diulf e-gi-ca ei-riks er-ma-na-ric er-me-ni-geld er-min-gild er-mi-ni-geld eu-ric eu-tha-ric e-ver-mud e-vo-ric fer-ho-nanths fri-de-ger fri-thi-gern fri-ti-gern"
+
+rawData.barbarian2="Ye-su-gei Nei-kun Da-ri-tai Chi-lei-du Bar-tan Te-mu-jin U-ge Kho-ri Bu-ka Kha-jiun Te-mu-ja Ku-tu-la Al-tan Meng-ge-tu Tar-gu-tai Dai Se-chen Mung-lik Am-ba-khai Cha-ra-kha To-daan Gir-ta Ka-sar Bek-tair Bel-gu-tai Bo-don-char Chim-bai Chi-laun Sor-khan Shi-ra Na-khu Boor-chu To-ghrul Kur-cha-khus Tokh-toa Er-ke Jel-mei Su-be-tai Ja-mu-kha Ja-kha Gam-bu Dair U-sun Kha-gha-ta Dar-ma-la Chil-gei Jo-chi Al-tan Khu-char Sa-cha Tai-chu Ku-chu Ko-ko-chu Kha-daan Ong-gur Je-be Khor-chi Mu-khal-khu Tai-chu O-kin Bar-kak Khu-char O-go-lai Jo-chi Dar-ma-la Tai-char Jur-cha-dai Khu-yil-dar Ku-tuk-to Yur-ki Shi-kiur Bu-ri Bo-ke Me-gu-jin"
+
+rawData.barbarian3="Ach-cauh-tli a-hui-liz-tli a-mox-tli atl chi-ca-hua chi-mal-li chi-pa-hua ci-pact-li cit-la-li coatl coa-xoch co-yotl cual-li cuauh-te-moc cuet-lach-tli cuetz-pal-li cuix-tli e-he-catl e-leuia e-tal-pal-li ez-tli hue-mac hui-tzi-li-huitl hui-tzil-li ic-cauh-tli ich-ta-ca ic-no-yotl i-hui-catl il-hi-ca-mi-na il-huitl i-to-tia itz-tli iuitl ixtli ma-hui-zoh ma-nauia ma-tlal ma-tla-li-huitl ma-zatl me-catl mez-tli mict-lan-te-cuh-tli mi-lin-ti-ca mo-moz-tli mo-yo-le-hua-ni na-huatl na-ma-cuix ne-cal-li ne-cua-metl nel-li ne-za-hual-co-yotl ne-za-hual-pil-li no-che-huatl noch-tli no-pal-tzin oh-tli ol-lin pat-li quauht-li quet-zal-coatl te-noch teo-xi-huitl te-pil-tzin tez-ca-coatl tla-cae-lel tla-ce-lel tla-chi-nol-li tla-loc tla-nex-tic tla-nex-tli tla-zoh-tla-lo-ni tla-zo-pil-li tle-xi-ctli tlil-po-ton-qui toch-tli tol-te-catl to-nauac to-totl ue-man ue-tzca-yotl xi-coh-ten-catl xi-huitl xi-pil xi-pil-li xiuh-coatl xo-chi-pe-pe xo-chi-pil-li yaotl ya-yauh-qui yo-lo-tli yol-ya-ma-ni-tzin zi-pac-to-nal zo-lin"
+
 local ALPHABET="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 function getRandomLetter()
@@ -168,19 +174,52 @@ function nameGenerator.generateNameHindi()
 	return getNameFromStandardTable("hindi")
 end
 
+function nameGenerator.getRandomNativeGenerator()
+	local rand=math.random()
+  
+	  if (rand<0.3) then
+	    return function() return getNameFromStandardTable("other1",3) end
+	  elseif (rand<0.6) then
+	    return function() return getNameFromStandardTable("other2",3) end
+	  else
+	    return function() return getNameFromStandardTable("other3",3) end
+	  end
+end
+
+function nameGenerator.getRandomBarbarianGenerator()
+	local rand=math.random()
+  
+	  if (rand<0.3) then
+	    return function() return getNameFromStandardTable("barbarian1",2) end
+	  elseif (rand<0.6) then
+	    return function() return getNameFromStandardTable("barbarian2",2) end
+	  else
+	    return function() return getNameFromStandardTable("barbarian3",2) end
+	  end
+end
+
 function nameGenerator.generateNameOther()
   
   local rand=math.random()
   
   if (rand<0.3) then
     return getNameFromStandardTable("other1",3)
-  elseif (rand<0.3) then
+  elseif (rand<0.6) then
     return getNameFromStandardTable("other2",3)
   else
     return getNameFromStandardTable("other3",3)
   end
 end
 
---for i=1,200 do
---	print(nameGenerator.generateNameOther()) 
---end
+function nameGenerator.generateNameBarbarian()
+  local rand=math.random()
+  
+  if (rand<0.3) then
+    return getNameFromStandardTable("barbarian1",2)
+  elseif (rand<0.6) then
+    return getNameFromStandardTable("barbarian2",2)
+  else
+    return getNameFromStandardTable("barbarian3",2)
+  end
+end
+

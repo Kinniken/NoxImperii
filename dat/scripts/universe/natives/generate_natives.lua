@@ -19,7 +19,7 @@ natives_generator.generateNativeCivilizedData=function(planet,industryFactor,agr
 	planet.factionPresence=1
 	planet.factionRange=1
 
-	planet.star.nameGenerator=nameGenerator.generateNameNatives
+	planet.star.nameGenerator=nameGenerator.getRandomNativeGenerator()
 end
 
 natives_generator.setNativeDemands=function(planet,basicWeapons,basicTools,primitiveWeapons,primitiveIndustrial,primativeConsumption)

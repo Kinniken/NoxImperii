@@ -28,7 +28,7 @@ function barbarian_lord_generate ()
    local titles={"Lord","Warlord","Chief"}
 
    -- Get the pirate name
-   barbarian_name = titles[math.random(#titles)].." "..nameGenerator.generateNameOther()
+   barbarian_name = titles[math.random(#titles)].." "..nameGenerator.generateNameBarbarian()
 
    -- Get the pirate details
    rating = player.getRating()

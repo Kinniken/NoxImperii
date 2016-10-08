@@ -183,6 +183,8 @@ local function generate_barbarian_population(star,planet,minFertility,settlement
 		planet.faction=factionName
 		planet.factionPresence=1
 		planet.factionRange=1
+
+		star.nameGenerator=nameGenerator.getRandomBarbarianGenerator()
 	end
 end
 

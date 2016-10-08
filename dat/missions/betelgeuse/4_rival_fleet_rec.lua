@@ -17,20 +17,10 @@ include "pilot/pilots_trader.lua"
    misn_desc   = "Destroy the rival trader's ship in orbit around ${targetPlanet}."
    computer_title  = "BETELGEUSE: Eliminate rival trader"
 
-   bar_accept_title = "Underhanded Methods"
-   bar_accept_text  = [[The Betelgian trader is looking angrier than you've ever seen him, slamming a little liqueur glass on the table. He greets you with a grunt and launches into a tirade without prompting. "Backstabbing buffoons! Green-livered thieves! Great bloated blistering traitors!", he starts, slamming the table at every new insult.
-
-It takes some time for him to calm down enough to explain the situation; a shipping magnate based on the independent world of ${targetPlanet} has double-crossed him, refusing to sell promised goods even after pocketing an advance - and worse, selling the whole lot to Rastapopoulos's own client!
-
-It seems like the famous Betelgian reluctance to open conflict can be set aside in dire enough cases. Rastapopoulos wants that fleet destroyed.]]
-
-   bar_accept_title_extra = "Punitive Expedition"
-   bar_accept_text_extra = [[The magnate's flagship is the ${targetShipName}, last seen in the ${targetSystem} system. Expect it to be well-escorted.]]
-
    bar_success_title = "Deadly Competition"
    bar_success_text = [[You land the ${shipName} and submit proof of the destruction of the target to a high-ranking member of the Betelgian house concerned. He whitens a little when reviewing the recording; clearly he is not at ease with such methods.
 
-He hands you your ${payment} credits payment, shaking slightly.]]
+He hands you your ${credits} credits payment, shaking slightly.]]
 
 function create ()
    -- Note: this mission does not make any system claims.

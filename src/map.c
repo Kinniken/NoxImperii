@@ -1070,7 +1070,7 @@ static void map_render( double bx, double by, double w, double h, void *data )
    /* background */
    gl_renderRect( bx, by, w, h, &cBlack );
 
-   map_renderDecorators( x, y );
+   map_renderDecorators( x, y, 0 );
 
    /* Render faction disks. */
    map_renderFactionDisks( x, y, 0 );
@@ -1136,7 +1136,7 @@ void map_renderParams( double bx, double by, double xpos, double ypos,
    *y = round((by - ypos + h/2) * 1.);
 }
 
-void map_renderDecorators( double x, double y)
+void map_renderDecorators( double x, double y, int editor)
 {
    int i,j;
    int sw, sh;
@@ -1151,19 +1151,21 @@ void map_renderDecorators( double x, double y)
 
 	   visible=0;
 
-	   for (j=0; j<systems_nstack && visible==0; j++) {
-	         sys = system_getIndex( j );
+	   if (!editor) {
+		   for (j=0; j<systems_nstack && visible==0; j++) {
+			   sys = system_getIndex( j );
 
-	         if (!sys_isKnown(sys))
-	        	 continue;
+			   if (!sys_isKnown(sys))
+				   continue;
 
-	         if (decorator->x < sys->pos.x + decorator->detection_radius && decorator->x > sys->pos.x - decorator->detection_radius
-	        		 && decorator->y < sys->pos.y + decorator->detection_radius && decorator->y > sys->pos.y - decorator->detection_radius) {
-	        	 visible=1;
-	         }
+			   if (decorator->x < sys->pos.x + decorator->detection_radius && decorator->x > sys->pos.x - decorator->detection_radius
+					   && decorator->y < sys->pos.y + decorator->detection_radius && decorator->y > sys->pos.y - decorator->detection_radius) {
+				   visible=1;
+			   }
+		   }
 	   }
 
-	   if (visible==1) {
+	   if (editor || visible==1) {
 
 		   tx = x + decorator->x*map_zoom;
 		   ty = y + decorator->y*map_zoom;

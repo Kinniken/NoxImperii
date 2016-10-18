@@ -24,6 +24,7 @@
 #define NT_MONTH_DIV   ((ntime_t)NT_DAY_IN_MONTH*(ntime_t)NT_DAY_DIV)
 #define NT_YEAR_DIV   ((ntime_t)NT_MONTH_IN_YEAR*(ntime_t)NT_MONTH_DIV)
 
+#define NT_GAME_TO_REAL_RATIO    (30)        /* Update rate, how many game seconds are in a real second. */
 
 typedef int64_t ntime_t;         /**< Core time type. */
 

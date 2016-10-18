@@ -23,30 +23,33 @@
 #include "hook.h"
 #include "damagetype.h"
 #include "nstring.h"
+#include "limits.h"
+#include "ndata.h"
+#include "dialogue.h"
 
 
-#define BOARDING_WIDTH  380 /**< Boarding window width. */
-#define BOARDING_HEIGHT 200 /**< Boarding window height. */
+#define TABLE_WIDTH  (120*4+20) /**< Loot tables width. */
+#define TABLE_HEIGHT (120*2+10) /**< Loot tables height. */
 
-#define BUTTON_WIDTH     50 /**< Boarding button width. */
+#define BUTTON_WIDTH     100 /**< Boarding button width. */
 #define BUTTON_HEIGHT    30 /**< Boarding button height. */
 
 
 static int board_stopboard = 0; /**< Whether or not to unboard. */
 static int board_boarded   = 0;
 
+int nloots=0;
+Loot* loots;
+ntime_t totalTime;
 
 /*
  * prototypes
  */
-static void board_stealCreds( unsigned int wdw, char* str );
-static void board_stealCargo( unsigned int wdw, char* str );
-static void board_stealFuel( unsigned int wdw, char* str );
-static void board_stealAmmo( unsigned int wdw, char* str );
+static void board_createLootLists(const unsigned int wid);
+static void board_computeLoots(Pilot* p);
 static int board_trySteal( Pilot *p );
-static int board_fail( unsigned int wdw );
-static void board_update( unsigned int wdw );
-
+static int board_fail(void);
+static void board_createWindow(Pilot* p);
 
 /**
  * @brief Gets if the player is boarded.
@@ -56,6 +59,53 @@ int player_isBoarded (void)
    return board_boarded;
 }
 
+/**
+ * @brief creates the window
+ */
+static void board_createWindow(Pilot* p) {
+
+	unsigned int wid;
+	/*
+	 * create the boarding window
+	 */
+	wid = window_create("Boarding", -1, -1, TABLE_WIDTH + 40 + 128 + 140,
+			TABLE_HEIGHT * 2 + BUTTON_HEIGHT * 2 + 80);
+
+	window_addButtonKey(wid, 20, -20 - TABLE_HEIGHT - 25, BUTTON_WIDTH,
+			BUTTON_HEIGHT, "btnBoardingTake", "Take", board_take, SDLK_t);
+
+	window_addButtonKey(wid, 20 + BUTTON_WIDTH + 20, -20 - TABLE_HEIGHT - 25,
+			BUTTON_WIDTH, BUTTON_HEIGHT, "btnBoardingRemove", "Remove",
+			board_remove, SDLK_r);
+
+	window_addText( wid, -20, -20, 128+80, 30, 1,
+				"txtLootZoomTitle", &gl_smallFont, &cDConsole,"");
+
+	window_addRect(wid, -80, -60, 128, 128, "rctLootZoom", &cBlack, 0);
+	window_addImageLayered(wid, -80, -60, 128, 128, "imgLootZoom", NULL, 0, 1);
+
+	window_addText( wid, -20, -60-128-20, 128+120, 120, 0,
+					"txtLootZoomLabels", &gl_smallFont, &cDConsole,"Quantity:\nTotal value:\nTime needed:\n");
+
+	window_addText( wid, -20, -60-128-20, 120, 120, 0,
+						"txtLootZoomDesc", &gl_smallFont, &cDConsole,"");
+
+	window_addText( wid, -20, -60-128-20-50, 128+120, 120, 0,
+						"txtLootZoomImpossible", &gl_smallFont, &cDarkRed,"");
+
+	window_addText( wid, 20, 20, TABLE_WIDTH, 30, 1,
+					"txtTotalTime", &gl_smallFont, &cBlack,"");
+
+
+	window_addButtonKey(wid, -20-BUTTON_WIDTH-20, 20, BUTTON_WIDTH, BUTTON_HEIGHT,
+			"btnBoardingLoot", "Loot", board_startLoot, SDLK_l);
+	window_addButtonKey(wid, -20, 20, BUTTON_WIDTH, BUTTON_HEIGHT,
+				"btnBoardingClose", "Leave", board_exit, SDLK_e);
+
+	board_computeLoots(p);
+	board_createLootLists(wid);
+	board_listUpdate( wid, NULL );
+}
 
 /**
  * @fn void player_board (void)
@@ -67,9 +117,11 @@ int player_isBoarded (void)
 void player_board (void)
 {
    Pilot *p;
-   unsigned int wdw;
    char c;
    HookParam hparam[2];
+   int answer;
+   char buf[512];
+   int chance;
 
    /* Not disabled. */
    if (pilot_isDisabled(player.p))
@@ -97,7 +149,7 @@ void player_board (void)
       player_message("\erTarget ship can not be boarded.");
       return;
    }
-   else if (pilot_isFlag(p,PILOT_BOARDED)) {
+   else if (pilot_isFlag(p,PILOT_BOARDED_FAILED)) {
       player_message("\erYour target cannot be boarded again.");
       return;
    }
@@ -126,11 +178,42 @@ void player_board (void)
       }
    }
 
+   if (p == NULL)
+	   return;
+
+   //If has not been boarded before, needs to fight for it
+   if (!pilot_isFlag(p,PILOT_BOARDED_SUCCESS)) {
+	   chance=100-(0.5 * (10. + p->crew*p->boarding_skills)/(10. + player.p->crew*player.p->boarding_skills))*100;
+
+	   chance=MAX(chance,0);
+	   chance=MIN(chance,100);
+
+	   nsnprintf( buf, 512, "Do you wish to attempt to board the %s?"
+			   "\n\nYou have a crew of %d fighting at %d%% efficiency."
+			   "\n\nThey have a crew of %d fighting at %d%% efficiency."
+			   "\n\nYour chance of winning are of %d%%.", p->name,
+			   (int)player.p->crew,(int)(player.p->boarding_skills*100),
+			   (int)p->crew,(int)(p->boarding_skills*100),
+			   chance);
+
+	   answer = dialogue_YesNoRaw("Boarding Attempt",buf);
+
+	   if (answer == 0)
+		   return;
+
+	   answer = board_fail();
+
+	   if (answer == 1)
+		   return;
+   }
+
    /* Is boarded. */
    board_boarded = 1;
 
    /* pilot will be boarded */
-   pilot_setFlag(p,PILOT_BOARDED);
+   pilot_setFlag(p,PILOT_BOARDED_SUCCESS);
+   pilot_setFlag(p,PILOT_BOARDED_IP);
+
    player_message("\epBoarding ship \e%c%s\e0.", c, p->name);
 
    /* Don't unboard. */
@@ -155,32 +238,394 @@ void player_board (void)
    /*
     * create the boarding window
     */
-   wdw = window_create( "Boarding", -1, -1, BOARDING_WIDTH, BOARDING_HEIGHT );
-
-   window_addText( wdw, 20, -30, 120, 60,
-         0, "txtCargo", &gl_smallFont, &cDConsole,
-         "Credits:\n"
-         "Cargo:\n"
-         "Fuel:\n"
-         "Ammo:\n"
-         );
-   window_addText( wdw, 80, -30, 120, 60,
-         0, "txtData", &gl_smallFont, &cBlack, NULL );
-
-   window_addButton( wdw, 20, 20, BUTTON_WIDTH, BUTTON_HEIGHT,
-         "btnStealCredits", "Credits", board_stealCreds);
-   window_addButton( wdw, 20+BUTTON_WIDTH+20, 20, BUTTON_WIDTH, BUTTON_HEIGHT,
-         "btnStealCargo", "Cargo", board_stealCargo);
-   window_addButton( wdw, 20+2*(BUTTON_WIDTH+20), 20, BUTTON_WIDTH, BUTTON_HEIGHT,
-         "btnStealFuel", "Fuel", board_stealFuel);
-   window_addButton( wdw, 20+3*(BUTTON_WIDTH+20), 20, BUTTON_WIDTH, BUTTON_HEIGHT,
-         "btnStealAmmo", "Ammo", board_stealAmmo);
-   window_addButton( wdw, -20, 20, BUTTON_WIDTH, BUTTON_HEIGHT,
-         "btnBoardingClose", "Leave", board_exit );
-
-   board_update(wdw);
+	board_createWindow(p);
 }
 
+/**
+ * @brief recreates the two image arrays
+ */
+static void board_createLootLists(const unsigned int wid) {
+
+	int i;
+	int* ntloots;
+	glTexture ***tloots;
+	char **loots_name;
+	char **loots_quantity;
+	int nb, pos;
+	char buf[256],buf2[128],buf3[128];
+	credits_t totalValue;
+
+	if (widget_exists( wid, "iarLoots" ))
+		window_destroyWidget( wid, "iarLoots" );
+	if (widget_exists( wid, "iarLootsSelected" ))
+		window_destroyWidget( wid, "iarLootsSelected" );
+
+	//First, non-selected loots
+	nb=0;
+	for (i=0; i<nloots; i++) {
+		if (loots[i].selected == 0)
+			nb++;
+	}
+
+	loots_name = malloc(sizeof(char*) * nb);
+	loots_quantity = malloc(sizeof(char*) * nb);
+	ntloots = malloc(sizeof(int*)* nb);
+	tloots    = malloc(sizeof(glTexture**) * nb);
+
+	pos=0;
+	for (i=0; i<nloots; i++) {
+		if (loots[i].selected == 0) {
+			loots_name[pos]=strdup(loots[i].label);
+
+			loots_quantity[pos] = malloc( loots[i].quantity / 10 + 4 );
+			nsnprintf( loots_quantity[pos], loots[i].quantity / 10 + 4, "%d", loots[i].quantity );
+
+			ntloots[pos] = loots[i].ntexture;
+			tloots[pos] = loots[i].textures;
+
+			pos++;
+		}
+	}
+
+	window_addImageLayeredArray( wid, 20, -30,
+			TABLE_WIDTH, TABLE_HEIGHT, "iarLoots", 96, 96,
+			tloots, ntloots, loots_name, nb, board_listUpdate, board_listUpdate );
+	toolkit_setImageLayeredArrayQuantity( wid, "iarLoots", loots_quantity );
+
+	//Now, the rest
+	nb=0;
+	for (i=0; i<nloots; i++) {
+		if (loots[i].selected == 1)
+			nb++;
+	}
+
+	loots_name = malloc(sizeof(char*) * nb);
+	ntloots = malloc(sizeof(int*)* nb);
+	tloots    = malloc(sizeof(glTexture**) * nb);
+	loots_quantity = malloc(sizeof(char*) * nb);
+
+	pos=0;
+	for (i=0; i<nloots; i++) {
+		if (loots[i].selected == 1) {
+			loots_name[pos]=strdup(loots[i].label);
+
+			loots_quantity[pos] = malloc( loots[i].quantity / 10 + 4 );
+			nsnprintf( loots_quantity[pos], loots[i].quantity / 10 + 4, "%d", loots[i].quantity );
+
+			ntloots[pos] = loots[i].ntexture;
+			tloots[pos] = loots[i].textures;
+
+			pos++;
+		}
+	}
+
+	window_addImageLayeredArray( wid, 20, -20-TABLE_HEIGHT-20-BUTTON_HEIGHT-20,
+				TABLE_WIDTH, TABLE_HEIGHT, "iarLootsSelected", 96, 96,
+				tloots, ntloots, loots_name, nb, board_listUpdateSelected, board_listUpdateSelected );
+	toolkit_setImageLayeredArrayQuantity( wid, "iarLootsSelected", loots_quantity );
+
+	totalTime = 0;
+	totalValue = 0;
+
+	for (i=0; i<nloots; i++) {
+			if (loots[i].selected == 1) {
+				totalTime += loots[i].timeNeeded;
+				totalValue += loots[i].totalValue;
+			}
+	}
+
+
+	if (totalTime>0) {
+		ntime_prettyBuf(buf2,128,totalTime,1);
+		credits2str( buf3, totalValue, 2 );
+
+		for (i=0; i<nloots; i++) {
+			if (loots[i].selected == 1) {
+				totalTime += loots[i].timeNeeded;
+			}
+		}
+
+		nsnprintf( buf, 256,
+				"Total time needed to loot items: %s\nTotal value: %s",
+				buf2,buf3
+		);
+		window_modifyText( wid, "txtTotalTime", buf );
+	} else {
+		window_modifyText( wid, "txtTotalTime", "" );
+	}
+}
+
+/*
+ * @brief calculates the list of lootable items on the target ship
+ */
+static void board_computeLoots(Pilot* p) {
+	int posNormal,posImpossible,pos;
+	char buf[PATH_MAX];
+	int i,slotSize;
+	double crewSize;
+	int impossibleStart=0;
+
+	totalTime=0;
+
+	crewSize = player.p->crew;
+
+	nloots=0;
+
+	if (p->credits > 0)
+		nloots++;
+
+	if (p->fuel > 0)
+		nloots++;
+
+	nloots += p->ncommodities;
+
+	//For some reasons, some p->outfits[i] can have a null outfit, must skip those
+	for (i=0;i<p->noutfits;i++) {
+		if (p->outfits[i]->outfit != NULL)
+			nloots++;
+	}
+
+	//Now calculating whether we have "impossible" items
+	impossibleStart=nloots;
+
+	if (p->fuel > 0 && player.p->fuel >= player.p->fuel_max)
+		impossibleStart--;
+
+	if (player.p->cargo_free == 0) {
+		impossibleStart-=p->ncommodities;
+	}
+
+	loots = malloc(sizeof(Loot) * nloots);
+	memset( loots, 0, sizeof(Loot) * nloots );
+
+	posImpossible=impossibleStart;
+	posNormal=0;
+
+	if (p->credits > 0) {
+		loots[posNormal].label = "Credits";
+
+		loots[posNormal].type = LOOT_CREDITS;
+		loots[posNormal].totalValue = p->credits;
+		loots[posNormal].quantity = (int)p->credits;
+		loots[posNormal].timeNeeded = ntime_create(0,0,0,0,15,0);
+		loots[posNormal].ntexture = 1;
+		loots[posNormal].textures = malloc(sizeof(glTexture));
+
+		nsnprintf( buf, PATH_MAX, COMMODITY_GFX_PATH"credits.png");
+		loots[posNormal].textures[0] = gl_newImage( buf, OPENGL_TEX_MIPMAPS );
+
+		posNormal++;
+	}
+
+	if (p->fuel > 0) {
+		if (player.p->fuel >= player.p->fuel_max) {
+			pos=posImpossible;
+		} else {
+			pos=posNormal;
+		}
+
+		loots[pos].label = "Fuel";
+
+		loots[pos].type = LOOT_FUEL;
+		loots[pos].fuel = (int)p->fuel;
+		loots[pos].quantity = (int)p->fuel;
+		loots[pos].timeNeeded = ntime_create(0,0,0,0,p->fuel/50,0);
+
+		if (player.p->fuel >= player.p->fuel_max) {
+			loots[pos].impossible = 1;
+
+			loots[pos].ntexture = 2;
+			loots[pos].textures = malloc(sizeof(glTexture) * 2);
+			nsnprintf( buf, PATH_MAX, COMMODITY_GFX_PATH"fuel.png");
+			loots[pos].textures[0] = gl_newImage( buf, OPENGL_TEX_MIPMAPS );
+			nsnprintf( buf, PATH_MAX, COMMODITY_GFX_PATH"barred.png");
+			loots[pos].textures[1] = gl_newImage( buf, OPENGL_TEX_MIPMAPS );
+
+			posImpossible++;
+		} else {
+			loots[pos].ntexture = 1;
+			loots[pos].textures = malloc(sizeof(glTexture));
+			nsnprintf( buf, PATH_MAX, COMMODITY_GFX_PATH"fuel.png");
+			loots[pos].textures[0] = gl_newImage( buf, OPENGL_TEX_MIPMAPS );
+
+			posNormal++;
+		}
+	}
+
+	for (i=0;i<p->ncommodities;i++) {
+		if (player.p->cargo_free == 0) {
+			pos=posImpossible;
+		} else {
+			pos=posNormal;
+		}
+
+		loots[pos].label = p->commodities[i].commodity->name;
+
+		loots[pos].type = LOOT_COMMODITTY;
+		loots[pos].commodity = p->commodities[i].commodity;
+		loots[pos].quantity = p->commodities[i].quantity;
+		loots[pos].totalValue = p->commodities[i].quantity * p->commodities[i].commodity->price;
+		loots[pos].timeNeeded = ntime_create(0,0,0,0,15+p->commodities[i].quantity/crewSize,0);
+
+		if (player.p->cargo_free == 0) {
+			loots[pos].impossible = 1;
+			loots[pos].ntexture = 2;
+			loots[pos].textures = malloc(sizeof(glTexture) * 2);
+			loots[pos].textures[0] = p->commodities[i].commodity->gfx_store;
+			nsnprintf( buf, PATH_MAX, COMMODITY_GFX_PATH"barred.png");
+			loots[pos].textures[1] = gl_newImage( buf, OPENGL_TEX_MIPMAPS );
+
+			posImpossible++;
+		} else {
+			loots[pos].ntexture = 1;
+			loots[pos].textures = malloc(sizeof(glTexture));
+			loots[pos].textures[0] = p->commodities[i].commodity->gfx_store;
+
+			posNormal++;
+		}
+	}
+
+	for (i=0;i<p->noutfits;i++) {
+
+		if (p->outfits[i]->outfit != NULL) {
+			loots[posNormal].label = p->outfits[i]->outfit->name;
+
+			if (p->outfits[i]->outfit->slot.size == OUTFIT_SLOT_SIZE_LIGHT) {
+				slotSize = 1;
+			} else if (p->outfits[i]->outfit->slot.size == OUTFIT_SLOT_SIZE_MEDIUM) {
+				slotSize = 2;
+			} else if (p->outfits[i]->outfit->slot.size == OUTFIT_SLOT_SIZE_HEAVY) {
+				slotSize = 4;
+			} else {
+				slotSize = 1;
+			}
+
+			loots[posNormal].type = LOOT_OUTFIT;
+			loots[posNormal].outfit = p->outfits[i]->outfit;
+			loots[posNormal].quantity = 1;
+			loots[posNormal].timeNeeded = ntime_create(0,0,0,0,15+slotSize*100/crewSize,0);
+			loots[posNormal].totalValue = p->outfits[i]->outfit->price;
+			loots[posNormal].ntexture = p->outfits[i]->outfit->gfx_store_nlayers;
+			loots[posNormal].textures = p->outfits[i]->outfit->gfx_store_layers;
+
+			posNormal++;
+		}
+	}
+}
+
+/**
+ * @brief displays a selected loot (in the info fields to the right of the window)
+ */
+static void board_displayLoot(unsigned int wid, const char *lootLabel) {
+	int i;
+	Loot loot;
+	char buf[256],buf2[128],buf3[128];
+	char *impossible;
+
+	for (i=0;i<nloots;i++) {
+		if (strcmp(loots[i].label,lootLabel) == 0) {
+			loot=loots[i];
+		}
+	}
+
+	window_modifyText( wid, "txtLootZoomTitle", loot.label );
+	window_modifyImageLayered( wid, "imgLootZoom", loot.textures, loot.ntexture, 128, 128 );
+
+	ntime_prettyBuf(buf2,128,loot.timeNeeded,1);
+
+	credits2str( buf3, loot.totalValue, 2 );
+
+	if (loot.impossible == 1 && loot.type == LOOT_FUEL) {
+		impossible="\n\n\erYour fuel tanks are full.\e0";
+	} else if (loot.impossible == 1 && loot.type == LOOT_COMMODITTY) {
+		impossible="\n\n\erYour cargo space is full.\e0";
+	} else {
+		impossible="";
+	}
+
+	nsnprintf( buf, 256,
+					"%d\n"
+					"%s\n"
+					"%s",
+					loot.quantity,
+					buf3,
+					buf2
+			);
+	window_modifyText( wid, "txtLootZoomDesc", buf );
+
+	window_modifyText( wid, "txtLootZoomImpossible", impossible );
+
+}
+
+/**
+ * @brief updates the displayed loot after click in the main list
+ */
+void board_listUpdate( unsigned int wid, char* str ) {
+	(void)str;
+	char *lootLabel;
+	lootLabel = toolkit_getImageLayeredArray( wid, "iarLoots" );
+
+	if (lootLabel == NULL)
+		return;
+
+	board_displayLoot(wid,lootLabel);
+}
+
+/**
+ * @brief updates the displayed loot after click in the selected list
+ */
+void board_listUpdateSelected( unsigned int wid, char* str ) {
+	(void)str;
+	char *lootLabel;
+	lootLabel = toolkit_getImageLayeredArray( wid, "iarLootsSelected" );
+
+	if (lootLabel == NULL)
+		return;
+
+	board_displayLoot(wid,lootLabel);
+}
+
+/**
+ * @brief takes a loot item (moves it to the bottom list)
+ */
+void board_take( unsigned int wid, char* str ) {
+	(void)str;
+	int i, pos, selpos;
+	selpos = toolkit_getImageLayeredArrayPos( wid, "iarLoots" );
+
+	pos=0;
+	for (i=0;i<nloots;i++) {
+		if (loots[i].selected == 0 && loots[i].impossible == 0) {
+			if (pos == selpos) {
+				loots[i].selected = 1;
+			}
+			pos++;
+		}
+	}
+
+	board_createLootLists(wid);
+}
+
+/**
+ * @brief returns a loot item to the main list
+ */
+void board_remove( unsigned int wid, char* str ) {
+	(void)str;
+	int i, pos, selpos;
+		selpos = toolkit_getImageLayeredArrayPos( wid, "iarLootsSelected" );
+
+		pos=0;
+		for (i=0;i<nloots;i++) {
+			if (loots[i].selected == 1) {
+				if (pos == selpos) {
+					loots[i].selected = 0;
+				}
+				pos++;
+			}
+		}
+
+	board_createLootLists(wid);
+}
 
 /**
  * @brief Forces unboarding of the pilot.
@@ -190,211 +635,53 @@ void board_unboard (void)
    board_stopboard = 1;
 }
 
+/**
+ * @brief starts the actual looting (window closes, looting process in-game starts)
+ */
+void board_startLoot( unsigned int wid, char* str ) {
+	(void) str;
+	int i,nChosenLoots,pos;
+	Loot* chosenLoots;
+	window_destroy( wid );
+
+	nChosenLoots=0;
+	for (i=0; i<nloots; i++) {
+		if (loots[i].selected == 1) {
+			nChosenLoots++;
+		}
+	}
+
+	chosenLoots = malloc(sizeof(Loot) * nChosenLoots);
+	pos = 0;
+	for (i=0; i<nloots; i++) {
+		if (loots[i].selected == 1) {
+			memcpy ( &chosenLoots[pos], &loots[i], sizeof(Loot) );
+			pos++;
+		}
+	}
+
+	pilot_startLoot(player.p,pilot_get(player.p->target),chosenLoots,nChosenLoots);
+
+	/* Is not boarded. */
+	board_boarded = 0;
+}
 
 /**
  * @brief Closes the boarding window.
  *
- *    @param wdw Window triggering the function.
+ *    @param wid Window triggering the function.
  *    @param str Unused.
  */
-void board_exit( unsigned int wdw, char* str )
+void board_exit( unsigned int wid, char* str )
 {
    (void) str;
-   window_destroy( wdw );
+   window_destroy( wid );
+
+   free(loots);
+   loots = NULL;
 
    /* Is not boarded. */
    board_boarded = 0;
-}
-
-
-/**
- * @brief Attempt to steal the boarded ship's credits.
- *
- *    @param wdw Window triggering the function.
- *    @param str Unused.
- */
-static void board_stealCreds( unsigned int wdw, char* str )
-{
-   (void)str;
-   Pilot* p;
-
-   p = pilot_get(player.p->target);
-
-   if (p->credits==0) { /* you can't steal from the poor */
-      player_message("\epThe ship has no credits.");
-      return;
-   }
-
-   if (board_fail(wdw)) return;
-
-   player_modCredits( p->credits );
-   p->credits = 0;
-   board_update( wdw ); /* update the lack of credits */
-   player_message("\epYou manage to steal the ship's credits.");
-}
-
-
-/**
- * @brief Attempt to steal the boarded ship's cargo.
- *
- *    @param wdw Window triggering the function.
- *    @param str Unused.
- */
-static void board_stealCargo( unsigned int wdw, char* str )
-{
-   (void)str;
-   int q;
-   Pilot* p;
-
-   p = pilot_get(player.p->target);
-
-   if (p->ncommodities==0) { /* no cargo */
-      player_message("\epThe ship has no cargo.");
-      return;
-   }
-   else if (pilot_cargoFree(player.p) <= 0) {
-      player_message("\erYou have no room for the ship's cargo.");
-      return;
-   }
-
-   if (board_fail(wdw)) return;
-
-   /** steal as much as possible until full - @todo let player choose */
-   q = 1;
-   while ((p->ncommodities > 0) && (q!=0)) {
-      q = pilot_cargoAdd( player.p, p->commodities[0].commodity,
-            p->commodities[0].quantity, 0 );
-      pilot_cargoRm( p, p->commodities[0].commodity, q );
-   }
-
-   board_update( wdw );
-   player_message("\epYou manage to steal the ship's cargo.");
-}
-
-
-/**
- * @brief Attempt to steal the boarded ship's fuel.
- *
- *    @param wdw Window triggering the function.
- *    @param str Unused.
- */
-static void board_stealFuel( unsigned int wdw, char* str )
-{
-   (void)str;
-   Pilot* p;
-
-   p = pilot_get(player.p->target);
-
-   if (p->fuel <= 0.) { /* no fuel. */
-      player_message("\epThe ship has no fuel.");
-      return;
-   }
-   else if (player.p->fuel == player.p->fuel_max) {
-      player_message("\erYour ship is at maximum fuel capacity.");
-      return;
-   }
-
-   if (board_fail(wdw))
-      return;
-
-   /* Steal fuel. */
-   player.p->fuel += p->fuel;
-   p->fuel = 0.;
-
-   /* Make sure doesn't overflow. */
-   if (player.p->fuel > player.p->fuel_max) {
-      p->fuel      = player.p->fuel - player.p->fuel_max;
-      player.p->fuel = player.p->fuel_max;
-   }
-
-   board_update( wdw );
-   player_message("\epYou manage to steal the ship's fuel.");
-}
-
-
-/**
- * @brief Attempt to steal the boarded ship's ammo.
- *
- *    @param wdw Window triggering the function.
- *    @param str Unused.
- */
-static void board_stealAmmo( unsigned int wdw, char* str )
-{
-     Pilot* p;
-     int nreloaded, i, nammo, x;
-     PilotOutfitSlot *target_outfit_slot, *player_outfit_slot;
-     Outfit *target_outfit, *ammo, *player_outfit;
-     (void)str;
-     nreloaded = 0;
-     p = pilot_get(player.p->target);
-     /* Target has no ammo */
-     if (pilot_countAmmo(p) <= 0) {
-        player_message("\erThe ship has no ammo.");
-        return; 
-     }
-     /* Player is already at max ammo */
-     if (pilot_countAmmo(player.p) >= pilot_maxAmmo(player.p)) {
-        player_message("\erYou are already at max ammo.");
-        return;
-     }
-     if (board_fail(wdw))
-        return;
-     /* Steal the ammo */
-     for (i=0; i<p->noutfits; i++) {
-        target_outfit_slot = p->outfits[i];
-        if (target_outfit_slot == NULL)
-           continue;
-        target_outfit = target_outfit_slot->outfit;
-        if (target_outfit == NULL)
-           continue;
-        /* outfit isn't a launcher */
-        if (!outfit_isLauncher(target_outfit)) {
-           continue;
-        }
-        nammo = target_outfit_slot->u.ammo.quantity;
-        ammo = target_outfit_slot->u.ammo.outfit;
-        /* launcher has no ammo */
-        if (ammo == NULL)
-           continue;
-        if (nammo <= 0) {
-           continue;
-        }
-        for (x=0; x<player.p->noutfits; x++) {
-           int nadded = 0;
-           player_outfit_slot = player.p->outfits[x];
-           if (player_outfit_slot == NULL)
-              continue;
-           player_outfit = player_outfit_slot->outfit;
-           if (player_outfit == NULL)
-              continue;
-           if (!outfit_isLauncher(player_outfit)) {
-              continue;
-           }
-           if (strcmp(ammo->name, player_outfit_slot->u.ammo.outfit->name) != 0) {
-              continue;
-           }
-           /* outfit's ammo matches; try to add to player and remove from target */
-           nadded = pilot_addAmmo(player.p, player_outfit_slot, ammo, nammo);
-           nammo -= nadded;
-           pilot_rmAmmo(p, target_outfit_slot, nadded);
-           nreloaded += nadded;
-           if (nadded > 0)
-              player_message("\epYou looted %d %s(s)", nadded, ammo->name);
-           if (nammo <= 0) {
-              break;
-           }
-        }
-        if (nammo <= 0) {
-           continue;
-        }
-     }
-     if (nreloaded <= 0)
-        player_message("\erThere is no ammo compatible with your launchers on board.");
-     pilot_updateMass(player.p);
-     pilot_weaponSane(player.p);
-     pilot_updateMass(p);
-     pilot_weaponSane(p);
-     board_update(wdw);
 }
 
 
@@ -433,6 +720,8 @@ static int board_trySteal( Pilot *p )
       return -1;
    }
 
+   pilot_setFlag(target,PILOT_BOARDED_FAILED);
+
    return 1;
 }
 
@@ -442,7 +731,7 @@ static int board_trySteal( Pilot *p )
  *
  *    @return 1 on failure to board, otherwise 0.
  */
-static int board_fail( unsigned int wdw )
+static int board_fail(void)
 {
    int ret;
 
@@ -456,66 +745,7 @@ static int board_fail( unsigned int wdw )
       player_message("\epThe ship's security system locks %s out.",
             (player.p->ship->crew > 0) ? "your crew" : "you" );
 
-   board_exit( wdw, NULL);
    return 1;
-}
-
-
-/**
- * @brief Updates the boarding window fields.
- *
- *    @param wdw Window to update.
- */
-static void board_update( unsigned int wdw )
-{
-   int i, j;
-   char str[PATH_MAX];
-   char cred[ECON_CRED_STRLEN];
-   Pilot* p;
-
-   p = pilot_get(player.p->target);
-   j = 0;
-
-   /* Credits. */
-   credits2str( cred, p->credits, 2 );
-   j += nsnprintf( &str[j], PATH_MAX, "%s\n", cred );
-
-   /* Commodities. */
-   if ((p->ncommodities==0) && (j < PATH_MAX))
-      j += snprintf( &str[j], PATH_MAX-j, "none\n" );
-   else {
-     for (i=0; i<p->ncommodities; i++) {
-         if (j > PATH_MAX)
-            break;
-         if (p->commodities[i].commodity == NULL)
-            continue;
-         j += snprintf( &str[j], PATH_MAX-j, "%d %s\n",
-                        p->commodities[i].quantity, p->commodities[i].commodity->name );
-     }
-   }
-
-   /* Fuel. */
-   if (p->fuel <= 0.) {
-      if (j < PATH_MAX)
-         j += snprintf( &str[j], PATH_MAX-j, "none\n" );
-   }
-   else {
-      if (j < PATH_MAX)
-         j += snprintf( &str[j], PATH_MAX-j, "%.0f Units\n", p->fuel );
-   }
-   
-   /* Missiles */
-   int nmissiles = pilot_countAmmo(p);
-   if (nmissiles <= 0) {
-      if (j < PATH_MAX)
-        j += snprintf( &str[j], PATH_MAX-j, "none\n" );
-   }
-   else {
-      if (j < PATH_MAX)
-        j += snprintf( &str[j], PATH_MAX-j, "%d missiles\n", nmissiles );
-   }
-
-   window_modifyText( wdw, "txtData", str );
 }
 
 
@@ -547,11 +777,9 @@ int pilot_board( Pilot *p )
             pow2(VY(p->solid->vel)-VY(target->solid->vel))) >
             (double)pow2(MAX_HYPERSPACE_VEL))
       return 0;
-   else if (pilot_isFlag(target,PILOT_BOARDED))
-      return 0;
 
    /* Set the boarding flag. */
-   pilot_setFlag(target, PILOT_BOARDED);
+   pilot_setFlag(target, PILOT_BOARDED_SUCCESS);
    pilot_setFlag(p, PILOT_BOARDING);
 
    /* Set time it takes to board. */

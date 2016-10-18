@@ -979,10 +979,14 @@ static void pilot_setCommMsg( Pilot *p, const char *s )
    if (p->comm_msg != NULL)
       free(p->comm_msg);
 
-   /* Duplicate the message. */
-   p->comm_msg       = strdup(s);
-   p->comm_msgWidth  = gl_printWidthRaw( NULL, s );
-   p->comm_msgTimer  = pilot_commTimeout;
+   if (s != NULL) {
+	   /* Duplicate the message. */
+	   p->comm_msg       = strdup(s);
+	   p->comm_msgWidth  = gl_printWidthRaw( NULL, s );
+	   p->comm_msgTimer  = pilot_commTimeout;
+   } else {
+	   p->comm_msg = NULL;
+   }
 }
 
 
@@ -1473,7 +1477,10 @@ void pilot_updateDisable( Pilot* p, const unsigned int shooter )
    else if (pilot_isFlag(p, PILOT_DISABLED) && (p->armour > p->stress)) { /* Pilot is disabled, but shouldn't be. */
       pilot_rmFlag( p, PILOT_DISABLED ); /* Undisable. */
       pilot_rmFlag( p, PILOT_DISABLED_PERM ); /* Clear perma-disable flag if necessary. */
-      pilot_rmFlag( p, PILOT_BOARDING ); /* Can get boarded again. */
+      pilot_rmFlag( p, PILOT_BOARDING );
+      /* getting undisabled clears the boarding success/failure flags */
+      pilot_rmFlag( p, PILOT_BOARDED_SUCCESS );
+      pilot_rmFlag( p, PILOT_BOARDED_FAILED );
 
       /* Reset the accumulated disable time. */
       p->dtimer_accum = 0.;
@@ -1790,7 +1797,9 @@ void pilot_update( Pilot* pilot, const double dt )
       pilot->stress -= stress_falloff * pilot->stats.stress_dissipation * dt;
       pilot->stress = MAX(pilot->stress, 0);
    }
-   else if (!pilot_isFlag(pilot, PILOT_DISABLED_PERM)) { /* Case pilot is disabled (but not permanently so). */
+   /* Case pilot is disabled (but not permanently so). */
+   /* Pilots currently being boarded also cannot get undisabled */
+   else if (!pilot_isFlag(pilot, PILOT_DISABLED_PERM) && !pilot_isFlag(pilot, PILOT_BOARDED_IP)) {
       pilot->dtimer_accum += dt;
       if (pilot->dtimer_accum >= pilot->dtimer) {
          pilot->stress       = 0.;
@@ -1910,8 +1919,12 @@ void pilot_update( Pilot* pilot, const double dt )
       }
    }
 
+   if (pilot_isFlag(pilot, PILOT_LOOTING)) {
+	   pilot_updateLoot(pilot, dt);
+   }
+
    /* purpose fallthrough to get the movement like disabled */
-   if (pilot_isDisabled(pilot) || pilot_isFlag(pilot, PILOT_COOLDOWN)) {
+   if (pilot_isDisabled(pilot) || pilot_isFlag(pilot, PILOT_COOLDOWN) || pilot_isFlag(pilot, PILOT_LOOTING)) {
       /* Do the slow brake thing */
       pilot->solid->speed_max = 0.;
       pilot_setThrust( pilot, 0. );
@@ -1929,7 +1942,8 @@ void pilot_update( Pilot* pilot, const double dt )
             pilot->engine_glow = 0.;
       }
 
-      return;
+      if (pilot_isDisabled(pilot) || pilot_isFlag(pilot, PILOT_COOLDOWN))
+    	  return;
    }
 
    /* Pilot is still alive */
@@ -2051,6 +2065,7 @@ void pilot_update( Pilot* pilot, const double dt )
    pilot->solid->update( pilot->solid, dt );
    gl_getSpriteFromDir( &pilot->tsx, &pilot->tsy,
          pilot->ship->gfx_space, pilot->solid->dir );
+
 }
 
 /**
@@ -3077,6 +3092,152 @@ credits_t pilot_worth( const Pilot *p )
    return price;
 }
 
+/**
+ * @brief method called when the player starts looting a ship
+ */
+void pilot_startLoot(Pilot *p, Pilot *target,Loot* loots,int nloot ) {
+	if (p->loots != NULL)
+		free(p->loots);
 
+	p->loots = loots;
+	p->nloots = nloot;
+	p->lootTarget = target->id;
 
+	pilot_setFlag(player.p,PILOT_LOOTING);
+	pause_setSpeed( 5. );
+}
 
+/**
+ * @brief end of the looting for a ship by the player
+ *
+ * (Wether because it's done or because it was interrupted for some reasons)
+ */
+void pilot_finishLooting(Pilot* p) {
+	Pilot* target;
+	pilot_rmFlag(p, PILOT_LOOTING);
+
+	if (player.p == p)
+		pause_setSpeed(1.);
+
+	target = pilot_get(p->lootTarget);
+
+	if (target != NULL) {
+		//remove the boarding label
+		target->comm_msgTimer  = 0;
+		pilot_rmFlag(target, PILOT_BOARDED_IP);
+	}
+
+	if (p->loots != NULL) {
+		free(p->loots);
+		p->lootTarget=0;
+		p->nloots=0;
+	}
+}
+
+/**
+ * @brief main method to update looting status
+ *
+ * Handles tracking progress of looting, transferring loot, displaying messages to player
+ */
+void pilot_updateLoot(Pilot *p, const double dt) {
+
+	Loot* currentLoot=NULL;
+	int i,q,perc;
+	char buf[256],buf2[128];
+	Pilot* target;
+
+	if (p->loots == NULL)
+		return;
+
+	target = pilot_get(p->lootTarget);
+
+	if (target == NULL) {
+		pilot_setCommMsg( p, "Target ship destroyed, looting cancelled." );
+		pilot_finishLooting(p);
+		return;
+	}
+
+	for (i=0;i<p->nloots && currentLoot==NULL;i++) {
+		if (p->loots[i].timePassed<p->loots[i].timeNeeded) {
+			currentLoot=&p->loots[i];
+		}
+	}
+
+	if (currentLoot == NULL) {
+		pilot_finishLooting(p);
+		return;
+	}
+
+	currentLoot->timePassed += dt*NT_GAME_TO_REAL_RATIO*NT_SEC_DIV;
+
+	if (!pilot_isDisabled(target)) {
+		pilot_setCommMsg( p, "Target ship not longer disabled, looting cancelled." );
+		pilot_finishLooting(p);
+		return;
+	}
+
+	if (currentLoot->timePassed > currentLoot->timeNeeded) {
+		if (currentLoot->type == LOOT_CREDITS) {
+			pilot_modCredits(p, currentLoot->quantity);
+			pilot_modCredits(target, -currentLoot->quantity);
+		} else if (currentLoot->type == LOOT_FUEL) {
+			pilot_refuel(p, currentLoot->quantity);
+			target->fuel=0;
+		} else if (currentLoot->type == LOOT_COMMODITTY) {
+			pilot_cargoAdd(p,currentLoot->commodity,currentLoot->quantity,0);
+			pilot_cargoRm(target,currentLoot->commodity,currentLoot->quantity);
+		} else if (currentLoot->type == LOOT_OUTFIT) {
+			/* only the player can steal outfits */
+			if (p == player.p) {
+				player_addOutfit(currentLoot->outfit,currentLoot->quantity);
+			}
+			q = currentLoot->quantity;
+			for (i=0; i<target->noutfits; i++) {
+				/* Must still need to remove. */
+				if (q <= 0)
+					break;
+
+				/* Not found. */
+				if (target->outfits[i]->outfit != currentLoot->outfit)
+					continue;
+
+				/* Remove outfit. */
+				pilot_rmOutfit( target, target->outfits[i] );
+				q--;
+			}
+		}
+
+		if (p == player.p) {
+			if (currentLoot->type == LOOT_CREDITS) {
+				credits2str( buf2, currentLoot->quantity, 2 );
+				nsnprintf( buf, 256, "\epSuccessfully looted %s credits.\e0", buf2 );
+				player_message(buf);
+			} else if (currentLoot->type == LOOT_FUEL) {
+				nsnprintf( buf, 256, "\epSuccessfully looted %d units of fuel.\e0", currentLoot->quantity );
+				player_message(buf);
+			} else if (currentLoot->type == LOOT_COMMODITTY) {
+				nsnprintf( buf, 256, "\epSuccessfully looted %d tonnes of %s.\e0", currentLoot->quantity, currentLoot->label );
+				player_message(buf);
+			} else if (currentLoot->type == LOOT_OUTFIT) {
+				nsnprintf( buf, 256, "\epSuccessfully looted a %s.\e0", currentLoot->label );
+				player_message(buf);
+			}
+
+			if (&p->loots[p->nloots-1] == currentLoot) {
+				nsnprintf( buf, 256, "\eLooting of the %d finished!\e0", target->name );
+				pilot_setCommMsg( p, buf );
+			}
+		}
+	} else {
+		perc = (int)((currentLoot->timePassed * 100) / currentLoot->timeNeeded );
+
+		if (currentLoot->type == LOOT_CREDITS) {
+			nsnprintf( buf, 256, "\epLooting credits: %d%%\e0", perc );
+		} else if (currentLoot->type == LOOT_FUEL) {
+			nsnprintf( buf, 256, "\epLooting fuel: %d%%\e0", perc );
+		} else if (currentLoot->type == LOOT_COMMODITTY || currentLoot->type == LOOT_OUTFIT) {
+			nsnprintf( buf, 256, "\epLooting %s: %d%%\e0", currentLoot->label, perc );
+		}
+		pilot_setCommMsg( target, buf );
+	}
+}

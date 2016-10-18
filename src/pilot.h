@@ -15,6 +15,7 @@
 #include "sound.h"
 #include "economy.h"
 #include "ntime.h"
+#include "board.h"
 
 
 #define PLAYER_ID       1 /**< Player pilot ID. */
@@ -97,9 +98,12 @@ enum {
    PILOT_HYP_BEGIN,    /**< Pilot is starting engines. */
    PILOT_HYPERSPACE,   /**< Pilot is in hyperspace. */
    PILOT_HYP_END,      /**< Pilot is exiting hyperspace. */
-   PILOT_BOARDED,      /**< Pilot has been boarded already. */
+   PILOT_BOARDED_IP,      /**< Pilot is currently being boarded. */
+   PILOT_BOARDED_SUCCESS,      /**< Pilot has been boarded already. */
+   PILOT_BOARDED_FAILED,      /**< Pilot has survived a boarding attempt. */
    PILOT_NOBOARD,      /**< Pilot can't be boarded. */
-   PILOT_BOARDING,     /**< Pilot is currently boarding it's target. */
+   PILOT_BOARDING,     /**< Pilot is currently boarding its target. */
+   PILOT_LOOTING,	   /**< Pilot is currently looting its target. */
    PILOT_BRIBED,       /**< Pilot has been bribed already. */
    PILOT_DISTRESSED,   /**< Pilot has distressed once already. */
    PILOT_REFUELING,    /**< Pilot is trying to refueling. */
@@ -258,6 +262,32 @@ typedef struct Escort_s {
    EscortType_t type;   /**< Type of escort. */
    unsigned int id;     /**< ID of in-game pilot. */
 } Escort_t;
+
+/* types of loot */
+#define LOOT_CREDITS 	1
+#define LOOT_FUEL 		2
+#define LOOT_COMMODITTY 3
+#define LOOT_OUTFIT 	4
+
+/**
+ * @brief The representation of something that can be stolen from a ship
+ */
+typedef struct Loot_ {
+   char* label;
+   Outfit *outfit;
+   Commodity *commodity;
+   int quantity;
+   ntime_t timeNeeded;
+   double timePassed;
+   credits_t totalValue;
+   int fuel;
+   int ntexture;
+   glTexture **textures;
+   int type;
+   int selected;
+   int done;
+   int impossible;
+} Loot;
 
 
 /**
@@ -424,6 +454,11 @@ typedef struct Pilot_ {
    double player_damage; /**< Accumulates damage done by player for hostileness.
                               In per one of max shield + armour. */
    double engine_glow; /**< Amount of engine glow to display. */
+
+   /* Loot data (from boarding). Player only for now. */
+   Loot* loots;
+   int nloots;
+   int lootTarget;
 } Pilot;
 
 
@@ -556,5 +591,8 @@ char pilot_getFactionColourChar( const Pilot *p );
  */
 credits_t pilot_worth( const Pilot *p );
 
+void pilot_startLoot(Pilot *p, Pilot *target,Loot* loots,int nloot );
+void pilot_updateLoot(Pilot *p, const double dt);
+void pilot_finishLooting(Pilot* p);
 
 #endif /* PILOT_H */

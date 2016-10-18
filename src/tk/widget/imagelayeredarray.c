@@ -765,6 +765,9 @@ char* toolkit_getImageLayeredArray( const unsigned int wid, const char* name )
    if (wgt == NULL)
       return NULL;
 
+   if (wgt->dat.iarl.selected == -1 || wgt->dat.iarl.nelements < 1)
+	   return NULL;
+
    return toolkit_getNameById( wgt, wgt->dat.iarl.selected );
 }
 

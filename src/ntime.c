@@ -45,9 +45,6 @@
 #include "crew.h"
 
 
-
-#define NT_GAME_TO_REAL_RATIO    (30)        /* Update rate, how many game seconds are in a real second. */
-
 static char* ntime_monthName(int month);
 
 

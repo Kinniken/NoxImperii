@@ -1304,6 +1304,11 @@ void player_restoreControl( int reason, char *str )
 		if (pilot_isFlag(player.p, PILOT_COOLDOWN))
 			pilot_cooldownEnd(player.p, str);
 	}
+
+	if (pilot_isFlag(player.p,PILOT_LOOTING)) {
+		player_message("Looting cancelled.");
+		pilot_finishLooting(player.p);
+	}
 }
 
 

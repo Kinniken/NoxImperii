@@ -1149,6 +1149,10 @@ void map_renderDecorators( double x, double y, int editor)
 
 	   decorator=&decorator_stack[i];
 
+	   //only if pict couldn't be loaded
+	   if (decorator->picture == NULL)
+		   continue;
+
 	   visible=0;
 
 	   if (!editor) {

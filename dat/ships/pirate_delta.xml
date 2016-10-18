@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Pirate Delta'>
  <base_type>Delta</base_type>
+ <short_name>Delta</short_name>
  <GFX sx="10" sy="10">phalanx_pirate</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

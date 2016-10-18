@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Pirate Vendetta'>
  <base_type>Vendetta</base_type>
+ <short_name>Vendetta</short_name>
  <GFX sx="8" sy="8">vendetta_pirate</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

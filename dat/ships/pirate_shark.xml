@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Pirate Shark'>
  <base_type>Shark</base_type>
+ <short_name>Shark</short_name>
  <GFX sx="8" sy="8">shark_pirate</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

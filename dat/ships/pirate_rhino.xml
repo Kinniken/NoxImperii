@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <ship name='Pirate Rhino'>
  <base_type>Rhino</base_type>
+ <short_name>Rhino</short_name>
  <GFX sx="10" sy="10">rhino_pirate</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>

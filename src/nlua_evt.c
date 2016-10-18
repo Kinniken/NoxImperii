@@ -186,6 +186,7 @@ int event_runLuaFunc( Event_t *ev, const char *func, int nargs )
  *    @luatparam string func Name of the function to run when approaching, gets passed the npc_id when called.
  *    @luatparam string name Name of the NPC
  *    @luatparam string portrait Portrait to use for the NPC (from GFX_PATH/portraits/).
+ *    @luatparam string portrait_background Portrait background to use for the NPC (from GFX_PATH/portraits*.png). Can be nil.
  *    @luatparam string desc Description associated to the NPC.
  *    @luatparam[opt=5] number priority Optional priority argument (highest is 0, lowest is 10).
  *    @luatreturn number The ID of the NPC to pass to npcRm.
@@ -195,29 +196,40 @@ static int evt_npcAdd( lua_State *L )
 {
    unsigned int id;
    int priority;
-   const char *func, *name, *gfx, *desc;
-   char portrait[PATH_MAX];
+   const char *func, *name, *gfx, *gfx_background, *desc, *portrait_background_pt;
+   char portrait[PATH_MAX],portrait_background[PATH_MAX];
    Event_t *cur_event;
 
    /* Handle parameters. */
    func = luaL_checkstring(L, 1);
    name = luaL_checkstring(L, 2);
    gfx  = luaL_checkstring(L, 3);
-   desc = luaL_checkstring(L, 4);
+   if (lua_isnil(L, 4)==1)
+	   gfx_background = NULL;
+   else
+	   gfx_background  = luaL_checkstring(L, 4);
+   desc = luaL_checkstring(L, 5);
 
    /* Optional priority. */
-   if (lua_gettop(L) > 4)
-      priority = luaL_checkint( L, 5 );
+   if (lua_gettop(L) > 5)
+	   priority = luaL_checkint( L, 6 );
    else
-      priority = 5;
+	   priority = 5;
 
    /* Set path. */
    nsnprintf( portrait, PATH_MAX, GFX_PATH"portraits/%s.png", gfx );
 
+   if (gfx_background != NULL) {
+	   nsnprintf( portrait_background, PATH_MAX, GFX_PATH"portraits/%s.png", gfx_background );
+	   portrait_background_pt=portrait_background;
+   } else {
+	   portrait_background_pt = NULL;
+   }
+
    cur_event = event_getFromLua(L);
 
    /* Add npc. */
-   id = npc_add_event( cur_event->id, func, name, priority, portrait, desc );
+   id = npc_add_event( cur_event->id, func, name, priority, portrait, portrait_background_pt, desc );
 
    /* Return ID. */
    if (id > 0) {

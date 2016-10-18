@@ -53,6 +53,7 @@ typedef struct Crew_ {
    char* cond; /**< Condition that must be met (Lua). */
 
    char* portrait; /**< Crew graphic. */
+   char* background; /**< Crew background. */
 
    int combatRatingNeeded;
    int factionNeeded;

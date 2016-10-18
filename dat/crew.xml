@@ -23,7 +23,8 @@
             <name>Ardar Youth</name>
             <level>1</level>
             <description>Straight out of a decent Ardar pilot school, name has refused to join the Ardar navy, a rare act of defiance that cut him off from decent Ardar society. Not for him the ordered life of Ardar ships!</description>
-            <portrait>neutral/thief1</portrait>
+            <portrait>ardar/ardar_1</portrait>
+            <background>ardar/background_1</background>
             <gender>male</gender>
             <hiring_price>1500</hiring_price>
             <monthly_salary>150</monthly_salary>
@@ -96,7 +97,8 @@
             <name>Express Trader</name>
             <level>2</level>
             <description>This gifted young Betelgian pilot was valued in all his jobs for his ability to deliver cargo quickly through hyperspace. He now wishes to see even more of the Galaxy that he did working for Betelgian companies</description>
-            <portrait>dvaered/unique/ka'def</portrait>
+            <portrait>betelgeuse/betelgeuse_1</portrait>
+            <background>betelgeuse/background_1</background>
             <gender>male</gender>
             <hiring_price>25000</hiring_price>
             <monthly_salary>1250</monthly_salary>
@@ -116,7 +118,8 @@
             <name>Ardar Mercenary Pilot</name>
             <level>2</level>
             <description>Skilled Ardar pilots generally work for the Navy, a prestigious occupation. But not all Ardars crave military service; this pilot resigned his commission and went for private employment. His dogfighting skills are still just as sharp as before.</description>
-            <portrait>neutral/unique/reynir</portrait>
+            <portrait>ardar/ardar_2</portrait>
+            <background>ardar/background_1</background>
             <gender>male</gender>
             <hiring_price>20000</hiring_price>
             <monthly_salary>1000</monthly_salary>
@@ -176,7 +179,8 @@
             <name>Ardar Elite Pilot</name>
             <level>3</level>
             <description>He won't speak much about his past, but he is know to have been a member of an elite Ardar strike team used for infiltration missions deep within the Empire. He clearly learned much there.</description>
-            <portrait>pirate/pirate4</portrait>
+            <portrait>ardar/ardar_3</portrait>
+            <background>ardar/background_2</background>
             <gender>male</gender>
             <hiring_price>120000</hiring_price>
             <monthly_salary>2400</monthly_salary>
@@ -198,7 +202,8 @@
             <name>Betelgian Expert Scout</name>
             <level>3</level>
             <description>This Betelgian has served in the legendary Betelgian scouting service, mapping star systems far into barbarian space. He zips from star to star with effortless grace to the sound of Betelgian orchestral symphonies.</description>
-            <portrait>pirate/pirate1</portrait>
+            <portrait>betelgeuse/betelgeuse_2</portrait>
+            <background>betelgeuse/background_2</background>
             <gender>male</gender>
             <hiring_price>110000</hiring_price>
             <monthly_salary>2200</monthly_salary>
@@ -258,7 +263,8 @@
             <name>Betelgian Technician</name>
             <level>1</level>
             <description>His career in the trading fleet of a Betelgian trade house never took off, but he did manage to learn a thing or two on improving fuel efficiency.</description>
-            <portrait>neutral/male1</portrait>
+            <portrait>betelgeuse/betelgeuse_3</portrait>
+            <background>betelgeuse/background_1</background>
             <gender>male</gender>
             <hiring_price>900</hiring_price>
             <monthly_salary>90</monthly_salary>
@@ -292,7 +298,8 @@
             <name>Ardar Civil Engineer</name>
             <level>1</level>
             <description>This Ardar engineer worked for an Ardar transport company, repairing ground transport vehicles. Working on a spaceship is something else... but at least he's motivated!</description>
-            <portrait>neutral/unique/shifty_merchant</portrait>
+            <portrait>ardar/ardar_3</portrait>
+            <background>ardar/background_1</background>
             <gender>male</gender>
             <hiring_price>1000</hiring_price>
             <monthly_salary>100</monthly_salary>
@@ -330,7 +337,8 @@
             <name>Ardar Mainframe Specialist</name>
             <level>2</level>
             <description>This Ardar technician is specialised in ships' mainframes. He'll eke out all that can be gotten of your CPU modules.</description>
-            <portrait>neutral/scientist</portrait>
+            <portrait>ardar/ardar_4</portrait>
+            <background>ardar/background_2</background>
             <gender>male</gender>
             <hiring_price>20000</hiring_price>
             <monthly_salary>1000</monthly_salary>
@@ -369,7 +377,8 @@
             <name>Expect Trade Engineer</name>
             <level>3</level>
             <description>This Betelgian engineer was still recently Head Engineer for a major trading house. Tired of office politics, he wishes to do what he does best again - deliver ships capable of going where none have gone before.</description>
-            <portrait>neutral/cyborg2</portrait>
+            <portrait>betelgeuse/betelgeuse_4</portrait>
+            <background>betelgeuse/background_1</background>
             <gender>male</gender>
             <hiring_price>100000</hiring_price>
             <monthly_salary>2000</monthly_salary>
@@ -432,7 +441,8 @@
             <name>Furious Gunner</name>
             <level>1</level>
             <description>Precision work is not for this imperious Ardar. He believes in closing-in before unleashing short-range volleys as fast as possible.</description>
-            <portrait>pirate/pirate_militia1</portrait>
+            <portrait>ardar/ardar_5</portrait>
+            <background>ardar/background_2</background>
             <gender>male</gender>
             <hiring_price>1000</hiring_price>
             <monthly_salary>100</monthly_salary>
@@ -449,7 +459,8 @@
             <name>Turret Afficiendo</name>
             <level>1</level>
             <description>This gruff Betelgian has mostly served on freighters and is of little use with missiles or forward weapons, but he handles turrets just fine.</description>
-            <portrait>sirius/unique/patrek</portrait>
+            <portrait>betelgeuse/betelgeuse_5</portrait>
+            <background>betelgeuse/background_1</background>
             <gender>male</gender>
             <hiring_price>1200</hiring_price>
             <monthly_salary>120</monthly_salary>
@@ -522,7 +533,8 @@
             <name>Ardar Fighter Gunner</name>
             <level>2</level>
             <description>This Ardar veteran served on a Roidhunate cruiser for most of his service, where he showed a solid grasp of turret tracking.</description>
-            <portrait>dvaered/dv_civilian2</portrait>
+            <portrait>ardar/ardar_1</portrait>
+            <background>ardar/background_1</background>
             <gender>male</gender>
             <hiring_price>25000</hiring_price>
             <monthly_salary>1250</monthly_salary>
@@ -602,7 +614,8 @@
             <name>Disgraced Ardar Colonel</name>
             <level>3</level>
             <description>After years of service in the Ardar Navy, this decorated colonel had to resign over accusations of luxuriant behaviour - something taken far more seriously on Ardarshir than on Terra. His combat credentials remain impeccable.</description>
-            <portrait>neutral/male1</portrait>
+            <portrait>ardar/ardar_2</portrait>
+            <background>ardar/background_1</background>
             <gender>male</gender>
             <hiring_price>125000</hiring_price>
             <monthly_salary>2500</monthly_salary>
@@ -678,7 +691,8 @@
             <name>Failed Shield Technician</name>
             <level>1</level>
             <description>The Roidhunate still lags Terra in shield technology, and this Ardar technician's training illustrates that. Thankfully, he's better at armour maintenance.</description>
-            <portrait>dvaered/unique/ka'def</portrait>
+            <portrait>ardar/ardar_3</portrait>
+            <background>ardar/background_2</background>
             <gender>male</gender>
             <hiring_price>1000</hiring_price>
             <monthly_salary>100</monthly_salary>
@@ -730,7 +744,8 @@
             <name>Ardar Armour Specialist</name>
             <level>2</level>
             <description>This young Ardar studied in an Ardar military institute. His grades were not quite sufficient for military postings, but he has served well on multiple freighters. Like most Ardar technicians, he is more at ease with armour.</description>
-            <portrait>neutral/thief1</portrait>
+            <portrait>ardar/ardar_4</portrait>
+            <background>ardar/background_1</background>
             <gender>male</gender>
             <hiring_price>22000</hiring_price>
             <monthly_salary>1100</monthly_salary>
@@ -786,7 +801,8 @@
             <name>Master Armourer</name>
             <level>3</level>
             <description>Ardar ships are well-known for their heavy armour, and this man is an expert on it. He is in fact so good he is capable of doing emergency repairs in-flight, something most technicians never touch.</description>
-            <portrait>pirate/pirate_militia2</portrait>
+            <portrait>ardar/ardar_5</portrait>
+            <background>ardar/background_2</background>
             <gender>male</gender>
             <hiring_price>120000</hiring_price>
             <monthly_salary>2400</monthly_salary>

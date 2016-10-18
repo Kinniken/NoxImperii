@@ -222,6 +222,7 @@ static int crew_parse( Crew *temp, xmlNodePtr parent, CrewPosition* position )
 
 		xmlr_strd(node, "conditions", temp->cond);
 		xmlr_strd(node, "portrait", temp->portrait);
+		xmlr_strd(node, "background", temp->background);
 		xmlr_strd(node, "name_generator", temp->nameGenerator);
 
 		if (xml_isNode(node,"faction")) {
@@ -586,22 +587,32 @@ static char* crew_findName( char* nameGenerator )
 static glTexture** getCrewLayers(const Crew* crew, int* nlayers) {
 
 	char buf[PATH_MAX];
+	int pos=0;
 
-	glTexture** layers=malloc( sizeof(glTexture *) * 4 );
+	if (crew->background == NULL) {
+		*nlayers=3;
+	} else {
+		*nlayers=4;
+	}
+
+	glTexture** layers=malloc( sizeof(glTexture *) * (*nlayers) );
+
+	if (crew->background != NULL) {
+		nsnprintf( buf, PATH_MAX, GFX_PATH"portraits/%s.png", crew->background);
+		layers[pos]=gl_newImage(buf,0);
+		pos++;
+	}
 
 	nsnprintf( buf, PATH_MAX, GFX_PATH"portraits/%s.png", crew->portrait);
-	layers[0]=gl_newImage(buf,0);
-
-	nsnprintf( buf, PATH_MAX, GFX_PATH"portraits/%s.png", crew->portrait);
-	layers[1]=gl_newImage(buf,0);
+	layers[pos]=gl_newImage(buf,0);
+	pos++;
 
 	nsnprintf( buf, PATH_MAX, GFX_PATH"portraits/crewlayers/stars%d.png", crew->level);
-	layers[2]=gl_newImage(buf,0);
+	layers[pos]=gl_newImage(buf,0);
+	pos++;
 
 	nsnprintf( buf, PATH_MAX, GFX_PATH"portraits/crewlayers/positions/%s.png", crew->position);
-	layers[3]=gl_newImage(buf,0);
-
-	*nlayers=4;
+	layers[pos]=gl_newImage(buf,0);
 
 	return layers;
 }

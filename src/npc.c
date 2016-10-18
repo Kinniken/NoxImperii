@@ -128,15 +128,27 @@ static unsigned int npc_add( NPC_t *npc )
 static unsigned int npc_add_giver( Mission *misn )
 {
    NPC_t npc;
-   glTexture** layers=malloc(sizeof(glTexture*));
-   layers[0]= gl_dupTexture(misn->portrait);
+   int nb_layers=1;
+
+   if (misn->portrait_background != NULL) {
+	   nb_layers=2;
+   }
+
+   glTexture** layers=malloc(sizeof(glTexture*) * nb_layers);
+
+   if (misn->portrait_background != NULL) {
+	   layers[0]= gl_dupTexture(misn->portrait_background);
+	   layers[1]= gl_dupTexture(misn->portrait);
+   } else {
+	   layers[0]= gl_dupTexture(misn->portrait);
+   }
 
    /* Set up the data. */
    npc.type       = NPC_TYPE_GIVER;
    npc.name       = strdup(misn->npc);
    npc.priority   = misn->data->avail.priority;
    npc.layers	  = layers;
-   npc.nlayers	  = 1;
+   npc.nlayers	  = nb_layers;
    npc.desc       = strdup(misn->desc);
    npc.u.g        = *misn;
 
@@ -148,19 +160,33 @@ static unsigned int npc_add_giver( Mission *misn )
  * @brief Adds a mission NPC to the mission computer.
  */
 unsigned int npc_add_mission( Mission *misn, const char *func, const char *name,
-      int priority, const char *portrait, const char *desc )
+      int priority, const char *portrait, const char *portrait_background, const char *desc )
 {
    NPC_t npc;
    glTexture** layers;
-   layers=malloc(sizeof(glTexture*));
-   layers[0]=gl_newImage( portrait, 0 );
+   int nb_layers;
+
+   if (portrait_background == NULL) {
+	   nb_layers = 1;
+   } else {
+	   nb_layers = 2;
+   }
+
+   layers=malloc(sizeof(glTexture*) * nb_layers);
+
+   if (nb_layers == 1) {
+	   layers[0]=gl_newImage( portrait, 0 );
+   } else {
+	   layers[0]=gl_newImage( portrait_background, 0 );
+	   layers[1]=gl_newImage( portrait, 0 );
+   }
 
    /* The data. */
    npc.type       = NPC_TYPE_MISSION;
    npc.name       = strdup( name );
    npc.priority   = priority;
    npc.layers	  = layers;
-   npc.nlayers	  = 1;
+   npc.nlayers	  = nb_layers;
    npc.desc       = strdup( desc );
    npc.u.m.misn   = misn;
    npc.u.m.func   = strdup( func );
@@ -173,19 +199,33 @@ unsigned int npc_add_mission( Mission *misn, const char *func, const char *name,
  * @brief Adds a event NPC to the mission computer.
  */
 unsigned int npc_add_event( unsigned int evt, const char *func, const char *name,
-      int priority, const char *portrait, const char *desc )
+      int priority, const char *portrait, const char *portrait_background, const char *desc )
 {
-   NPC_t npc;
-   glTexture** layers;
-   layers=malloc(sizeof(glTexture*));
-   layers[0]=gl_newImage( portrait, 0 );
+	NPC_t npc;
+	glTexture** layers;
+	int nb_layers;
+
+	if (portrait_background == NULL) {
+		nb_layers = 1;
+	} else {
+		nb_layers = 2;
+	}
+
+	layers=malloc(sizeof(glTexture*) * nb_layers);
+
+	if (nb_layers == 1) {
+		layers[0]=gl_newImage( portrait, 0 );
+	} else {
+		layers[0]=gl_newImage( portrait_background, 0 );
+		layers[1]=gl_newImage( portrait, 0 );
+	}
 
    /* The data. */
    npc.type       = NPC_TYPE_EVENT;
    npc.name       = strdup( name );
    npc.priority   = priority;
    npc.layers	  = layers;
-   npc.nlayers	  = 1;
+   npc.nlayers	  = nb_layers;
    npc.desc       = strdup( desc );
    npc.u.e.id     = evt;
    npc.u.e.func   = strdup( func );

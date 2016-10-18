@@ -544,6 +544,8 @@ void mission_cleanup( Mission* misn )
       free(misn->reward);
    if (misn->portrait != NULL)
       gl_freeTexture(misn->portrait);
+   if (misn->portrait_background != NULL)
+         gl_freeTexture(misn->portrait_background);
    if (misn->npc != NULL)
       free(misn->npc);
 

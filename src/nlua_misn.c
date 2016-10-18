@@ -521,17 +521,19 @@ static int misn_markerRm( lua_State *L )
  *  the ones found in GFX_PATH/portraits without the png extension. So for
  *  GFX_PATH/portraits/none.png you would just use "none".
  *
- * @usage misn.setNPC( "Invisible Man", "none" )
+ * @usage misn.setNPC( "Invisible Man", "none", "none" )
  *
  *    @luatparam string name Name of the NPC.
  *    @luatparam string portrait Name of the portrait to use for the NPC.
- * @luafunc setNPC( name, portrait )
+ *    @luatparam string portrait_background Name of the portrait background to use for the NPC (optional).
+ * @luafunc setNPC( name, portrait, portrait_background )
  */
 static int misn_setNPC( lua_State *L )
 {
    char buf[PATH_MAX];
    const char *name, *str;
    Mission *cur_mission;
+   int nb_params;
 
    cur_mission = misn_getFromLua(L);
 
@@ -541,14 +543,21 @@ static int misn_setNPC( lua_State *L )
       cur_mission->portrait = NULL;
    }
 
+   if (cur_mission->portrait_background != NULL) {
+	   gl_freeTexture(cur_mission->portrait_background);
+	   cur_mission->portrait_background = NULL;
+   }
+
    /* Free NPC name. */
    if (cur_mission->npc != NULL) {
       free(cur_mission->npc);
       cur_mission->npc = NULL;
    }
 
+   nb_params = lua_gettop(L);
+
    /* For no parameters just leave having freed NPC. */
-   if (lua_gettop(L) == 0)
+   if (nb_params == 0)
       return 0;
 
    /* Get parameters. */
@@ -561,6 +570,16 @@ static int misn_setNPC( lua_State *L )
    /* Set portrait. */
    nsnprintf( buf, PATH_MAX, GFX_PATH"portraits/%s.png", str );
    cur_mission->portrait = gl_newImage( buf, 0 );
+
+   if (nb_params>2) {
+	   str  = luaL_checkstring(L,3);
+
+	   if (str != NULL) {
+		   /* Set portrait background. */
+		   nsnprintf( buf, PATH_MAX, GFX_PATH"portraits/%s.png", str );
+		   cur_mission->portrait_background = gl_newImage( buf, 0 );
+	   }
+   }
 
    return 0;
 }
@@ -888,6 +907,7 @@ static int misn_osdActive( lua_State *L )
  *    @luatparam string func Name of the function to run when approaching, gets passed the npc_id when called.
  *    @luatparam string name Name of the NPC
  *    @luatparam string portrait Portrait to use for the NPC (from GFX_PATH/portraits*.png).
+ *    @luatparam string portrait_background Portrait background to use for the NPC (from GFX_PATH/portraits*.png). Can be nil.
  *    @luatparam string desc Description associated to the NPC.
  *    @luatparam[opt=5] number priority Optional priority argument (highest is 0, lowest is 10).
  *    @luatreturn number The ID of the NPC to pass to npcRm.
@@ -897,34 +917,45 @@ static int misn_npcAdd( lua_State *L )
 {
    unsigned int id;
    int priority;
-   const char *func, *name, *gfx, *desc;
-   char portrait[PATH_MAX];
+   const char *func, *name, *gfx, *gfx_background, *desc, *portrait_background_pt;
+   char portrait[PATH_MAX],portrait_background[PATH_MAX];
    Mission *cur_mission;
 
    /* Handle parameters. */
    func = luaL_checkstring(L, 1);
    name = luaL_checkstring(L, 2);
    gfx  = luaL_checkstring(L, 3);
-   desc = luaL_checkstring(L, 4);
+   if (lua_isnil(L, 4)==1)
+	   gfx_background = NULL;
+   else
+	   gfx_background  = luaL_checkstring(L, 4);
+   desc = luaL_checkstring(L, 5);
 
    /* Optional priority. */
-   if (lua_gettop(L) > 4)
-      priority = luaL_checkint( L, 5 );
+   if (lua_gettop(L) > 5)
+	   priority = luaL_checkint( L, 6 );
    else
-      priority = 5;
+	   priority = 5;
 
    /* Set path. */
    nsnprintf( portrait, PATH_MAX, GFX_PATH"portraits/%s.png", gfx );
 
+   if (gfx_background != NULL) {
+	   nsnprintf( portrait_background, PATH_MAX, GFX_PATH"portraits/%s.png", gfx_background );
+	   portrait_background_pt=portrait_background;
+   } else {
+	   portrait_background_pt = NULL;
+   }
+
    cur_mission = misn_getFromLua(L);
 
    /* Add npc. */
-   id = npc_add_mission( cur_mission, func, name, priority, portrait, desc );
+   id = npc_add_mission( cur_mission, func, name, priority, portrait, portrait_background_pt, desc );
 
    /* Return ID. */
    if (id > 0) {
-      lua_pushnumber( L, id );
-      return 1;
+	   lua_pushnumber( L, id );
+	   return 1;
    }
    return 0;
 }

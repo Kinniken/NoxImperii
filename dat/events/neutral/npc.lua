@@ -24,51 +24,66 @@ else --default english
                             "neutral/thief1",
                             "neutral/thief3",
                            }
-    civ_port.ardarCivilians = {
-    	"dvaered/dv_civilian1",
-    	"dvaered/dv_civilian2"
-	}
-	civ_port.imperialMilitary = {
-		"empire/empire1",
-		"empire/empire2",
-		"empire/empire3",
-		"empire/empire4"
-	}	
-	civ_port.ardarMilitary = {
-		"ardar/military_m1",
-		"ardar/military_m2",
-		"ardar/military_m3"
-	}
-	civ_port.independentMilitary = {
-		"pirate/pirate_militia1",
-		"pirate/pirate_militia2"
-	}
-	civ_port.betelgianMilitary = {
-		"empire/empire1",
-		"empire/empire2",
-		"empire/empire3",
-		"empire/empire4"
-	}
-	civ_port.royalixumMilitary = {
-		"empire/empire1",
-		"empire/empire2",
-		"empire/empire3",
-		"empire/empire4"
-	}
-	civ_port.holyflameCivilians = {
-    	"holyflame/holyflame_1",
-    	"holyflame/holyflame_2",
-    	"holyflame/holyflame_3",
-    	"holyflame/holyflame_4"
-	}
-	civ_port.holyflameMilitary = {
-		"holyflame/holyflame_military1",
-    	"holyflame/holyflame_military2"
-	}
+  civ_port.ardarCivilians = {
+      "ardar/ardar_1",
+      "ardar/ardar_2",
+      "ardar/ardar_3",
+      "ardar/ardar_4",
+      "ardar/ardar_5"
+  }
+  civ_port.ardarMilitary = {
+    "ardar/ardar_1",
+      "ardar/ardar_2",
+      "ardar/ardar_3",
+      "ardar/ardar_4",
+      "ardar/ardar_5"
+  }
+  civ_port.ardarBackgrounds = {
+      "ardar/background_1",
+      "ardar/background_2"
+  }
+  civ_port.imperialMilitary = {
+    "empire/empire1",
+    "empire/empire2",
+    "empire/empire3",
+    "empire/empire4"
+  } 
+  civ_port.independentMilitary = {
+    "pirate/pirate_militia1",
+    "pirate/pirate_militia2"
+  }
+  civ_port.betelgian = {
+    "betelgeuse/betelgeuse_1",
+    "betelgeuse/betelgeuse_2",
+    "betelgeuse/betelgeuse_3",
+    "betelgeuse/betelgeuse_4",
+    "betelgeuse/betelgeuse_5",
+    "betelgeuse/betelgeuse_6"
+  }
+  civ_port.betelgianBackgrounds = {
+    "betelgeuse/background_1",
+    "betelgeuse/background_2"
+  }
+  civ_port.royalixumMilitary = {
+    "empire/empire1",
+    "empire/empire2",
+    "empire/empire3",
+    "empire/empire4"
+  }
+  civ_port.holyflameCivilians = {
+      "holyflame/holyflame_1",
+      "holyflame/holyflame_2",
+      "holyflame/holyflame_3",
+      "holyflame/holyflame_4"
+  }
+  civ_port.holyflameMilitary = {
+    "holyflame/holyflame_military1",
+      "holyflame/holyflame_military2"
+  }
     civ_port.barbarians =    {"pirate/pirate1",
-						"pirate/pirate2",
-						"pirate/pirate3",
-						"pirate/pirate4",
+            "pirate/pirate2",
+            "pirate/pirate3",
+            "pirate/pirate4",
     }
 						   
 						   
@@ -390,32 +405,35 @@ else --default english
    }
    
    
-   npcs.ardar_civilians={
-	worldFactions={[G.ROIDHUNATE]=true},
-	name="Ardar Civilian",
-	speech={	{items=msg_lore.ardar.civilians,weight=10},
+  npcs.ardar_civilians={
+	 worldFactions={[G.ROIDHUNATE]=true},
+	 name="Ardar Civilian",
+	 speech={	{items=msg_lore.ardar.civilians,weight=10},
 				{items=msg_tip,weight=5}},
-	portraits=civ_port.ardarCivilians,
-	descriptions=civ_desc.general,
-	weight=20
-   }
-   npcs.ardar_military={
-	worldFactions={[G.ROIDHUNATE]=true},
-	name="Ardar Private",
-	speech={	{items=msg_lore.ardar.military,weight=10}},
-	portraits=civ_port.ardarMilitary,
-	descriptions=civ_desc.ardarMilitary,
-	weight=20
-   }
-   npcs.ardar_traders={
-	worldFactions={[G.ROIDHUNATE]=true},
-	name="Ardar Trader",
-	speech={	{items=msg_lore.ardar.traders,weight=10},
+	 portraits=civ_port.ardarCivilians,
+   backgrounds=civ_port.ardarBackgrounds,
+	 descriptions=civ_desc.general,
+	 weight=20
+  }
+  npcs.ardar_military={
+	 worldFactions={[G.ROIDHUNATE]=true},
+	 name="Ardar Private",
+	 speech={	{items=msg_lore.ardar.military,weight=10}},
+	 portraits=civ_port.ardarMilitary,
+   backgrounds=civ_port.ardarBackgrounds,
+	 descriptions=civ_desc.ardarMilitary,
+	 weight=20
+  }
+  npcs.ardar_traders={
+	 worldFactions={[G.ROIDHUNATE]=true},
+	 name="Ardar Trader",
+	 speech={	{items=msg_lore.ardar.traders,weight=10},
 				{items=msg_tip,weight=5}},
-	portraits=civ_port.ardarCivilians,
-	descriptions=civ_desc.general,
-	weight=10
-   }
+	 portraits=civ_port.ardarCivilians,
+   backgrounds=civ_port.ardarBackgrounds,
+	 descriptions=civ_desc.general,
+	 weight=10
+  }
    
    
    npcs.betelgeuse_civilians={
@@ -423,7 +441,8 @@ else --default english
 	name="Betelgian Civilian",
 	speech={	{items=msg_lore.betelgeuse.civilians,weight=10},
 				{items=msg_tip,weight=5}},
-	portraits=civ_port.general,
+	portraits=civ_port.betelgian,
+  backgrounds=civ_port.betelgianBackgrounds,
 	descriptions=civ_desc.general,
 	weight=20
    }
@@ -431,7 +450,8 @@ else --default english
 	worldFactions={[G.BETELGEUSE]=true},
 	name="Betelgian Private",
 	speech={	{items=msg_lore.betelgeuse.military,weight=10}},
-	portraits=civ_port.betelgianMilitary,
+	portraits=civ_port.betelgian,
+  backgrounds=civ_port.betelgianBackgrounds,
 	descriptions=civ_desc.betelgianMilitary,
 	weight=10
    }
@@ -440,7 +460,8 @@ else --default english
 	name="Betelgian Trader",
 	speech={	{items=msg_lore.betelgeuse.traders,weight=10},
 				{items=msg_tip,weight=5}},
-	portraits=civ_port.traders,
+	portraits=civ_port.betelgian,
+  backgrounds=civ_port.betelgianBackgrounds,
 	descriptions=civ_desc.general,
 	weight=20
    }
@@ -449,9 +470,10 @@ else --default english
 	name="Betelgian Trader",
 	speech={	{items=msg_lore.betelgeuse.traders,weight=10},
 				{items=msg_tip,weight=5}},
-	portraits=civ_port.traders,
+	portraits=civ_port.betelgian,
+  backgrounds=civ_port.betelgianBackgrounds,
 	descriptions=civ_desc.general,
-	weight=2
+	weight=4
    }
    
    
@@ -549,6 +571,13 @@ function spawnNPC()
    -- Select a portrait
    local portrait = gh.randomObject(npc.portraits)
 
+   -- Select a background
+   local background = nil
+
+   if npc.backgrounds then
+    background = gh.randomObject(npc.backgrounds)
+   end
+
    -- Select a description for the civilian.
    local desc = gh.randomObject(npc.descriptions)
 
@@ -560,7 +589,7 @@ function spawnNPC()
 
    local npcdata = {name = npcname, msg = msg, func = func}
 
-   id = evt.npcAdd("talkNPC", npcname, portrait, desc, 50)
+   id = evt.npcAdd("talkNPC", npcname, portrait, background, desc, 50)
    npcs_data[id] = npcdata
 end
 

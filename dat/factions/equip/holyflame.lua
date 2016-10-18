@@ -17,13 +17,30 @@ function equip( p )
    -- Split by type
    if shiptype == "civilian" then
       equip_genericCivilian( p, shipsize )
+      cargo_civilian(p)
+      p:setCredits( rnd.int(p:ship():price()/50 , p:ship():price()/20) )
    elseif shiptype == "merchant"  then
       equip_genericMerchant( p, shipsize )
+      cargo_merchant(p)
+      p:setCredits( rnd.int(p:ship():price()/50 , p:ship():price()/20) )
    elseif shiptype == "military" then
       equip_military( p, shipsize )
+      cargo_military(p)
+      p:setCredits( rnd.int(p:ship():price()/100 , p:ship():price()/50) )
    end
 end
 
+function cargo_civilian(p)
+   cargo_fill(p,{C.FOOD,C.CONSUMER_GOODS},{C.FOOD,C.CONSUMER_GOODS},2,0.2,0.5)
+end
+
+function cargo_merchant(p)
+   cargo_fill(p,{C.FOOD,C.CONSUMER_GOODS,C.PRIMITIVE_CONSUMER,C.ORE,C.PRIMITIVE_INDUSTRIAL,C.INDUSTRIAL,C.ARMAMENT,C.PRIMITIVE_ARMAMENT},{C.ARMAMENT,C.MODERN_ARMAMENT},2,0.5,0.8)
+end
+
+function cargo_military(p)
+   cargo_fill(p,{C.PRIMITIVE_ARMAMENT,C.MODERN_ARMAMENT},{C.MODERN_ARMAMENT},2,0.2,0.5)
+end
 
 function equip_military( p, shipsize )
    local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(p:ship())

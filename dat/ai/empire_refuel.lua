@@ -9,7 +9,7 @@ mem.distressmsg = "Empire refuel ship under attack!"
 function create ()
 
    -- Broke
-   ai.setcredits( 0 )
+   --ai.setcredits( 0 )
 
    -- Get refuel chance
    p = player.pilot()

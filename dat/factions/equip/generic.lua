@@ -24,10 +24,44 @@ function equip_generic( p )
    -- Split by type
    if shiptype == "civilian" then
       equip_genericCivilian( p, shipsize )
+      cargo_civilian(p)
+      p:setCredits( rnd.int(p:ship():price()/20 , p:ship():price()/10) )
    elseif shiptype == "merchant"  then
       equip_genericMerchant( p, shipsize )
+      cargo_merchant(p)
+      p:setCredits( rnd.int(p:ship():price()/20 , p:ship():price()/10) )
    elseif shiptype == "military" then
       equip_genericMilitary( p, shipsize )
+      cargo_military(p)
+      p:setCredits( rnd.int(p:ship():price()/50 , p:ship():price()/25) )
+   end
+end
+
+function cargo_civilian(p)
+   cargo_fill(p,{C.FOOD,C.CONSUMER_GOODS},{C.GOURMET_FOOD,C.LUXURY_GOODS},2,0.2,1)
+end
+
+function cargo_merchant(p)
+   cargo_fill(p,{C.FOOD,C.CONSUMER_GOODS,C.PRIMITIVE_CONSUMER,C.ORE,C.PRIMITIVE_INDUSTRIAL,C.INDUSTRIAL,C.ARMAMENT,C.PRIMITIVE_ARMAMENT},{C.MODERN_INDUSTRIAL,C.LUXURY_GOODS,C.GOURMET_FOOD,C.MODERN_ARMAMENT},3,0.5,1)
+end
+
+function cargo_military(p)
+   cargo_fill(p,{C.ARMAMENT,C.MODERN_ARMAMENT},{C.ARMAMENT,C.MODERN_ARMAMENT},2,0.2,0.5)
+end
+
+function cargo_fill(p,types,rareTypes,maxTypeNumber,minFill,maxFill)
+   local free=p.cargoFree(p)
+
+   local nbTypes=math.random(1,maxTypeNumber)
+
+   for i=1,maxTypeNumber do
+      local nb=math.ceil(math.random(minFill*free/maxTypeNumber,maxFill*free/maxTypeNumber))
+
+      if (math.random()>0.1) then
+         p:cargoAdd(types[math.random(#types)],nb)
+      else
+         p:cargoAdd(rareTypes[math.random(#rareTypes)],nb)
+      end
    end
 end
 

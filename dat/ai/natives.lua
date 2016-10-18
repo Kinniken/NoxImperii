@@ -11,7 +11,7 @@ mem.aggressive = true
 function create ()
 
    -- Credits
-   ai.setcredits( rnd.int(ai.pilot():ship():price()/300, ai.pilot():ship():price()/70) )
+   --ai.setcredits( rnd.int(ai.pilot():ship():price()/300, ai.pilot():ship():price()/70) )
 
    -- Bribing
    bribe_no = {

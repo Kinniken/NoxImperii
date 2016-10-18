@@ -114,6 +114,7 @@ static int pilotL_setEnergy( lua_State *L );
 static int pilotL_setNoboard( lua_State *L );
 static int pilotL_setNodisable( lua_State *L );
 static int pilotL_setSpeedLimit( lua_State *L);
+static int pilotL_setCredits(lua_State* L);
 static int pilotL_getHealth( lua_State *L );
 static int pilotL_getEnergy( lua_State *L );
 static int pilotL_getLockon( lua_State *L );
@@ -184,6 +185,7 @@ static const luaL_reg pilotL_methods[] = {
    { "setNoboard", pilotL_setNoboard },
    { "setNodisable", pilotL_setNodisable },
    { "setSpeedLimit", pilotL_setSpeedLimit },
+   { "setCredits", pilotL_setCredits },
    { "setPos", pilotL_setPosition },
    { "setVel", pilotL_setVelocity },
    { "setDir", pilotL_setDir },
@@ -2961,6 +2963,30 @@ static int pilotL_setSpeedLimit(lua_State* L)
      pilot_rmFlag( p, PILOT_HASSPEEDLIMIT );
       
    pilot_updateMass(p);
+   return 0;
+}
+
+/**
+ * @brief Set the pilot's credits
+ *
+ * @usage p:setCredits( 1000 ) -- Sets credits to 1000.
+ *    @luatparam pilot p Pilot to set credits of.
+ *    @luatparam number credits Value to set credits to.
+ *
+ * @luafunc setCredits( p, credits )
+ */
+static int pilotL_setCredits(lua_State* L)
+{
+
+   Pilot *p;
+   double c;
+
+   /* Handle parameters. */
+   p  = luaL_validpilot(L,1);
+   c  = luaL_checknumber(L, 2);
+
+   p->credits = c;
+
    return 0;
 }
 

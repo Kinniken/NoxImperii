@@ -16,8 +16,13 @@ function equip( p )
 
    -- all pirate ships are military!
    equip_military( p, shipsize )
+   cargo_military(p)
+   p:setCredits( rnd.int(p:ship():price()/20 , p:ship():price()/10) )
 end
 
+function cargo_military(p)
+   cargo_fill(p,{C.FOOD,C.CONSUMER_GOODS,C.ARMAMENT},{C.MODERN_ARMAMENT,C.LUXURY_GOODS},2,0.2,1)
+end
 
 function equip_military( p, shipsize )
    local nbSlotTurrets, nbSlotWeapons, nSlotUtilities, nbSlotStructures = equip_getSlotNumbers(p:ship())

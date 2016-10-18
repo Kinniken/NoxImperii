@@ -10,7 +10,7 @@ mem.aggressive = true
 function create ()
 
    -- Not too many credits.
-   ai.setcredits( rnd.rnd(ai.pilot():ship():price()/300, ai.pilot():ship():price()/70) )
+   ----ai.setcredits( rnd.rnd(ai.pilot():ship():price()/300, ai.pilot():ship():price()/70) )
 
    -- Lines to annoy the player. Shouldn't be too common or Gamma Polaris and such get inundated.
    r = rnd.rnd(0,20)

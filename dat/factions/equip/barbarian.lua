@@ -14,16 +14,14 @@ function equip( p )
    -- Get ship info
    local shiptype, shipsize = equip_getShipBroad( p:ship():class() )
 
-   -- Split by type
-   if shiptype == "civilian" then
-      equip_genericCivilian( p, shipsize )
-   elseif shiptype == "merchant"  then
-      equip_genericMerchant( p, shipsize )
-   elseif shiptype == "military" then
-      equip_military( p, shipsize )
-   end
+   cargo_military(p)
+   p:setCredits( rnd.int(p:ship():price()/20 , p:ship():price()/10) )
+   equip_military( p, shipsize )
 end
 
+function cargo_military(p)
+   cargo_fill(p,{C.FOOD,C.CONSUMER_GOODS,C.PRIMITIVE_ARMAMENT},{C.ARMAMENT,C.LUXURY_GOODS},2,0.2,1)
+end
 
 function equip_military( p, shipsize )
 

@@ -17,11 +17,29 @@ function equip( p )
    -- Split by type
    if shiptype == "civilian" then
       equip_civilian( p, shipsize )
+      cargo_civilian(p)
+      p:setCredits( rnd.int(p:ship():price()/10 , p:ship():price()/5) )
    elseif shiptype == "merchant"  then
       equip_merchant( p, shipsize )
+      cargo_merchant(p)
+      p:setCredits( rnd.int(p:ship():price()/10 , p:ship():price()/5) )
    elseif shiptype == "military" then
       equip_military( p, shipsize )
+      cargo_military(p)
+      p:setCredits( rnd.int(p:ship():price()/20 , p:ship():price()/10) )
    end
+end
+
+function cargo_civilian(p)
+   cargo_fill(p,{C.FOOD,C.CONSUMER_GOODS},{C.GOURMET_FOOD,C.LUXURY_GOODS,C.EXOTIC_FOOD},2,0.2,1)
+end
+
+function cargo_merchant(p)
+   cargo_fill(p,{C.FOOD,C.CONSUMER_GOODS,C.PRIMITIVE_CONSUMER,C.ORE,C.PRIMITIVE_INDUSTRIAL,C.INDUSTRIAL,C.ARMAMENT,C.PRIMITIVE_ARMAMENT,C.PRIMITIVE_CONSUMER},{C.LUXURY_GOODS,C.GOURMET_FOOD,C.EXOTIC_FURS,C.EXOTIC_ORGANIC,C.NATIVE_ARTWORK,C.NATIVE_TECHNOLOGY,C.NATIVE_WEAPONS,C.NATIVE_SCULPTURES},4,0.7,1)
+end
+
+function cargo_military(p)
+   cargo_fill(p,{C.ARMAMENT,C.MODERN_ARMAMENT},{C.ARMAMENT,C.MODERN_ARMAMENT},2,0.2,0.5)
 end
 
 function equip_military( p, shipsize )

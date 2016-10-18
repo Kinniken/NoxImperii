@@ -9,7 +9,7 @@ mem.aggressive = true
 
 function create ()
 
-   ai.setcredits( rnd.int(ai.pilot():ship():price()/150, ai.pilot():ship():price()/50) )
+   --ai.setcredits( rnd.int(ai.pilot():ship():price()/150, ai.pilot():ship():price()/50) )
 
    if rnd.int() > 0.7 then
       mem.bribe = math.sqrt( ai.pilot():stats().mass ) * (750. * rnd.int() + 2500.)

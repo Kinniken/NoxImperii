@@ -30,7 +30,7 @@ mem.careful   = true
 function create ()
 
    -- Credits.
-   ai.setcredits( rnd.int(ai.pilot():ship():price()/500, ai.pilot():ship():price()/200) )
+   --ai.setcredits( rnd.int(ai.pilot():ship():price()/500, ai.pilot():ship():price()/200) )
 
    -- No bribe
    local bribe_msg = {

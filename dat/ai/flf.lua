@@ -12,7 +12,7 @@ mem.land_planet    = false
 function create ()
 
    -- Give monies.
-   ai.setcredits( rnd.int(ai.pilot():ship():price()/600 , ai.pilot():ship():price()/100) )
+   --ai.setcredits( rnd.int(ai.pilot():ship():price()/600 , ai.pilot():ship():price()/100) )
 
    -- Get standing.
    p = player.pilot()

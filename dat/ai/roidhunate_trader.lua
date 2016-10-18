@@ -26,7 +26,7 @@ mem.careful   = true
 function create ()
 
    -- Probably the ones with the most money
-   ai.setcredits( rnd.int(ai.pilot():ship():price()/100, ai.pilot():ship():price()/25) )
+   --ai.setcredits( rnd.int(ai.pilot():ship():price()/100, ai.pilot():ship():price()/25) )
 
    -- Communication stuff
    mem.bribe_no = "\"Ardars do not negotiate with criminals.\""
@@ -40,21 +40,6 @@ function create ()
       mem.refuel_msg = string.format("\"I'll supply your ship with fuel for %d credits.\"",
             mem.refuel);
    end
-
-   -- Some stuff has more chance then others
-   num = rnd.int(12)
-   if num < 5 then
-      cargo = "Food"
-   elseif num < 8 then
-      cargo = "Ore"
-   elseif num < 10 then
-      cargo = C.INDUSTRIAL
-   elseif num < 12 then
-      cargo = C.ARMAMENT
-   else
-      cargo = "Medicine"
-   end
-   ai.pilot():cargoAdd( cargo, rnd.int(0, ai.pilot():cargoFree() ) )
 
    -- Finish up creation
    create_post()

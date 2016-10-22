@@ -26,13 +26,16 @@
 #include "dialogue.h"
 #include "map_find.h"
 #include "slots.h"
+#include "ndata.h"
 
 
 /*
  * Vars.
  */
 static Ship* shipyard_selected = NULL; /**< Currently selected shipyard ship. */
-
+static Pilot* shipyard_pilot = NULL; /** Pilot for the currently select ship (for the spinning graphics) **/
+static double shipyard_dir      = 0.; /**< Equipment dir. */
+static unsigned int shipyard_lastick = 0; /**< Last tick. */
 
 /*
  * Helper functions.
@@ -42,6 +45,7 @@ static void shipyard_trade( unsigned int wid, char* str );
 static void shipyard_rmouse( unsigned int wid, char* widget_name );
 static void shipyard_renderSlots( double bx, double by, double bw, double bh, void *data );
 static void shipyard_renderSlotsRow( double bx, double by, double bw, char *str, ShipOutfitSlot *s, int n );
+static void shipyard_renderShip( double bx, double by, double bw, double bh, void *data );
 static void shipyard_find( unsigned int wid, char* str );
 static const char *shipyard_slotSize( const OutfitSlotSize* size );
 static int shipyard_generateSlotDesc(int bx, int yStart, int nslots, ShipOutfitSlot *slots, const char *typeName);
@@ -54,7 +58,8 @@ void shipyard_open( unsigned int wid )
    int i;
    Ship **ships;
    char **sships;
-   glTexture **tships;
+   glTexture ***tships;
+   int *ntships;
    int nships;
    int w, h;
    int iw, ih;
@@ -97,14 +102,27 @@ void shipyard_open( unsigned int wid )
          bw, bh, "btnFindShips",
          "Find Ships", shipyard_find, SDLK_f );
 
-   /* target gfx */
-   window_addRect( wid, -41, -50,
-         SHIP_TARGET_W, SHIP_TARGET_H, "rctTarget", &cBlack, 0 );
-   window_addImage( wid, -40, -50,
-         SHIP_TARGET_W, SHIP_TARGET_H, "imgTarget", NULL, 1 );
+   window_addCust( wid, -40, -50, SHIP_TARGET_W, SHIP_TARGET_H, "cstTarget", 0,
+		   shipyard_renderShip, NULL, NULL );
+
+   window_addText( wid, -40, -192, 128, 200, 0, "txtLMilitary",
+               &gl_smallFont, &cBlack, "Military:" );
+
+   window_addImage( wid, -40, -194, 58, 10, "imgMilitary", NULL, 0 );
+
+   window_addText( wid, -40, -208, 128, 200, 0, "txtLUtility",
+                  &gl_smallFont, &cBlack, "Utility:" );
+
+   window_addImage( wid, -40, -210, 58, 10, "imgUtility", NULL, 0 );
+
+   window_addText( wid, -40, -224, 128, 200, 0, "txtLAgility",
+                  &gl_smallFont, &cBlack, "Agility:" );
+
+   window_addImage( wid, -40, -226, 58, 10, "imgAgility", NULL, 0 );
+
 
    /* slot types */
-   window_addCust( wid, -20, -192, 160, 200, "cstSlots", 0.,
+   window_addCust( wid, -40, -246, 128, 200, "cstSlots", 0.,
          shipyard_renderSlots, NULL, NULL );
 
 
@@ -153,22 +171,28 @@ void shipyard_open( unsigned int wid )
    if (nships <= 0) {
       sships    = malloc(sizeof(char*));
       sships[0] = strdup("None");
-      tships    = malloc(sizeof(glTexture*));
-      tships[0] = NULL;
+      tships    = malloc(sizeof(glTexture**));
+      tships[0] = malloc( sizeof(glTexture*) );
+      tships[0][0] = NULL;
+      ntships = malloc(sizeof(int) );
+      ntships[0] = 0;
       nships    = 1;
    }
    else {
       sships = malloc(sizeof(char*)*nships);
-      tships = malloc(sizeof(glTexture*)*nships);
+      tships = malloc(sizeof(glTexture**)*nships);
+      ntships = malloc(sizeof(int)*nships);
       for (i=0; i<nships; i++) {
          sships[i] = strdup(ships[i]->name);
-         tships[i] = ships[i]->gfx_store;
+
+         tships[i] = ships[i]->gfx_store_layers;
+         ntships[i] = ships[i]->gfx_store_nlayers;
       }
       free(ships);
    }
-   window_addImageArray( wid, 20, 20,
+   window_addImageLayeredArray( wid, 20, 20,
          iw, ih, "iarShipyard", 96., 96.,
-         tships, sships, nships, shipyard_update, shipyard_rmouse );
+         tships, ntships, sships, nships, shipyard_update, shipyard_rmouse );
 
    /* write the shipyard stuff */
    shipyard_update(wid, NULL);
@@ -188,8 +212,10 @@ void shipyard_update( unsigned int wid, char* str )
    char buf[PATH_MAX], buf2[ECON_CRED_STRLEN], buf3[ECON_CRED_STRLEN];
    size_t len;
    double jumps=0;
+   Vector2d vp, vv;
+   PilotFlags flags;
 
-   shipname = toolkit_getImageArray( wid, "iarShipyard" );
+   shipname = toolkit_getImageLayeredArray( wid, "iarShipyard" );
 
    /* No ships */
    if (strcmp(shipname,"None")==0) {
@@ -228,8 +254,15 @@ void shipyard_update( unsigned int wid, char* str )
    ship = ship_get( shipname );
    shipyard_selected = ship;
 
-   /* update image */
-   window_modifyImage( wid, "imgTarget", ship->gfx_store, 0, 0 );
+   vect_cset( &vp, 0., 0. );
+   vect_cset( &vv, 0., 0. );
+   pilot_clearFlagsRaw( flags );
+
+   if (shipyard_pilot != NULL ) {
+	   free(shipyard_pilot);
+   }
+
+   shipyard_pilot = pilot_createEmpty( ship, "", faction_get("Player"), NULL, flags);
 
    /* update text */
    if (ship->desc_stats == NULL)
@@ -307,6 +340,19 @@ void shipyard_update( unsigned int wid, char* str )
    if (license_text != ship->license)
       free(license_text);
 
+   if (ship->rating_military > 0) {
+	   nsnprintf( buf, PATH_MAX, SHIP_GFX_PATH"layers/rating_%d.png", ship->rating_military);
+	   window_modifyImage( wid, "imgMilitary", gl_newImage( buf, OPENGL_TEX_MIPMAPS ), 0, 0 );
+
+	   nsnprintf( buf, PATH_MAX, SHIP_GFX_PATH"layers/rating_%d.png", ship->rating_utility);
+	   window_modifyImage( wid, "imgUtility", gl_newImage( buf, OPENGL_TEX_MIPMAPS ), 0, 0 );
+
+	   nsnprintf( buf, PATH_MAX, SHIP_GFX_PATH"layers/rating_%d.png", ship->rating_agility);
+	   window_modifyImage( wid, "imgAgility", gl_newImage( buf, OPENGL_TEX_MIPMAPS ), 0, 0 );
+
+   }
+
+
    if (!shipyard_canBuy( shipname, land_planet ))
       window_disableButtonSoft( wid, "btnBuyShip");
    else
@@ -354,7 +400,7 @@ static void shipyard_buy( unsigned int wid, char* str )
    char *shipname, buf[ECON_CRED_STRLEN];
    Ship* ship;
 
-   shipname = toolkit_getImageArray( wid, "iarShipyard" );
+   shipname = toolkit_getImageLayeredArray( wid, "iarShipyard" );
    if (strcmp(shipname, "None") == 0)
       return;
 
@@ -490,7 +536,7 @@ static void shipyard_trade( unsigned int wid, char* str )
          buf3[ECON_CRED_STRLEN], buf4[ECON_CRED_STRLEN];
    Ship* ship;
 
-   shipname = toolkit_getImageArray( wid, "iarShipyard" );
+   shipname = toolkit_getImageLayeredArray( wid, "iarShipyard" );
    if (strcmp(shipname, "None") == 0)
       return;
 
@@ -663,6 +709,51 @@ static void shipyard_renderSlotsRow( double bx, double by, double bw, char *str,
 }
 
 
+static void shipyard_renderShip( double bx, double by, double bw, double bh, void *data )
+{
+	(void)data;
+   int sx, sy;
+   const glColour *lc, *c, *dc;
+   unsigned int tick;
+   double dt;
+   double pw, ph;
+   double w, h;
+   double px, py;
 
+   if (shipyard_pilot == NULL)
+	   return;
+
+   tick = SDL_GetTicks();
+   dt   = (double)(tick - shipyard_lastick)/1000.;
+   shipyard_lastick = tick;
+   shipyard_dir += shipyard_pilot->turn * dt;
+   if (shipyard_dir > 2*M_PI)
+	   shipyard_dir = fmod( shipyard_dir, 2*M_PI );
+   gl_getSpriteFromDir( &sx, &sy, shipyard_pilot->ship->gfx_space, shipyard_dir );
+
+   /* Render ship graphic. */
+   if (shipyard_pilot->ship->gfx_space->sw > bw) {
+      pw = bw;
+      ph = bh;
+   }
+   else {
+      pw = shipyard_pilot->ship->gfx_space->sw;
+      ph = shipyard_pilot->ship->gfx_space->sh;
+   }
+   w  = bw;
+   h  = bh;
+   px = bx + bw - 30 - w + (w-pw)/2 + 30;
+   py = by + bh - 30 - h + (h-ph)/2 + 30;
+
+   toolkit_drawRect( bx-5, by-5, w+10, h+10, &cBlack, NULL );
+   gl_blitScaleSprite( shipyard_pilot->ship->gfx_space,
+         px, py, sx, sy, pw, ph, NULL );
+
+   lc = toolkit_colLight;
+   c  = toolkit_col;
+   dc = toolkit_colDark;
+   toolkit_drawOutline( bx - 4., by-4., w+7., h+2., 1., lc, c  );
+   toolkit_drawOutline( bx - 4., by-4., w+7., h+2., 2., dc, NULL  );
+}
 
 

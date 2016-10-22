@@ -1418,7 +1418,7 @@ static void equipment_genShipList( unsigned int wid )
       if (planet_hasService(land_planet, PLANET_SERVICE_SHIPYARD))
          player_ships( &sships[1], &tships[1] );
       window_addImageArray( wid, 20, -40,
-            sw, sh, EQUIPMENT_SHIPS, 64./96.*128., 64.,
+            sw, sh, EQUIPMENT_SHIPS, 96., 96.,
             tships, sships, nships, equipment_updateShips, NULL );
 
       /* Ship stats in alt text. */

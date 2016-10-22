@@ -10,10 +10,14 @@
  <description>This slightly-adapted Imperial Halley is shipped in large quantities to the Kingdom of Ixum. It trade some of the speed and range of the original for beefier armour and one more weapon slot; the Royal Ixum Navy does not have far to patrol in any case.</description>
  <price>1200000</price>
  <license>Ixumite Honorary Lancer</license>
+ <logo>royalixum</logo>
+ <rating_military>4</rating_military>
+ <rating_utility>2</rating_utility>
+ <rating_agility>7</rating_agility>
  <movement>
-  <thrust>200</thrust>
+  <thrust>220</thrust>
   <turn>125</turn>
-  <speed>180</speed>
+  <speed>230</speed>
   <engine_limit>450</engine_limit>
  </movement>
  <health>

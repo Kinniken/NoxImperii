@@ -8,6 +8,9 @@
  <fabricator>Paoli Shipyards</fabricator>
  <description>Long-ranged and with a spacious cargo hold, the Pelegrina is used by Betelgian trading families for small, urgent cargo. Its decent speed is its main defense against pirates or barbarians, as its shield is weak and armour almost non-existent.</description>
  <price>300000</price>
+ <rating_military>1</rating_military>
+ <rating_utility>2</rating_utility>
+ <rating_agility>8</rating_agility>
  <movement>
   <thrust>220</thrust>
   <turn>120</turn>

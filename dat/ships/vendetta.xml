@@ -8,6 +8,9 @@
  <fabricator>Various</fabricator>
  <description>This simple and ancient design is built to maximise the amount of weapons that can be focused simultaneously on the primary target, even at the expense of defence and agility.</description>
  <price>900000</price>
+ <rating_military>3</rating_military>
+ <rating_utility>1</rating_utility>
+ <rating_agility>5</rating_agility>
  <movement>
   <thrust>180</thrust>
   <turn>100</turn>

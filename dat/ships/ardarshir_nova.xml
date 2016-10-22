@@ -8,12 +8,16 @@
  <class>Cruiser</class>
  <fabricator>Roidhunate Shipyards</fabricator>
  <description>The largest ships in the Roidhunate's navy, Moloch-class dreadnoughts are the best Ardar technology can manage. While Imperial admirals would keep such prized ships in reserve, wary of losing them, the Roidhunate sends them on the riskiest missions. If some are lost, new ones can always be built, improved with the lessons learnt.</description>
- <price>19000000</price>
+ <price>22000000</price>
  <license>Ardarshir Ally</license>
+ <logo>ardarshir</logo>
+ <rating_military>10</rating_military>
+ <rating_utility>9</rating_utility>
+ <rating_agility>4</rating_agility>
  <movement>
-  <thrust>100</thrust>
-  <turn>75</turn>
-  <speed>120</speed>
+  <thrust>150</thrust>
+  <turn>100</turn>
+  <speed>160</speed>
   <engine_limit>7000</engine_limit>
  </movement>
  <health>

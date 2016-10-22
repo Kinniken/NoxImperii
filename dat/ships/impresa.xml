@@ -9,10 +9,14 @@
  <description>Maybe the finest ship ever produced on Betelgeuse, the Impresa is a design unique in known space, that goes beyond variations on existing template to offer something genuinely new. While technically classified as a cruiser, the Impresa is really a deep space exploration and trade ship, intended to survey uncharted territories, collect masses of exotic goods, and come back through barbarian space with tales of uncharted worlds. No other known ship will travel so far through hostile space, and in the customary Betelgian style to boot.</description>
  <price>5000000</price>
  <license>Betelgian Merchant Prince</license>
+ <logo>betelgeuse</logo>
+ <rating_military>7</rating_military>
+ <rating_utility>10</rating_utility>
+ <rating_agility>6</rating_agility>
  <movement>
   <thrust>180</thrust>
-  <turn>100</turn>
-  <speed>190</speed>
+  <turn>110</turn>
+  <speed>200</speed>
   <engine_limit>5000</engine_limit>
  </movement>
  <health>

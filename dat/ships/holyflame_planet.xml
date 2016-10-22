@@ -10,10 +10,14 @@
  <description>Mowyers cruisers are the only ships in the Holy Flame navy to be entirely produced by the Roidhunate and sold as-is to the theocracy. Their poor performance compared to the ships serving in the Ardar navy is thus due entirely to poor maintenance.</description>
  <price>8000000</price>
  <license>Holy Flame Warrior</license>
+ <logo>holyflame</logo>
+ <rating_military>8</rating_military>
+ <rating_utility>7</rating_utility>
+ <rating_agility>4</rating_agility>
  <movement>
-  <thrust>120</thrust>
-  <turn>75</turn>
-  <speed>120</speed>
+  <thrust>160</thrust>
+  <turn>90</turn>
+  <speed>160</speed>
   <engine_limit>4500</engine_limit>
  </movement>
  <health>

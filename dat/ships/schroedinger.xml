@@ -4,10 +4,13 @@
  <GFX sx="8" sy="8">schroedinger</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
- <class>Scout</class>
+ <class>Courier</class>
  <fabricator>Sirius Systems</fabricator>
  <description>The Schroedinger is an old but singular design, an extremely light and maneuverable ship that is almost alone in its ability to perform jumps instantly. This makes it a great courier and scout ship - as long as it is not subject to enemy fire.</description>
  <price>250000</price>
+ <rating_military>1</rating_military>
+ <rating_utility>1</rating_utility>
+ <rating_agility>9</rating_agility>
  <movement>
   <thrust>250</thrust>
   <turn>150</turn>

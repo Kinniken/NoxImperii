@@ -10,10 +10,14 @@
  <description>The Ardar equivalent of the Jupiter cruisers, Roidhunate Mowyrs have a somewhat more offensive design; they are intended not primarily as flagships, but as the shock elements of any large battles. And should the battle go the Roidhunate's way, they have the speed to finish off Imperial stragglers.</description>
  <price>8500000</price>
  <license>Ardarshir Auxiliary, Honourable</license>
+ <logo>ardarshir</logo>
+ <rating_military>9</rating_military>
+ <rating_utility>7</rating_utility>
+ <rating_agility>5</rating_agility>
  <movement>
-  <thrust>130</thrust>
-  <turn>80</turn>
-  <speed>130</speed>
+  <thrust>170</thrust>
+  <turn>100</turn>
+  <speed>170</speed>
   <engine_limit>4500</engine_limit>
  </movement>
  <health>

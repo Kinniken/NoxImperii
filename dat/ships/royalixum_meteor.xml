@@ -10,6 +10,10 @@
  <description>These fighters of Terran designs are the only military ships still produced by the remains of the Royal Ixum shipyards. They are poorly-made copies of the Terran version, though somewhat more heavily-armed.</description>
  <price>250000</price>
  <license>Ixumite Honorary Hunter</license>
+ <logo>royalixum</logo>
+ <rating_military>2</rating_military>
+ <rating_utility>1</rating_utility>
+ <rating_agility>9</rating_agility>
  <movement>
   <thrust>250</thrust>
   <turn>145</turn>

@@ -9,6 +9,10 @@
  <fabricator>Pirate Shipyards</fabricator>
  <description>Delta designs used by pirates trade some cargo space for increased thrust and heavier armour, as they are intended primarily as strike ships against beefier merchant ships.</description>
  <price>1100000</price>
+ <logo>pirates</logo>
+ <rating_military>4</rating_military>
+ <rating_utility>2</rating_utility>
+ <rating_agility>7</rating_agility>
  <movement>
   <thrust>220</thrust>
   <turn>120</turn>

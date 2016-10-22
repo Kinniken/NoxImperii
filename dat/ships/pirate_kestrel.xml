@@ -9,9 +9,13 @@
  <fabricator>Pirate Shipyards</fabricator>
  <description>Retrofitted from kestrels stolen, captured or bought via back-handed channels, the pirate version of the ship packs even more punch than the factory one. Truly a ship to strike fear in passing traders.</description>
  <price>5000000</price>
+ <logo>pirates</logo>
+ <rating_military>6</rating_military>
+ <rating_utility>4</rating_utility>
+ <rating_agility>7</rating_agility>
  <movement>
-  <thrust>170</thrust>
-  <turn>120</turn>
+  <thrust>190</thrust>
+  <turn>150</turn>
   <speed>200</speed>
   <engine_limit>2000</engine_limit>
  </movement>

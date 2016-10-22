@@ -4,14 +4,17 @@
  <GFX sx="6" sy="6">keserlan</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
- <class>Freighter</class>
+ <class>Bulk Carrier</class>
  <fabricator>Maggiore Shipyards</fabricator>
  <description>Pride and glory of the Maggiore Shipyards, the Veniera is a rare bulk freighter not descended from the universal "fish bone" design: Betelgeuse has no use for such fragile ships, not when its traders ply dangerous routes far from its borders. With its strong armour, decent offensive military capacities, and huge fuel tanks, the Veniera can deliver large cargo in the most dangerous neighbourhoods.</description>
- <price>3800000</price>
+ <price>2800000</price>
+ <rating_military>6</rating_military>
+ <rating_utility>9</rating_utility>
+ <rating_agility>2</rating_agility>
  <movement>
-  <thrust>180</thrust>
-  <turn>90</turn>
-  <speed>180</speed>
+  <thrust>100</thrust>
+  <turn>100</turn>
+  <speed>120</speed>
   <engine_limit>5000</engine_limit>
  </movement>
  <health>

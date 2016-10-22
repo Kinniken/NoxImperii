@@ -10,10 +10,14 @@
  <description>Vach Rueth frigates produced by the Holy Flame are distinctly weaker than their Ardar models. To compensate, Holy Flame engineers slap extra armour on top, at the predictable cost of mobility. They remain dangerous foes - at least in number.</description>
  <price>800000</price>
  <license>Holy Flame Initiate</license>
+ <logo>holyflame</logo>
+ <rating_military>4</rating_military>
+ <rating_utility>3</rating_utility>
+ <rating_agility>5</rating_agility>
  <movement>
-  <thrust>150</thrust>
+  <thrust>180</thrust>
   <turn>100</turn>
-  <speed>170</speed>
+  <speed>200</speed>
   <engine_limit>400</engine_limit>
  </movement>
  <health>

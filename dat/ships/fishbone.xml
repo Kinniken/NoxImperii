@@ -8,10 +8,13 @@
  <fabricator>Various</fabricator>
  <description>Derisively nick-named fish bones, ungainly ships such as these are among the cheapest and simplest ways of shipping goods from systems to systems; no other ship in widespread use offers so much cargo capacity for so cheap a price. Of course, the downside of captaining one include terrible speed, weak shields and getting laughed out of pilots' bars.</description>
  <price>420000</price>
+ <rating_military>2</rating_military>
+ <rating_utility>3</rating_utility>
+ <rating_agility>3</rating_agility>
  <movement>
-  <thrust>150</thrust>
+  <thrust>120</thrust>
   <turn>80</turn>
-  <speed>170</speed>
+  <speed>140</speed>
   <engine_limit>1000</engine_limit>
  </movement>
  <health>

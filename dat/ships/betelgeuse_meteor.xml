@@ -10,8 +10,12 @@
  <description>The Alba is a light fighter adapted from civilian recon crafts. Like most Betelgian ships, its fighting capacities do not match those of its nearest equivalent, the Tunguska. Its heritage however does leave it with a larger cargo hold than typical on fighters.</description>
  <price>220000</price>
  <license>Betelgian Courier</license>
+ <logo>betelgeuse</logo>
+ <rating_military>2</rating_military>
+ <rating_utility>2</rating_utility>
+ <rating_agility>8</rating_agility>
  <movement>
-  <thrust>220</thrust>
+  <thrust>230</thrust>
   <turn>130</turn>
   <speed>280</speed>
   <engine_limit>160</engine_limit>

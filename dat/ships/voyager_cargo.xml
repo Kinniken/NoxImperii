@@ -8,10 +8,13 @@
  <fabricator>Various</fabricator>
  <description>The general structure of Voyager spacecrafts predates human ultraluminous flights, and has been reused and re-adapted on many worlds. Cargo versions are particularly popular; not fancy, but reliable and fairly speedy for their size.</description>
  <price>450000</price>
+ <rating_military>2</rating_military>
+ <rating_utility>3</rating_utility>
+ <rating_agility>4</rating_agility>
  <movement>
-  <thrust>180</thrust>
+  <thrust>140</thrust>
   <turn>100</turn>
-  <speed>180</speed>
+  <speed>150</speed>
   <engine_limit>700</engine_limit>
  </movement>
  <health>

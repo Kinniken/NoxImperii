@@ -4,14 +4,17 @@
  <GFX sx="6" sy="6">irali</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
- <class>Freighter</class>
+ <class>Bulk Carrier</class>
  <fabricator>Roidhunate Shipyards</fabricator>
  <description>While the Rioloch's structure clearly show its "fish bone" heritage, it has been heavily adapted by the Roidhunate and now differs significantly from the original human design. Tougher and better armed than human equivalents, it is intended to follow Ardar offensives under minimal protection.</description>
- <price>2800000</price>
+ <price>2200000</price>
+ <rating_military>5</rating_military>
+ <rating_utility>8</rating_utility>
+ <rating_agility>2</rating_agility>
  <movement>
-  <thrust>160</thrust>
-  <turn>100</turn>
-  <speed>190</speed>
+  <thrust>100</thrust>
+  <turn>80</turn>
+  <speed>120</speed>
   <engine_limit>4000</engine_limit>
  </movement>
  <health>

@@ -10,10 +10,14 @@
  <description>Produced in the Empire and then "loaned" to the Royal Ixumite Navy, those powerful destroyers are among the best tools still left to the hapless King of Ixum. They are generally adapted to a limited extent by the Royal Ixumite Navy, adding some extra armour at the cost of mobility.</description>
  <price>2700000</price>
  <license>Ixumite Knight</license>
+ <logo>royalixum</logo>
+ <rating_military>6</rating_military>
+ <rating_utility>5</rating_utility>
+ <rating_agility>5</rating_agility>
  <movement>
-  <thrust>160</thrust>
+  <thrust>180</thrust>
   <turn>100</turn>
-  <speed>160</speed>
+  <speed>180</speed>
   <engine_limit>2000</engine_limit>
  </movement>
  <health>

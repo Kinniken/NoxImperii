@@ -8,12 +8,16 @@
  <class>Cruiser</class>
  <fabricator>Imperial Shipyards</fabricator>
  <description>The few remaining heavy cruisers in the Royal Ixumite Navy are Jupiter-class Imperial models. As the Empire refuses its ally access to Imperial Nova dreadnoughts, they are the flagships of the Royal Navy, cherished and rarely risked in open battle. They are generally equipped with all the resources the Kingdom can still muster, and are in fact often better armed than their Terran equivalents.</description>
- <price>11000000</price>
+ <price>10000000</price>
  <license>Ixumite Baron</license>
+ <logo>royalixum</logo>
+ <rating_military>9</rating_military>
+ <rating_utility>8</rating_utility>
+ <rating_agility>4</rating_agility>
  <movement>
-  <thrust>120</thrust>
-  <turn>75</turn>
-  <speed>120</speed>
+  <thrust>160</thrust>
+  <turn>90</turn>
+  <speed>150</speed>
   <engine_limit>5000</engine_limit>
  </movement>
  <health>

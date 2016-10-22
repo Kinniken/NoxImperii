@@ -10,10 +10,14 @@
  <description>All but the most important Terran fleets are lead by Planet-class cruisers, and the Jupiter is the most advanced ever built by the Terran Navy. Clearly this is a ship that can face anything... this side of the Ardar border.</description>
  <price>9000000</price>
  <license>Reserve Colonel</license>
+ <logo>terra</logo>
+ <rating_military>8</rating_military>
+ <rating_utility>8</rating_utility>
+ <rating_agility>4</rating_agility>
  <movement>
-  <thrust>120</thrust>
-  <turn>75</turn>
-  <speed>120</speed>
+  <thrust>160</thrust>
+  <turn>90</turn>
+  <speed>150</speed>
   <engine_limit>5000</engine_limit>
  </movement>
  <health>

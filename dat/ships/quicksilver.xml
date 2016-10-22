@@ -8,6 +8,9 @@
  <fabricator>Melendez Corp.</fabricator>
  <description>Marketed as the "King of the Courier", the Quicksilver is a sleek ship indeed. Its speed, decent cargo hold, and reasonable protection for its class makes it an excellent if pricey courier on risky runs.</description>
  <price>500000</price>
+ <rating_military>2</rating_military>
+ <rating_utility>4</rating_utility>
+ <rating_agility>8</rating_agility>
  <movement>
   <thrust>230</thrust>
   <turn>110</turn>

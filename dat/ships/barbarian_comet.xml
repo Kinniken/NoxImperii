@@ -11,10 +11,14 @@
  
 This raider model is simple but effective. Slower and with lesser shields than the equivalent Terran ships, it makes up with a heavier armour, and the usual ample cargo hold.</description>
  <price>750000</price>
+ <logo>barbarians</logo>
+ <rating_military>3</rating_military>
+ <rating_utility>3</rating_utility>
+ <rating_agility>5</rating_agility>
  <movement>
-  <thrust>150</thrust>
+  <thrust>170</thrust>
   <turn>100</turn>
-  <speed>180</speed>
+  <speed>200</speed>
   <engine_limit>600</engine_limit>
  </movement>
  <health>

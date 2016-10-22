@@ -8,10 +8,13 @@
  <fabricator>Various</fabricator>
  <description>Raptor-based designs are classified somewhere between heavy frigates and light cruisers, depending on the equipment. They are popular with pirates and independent militaries, being among the heaviest military ships available outside the main galactic powers.</description>
  <price>2800000</price>
+ <rating_military>5</rating_military>
+ <rating_utility>3</rating_utility>
+ <rating_agility>4</rating_agility>
  <movement>
-  <thrust>130</thrust>
-  <turn>90</turn>
-  <speed>150</speed>
+  <thrust>150</thrust>
+  <turn>110</turn>
+  <speed>160</speed>
   <engine_limit>1800</engine_limit>
  </movement>
  <health>

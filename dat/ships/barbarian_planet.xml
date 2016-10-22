@@ -11,10 +11,14 @@
  
 The results are bulky, ill-designed ships far from the sleek ships of modern navies. But in the border worlds of the Terran and Ardar empires, those ships can often over-power limited local defenses and leave with their holds full of loots and slaves.</description>
  <price>7000000</price>
+ <logo>barbarians</logo>
+ <rating_military>8</rating_military>
+ <rating_utility>7</rating_utility>
+ <rating_agility>3</rating_agility>
  <movement>
-  <thrust>100</thrust>
-  <turn>65</turn>
-  <speed>100</speed>
+  <thrust>130</thrust>
+  <turn>80</turn>
+  <speed>150</speed>
   <engine_limit>5500</engine_limit>
  </movement>
  <health>

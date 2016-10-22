@@ -10,10 +10,14 @@
  <description>This Comet-class light frigate is one of the workhorse of the Terran Navy. It is used mainly as an interceptor and as a frontier scout ship, and is provided with the engines and fuel capacity needed for those roles.</description>
  <price>1100000</price>
  <license>Reserve Lieutenant</license>
+ <logo>terra</logo>
+ <rating_military>4</rating_military>
+ <rating_utility>4</rating_utility>
+ <rating_agility>8</rating_agility>
  <movement>
-  <thrust>200</thrust>
+  <thrust>220</thrust>
   <turn>125</turn>
-  <speed>200</speed>
+  <speed>250</speed>
   <engine_limit>500</engine_limit>
  </movement>
  <health>

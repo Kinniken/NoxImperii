@@ -8,6 +8,9 @@
  <fabricator>Various</fabricator>
  <description>Generally known as admonishers, those versatile heavy fighters are less agile than most, but pack more fire-power than shark or wasp-based designs.</description>
  <price>270000</price>
+ <rating_military>2</rating_military>
+ <rating_utility>1</rating_utility>
+ <rating_agility>6</rating_agility>
  <movement>
   <thrust>190</thrust>
   <turn>120</turn>

@@ -11,10 +11,14 @@
  
 The striking steel spikes often added to its hull are mostly intended for effect, though there are stories in worlds on the fringe of barbarian captains wild enough to attempt ramming manoeuvres.</description>
  <price>1800000</price>
+ <logo>barbarians</logo>
+ <rating_military>5</rating_military>
+ <rating_utility>4</rating_utility>
+ <rating_agility>4</rating_agility>
  <movement>
-  <thrust>140</thrust>
+  <thrust>170</thrust>
   <turn>90</turn>
-  <speed>150</speed>
+  <speed>170</speed>
   <engine_limit>2000</engine_limit>
  </movement>
  <health>

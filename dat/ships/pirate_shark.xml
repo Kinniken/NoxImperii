@@ -9,6 +9,10 @@
  <fabricator>Pirate Shipyards</fabricator>
  <description>The pirate variants of the shark design are known for focusing on speed and offensive capacities, to better close in on weaker targets.</description>
  <price>230000</price>
+ <logo>pirates</logo>
+ <rating_military>2</rating_military>
+ <rating_utility>1</rating_utility>
+ <rating_agility>9</rating_agility>
  <movement>
   <thrust>250</thrust>
   <turn>140</turn>

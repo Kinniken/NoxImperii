@@ -182,7 +182,7 @@ static unsigned int comm_openPilotWindow (void)
    sprintf(buff,"%s %s",faction_adjective(comm_pilot->faction),comm_pilot->ship->short_name);
 
    /* Create the generic comm window. */
-   wid = comm_open( ship_loadCommGFX( comm_pilot->ship ),
+   wid = comm_open( comm_pilot->ship->gfx_store,
          comm_pilot->faction,
          pilot_isHostile(comm_pilot) ? -1 : pilot_isFriendly(comm_pilot) ? 1 : 0,
          pilot_isFlag(comm_pilot, PILOT_BRIBED),

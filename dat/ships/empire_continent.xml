@@ -10,10 +10,14 @@
  <description>Like all Terran Continent-class ship, the Asieneuve destroyer is named after a continent - in this case the main landmass of the Ardeche planet. This powerful destroyer is effective against most Imperial enemies. Pirates and barbarian races would rarely challenge one.</description>
  <price>3000000</price>
  <license>Reserve Major</license>
+ <logo>terra</logo>
+ <rating_military>6</rating_military>
+ <rating_utility>5</rating_utility>
+ <rating_agility>6</rating_agility>
  <movement>
-  <thrust>180</thrust>
+  <thrust>200</thrust>
   <turn>110</turn>
-  <speed>170</speed>
+  <speed>200</speed>
   <engine_limit>2000</engine_limit>
  </movement>
  <health>

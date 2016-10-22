@@ -8,8 +8,11 @@
  <fabricator>Various</fabricator>
  <description>The light frigate variation of the voyager design remains a popular design, despite limited performance. It has been used both as a light combat ship and as a courier in fringe areas; its weak protection remains its chief weakness.</description>
  <price>720000</price>
+ <rating_military>3</rating_military>
+ <rating_utility>2</rating_utility>
+ <rating_agility>5</rating_agility>
  <movement>
-  <thrust>200</thrust>
+  <thrust>170</thrust>
   <turn>110</turn>
   <speed>180</speed>
   <engine_limit>600</engine_limit>

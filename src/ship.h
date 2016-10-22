@@ -36,9 +36,9 @@ typedef enum ShipClass_ {
    SHIP_CLASS_CRUISE_SHIP, /**< Medium ship. */
    /* Merchant. */
    SHIP_CLASS_COURIER,     /**< Small ship. */
-   SHIP_CLASS_ARMOURED_TRANSPORT, /**< Medium, somewhat combat-oriented ship. */
    SHIP_CLASS_FREIGHTER,   /**< Medium ship. */
    SHIP_CLASS_BULK_CARRIER, /**< Large ship. */
+   SHIP_CLASS_ARMOURED_TRANSPORT, /**< Medium, somewhat combat-oriented ship. */
    /* Military. */
    SHIP_CLASS_SCOUT,       /**< Small scouter. */
    SHIP_CLASS_FIGHTER,     /**< Small attack ship. */
@@ -92,6 +92,13 @@ typedef struct Ship_ {
    char* license;    /**< License needed to buy it. */
    char* fabricator; /**< company that makes it */
    char* description; /**< selling description */
+   char *logo; /**< Logo to add to ship store pict (optional) */
+
+   /* star ratings (purely indicative, for UI) */
+   /* stored as ints from 1 to 10, rendered as stars from 0.5 to 5 */
+   int rating_military;
+   int rating_utility;
+   int rating_agility;
 
    /* movement */
    double thrust;    /**< Ship's thrust in "pixel/sec^2" (not multiplied by mass) */
@@ -120,8 +127,9 @@ typedef struct Ship_ {
    glTexture *gfx_space; /**< Space sprite sheet. */
    glTexture *gfx_engine; /**< Space engine glow sprite sheet. */
    glTexture *gfx_target; /**< Targeting window graphic. */
-   glTexture *gfx_store; /**< Store graphic. */
-   char* gfx_comm;   /**< Name of graphic for communication. */
+   glTexture *gfx_store; /**< Store graphic, without layers */
+   glTexture **gfx_store_layers; /**< Store graphic, with layers */
+   int gfx_store_nlayers; /**< Store graphic, layer number */
 
    /* GUI interface */
    char* gui;        /**< Name of the GUI the ship uses by default. */
@@ -164,7 +172,6 @@ char* ship_class( Ship* s );
 ShipClass ship_classFromString( char* str );
 credits_t ship_basePrice( const Ship* s );
 credits_t ship_buyPrice( const Ship* s );
-glTexture* ship_loadCommGFX( Ship* s );
 
 
 /*

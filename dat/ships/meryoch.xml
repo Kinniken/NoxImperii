@@ -8,6 +8,9 @@
  <fabricator>Roidhunate Shipyards</fabricator>
  <description>While no Ardar engineer would willingly acknowledge it, the Meryoch is an adaptation of an earlier human design. It is however efficient at fulfilling the Roidhunate's shipping needs, and the Ardars are a practical race.</description>
  <price>1200000</price>
+ <rating_military>3</rating_military>
+ <rating_utility>5</rating_utility>
+ <rating_agility>4</rating_agility>
  <movement>
   <thrust>160</thrust>
   <turn>90</turn>

@@ -10,12 +10,16 @@
  <description>Stella dreadnoughts are a rare and new sight in the Betelgian navy, a clear sign that the Merchant Princes are aware that Betelgeuse's position as a neutral trading power is under threat.
 
 Intended as command ships for large fleets, and always commanded by prominent members of leading families, Stella dreadnoughts are not just formidable vessels but also provide luxurious accommodations worthy of the Doge himself.</description>
- <price>15000000</price>
+ <price>20000000</price>
  <license>Betelgian Merchant Prince</license>
+ <logo>betelgeuse</logo>
+ <rating_military>10</rating_military>
+ <rating_utility>10</rating_utility>
+ <rating_agility>4</rating_agility>
  <movement>
-  <thrust>100</thrust>
-  <turn>60</turn>
-  <speed>100</speed>
+  <thrust>150</thrust>
+  <turn>100</turn>
+  <speed>160</speed>
   <engine_limit>7000</engine_limit>
  </movement>
  <health>

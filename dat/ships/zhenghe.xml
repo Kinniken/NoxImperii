@@ -4,14 +4,17 @@
  <GFX sx="6" sy="6">iserlohn</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
- <class>Freighter</class>
+ <class>Bulk Carrier</class>
  <fabricator>Xiao Shipyards</fabricator>
  <description>A higher-end variant on the common "whales" design, the Zheng He is popular in the Empire for its increased cargo capacity, greater speed and stronger shields. Its vulnerability still limits it to core Terran space.</description>
- <price>2500000</price>
+ <price>2100000</price>
+ <rating_military>5</rating_military>
+ <rating_utility>7</rating_utility>
+ <rating_agility>2</rating_agility>
  <movement>
-  <thrust>150</thrust>
-  <turn>90</turn>
-  <speed>180</speed>
+  <thrust>110</thrust>
+  <turn>70</turn>
+  <speed>100</speed>
   <engine_limit>3200</engine_limit>
  </movement>
  <health>

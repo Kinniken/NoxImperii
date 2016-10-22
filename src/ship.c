@@ -134,21 +134,20 @@ int ship_compareTech( const void *arg1, const void *arg2 )
    s2 = * (const Ship**) arg2;
 
    /* Compare class. */
-   if (s1->class < s2->class)
+   if (s1->class > s2->class)
       return +1;
-   else if (s1->class > s2->class)
+   else if (s1->class < s2->class)
       return -1;
 
    /* Compare price. */
-   if (s1->price < s2->price)
+   if (s1->price > s2->price)
       return +1;
-   else if (s1->price > s2->price)
+   else if (s1->price < s2->price)
       return -1;
 
    /* Same. */
    return strcmp( s1->name, s2->name );
 }
-
 
 /**
  * @brief Gets the ship's class name in human readable form.
@@ -315,20 +314,6 @@ credits_t ship_buyPrice( const Ship* s )
    return price;
 }
 
-
-/**
- * @brief Loads the ship's comm graphic.
- *
- * Must be freed afterwards.
- */
-glTexture* ship_loadCommGFX( Ship* s )
-{
-   if (s->gfx_comm != NULL)
-      return gl_newImage( s->gfx_comm, 0 );
-   return NULL;
-}
-
-
 /**
  * @brief Generates a target graphic for a ship.
  */
@@ -472,7 +457,7 @@ static int ship_genTargetGFX( Ship *temp, SDL_Surface *surface, int sx, int sy )
 static int ship_loadGFX( Ship *temp, char *buf, int sx, int sy, int engine )
 {
    char base[PATH_MAX], str[PATH_MAX];
-   int i;
+   int i, pos, nbLayers;
    png_uint_32 w, h;
    SDL_RWops *rw;
    npng_t *npng;
@@ -523,9 +508,45 @@ static int ship_loadGFX( Ship *temp, char *buf, int sx, int sy, int engine )
    temp->mangle  = 2.*M_PI;
    temp->mangle /= temp->gfx_space->sx * temp->gfx_space->sy;
 
-   /* Get the comm graphic for future loading. */
    nsnprintf( str, PATH_MAX, SHIP_GFX_PATH"%s/%s"SHIP_COMM SHIP_EXT, base, buf );
-   temp->gfx_comm = strdup(str);
+   temp->gfx_store = gl_newImage( str, OPENGL_TEX_MIPMAPS );
+
+   nbLayers=1;
+
+   if (temp->logo != NULL) {
+	   nbLayers++;
+   }
+
+   if (temp->rating_military>0) {
+	   nbLayers+=3;
+   }
+
+   temp->gfx_store_layers = malloc(sizeof(glTexture*) * nbLayers);
+   temp->gfx_store_nlayers = nbLayers;
+
+   pos = 0;
+
+   temp->gfx_store_layers[pos] = temp->gfx_store;
+
+   pos++;
+
+   if (temp->logo != NULL) {
+	   nsnprintf( str, PATH_MAX, SHIP_GFX_PATH"layers/logo_%s.png", temp->logo);
+	   temp->gfx_store_layers[pos] = gl_newImage( str, OPENGL_TEX_MIPMAPS );
+	   pos++;
+   }
+
+   if (temp->rating_military>0) {
+	   nsnprintf( str, PATH_MAX, SHIP_GFX_PATH"layers/military_%d.png", temp->rating_military);
+	   temp->gfx_store_layers[pos] = gl_newImage( str, OPENGL_TEX_MIPMAPS );
+	   pos++;
+	   nsnprintf( str, PATH_MAX, SHIP_GFX_PATH"layers/utility_%d.png", temp->rating_utility);
+	   temp->gfx_store_layers[pos] = gl_newImage( str, OPENGL_TEX_MIPMAPS );
+	   pos++;
+	   nsnprintf( str, PATH_MAX, SHIP_GFX_PATH"layers/agility_%d.png", temp->rating_agility);
+	   temp->gfx_store_layers[pos] = gl_newImage( str, OPENGL_TEX_MIPMAPS );
+	   pos++;
+   }
 
    return 0;
 }
@@ -726,9 +747,6 @@ static int ship_parse( Ship *temp, xmlNodePtr parent )
          else
             engine = 1;
 
-         /* Load the graphics. */
-         ship_loadGFX( temp, buf, sx, sy, engine );
-
          continue;
       }
 
@@ -747,6 +765,10 @@ static int ship_parse( Ship *temp, xmlNodePtr parent )
       xmlr_strd(node,"fabricator",temp->fabricator);
       xmlr_strd(node,"short_name",temp->short_name);
       xmlr_strd(node,"description",temp->description);
+      xmlr_strd(node,"logo",temp->logo);
+      xmlr_int(node,"rating_military",temp->rating_military);
+      xmlr_int(node,"rating_utility",temp->rating_utility);
+      xmlr_int(node,"rating_agility",temp->rating_agility);
       if (xml_isNode(node,"movement")) {
          cur = node->children;
          do {
@@ -876,6 +898,9 @@ static int ship_parse( Ship *temp, xmlNodePtr parent )
    if (temp->short_name == NULL)
 	   temp->short_name = strdup(temp->name);
 
+   /* Load the graphics. */
+      ship_loadGFX( temp, buf, sx, sy, engine );
+
    /* ship validator */
 #define MELEMENT(o,s)      if (o) WARN("Ship '%s' missing '"s"' element", temp->name)
    MELEMENT(temp->name==NULL,"name");
@@ -901,6 +926,8 @@ static int ship_parse( Ship *temp, xmlNodePtr parent )
    /*MELEMENT(temp->cap_cargo==0,"cargo");
    MELEMENT(temp->cpu==0.,"cpu");*/
 #undef MELEMENT
+
+
 
    return 0;
 }
@@ -1025,7 +1052,12 @@ void ships_free (void)
          gl_freeTexture(s->gfx_target);
       if (s->gfx_store != NULL)
          gl_freeTexture(s->gfx_store);
-      free(s->gfx_comm);
+      if (s->gfx_store_layers != NULL) {
+    	  for (j=0; j<s->gfx_store_nlayers; j++) {
+    		  gl_freeTexture(s->gfx_store_layers[j]);
+    	  }
+    	  free(s->gfx_store_layers);
+      }
    }
 
    array_free(ship_stack);

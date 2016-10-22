@@ -4,10 +4,13 @@
  <GFX sx="8" sy="8">llama</GFX>
  <GUI>slim</GUI>
  <sound>engine</sound>
- <class>Scout</class>
+ <class>Courier</class>
  <fabricator>Various</fabricator>
  <description>Generally referred to as "Endeavour shuttles", those sturdy little ships are among the cheapest and most common ships around. While this was originally a human design, it is now common in adapted forms throughout known space.</description>
  <price>150000</price>
+ <rating_military>1</rating_military>
+ <rating_utility>1</rating_utility>
+ <rating_agility>5</rating_agility>
  <movement>
   <thrust>180</thrust>
   <turn>90</turn>

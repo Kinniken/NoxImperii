@@ -8,6 +8,9 @@
  <fabricator>N/A</fabricator>
  <description>This is a base. It's for AI use only. Don't buy it. Seriously.</description>
  <price>1</price>
+ <rating_military></rating_military>
+ <rating_utility></rating_utility>
+ <rating_agility></rating_agility>
  <movement>
   <thrust>0</thrust>
   <turn>100</turn>

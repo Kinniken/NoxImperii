@@ -25,13 +25,22 @@ else --default english
                             "neutral/thief3",
                            }
   civ_port.ardarCivilians = {
+    	"dvaered/dv_civilian1",
+    	"dvaered/dv_civilian2"
+	} 
+	civ_port.ardarMilitary = {
+		"ardar/military_m1",
+		"ardar/military_m2",
+		"ardar/military_m3"
+	}                        
+  civ_port.ardarCivilians_todo = {
       "ardar/ardar_1",
       "ardar/ardar_2",
       "ardar/ardar_3",
       "ardar/ardar_4",
       "ardar/ardar_5"
   }
-  civ_port.ardarMilitary = {
+  civ_port.ardarMilitary_todo = {
     "ardar/ardar_1",
       "ardar/ardar_2",
       "ardar/ardar_3",
@@ -47,12 +56,23 @@ else --default english
     "empire/empire2",
     "empire/empire3",
     "empire/empire4"
-  } 
+  }
+  civ_port.ardarMilitary = {
+		"ardar/military_m1",
+		"ardar/military_m2",
+		"ardar/military_m3"
+	}
   civ_port.independentMilitary = {
     "pirate/pirate_militia1",
     "pirate/pirate_militia2"
   }
-  civ_port.betelgian = {
+  civ_port.betelgianMilitary = {
+		"empire/empire1",
+		"empire/empire2",
+		"empire/empire3",
+		"empire/empire4"
+	}
+  civ_port.betelgian_todo = {
     "betelgeuse/betelgeuse_1",
     "betelgeuse/betelgeuse_2",
     "betelgeuse/betelgeuse_3",
@@ -406,34 +426,31 @@ else --default english
    
    
   npcs.ardar_civilians={
-	 worldFactions={[G.ROIDHUNATE]=true},
-	 name="Ardar Civilian",
-	 speech={	{items=msg_lore.ardar.civilians,weight=10},
+	worldFactions={[G.ROIDHUNATE]=true},
+	name="Ardar Civilian",
+	speech={	{items=msg_lore.ardar.civilians,weight=10},
 				{items=msg_tip,weight=5}},
-	 portraits=civ_port.ardarCivilians,
-   backgrounds=civ_port.ardarBackgrounds,
-	 descriptions=civ_desc.general,
-	 weight=20
-  }
-  npcs.ardar_military={
-	 worldFactions={[G.ROIDHUNATE]=true},
-	 name="Ardar Private",
-	 speech={	{items=msg_lore.ardar.military,weight=10}},
-	 portraits=civ_port.ardarMilitary,
-   backgrounds=civ_port.ardarBackgrounds,
-	 descriptions=civ_desc.ardarMilitary,
-	 weight=20
-  }
-  npcs.ardar_traders={
-	 worldFactions={[G.ROIDHUNATE]=true},
-	 name="Ardar Trader",
-	 speech={	{items=msg_lore.ardar.traders,weight=10},
+	portraits=civ_port.ardarCivilians,
+	descriptions=civ_desc.general,
+	weight=20
+   }
+   npcs.ardar_military={
+	worldFactions={[G.ROIDHUNATE]=true},
+	name="Ardar Private",
+	speech={	{items=msg_lore.ardar.military,weight=10}},
+	portraits=civ_port.ardarMilitary,
+	descriptions=civ_desc.ardarMilitary,
+	weight=20
+   }
+   npcs.ardar_traders={
+	worldFactions={[G.ROIDHUNATE]=true},
+	name="Ardar Trader",
+	speech={	{items=msg_lore.ardar.traders,weight=10},
 				{items=msg_tip,weight=5}},
-	 portraits=civ_port.ardarCivilians,
-   backgrounds=civ_port.ardarBackgrounds,
-	 descriptions=civ_desc.general,
-	 weight=10
-  }
+	portraits=civ_port.ardarCivilians,
+	descriptions=civ_desc.general,
+	weight=10
+   }
    
    
    npcs.betelgeuse_civilians={
@@ -441,8 +458,7 @@ else --default english
 	name="Betelgian Civilian",
 	speech={	{items=msg_lore.betelgeuse.civilians,weight=10},
 				{items=msg_tip,weight=5}},
-	portraits=civ_port.betelgian,
-  backgrounds=civ_port.betelgianBackgrounds,
+	portraits=civ_port.general,
 	descriptions=civ_desc.general,
 	weight=20
    }
@@ -450,8 +466,7 @@ else --default english
 	worldFactions={[G.BETELGEUSE]=true},
 	name="Betelgian Private",
 	speech={	{items=msg_lore.betelgeuse.military,weight=10}},
-	portraits=civ_port.betelgian,
-  backgrounds=civ_port.betelgianBackgrounds,
+	portraits=civ_port.betelgianMilitary,
 	descriptions=civ_desc.betelgianMilitary,
 	weight=10
    }
@@ -460,8 +475,7 @@ else --default english
 	name="Betelgian Trader",
 	speech={	{items=msg_lore.betelgeuse.traders,weight=10},
 				{items=msg_tip,weight=5}},
-	portraits=civ_port.betelgian,
-  backgrounds=civ_port.betelgianBackgrounds,
+	portraits=civ_port.traders,
 	descriptions=civ_desc.general,
 	weight=20
    }
@@ -470,8 +484,7 @@ else --default english
 	name="Betelgian Trader",
 	speech={	{items=msg_lore.betelgeuse.traders,weight=10},
 				{items=msg_tip,weight=5}},
-	portraits=civ_port.betelgian,
-  backgrounds=civ_port.betelgianBackgrounds,
+	portraits=civ_port.traders,
 	descriptions=civ_desc.general,
 	weight=4
    }

@@ -53,7 +53,7 @@ function create ()
    end
 
    -- creates the NPC at the bar to create the mission
-   misn.setNPC( "Rastapopoulos", "betelgeuse/betelgeuse_6", "betelgeuse/background_rastapopoulos" )
+   misn.setNPC( "Rastapopoulos", "neutral/unique/aristocrat" )
    misn.setDesc( bar_desc )
 end
 

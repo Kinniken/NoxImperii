@@ -54,7 +54,7 @@ extern int save_loaded; /**< From save.c */
  */
 /* externs */
 /* player.c */
-extern Planet* player_load( xmlNodePtr parent ); /**< Loads player related stuff. */
+extern char* player_load( xmlNodePtr parent ); /**< Loads player related stuff. */
 /* mission.c */
 extern int missions_loadActive( xmlNodePtr parent ); /**< Loads active missions. */
 /* event.c */
@@ -540,7 +540,7 @@ int load_game( const char* file, int version_diff )
 
    xmlNodePtr node;
    xmlDocPtr doc;
-   Planet *pnt;
+   char* landed_planet_name;
 
    /* Make sure it exists. */
    if (!nfile_fileExists(file)) {
@@ -605,7 +605,8 @@ int load_game( const char* file, int version_diff )
    news_loadArticles( node );
    hook_load(node);
 
-   pnt = player_load(node);
+   /* note : need the name not the pointer as events can force reallocation of planet stack */
+   landed_planet_name = player_load(node);
 
    /* Check sanity. */
    event_checkSanity();
@@ -614,7 +615,7 @@ int load_game( const char* file, int version_diff )
    events_trigger( EVENT_TRIGGER_LOAD );
 
    /* Land the player. */
-   land( pnt, 1 );
+   land( planet_get(landed_planet_name), 1 );
 
    /* Load the GUI. */
    if (gui_load( gui_pick() )) {

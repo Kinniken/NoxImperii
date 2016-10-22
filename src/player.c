@@ -201,7 +201,7 @@ static int preemption = 0; /* Hyperspace target/untarget preemption. */
  * externed
  */
 int player_save( xmlTextWriterPtr writer ); /* save.c */
-Planet* player_load( xmlNodePtr parent ); /* save.c */
+char* player_load( xmlNodePtr parent ); /* save.c */
 
 
 /**
@@ -3314,9 +3314,9 @@ static int player_saveCrew( xmlTextWriterPtr writer,
  * @brief Loads the player stuff.
  *
  *    @param parent Node where the player stuff is to be found.
- *    @return 0 on success.
+ *    @return name of landed planet.
  */
-Planet* player_load( xmlNodePtr parent )
+char* player_load( xmlNodePtr parent )
 {
 	xmlNodePtr node;
 	Planet *pnt;
@@ -3338,7 +3338,7 @@ Planet* player_load( xmlNodePtr parent )
 			player_parseEscorts(node);
 	} while (xml_nextNode(node));
 
-	return pnt;
+	return pnt->name;
 }
 
 

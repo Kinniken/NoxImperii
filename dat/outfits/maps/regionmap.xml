@@ -2,7 +2,7 @@
 <outfit name="Region Map">
  <general>
   <mass>0</mass>
-  <price>500000</price>
+  <price>100000</price>
   <description>This map contains information about systems and planets up to three jumps away.</description>
   <gfx_store>map</gfx_store>
   <level>3</level>

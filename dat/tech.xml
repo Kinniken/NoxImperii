@@ -715,12 +715,12 @@
 
 		<item>Terran Shield Booster</item>
 		<item>Terran Light Battery</item>
-		<item>Engine Reroute</item>
-		<item>Region Map</item>
+		<item>Engine Reroute</item>		
 	</tech>
 	<tech name="Empire Civil 3">
 		<item>Terran Medium Shield Booster</item>
 		<item>Terran Medium Battery</item>
+		<item>Region Map</item>
 	</tech>
 	<tech name="Empire Civil 4">
 		<item>Zheng He</item>
@@ -738,11 +738,12 @@
 		<item>Meryoch</item>
 	</tech>
 	<tech name="Roidhunate Civil 3">
-		<item>Region Map</item>
+		
 	</tech>
 	<tech name="Roidhunate Civil 4">
 		<item>Rioloch</item>
 		<item>Ardar Large Battery</item>
+		<item>Region Map</item>
 	</tech>
 	<tech name="Roidhunate Civil 5">
 		<item>Geldoch</item>

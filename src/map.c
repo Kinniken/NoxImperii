@@ -779,12 +779,12 @@ static void map_update_trade(unsigned int wid) {
 
 		window_moveWidget( wid, "txtSRefreshDate", x, y );
 		window_moveWidget( wid, "txtRefreshDate", x, y - gl_smallFont.h - 5 );
-		window_modifyText( wid, "txtRefreshDate", "Unknown" );
+		window_modifyText( wid, "txtRefreshDate", "" );
 		y -= 2 * gl_smallFont.h + 5 + 15;
 
 		window_moveWidget( wid, "txtSGoods", x, y );
 		window_moveWidget( wid, "txtGoods", x, y - gl_smallFont.h - 5 );
-		window_modifyText( wid, "txtGoods", "Unknown" );
+		window_modifyText( wid, "txtGoods", "\nNo known data." );
 		window_modifyText( wid, "txtGoodsPrices", "" );
 		window_modifyText( wid, "txtGoodsBuy", "" );
 		window_modifyText( wid, "txtGoodsSell", "" );
@@ -837,8 +837,8 @@ static void map_update_trade(unsigned int wid) {
 		cur_trade_data->sellingQuantity=0;
 
 		for (j=0;j<sys->nplanets;j++) {
-			if (refresh_date<sys->planets[j]->lastRefresh) {
-				refresh_date=sys->planets[j]->lastRefresh;
+			if (refresh_date<sys->planets[j]->lastTradeRefresh) {
+				refresh_date=sys->planets[j]->lastTradeRefresh;
 			}
 
 			for (k=0;k<sys->planets[j]->ntradedatas;k++) {
@@ -862,29 +862,31 @@ static void map_update_trade(unsigned int wid) {
 	buf_buy[0]='\0';
 	buf_sell[0]='\0';
 
-	for (i=0;i<sys_ndata;i++) {
-		if (sys_data[i].commodity->price>0) {//price=0 : mission commodities
-			if (sys_data[i].adjustedPriceFactor != 0) {
+	if (refresh_date!=0) {
+		for (i=0;i<sys_ndata;i++) {
+			if (sys_data[i].commodity->price>0) {//price=0 : mission commodities
+				if (sys_data[i].adjustedPriceFactor != 0) {
 
-				p_names += nsnprintf( &buf_names[p_names], 2048-p_names, "%s\n",sys_data[i].commodity->name);
+					p_names += nsnprintf( &buf_names[p_names], 2048-p_names, "%s\n",sys_data[i].commodity->name);
 
-				p_prices += nsnprintf( &buf_prices[p_prices], 2048-p_prices, "%d cr (%s)\n",
-						(int)round(sys_data[i].commodity->price*sys_data[i].adjustedPriceFactor),
-						commodity_price_adj(sys_data[i].adjustedPriceFactor));
+					p_prices += nsnprintf( &buf_prices[p_prices], 2048-p_prices, "%d cr (%s)\n",
+							(int)round(sys_data[i].commodity->price*sys_data[i].adjustedPriceFactor),
+							commodity_price_adj(sys_data[i].adjustedPriceFactor));
 
-				p_buy += nsnprintf( &buf_buy[p_buy], 2048-p_buy, "%d\n",
-						(int)round(sys_data[i].buyingQuantity));
+					p_buy += nsnprintf( &buf_buy[p_buy], 2048-p_buy, "%d\n",
+							(int)round(sys_data[i].buyingQuantity));
 
-				p_sell += nsnprintf( &buf_sell[p_sell], 2048-p_sell, "%d\n",
-						(int)round(sys_data[i].sellingQuantity));
-			} else {
-				p_names += nsnprintf( &buf_names[p_names], 2048-p_names, "%s\n",sys_data[i].commodity->name);
+					p_sell += nsnprintf( &buf_sell[p_sell], 2048-p_sell, "%d\n",
+							(int)round(sys_data[i].sellingQuantity));
+				} else {
+					p_names += nsnprintf( &buf_names[p_names], 2048-p_names, "%s\n",sys_data[i].commodity->name);
 
-				p_prices += nsnprintf( &buf_prices[p_prices], 2048-p_prices, "n/a\n");
+					p_prices += nsnprintf( &buf_prices[p_prices], 2048-p_prices, "n/a\n");
 
-				p_buy += nsnprintf( &buf_buy[p_buy], 2048-p_buy, "0\n");
+					p_buy += nsnprintf( &buf_buy[p_buy], 2048-p_buy, "0\n");
 
-				p_sell += nsnprintf( &buf_sell[p_sell], 2048-p_sell, "0\n");
+					p_sell += nsnprintf( &buf_sell[p_sell], 2048-p_sell, "0\n");
+				}
 			}
 		}
 	}
@@ -895,21 +897,31 @@ static void map_update_trade(unsigned int wid) {
 	if (refresh_date!=0) {
 		ntime_prettyBuf(buf2,128,refresh_date,1);
 		window_modifyText( wid, "txtRefreshDate", buf2 );
+
+		window_modifyText( wid, "txtGoods", buf_names );
+		window_modifyText( wid, "txtGoodsPrices", buf_prices );
+		window_modifyText( wid, "txtGoodsBuy", buf_buy );
+		window_modifyText( wid, "txtGoodsSell", buf_sell );
+
 	} else {
 		window_modifyText( wid, "txtRefreshDate", "" );
+		window_modifyText( wid, "txtGoods", "\nNo known data." );
+		window_modifyText( wid, "txtGoodsPrices", "" );
+		window_modifyText( wid, "txtGoodsBuy", "" );
+		window_modifyText( wid, "txtGoodsSell", "" );
 	}
 
 	y -= 2 * gl_smallFont.h + 5 + 15;
 
-	window_modifyText( wid, "txtGoods", buf_names );
-	window_modifyText( wid, "txtGoodsPrices", buf_prices );
-	window_modifyText( wid, "txtGoodsBuy", buf_buy );
-	window_modifyText( wid, "txtGoodsSell", buf_sell );
 	window_moveWidget( wid, "txtSGoods", x, y );
 	window_moveWidget( wid, "txtGoods", x, y-gl_smallFont.h-5 );
 	window_moveWidget( wid, "txtGoodsPrices", x, y-gl_smallFont.h-5 );
 	window_moveWidget( wid, "txtGoodsBuy", x, y-gl_smallFont.h-5 );
 	window_moveWidget( wid, "txtGoodsSell", x, y-gl_smallFont.h-5 );
+
+	y -= 2 * gl_smallFont.h + 5 + 15;
+
+
 }
 
 
@@ -1911,6 +1923,7 @@ static SysNode* A_in( SysNode *first, StarSystem *cur );
 static SysNode* A_lowest( SysNode *first );
 static void A_freeList( SysNode *first );
 static int map_decorator_parse( MapDecorator *temp, xmlNodePtr parent );
+static int localmap_recursive(StarSystem* s,int range,int checkOnly);
 /** @brief Creates a new node link to star system. */
 static SysNode* A_newNode( StarSystem* sys )
 {
@@ -2234,34 +2247,76 @@ int map_isMapped( const Outfit* map )
  */
 int localmap_map( const Outfit *lmap )
 {
-   int i;
-   JumpPoint *jp;
-   Planet *p;
-   double detect, mod;
-
    if (cur_system==NULL)
       return 0;
 
-   mod = pow2( 200. / (cur_system->interference + 200.) );
-
-   detect = lmap->u.lmap.jump_detect;
-   for (i=0; i<cur_system->njumps; i++) {
-      jp = &cur_system->jumps[i];
-      if (jp_isFlag(jp, JP_EXITONLY) || jp_isFlag(jp, JP_HIDDEN))
-         continue;
-      if (mod*jp->hide <= detect)
-         jp_setFlag( jp, JP_KNOWN );
-   }
-
-   detect = lmap->u.lmap.asset_detect;
-   for (i=0; i<cur_system->nplanets; i++) {
-      p = cur_system->planets[i];
-      if (p->real != ASSET_REAL)
-         continue;
-      if (mod*p->hide <= detect)
-         planet_setKnown( p );
-   }
+   localmap_recursive(cur_system, lmap->u.lmap.range,0);
    return 0;
+}
+
+/**
+ * @brief recursive function to either check whether the map is known
+ * or to apply it
+ *
+ * This brute-force algorithm does not check whether a system was already visited;
+ * it is intended for smallish ranges (5-6 jumps max)
+ *
+ *    @param s current system
+ *    @param range range in jumps to search around
+ *    @param checkOnly if 1, checks if map is known. If 0, applies it.
+ *    @return if in checking mode, returns 0 if part of the map is unknown, 1 otherwise
+ */
+static int localmap_recursive(StarSystem* s,int range,int checkOnly) {
+	int i;
+	JumpPoint *jp;
+	Planet *p;
+	int ret;
+
+	if (checkOnly == 0)
+		sys_setFlag(s, SYSTEM_KNOWN);
+
+	for (i=0; i<s->njumps; i++) {
+		jp = &s->jumps[i];
+		if (jp_isFlag(jp, JP_EXITONLY) || jp_isFlag(jp, JP_HIDDEN))
+			continue;
+		if (checkOnly == 1) {
+			if (!jp_isKnown( jp )) {
+				return 0;
+			}
+		} else {
+			jp_setFlag( jp, JP_KNOWN );
+		}
+	}
+	for (i=0; i<s->nplanets; i++) {
+		p = s->planets[i];
+		if (p->real != ASSET_REAL)
+			continue;
+
+		if (checkOnly == 1) {
+			if (!planet_isKnown( p )) {
+				return 0;
+			}
+		} else {
+			planet_setKnown( p );
+		}
+	}
+
+	if (range>0) {
+		range--;
+		for (i=0; i<s->njumps; i++) {
+			jp = &s->jumps[i];
+			if (jp_isFlag(jp, JP_EXITONLY) || jp_isFlag(jp, JP_HIDDEN))
+				continue;
+			ret=localmap_recursive(jp->target,range,checkOnly);
+
+			if (checkOnly == 1 && ret == 0) {
+				return 0;
+			}
+		}
+	}
+
+	//all known (or we were not checking)
+	return 1;
 }
 
 /**
@@ -2269,34 +2324,10 @@ int localmap_map( const Outfit *lmap )
  */
 int localmap_isMapped( const Outfit *lmap )
 {
-   int i;
-   JumpPoint *jp;
-   Planet *p;
-   double detect, mod;
-
    if (cur_system==NULL)
       return 1;
 
-   mod = pow2( 200. / (cur_system->interference + 200.) );
-
-   detect = lmap->u.lmap.jump_detect;
-   for (i=0; i<cur_system->njumps; i++) {
-      jp = &cur_system->jumps[i];
-      if (jp_isFlag(jp, JP_EXITONLY) || jp_isFlag(jp, JP_HIDDEN))
-         continue;
-      if ((mod*jp->hide <= detect) && !jp_isKnown( jp ))
-         return 0;
-   }
-
-   detect = lmap->u.lmap.asset_detect;
-   for (i=0; i<cur_system->nplanets; i++) {
-      p = cur_system->planets[i];
-      if (p->real != ASSET_REAL)
-         continue;
-      if ((mod*p->hide <= detect) && !planet_isKnown( p ))
-         return 0;
-   }
-   return 1;
+   return localmap_recursive(cur_system, lmap->u.lmap.range,1);
 }
 
 

@@ -272,6 +272,9 @@
 		<item>Terran Unobtainium Shield Capacitor</item>
 		<item>Terran Unobtainium Shield Capacitor II</item>
 		<item>Terran Unobtainium Shield Capacitor III</item>
+		<item>Local Systems Map</item>
+		<item>Region Map</item>
+		<item>Zone Map</item>
 	</tech>
 	<tech name="All Commodities">
 		<item>Food</item>
@@ -660,10 +663,7 @@
 		<item>Fuel Pod</item>
 		<item>Solar Panel</item>		
 
-		
-		<item>GUI - Brushed</item>
-
-
+		<item>Local Systems Map</item>
 	</tech>
 	<tech name="Generic Civil 2">
 		<item>Fish Bone</item>
@@ -677,11 +677,7 @@
 		<item>Cargo Pod</item>
 		<item>Medium Fuel Pod</item>
 		<item>Reactor Class I</item>
-    <item>Basic Computer</item>
-
-		
-		<item>GUI - Brushed</item>
-		<item>GUI - Legacy</item>
+    	<item>Basic Computer</item>
 	</tech>
 	<tech name="Generic Civil 3">
 		<item>Hauler</item>
@@ -720,6 +716,7 @@
 		<item>Terran Shield Booster</item>
 		<item>Terran Light Battery</item>
 		<item>Engine Reroute</item>
+		<item>Region Map</item>
 	</tech>
 	<tech name="Empire Civil 3">
 		<item>Terran Medium Shield Booster</item>
@@ -728,6 +725,7 @@
 	<tech name="Empire Civil 4">
 		<item>Zheng He</item>
 		<item>Argosy</item>
+		<item>Zone Map</item>
 	</tech>
 	<tech name="Empire Civil 5">
 		<item>Sunflower</item>
@@ -740,7 +738,7 @@
 		<item>Meryoch</item>
 	</tech>
 	<tech name="Roidhunate Civil 3">
-
+		<item>Region Map</item>
 	</tech>
 	<tech name="Roidhunate Civil 4">
 		<item>Rioloch</item>
@@ -766,6 +764,7 @@
 		<item>Large Trade Pod</item>
 		<item>Betelgian Engine Rework</item>
 		<item>Solar Panel Array</item>
+		<item>Region Map</item>
 	</tech>
 	<tech name="Betelgeuse Civil 4">
 		<item>Large Exploration Battery</item>

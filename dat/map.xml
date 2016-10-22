@@ -151,6 +151,12 @@
     <detection_radius>300</detection_radius>
   </decorator>
   <decorator>
+    <pict>roidhunate_fringes_coreward</pict>
+    <x>2070</x>
+    <y>670</y>
+    <detection_radius>300</detection_radius>
+  </decorator>
+  <decorator>
     <pict>barbarians_spinward</pict>
     <x>2660</x>
     <y>-90</y>

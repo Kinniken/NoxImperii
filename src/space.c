@@ -2008,8 +2008,8 @@ static int planet_parse( Planet *planet, const xmlNodePtr parent )
             	do {
             		if (xml_isNode(ccur,"buySellGap")) {
             			planet->buySellGap=xml_getFloat(ccur);
-            		} else if (xml_isNode(ccur,"lastRefresh")) {
-            			planet->lastRefresh = ntime_parseNode(ccur,planet->name);
+            		} else if (xml_isNode(ccur,"lastTradeRefresh")) {
+            			planet->lastTradeRefresh = ntime_parseNode(ccur,planet->name);
             		} else if (xml_isNode(ccur,"tradedata")) {
             			cccur = ccur->children;
 
@@ -2265,6 +2265,8 @@ static int planet_parseCustom( Planet *planet, const xmlNodePtr parent )
 					do {
 						if (xml_isNode(ccur,"buySellGap")) {
 							planet->buySellGap=xml_getFloat(ccur);
+						} else if (xml_isNode(ccur,"lastTradeRefresh")) {
+							planet->lastTradeRefresh = ntime_parseNode(ccur,planet->name);
 						} else if (xml_isNode(ccur,"tradedata")) {
 							cccur = ccur->children;
 
@@ -2310,8 +2312,8 @@ static int planet_parseCustom( Planet *planet, const xmlNodePtr parent )
 				} else if (xml_isNode(cur, "tradeStatus")) {
 					ccur = cur->children;
 					do {
-						if (xml_isNode(ccur,"lastRefresh")) {
-							planet->lastRefresh =  ntime_parseNode(ccur,planet->name);
+						if (xml_isNode(ccur,"lastTradeRefresh")) {
+							planet->lastTradeRefresh =  ntime_parseNode(ccur,planet->name);
 						} else if (xml_isNode(ccur,"tradedata")) {
 							cccur = ccur->children;
 
@@ -4763,14 +4765,16 @@ int planet_savePlanet( xmlTextWriterPtr writer, const Planet *p, int customDataO
 			 xmlw_elem( writer, "buySellGap", "%f", p->buySellGap );
 
 			 /* Time. */
-			 xmlw_startElem(writer,"lastRefresh");
+			 if (p->lastTradeRefresh > 0) {
+				 xmlw_startElem(writer,"lastTradeRefresh");
 
-			 ret=ntime_saveNode(writer, ntime_get());
+				 ret=ntime_saveNode(writer, p->lastTradeRefresh);
 
-			 if (ret!=0)
-				 return ret;
+				 if (ret!=0)
+					 return ret;
 
-			 xmlw_endElem(writer); /* "time" */
+				 xmlw_endElem(writer); /* "time" */
+			 }
 
 			 for (i=0; i<p->ntradedatas; i++) {
 				 xmlw_startElem( writer, "tradedata" );
@@ -5227,13 +5231,13 @@ void planet_updateQuantities(Planet* p) {
 	int i;
 
 	//If never refreshed, initialize to max
-	if (p->lastRefresh==0) {
+	if (p->lastTradeRefresh==0) {
 		for (i=0;i<p->ntradedatas;i++) {
 			p->tradedatas[i].buyingQuantityRemaining=p->tradedatas[i].buyingQuantity;
 			p->tradedatas[i].sellingQuantityRemaining=p->tradedatas[i].sellingQuantity;
 		}
 	} else {
-		timeDiff=ntime_get()-p->lastRefresh;
+		timeDiff=ntime_get()-p->lastTradeRefresh;
 		ratio = timeDiff / TRADE_REFILL_DURATION;
 
 		for (i=0;i<p->ntradedatas;i++) {
@@ -5248,7 +5252,7 @@ void planet_updateQuantities(Planet* p) {
 				p->tradedatas[i].sellingQuantityRemaining=p->tradedatas[i].sellingQuantity;
 		}
 	}
-	p->lastRefresh=ntime_get();
+	p->lastTradeRefresh=ntime_get();
 }
 
 /**

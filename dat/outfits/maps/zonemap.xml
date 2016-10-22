@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<outfit name="Zone Map">
+ <general>
+  <mass>0</mass>
+  <price>1000000</price>
+  <description>This massive, painstakingly assembled map describes systems and planets within five jumps.</description>
+  <gfx_store>map</gfx_store>
+  <level>5</level>
+ </general>
+ <specific type="localmap">
+  <range>5</range>
+ </specific>
+</outfit>

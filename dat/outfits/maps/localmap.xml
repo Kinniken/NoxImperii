@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<outfit name="Local System Map">
+<outfit name="Local Systems Map">
  <general>
   <mass>0</mass>
-  <price>5000</price>
-  <description>This map contains information about the local system.</description>
+  <price>20000</price>
+  <description>This map contains information about the adjacent systems and their planets.</description>
   <gfx_store>map</gfx_store>
   <level>1</level>
  </general>
  <specific type="localmap">
-  <jump_detect>1.25</jump_detect>
-  <asset_detect>0.75</asset_detect>
+  <range>1</range>
  </specific>
 </outfit>

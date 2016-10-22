@@ -198,10 +198,10 @@ int outfit_compareTech( const void *outfit1, const void *outfit2 )
          return -1;
 
    /* Compare intrinsic types. */
-   //if (o1->type > o2->type)
-   //   return -1;
-   //else if (o1->type < o2->type)
-   //   return +1;
+   if (o1->type > o2->type)
+      return -1;
+   else if (o1->type < o2->type)
+      return +1;
 
    /* Compare named types. */
    if ((o1->typename == NULL) && (o2->typename != NULL))
@@ -1931,13 +1931,9 @@ static void outfit_parseSLocalMap( Outfit *temp, const xmlNodePtr parent )
 
    do {
       xml_onlyNodes(node);
-      xmlr_float(node,"asset_detect",temp->u.lmap.asset_detect);
-      xmlr_float(node,"jump_detect",temp->u.lmap.jump_detect);
+      xmlr_int(node,"range",temp->u.lmap.range);
       WARN("Outfit '%s' has unknown node '%s'",temp->name, node->name);
    } while (xml_nextNode(node));
-
-   temp->u.lmap.asset_detect = pow2( temp->u.lmap.asset_detect );
-   temp->u.lmap.jump_detect  = pow2( temp->u.lmap.jump_detect );
 
    /* Set short description. */
    temp->desc_short = malloc( OUTFIT_SHORTDESC_MAX );
@@ -2273,7 +2269,7 @@ if (o) WARN("Outfit '%s' missing/invalid '"s"' element", temp->name) /**< Define
 
 	   if (temp->slot.type != OUTFIT_SLOT_NA) {
          if (temp->slot.spid>0) {
-			   nsnprintf( buf, bufsize, OUTFIT_GFX_PATH"store/layers/slot_special_%s.png",  sp_name(temp->slot.spid));
+        	 nsnprintf( buf, bufsize, OUTFIT_GFX_PATH"store/layers/slot_special_%s.png",  sp_name(temp->slot.spid));
             temp->gfx_store_layers[layerpos] = gl_newImage( buf, OPENGL_TEX_MIPMAPS );
          } else if (temp->slot.type == OUTFIT_SLOT_UTILITY) {
             temp->gfx_store_layers[layerpos] = gl_newImage( OUTFIT_GFX_PATH"store/layers/slot_utility.png", OPENGL_TEX_MIPMAPS );

@@ -141,7 +141,7 @@ local function barbarian_fringes_names(star)
 end
 
 local function barbarian_priority(star)
-	if (gh.calculateDistance(earth_pos,star)<1500 or gh.calculateDistance(ardarshir_pos,star)<1000 or gh.calculateDistance(gonder_pos,star)<700) then
+	if (gh.calculateDistance(earth_pos,star)<1500 or gh.calculateDistance(ardarshir_pos,star)<1200 or gh.calculateDistance(gonder_pos,star)<700) then
 		return 5
 	end
 
@@ -410,7 +410,7 @@ locations.ardarshir_outer={
 }
 
 locations.ardarshir_fringe={
-	priority=function(star) return priority_distance(ardarshir_pos,star,700,18) end,
+	priority=function(star) return priority_distance(ardarshir_pos,star,900,18) end,
 	zoneName=function(star) return "Roidhunate Fringes" end,
 	star_template="default",
 	pop_template="ardarshir_fringe"

@@ -126,7 +126,7 @@ typedef struct Planet_ {
    int ntradedatas; /**< the amount they have */
    int mem_tradedatas; /** allocated memory for tradedatas **/
    float buySellGap; /** difference between base price and buying or selling price **/
-   ntime_t lastRefresh; /** last time trade was updated **/
+   ntime_t lastTradeRefresh; /** last time trade was updated **/
    tech_group_t *tech; /**< Planet tech. */
 
    /* Graphics. */

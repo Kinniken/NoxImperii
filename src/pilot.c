@@ -3181,7 +3181,9 @@ void pilot_updateLoot(Pilot *p, const double dt) {
 			pilot_modCredits(p, currentLoot->quantity);
 			pilot_modCredits(target, -currentLoot->quantity);
 		} else if (currentLoot->type == LOOT_FUEL) {
-			pilot_refuel(p, currentLoot->quantity);
+			p->fuel+=currentLoot->quantity;
+
+			p->fuel=MAX(p->fuel,p->fuel_max);
 			target->fuel=0;
 		} else if (currentLoot->type == LOOT_COMMODITTY) {
 			pilot_cargoAdd(p,currentLoot->commodity,currentLoot->quantity,0);

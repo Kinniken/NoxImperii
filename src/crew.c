@@ -75,7 +75,7 @@ static lua_State *crew_name_lua = NULL; /** Crew name generators */
 
 static const HiredCrew* selectedCrew = NULL;
 
-#define STATS_DESC_MAX 256 /**< Maximum length for statistics description. */
+#define STATS_DESC_MAX 1024 /**< Maximum length for statistics description. */
 
 /**
  * @brief Loads all the crews and crew positions data.
@@ -322,7 +322,7 @@ void crew_addToBar(const Planet* landPlanet) {
 	char barDesc[MAX_BAR_DESC];
 	char *generatedName;
 	double chance;
-	char bufFaction[PATH_MAX],bufRating[PATH_MAX],buf[PATH_MAX];
+	char bufFaction[MAX_BAR_DESC],bufRating[MAX_BAR_DESC],buf[MAX_BAR_DESC];
 	glTexture **layers;
 	int nlayers;
 
@@ -881,14 +881,14 @@ void crew_update_reserve( unsigned int wid, char* str ) {
  */
 static void display_crew(unsigned int wid, char* crewName) {
 	const HiredCrew* hiredCrew;
-	char buf[PATH_MAX];
+	char buf[MAX_BAR_DESC];
 
 	hiredCrew=player_getCrew(crewName);
 
 	if (hiredCrew!=NULL) {
 		window_modifyText( wid, "txtPortrait", hiredCrew->crew->name );
 
-		nsnprintf( buf, PATH_MAX,
+		nsnprintf( buf, MAX_BAR_DESC,
 				"%s\n"
 				"%s\n"
 				"%s\n"
@@ -901,7 +901,7 @@ static void display_crew(unsigned int wid, char* crewName) {
 		);
 		window_modifyText( wid, "txtCrewZoom", buf );
 
-		nsnprintf( buf, PATH_MAX,
+		nsnprintf( buf, MAX_BAR_DESC,
 				"%s\n"
 				"\n"
 				"Effects on ship:\n"

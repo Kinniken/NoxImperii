@@ -984,6 +984,10 @@ void land_genWindows( int load, int changetab )
    else {
       w = 800 + 0.5 * (SCREEN_W - 800);
       h = 600 + 0.5 * (SCREEN_H - 600);
+
+      /* max sizes, otherwise looks very empty at very high resolutions */
+      w = MIN(w,1300);
+      h = MIN(h,900);
    }
    land_wid = window_create( p->name, -1, -1, w, h );
    window_onClose( land_wid, land_cleanupWindow );

@@ -287,13 +287,6 @@ static unsigned int comm_open( glTexture *gfx, int faction,
    int gw, gh;
    double aspect;
 
-   /* Clean up. */
-   if (comm_graphic != NULL) {
-      /* First clean up if needed. */
-      gl_freeTexture(comm_graphic);
-      comm_graphic = NULL;
-   }
-
    /* Get faction details. */
    comm_graphic   = gfx;
    logo           = faction_logoSmall(faction);
@@ -421,11 +414,8 @@ static unsigned int comm_open( glTexture *gfx, int faction,
  */
 static void comm_close( unsigned int wid, char *unused )
 {
-   /* Clean up a bit after ourselves. */
-   if (comm_graphic != NULL) {
-      gl_freeTexture(comm_graphic);
-      comm_graphic = NULL;
-   }
+   //comm_graphic doesn't get freeded since it's now kept in memory all the time
+
    comm_pilot  = NULL;
    comm_planet = NULL;
    /* Close the window. */

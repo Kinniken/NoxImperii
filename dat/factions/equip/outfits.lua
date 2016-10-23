@@ -60,7 +60,7 @@ end
 -- Uses also barbarian and Imperial weapons
 --]]
 function equip_defaultForwardPiratesLow ()
-   return { "Laser Cannon MK2", "Laser Cannon MK3", "Mass Driver", "Light EMP Gun", "EMP Gun" }
+   return { "Laser Cannon MK2", "Laser Cannon MK3", "Mass Driver", "Light EMP Gun" }
 end
 function equip_defaultForwardPiratesMed ()
    return { "Plasma Blaster MK3", "Upgraded Mass Driver", "EMP Gun" }

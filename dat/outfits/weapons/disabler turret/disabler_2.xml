@@ -22,13 +22,13 @@
   <falloff>300</falloff>
   <gfx_end>razorS-end</gfx_end>
   <energy>6</energy>
-  <heatup>10</heatup>
+  <heatup>15</heatup>
   <track>2.25</track>
   <damage>
    <type>emp</type>
    <penetrate>0</penetrate>
    <physical>2</physical>
-   <disable>4</disable>
+   <disable>6</disable>
   </damage>
  </specific>
 </outfit>

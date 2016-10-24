@@ -746,6 +746,8 @@ local function generateCivilizedPlanetServices(planet)
 	local bestMilitary=0
 	local bestStability=0
 
+	local f=planet.c:faction()
+
 	for k,settlement in pairs(planet.lua.settlements) do
 		if (settlement.population>bestPop) then
 			bestPop=settlement.population
@@ -791,21 +793,31 @@ local function generateCivilizedPlanetServices(planet)
   	planet.c:removeService("c")
   end
 
-  if (bestIndustry>0.5) then
+  local threshholdOutfits = 0.5
+  local threshholdShipyard = 0.9
+
+  if (f) then
+  	--special barbarian thresholds, otherwise they never spawn those services
+  	if f==faction.get(G.BARBARIANS) then
+  		threshholdOutfits = 0.2
+  		threshholdShipyard = 0.3
+  	end
+  end
+
+
+  if (bestIndustry>threshholdOutfits) then
   	planet.c:addService("o")
   else
   	planet.c:removeService("o")
   end
 
-  if (bestIndustry>0.9) then
+  if (bestIndustry>threshholdShipyard) then
   	planet.c:addService("s")
   else
   	planet.c:removeService("s")
   end
 
   removeAllTechGroups(planet)
-
-  local f=planet.c:faction()
 
   if (f and not (f==faction.get(G.NATIVES))) then
   	factionName=f:name()

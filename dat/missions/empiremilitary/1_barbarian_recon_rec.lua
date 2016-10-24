@@ -3,7 +3,8 @@
 --]]
 
 include "dat/missions/templates/recon.lua"
-include "dat/missions/supportfiles/barbarians.lua"
+include "dat/missions/supportfiles/independent_worlds.lua"
+include "dat/missions/supportfiles/common.lua"
 
 
 -- Whether mission starts in bar (if false, it starts in computer)
@@ -15,8 +16,8 @@ computer_title  = "NAVY: Investigate barbarians in system ${mainTargetSystem}"
 
 -- Mission details
 
-misn_title  = "Investigate Barbarian activity."
-misn_desc   = "Investigate barbarians in systems ${mainTargetSystem}, ${targetSystem2} and ${targetSystem3}"
+misn_title  = "Survey Fringe space."
+misn_desc   = "Survey systems ${mainTargetSystem}, ${targetSystem2} and ${targetSystem3}"
 
 -- Text if mission ends in space in starting system.
 space_success_title = "Recon Completed"
@@ -32,15 +33,15 @@ osd_msg[2] = "Return to ${startPlanet}."
 
 function create ()
    -- Get target system
-   main_target_planet,main_target_system = get_barbarian_planet( system.cur() )
+   main_target_planet,main_target_system = get_independent_planet( system.cur() )
 
    -- Handle edge cases where no suitable neighbours exist.
    if not main_target_system then
       misn.finish(false)
    end
 
-   local target_sys_2 = get_adjacent_barbarian_system(main_target_system)
-   local target_sys_3 = get_adjacent_barbarian_system(main_target_system,{target_sys_2})
+   local target_sys_2 = get_adjacent_system(main_target_system,G.INDEPENDENT_WORLDS)
+   local target_sys_3 = get_adjacent_system(main_target_system,{target_sys_2},G.INDEPENDENT_WORLDS)
 
    if not target_sys_2 or not target_sys_3 then
       misn.finish(false)

@@ -84,6 +84,7 @@ end
 
 
 -- @brief Creation hook.
+-- return is just delay before first spawn
 function create ( max )
     local weights = {}
 
@@ -95,7 +96,7 @@ function create ( max )
     -- Create spawn table base on weights
     spawn_table = scom.createSpawnTable( weights )
 
-    -- Calculate spawn data
+    -- Calculate spawn data for next time (spawn_data persists between calls)
     spawn_data = scom.choose( spawn_table )
 
     return scom.calcNextSpawn( 0, scom.presence(spawn_data), max )
@@ -103,6 +104,12 @@ end
 
 
 -- @brief Spawning hook
+-- presence: presence used by pilots of that faction currently
+-- max: maximum presence allowed
+-- return:
+--  - delay before next spawn (calculated from the next fleet size)
+--  - table of pilots as a series of { pilot = pilot, presence = presence }
+
 function spawn ( presence, max )
 
     --safety if create() was not called
@@ -115,13 +122,14 @@ function spawn ( presence, max )
 
     -- Over limit
     if presence > max then
-       return 5
+       return 5--retry in 5 ticks
     end
   
-    -- Actually spawn the pilots
+    -- Actually spawn the pilots & returns them in a table of elements { pilot = pilot, presence = presence }
+    -- if a fleet was spawned, each pilot is returned seperately
     pilots = scom.spawn( spawn_data )
 
-    -- Calculate spawn data
+    -- Calculate spawn data for next time (spawn_data persists between calls)
     spawn_data = scom.choose( spawn_table )
 
     return scom.calcNextSpawn( presence, scom.presence(spawn_data), max ), pilots

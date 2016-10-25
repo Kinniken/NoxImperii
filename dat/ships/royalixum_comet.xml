@@ -8,7 +8,7 @@
  <class>Destroyer</class>
  <fabricator>Imperial Shipyards</fabricator>
  <description>This slightly-adapted Imperial Halley is shipped in large quantities to the Kingdom of Ixum. It trade some of the speed and range of the original for beefier armour and one more weapon slot; the Royal Ixum Navy does not have far to patrol in any case.</description>
- <price>1200000</price>
+ <price>2400000</price>
  <license>Ixumite Honorary Lancer</license>
  <logo>royalixum</logo>
  <rating_military>4</rating_military>

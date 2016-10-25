@@ -4,7 +4,7 @@
   <slot>utility</slot>
   <size>small</size>
   <mass>8</mass>
-  <price>40000</price>
+  <price>60000</price>
   <description>This improved afterburner model offers better performance.</description>
   <gfx_store>afterburner</gfx_store>
   <limit>afterburner</limit>
@@ -16,7 +16,7 @@
   <sound>afterburner</sound>
   <sound_off>afb_disengage</sound_off>
   <thrust>220</thrust>
-  <speed>35</speed>
+  <speed>70</speed>
   <energy>45</energy>
   <mass_limit>190</mass_limit>
   <heatup>15</heatup>

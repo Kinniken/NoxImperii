@@ -5,7 +5,7 @@
   <slot>utility</slot>
   <size>large</size>
   <mass>80</mass>
-  <price>1500000</price>
+  <price>2500000</price>
   <gfx_store>reactor_iii</gfx_store>
   <description>While based on the universal Class III design, the largest reactors used by the Roidhunate Navy are superior in almost every way - they have greater power output and weight less. Their main drawback, price aside, are their hefty CPU requirements.</description>
   <cpu>-30</cpu>

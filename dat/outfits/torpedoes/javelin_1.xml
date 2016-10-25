@@ -19,9 +19,9 @@
   <resist>5</resist>
   <damage>
    <type>impact</type>
-   <penetrate>5</penetrate>
-   <physical>40</physical>
-   <disable>1</disable>
+   <penetrate>10</penetrate>
+   <physical>80</physical>
+   <disable>3</disable>
   </damage>
   <ai>dumb</ai>
  </specific>

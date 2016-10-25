@@ -8,7 +8,7 @@
  <class>Destroyer</class>
  <fabricator>Gonder Shipyards</fabricator>
  <description>Vach Rueth frigates produced by the Holy Flame are distinctly weaker than their Ardar models. To compensate, Holy Flame engineers slap extra armour on top, at the predictable cost of mobility. They remain dangerous foes - at least in number.</description>
- <price>800000</price>
+ <price>1600000</price>
  <license>Holy Flame Initiate</license>
  <logo>holyflame</logo>
  <rating_military>4</rating_military>

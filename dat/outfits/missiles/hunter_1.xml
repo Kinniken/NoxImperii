@@ -20,8 +20,8 @@
   <resist>5</resist>
   <damage>
    <type>impact</type>
-   <penetrate>5</penetrate>
-   <physical>40</physical>
+   <penetrate>8</penetrate>
+   <physical>60</physical>
    <disable>1</disable>
   </damage>
   <ai>smart</ai>

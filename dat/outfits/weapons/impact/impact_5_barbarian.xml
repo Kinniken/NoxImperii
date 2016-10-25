@@ -4,7 +4,7 @@
   <slot>weapon</slot>
   <size>large</size>
   <mass>35</mass>
-  <price>210000</price>
+  <price>350000</price>
   <description>Shredders are based on similar principles than mass drivers, but with smaller projectiles fired much faster. They are a favourite of barbarians everywhere for their mix of low technology and great efficiency. They are weak against shields, however.</description>
   <gfx_store>shredder</gfx_store>
   <cpu>-20</cpu>
@@ -26,8 +26,8 @@
   <swivel>8</swivel>
   <damage>
    <type>impact</type>
-   <penetrate>70</penetrate>
-   <physical>40</physical>
+   <penetrate>95</penetrate>
+   <physical>60</physical>
    <disable>4</disable>
   </damage>
  </specific>

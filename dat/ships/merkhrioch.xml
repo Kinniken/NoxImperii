@@ -7,7 +7,7 @@
  <class>Cruiser</class>
  <fabricator>Roidhunate Shipyards</fabricator>
  <description>The Roidhunate restricts private access to military crafts much more than the Empire does, and thus it might seem surprising that a ship like the Merkhrioch would ever be cleared for sale outside the Ardar navy; only when the need to develop a network of client states dependent on Ardar support rose did the Roidhunate relent and accept the development of a cruiser available to its allies. The result is a powerful ship indeed, among the most powerful available outside the Imperial and Ardar navies, sales of which are closely monitored.</description>
- <price>5200000</price>
+ <price>10400000</price>
  <license>Ardarshir Auxiliary, Class III</license>
  <logo>ardarshir</logo>
  <rating_military>6</rating_military>

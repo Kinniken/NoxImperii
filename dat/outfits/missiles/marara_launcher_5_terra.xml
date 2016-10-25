@@ -4,7 +4,7 @@
   <slot prop="turret">weapon</slot>
   <size>large</size>
   <mass>45</mass>
-  <price>235000</price>
+  <price>380000</price>
   <description>Turret-based missile launchers are bulky and difficult to engineer, and generally thought to be not worth the extra cost. The Imperial Navy disagrees, at least for flagships; the faster targeting makes this Marara turreted launcher a much improved fighter defence.</description>
   <gfx_store>turreted_fury_launcher</gfx_store>
   <cpu>-15</cpu>

@@ -5,7 +5,7 @@
   <slot>structure</slot>
   <size>medium</size>
   <mass>5</mass>
-  <price>450000</price>
+  <price>850000</price>
   <description>These Terran Navy shock absorbers are attached to the forward mounts, isolating them from the hull and providing increased accuracy.</description>
   <gfx_store>accuracy_forward</gfx_store>
   <level>4</level>

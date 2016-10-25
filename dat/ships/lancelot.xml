@@ -7,7 +7,7 @@
  <class>Fighter</class>
  <fabricator>Nexus Shipyards</fabricator>
  <description>The most capable fighter generally available to civilians in Imperial space, the Lancelot mixes decent offensive capacities with better defence than generic designs and boosted engines.</description>
- <price>230000</price>
+ <price>345000</price>
  <rating_military>2</rating_military>
  <rating_utility>1</rating_utility>
  <rating_agility>9</rating_agility>

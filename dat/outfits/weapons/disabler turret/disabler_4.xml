@@ -4,7 +4,7 @@
   <slot prop="turret">weapon</slot>
   <size>large</size>
   <mass>30</mass>
-  <price>202000</price>
+  <price>900000</price>
   <description>EMP turrets are used by larger pirate ships to immobilise their targets without damaging them too much; respectable worlds will not sell them.</description>
   <gfx_store>weapon01</gfx_store>
   <cpu>-18</cpu>
@@ -28,7 +28,7 @@
    <type>emp</type>
    <penetrate>0</penetrate>
    <physical>30</physical>
-   <disable>100</disable>
+   <disable>50</disable>
   </damage>
  </specific>
 </outfit>

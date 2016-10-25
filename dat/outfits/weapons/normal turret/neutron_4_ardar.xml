@@ -4,7 +4,7 @@
   <slot prop="turret">weapon</slot>
   <size>medium</size>
   <mass>25</mass>
-  <price>130500</price>  
+  <price>350000</price>  
   <description>Turreted weapons are not the Roidhunate's speciality, and Ardar turrets tend to require more CPU and energy than human models. The upgraded disruptors mounted on this turret however have no lack of fire-power.</description>
   <gfx_store>neutron</gfx_store>
   <cpu>-12</cpu>

@@ -5,7 +5,7 @@
   <slot>structure</slot>
   <size>medium</size>
   <mass>10</mass>
-  <price>950000</price>
+  <price>1300000</price>
   <description>Stabilised cannon mounts such as these are an Ardar speciality; by isolating forward weapons from the hull they allow much more precise firing, less heat build-up and even higher firing rates. Unfortunately, they are too big to fit on fighters.</description>
   <gfx_store>accuracy_forward</gfx_store>
   <level>5</level>

@@ -5,7 +5,7 @@
   <slot>utility</slot>
   <size>medium</size>
   <mass>5</mass>
-  <price>200000</price>
+  <price>300000</price>
   <description>The Roidhunate cannot match Imperial shield technology, but they are getting closing. This Ardar-designed emergency shield booster is the best available outside of the Imperial Navy.</description>
   <gfx_store>accuracy_forward</gfx_store>
   <limit>emergency_shield_booster</limit>

@@ -5,7 +5,7 @@
   <slot>utility</slot>
   <size>medium</size>
   <mass>6</mass>
-  <price>95000</price>
+  <price>190000</price>
   <description>A decent onboard computer providing a big boost to a ship's CPU.</description>
   <gfx_store>cpu_ii</gfx_store>
   <level>2</level>

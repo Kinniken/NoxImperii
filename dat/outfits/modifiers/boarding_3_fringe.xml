@@ -5,7 +5,7 @@
   <slot>utility</slot>
   <size>large</size>
   <mass>5</mass>
-  <price>100000</price>
+  <price>150000</price>
   <description>Droids are rare in fringe worlds, where lower-tech solutions are favoured - for example, keeping mercenaries on board. Fighting off boarders or capturing enemy ships, it's all the same to them.</description>
   <gfx_store>cargo_pod</gfx_store>
   <level>3</level>

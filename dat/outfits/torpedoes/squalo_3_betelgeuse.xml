@@ -2,7 +2,7 @@
 <outfit name="Squalo Torpedo">
  <general>  
   <mass>0.5</mass>
-  <price>1300</price>
+  <price>1800</price>
   <description>The Squalo is a light torpedo developed by Betelgeuse to help exploration ships fight off barbarian cruisers. It is neither terribly powerful nor terribly fast, but its light weight and low cost makes it a good choice in long expeditions.</description>
   <gfx_store>headhunter</gfx_store>
   <level>3</level>

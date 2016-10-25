@@ -4,7 +4,7 @@
  <general>
  	<license>Holy Flame Brother</license>
   <mass>0</mass>
-  <price>100000</price>
+  <price>1000000</price>
   <gfx_store>license</gfx_store>
   <description>This license recognises you as a Warrior of the Holy Flame.</description>
   <faction_needed>Holy Flame of Ixum</faction_needed>

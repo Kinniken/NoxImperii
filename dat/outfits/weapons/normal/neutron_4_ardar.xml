@@ -4,7 +4,7 @@
   <slot>weapon</slot>
   <size>medium</size>
   <mass>17</mass>
-  <price>95500</price>  
+  <price>120000</price>  
   <description>Neutron disruptors are short-range weapons compared to lasers or the plasma blasters used by the Empire, but they are particularly effective in the close-contact encounters favoured by Ardar military doctrine. This heavy version fires further and faster, but cannot be mounted on fighters.</description>
   <gfx_store>neutronheavy</gfx_store>
   <cpu>-5</cpu>

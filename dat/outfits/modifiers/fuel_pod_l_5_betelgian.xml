@@ -5,7 +5,7 @@
   <slot>structure</slot>
   <size>large</size>
   <mass>25</mass>
-  <price>750000</price>
+  <price>1400000</price>
   <description>The highest-capacity fuel pods ever designed, they are intended for use in long-distance exploration missions. Access to them is limited to the major Trading Houses, less such a technology leak to rival explorers.</description>
   <gfx_store>large_fuel_pod</gfx_store>
   <level>4</level>

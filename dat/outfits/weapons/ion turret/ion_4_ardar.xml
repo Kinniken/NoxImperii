@@ -4,7 +4,7 @@
   <slot prop="turret">weapon</slot>
   <size>medium</size>
   <mass>42</mass>
-  <price>174000</price>
+  <price>360000</price>
   <description>Turret-mounted ion cannons are a mainstay of Ardar capital vessels, having proved very effective at stripping away the shields of smaller Terran vessels. This design is based on a level II Ardar Ion Cannon.</description>
   <gfx_store>ioncannon</gfx_store>
   <cpu>-30</cpu>

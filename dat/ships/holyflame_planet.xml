@@ -8,7 +8,7 @@
  <class>Cruiser</class>
  <fabricator>Gonder Shipyards</fabricator>
  <description>Mowyers cruisers are the only ships in the Holy Flame navy to be entirely produced by the Roidhunate and sold as-is to the theocracy. Their poor performance compared to the ships serving in the Ardar navy is thus due entirely to poor maintenance.</description>
- <price>8000000</price>
+ <price>24000000</price>
  <license>Holy Flame Warrior</license>
  <logo>holyflame</logo>
  <rating_military>8</rating_military>

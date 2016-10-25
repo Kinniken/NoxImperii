@@ -5,7 +5,7 @@
   <slot>structure</slot>
   <size>small</size>
   <mass>0</mass>
-  <price>55000</price>
+  <price>85000</price>
   <description>This crude modification, popular in Fringe worlds, allows your forward mounts to dump more power into the weapons, providing greatly enhanced destructive potential. Unfortunately, exceeding design specifications results in increased heat production.</description>
   <gfx_store>damage_forward</gfx_store>
   <level>2</level>

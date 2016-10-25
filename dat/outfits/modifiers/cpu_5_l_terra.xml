@@ -5,7 +5,7 @@
   <slot>utility</slot>
   <size>large</size>
   <mass>18</mass>
-  <price>550000</price>
+  <price>2500000</price>
   <description>The largest and most powerful computer available to the Imperial Navy, this mainframe equips Imperial capital ships.</description>
   <gfx_store>cpu_iii</gfx_store>
   <level>5</level>

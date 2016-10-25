@@ -4,7 +4,7 @@
   <slot prop="turret">weapon</slot>
   <size>small</size>  
   <mass>9</mass>
-  <price>35000</price>
+  <price>45000</price>
   <description>Swapping a MK1 laser for the improved MK2 version, this turret is a classic on light trade ships or smaller militia corvettes.</description>
   <gfx_store>laserturret</gfx_store>
   <cpu>-8</cpu>

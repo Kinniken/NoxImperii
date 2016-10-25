@@ -5,7 +5,7 @@
   <slot>utility</slot>
   <size>large</size>
   <mass>10</mass>
-  <price>1200000</price>
+  <price>1800000</price>
   <description>The Roidhunate's shock troops are widely thought the best in the Galaxy: tougher than human, fiercer, and yet disciplined and trained to the highest standards. Space battles are rarely decided in boarding actions - but when they do, the Roidhunate wins.</description>
   <gfx_store>cargo_pod</gfx_store>
   <level>5</level>

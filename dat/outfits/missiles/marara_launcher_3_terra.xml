@@ -4,7 +4,7 @@
   <slot>weapon</slot>
   <size>small</size>
   <mass>10</mass>
-  <price>62000</price>
+  <price>80000</price>
   <description>This light Marara missile launcher is designed to fit on fighters; its ammo hold is limited and its firing rate rather low, but it provides precious extra fire-power to small Terran vessels.</description>
   <gfx_store>unicorp_fury_launcher</gfx_store>
   <cpu>-4</cpu>

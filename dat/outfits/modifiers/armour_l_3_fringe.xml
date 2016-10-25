@@ -5,7 +5,7 @@
   <slot>structure</slot>
   <size>large</size>
   <mass/>
-  <price>225000</price>
+  <price>290000</price>
   <gfx_store>nanobond</gfx_store>
   <description>Pure metal armours have been largely abandoned in high-tech societies due to their cost and weight; on fringe worlds, they remain popular for their enduring qualities: simplicity and effectiveness.</description>
   <level>3</level>

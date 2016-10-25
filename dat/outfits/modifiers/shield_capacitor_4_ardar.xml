@@ -5,7 +5,7 @@
   <slot>structure</slot>
   <size>large</size>
   <mass>90</mass>
-  <price>550000</price>
+  <price>1050000</price>
   <description>Ardar technology might not be as good as Terra's as far as shields are concerned, but the Roidhunate has still produced effective designs. This capacitor is heavy but much stronger than commercially-available models.</description>
   <gfx_store>capacitor8</gfx_store>
   <level>4</level>

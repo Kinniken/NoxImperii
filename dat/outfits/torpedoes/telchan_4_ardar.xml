@@ -2,7 +2,7 @@
 <outfit name="Telchan Torpedo">
  <general>  
   <mass>4</mass>
-  <price>3200</price>
+  <price>3800</price>
   <description>Telchan torpedoes are lighter and quicker than their Imperial equivalents, the Narvals. Somewhat less effective against large capital ships, they are easier to use against enemy destroyers.</description>
   <gfx_store>mace</gfx_store>
   <level>4</level>

@@ -5,7 +5,7 @@
   <slot>structure</slot>
   <size>large</size>
   <mass/>
-  <price>100000</price>
+  <price>140000</price>
   <gfx_store>plasteel</gfx_store>
   <description>Composite plating is the most common approach for armour packs; it's cheap, easy to adjust to various hulls, and reasonably resistant.</description>
   <level>1</level>

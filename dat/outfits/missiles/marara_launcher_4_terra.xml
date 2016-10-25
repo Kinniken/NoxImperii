@@ -4,7 +4,7 @@
   <slot>weapon</slot>
   <size>medium</size>
   <mass>25</mass>
-  <price>115000</price>
+  <price>190000</price>
   <description>Heavy-duty launchers such as these are intended for use on destroyers or even light capital ships; bulkier than the fighter model, they fire faster and hold more missiles.</description>
   <gfx_store>teracom_fury_launcher</gfx_store>
   <cpu>-8</cpu>

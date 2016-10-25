@@ -3,7 +3,7 @@
  <general>
  	<license>Holy Flame Servant</license>
   <mass>0</mass>
-  <price>20000</price>
+  <price>200000</price>
   <gfx_store>license</gfx_store>
   <description>This license recognises you as an Initiate of the Holy Flame.</description>
   <faction_needed>Holy Flame of Ixum</faction_needed>

@@ -4,7 +4,7 @@
   <slot>utility</slot>
   <size>small</size>
   <mass>2</mass>
-  <price>100000</price>
+  <price>150000</price>
   <description>Terran shield engineering remains the best in the Galaxy, and this improved emergency shield booster is clearly superior to the generic model found outside Terran worlds.</description>
   <gfx_store>accuracy_forward</gfx_store>
   <limit>emergency_shield_booster</limit>

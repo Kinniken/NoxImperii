@@ -5,7 +5,7 @@
   <slot>structure</slot>
   <size>large</size>
   <mass>80</mass>
-  <price>900000</price>
+  <price>2200000</price>
   <description>Shield technology is one of the key sector where the Empire keeps a decisive edge, and these capacitors are the best the Terran Navy has to offer.</description>
   <gfx_store>capacitor8</gfx_store>
   <level>5</level>

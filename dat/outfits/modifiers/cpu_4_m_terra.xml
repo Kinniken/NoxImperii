@@ -5,7 +5,7 @@
   <slot>utility</slot>
   <size>medium</size>
   <mass>8</mass>
-  <price>200000</price>
+  <price>520000</price>
   <description>The Imperial Navy has developped high-power, dense onboard computers suited for military work. This model is intended for frigates and light cruisers.</description>
   <gfx_store>cpu_ii</gfx_store>
   <level>4</level>

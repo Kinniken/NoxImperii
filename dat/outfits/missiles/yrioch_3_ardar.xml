@@ -2,7 +2,7 @@
 <outfit name="Yrioch Missile">
  <general>  
   <mass>2</mass>
-  <price>1200</price>
+  <price>1800</price>
   <description>The closest Ardar equivalent to Terra's famous Marara missile is heavier and more powerful, though hindered by slower speeds and less reactivity. Ardar doctrine compensate by engaging closer before firing.</description>
   <gfx_store>banshee</gfx_store>
   <level>3</level>

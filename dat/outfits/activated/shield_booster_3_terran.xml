@@ -4,7 +4,7 @@
   <slot>utility</slot>
   <size>medium</size>
   <mass>5</mass>
-  <price>150000</price>
+  <price>220000</price>
   <description>This heavier emergency shield booster requires more room but provides a larger boost. It is popular on larger Terran merchant ships.</description>
   <gfx_store>accuracy_forward</gfx_store>
   <limit>emergency_shield_booster</limit>

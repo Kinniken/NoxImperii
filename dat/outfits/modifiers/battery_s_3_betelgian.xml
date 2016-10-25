@@ -5,7 +5,7 @@
   <slot>structure</slot>
   <size>small</size>
   <mass>5</mass>
-  <price>120000</price>
+  <price>240000</price>
   <description>Betelgian exploration fleets have driven a strong need for better battery technology in Betelgian fleets, to the point where it is one of the few areas where Betelgeuse is now a tech leader. This battery pack, intended for small exploration ships, is lighter and more powerful than anything Terra produces.</description>
   <gfx_store>capacitor-g</gfx_store>
   <level>3</level>

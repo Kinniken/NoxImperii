@@ -2,7 +2,7 @@
 <outfit name="Marara Missile">
  <general>
   <mass>1</mass>
-  <price>1500</price>
+  <price>2000</price>
   <description>Marara missiles are the main guided missiles in use within the Imperial Navy; powerful and fast, they are very effective against fighters and light capital ships.</description>
   <gfx_store>fury</gfx_store>
   <level>3</level>

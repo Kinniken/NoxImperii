@@ -16,7 +16,7 @@
   <sound>afterburner</sound>
   <sound_off>afb_disengage</sound_off>
   <thrust>180</thrust>
-  <speed>30</speed>
+  <speed>50</speed>
   <energy>40</energy>
   <mass_limit>160</mass_limit>
   <heatup>17</heatup>

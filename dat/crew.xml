@@ -7,8 +7,8 @@
             <description>Kicked out of his previous post for drunkenness on the job, he has since changed his ways. No liquor on the job now, no sir! Before or after, that's another matter...</description>
             <portrait>neutral/unique/drunkard</portrait>
             <gender>male</gender>
-            <hiring_price>1000</hiring_price>
-            <monthly_salary>100</monthly_salary>
+            <hiring_price>10000</hiring_price>
+            <monthly_salary>1000</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Empire of Terra</faction>
@@ -25,8 +25,8 @@
             <description>Straight out of a decent Ardar pilot school, name has refused to join the Ardar navy, a rare act of defiance that cut him off from decent Ardar society. Not for him the ordered life of Ardar ships!</description>
             <portrait>neutral/thief1</portrait>
             <gender>male</gender>
-            <hiring_price>1500</hiring_price>
-            <monthly_salary>150</monthly_salary>
+            <hiring_price>15000</hiring_price>
+            <monthly_salary>1500</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -43,8 +43,8 @@
             <description>This pilot is humanoid, though you can't recognise his specie. Born in a non-industrial society on a world at the fringe of imperial space, he started as a stow away on a dingy freighter and ended up pilot. Sort of.</description>
             <portrait>pirate/pirate_militia2</portrait>
             <gender>male</gender>
-            <hiring_price>1200</hiring_price>
-            <monthly_salary>120</monthly_salary>
+            <hiring_price>12000</hiring_price>
+            <monthly_salary>1200</monthly_salary>
             <location>bar</location>
             <name_generator>Other</name_generator>
             <faction>Independent Worlds</faction>
@@ -60,8 +60,8 @@
             <description>Before the war, this old Ixumite earned a decent livehood as owner and captain of a small cargo ship. Now he seaks empoyment beyond Ixumite, no matter how badly paid.</description>
             <portrait>pirate/pirate_militia2</portrait>
             <gender>male</gender>
-            <hiring_price>900</hiring_price>
-            <monthly_salary>90</monthly_salary>
+            <hiring_price>9000</hiring_price>
+            <monthly_salary>900</monthly_salary>
             <location>bar</location>
             <name_generator>Ixumite</name_generator>
             <faction>Kingdom of Ixum</faction>
@@ -78,8 +78,8 @@
             <description>An entire life spend piloting speedy courier ships has made this pilot a very capable woman indeed, speeding in both normal and hyperspace.</description>
             <portrait>neutral/unique/oldwoman</portrait>
             <gender>female</gender>
-            <hiring_price>20000</hiring_price>
-            <monthly_salary>1000</monthly_salary>
+            <hiring_price>100000</hiring_price>
+            <monthly_salary>10000</monthly_salary>
             <location>bar</location>
             <name_generator>HumanFemale</name_generator>
             <faction>Empire of Terra</faction>
@@ -98,8 +98,8 @@
             <description>This gifted young Betelgian pilot was valued in all his jobs for his ability to deliver cargo quickly through hyperspace. He now wishes to see even more of the Galaxy that he did working for Betelgian companies</description>
             <portrait>dvaered/unique/ka'def</portrait>
             <gender>male</gender>
-            <hiring_price>25000</hiring_price>
-            <monthly_salary>1250</monthly_salary>
+            <hiring_price>125000</hiring_price>
+            <monthly_salary>12500</monthly_salary>
             <location>bar</location>
             <name_generator>Betelgian</name_generator>
             <faction>Oligarchy of Betelgeuse</faction>
@@ -118,8 +118,8 @@
             <description>Skilled Ardar pilots generally work for the Navy, a prestigious occupation. But not all Ardars crave military service; this pilot resigned his commission and went for private employment. His dogfighting skills are still just as sharp as before.</description>
             <portrait>neutral/unique/reynir</portrait>
             <gender>male</gender>
-            <hiring_price>20000</hiring_price>
-            <monthly_salary>1000</monthly_salary>
+            <hiring_price>100000</hiring_price>
+            <monthly_salary>10000</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -137,8 +137,8 @@
             <description>This Ixumite pilot has fought in the ongoing civil war since his teenage years, amassing war experience beyond his age. Since losing an eye to the conflict, he has decided to seak other employers.</description>
             <portrait>pirate/pirate4</portrait>
             <gender>male</gender>
-            <hiring_price>22000</hiring_price>
-            <monthly_salary>1100</monthly_salary>
+            <hiring_price>110000</hiring_price>
+            <monthly_salary>11000</monthly_salary>
             <location>bar</location>
             <name_generator>Ixumite</name_generator>
             <faction>Kingdom of Ixum</faction>
@@ -157,8 +157,8 @@
             <description>Decorated for acts of bravery in multiple battles against pirates, this ex-Navy pilot's deadly skills and impressive sang-froid would greatly help you in tight battles.</description>
             <portrait>neutral/thief3</portrait>
             <gender>female</gender>
-            <hiring_price>110000</hiring_price>
-            <monthly_salary>2200</monthly_salary>
+            <hiring_price>1100000</hiring_price>
+            <monthly_salary>110000</monthly_salary>
             <location>bar</location>
             <name_generator>HumanFemale</name_generator>
             <faction>Empire of Terra</faction>
@@ -178,8 +178,8 @@
             <description>He won't speak much about his past, but he is know to have been a member of an elite Ardar strike team used for infiltration missions deep within the Empire. He clearly learned much there.</description>
             <portrait>pirate/pirate4</portrait>
             <gender>male</gender>
-            <hiring_price>120000</hiring_price>
-            <monthly_salary>2400</monthly_salary>
+            <hiring_price>1200000</hiring_price>
+            <monthly_salary>120000</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -200,8 +200,8 @@
             <description>This Betelgian has served in the legendary Betelgian scouting service, mapping star systems far into barbarian space. He zips from star to star with effortless grace to the sound of Betelgian orchestral symphonies.</description>
             <portrait>pirate/pirate1</portrait>
             <gender>male</gender>
-            <hiring_price>110000</hiring_price>
-            <monthly_salary>2200</monthly_salary>
+            <hiring_price>1100000</hiring_price>
+            <monthly_salary>110000</monthly_salary>
             <location>bar</location>
             <name_generator>Betelgian</name_generator>
             <faction>Oligarchy of Betelgeuse</faction>
@@ -222,10 +222,10 @@
             <description>Having resigned her position as Queen, Shadowlines is looking for adventures beyond Harkan. With her quick mind and flying instincts, she has proven an excellent pilot.</description>
             <portrait>dvaered/dv_civilian1</portrait>
             <gender>female</gender>
-            <hiring_price>5000</hiring_price>
-            <monthly_salary>250</monthly_salary>
+            <hiring_price>25000</hiring_price>
+            <monthly_salary>2500</monthly_salary>
             <location>bar</location>
-            <conditions>var.peek ("harkan_roidhunate_win")==true and planet.cur()==planet.get("Harkan")</conditions>
+            <conditions>var.peek (&quot;harkan_roidhunate_win&quot;)==true and planet.cur()==planet.get(&quot;Harkan&quot;)</conditions>
             <faction>Roidhunate of Ardarshir</faction>
             <chance>100</chance>
             <combat_rating_needed>0</combat_rating_needed>
@@ -243,8 +243,8 @@
             <description>An accountant by trade, he set aside enough money to focus on his real passion: tinkering with engines. He'd love to have a go at improving your ship; so much to learn!</description>
             <portrait>neutral/unique/shifty_merchant</portrait>
             <gender>male</gender>
-            <hiring_price>1000</hiring_price>
-            <monthly_salary>100</monthly_salary>
+            <hiring_price>10000</hiring_price>
+            <monthly_salary>1000</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Empire of Terra</faction>
@@ -260,8 +260,8 @@
             <description>His career in the trading fleet of a Betelgian trade house never took off, but he did manage to learn a thing or two on improving fuel efficiency.</description>
             <portrait>neutral/male1</portrait>
             <gender>male</gender>
-            <hiring_price>900</hiring_price>
-            <monthly_salary>90</monthly_salary>
+            <hiring_price>9000</hiring_price>
+            <monthly_salary>900</monthly_salary>
             <location>bar</location>
             <name_generator>Betelgian</name_generator>
             <faction>Oligarchy of Betelgeuse</faction>
@@ -277,8 +277,8 @@
             <description>This technician learnt his trade on rickety ships whose power and CPU were never quite up to the job. He's learnt the hard way to get a bit more out of them.</description>
             <portrait>neutral/miner1</portrait>
             <gender>male</gender>
-            <hiring_price>1200</hiring_price>
-            <monthly_salary>120</monthly_salary>
+            <hiring_price>12000</hiring_price>
+            <monthly_salary>1200</monthly_salary>
             <location>bar</location>
             <name_generator>Other</name_generator>
             <faction>Independent Worlds</faction>
@@ -294,8 +294,8 @@
             <description>This Ardar engineer worked for an Ardar transport company, repairing ground transport vehicles. Working on a spaceship is something else... but at least he's motivated!</description>
             <portrait>neutral/unique/shifty_merchant</portrait>
             <gender>male</gender>
-            <hiring_price>1000</hiring_price>
-            <monthly_salary>100</monthly_salary>
+            <hiring_price>10000</hiring_price>
+            <monthly_salary>1000</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -312,8 +312,8 @@
             <description>Educated on Terra itself, this engineer has worked on good, modern ships, and helped run them well.</description>
             <portrait>neutral/unique/oldwoman</portrait>
             <gender>female</gender>
-            <hiring_price>22000</hiring_price>
-            <monthly_salary>1100</monthly_salary>
+            <hiring_price>120000</hiring_price>
+            <monthly_salary>12000</monthly_salary>
             <location>bar</location>
             <name_generator>HumanFemale</name_generator>
             <faction>Empire of Terra</faction>
@@ -332,8 +332,8 @@
             <description>This Ardar technician is specialised in ships' mainframes. He'll eke out all that can be gotten of your CPU modules.</description>
             <portrait>neutral/scientist</portrait>
             <gender>male</gender>
-            <hiring_price>20000</hiring_price>
-            <monthly_salary>1000</monthly_salary>
+            <hiring_price>110000</hiring_price>
+            <monthly_salary>11000</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -350,8 +350,8 @@
             <description>Born on a remote human world with a 20th-century technology, he learned to code using a keyboard! Switching to modern technologies was easy for this genius, and he can make your ship do things you'd never have thought possible.</description>
             <portrait>pirate/pirate1</portrait>
             <gender>male</gender>
-            <hiring_price>100000</hiring_price>
-            <monthly_salary>2000</monthly_salary>
+            <hiring_price>1050000</hiring_price>
+            <monthly_salary>105000</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Independent Worlds</faction>
@@ -371,8 +371,8 @@
             <description>This Betelgian engineer was still recently Head Engineer for a major trading house. Tired of office politics, he wishes to do what he does best again - deliver ships capable of going where none have gone before.</description>
             <portrait>neutral/cyborg2</portrait>
             <gender>male</gender>
-            <hiring_price>100000</hiring_price>
-            <monthly_salary>2000</monthly_salary>
+            <hiring_price>1200000</hiring_price>
+            <monthly_salary>120000</monthly_salary>
             <location>bar</location>
             <name_generator>Betelgian</name_generator>
             <faction>Oligarchy of Betelgeuse</faction>
@@ -392,8 +392,8 @@
             <description>Ixumites are not known for their mechanical abilities, but this sharp-looking young Ixumite is a clear exception. Before the war, he might have gotten fundings to get a Terran education and come back to work in the Royal shipyard; now he'll take anything to leave and avoid getting drafted.</description>
             <portrait>neutral/cyborg2</portrait>
             <gender>male</gender>
-            <hiring_price>90000</hiring_price>
-            <monthly_salary>1800</monthly_salary>
+            <hiring_price>900000</hiring_price>
+            <monthly_salary>90000</monthly_salary>
             <location>bar</location>
             <name_generator>Ixumite</name_generator>
             <faction>Kingdom of Ixum</faction>
@@ -417,8 +417,8 @@
             <description>Having done competitive precision shooting, he prides himself on his accuracy with a laser. His rate of fire is another matter.</description>
             <portrait>neutral/thief1</portrait>
             <gender>male</gender>
-            <hiring_price>1000</hiring_price>
-            <monthly_salary>100</monthly_salary>
+            <hiring_price>11000</hiring_price>
+            <monthly_salary>1100</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Empire of Terra</faction>
@@ -434,8 +434,8 @@
             <description>Precision work is not for this imperious Ardar. He believes in closing-in before unleashing short-range volleys as fast as possible.</description>
             <portrait>pirate/pirate_militia1</portrait>
             <gender>male</gender>
-            <hiring_price>1000</hiring_price>
-            <monthly_salary>100</monthly_salary>
+            <hiring_price>10000</hiring_price>
+            <monthly_salary>1000</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -451,8 +451,8 @@
             <description>This gruff Betelgian has mostly served on freighters and is of little use with missiles or forward weapons, but he handles turrets just fine.</description>
             <portrait>sirius/unique/patrek</portrait>
             <gender>male</gender>
-            <hiring_price>1200</hiring_price>
-            <monthly_salary>120</monthly_salary>
+            <hiring_price>12000</hiring_price>
+            <monthly_salary>1200</monthly_salary>
             <location>bar</location>
             <name_generator>Betelgian</name_generator>
             <faction>Oligarchy of Betelgeuse</faction>
@@ -470,8 +470,8 @@
             <description>This tall and burly Ixumite served as an infantryman in the Royal Ixumite Army. He's solid in firefight and can handle basic artillery.</description>
             <portrait>neutral/male1</portrait>
             <gender>male</gender>
-            <hiring_price>900</hiring_price>
-            <monthly_salary>90</monthly_salary>
+            <hiring_price>9000</hiring_price>
+            <monthly_salary>900</monthly_salary>
             <location>bar</location>
             <name_generator>Ixumite</name_generator>
             <faction>Kingdom of Ixum</faction>
@@ -487,8 +487,8 @@
             <description>On this humanoid's homeworld, turrets are unknown but the local kingdoms build massive guns. He's carried that passion in space; turrets are for wimps!</description>
             <portrait>pirate/pirate_militia2</portrait>
             <gender>male</gender>
-            <hiring_price>1100</hiring_price>
-            <monthly_salary>110</monthly_salary>
+            <hiring_price>11000</hiring_price>
+            <monthly_salary>1100</monthly_salary>
             <location>bar</location>
             <name_generator>Other</name_generator>
             <faction>Independent Worlds</faction>
@@ -504,8 +504,8 @@
             <description>This man served competently if not remarkably for some years in the Imperial navy before exiting the service for more lucrative positions.</description>
             <portrait>neutral/male1</portrait>
             <gender>male</gender>
-            <hiring_price>20000</hiring_price>
-            <monthly_salary>1000</monthly_salary>
+            <hiring_price>120000</hiring_price>
+            <monthly_salary>12000</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Empire of Terra</faction>
@@ -524,8 +524,8 @@
             <description>This Ardar veteran served on a Roidhunate cruiser for most of his service, where he showed a solid grasp of turret tracking.</description>
             <portrait>dvaered/dv_civilian2</portrait>
             <gender>male</gender>
-            <hiring_price>25000</hiring_price>
-            <monthly_salary>1250</monthly_salary>
+            <hiring_price>130000</hiring_price>
+            <monthly_salary>13000</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -543,8 +543,8 @@
             <description>This Ixumite has served many years in the Holy Flame Navy, mostly as a capital-ship gunner. Having lost faith in the civil war, he is looking for work elsewhere.</description>
             <portrait>neutral/thief1</portrait>
             <gender>male</gender>
-            <hiring_price>22000</hiring_price>
-            <monthly_salary>1100</monthly_salary>
+            <hiring_price>110000</hiring_price>
+            <monthly_salary>11000</monthly_salary>
             <location>bar</location>
             <name_generator>Ixumite</name_generator>
             <faction>Holy Flame of Ixum</faction>
@@ -563,8 +563,8 @@
             <description>This solidly-built humanoid spend much of his life as chief of an iron-age native community on a remote world. Captured by raiders, he showed remarkable zero-gravity fighting skills.</description>
             <portrait>pirate/pirate_militia2</portrait>
             <gender>male</gender>
-            <hiring_price>22000</hiring_price>
-            <monthly_salary>1100</monthly_salary>
+            <hiring_price>95000</hiring_price>
+            <monthly_salary>9500</monthly_salary>
             <location>bar</location>
             <name_generator>Other</name_generator>
             <faction>Independent Worlds</faction>
@@ -582,8 +582,8 @@
             <description>You'll never know why this steely aristocrat left Imperial service, but his career in the Navy's elite commando unit is all the recommendation he needs - even if most of it is classified.</description>
             <portrait>neutral/unique/aristocrat</portrait>
             <gender>male</gender>
-            <hiring_price>125000</hiring_price>
-            <monthly_salary>2500</monthly_salary>
+            <hiring_price>1250000</hiring_price>
+            <monthly_salary>125000</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Empire of Terra</faction>
@@ -604,8 +604,8 @@
             <description>After years of service in the Ardar Navy, this decorated colonel had to resign over accusations of luxuriant behaviour - something taken far more seriously on Ardarshir than on Terra. His combat credentials remain impeccable.</description>
             <portrait>neutral/male1</portrait>
             <gender>male</gender>
-            <hiring_price>125000</hiring_price>
-            <monthly_salary>2500</monthly_salary>
+            <hiring_price>1350000</hiring_price>
+            <monthly_salary>135000</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -626,10 +626,10 @@
             <description>Following the events on Harkan, Prince Hakka has decided to leave his native world behind and to explore the Galaxy as a warrior for hire. Grateful for your help, he does not charge much.</description>
             <portrait>pirate/pirate_militia2</portrait>
             <gender>male</gender>
-            <hiring_price>5000</hiring_price>
-            <monthly_salary>250</monthly_salary>
+            <hiring_price>30000</hiring_price>
+            <monthly_salary>3000</monthly_salary>
             <location>bar</location>
-            <conditions>var.peek ("harkan_empire_win")==true and planet.cur()==planet.get("Harkan")</conditions>
+            <conditions>var.peek (&quot;harkan_empire_win&quot;)==true and planet.cur()==planet.get(&quot;Harkan&quot;)</conditions>
             <faction>Empire of Terra</faction>
             <chance>100</chance>
             <stats>
@@ -646,8 +646,8 @@
             <description>This engineer trained for service in the imperial navy and failed. Since there he's been working aboard freighters. You can count on him to keep your shield generators clean, and that's about it.</description>
             <portrait>neutral/unique/reynir</portrait>
             <gender>male</gender>
-            <hiring_price>1000</hiring_price>
-            <monthly_salary>100</monthly_salary>
+            <hiring_price>8500</hiring_price>
+            <monthly_salary>850</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Empire of Terra</faction>
@@ -663,8 +663,8 @@
             <description>Raised on a backward colony in the fringes, this man started as a smith- an actual, history-book style smith, hammering metal by hand, making shovels and horseshoes. He's more than willing to straighten out your armour the same way.</description>
             <portrait>neutral/barman</portrait>
             <gender>male</gender>
-            <hiring_price>900</hiring_price>
-            <monthly_salary>90</monthly_salary>
+            <hiring_price>7000</hiring_price>
+            <monthly_salary>700</monthly_salary>
             <location>bar</location>
             <name_generator>Other</name_generator>
             <faction>Independent Worlds</faction>
@@ -680,8 +680,8 @@
             <description>The Roidhunate still lags Terra in shield technology, and this Ardar technician's training illustrates that. Thankfully, he's better at armour maintenance.</description>
             <portrait>dvaered/unique/ka'def</portrait>
             <gender>male</gender>
-            <hiring_price>1000</hiring_price>
-            <monthly_salary>100</monthly_salary>
+            <hiring_price>9000</hiring_price>
+            <monthly_salary>900</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -697,8 +697,8 @@
             <description>Recruited young in the Holy Flame Navy, this Ixumite learnt how to maintain shields without much formal education.</description>
             <portrait>pirate/pirate3</portrait>
             <gender>male</gender>
-            <hiring_price>800</hiring_price>
-            <monthly_salary>80</monthly_salary>
+            <hiring_price>8500</hiring_price>
+            <monthly_salary>850</monthly_salary>
             <location>bar</location>
             <name_generator>Ixumite</name_generator>
             <faction>Holy Flame of Ixum</faction>
@@ -714,8 +714,8 @@
             <description>While young and without much experience, this technician has a solid grasp of shield theory and will do a fine job keeping them up. Armour isn't her thing, however.</description>
             <portrait>sirius/unique/joanne</portrait>
             <gender>female</gender>
-            <hiring_price>20000</hiring_price>
-            <monthly_salary>1000</monthly_salary>
+            <hiring_price>95000</hiring_price>
+            <monthly_salary>9500</monthly_salary>
             <location>bar</location>
             <name_generator>HumanFemale</name_generator>
             <faction>Empire of Terra</faction>
@@ -732,8 +732,8 @@
             <description>This young Ardar studied in an Ardar military institute. His grades were not quite sufficient for military postings, but he has served well on multiple freighters. Like most Ardar technicians, he is more at ease with armour.</description>
             <portrait>neutral/thief1</portrait>
             <gender>male</gender>
-            <hiring_price>22000</hiring_price>
-            <monthly_salary>1100</monthly_salary>
+            <hiring_price>82000</hiring_price>
+            <monthly_salary>8200</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -750,8 +750,8 @@
             <description>Used to fighting on easily-disabled ships, this man is amazing at getting a paralyzed ship running again. It has served him well on freighters operating in dangerous spaces.</description>
             <portrait>pirate/pirate4</portrait>
             <gender>male</gender>
-            <hiring_price>25000</hiring_price>
-            <monthly_salary>1250</monthly_salary>
+            <hiring_price>90000</hiring_price>
+            <monthly_salary>9000</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Independent Worlds</faction>
@@ -768,8 +768,8 @@
             <description>This man does not just maintain shields - for years he developed new ones in a major Imperial research institute. It's your luck that he now wishes to conduct 'real-world trials', as he puts it.</description>
             <portrait>neutral/scientist</portrait>
             <gender>male</gender>
-            <hiring_price>110000</hiring_price>
-            <monthly_salary>2200</monthly_salary>
+            <hiring_price>1100000</hiring_price>
+            <monthly_salary>110000</monthly_salary>
             <location>bar</location>
             <name_generator>HumanMale</name_generator>
             <faction>Empire of Terra</faction>
@@ -788,8 +788,8 @@
             <description>Ardar ships are well-known for their heavy armour, and this man is an expert on it. He is in fact so good he is capable of doing emergency repairs in-flight, something most technicians never touch.</description>
             <portrait>pirate/pirate_militia2</portrait>
             <gender>male</gender>
-            <hiring_price>120000</hiring_price>
-            <monthly_salary>2400</monthly_salary>
+            <hiring_price>1200000</hiring_price>
+            <monthly_salary>120000</monthly_salary>
             <location>bar</location>
             <name_generator>Ardar</name_generator>
             <faction>Roidhunate of Ardarshir</faction>
@@ -808,8 +808,8 @@
             <description>This eccentric humanoid from a fringe world is a true genius at keeping a ship in shape during the toughest battles. No matter what happens, he'll be there, repairing the armour, resetting disabled systems, and getting shields back online.</description>
             <portrait>pirate/pirate2</portrait>
             <gender>male</gender>
-            <hiring_price>150000</hiring_price>
-            <monthly_salary>3000</monthly_salary>
+            <hiring_price>1500000</hiring_price>
+            <monthly_salary>150000</monthly_salary>
             <location>bar</location>
             <name_generator>Other</name_generator>
             <faction>Independent Worlds</faction>

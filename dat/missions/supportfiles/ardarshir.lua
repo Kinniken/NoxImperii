@@ -2,7 +2,7 @@
 
 function get_ardarshir_system( sys,sysTaken )
    local planets = {}
-    getsysatdistance(system.cur(), 3, 8,
+    getsysatdistance(system.cur(), 3, 12,
         function(s)
             local taken=false
             if sysTaken then               

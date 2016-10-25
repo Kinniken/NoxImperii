@@ -70,7 +70,7 @@ function accept()
 end
 
 function land ()
-   if planet.cur() == startPlanet and player.quantityCargo(C.GOURMET_FOOD) >= 20 then
+   if planet.cur() == startPlanet and player.quantityCargo(C.GOURMET_FOOD) >= 50 then
       local stringData=getStringData()
 
       tk.msg( gh.format(title[2],stringData), gh.format(text[2],stringData) )
@@ -78,7 +78,7 @@ function land ()
       misn.markerRm(landmarker)
 
       player.pay( payment )
-      player.addCargo(C.GOURMET_FOOD,-20)
+      player.pilot():cargoRm(C.GOURMET_FOOD,50)
 
       faction.modPlayerSingle( G.BETELGEUSE, 5 )
       player.addOutfit("Betelgian Trader",1)

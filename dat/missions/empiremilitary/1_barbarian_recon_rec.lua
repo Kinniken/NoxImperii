@@ -40,7 +40,7 @@ function create ()
       misn.finish(false)
    end
 
-   local target_sys_2 = get_adjacent_system(main_target_system,G.INDEPENDENT_WORLDS)
+   local target_sys_2 = get_adjacent_system(main_target_system,{},G.INDEPENDENT_WORLDS)
    local target_sys_3 = get_adjacent_system(main_target_system,{target_sys_2},G.INDEPENDENT_WORLDS)
 
    if not target_sys_2 or not target_sys_3 then

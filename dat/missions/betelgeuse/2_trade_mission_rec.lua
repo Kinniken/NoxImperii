@@ -75,7 +75,7 @@ function land ()
       tk.msg( gh.format(title[1],stringData), gh.format(text[1],stringData) )
 
       player.pay( payment )
-      player.addCargo(commodityName,-quantity)
+      player.pilot():cargoRm(commodityName,quantity)
 
       faction.modPlayerSingle( G.BETELGEUSE, 2 )
 

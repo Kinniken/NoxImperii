@@ -40,7 +40,15 @@ function land( pnt )
       return true
    end
 
+   if pnt:faction() == faction.get(G.BARBARIANS) then
+      return land_barbarian(pnt)
+   end
+
    return land_civilian(pnt, 0, -30)
+end
+
+function land_barbarian( pnt )
+   return land_civilian(pnt, -20, -1000)
 end
 
 -- Low-class landing function. Low class planets let you land and bribe at much lower standings.

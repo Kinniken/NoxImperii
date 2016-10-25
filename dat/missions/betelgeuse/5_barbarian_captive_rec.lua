@@ -76,8 +76,8 @@ function land_target ()
       local stringData=getStringData()
 
        tk.msg( gh.format(title[1],stringData), gh.format(text[1],stringData) )
-
-       landmarker = misn.markerAdd( returnPlanet:system(), "minor" )
+       misn.markerRm(landmarker)
+       landmarker = misn.markerAdd( startPlanet:system(), "low" )
        misn.osdActive(2)
 
        hook.rm(landhook)

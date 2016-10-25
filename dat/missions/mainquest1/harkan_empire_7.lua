@@ -2,7 +2,7 @@ include "dat/scripts/general_helper.lua"
 include "dat/missions/supportfiles/common.lua"
 include "pilot/pilots_empire.lua"
 
-payment = 100000
+payment = 200000
 
 -- Mission Details
 misn_title = "Locate Colonel Syrnd"

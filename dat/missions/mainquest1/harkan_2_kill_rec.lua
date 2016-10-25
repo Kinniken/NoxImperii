@@ -47,7 +47,7 @@ function create ()
    target_system = get_suitable_system( planet.get("Harkan"):system() )
 
    -- Get credits
-   credits  = rnd.rnd(5,8) * 10000
+   credits  = rnd.rnd(10,15) * 10000
 
    end_planet=planet.get("Harkan")
 

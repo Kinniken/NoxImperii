@@ -7,7 +7,7 @@ include('universe/objects/class_planets.lua')
 include "pilot/pilots_ardarshir.lua"
 include "dat/scripts/universe/live/live_universe.lua"
 
-payment = 500000
+payment = 1000000
 
 -- Mission Details
 misn_title = "Get weapons for the raid"

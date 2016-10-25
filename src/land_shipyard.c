@@ -28,6 +28,7 @@
 #include "slots.h"
 #include "ndata.h"
 
+#define DESC_MAX         512
 
 /*
  * Vars.
@@ -209,7 +210,7 @@ void shipyard_update( unsigned int wid, char* str )
    (void)str;
    char *shipname, *license_text;
    Ship* ship;
-   char buf[PATH_MAX], buf2[ECON_CRED_STRLEN], buf3[ECON_CRED_STRLEN];
+   char buf[DESC_MAX], buf2[ECON_CRED_STRLEN], buf3[ECON_CRED_STRLEN];
    size_t len;
    double jumps=0;
    Vector2d vp, vv;
@@ -222,7 +223,7 @@ void shipyard_update( unsigned int wid, char* str )
       window_modifyImage( wid, "imgTarget", NULL, 0, 0 );
       window_disableButton( wid, "btnBuyShip");
       window_disableButton( wid, "btnTradeShip");
-      nsnprintf( buf, PATH_MAX,
+      nsnprintf( buf, DESC_MAX,
             "None\n"
             "NA\n"
             "NA\n"
@@ -291,7 +292,7 @@ void shipyard_update( unsigned int wid, char* str )
    if (ship->fuel_consumption>0 && ship->fuel>0)
 	   jumps=(ship->fuel/ship->fuel_consumption);
 
-   nsnprintf( buf, PATH_MAX,
+   nsnprintf( buf, DESC_MAX,
          "%s\n"
          "%s\n"
          "%s\n"

@@ -3104,7 +3104,7 @@ void pilot_startLoot(Pilot *p, Pilot *target,Loot* loots,int nloot ) {
 	p->lootTarget = target->id;
 
 	pilot_setFlag(player.p,PILOT_LOOTING);
-	pause_setSpeed( 5. );
+	pause_setSpeed( 10. );
 }
 
 /**

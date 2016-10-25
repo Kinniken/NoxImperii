@@ -10,7 +10,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("Urgent medical help is needed following the barbarian attack.",
 		(time.get() + self.duration):tonumber(), "empire_barbarian_raid" )
-	planet.lua.settlements.humans:addGoodDemand(C.MEDICINE,2000,3,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.MEDICINE,500,3,effectId)
 
 	adjustBarbarianActivity(get_nearest_barbarian_zone(system_class.load(planet.c:system())).name,1.01)
 end
@@ -161,7 +161,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet.lua.settlements.humans:addActiveEffect("The ongoing plague is driving up the price of medicine while the quarantine depresses the cost of consumer goods.",
 		(time.get() + time.create( 0,1,0, 0, 0, 0 )):tonumber(), "empire_plague" )
-	planet.lua.settlements.humans:addGoodDemand(C.MEDICINE,2000,5,effectId)
+	planet.lua.settlements.humans:addGoodDemand(C.MEDICINE,500,3,effectId)
 	planet.lua.settlements.humans:reduceGoodDemand(C.CONSUMER_GOODS,5000,0.5,effectId)
 	
 	adjustSectorStability(planet.c:system():getZone(),0.98)

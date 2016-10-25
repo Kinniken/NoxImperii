@@ -407,7 +407,7 @@ static void board_computeLoots(Pilot* p) {
 		loots[posNormal].type = LOOT_CREDITS;
 		loots[posNormal].totalValue = p->credits;
 		loots[posNormal].quantity = (int)p->credits;
-		loots[posNormal].timeNeeded = ntime_create(0,0,0,0,15,0);
+		loots[posNormal].timeNeeded = ntime_create(0,0,0,0,10,0);
 		loots[posNormal].ntexture = 1;
 		loots[posNormal].textures = malloc(sizeof(glTexture));
 
@@ -429,7 +429,7 @@ static void board_computeLoots(Pilot* p) {
 		loots[pos].type = LOOT_FUEL;
 		loots[pos].fuel = (int)p->fuel;
 		loots[pos].quantity = (int)p->fuel;
-		loots[pos].timeNeeded = ntime_create(0,0,0,0,p->fuel/50,0);
+		loots[pos].timeNeeded = ntime_create(0,0,0,0,p->fuel/80,0);
 
 		if (player.p->fuel >= player.p->fuel_max) {
 			loots[pos].impossible = 1;
@@ -465,7 +465,7 @@ static void board_computeLoots(Pilot* p) {
 		loots[pos].commodity = p->commodities[i].commodity;
 		loots[pos].quantity = p->commodities[i].quantity;
 		loots[pos].totalValue = p->commodities[i].quantity * p->commodities[i].commodity->price;
-		loots[pos].timeNeeded = ntime_create(0,0,0,0,15+p->commodities[i].quantity/crewSize,0);
+		loots[pos].timeNeeded = ntime_create(0,0,0,0,5+p->commodities[i].quantity/(crewSize*2),0);
 
 		if (player.p->cargo_free == 0) {
 			loots[pos].impossible = 1;
@@ -503,7 +503,7 @@ static void board_computeLoots(Pilot* p) {
 			loots[posNormal].type = LOOT_OUTFIT;
 			loots[posNormal].outfit = p->outfits[i]->outfit;
 			loots[posNormal].quantity = 1;
-			loots[posNormal].timeNeeded = ntime_create(0,0,0,0,15+slotSize*100/crewSize,0);
+			loots[posNormal].timeNeeded = ntime_create(0,0,0,0,5+slotSize*50/crewSize,0);
 			loots[posNormal].totalValue = p->outfits[i]->outfit->price;
 			loots[posNormal].ntexture = p->outfits[i]->outfit->gfx_store_nlayers;
 			loots[posNormal].textures = p->outfits[i]->outfit->gfx_store_layers;

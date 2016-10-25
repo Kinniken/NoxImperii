@@ -29,7 +29,6 @@
 
 
 #define CHUNK_SIZE      32 /**< Size to allocate memory by. */
-static const int MAX_FUNC_NAME = 128;
 
 /* stack of fleets */
 static Fleet* fleet_stack = NULL; /**< Fleet stack. */

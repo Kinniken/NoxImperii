@@ -536,14 +536,14 @@ static void iar_cleanup( Widget* iar )
 
    if (iar->dat.iarl.nelements > 0) { /* Free each text individually */
       for (i=0; i<iar->dat.iarl.nelements; i++) {
-         if (iar->dat.iarl.captions[i])
-            free(iar->dat.iarl.captions[i]);
-         if (iar->dat.iarl.alts && iar->dat.iarl.alts[i])
-            free(iar->dat.iarl.alts[i]);
-         if (iar->dat.iarl.quantity && iar->dat.iarl.quantity[i])
-            free(iar->dat.iarl.quantity[i]);
-	    if (iar->dat.iarl.layers && iar->dat.iarl.layers[i])
-			free( iar->dat.iarl.layers[i] );
+    	  if (iar->dat.iarl.captions[i])
+    		  free(iar->dat.iarl.captions[i]);
+    	  if (iar->dat.iarl.alts && iar->dat.iarl.alts[i])
+    		  free(iar->dat.iarl.alts[i]);
+    	  if (iar->dat.iarl.quantity && iar->dat.iarl.quantity[i])
+    		  free(iar->dat.iarl.quantity[i]);
+    	  if (iar->dat.iarl.layers && iar->dat.iarl.layers[i])
+    		  free( iar->dat.iarl.layers[i] );
       }
    }
 

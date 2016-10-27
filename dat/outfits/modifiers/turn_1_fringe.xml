@@ -11,8 +11,7 @@
   <level>1</level>
  </general>
  <specific type="modification">
-  <turn>3</turn>
-  <turn_mod>7</turn_mod>
+  <turn_mod>10</turn_mod>
   <energy_usage>1.5</energy_usage>
  </specific>
 </outfit>

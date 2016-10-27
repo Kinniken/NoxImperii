@@ -60,13 +60,13 @@ end
 -- Uses also barbarian and Imperial weapons
 --]]
 function equip_defaultForwardPiratesLow ()
-   return { "Laser Cannon MK2", "Laser Cannon MK3", "Mass Driver", "Light EMP Gun" }
+   return { "Laser Cannon MK2", "Laser Cannon MK3", "Light EMP Gun", "Light EMP Gun", "Light EMP Gun", "Light EMP Gun" }
 end
 function equip_defaultForwardPiratesMed ()
-   return { "Plasma Blaster MK3", "Upgraded Mass Driver", "EMP Gun" }
+   return { "Plasma Blaster MK3", "Upgraded Mass Driver", "EMP Gun", "EMP Gun", "EMP Gun", "EMP Gun" }
 end
 function equip_defaultForwardPiratesHigh ()
-   return { "Plasma Cannon MK2", "Powerful EMP Gun", "Heavy Shredder" }
+   return { "Plasma Cannon MK2", "Powerful EMP Gun", "Heavy Shredder", "Powerful EMP Gun", "Powerful EMP Gun", "Powerful EMP Gun" }
 end
 function equip_defaultForwardPirates ()
    return {equip_defaultForwardPiratesLow(),equip_defaultForwardPiratesMed(),equip_defaultForwardPiratesHigh()}
@@ -110,13 +110,13 @@ end
 -- Turret mounts - pirates
 --]]
 function equip_defaultTurretPiratesLow ()
-   return { "Laser Turret MK3", "Mass Driver Turret", "Light EMP Turret" }
+   return { "Laser Turret MK3", "Mass Driver Turret", "Light EMP Turret", "Light EMP Turret", "Light EMP Turret", "Light EMP Turret", "Light EMP Turret" }
 end
 function equip_defaultTurretPiratesMed ()
-   return { "Plasma Cannon Turret", "Upgraded Mass Driver Turret", "Turreted Javelin Tubes", "EMP Turret" }
+   return { "Plasma Cannon Turret", "Upgraded Mass Driver Turret", "Turreted Javelin Tubes", "EMP Turret", "EMP Turret", "EMP Turret", "EMP Turret", "EMP Turret" }
 end
 function equip_defaultTurretPiratesHigh ()
-   return { "Plasma Cannon Turret", "Heavy Shredder Turret", "Turreted Javelin Tubes", "Powerful EMP Turret" }
+   return { "Plasma Cannon Turret", "Heavy Shredder Turret", "Turreted Javelin Tubes", "Powerful EMP Turret", "Powerful EMP Turret", "Powerful EMP Turret", "Powerful EMP Turret", "Powerful EMP Turret" }
 end
 function equip_defaultTurretsPirates()
    return {equip_defaultTurretPiratesLow(),equip_defaultTurretPiratesMed(),equip_defaultTurretPiratesHigh()}

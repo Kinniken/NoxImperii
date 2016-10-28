@@ -153,6 +153,8 @@ function ship_hail()
 	misn.osdCreate(gh.format(misn_title,stringData), osd_msg_3)
 	misn.osdActive(4)
 
+	misn.markerMove(landmarker,planet.get("Harkan"):system())
+
 	hook.rm(spacehook)
 	landhook = hook.land ("land_final")
 end

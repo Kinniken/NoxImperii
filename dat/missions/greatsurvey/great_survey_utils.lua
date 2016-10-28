@@ -145,32 +145,38 @@ function handlePlanet(surveyedPlanet,successMessage)
          var.push("survey_planet_"..surveyedPlanet.c:class(),planetClassCount)
 
          if (surveyedPlanet.lua.natives) then
-            local nativeClassCount=var.peek("survey_natives_"..surveyedPlanet.lua.natives.type)
 
-            if not nativeClassCount then
-               nativeClassCount=0
-            end
+            if (surveyedPlanet.lua.natives.type) then
+               error("Planet "..planet.cur():name().." has natives with no types!")
+            else
 
-            if nativeClassCount==0 then
-               local bonus
+               local nativeClassCount=var.peek("survey_natives_"..surveyedPlanet.lua.natives.type)
 
-               if surveyedPlanet.lua.natives:hasTag("rare") then
-                  bonus=250000
-               else
-                  bonus=100000
+               if not nativeClassCount then
+                  nativeClassCount=0
                end
 
-               reward.bonus=gh.numstring(bonus)
+               if nativeClassCount==0 then
+                  local bonus
 
-               reward.specieName=surveyedPlanet.lua.natives.name
-               reward.specieType=natives_generator.common_natives[surveyedPlanet.lua.natives.type].label
-               tk.msg( "Bonus!", gh.format(specie_bonus,reward) )
-               player.pay( bonus )
+                  if surveyedPlanet.lua.natives:hasTag("rare") then
+                     bonus=250000
+                  else
+                     bonus=100000
+                  end
+
+                  reward.bonus=gh.numstring(bonus)
+
+                  reward.specieName=surveyedPlanet.lua.natives.name
+                  reward.specieType=natives_generator.common_natives[surveyedPlanet.lua.natives.type].label
+                  tk.msg( "Bonus!", gh.format(specie_bonus,reward) )
+                  player.pay( bonus )
+               end
+
+               nativeClassCount=nativeClassCount+1
+
+               var.push("survey_natives_"..surveyedPlanet.lua.natives.type,nativeClassCount)
             end
-
-            nativeClassCount=nativeClassCount+1
-
-            var.push("survey_natives_"..surveyedPlanet.lua.natives.type,nativeClassCount)
          end
 
          return true

@@ -51,7 +51,7 @@ function create ()
    target_systems["__save"] = true
 
    -- Get credits
-   credits  = rnd.rnd(30,40) * 10000
+   credits  = rnd.rnd(10,15) * 10000
 
    template_create ()
 end

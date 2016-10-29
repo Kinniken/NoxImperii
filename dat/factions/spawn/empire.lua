@@ -1,119 +1,22 @@
-include("dat/factions/spawn/common.lua")
+include("dat/factions/spawn/common_new.lua")
+
+fleet_table[#fleet_table+1] = new_fleet({"Imperial Meteor"},10,nil,nil)
+fleet_table[#fleet_table+1] = new_fleet({"Imperial Comet"},10,nil,nil)
+fleet_table[#fleet_table+1] = new_fleet({"Imperial Continent"},5,nil,nil)
+fleet_table[#fleet_table+1] = new_fleet({"Imperial Planet"},2,nil,nil)
+fleet_table[#fleet_table+1] = new_fleet({"Imperial Nova"},1,nil,nil)
 
 
--- @brief Spawns a small patrol fleet.
-function spawn_patrol ()
-   local pilots = {}
-   local r = rnd.rnd()
-
-   if r < 0.5 then
-      scom.addPilot( pilots, "Imperial Comet", 25 );
-   elseif r < 0.8 then
-      scom.addPilot( pilots, "Imperial Meteor", 20 );
-      scom.addPilot( pilots, "Imperial Comet", 25 );
-   else
-      scom.addPilot( pilots, "Imperial Continent", 75 );
-   end
-
-   return pilots
-end
+fleet_table[#fleet_table+1] = new_fleet({"Imperial Meteor","Imperial Meteor","Imperial Meteor"},10,nil,50)
+fleet_table[#fleet_table+1] = new_fleet({"Imperial Comet","Imperial Meteor","Imperial Meteor"},10,nil,50)
+fleet_table[#fleet_table+1] = new_fleet({"Imperial Continent"},10,nil,50)
 
 
--- @brief Spawns a medium sized squadron.
-function spawn_squad ()
-   local pilots = {}
-   local r = rnd.rnd()
-
-   if r < 0.5 then
-      scom.addPilot( pilots, "Imperial Meteor", 20 );
-      scom.addPilot( pilots, "Imperial Comet", 25 );
-      scom.addPilot( pilots, "Imperial Continent", 45 );
-   elseif r < 0.8 then
-      scom.addPilot( pilots, "Imperial Comet", 25 );
-      scom.addPilot( pilots, "Imperial Continent", 45 );
-   else
-      scom.addPilot( pilots, "Imperial Meteor", 20 );
-      scom.addPilot( pilots, "Imperial Comet", 25 );
-      scom.addPilot( pilots, "Imperial Continent", 75 );
-   end
-
-   return pilots
-end
+fleet_table[#fleet_table+1] = new_fleet({"Imperial Planet","Imperial Continent"},10,nil,100)
+fleet_table[#fleet_table+1] = new_fleet({"Imperial Planet","Imperial Continent","Imperial Continent"},10,nil,100)
 
 
--- @brief Spawns a capship with escorts.
-function spawn_capship ()
-   local pilots = {}
-   local r = rnd.rnd()
-
-   -- Generate the capship
-    if r < 0.3 then
-      scom.addPilot( pilots, "Imperial Nova", 140 )
-    else
-    	 scom.addPilot( pilots, "Imperial Planet", 140 )
-    end
-
-   -- Generate the escorts
-   r = rnd.rnd()
-   if r < 0.5 then
-      scom.addPilot( pilots, "Imperial Meteor", 20 );
-      scom.addPilot( pilots, "Imperial Comet", 25 );
-      scom.addPilot( pilots, "Imperial Comet", 25 );
-   elseif r < 0.8 then
-      scom.addPilot( pilots, "Imperial Comet", 25 );
-      scom.addPilot( pilots, "Imperial Continent", 45 );
-   else
-      scom.addPilot( pilots, "Imperial Comet", 25 );
-      scom.addPilot( pilots, "Imperial Continent", 75 );
-   end
-
-   return pilots
-end
+fleet_table[#fleet_table+1] = new_fleet({"Imperial Nova","Imperial Continent","Imperial Continent"},10,nil,200)
 
 
--- @brief Creation hook.
-function create ( max )
-
-   local weights = {}
-
-   -- Create weights for spawn table
-    weights[ spawn_patrol  ] = 100
-    weights[ spawn_squad   ] = math.max(1, -80 + 0.80 * max)
-    weights[ spawn_capship ] = math.max(1, -500 + 1.70 * max)
-   
-   -- Create spawn table base on weights
-   spawn_table = scom.createSpawnTable( weights )
-
-   -- Calculate spawn data
-   spawn_data = scom.choose( spawn_table )
-
-   return scom.calcNextSpawn( 0, scom.presence(spawn_data), max )
-end
-
-
--- @brief Spawning hook
-function spawn ( presence, max )
-
-  --safety if create() was not called
-   --(can happen in border cases in Nox, unlike Naev)
-   if spawn_data==nil then
-      return 10000,nil
-    end
-
-   local pilots
-
-   -- Over limit
-   if presence > max then
-      return 5
-   end
-  
-   -- Actually spawn the pilots
-   pilots = scom.spawn( spawn_data )
-
-   -- Calculate spawn data
-   spawn_data = scom.choose( spawn_table )
-
-   return scom.calcNextSpawn( presence, scom.presence(spawn_data), max ), pilots
-end
-
-
+fleet_table[#fleet_table+1] = new_fleet({"Imperial Nova","Imperial Planet","Imperial Planet","Imperial Continent","Imperial Continent"},10,nil,500)

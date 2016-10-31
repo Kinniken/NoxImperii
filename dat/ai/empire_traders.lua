@@ -1,5 +1,6 @@
 include("dat/ai/tpl/generic.lua")
 include("dat/ai/personality/trader.lua")
+include("dat/ai/include/civilian_chatter.lua")
 
 
 -- Sends a distress signal which causes faction loss
@@ -27,6 +28,15 @@ function create ()
 
    -- Probably the ones with the most money
    --ai.setcredits( rnd.int(ai.pilot():ship():price()/100, ai.pilot():ship():price()/25) )
+
+   r = rnd.rnd(0,10)
+   if r == 0 then
+      local tradeChatter = getTradeDealChatter(system.cur(),ai.pilot())
+
+      if tradeChatter then
+        ai.pilot():comm(tradeChatter)
+      end
+   end
 
    -- Communication stuff
    mem.bribe_no = "\"Imperial Traders do not negotiate with criminals.\""

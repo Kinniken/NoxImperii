@@ -1053,9 +1053,6 @@ void ships_free (void)
       if (s->gfx_store != NULL)
          gl_freeTexture(s->gfx_store);
       if (s->gfx_store_layers != NULL) {
-    	  for (j=0; j<s->gfx_store_nlayers; j++) {
-    		  gl_freeTexture(s->gfx_store_layers[j]);
-    	  }
     	  free(s->gfx_store_layers);
       }
    }

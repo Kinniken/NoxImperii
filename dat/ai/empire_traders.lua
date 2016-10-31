@@ -26,22 +26,26 @@ mem.careful   = true
 
 function create ()
 
+   p = player.pilot()
+
    -- Probably the ones with the most money
    --ai.setcredits( rnd.int(ai.pilot():ship():price()/100, ai.pilot():ship():price()/25) )
 
-   r = rnd.rnd(0,10)
-   if r == 0 then
-      local tradeChatter = getTradeDealChatter(system.cur(),ai.pilot())
+   if p:exists() then
+      r = rnd.rnd(1,2)
+      if r == 1 then
+         local tradeChatter = getTradeDealChatter(system.cur(),ai.pilot())
 
-      if tradeChatter then
-        ai.pilot():comm(tradeChatter)
+         if tradeChatter then
+           ai.pilot():comm(tradeChatter)
+         end
       end
    end
 
    -- Communication stuff
    mem.bribe_no = "\"Imperial Traders do not negotiate with criminals.\""
    mem.refuel = rnd.rnd( 3000, 5000 )
-   p = player.pilot()
+   
    if p:exists() then
       standing = ai.getstanding( p ) or -1
       if standing > 50 then mem.refuel = mem.refuel * 0.75

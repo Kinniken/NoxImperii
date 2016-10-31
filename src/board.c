@@ -183,8 +183,7 @@ void player_board (void)
 
    //If has not been boarded before, needs to fight for it
    if (!pilot_isFlag(p,PILOT_BOARDED_SUCCESS)) {
-	   chance=100-(0.5 * (10. + p->crew*p->boarding_skills)/(10. + player.p->crew*player.p->boarding_skills))*100;
-
+	   chance=100-(0.4 * (5. + p->crew*p->boarding_skills)/(5. + player.p->crew*player.p->boarding_skills))*100;
 	   chance=MAX(chance,0);
 	   chance=MIN(chance,100);
 

@@ -1095,7 +1095,7 @@ static int planetL_commoditiesSold( lua_State *L )
 static int planetL_tradeDatas( lua_State *L )
 {
    Planet *p;
-   int i, k;
+   int i;
    TradeData *td;
 
    /* Get result and tech. */
@@ -1103,14 +1103,13 @@ static int planetL_tradeDatas( lua_State *L )
 
    /* Push results in a table. */
    lua_newtable(L);
-   k=0;
+
    for (i=0; i<p->ntradedatas; i++) {
 	  td = &p->tradedatas[i];
 
       lua_pushnumber(L,i+1); /* index, starts with 1 */
 
       /* Set up for creation. */
-      lua_pushnumber(L,++k);
       lua_newtable(L);
 
       lua_pushstring(L,"commodity");

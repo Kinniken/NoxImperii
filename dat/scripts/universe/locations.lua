@@ -340,7 +340,7 @@ locations.empire_inner_sectors={
 }
 
 locations.empire_outer_sectors={
-	priority=function(star) return priority_distance(earth_pos,star,1000,20) end,
+	priority=function(star) return priority_distance(earth_pos,star,1050,20) end,
 	zoneName=function(star)
 		local sector=get_closest_imperial_sector(star)
 

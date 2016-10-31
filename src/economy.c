@@ -202,7 +202,7 @@ int commodity_getNumber(void) {
 	return commodity_nstack;
 }
 
-const Commodity* commodity_getAll(void) {
+Commodity* commodity_getAll(void) {
 	return commodity_stack;
 }
 

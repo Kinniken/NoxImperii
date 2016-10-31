@@ -274,7 +274,7 @@ float planet_commodityPriceSellingRatio( const Planet *p, const Commodity *c )
 	return 1;
 }
 
-void planet_addOrUpdateTradeData(Planet *p, const Commodity *c,float priceFactor,
+void planet_addOrUpdateTradeData(Planet *p, Commodity *c,float priceFactor,
 		int buyingQuantity,int sellingQuantity) {
 
 	//space_debugCheckDataIntegrity();
@@ -4428,7 +4428,10 @@ void system_addPresence( StarSystem *sys, int faction, double amount, int range 
    /* Create the initial queue consisting of sys adjacencies. */
    for (i=0; i < sys->njumps; i++) {
       if (sys->jumps[i].target->spilled == 0 && !jp_isFlag( &sys->jumps[i], JP_HIDDEN ) && !jp_isFlag( &sys->jumps[i], JP_EXITONLY )) {
-         q_enqueue( q, sys->jumps[i].target );
+    	  /* Check whether the faction is forbidden by the system's owner */
+    	  if (!(sys->jumps[i].target->faction>0 && !faction_isAllowedBy(sys->jumps[i].target->faction,faction))) {
+    		  q_enqueue( q, sys->jumps[i].target );
+    	  }
          sys->jumps[i].target->spilled = 1;
       }
    }
@@ -4453,9 +4456,13 @@ void system_addPresence( StarSystem *sys, int faction, double amount, int range 
 
       /* Enqueue all its adjacencies to the next range queue. */
       for (i=0; i<cur->njumps; i++) {
-         if (cur->jumps[i].target->spilled == 0 && !jp_isFlag( &cur->jumps[i], JP_HIDDEN ) && !jp_isFlag( &cur->jumps[i], JP_EXITONLY )) {
-            q_enqueue( qn, cur->jumps[i].target );
-            cur->jumps[i].target->spilled = 1;
+    	  if (cur->jumps[i].target->spilled == 0 && !jp_isFlag( &cur->jumps[i], JP_HIDDEN ) && !jp_isFlag( &cur->jumps[i], JP_EXITONLY )) {
+
+    		  /* Check whether the faction is forbidden by the system's owner */
+    		  if (!(cur->jumps[i].target->faction>0 && !faction_isAllowedBy(cur->jumps[i].target->faction,faction))) {
+    			  q_enqueue( qn, cur->jumps[i].target );
+    		  }
+    		  cur->jumps[i].target->spilled = 1;
          }
       }
 

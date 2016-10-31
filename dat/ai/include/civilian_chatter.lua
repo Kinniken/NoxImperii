@@ -18,7 +18,7 @@ function getTradeDealChatter(sys,callingShip)
 	elseif deal.type == "cheapBulk" then
 		chatters = {"If you are looking to buy ${commodity} in bulk, head to ${planet}, system ${system}; prices are decent and the market is deep.","Last time I was on ${planet} in system ${system}, they were selling cheap ${commodity} in large quantities."}
 	else
-		chatters = {"Looking to sell ${commodity} in bulk? Try ${planet}, system ${system}: they pay decent prices.","I know ${planet} in system ${system} is looking for large quantities of ${commodity} and pay good prices for it."}
+		chatters = {"Looking to sell ${commodity} in bulk? Try ${planet}, system ${system}: they pay decent prices.","I know ${planet} in system ${system} is looking for large quantities of ${commodity} and pays good prices for it."}
 	end
 
 	local chatter = chatters[math.random(#chatters)]

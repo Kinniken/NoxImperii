@@ -1283,79 +1283,80 @@ static int faction_parse( Faction* temp, xmlNodePtr parent )
  */
 static void faction_parseSocial( xmlNodePtr parent )
 {
-   xmlNodePtr node, cur;
-   char *buf;
-   Faction *base;
-   int mod;
-   int mem;
+	xmlNodePtr node, cur;
+	char *buf;
+	Faction *base;
+	int mod;
+	int mem;
 
-   buf = xml_nodeProp(parent,"name");
-   base = &faction_stack[faction_get(buf)];
-   free(buf);
+	buf = xml_nodeProp(parent,"name");
+	base = &faction_stack[faction_get(buf)];
+	free(buf);
 
-   node = parent->xmlChildrenNode;
-   do {
+	node = parent->xmlChildrenNode;
+	do {
 
-      /* Grab the allies */
-      if (xml_isNode(node,"allies")) {
-         cur = node->xmlChildrenNode;
+		/* Grab the allies */
+		if (xml_isNode(node,"allies")) {
+			cur = node->xmlChildrenNode;
 
-         mem = 0;
-         do {
-            if (xml_isNode(cur,"ally")) {
-               mod = faction_get(xml_get(cur));
-               base->nallies++;
-               if (base->nallies > mem) {
-                  mem += CHUNK_SIZE;
-                  base->allies = realloc(base->allies, sizeof(int)*mem);
-               }
-               base->allies[base->nallies-1] = mod;
-            }
-         } while (xml_nextNode(cur));
-         if (base->nallies > 0)
-            base->allies = realloc(base->allies, sizeof(int)*base->nallies);
-      }
+			mem = 0;
+			do {
+				if (xml_isNode(cur,"ally")) {
+					mod = faction_get(xml_get(cur));
+					base->nallies++;
+					if (base->nallies > mem) {
+						mem += CHUNK_SIZE;
+						base->allies = realloc(base->allies, sizeof(int)*mem);
+					}
+					base->allies[base->nallies-1] = mod;
+				}
+			} while (xml_nextNode(cur));
+			if (base->nallies > 0)
+				base->allies = realloc(base->allies, sizeof(int)*base->nallies);
+		}
 
-      /* Grab the enemies */
-      if (xml_isNode(node,"enemies")) {
-    	  cur = node->xmlChildrenNode;
+		/* Grab the enemies */
+		if (xml_isNode(node,"enemies")) {
+			cur = node->xmlChildrenNode;
 
-    	  mem = 0;
-    	  do {
-    		  if (xml_isNode(cur,"enemy")) {
-    			  mod = faction_get(xml_get(cur));
-    			  base->nenemies++;
-    			  if (base->nenemies > mem) {
-    				  mem += CHUNK_SIZE;
-    				  base->enemies = realloc(base->enemies, sizeof(int)*mem);
-    			  }
-    			  base->enemies[base->nenemies-1] = mod;
-    		  }
-    	  } while (xml_nextNode(cur));
-    	  if (base->nenemies > 0)
-    		  base->enemies = realloc(base->enemies, sizeof(int)*base->nenemies);
-      }
+			mem = 0;
+			do {
+				if (xml_isNode(cur,"enemy")) {
+					mod = faction_get(xml_get(cur));
+					base->nenemies++;
+					if (base->nenemies > mem) {
+						mem += CHUNK_SIZE;
+						base->enemies = realloc(base->enemies, sizeof(int)*mem);
+					}
+					base->enemies[base->nenemies-1] = mod;
+				}
+			} while (xml_nextNode(cur));
+			if (base->nenemies > 0)
+				base->enemies = realloc(base->enemies, sizeof(int)*base->nenemies);
+		}
 
-      /* Grab the forbidden */
-      if (xml_isNode(node,"forbidden")) {
-    	  cur = node->xmlChildrenNode;
+		/* Grab the forbidden */
+		if (xml_isNode(node,"forbidden")) {
+			cur = node->xmlChildrenNode;
 
-    	  mem = 0;
-    	  do {
-    		  if (xml_isNode(cur,"forbid")) {
-    			  mod = faction_get(xml_get(cur));
-    			  base->nforbiddens++;
-    			  if (base->nforbiddens > mem) {
-    				  mem += CHUNK_SIZE;
-    				  base->forbiddens = realloc(base->forbiddens, sizeof(int)*mem);
-    			  }
-    			  base->forbiddens[base->nenemies-1] = mod;
-    		  }
-    	  } while (xml_nextNode(cur));
-    	  if (base->nforbiddens > 0)
-    		  base->forbiddens = realloc(base->forbiddens, sizeof(int)*base->nforbiddens);
-      }
-   } while (xml_nextNode(node));
+			mem = 0;
+			do {
+				if (xml_isNode(cur,"forbid")) {
+					mod = faction_get(xml_get(cur));
+					base->nforbiddens++;
+					if (base->nforbiddens > mem) {
+						mem += CHUNK_SIZE;
+						base->forbiddens = realloc(base->forbiddens, sizeof(int)*mem);
+					}
+					base->forbiddens[base->nforbiddens-1] = mod;
+					WARN("Faction %s forbids entry to faction %s",base->name,xml_get(cur));
+				}
+			} while (xml_nextNode(cur));
+			if (base->nforbiddens > 0)
+				base->forbiddens = realloc(base->forbiddens, sizeof(int)*base->nforbiddens);
+		}
+	} while (xml_nextNode(node));
 
 
 }
@@ -1666,19 +1667,17 @@ int *faction_getGroup( int *n, int which )
  */
 int faction_isAllowedBy(int ownerFaction, int visitingFaction) {
 	int i;
-	Faction *owner;
 
 	if (!faction_isFaction(ownerFaction)) {
 		WARN("Invalid faction id: %d",ownerFaction);
 		return 1;
 	}
 
-	owner = &faction_stack[ownerFaction];
-
-	for (i=0;i<owner->nforbiddens;i++) {
-		if (owner->forbiddens[i] == visitingFaction) {
+	for (i=0;i<faction_stack[ownerFaction].nforbiddens;i++) {
+		if (faction_stack[ownerFaction].forbiddens[i] == visitingFaction) {
 			return 0;
 		}
 	}
+
 	return 1;
 }

@@ -43,7 +43,7 @@ typedef struct Commodity_ {
 Commodity* commodity_get( const char* name );
 Commodity* commodity_getW( const char* name );
 int commodity_getNumber(void);
-const Commodity* commodity_getAll(void);
+Commodity* commodity_getAll(void);
 int commodity_load (void);
 void commodity_free (void);
 

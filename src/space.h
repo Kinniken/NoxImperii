@@ -321,7 +321,7 @@ credits_t planet_commodityPriceBuying( const Planet *p, const Commodity *c );
 credits_t planet_commodityPriceSelling( const Planet *p, const Commodity *c );
 float planet_commodityPriceBuyingRatio( const Planet *p, const Commodity *c );
 float planet_commodityPriceSellingRatio( const Planet *p, const Commodity *c );
-void planet_addOrUpdateTradeData(Planet *p, const Commodity *c,float priceFactor,
+void planet_addOrUpdateTradeData(Planet *p, Commodity *c,float priceFactor,
 		int buyingQuantity,int sellingQuantity);
 /* Misc modification. */
 int planet_setFaction( Planet *p, int faction );

@@ -733,7 +733,7 @@ static void map_update_trade(unsigned int wid) {
 	int p_names=0,p_prices=0,p_buy=0,p_sell=0;
 
 	TradeData* cur_trade_data,*planet_trade_data;
-	const Commodity* all_commodities;
+	Commodity* all_commodities;
 
 	int sys_ndata=commodity_getNumber();
 	TradeData sys_data[sys_ndata];

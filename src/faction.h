@@ -33,6 +33,7 @@ const glColour* faction_colour( int f );
 int* faction_getEnemies( int f, int *n );
 int* faction_getAllies( int f, int *n );
 int* faction_getGroup( int *n, int which );
+int faction_isAllowedBy(int ownerFaction, int visitingFaction);
 
 /* set stuff */
 int faction_setKnown( int id, int state );

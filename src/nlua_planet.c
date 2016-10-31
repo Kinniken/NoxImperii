@@ -59,6 +59,7 @@ static int planetL_gfxExterior( lua_State *L );
 static int planetL_shipsSold( lua_State *L );
 static int planetL_outfitsSold( lua_State *L );
 static int planetL_commoditiesSold( lua_State *L );
+static int planetL_tradeDatas( lua_State *L );
 static int planetL_isBlackMarket( lua_State *L );
 static int planetL_isKnown( lua_State *L );
 static int planetL_setKnown( lua_State *L );
@@ -105,6 +106,7 @@ static const luaL_reg planet_methods[] = {
    { "shipsSold", planetL_shipsSold },
    { "outfitsSold", planetL_outfitsSold },
    { "commoditiesSold", planetL_commoditiesSold },
+   { "tradeDatas", planetL_tradeDatas },
    { "blackmarket", planetL_isBlackMarket },
    { "known", planetL_isKnown },
    { "setKnown", planetL_setKnown },
@@ -152,6 +154,7 @@ static const luaL_reg planet_cond_methods[] = {
    { "shipsSold", planetL_shipsSold },
    { "outfitsSold", planetL_outfitsSold },
    { "commoditiesSold", planetL_commoditiesSold },
+   { "tradeDatas", planetL_tradeDatas },
    { "blackmarket", planetL_isBlackMarket },
    { "known", planetL_isKnown },
    { "getLuaData", planetL_getLuaData },
@@ -1074,6 +1077,60 @@ static int planetL_commoditiesSold( lua_State *L )
       lua_pushnumber(L,i+1); /* index, starts with 1 */
       lua_pushcommodity(L,c[i]); /* value = LuaCommodity */
       lua_rawset(L,-3); /* store the value in the table */
+   }
+
+   return 1;
+}
+
+/**
+ * @brief Gets the trade datas of a planet.
+ *
+ * Does not include the adjusted price factor nor the remaining quantities,
+ * as these are not always up-to-date.
+ *
+ *    @luatparam Pilot p Planet to get trade data sold at.
+ *    @luatreturn {{commodity=<c1>,priceFactor=<p1>,buyingQuantity=<bq1>,sellingQuantity=<sq1>},...}
+ * @luafunc tradeDatas( p )
+ */
+static int planetL_tradeDatas( lua_State *L )
+{
+   Planet *p;
+   int i, k;
+   TradeData *td;
+
+   /* Get result and tech. */
+   p = luaL_validplanet(L,1);
+
+   /* Push results in a table. */
+   lua_newtable(L);
+   k=0;
+   for (i=0; i<p->ntradedatas; i++) {
+	  td = &p->tradedatas[i];
+
+      lua_pushnumber(L,i+1); /* index, starts with 1 */
+
+      /* Set up for creation. */
+      lua_pushnumber(L,++k);
+      lua_newtable(L);
+
+      lua_pushstring(L,"commodity");
+      lua_pushcommodity(L,td->commodity); /* value = LuaCommodity */
+      lua_rawset(L,-3); /* store the value in the table */
+
+      lua_pushstring(L,"priceFactor");
+      lua_pushnumber(L,td->priceFactor);
+      lua_rawset(L,-3); /* store the value in the table */
+
+      lua_pushstring(L,"buyingQuantity");
+      lua_pushnumber(L,td->buyingQuantity);
+      lua_rawset(L,-3); /* store the value in the table */
+
+      lua_pushstring(L,"sellingQuantity");
+      lua_pushnumber(L,td->sellingQuantity);
+      lua_rawset(L,-3); /* store the value in the table */
+
+      /* Set table in table. */
+      lua_rawset(L,-3);
    }
 
    return 1;

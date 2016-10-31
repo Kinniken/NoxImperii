@@ -30,7 +30,7 @@
  * @brief Represents a commodity traded on a world.
  */
 typedef struct TradeData_ {
-	const Commodity *commodity;
+	Commodity *commodity;
 	float priceFactor;//set in XML or Lua, represents world itself
 	float adjustedPriceFactor;//takes into account nearby worlds
 	int buyingQuantity,sellingQuantity;

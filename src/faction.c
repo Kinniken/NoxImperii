@@ -68,6 +68,10 @@ typedef struct Faction_ {
    int *allies; /**< Allies by ID of the faction. */
    int nallies; /**< Number of allies. */
 
+   /* Forbidden */
+   int *forbiddens; /**< Factions by ID barred from systems of the faction. */
+   int nforbiddens; /**< Number of forbidden factions. */
+
    /* Player information. */
    double player_def; /**< Default player standing. */
    double player; /**< Standing with player - from -100 to 100 */
@@ -1314,24 +1318,46 @@ static void faction_parseSocial( xmlNodePtr parent )
 
       /* Grab the enemies */
       if (xml_isNode(node,"enemies")) {
-         cur = node->xmlChildrenNode;
+    	  cur = node->xmlChildrenNode;
 
-         mem = 0;
-         do {
-            if (xml_isNode(cur,"enemy")) {
-               mod = faction_get(xml_get(cur));
-               base->nenemies++;
-               if (base->nenemies > mem) {
-                  mem += CHUNK_SIZE;
-                  base->enemies = realloc(base->enemies, sizeof(int)*mem);
-               }
-               base->enemies[base->nenemies-1] = mod;
-            }
-         } while (xml_nextNode(cur));
-         if (base->nenemies > 0)
-            base->enemies = realloc(base->enemies, sizeof(int)*base->nenemies);
+    	  mem = 0;
+    	  do {
+    		  if (xml_isNode(cur,"enemy")) {
+    			  mod = faction_get(xml_get(cur));
+    			  base->nenemies++;
+    			  if (base->nenemies > mem) {
+    				  mem += CHUNK_SIZE;
+    				  base->enemies = realloc(base->enemies, sizeof(int)*mem);
+    			  }
+    			  base->enemies[base->nenemies-1] = mod;
+    		  }
+    	  } while (xml_nextNode(cur));
+    	  if (base->nenemies > 0)
+    		  base->enemies = realloc(base->enemies, sizeof(int)*base->nenemies);
+      }
+
+      /* Grab the forbidden */
+      if (xml_isNode(node,"forbidden")) {
+    	  cur = node->xmlChildrenNode;
+
+    	  mem = 0;
+    	  do {
+    		  if (xml_isNode(cur,"forbid")) {
+    			  mod = faction_get(xml_get(cur));
+    			  base->nforbiddens++;
+    			  if (base->nforbiddens > mem) {
+    				  mem += CHUNK_SIZE;
+    				  base->forbiddens = realloc(base->forbiddens, sizeof(int)*mem);
+    			  }
+    			  base->forbiddens[base->nenemies-1] = mod;
+    		  }
+    	  } while (xml_nextNode(cur));
+    	  if (base->nforbiddens > 0)
+    		  base->forbiddens = realloc(base->forbiddens, sizeof(int)*base->nforbiddens);
       }
    } while (xml_nextNode(node));
+
+
 }
 
 
@@ -1629,4 +1655,30 @@ int *faction_getGroup( int *n, int which )
    }
 
    return group;
+}
+
+/**
+ * @brief Returns 0 if a faction is forbidden from entering the other faction's system.
+ *
+ *    @param ownerFaction faction id that owns the system
+ *    @param visitingFaction faction id that wants to enter it
+ *    @return 0 if forbidden, 1 if allowed
+ */
+int faction_isAllowedBy(int ownerFaction, int visitingFaction) {
+	int i;
+	Faction *owner;
+
+	if (!faction_isFaction(ownerFaction)) {
+		WARN("Invalid faction id: %d",ownerFaction);
+		return 1;
+	}
+
+	owner = &faction_stack[ownerFaction];
+
+	for (i=0;i<owner->nforbiddens;i++) {
+		if (owner->forbiddens[i] == visitingFaction) {
+			return 0;
+		}
+	}
+	return 1;
 }

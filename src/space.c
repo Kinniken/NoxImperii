@@ -4407,6 +4407,10 @@ void system_addPresence( StarSystem *sys, int faction, double amount, int range 
    if (amount == 0)
       return;
 
+   /* Check whether the faction is forbidden by the system's owner */
+   if (sys->faction>0 && !faction_isAllowedBy(sys->faction,faction))
+	   return;
+
    /* Add the presence to the current system. */
    i = getPresenceIndex(sys, faction);
    sys->presence[i].value += amount;

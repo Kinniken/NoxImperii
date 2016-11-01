@@ -409,7 +409,7 @@ unsigned int pilot_getNearestPilot( const Pilot* p )
  *    @param p Pilot to get the boss of.
  *    @return The boss.
  */
-unsigned int pilot_getBoss( const Pilot* p )
+unsigned int pilot_getNewBoss( const Pilot* p )
 {
    unsigned int t;
    int i;
@@ -440,6 +440,10 @@ unsigned int pilot_getBoss( const Pilot* p )
       /* Must be a valid target. */
       if (!pilot_validTarget( p, pilot_stack[i] ))
          continue;
+
+      /* Must not have a boss. */
+      if (pilot_stack[i]->boss > 0)
+    	  continue;
 
       /* Maximum distance in 2 seconds. */
       dx = pilot_stack[i]->solid->pos.x + 2*pilot_stack[i]->solid->vel.x -
@@ -2668,18 +2672,25 @@ Pilot* pilot_copy( Pilot* src )
    return dest;
 }
 
+void pilot_freeHooks( Pilot* p) {
+	/* Clear up pilot hooks (hooks where pilot is the object). */
+	pilot_clearHooks(p);
+
+	/* Clear up the pilot's AI hooks (where pilot is the subjet) */
+	hook_rmAIParent( p->id );
+}
+
 
 /**
  * @brief Frees and cleans up a pilot
+ *
+ * Does not free hooks, to avoid crashes if hook refers to a pilot being deleted
  *
  *    @param p Pilot to free.
  */
 void pilot_free( Pilot* p )
 {
    int i;
-
-   /* Clear up pilot hooks. */
-   pilot_clearHooks(p);
 
    /* If hostile, must remove counter. */
    pilot_rmHostile(p, 1);
@@ -2757,6 +2768,7 @@ void pilot_destroy(Pilot* p)
    }
 
    /* pilot is eliminated */
+   pilot_freeHooks(p);
    pilot_free(p);
    pilot_nstack--;
 
@@ -2774,6 +2786,10 @@ void pilots_free (void)
 
    pilot_freeGlobalHooks();
 
+   /* hooks first to avoid needing references to deleted pilots */
+   for (i=0; i < pilot_nstack; i++)
+	   pilot_freeHooks(pilot_stack[i]);
+
    /* Free pilots. */
    for (i=0; i < pilot_nstack; i++)
       pilot_free(pilot_stack[i]);
@@ -2790,6 +2806,14 @@ void pilots_free (void)
 void pilots_clean (void)
 {
    int i;
+
+   /* free hooks first as you can't free them once the pilots are getting erased */
+   for (i=0; i < pilot_nstack; i++) {
+	   if ((player.p == NULL) || (pilot_stack[i] != player.p)) {
+		   pilot_freeHooks(pilot_stack[i]);
+	   }
+   }
+
    for (i=0; i < pilot_nstack; i++) {
       /* we'll set player.p at privileged position */
       if ((player.p != NULL) && (pilot_stack[i] == player.p)) {

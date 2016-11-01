@@ -181,12 +181,84 @@ function follow_accurate ()
    local mod = vec2.mod(goal - p:pos())
 
    --  Always face the goal
-   local dir   = ai.face(goal)
+   local dir   = ai.face(goal, nil, true)
 
-   if dir < 10 and mod > 300 then
+   if dir < 10 and mod > mem.radius then
       ai.accel()
    end
+end
 
+function formation_old ()
+   local target = ai.target()
+   local p = ai.pilot()
+
+   -- Will just float without a target to escort.
+   if not target:exists() then
+      ai.poptask()
+      return
+   end
+
+   local goal,formation_position,velocity_delta = ai.follow_formation(target, mem.radius, 
+         mem.angle, mem.Kp, mem.Kd)
+
+   local distance = vec2.mod(formation_position - p:pos())
+
+   local vel_delta_mod = vec2.mod(velocity_delta)
+
+   if ((distance < 60 and mem.in_formation) or (distance < 5 and vel_delta_mod < 10)) then
+      ai.faceSameDir(target)
+      ai.matchVelocity(target,5)
+
+      mem.in_formation = true
+      p:setSpeedLimit(target:stats().speed_max)
+   else
+      local mod = vec2.mod(goal - p:pos())
+
+      p:setSpeedLimit( 0 )
+
+      --  Always face the goal
+      local dir   = ai.face(goal, nil, false)
+
+      if dir < 10 and mod > mem.radius then
+         ai.accel()
+      end
+
+      mem.in_formation = false
+   end
+end
+
+function formation ()
+
+   local p = ai.pilot()
+   local target = pilot.byId(mem.formation_leader_id)
+
+   local goal,formation_position,velocity_delta = ai.follow_formation(target, mem.formation_static_radius,
+      mem.formation_static_angle, mem.Kp, mem.Kd)
+
+   local distance = vec2.mod(formation_position - p:pos())
+
+   local vel_delta_mod = vec2.mod(velocity_delta)
+
+   if ((distance < formation_tightness and mem.in_formation) or (distance < formation_tightness/5 and vel_delta_mod < formation_tightness/5)) then
+      ai.faceSameDir(target)
+      p:matchVelocity(target,5)
+
+      mem.in_formation = true
+      p:setSpeedLimit(target:stats().speed_max)
+   else
+      local mod = vec2.mod(goal - p:pos())
+
+      p:setSpeedLimit( 0 )
+
+      --  Always face the goal
+      local dir   = ai.face(goal, nil, false)
+
+      if dir < 10 and mod > formation_tightness/5 then
+         ai.accel()
+      end
+
+      mem.in_formation = false
+   end
 end
 
 --[[

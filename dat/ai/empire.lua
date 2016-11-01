@@ -6,11 +6,11 @@ mem.armour_run = 40
 mem.armour_return = 70
 mem.aggressive = true
 
+formation_type = "wedge"
+formation_tightness = 50
+formation_sticky = 5
 
 function create ()
-
-   -- Not too many credits.
-   --ai.setcredits( rnd.rnd(ai.pilot():ship():price()/300, ai.pilot():ship():price()/70) )
 
    -- Lines to annoy the player. Shouldn't be too common or Gamma Polaris and such get inundated.
    r = rnd.rnd(0,20)

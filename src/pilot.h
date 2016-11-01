@@ -301,7 +301,7 @@ typedef struct Pilot_ {
 
    /* Fleet/faction management. */
    int faction;      /**< Pilot's faction. */
-   int systemFleet;  /**< The system fleet the pilot belongs to. */
+   int systemFleet;  /**< The system fleet the pilot belongs to. NOT IMPLEMENTED */
    int presence;     /**< Presence being used by the pilot. */
 
    /* Object characteristics */
@@ -435,6 +435,8 @@ typedef struct Pilot_ {
    double tcontrol;  /**< timer for control tick */
    double timer[MAX_AI_TIMERS]; /**< timers for AI */
    Task* task;       /**< current action */
+   unsigned int boss; /**< AI pilot boss (head ship). */
+   Vector2d formation_position; /* position in formation, if preset */
 
    /* Misc */
    double comm_msgTimer; /**< Message timer for the comm. */
@@ -482,7 +484,7 @@ unsigned int pilot_getNearestEnemy_size( const Pilot* p, double target_mass_LB, 
 unsigned int pilot_getNearestEnemy_heuristic(const Pilot* p, double mass_factor, double health_factor, double damage_factor, double range_factor);
 unsigned int pilot_getNearestHostile (void); /* only for the player */
 unsigned int pilot_getNearestPilot( const Pilot* p );
-unsigned int pilot_getBoss( const Pilot* p );
+unsigned int pilot_getNewBoss( const Pilot* p );
 double pilot_getNearestPos( const Pilot *p, unsigned int *tp, double x, double y, int disabled );
 double pilot_getNearestAng( const Pilot *p, unsigned int *tp, double ang, int disabled );
 int pilot_getJumps( const Pilot* p );
@@ -545,7 +547,7 @@ void pilots_clean (void);
 void pilots_clear (void);
 void pilots_cleanAll (void);
 void pilot_free( Pilot* p );
-
+void pilot_freeHooks( Pilot* p);
 
 /*
  * Movement.

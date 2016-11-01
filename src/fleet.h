@@ -28,6 +28,8 @@ typedef struct FleetPilot_ {
    char *name; /**< Used if they have a special name like uniques. */
    char *name_generator;
    char *ai; /**< AI different of fleet's global AI. */
+   double formation_radius;
+   double formation_angle;
 } FleetPilot;
 
 

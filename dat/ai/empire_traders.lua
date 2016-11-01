@@ -15,6 +15,10 @@ function sos ()
    ai.distress( msg[ rnd.int(1,#msg) ])
 end
 
+formation_type = "trade column"
+formation_tightness = 50
+formation_sticky = 5
+
 
 mem.shield_run = 100
 mem.armour_run = 100

@@ -91,7 +91,8 @@ AI_Profile* ai_getProfile( char* name );
  */
 int ai_load (void);
 void ai_exit (void);
-
+lua_State *ai_runStart( Pilot *pilot, const char *func );
+int ai_runFunc( Pilot *pilot, const char *func, int nargs );
 
 /*
  * Init, destruction.
@@ -114,6 +115,7 @@ void ai_refuel( Pilot* refueler, unsigned int target );
 void ai_getDistress( Pilot *p, const Pilot *distressed, const Pilot *attacker );
 void ai_think( Pilot* pilot, const double dt );
 void ai_setPilot( Pilot *p );
+Pilot* ai_getFromLua( lua_State *L );
 
 
 #endif /* AI_H */

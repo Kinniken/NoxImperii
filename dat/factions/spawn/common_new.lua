@@ -1,22 +1,18 @@
-include('dat/scripts/general_helper.lua')
+include "general_helper.lua"
+include "fleethelper.lua"
+include "fleet_form.lua"
+
+local MAX_DELAY = 60
+local DELAY = 2000
 
 fleet_table = {}
 
 local fleet_prototype = {
-	getFleets=function(self)
-		local fleets={}
-
-		for _,v in ipairs(fleetNames) do
-			fleets[#fleets+1] = {{fleet=v}}
-		end
-
-		return fleets
-	end,
-	weightValidity=function(obj)
-		if (obj.fleet.min_presence and presences.max > obj.fleet.min_presence) then
+	weightValiditySelf=function(self,presences)
+		if (self.min_presence and presences.max < self.min_presence) then
 			return false
 		end
-		if (obj.fleet.max_presence and presences.max > obj.fleet.max_presence) then
+		if (self.max_presence and presences.max > self.max_presence) then
 			return false
 		end
 		return true
@@ -25,10 +21,15 @@ local fleet_prototype = {
 
 fleet_prototype.__index = fleet_prototype
 
-function new_fleet(fleetNames,weight,min_presence,max_presence)
+function new_fleet(fleetNames,weight,max_presence,min_presence)
   local o={}
   setmetatable(o, fleet_prototype)
-  o.fleetNames=fleetNames
+
+  if (type(fleetNames) == "string") then
+    o.fleetNames={fleetNames}
+  else
+    o.fleetNames=fleetNames
+  end  
   o.weight=weight
   o.min_presence=min_presence
   o.max_presence=max_presence
@@ -36,8 +37,13 @@ function new_fleet(fleetNames,weight,min_presence,max_presence)
 end
 
 
-function chooseSpawn(used, max)
-	local fleet = gh.pickConditionalWeightedObject(fleet_table,{used=used,max=max})
+function chooseSpawn(used, max_presence)
+	local fleet = gh.pickConditionalWeightedObject(fleet_table,{used=used,max=max_presence})
+
+	if fleet == nil then
+		print("No suitable fleet! Max presence: "..max_presence)
+		return nil
+	end
 
 	return fleet
 end
@@ -45,50 +51,104 @@ end
 
 -- @brief Creation hook.
 -- return is just delay before first spawn
-function create ( max )
-    return math.random(0,10000/max)
+function create ( max_presence )
+    return math.random(0,math.min(MAX_DELAY,DELAY/max_presence))
 end
 
 
 -- @brief Spawning hook
 -- presence: presence used by pilots of that faction currently
--- max: maximum presence allowed
+-- max_presence: maximum presence allowed
 -- return:
 --  - delay before next spawn (calculated from the next fleet size)
 --  - table of pilots as a series of { pilot = pilot, presence = presence }
 
-function spawn ( used, max )
+function spawn ( used, max_presence, cur_faction )
 
-  	-- Over limit
-    if used > max then
-       return 5--retry in 5 ticks
+	-- Over limit
+  if used > max_presence then
+     return 5--retry in 5 seconds
+  end
+
+  local fleet=chooseSpawn(used,max_presence)
+
+  if (fleet == nil) then
+  	return 10000--retry in a long time, probably won't work ever
+  end
+
+  origin = spawn_findOrigin(cur_faction)
+
+  if not origin then
+    warn("Could find no valid origin for faction "..cur_faction:name().." in system "..system.cur():name())
+    return 10000
+  end
+
+  local ps={}
+
+  for _,f in ipairs(fleet.fleetNames) do
+    local addedPilots=pilot.add( f, nil, origin )
+
+    for _,p in ipairs(addedPilots) do
+      ps[#ps+1] = p
+    end
+  end
+
+  local pilots={}
+
+	for i,p in ipairs(ps) do
+
+    if #ps > 1 then
+      if i == 1 then
+        p:memory("is_fleet_leader",true)
+      else
+        --currently not used due to presumed memoryCheck bug; instead we use setBoss
+        --p:memory("fleet_leader",ps[1]:id())
+
+        p:setBoss(ps[1])
+      end
     end
 
-    local fleet=chooseSpawn(used,max)
+		local presence
 
-    if (fleets == nil) then
-    	return 10000--retry in a long time, probably won't work ever
+  	if (fleet.presence == nil) then
+  		--by default, calculated from ship mass
+  		presence = math.ceil(p:stats().mass/20)
+  	else
+  		--split between pilots if more than one ship
+  		presence = fleet.presence / #ps
+  	end
+
+  	pilots[#pilots+1] = {pilot=p, presence=presence}
+  end
+
+  --atFleet = Forma:new(ps, "cross", 3000)
+
+  return math.random(0,math.min(MAX_DELAY,DELAY/max_presence)), pilots
+end
+
+function spawn_findOrigin(cur_faction)
+
+  local dest = {}
+
+  for _,v in ipairs(system.cur():jumps()) do
+    if v:dest():presence(cur_faction) then
+      dest[#dest+1]={dest=v:dest(),weight=v:dest():presence(cur_faction)}
     end
+  end
 
-    local pilots={}
-
-    for _,v in ipairs(fleets) do
-    	local ps=pilot.add( v.fleet )
-
-    	for _,p in ipairs(ps) do
-    		local presence
-
-	    	if (v.presence == nil) then
-	    		--by default, calculated from ship mass
-	    		presence = math.ceil(p:ship():mass()/100)
-	    	else
-	    		--split between pilots if more than one ship
-	    		presence = v.presence / #ps
-	    	end
-
-	    	pilots[#pilots+1] = {pilot=p, presence=presence}
-	    end
+  for _,v in ipairs(system.cur():planets()) do
+    if v:services()["inhabited"] and (v:faction() == nil or not v:faction():areEnemies(cur_faction)) then
+      if v:presence(cur_faction) then
+        dest[#dest+1]={dest=v,weight=10+v:presence(cur_faction)}
+      else
+        dest[#dest+1]={dest=v,weight=10}
+      end
     end
+  end
 
-    return math.random(0,10000/max), pilots
+  local choice=gh.pickWeightedObject(dest)
+
+  if choice then
+    return choice.dest
+  end
 end

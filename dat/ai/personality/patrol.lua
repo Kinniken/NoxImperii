@@ -1,5 +1,35 @@
+include "dat/ai/include/formation_ai.lua"
+
 -- Default task to run when idle
 function idle ()
+
+  -- if not mem.boss then -- Pilot nover had a boss
+  --     mem.boss, radius, angle = ai.getBoss(false)
+
+  --     if radius then
+  --       mem.angle = angle
+  --       mem.radius = radius
+  --     end
+  --  end
+
+  --  -- If the boss exists, follow him
+  --  if mem.boss and mem.boss:exists() then
+  --     if not mem.radius then
+  --       mem.angle = rnd.rnd( 0, 360 )
+  --       mem.radius = rnd.rnd( 150, 200 )
+  --     end
+  --     ai.pushtask("formation",mem.boss)
+  --     return
+  --   end
+
+  if mem.is_fleet_leader == true and not mem.fleet then
+      create_fleet(ai.pilot())
+  elseif mem.formation_leader_id ~= nil then
+    ai.pushtask("formation")
+    return
+  end
+
+    -- Otherwise, normal patrol behaviour
    if mem.loiter == nil then mem.loiter = 3 end
    if mem.loiter == 0 then -- Try to leave.
        local planet = ai.landplanet( mem.land_friendly )

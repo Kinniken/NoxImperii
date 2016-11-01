@@ -1206,6 +1206,9 @@ static void system_scheduler( double dt, int init )
       }
       lua_pushnumber( L, p->value ); /* f, [arg,], max */
 
+      lua_pushfaction(L, (LuaFaction)p->faction);
+      n++;
+
 #if DEBUGGING
       errf = -2-(n+1);
 #else /* DEBUGGING */

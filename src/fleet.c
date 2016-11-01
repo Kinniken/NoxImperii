@@ -101,6 +101,11 @@ unsigned int fleet_createPilot( Fleet *flt, FleetPilot *plt, double dir,
          vel,
          flags,
          systemFleet );
+
+   if (plt->formation_radius>0) {
+	   vect_pset(&pilot_get(p)->formation_position, plt->formation_radius, plt->formation_angle);
+   }
+
    return p;
 }
 
@@ -115,10 +120,10 @@ unsigned int fleet_createPilot( Fleet *flt, FleetPilot *plt, double dir,
  */
 static int fleet_parse( Fleet *temp, const xmlNodePtr parent )
 {
-   xmlNodePtr cur, node;
+   xmlNodePtr cur, node, ccur;
    FleetPilot* pilot;
    char* c;
-   int mem;
+   int mem,i;
    node = parent->xmlChildrenNode;
 
    /* Sane defaults and clean up. */
@@ -192,6 +197,18 @@ static int fleet_parse( Fleet *temp, const xmlNodePtr parent )
                   WARN("Pilot %s in Fleet %s has invalid ship", pilot->name, temp->name);
                if (c!=NULL)
                   free(c);
+
+               /* Parse body. */
+               ccur = cur->children;
+               do {
+            	   xml_onlyNodes(ccur);
+
+            	   xmlr_float(ccur,"formation_radius",pilot->formation_radius);
+            	   xmlr_float(ccur,"formation_angle",pilot->formation_angle);
+
+            	   WARN("Fleet '%s' has unknown node '%s'.", temp->name, ccur->name);
+               } while (xml_nextNode(ccur));
+
                continue;
             }
 
@@ -213,6 +230,13 @@ if (o) WARN("Fleet '%s' missing '"s"' element", temp->name)
    MELEMENT(temp->faction==-1,"faction");
    MELEMENT(temp->pilots==NULL,"pilots");
 #undef MELEMENT
+
+   for (i=0;i<temp->npilots;i++) {
+	   if (temp->pilots[i].formation_angle != 0) {
+		   /* read in degress, store in rad */
+		   temp->pilots[i].formation_angle *= M_PI/180.;
+	   }
+   }
 
    return 0;
 }

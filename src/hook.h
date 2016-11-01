@@ -58,10 +58,12 @@ void hook_exclusionEnd( double dt );
 /* add/run hooks */
 unsigned int hook_addMisn( unsigned int parent, const char *func, const char *stack );
 unsigned int hook_addEvent( unsigned int parent, const char *func, const char *stack );
+unsigned int hook_addAI( unsigned int parent, const char *func, const char *stack );
 unsigned int hook_addFunc( int (*func)(void*), void* data, const char *stack );
 void hook_rm( unsigned int id );
 void hook_rmMisnParent( unsigned int parent );
 void hook_rmEventParent( unsigned int parent );
+void hook_rmAIParent( unsigned int parent );
 int hook_hasMisnParent( unsigned int parent );
 int hook_hasEventParent( unsigned int parent );
 
@@ -105,11 +107,13 @@ void hook_cleanup (void);
 void hooks_update( double dt );
 unsigned int hook_addTimerMisn( unsigned int parent, const char *func, double ms );
 unsigned int hook_addTimerEvt( unsigned int parent, const char *func, double ms );
+unsigned int hook_addTimerAI( unsigned int parent, const char *func, double ms );
 
 /* Date hooks. */
 void hooks_updateDate( ntime_t change );
 unsigned int hook_addDateMisn( unsigned int parent, const char *func, ntime_t resolution );
 unsigned int hook_addDateEvt( unsigned int parent, const char *func, ntime_t resolution );
+unsigned int hook_addDateAI( unsigned int parent, const char *func, ntime_t resolution );
 
 
 #endif /* HOOK_H */

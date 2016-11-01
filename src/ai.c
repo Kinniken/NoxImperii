@@ -91,6 +91,7 @@
 #include "nlua_pilot.h"
 #include "nlua_planet.h"
 #include "nlua_faction.h"
+#include "nlua_hook.h"
 #include "board.h"
 #include "hook.h"
 #include "array.h"
@@ -191,6 +192,7 @@ static int aiL_haslockon( lua_State *L ); /* boolean haslockon() */
 static int aiL_accel( lua_State *L ); /* accel(number); number <= 1. */
 static int aiL_turn( lua_State *L ); /* turn(number); abs(number) <= 1. */
 static int aiL_face( lua_State *L ); /* face( number/pointer, bool) */
+static int aiL_faceSameDir( lua_State *L ); /* face in same direction as other pilot */
 static int aiL_careful_face( lua_State *L ); /* face( number/pointer, bool) */
 static int aiL_aim( lua_State *L ); /* aim(number) */
 static int aiL_iface( lua_State *L ); /* iface(number/pointer) */
@@ -205,6 +207,7 @@ static int aiL_land( lua_State *L ); /* bool land() */
 static int aiL_stop( lua_State *L ); /* stop() */
 static int aiL_relvel( lua_State *L ); /* relvel( number ) */
 static int aiL_follow_accurate( lua_State *L ); /* follow_accurate() */
+static int aiL_follow_formation( lua_State *L ); /* follow_formation() */
 
 /* Hyperspace. */
 static int aiL_nearhyptarget( lua_State *L ); /* pointer rndhyptarget() */
@@ -287,6 +290,7 @@ static const luaL_reg aiL_methods[] = {
    { "accel", aiL_accel },
    { "turn", aiL_turn },
    { "face", aiL_face },
+   { "faceSameDir", aiL_faceSameDir },
    { "careful_face", aiL_careful_face },
    { "iface", aiL_iface },
    { "dir", aiL_dir },
@@ -296,6 +300,7 @@ static const luaL_reg aiL_methods[] = {
    { "stop", aiL_stop },
    { "relvel", aiL_relvel },
    { "follow_accurate", aiL_follow_accurate },
+   { "follow_formation", aiL_follow_formation },
    /* Hyperspace. */
    { "nearhyptarget", aiL_nearhyptarget },
    { "rndhyptarget", aiL_rndhyptarget },
@@ -430,6 +435,69 @@ void ai_setPilot( Pilot *p )
 {
    cur_pilot = p;
    ai_setMemory();
+}
+
+/**
+ * @brief Sets up the AI to run ai_runFunc.
+ */
+lua_State *ai_runStart( Pilot *pilot, const char *func )
+{
+   lua_State *L;
+
+   L = pilot->ai->L;
+
+#if DEBUGGING
+   lua_pushcfunction(L, nlua_errTrace);
+#endif /* DEBUGGING */
+
+   /* Set environment. */
+   ai_setPilot(pilot);
+
+   /* Set the Lua state. */
+   lua_getglobal( L, func );
+
+   return L;
+}
+
+/**
+ * @brief Runs a pilot func set up with ai_runStart.
+ *
+ *    @param pilot Pilot that owns the function.
+ *    @param func Name of the function to call.
+ *    @return -1 on error, 0 normally.
+ */
+int ai_runFunc( Pilot *pilot, const char *func, int nargs )
+{
+   int ret, errf;
+   const char* err;
+   lua_State *L;
+
+   /* For comfort. */
+   L = pilot->ai->L;
+
+#if DEBUGGING
+   errf = -2-nargs;
+#else /* DEBUGGING */
+   errf = 0;
+#endif /* DEBUGGING */
+
+   ret = lua_pcall(L, nargs, 0, errf);
+   if (ret != 0) { /* error has occurred */
+      err = (lua_isstring(L,-1)) ? lua_tostring(L,-1) : NULL;
+      if ((err==NULL) || (strcmp(err,NLUA_DONE)!=0)) {
+         WARN("Pilot '%s' -> '%s': %s",
+               pilot->name, func, (err) ? err : "unknown error");
+         ret = -1;
+      }
+      else
+         ret = 1;
+      lua_pop(L,1);
+   }
+#if DEBUGGING
+   lua_pop(L,1);
+#endif /* DEBUGGING */
+
+   return ret;
 }
 
 
@@ -713,6 +781,9 @@ static int ai_loadProfile( const char* filename )
 
    /* Prepare API. */
    nlua_loadStandard(L,0);
+
+   /* Load hooks as well */
+   nlua_loadHook(L);
 
    /* Register C functions in Lua */
    luaL_register(L, "ai", aiL_methods);
@@ -1148,6 +1219,16 @@ Task *ai_newtask( Pilot *p, const char *func, int subtask, int pos )
    return t;
 }
 
+/**
+ * @brief Gets the pilot being run in that LUA state, if any
+ */
+Pilot* ai_getFromLua( lua_State *L )
+{
+   if (cur_pilot->ai->L == L)
+	   return cur_pilot;
+
+   return NULL;
+}
 
 /**
  * @brief Frees an AI task.
@@ -1809,7 +1890,7 @@ static int aiL_face( lua_State *L )
       NLUA_INVALID_PARAMETER(L);
 
    /* Default gain. */
-   k_diff = 10.;
+   k_diff = 10;
    k_vel  = 100.; /* overkill gain! */
 
    /* Check if must invert. */
@@ -1857,6 +1938,40 @@ static int aiL_face( lua_State *L )
    return 1;
 }
 
+/**
+ * @brief Faces the same direction as the target.
+ *
+ * @usage ai.face( a_pilot ) -- Face a pilot's direction
+ *
+ *    @luatparam Pilot target Target whose direction to face.
+ *    @luatreturn number Angle offset in degrees.
+ * @luafunc faceSameDir( target, invert, compensate )
+ */
+static int aiL_faceSameDir( lua_State *L )
+{
+   Pilot* p;
+   double k_diff, diff;
+
+   /* Get first parameter, aka what to face. */
+   if (lua_ispilot(L,1)) {
+      p = luaL_validpilot(L,1);
+      }
+   else
+      NLUA_INVALID_PARAMETER(L);
+
+   /* Default gain. */
+   k_diff = 10;
+
+   /* Compensate error and rotate. */
+   diff = angle_diff( cur_pilot->solid->dir, p->solid->dir );
+
+   /* Make pilot turn. */
+   pilot_turn = k_diff * diff;
+
+   /* Return angle in degrees away from target. */
+   lua_pushnumber(L, ABS(diff*180./M_PI));
+   return 1;
+}
 
 /**
  * @brief Gives the direction to follow in order to reach the target while
@@ -2656,6 +2771,7 @@ static int aiL_follow_accurate( lua_State *L )
    else /* method == "velocity" */
       angle2 = angle * M_PI/180 + VANGLE( target->solid->vel );
 
+   /* computing the ship's place in the formation */
    vect_cset( &point, VX(target->solid->pos) + radius * cos(angle2),
          VY(target->solid->pos) + radius * sin(angle2) );
 
@@ -2671,6 +2787,72 @@ static int aiL_follow_accurate( lua_State *L )
    lua_pushvector( L, goal );
 
    return 1;
+
+}
+
+/**
+ * @brief Computes the point to face in order to
+ *        follow an other pilot using a PD controller.
+ *
+ *    Based on follow_accurate, but when at the right spot faces in the same direction as the lead ship
+ *
+ *    @luatparam pilot target The pilot to follow
+ *    @luatparam number radius The requested distance between p and target
+ *    @luatparam number angle The requested angle between p and target
+ *    @luatparam number Kp The first controller parameter
+ *    @luatparam number Kd The second controller parameter
+ *    @luareturn The point to go to as a vector2.
+ * @luafunc follow_formation( target, radius, angle, Kp, Kd, method )
+ */
+static int aiL_follow_formation( lua_State *L )
+{
+   Vector2d point, cons, goal, pv, velDelta;
+   double Kp, Kd, radius,angle,angle2;
+   Pilot *p, *target;
+   const char *method;
+
+   p = cur_pilot;
+   target = luaL_validpilot(L,1);
+   radius = luaL_checklong(L,2);
+   angle = luaL_checklong(L,3);
+   Kp = luaL_checklong(L,4);
+   Kd = luaL_checklong(L,5);
+   
+   if (lua_gettop(L) > 6)
+      method = luaL_checkstring(L,6);
+   else
+      method = "velocity";
+
+   if (strcmp( method, "absolute" ) == 0)
+      angle2 = angle * M_PI/180;
+   else if (strcmp( method, "keepangle" ) == 0){
+      vect_cset( &pv, p->solid->pos.x - target->solid->pos.x,
+            p->solid->pos.y - target->solid->pos.y );
+      angle2 = VANGLE(pv);
+      }
+   else /* method == "velocity" */
+      angle2 = angle * M_PI/180 + VANGLE( target->solid->vel );
+
+   /* computing the ship's place in the formation */
+   vect_cset( &point, VX(target->solid->pos) + radius * cos(angle2),
+         VY(target->solid->pos) + radius * sin(angle2) );
+
+   /*  Compute the direction using a pd controller */
+   vect_cset( &cons, (point.x - p->solid->pos.x) * Kp +
+		   (target->solid->vel.x - p->solid->vel.x) *Kd,
+		   (point.y - p->solid->pos.y) * Kp +
+		   (target->solid->vel.y - p->solid->vel.y) *Kd );
+
+   vect_cset( &goal, cons.x + p->solid->pos.x, cons.y + p->solid->pos.y);
+
+   vect_cset( &velDelta, target->solid->vel.x - p->solid->vel.x, target->solid->vel.y - p->solid->vel.y);
+
+   /* Push info */
+   lua_pushvector( L, goal );
+   lua_pushvector( L, point );
+   lua_pushvector( L, velDelta );
+
+   return 3;
 
 }
 
@@ -3251,21 +3433,45 @@ static int aiL_distress( lua_State *L )
 /**
  * @brief Picks a pilot that will command the current pilot.
  *
+ *	  @luatparam boolean|nil if true, will attempt to generate a new boss if none is set
  *    @luatreturn Pilot|nil
- *    @luafunc getBoss()
+ *    @luatreturn number|nil radius of position in formation, nil if not set
+ *    @luatreturn number|nil angle of position in formation, in degrees, nil if not set
+ *    @luafunc getBoss(generate)
  */
 static int aiL_getBoss( lua_State *L )
 {
-   unsigned int id;
+   int generate;
 
-   id = pilot_getBoss( cur_pilot );
+   /* Get generate. */
+   if (lua_gettop(L) > 0)
+	   generate = lua_toboolean(L, 1);
+   else
+	   generate = 0;
 
-   if (id==0) /* No boss found */
+   /* if there is a boss set, check whether it still exists */
+   if (cur_pilot->boss > 0 && pilot_get(cur_pilot->boss) == NULL) {
+	   cur_pilot->boss = 0;
+   }
+
+   /* if there is no boss but we are allowed to pick a new one, attempt it */
+   if (cur_pilot->boss == 0 && generate == 1) {
+	   cur_pilot->boss = pilot_getNewBoss( cur_pilot );
+   }
+
+   if (cur_pilot->boss==0) /* No boss found */
       return 0;
 
-   lua_pushpilot(L, id);
+   lua_pushpilot(L, cur_pilot->boss);
 
-   return 1;
+   if (cur_pilot->formation_position.mod > 0) {
+	   lua_pushnumber(L, cur_pilot->formation_position.mod);
+	   lua_pushnumber(L, cur_pilot->formation_position.angle*180./M_PI);
+
+	   return 3;
+   } else {
+	   return 1;
+   }
 }
 
 /**

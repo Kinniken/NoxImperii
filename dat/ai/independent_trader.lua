@@ -1,5 +1,5 @@
 include("dat/ai/tpl/generic.lua")
-include("dat/ai/personality/civilian.lua")
+include("dat/ai/personality/trader.lua")
 
 
 mem.shield_run = 100
@@ -8,6 +8,9 @@ mem.defensive  = false
 mem.enemyclose = 500
 mem.distressmsgfunc = sos
 
+formation_type = "trade column"
+formation_tightness = 100
+formation_sticky = 1
 
 -- Sends a distress signal which causes faction loss
 function sos ()
@@ -27,8 +30,18 @@ end
 
 function create ()
 
-   -- Credits.
-   --ai.setcredits( rnd.int(ai.pilot():ship():price()/500, ai.pilot():ship():price()/200) )
+   p = player.pilot()
+
+   if p:exists() then
+      r = rnd.rnd(1,2)
+      if r == 1 then
+         local tradeChatter = getTradeDealChatter(system.cur(),ai.pilot())
+
+         if tradeChatter then
+           ai.pilot():comm(tradeChatter)
+         end
+      end
+   end
 
    -- No bribe
    local bribe_msg = {

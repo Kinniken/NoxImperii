@@ -64,8 +64,11 @@ static int pilotL_getPilots( lua_State *L );
 static int pilotL_eq( lua_State *L );
 static int pilotL_name( lua_State *L );
 static int pilotL_id( lua_State *L );
+static int pilotL_byId( lua_State *L );
 static int pilotL_exists( lua_State *L );
 static int pilotL_target( lua_State *L );
+static int pilotL_boss( lua_State *L );
+static int pilotL_setBoss( lua_State *L );
 static int pilotL_inrange( lua_State *L );
 static int pilotL_nav( lua_State *L );
 static int pilotL_weapset( lua_State *L );
@@ -114,6 +117,8 @@ static int pilotL_setEnergy( lua_State *L );
 static int pilotL_setNoboard( lua_State *L );
 static int pilotL_setNodisable( lua_State *L );
 static int pilotL_setSpeedLimit( lua_State *L);
+static int pilotL_matchVelocity( lua_State *L );
+static int pilotL_faceSameDir( lua_State *L );
 static int pilotL_setCredits(lua_State* L);
 static int pilotL_getHealth( lua_State *L );
 static int pilotL_getEnergy( lua_State *L );
@@ -150,8 +155,11 @@ static const luaL_reg pilotL_methods[] = {
    /* Info. */
    { "name", pilotL_name },
    { "id", pilotL_id },
+   { "byId", pilotL_byId },
    { "exists", pilotL_exists },
    { "target", pilotL_target },
+   { "boss", pilotL_boss },
+   { "setBoss", pilotL_setBoss },
    { "inrange", pilotL_inrange },
    { "nav", pilotL_nav },
    { "weapset", pilotL_weapset },
@@ -185,6 +193,8 @@ static const luaL_reg pilotL_methods[] = {
    { "setNoboard", pilotL_setNoboard },
    { "setNodisable", pilotL_setNodisable },
    { "setSpeedLimit", pilotL_setSpeedLimit },
+   { "matchVelocity", pilotL_matchVelocity },
+   { "faceSameDir", pilotL_faceSameDir },
    { "setCredits", pilotL_setCredits },
    { "setPos", pilotL_setPosition },
    { "setVel", pilotL_setVelocity },
@@ -247,6 +257,8 @@ static const luaL_reg pilotL_cond_methods[] = {
    { "id", pilotL_id },
    { "exists", pilotL_exists },
    { "target", pilotL_target },
+   { "boss", pilotL_boss },
+   { "setBoss", pilotL_setBoss },
    { "inrange", pilotL_inrange },
    { "nav", pilotL_nav },
    { "weapset", pilotL_weapset },
@@ -620,7 +632,6 @@ static int pilotL_addFleetFrom( lua_State *L, int from_ship )
          if (!first)
             vect_cadd(&vp, RNG(75,150) * (RNG(0,1) ? 1 : -1),
                   RNG(75,150) * (RNG(0,1) ? 1 : -1));
-         first = 0;
 
          /* Create the pilot. */
          p = fleet_createPilot( flt, plt, a, &vp, &vv, fltai, flags, -1 );
@@ -629,6 +640,8 @@ static int pilotL_addFleetFrom( lua_State *L, int from_ship )
          lua_pushnumber(L,i+1); /* index, starts with 1 */
          lua_pushpilot(L,p); /* value = LuaPilot */
          lua_rawset(L,-3); /* store the value in the table */
+
+         first = 0;
       }
    }
    return 1;
@@ -930,6 +943,38 @@ static int pilotL_id( lua_State *L )
 }
 
 /**
+ * @brief Gets the ID of the pilot.
+ *
+ * @usage p = pilot.byId(12)
+ *
+ *    @luaparam id number Id of the pilot to get
+ *    @luareturn Pilot|nil The pilot if found, nil otheriwse
+ * @luafunc id( p )
+ */
+static int pilotL_byId( lua_State *L )
+{
+   unsigned int id;
+   Pilot *p;
+
+   /* Parse parameters. */
+   id = luaL_checkint(L,1);
+
+   if (id < 1) {
+	   NLUA_INVALID_PARAMETER(L);
+   }
+
+   p = pilot_get(id);
+
+   if (p == NULL) {
+	   NLUA_INVALID_PARAMETER(L);
+   }
+
+   /* Get pilot. */
+   lua_pushpilot(L, p->id);
+   return 1;
+}
+
+/**
  * @brief Checks to see if pilot is still in the system and alive.
  *
  * Pilots cease to exist if they die or jump out.
@@ -986,6 +1031,49 @@ static int pilotL_target( lua_State *L )
    /* Push target. */
    lua_pushpilot(L, p->target);
    return 1;
+}
+
+
+/**
+ * @brief Gets the pilot boss of the pilot.
+ *
+ * @usage target = p:boss()
+ *
+ *    @luatparam Pilot p Pilot to get boss of.
+ *    @luatreturn Pilot|nil nil if no boss is selected, otherwise the boss of the pilot.
+ * @luafunc boss( p )
+ */
+static int pilotL_boss( lua_State *L )
+{
+   Pilot *p;
+   p = luaL_validpilot(L,1);
+   if (p->boss == 0)
+      return 0;
+   /* Must be valid. */
+   if (pilot_get(p->boss) == NULL)
+      return 0;
+   /* Push target. */
+   lua_pushpilot(L, p->boss);
+   return 1;
+}
+
+/**
+ * @brief Sets the pilot boss of the pilot.
+ *
+ * @usage p:boss(target)
+ *
+ *    @luatparam Pilot p Pilot to set boss of.
+ *    @luatparam Pilot boss The boss.
+ * @luafunc boss( p )
+ */
+static int pilotL_setBoss( lua_State *L )
+{
+   Pilot *p,*boss;
+   p = luaL_validpilot(L,1);
+   boss = luaL_validpilot(L,2);
+
+   p->boss = boss->id;
+   return 0;
 }
 
 
@@ -2963,6 +3051,101 @@ static int pilotL_setSpeedLimit(lua_State* L)
      pilot_rmFlag( p, PILOT_HASSPEEDLIMIT );
       
    pilot_updateMass(p);
+   return 0;
+}
+
+/* @brief slowly matches the target's velocity (cheats to do)
+ *
+ * @usage p:matchVelocity( target, 5 ) -- matches target's velocity at up to 5 px/s/s
+ *    @luatparam pilot p Pilot whose velocity to adjust
+ *    @luatparam pilot target Pilot whose velocity we are adjusting too
+ *    @luatparam number velocity Max adjustement
+ *
+ * @luafunc matchVelocity( p, target, velocity )
+ * */
+static int pilotL_matchVelocity( lua_State *L )
+{
+   Pilot *p,*target;
+   double tvx,tvy,dx,dy;
+   double adjustement;
+
+   if (lua_ispilot(L,1)) {
+	   p = luaL_validpilot(L,1);
+   }
+   else
+	   NLUA_INVALID_PARAMETER(L);
+
+   if (lua_ispilot(L,2)) {
+	   target = luaL_validpilot(L,2);
+   }
+   else
+	   NLUA_INVALID_PARAMETER(L);
+
+   adjustement = lua_tonumber(L, 3);
+
+   tvx = target->solid->vel.x;
+   tvy = target->solid->vel.y;
+
+   if (p->solid->vel.x > tvx+adjustement) {
+	   dx=-adjustement;
+   } else if (p->solid->vel.x < tvx-adjustement) {
+	   dx=adjustement;
+   } else {
+	   dx=tvx - p->solid->vel.x;
+   }
+
+   if (p->solid->vel.y > tvy+adjustement) {
+	   dy=-adjustement;
+   } else if (p->solid->vel.y < tvy-adjustement) {
+	   dy=adjustement;
+   } else {
+	   dy=tvy - p->solid->vel.y;
+   }
+
+   vect_cadd(&p->solid->vel, dx, dy);
+
+   return 0;
+}
+
+/**
+ * @brief Faces the same direction as the target.
+ *
+ * @usage p:face( a_pilot ) -- Face a pilot's direction
+ *
+ *	  @luatparam Pilot p Pilot whose direction to change.
+ *    @luatparam Pilot target Target whose direction to face.
+ *    @luatreturn number Angle offset in degrees.
+ * @luafunc faceSameDir( target, invert, compensate )
+ */
+static int pilotL_faceSameDir( lua_State *L )
+{
+   Pilot *p, *target;
+   Task *t;
+   Vector2d *vec;
+
+   if (lua_ispilot(L,1)) {
+	   p = luaL_validpilot(L,1);
+   }
+   else
+	   NLUA_INVALID_PARAMETER(L);
+
+   if (lua_ispilot(L,2)) {
+	   target = luaL_validpilot(L,2);
+   }
+   else
+	   NLUA_INVALID_PARAMETER(L);
+
+   vec = malloc(sizeof(Vector2d));
+
+   vect_pset(vec, 1000, target->solid->dir);
+
+   vect_cadd(vec, p->solid->pos.x, p->solid->pos.y);
+
+   /* Set the task. */
+   t     = pilotL_newtask( L, p, "__face" );
+   t->dtype = TASKDATA_VEC2;
+   t->dat.vec = *vec;
+
    return 0;
 }
 

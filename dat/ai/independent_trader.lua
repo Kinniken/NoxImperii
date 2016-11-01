@@ -1,6 +1,6 @@
 include("dat/ai/tpl/generic.lua")
 include("dat/ai/personality/trader.lua")
-
+include("dat/ai/include/civilian_chatter.lua")
 
 mem.shield_run = 100
 mem.armour_run = 100

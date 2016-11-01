@@ -102,9 +102,9 @@ function spawn ( used, max_presence, cur_faction )
         p:memory("is_fleet_leader",true)
       else
         --currently not used due to presumed memoryCheck bug; instead we use setBoss
-        --p:memory("fleet_leader",ps[1]:id())
+        p:memory("fleet_leader_id",ps[1]:id())
 
-        p:setBoss(ps[1])
+        --p:setBoss(ps[1])
       end
     end
 

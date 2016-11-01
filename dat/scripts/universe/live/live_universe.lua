@@ -545,7 +545,7 @@ local function generateExtraPresences(planet,sectorStability)
 
 		if (factionName==G.EMPIRE) then
 			planet.c:setFactionExtraPresence(G.IMPERIAL_TRADERS,amount,range)
-			planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount/2,range)
+			planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount/4,range)
 		else
 			planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount,range)
 		end
@@ -608,7 +608,7 @@ local function generateExtraPresences(planet,sectorStability)
 			amount=5
 		end
 
-		planet.c:setFactionExtraPresence(G.BETELGIAN_TRADERS,amount,range)
+		planet.c:setFactionExtraPresence(G.BETELGIAN_TRADERS,amount*3,range)
 
 		if (settlement.stability<0.3) then
 			local amount=40*(1-settlement.stability*3)/sectorStability

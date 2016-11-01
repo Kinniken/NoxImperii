@@ -1350,7 +1350,6 @@ static void faction_parseSocial( xmlNodePtr parent )
 						base->forbiddens = realloc(base->forbiddens, sizeof(int)*mem);
 					}
 					base->forbiddens[base->nforbiddens-1] = mod;
-					WARN("Faction %s forbids entry to faction %s",base->name,xml_get(cur));
 				}
 			} while (xml_nextNode(cur));
 			if (base->nforbiddens > 0)

@@ -335,7 +335,7 @@ void planet_updateQuantities(Planet* p);
 void planet_refreshPlanetPriceFactors(Planet* p);
 void planet_refreshAllPlanetAdjustedPrices(void);
 void planet_addOrUpdateExtraPresence(Planet *p,int factionId,double amount,int range);
-
+double planet_getFactionPresence(Planet *p,int factionId);
 
 /*
  * jump stuff

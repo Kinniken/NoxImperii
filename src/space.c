@@ -366,6 +366,22 @@ void planet_addOrUpdateExtraPresence(Planet *p,int factionId,double amount,int r
 	//space_debugCheckDataIntegrity();
 }
 
+double planet_getFactionPresence(Planet *p,int factionId) {
+	int i;
+
+	if (p->faction == factionId) {
+		return p->presenceAmount;
+	}
+
+	for (i=0;i<p->nextrapresences;i++) {
+		if (p->extraPresenceFactions[i]==factionId) {
+			return p->extraPresenceAmounts[i];
+		}
+	}
+
+	return 0;
+}
+
 
 /**
  * @brief Changes the planets faction.

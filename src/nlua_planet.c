@@ -78,6 +78,7 @@ static int planetL_setDescSettlements( lua_State *L );
 static int planetL_descHistory( lua_State *L );
 static int planetL_setDescHistory( lua_State *L );
 static int planetL_setFactionPresence( lua_State *L );
+static int planetL_getFactionPresence( lua_State *L );
 static int planetL_addOrUpdateTradeData( lua_State *L );
 static int planetL_setTradeBuySellRation( lua_State *L );
 static int planetL_setFactionExtraPresence( lua_State *L );
@@ -117,6 +118,7 @@ static const luaL_reg planet_methods[] = {
    { "addTechGroup", planetL_addTechGroup },
    { "removeTechGroup", planetL_removeTechGroup },
    { "setFactionPresence", planetL_setFactionPresence },
+   { "presence", planetL_getFactionPresence },
    { "desc", planetL_desc },
    { "setDesc", planetL_setDesc },
    { "shortInfo", planetL_shortInfo },
@@ -164,6 +166,7 @@ static const luaL_reg planet_cond_methods[] = {
    { "addTechGroup", planetL_addTechGroup },
    { "removeTechGroup", planetL_removeTechGroup },
    { "setFactionPresence", planetL_setFactionPresence },
+   { "presence", planetL_getFactionPresence },
    { "shortInfo", planetL_shortInfo },
    { "setShortInfo", planetL_setShortInfo },
    { "desc", planetL_desc },
@@ -1425,6 +1428,41 @@ static int planetL_setFactionPresence( lua_State *L )
    space_reconstructPresences();
 
    return 0;
+}
+
+/**
+ * @brief Get a planet's presence for provided faction
+ *
+ * @usage p:presence(faction)
+ *    @luaparam p Planet to set faction & presence for
+ *    @luaparam faction faction|nil faction to test (if nil, planet's faction)
+ *    @return number|nil the presence, or nil if none
+ * @luafunc presence = presence(faction)
+ */
+static int planetL_getFactionPresence( lua_State *L )
+{
+	Planet *p;
+	int faction;
+	int ret;
+
+	p = luaL_validplanet(L,1);
+
+	if ((lua_gettop(L) < 2) || lua_isnil(L,2))
+		faction = p->faction;
+	else
+		faction = luaL_validfaction(L,2);
+
+	if (faction < 1)
+		return 0;
+
+	ret=planet_getFactionPresence(p,faction);
+
+	if (ret>0) {
+		lua_pushnumber(L,ret);
+		return 1;
+	}
+
+	return 0;
 }
 
 /**

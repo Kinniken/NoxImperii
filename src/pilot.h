@@ -435,8 +435,6 @@ typedef struct Pilot_ {
    double tcontrol;  /**< timer for control tick */
    double timer[MAX_AI_TIMERS]; /**< timers for AI */
    Task* task;       /**< current action */
-   unsigned int boss; /**< AI pilot boss (head ship). */
-   Vector2d formation_position; /* position in formation, if preset */
 
    /* Misc */
    double comm_msgTimer; /**< Message timer for the comm. */

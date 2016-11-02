@@ -247,7 +247,6 @@ static int aiL_timeup( lua_State *L ); /* boolean timeup( number ) */
 
 /* messages */
 static int aiL_distress( lua_State *L ); /* distress( string [, bool] ) */
-static int aiL_getBoss( lua_State *L ); /* number getBoss() */
 
 /* loot */
 static int aiL_credits( lua_State *L ); /* credits( number ) */
@@ -336,7 +335,6 @@ static const luaL_reg aiL_methods[] = {
    { "timeup", aiL_timeup },
    /* messages */
    { "distress", aiL_distress },
-   { "getBoss", aiL_getBoss },
    /* loot */
    { "setcredits", aiL_credits },
    /* misc */
@@ -3427,51 +3425,6 @@ static int aiL_distress( lua_State *L )
    ai_setFlag(AI_DISTRESS);
 
    return 0;
-}
-
-
-/**
- * @brief Picks a pilot that will command the current pilot.
- *
- *	  @luatparam boolean|nil if true, will attempt to generate a new boss if none is set
- *    @luatreturn Pilot|nil
- *    @luatreturn number|nil radius of position in formation, nil if not set
- *    @luatreturn number|nil angle of position in formation, in degrees, nil if not set
- *    @luafunc getBoss(generate)
- */
-static int aiL_getBoss( lua_State *L )
-{
-   int generate;
-
-   /* Get generate. */
-   if (lua_gettop(L) > 0)
-	   generate = lua_toboolean(L, 1);
-   else
-	   generate = 0;
-
-   /* if there is a boss set, check whether it still exists */
-   if (cur_pilot->boss > 0 && pilot_get(cur_pilot->boss) == NULL) {
-	   cur_pilot->boss = 0;
-   }
-
-   /* if there is no boss but we are allowed to pick a new one, attempt it */
-   if (cur_pilot->boss == 0 && generate == 1) {
-	   cur_pilot->boss = pilot_getNewBoss( cur_pilot );
-   }
-
-   if (cur_pilot->boss==0) /* No boss found */
-      return 0;
-
-   lua_pushpilot(L, cur_pilot->boss);
-
-   if (cur_pilot->formation_position.mod > 0) {
-	   lua_pushnumber(L, cur_pilot->formation_position.mod);
-	   lua_pushnumber(L, cur_pilot->formation_position.angle*180./M_PI);
-
-	   return 3;
-   } else {
-	   return 1;
-   }
 }
 
 /**

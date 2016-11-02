@@ -67,8 +67,6 @@ static int pilotL_id( lua_State *L );
 static int pilotL_byId( lua_State *L );
 static int pilotL_exists( lua_State *L );
 static int pilotL_target( lua_State *L );
-static int pilotL_boss( lua_State *L );
-static int pilotL_setBoss( lua_State *L );
 static int pilotL_inrange( lua_State *L );
 static int pilotL_nav( lua_State *L );
 static int pilotL_weapset( lua_State *L );
@@ -158,8 +156,6 @@ static const luaL_reg pilotL_methods[] = {
    { "byId", pilotL_byId },
    { "exists", pilotL_exists },
    { "target", pilotL_target },
-   { "boss", pilotL_boss },
-   { "setBoss", pilotL_setBoss },
    { "inrange", pilotL_inrange },
    { "nav", pilotL_nav },
    { "weapset", pilotL_weapset },
@@ -257,8 +253,6 @@ static const luaL_reg pilotL_cond_methods[] = {
    { "id", pilotL_id },
    { "exists", pilotL_exists },
    { "target", pilotL_target },
-   { "boss", pilotL_boss },
-   { "setBoss", pilotL_setBoss },
    { "inrange", pilotL_inrange },
    { "nav", pilotL_nav },
    { "weapset", pilotL_weapset },
@@ -966,7 +960,7 @@ static int pilotL_byId( lua_State *L )
    p = pilot_get(id);
 
    if (p == NULL) {
-	   NLUA_INVALID_PARAMETER(L);
+	  return 0;
    }
 
    /* Get pilot. */
@@ -1031,49 +1025,6 @@ static int pilotL_target( lua_State *L )
    /* Push target. */
    lua_pushpilot(L, p->target);
    return 1;
-}
-
-
-/**
- * @brief Gets the pilot boss of the pilot.
- *
- * @usage target = p:boss()
- *
- *    @luatparam Pilot p Pilot to get boss of.
- *    @luatreturn Pilot|nil nil if no boss is selected, otherwise the boss of the pilot.
- * @luafunc boss( p )
- */
-static int pilotL_boss( lua_State *L )
-{
-   Pilot *p;
-   p = luaL_validpilot(L,1);
-   if (p->boss == 0)
-      return 0;
-   /* Must be valid. */
-   if (pilot_get(p->boss) == NULL)
-      return 0;
-   /* Push target. */
-   lua_pushpilot(L, p->boss);
-   return 1;
-}
-
-/**
- * @brief Sets the pilot boss of the pilot.
- *
- * @usage p:boss(target)
- *
- *    @luatparam Pilot p Pilot to set boss of.
- *    @luatparam Pilot boss The boss.
- * @luafunc boss( p )
- */
-static int pilotL_setBoss( lua_State *L )
-{
-   Pilot *p,*boss;
-   p = luaL_validpilot(L,1);
-   boss = luaL_validpilot(L,2);
-
-   p->boss = boss->id;
-   return 0;
 }
 
 

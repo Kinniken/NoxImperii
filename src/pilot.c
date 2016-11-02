@@ -441,10 +441,6 @@ unsigned int pilot_getNewBoss( const Pilot* p )
       if (!pilot_validTarget( p, pilot_stack[i] ))
          continue;
 
-      /* Must not have a boss. */
-      if (pilot_stack[i]->boss > 0)
-    	  continue;
-
       /* Maximum distance in 2 seconds. */
       dx = pilot_stack[i]->solid->pos.x + 2*pilot_stack[i]->solid->vel.x -
            p->solid->pos.x - 2*p->solid->vel.x;

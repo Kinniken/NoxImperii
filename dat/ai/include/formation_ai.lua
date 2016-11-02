@@ -1,17 +1,16 @@
 include "fleet_form.lua"
 include "general_helper.lua"
 
-function create_fleet(lead_ship)
+function create_fleet()
 	ships = {}
-	ships[1] = lead_ship
+	ships[1] = ai.pilot()
 
-	local faction_ships = pilot.get( { lead_ship:faction() } )
+	local faction_ships = pilot.get( { ai.pilot():faction() } )
 
 	local shipNames = ""
 
 	for _,v in ipairs(faction_ships) do
-		--if v:boss() == lead_ship and v ~= lead_ship then
-		if v:memoryCheck("fleet_leader_id") == lead_ship:id() and v ~= lead_ship then
+		if v:memoryCheck("fleet_leader_id") == ai.pilot():id() and v ~= ai.pilot() then
 			ships[#ships+1]=v
 			shipNames=shipNames.."'"..v:name().."' "
 		end
@@ -21,12 +20,18 @@ function create_fleet(lead_ship)
 		mem.fleet = false
 		warn("Couldn't locate other ships.")
 		return
-	end	
-
-	if not formation_type then
-		formation_type = column
 	end
 
+	local fleet_formation
+
+	if mem.fleet_formation then
+		fleet_formation = mem.fleet_formation
+	elseif formation_default_type then
+		fleet_formation = formation_default_type
+	else
+		fleet_formation = "column"
+	end
+	
 	if not formation_tightness then
 		formation_tightness = 50--max distance ships are allowed to drift
 	end
@@ -35,9 +40,9 @@ function create_fleet(lead_ship)
 		formation_sticky = 2--amount of cheat velocity matching; the higher, the more the formations stay accurate
 	end
 
-	warn("Creating fleet with "..#ships.." ships for "..lead_ship:name()..", formation: "..formation_type..", ships: "..shipNames)
+	warn("Creating fleet with "..#ships.." ships for "..ai.pilot():name()..", formation: "..fleet_formation..", ships: "..shipNames)
 
-	local fleet=Forma:new(ships, formation_type, 3000)
+	local fleet=Forma:new(ships, fleet_formation, 3000)
 
 	mem.fleet = fleet
 end

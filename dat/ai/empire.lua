@@ -6,7 +6,7 @@ mem.armour_run = 40
 mem.armour_return = 70
 mem.aggressive = true
 
-formation_type = "wedge"
+formation_default_type = "imperial"
 formation_tightness = 50
 formation_sticky = 5
 

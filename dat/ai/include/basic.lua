@@ -232,6 +232,10 @@ function formation ()
    local p = ai.pilot()
    local target = pilot.byId(mem.formation_leader_id)
 
+   if not target then
+      return-- lead ship must be gone, normally the formation should find a new one after a short while
+   end
+
    local goal,formation_position,velocity_delta = ai.follow_formation(target, mem.formation_static_radius,
       mem.formation_static_angle, mem.Kp, mem.Kd)
 

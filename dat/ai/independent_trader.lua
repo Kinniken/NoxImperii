@@ -8,7 +8,7 @@ mem.defensive  = false
 mem.enemyclose = 500
 mem.distressmsgfunc = sos
 
-formation_type = "trade column"
+formation_default_type = "trade column"
 formation_tightness = 100
 formation_sticky = 1
 

@@ -134,7 +134,7 @@ function Forma:reorganize()
       end
    end
 
-   if self.formation == "buffer" then
+   if self.formation == "buffer" or self.formation == "imperial" then
       self:shipCount()
    end
  
@@ -182,7 +182,7 @@ function Forma:dead(victim)
    end
 
    -- Update the ship count if the formation is "buffer".
-   if self.formation == "buffer" then
+   if self.formation == "buffer" or self.formation == "imperial" then
       self:shipCount()
    end
 end
@@ -296,6 +296,24 @@ function Forma:assignCoords()
             angle = 0 --The angle needs to be zero.
          else -- If there's more than one ship in each class...
             angle = ((count[ship_class]-1)*((math.pi/2)/(self.class_count[ship_class]-1)))-(math.pi/4) -- ..the angle rotates from -45 degrees to 45 degrees, assigning coordinates at even intervals.
+            count[ship_class] = count[ship_class] + 1 --Update the count
+         end
+         radius = radii[ship_class] --Assign the radius, defined above.
+         posit[i] = {angle = angle, radius = radius}
+      end
+
+
+   --imperial buffer formation
+   elseif self.formation == "imperial" then
+      -- Buffer logic. Consecutive arcs eminating from the fleader. Stored as polar coordinates.
+      local radii = {Scout = 800, Fighter = 650, Bomber = 600, Corvette = 500, Destroyer = 400, Cruiser = 350, Carrier = 250} -- Different radii for each class.
+      local count = {Scout = 1, Fighter = 1, Bomber = 1, Corvette = 1, Destroyer = 1, Cruiser = 1, Carrier = 1} -- Need to keep track of positions already iterated through.
+      for i, p in ipairs(self.fleet) do
+         ship_class = p:ship():class() -- For readability.
+         if self.class_count[ship_class] == 1 then -- If there's only one ship in this specific class...
+            angle = 0 --The angle needs to be zero.
+         else -- If there's more than one ship in each class...
+            angle = ((count[ship_class]-1)*((math.pi*2)/(self.class_count[ship_class]-1)))-(math.pi/2) -- 360° cover
             count[ship_class] = count[ship_class] + 1 --Update the count
          end
          radius = radii[ship_class] --Assign the radius, defined above.

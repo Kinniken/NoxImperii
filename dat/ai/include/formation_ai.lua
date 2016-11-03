@@ -1,4 +1,4 @@
-include "fleet_form.lua"
+include "dat/ai/include/fleet_form.lua"
 include "general_helper.lua"
 
 function create_fleet()

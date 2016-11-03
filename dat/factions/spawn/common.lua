@@ -1,6 +1,4 @@
 include "general_helper.lua"
-include "fleethelper.lua"
-include "fleet_form.lua"
 
 local MAX_DELAY = 60
 local DELAY = 2000
@@ -8,31 +6,28 @@ local MASS_PER_PRESENCE = 20
 
 fleet_table = {}
 
+-- return 0 if not suitable, 1 is fine, something in-between if not so good
 local function test_range(range,value)
+  local validity=1
+
   --first value is minimum required
   if range[1] and range[1]>value then
-    return false
+    return 0
   end
   --second value is minimum wanted
   if range[2] and range[2]>value then
-    --probabilistic return: the closer to the minimum the lesser the chance of saying no
-    if math.random(0,range[2])>value then
-      return false
-    end
+      validity = validity * value/range[2]
   end
   --third value is maximum wanted
   if range[3] and range[3]<value then
-    --probabilistic return: the closer to the maximum the lesser the chance of saying no
-    if math.random(range[3],range[3]*4)<value then
-      return false
-    end
+    validity = validity * range[3]/value
   end
   --fourth value is maximum required
   if range[4] and range[4]<value then
-    return false
+    return 0
   end
 
-  return true
+  return validity
 end
 
 local fleet_prototype = {
@@ -41,7 +36,8 @@ local fleet_prototype = {
     if (self.params.presence) then
       local ret=test_range(self.params.presence,values.max)
       
-      if not ret then
+      if ret == 0 then
+        --warn("Refused fleet "..self.id.." with presence of "..values.max)
         return false
       end
     end
@@ -49,18 +45,33 @@ local fleet_prototype = {
 		if (self.params.enemies) then
       local ret=test_range(self.params.enemies,values.danger)
       
-      if not ret then
+      if ret == 0 then
+        --warn("Refused fleet "..self.id.." with danger of "..values.danger)
         return false
       end
     end
 
+    --warn("Fleet "..self.id.." ok")
 		return true
-	end
+	end,
+  dynamicWeight=function(self,values)
+    local weight = self.weight
+
+    if (self.params.presence) then
+      weight = weight * test_range(self.params.presence,values.max)
+    end
+
+    if (self.params.enemies) then      
+      weight = weight * test_range(self.params.enemies,values.danger)
+    end
+
+    return weight
+  end
 }
 
 fleet_prototype.__index = fleet_prototype
 
-function new_fleet(fleetNames,weight,params)
+function declare_fleet(fleetNames,weight,params)
   local o={}
   setmetatable(o, fleet_prototype)
 
@@ -75,7 +86,8 @@ function new_fleet(fleetNames,weight,params)
   else
     o.params={}
   end
-  return o
+  fleet_table[#fleet_table+1] = o
+  o.id = #fleet_table
 end
 
 
@@ -94,7 +106,7 @@ function chooseSpawn(used, max_presence, cur_faction)
 	local fleet = gh.pickConditionalWeightedObject(fleet_table,{max=max_presence,danger=danger})
 
 	if fleet == nil then
-		print("No suitable fleet for "..cur_faction:name().."! Max presence: "..max_presence..", danger: "..danger)
+		warn("No suitable fleet for "..cur_faction:name().."! Max presence: "..max_presence..", danger: "..danger)
 		return nil
 	end
 

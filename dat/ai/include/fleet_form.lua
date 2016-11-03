@@ -146,7 +146,7 @@ function Forma:reorganize()
    end
 
    self.fleader = fleader
-   self.fleetspeed = minspeed * 0.5
+   self.fleetspeed = minspeed * 0.9
    self.incombat = false --Combat flag, used in the controlling function.
 end
 
@@ -306,17 +306,40 @@ function Forma:assignCoords()
    --imperial buffer formation
    elseif self.formation == "imperial" then
       -- Buffer logic. Consecutive arcs eminating from the fleader. Stored as polar coordinates.
-      local radii = {Scout = 800, Fighter = 650, Bomber = 600, Corvette = 500, Destroyer = 400, Cruiser = 350, Carrier = 250} -- Different radii for each class.
-      local count = {Scout = 1, Fighter = 1, Bomber = 1, Corvette = 1, Destroyer = 1, Cruiser = 1, Carrier = 1} -- Need to keep track of positions already iterated through.
+      local groups = {Scout = "Outer",Fighter = "Outer",Bomber = "Outer",Corvette = "Middle",Destroyer = "Middle",Cruiser = "Centre",Carrier = "Centre"}
+      local count = {Outer = 1, Middle = 1, Centre = 1} -- Need to keep track of positions already iterated through.
+      local group_count = {}
+      local group_radii = {}
+
+      for k,v in pairs(self.class_count) do
+         local ship_group = groups[k]
+         if not group_count[ship_group] then
+           group_count[ship_group] = self.class_count[k]
+         else
+           group_count[ship_group] = group_count[ship_group] + self.class_count[k]
+         end 
+      end
+
+      local radii = 100
+
+      for _,v in ipairs({"Centre","Middle","Outer"}) do
+         if group_count[v] then
+            group_radii[v] = radii
+            radii = radii + 100
+         end
+      end
+
       for i, p in ipairs(self.fleet) do
-         ship_class = p:ship():class() -- For readability.
-         if self.class_count[ship_class] == 1 then -- If there's only one ship in this specific class...
+         local ship_class = p:ship():class() -- For readability.
+         local ship_group = groups[ship_class]
+
+         if self.class_count[ship_group] == 1 then -- If there's only one ship in this specific class...
             angle = 0 --The angle needs to be zero.
          else -- If there's more than one ship in each class...
-            angle = ((count[ship_class]-1)*((math.pi*2)/(self.class_count[ship_class])))-(math.pi/2) -- 360° cover
-            count[ship_class] = count[ship_class] + 1 --Update the count
+            angle = ((count[ship_group]-1)*((math.pi*2)/(group_count[ship_group])))-(math.pi/2) -- 360° cover
+            count[ship_group] = count[ship_group] + 1 --Update the count
          end
-         radius = radii[ship_class] --Assign the radius, defined above.
+         radius = group_radii[ship_group] --Assign the radius, defined above.
          posit[i] = {angle = angle, radius = radius}
       end
 

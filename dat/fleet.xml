@@ -187,53 +187,11 @@
       <pilot name_generator="ardar_civilian" ship="Fish Bone"/>
     </pilots>
   </fleet>
-  <fleet name="Ardar Traders Fish Bone x3">
-    <ai>roidhunate_trader</ai>
-    <faction>Ardar Traders</faction>
-    <pilots>
-      <pilot name_generator="ardar_civilian" ship="Fish Bone"/>
-      <pilot name_generator="ardar_civilian" ship="Fish Bone"/>
-      <pilot name_generator="ardar_civilian" ship="Fish Bone"/>
-    </pilots>
-  </fleet>
   <fleet name="Ardar Traders Meryoch">
     <ai>roidhunate_trader</ai>
     <faction>Ardar Traders</faction>
     <pilots>
       <pilot name_generator="ardar_civilian" ship="Meryoch"/>
-    </pilots>
-  </fleet>
-  <fleet name="Ardar Traders Meryoch x3">
-    <ai>roidhunate_trader</ai>
-    <faction>Ardar Traders</faction>
-    <pilots>
-      <pilot name_generator="ardar_civilian" ship="Meryoch"/>
-      <pilot name_generator="ardar_civilian" ship="Meryoch"/>
-      <pilot name_generator="ardar_civilian" ship="Meryoch"/>
-    </pilots>
-  </fleet>
-  <fleet name="Ardar Traders Meryoch x6">
-    <ai>roidhunate_trader</ai>
-    <faction>Ardar Traders</faction>
-    <pilots>
-      <pilot name_generator="ardar_civilian" ship="Meryoch"/>
-      <pilot name_generator="ardar_civilian" ship="Meryoch"/>
-      <pilot name_generator="ardar_civilian" ship="Meryoch"/>
-      <pilot name_generator="ardar_civilian" ship="Meryoch"/>
-      <pilot name_generator="ardar_civilian" ship="Meryoch"/>
-      <pilot name_generator="ardar_civilian" ship="Meryoch"/>
-    </pilots>
-  </fleet>
-  <fleet name="Ardar Traders Meryoch x3 Fish Bone x3">
-    <ai>roidhunate_trader</ai>
-    <faction>Ardar Traders</faction>
-    <pilots>
-      <pilot name_generator="ardar_civilian" ship="Meryoch"/>
-      <pilot name_generator="ardar_civilian" ship="Meryoch"/>
-      <pilot name_generator="ardar_civilian" ship="Meryoch"/>
-      <pilot name_generator="ardar_civilian" ship="Fish Bone"/>
-      <pilot name_generator="ardar_civilian" ship="Fish Bone"/>
-      <pilot name_generator="ardar_civilian" ship="Fish Bone"/>
     </pilots>
   </fleet>
   <fleet name="Ardar Traders Rioloch">
@@ -247,14 +205,6 @@
     <ai>roidhunate_trader</ai>
     <faction>Ardar Traders</faction>
     <pilots>
-      <pilot name_generator="ardar_civilian" ship="Geldoch"/>
-    </pilots>
-  </fleet>
-  <fleet name="Ardar Traders Geldoch x2">
-    <ai>roidhunate_trader</ai>
-    <faction>Ardar Traders</faction>
-    <pilots>
-      <pilot name_generator="ardar_civilian" ship="Geldoch"/>
       <pilot name_generator="ardar_civilian" ship="Geldoch"/>
     </pilots>
   </fleet>
@@ -273,40 +223,10 @@
       <pilot name_generator="betelgeuse_civilian" ship="Carvela"/>
     </pilots>
   </fleet>
-  <fleet name="Betelgian Traders Carvela - x3">
-    <ai>betelgeuse_trader</ai>
-    <faction>Betelgian Traders</faction>
-    <pilots>
-      <pilot name_generator="betelgeuse_civilian" ship="Carvela"/>
-      <pilot name_generator="betelgeuse_civilian" ship="Carvela"/>
-      <pilot name_generator="betelgeuse_civilian" ship="Carvela"/>
-    </pilots>
-  </fleet>
   <fleet name="Betelgian Traders Veniera">
     <ai>betelgeuse_trader</ai>
     <faction>Betelgian Traders</faction>
     <pilots>
-      <pilot name_generator="betelgeuse_civilian" ship="Veniera"/>
-    </pilots>
-  </fleet>
-  <fleet name="Betelgian Traders Veniera - x3">
-    <ai>betelgeuse_trader</ai>
-    <faction>Betelgian Traders</faction>
-    <pilots>
-      <pilot name_generator="betelgeuse_civilian" ship="Veniera"/>
-      <pilot name_generator="betelgeuse_civilian" ship="Veniera"/>
-      <pilot name_generator="betelgeuse_civilian" ship="Veniera"/>
-    </pilots>
-  </fleet>
-  <fleet name="Betelgian Traders Veniera - x6">
-    <ai>betelgeuse_trader</ai>
-    <faction>Betelgian Traders</faction>
-    <pilots>
-      <pilot name_generator="betelgeuse_civilian" ship="Veniera"/>
-      <pilot name_generator="betelgeuse_civilian" ship="Veniera"/>
-      <pilot name_generator="betelgeuse_civilian" ship="Veniera"/>
-      <pilot name_generator="betelgeuse_civilian" ship="Veniera"/>
-      <pilot name_generator="betelgeuse_civilian" ship="Veniera"/>
       <pilot name_generator="betelgeuse_civilian" ship="Veniera"/>
     </pilots>
   </fleet>
@@ -317,15 +237,6 @@
       <pilot name_generator="betelgeuse_civilian" ship="Impresa"/>
     </pilots>
   </fleet>
-  <fleet name="Betelgian Traders Impresa - escort">
-    <ai>betelgeuse_trader</ai>
-    <faction>Betelgian Traders</faction>
-    <pilots>
-      <pilot name_generator="betelgeuse_civilian" ship="Impresa"/>
-      <pilot name_generator="betelgeuse_civilian" ship="Carvela"/>
-      <pilot name_generator="betelgeuse_civilian" ship="Carvela"/>
-    </pilots>
-  </fleet>
   <!-- Pirates -->
   <fleet name="Pirate Shark">
     <ai>pirate</ai>
@@ -334,27 +245,10 @@
       <pilot name_generator="pirate" ship="Pirate Shark"/>
     </pilots>
   </fleet>
-  <fleet name="Pirate Shark x3">
-    <ai>pirate</ai>
-    <faction>Pirates</faction>
-    <pilots>
-      <pilot name_generator="pirate" ship="Pirate Shark"/>
-      <pilot name_generator="pirate" ship="Pirate Shark"/>
-      <pilot name_generator="pirate" ship="Pirate Shark"/>
-    </pilots>
-  </fleet>
   <fleet name="Pirate Admonisher">
     <ai>pirate</ai>
     <faction>Pirates</faction>
     <pilots>
-      <pilot name_generator="pirate" ship="Pirate Admonisher"/>
-    </pilots>
-  </fleet>
-  <fleet name="Pirate Admonisher x2">
-    <ai>pirate</ai>
-    <faction>Pirates</faction>
-    <pilots>
-      <pilot name_generator="pirate" ship="Pirate Admonisher"/>
       <pilot name_generator="pirate" ship="Pirate Admonisher"/>
     </pilots>
   </fleet>
@@ -379,49 +273,11 @@
       <pilot name_generator="pirate" ship="Pirate Kestrel"/>
     </pilots>
   </fleet>
-  <fleet name="Pirate Kestrel - small escort">
-    <ai>pirate</ai>
-    <faction>Pirates</faction>
-    <pilots>
-      <pilot name_generator="pirate" ship="Pirate Kestrel"/>
-      <pilot name_generator="pirate" ship="Pirate Shark"/>
-      <pilot name_generator="pirate" ship="Pirate Admonisher"/>
-    </pilots>
-  </fleet>
-  <fleet name="Pirate Kestrel x2 - escort">
-    <ai>pirate</ai>
-    <faction>Pirates</faction>
-    <pilots>
-      <pilot name_generator="pirate" ship="Pirate Kestrel"/>
-      <pilot name_generator="pirate" ship="Pirate Kestrel"/>
-      <pilot name_generator="pirate" ship="Pirate Delta"/>
-      <pilot name_generator="pirate" ship="Pirate Shark"/>
-      <pilot name_generator="pirate" ship="Pirate Admonisher"/>
-    </pilots>
-  </fleet>
-  <fleet name="Pirate Kestrel Rhino">
-    <ai>pirate</ai>
-    <faction>Pirates</faction>
-    <pilots>
-      <pilot name_generator="pirate" ship="Pirate Kestrel"/>
-      <pilot name_generator="pirate" ship="Pirate Rhino"/>
-      <pilot name_generator="pirate" ship="Pirate Rhino"/>
-    </pilots>
-  </fleet>
   <fleet name="Pirate Delta">
     <ai>pirate</ai>
     <faction>Pirates</faction>
     <pilots>
       <pilot name_generator="pirate" ship="Pirate Delta"/>
-    </pilots>
-  </fleet>
-  <fleet name="Pirate Delta - escort">
-    <ai>pirate</ai>
-    <faction>Pirates</faction>
-    <pilots>
-      <pilot name_generator="pirate" ship="Pirate Delta"/>
-      <pilot name_generator="pirate" ship="Pirate Shark"/>
-      <pilot name_generator="pirate" ship="Pirate Admonisher"/>
     </pilots>
   </fleet>
   <!-- Navies -->
@@ -433,29 +289,11 @@
       <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska"/>
     </pilots>
   </fleet>
-  <fleet name="Imperial Meteor x3">
-    <ai>empire</ai>
-    <faction>Empire of Terra</faction>
-    <pilots>
-      <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska"/>
-      <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska"/>
-      <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska"/>
-    </pilots>
-  </fleet>
   <fleet name="Imperial Comet">
     <ai>empire</ai>
     <faction>Empire of Terra</faction>
     <pilots>
       <pilot name_generator="imperial_navy_comet" ship="Imperial Halley"/>
-    </pilots>
-  </fleet>
-  <fleet name="Imperial Comet - escort">
-    <ai>empire</ai>
-    <faction>Empire of Terra</faction>
-    <pilots>
-      <pilot name_generator="imperial_navy_comet" ship="Imperial Halley"/>
-      <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska"/>
-      <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska"/>
     </pilots>
   </fleet>
   <fleet name="Imperial Continent">
@@ -472,29 +310,6 @@
       <pilot name_generator="imperial_navy_planet" ship="Imperial Jupiter"/>
     </pilots>
   </fleet>
-  <fleet name="Imperial Planet - small escort">
-    <ai>empire</ai>
-    <faction>Empire of Terra</faction>
-    <pilots>
-      <pilot name_generator="imperial_navy_planet" ship="Imperial Jupiter"/>
-      <pilot name_generator="imperial_navy_continent" ship="Imperial Asieneuve"/>
-      <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska"/>
-      <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska"/>
-    </pilots>
-  </fleet>
-  <fleet name="Imperial Planet - large escort">
-    <ai>empire</ai>
-    <faction>Empire of Terra</faction>
-    <pilots>
-      <pilot name_generator="imperial_navy_planet" ship="Imperial Jupiter"/>
-      <pilot name_generator="imperial_navy_continent" ship="Imperial Asieneuve"/>
-      <pilot name_generator="imperial_navy_continent" ship="Imperial Asieneuve"/>
-      <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska"/>
-      <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska"/>
-      <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska"/>
-      <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska"/>
-    </pilots>
-  </fleet>
   <fleet name="Imperial Nova">
     <ai>empire</ai>
     <faction>Empire of Terra</faction>
@@ -502,68 +317,6 @@
       <pilot name_generator="imperial_navy_nova" ship="Imperial Valenderay"/>
     </pilots>
   </fleet>
-  <fleet name="Imperial Nova - small escort">
-    <ai>empire</ai>
-    <faction>Empire of Terra</faction>
-    <pilots>
-      <pilot name_generator="imperial_navy_nova" ship="Imperial Valenderay"/>
-      <pilot name_generator="imperial_navy_continent" ship="Imperial Asieneuve">
-       <formation_radius>150</formation_radius>
-       <formation_angle>180</formation_angle>
-      </pilot>
-      <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska">
-        <formation_radius>200</formation_radius>
-       <formation_angle>45</formation_angle>
-     </pilot>
-      <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska">
-        <formation_radius>200</formation_radius>
-       <formation_angle>135</formation_angle>
-      </pilot>
-      <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska">
-        <formation_radius>200</formation_radius>
-       <formation_angle>-45</formation_angle>
-      </pilot>
-      <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska">
-        <formation_radius>200</formation_radius>
-       <formation_angle>-135</formation_angle>
-      </pilot>
-    </pilots>
-  </fleet>
- <fleet name="Imperial Nova - large escort">
-  <ai>empire</ai>
-  <faction>Empire of Terra</faction>
-  <pilots>
-    <pilot name_generator="imperial_navy_nova" ship="Imperial Valenderay"/>
-    <pilot name_generator="imperial_navy_planet" ship="Imperial Jupiter">
-      <formation_radius>150</formation_radius>
-      <formation_angle>180</formation_angle>
-    </pilot>
-    <pilot name_generator="imperial_navy_continent" ship="Imperial Asieneuve">
-      <formation_radius>200</formation_radius>
-      <formation_angle>150</formation_angle>
-    </pilot>
-    <pilot name_generator="imperial_navy_continent" ship="Imperial Asieneuve">
-      <formation_radius>200</formation_radius>
-      <formation_angle>210</formation_angle>
-    </pilot>
-    <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska">
-      <formation_radius>200</formation_radius>
-      <formation_angle>45</formation_angle>
-    </pilot>
-    <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska">
-      <formation_radius>200</formation_radius>
-      <formation_angle>135</formation_angle>
-    </pilot>
-    <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska">
-      <formation_radius>200</formation_radius>
-      <formation_angle>-45</formation_angle>
-    </pilot>
-    <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska">
-      <formation_radius>200</formation_radius>
-      <formation_angle>-135</formation_angle>
-    </pilot>
-  </pilots>
-</fleet>
   <!-- Ardarshir -->
   <fleet name="Ardar Meteor">
     <ai>roidhunate</ai>
@@ -608,29 +361,11 @@
       <pilot name_generator="betelgeuse_military" ship="Betelgian Alba"/>
     </pilots>
   </fleet>
-  <fleet name="Betelgian Meteor x3">
-    <ai>betelgeuse</ai>
-    <faction>Oligarchy of Betelgeuse</faction>
-    <pilots>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Alba"/>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Alba"/>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Alba"/>
-    </pilots>
-  </fleet>
   <fleet name="Betelgian Comet">
     <ai>betelgeuse</ai>
     <faction>Oligarchy of Betelgeuse</faction>
     <pilots>
       <pilot name_generator="betelgeuse_military" ship="Betelgian Libera"/>
-    </pilots>
-  </fleet>
-  <fleet name="Betelgian Comet - escort">
-    <ai>betelgeuse</ai>
-    <faction>Oligarchy of Betelgeuse</faction>
-    <pilots>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Libera"/>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Alba"/>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Alba"/>
     </pilots>
   </fleet>
   <fleet name="Betelgian Continent">
@@ -647,51 +382,11 @@
       <pilot name_generator="betelgeuse_military" ship="Betelgian Orsa"/>
     </pilots>
   </fleet>
-  <fleet name="Betelgian Planet - small escort">
-    <ai>betelgeuse</ai>
-    <faction>Oligarchy of Betelgeuse</faction>
-    <pilots>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Orsa"/>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Cassandra"/>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Alba"/>
-    </pilots>
-  </fleet>
-  <fleet name="Betelgian Planet - large escort">
-    <ai>betelgeuse</ai>
-    <faction>Oligarchy of Betelgeuse</faction>
-    <pilots>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Orsa"/>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Cassandra"/>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Cassandra"/>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Alba"/>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Alba"/>
-    </pilots>
-  </fleet>
   <fleet name="Betelgian Nova">
     <ai>betelgeuse</ai>
     <faction>Oligarchy of Betelgeuse</faction>
     <pilots>
       <pilot name_generator="betelgeuse_military" ship="Betelgian Stella"/>
-    </pilots>
-  </fleet>
-  <fleet name="Betelgian Nova - small escort">
-    <ai>betelgeuse</ai>
-    <faction>Oligarchy of Betelgeuse</faction>
-    <pilots>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Stella"/>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Cassandra"/>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Cassandra"/>
-    </pilots>
-  </fleet>
-  <fleet name="Betelgian Nova - large escort">
-    <ai>betelgeuse</ai>
-    <faction>Oligarchy of Betelgeuse</faction>
-    <pilots>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Stella"/>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Orsa"/>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Orsa"/>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Cassandra"/>
-      <pilot name_generator="betelgeuse_military" ship="Betelgian Cassandra"/>
     </pilots>
   </fleet>
   <!-- Barbarians -->
@@ -702,14 +397,6 @@
       <pilot name_generator="barbarians" ship="Barbarian Raider"/>
     </pilots>
   </fleet>
-  <fleet name="Barbarian Raider x2">
-    <ai>barbarians</ai>
-    <faction>Barbarians</faction>
-    <pilots>
-      <pilot name_generator="barbarians" ship="Barbarian Raider"/>
-      <pilot name_generator="barbarians" ship="Barbarian Raider"/>
-    </pilots>
-  </fleet>
   <fleet name="Barbarian Looter">
     <ai>barbarians</ai>
     <faction>Barbarians</faction>
@@ -717,39 +404,11 @@
       <pilot name_generator="barbarians" ship="Barbarian Looter"/>
     </pilots>
   </fleet>
-  <fleet name="Barbarian Looter - escort">
-    <ai>barbarians</ai>
-    <faction>Barbarians</faction>
-    <pilots>
-      <pilot name_generator="barbarians" ship="Barbarian Looter"/>
-      <pilot name_generator="barbarians" ship="Barbarian Raider"/>
-    </pilots>
-  </fleet>
   <fleet name="Barbarian Slaver">
     <ai>barbarians</ai>
     <faction>Barbarians</faction>
     <pilots>
       <pilot name_generator="barbarians" ship="Barbarian Slaver"/>
-    </pilots>
-  </fleet>
-  <fleet name="Barbarian Slaver - small escort">
-    <ai>barbarians</ai>
-    <faction>Barbarians</faction>
-    <pilots>
-      <pilot name_generator="barbarians" ship="Barbarian Slaver"/>
-      <pilot name_generator="barbarians" ship="Barbarian Raider"/>
-      <pilot name_generator="barbarians" ship="Barbarian Raider"/>
-    </pilots>
-  </fleet>
-  <fleet name="Barbarian Slaver - large escort">
-    <ai>barbarians</ai>
-    <faction>Barbarians</faction>
-    <pilots>
-      <pilot name_generator="barbarians" ship="Barbarian Slaver"/>
-      <pilot name_generator="barbarians" ship="Barbarian Looter"/>
-      <pilot name_generator="barbarians" ship="Barbarian Looter"/>
-      <pilot name_generator="barbarians" ship="Barbarian Raider"/>
-      <pilot name_generator="barbarians" ship="Barbarian Raider"/>
     </pilots>
   </fleet>
   <fleet name="Barbarian Vendetta">
@@ -764,14 +423,6 @@
     <faction>Barbarians</faction>
     <pilots>
       <pilot name_generator="barbarians" ship="Raptor"/>
-    </pilots>
-  </fleet>
-  <fleet name="Barbarian Raptor - escort">
-    <ai>barbarians</ai>
-    <faction>Barbarians</faction>
-    <pilots>
-      <pilot name_generator="barbarians" ship="Raptor"/>
-      <pilot name_generator="barbarians" ship="Barbarian Raider"/>
     </pilots>
   </fleet>
 

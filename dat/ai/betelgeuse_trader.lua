@@ -22,6 +22,9 @@ mem.enemyclose = 500
 mem.distressmsgfunc = sos
 mem.careful   = true
 
+formation_default_type = "trade column"
+formation_tightness = 50
+formation_sticky = 4
 
 function create ()
 

@@ -16,6 +16,10 @@ mem.atk_board      = true
 mem.atk_kill       = false
 mem.careful       = true
 
+formation_default_type = "wall"
+formation_tightness = 50
+formation_sticky = 3
+
 
 function create ()
 

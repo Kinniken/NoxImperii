@@ -1,94 +1,20 @@
 include("dat/factions/spawn/common.lua")
 
+fleet_table[#fleet_table+1] = new_fleet("Independent Worlds Wasp",10,{presence={nil,nil,50,nil}})
+fleet_table[#fleet_table+1] = new_fleet("Independent Worlds Shark",10,{presence={nil,nil,50,nil}})
+fleet_table[#fleet_table+1] = new_fleet("Independent Worlds Admonisher",10,{presence={nil,nil,100,nil}})
 
--- @brief Spawns a small patrol fleet.
-function spawn_patrol ()
-    local pilots = {}
-    local r = rnd.rnd()
+fleet_table[#fleet_table+1] = new_fleet("Independent Worlds Voyager Frigate",10,{presence={nil,50,200,nil}})
+fleet_table[#fleet_table+1] = new_fleet("Independent Worlds Delta",10,{presence={nil,50,200,nil}})
+fleet_table[#fleet_table+1] = new_fleet("Independent Worlds Vendetta",10,{presence={nil,50,200,nil}})
 
-    if r < 0.5 then
-       scom.addPilot( pilots, "Independent Worlds Wasp", 5 );
-    elseif r < 0.8 then
-       scom.addPilot( pilots, "Independent Worlds Wasp", 5 );
-       scom.addPilot( pilots, "Independent Worlds Shark", 10 );
-    else
-       scom.addPilot( pilots, "Independent Worlds Shark", 10 );
-       scom.addPilot( pilots, "Independent Worlds Voyager Frigate", 20 );
-       scom.addPilot( pilots, "Independent Worlds Admonisher", 15 );
-    end
-
-    return pilots
-end
+fleet_table[#fleet_table+1] = new_fleet(function() return spawn_variableFleet({"Independent Worlds Wasp",2,4}) end,10,{presence={nil,50,nil,nil}})
+fleet_table[#fleet_table+1] = new_fleet(function() return spawn_variableFleet({"Independent Worlds Shark",2,4}) end,10,{presence={nil,50,nil,nil}})
+fleet_table[#fleet_table+1] = new_fleet(function() return spawn_variableFleet({"Independent Worlds Admonisher",2,4}) end,10,{presence={nil,50,nil,nil}})
 
 
--- @brief Spawns a medium sized squadron.
-function spawn_squad ()
-    local pilots = {}
-    local r = rnd.rnd()
-
-    if r < 0.5 then
-       scom.addPilot( pilots, "Independent Worlds Wasp", 5 );
-       scom.addPilot( pilots, "Independent Worlds Shark", 10 );
-       scom.addPilot( pilots, "Independent Worlds Voyager Frigate", 20 );
-       scom.addPilot( pilots, "Independent Worlds Shark", 5 );
-    elseif r < 0.8 then
-       scom.addPilot( pilots, "Independent Worlds Shark", 10 );
-       scom.addPilot( pilots, "Independent Worlds Voyager Frigate", 20 );
-       scom.addPilot( pilots, "Independent Worlds Delta", 40 );
-       scom.addPilot( pilots, "Independent Worlds Vendetta", 40 );
-       scom.addPilot( pilots, "Independent Worlds Shark", 10 );
-    else
-       scom.addPilot( pilots, "Independent Worlds Shark", 10 );
-       scom.addPilot( pilots, "Independent Worlds Voyager Frigate", 20 );
-       scom.addPilot( pilots, "Independent Worlds Delta", 40 );
-       scom.addPilot( pilots, "Independent Worlds Vendetta", 40 );
-       scom.addPilot( pilots, "Independent Worlds Raptor", 100 );
-       
-    end
-
-    return pilots
-end
+fleet_table[#fleet_table+1] = new_fleet(function() return spawn_variableFleet({"Independent Worlds Raptor",1,1},{"Independent Worlds Vendetta",0,1},{"Independent Worlds Shark",1,2},{"Independent Worlds Admonisher",1,2}) end,10,{presence={50,100,400,nil}})
+fleet_table[#fleet_table+1] = new_fleet(function() return spawn_variableFleet({"Independent Worlds Delta",1,1},{"Independent Worlds Shark",1,2},{"Independent Worlds Admonisher",1,2}) end,10,{presence={50,100,400,nil}})
 
 
--- @brief Creation hook.
-function create ( max )
-    local weights = {}
-
-    -- Create weights for spawn table
-    weights[ spawn_patrol  ] = 100
-    weights[ spawn_squad   ] = math.max(1, -100 + 1.00 * max)
-   
-    -- Create spawn table base on weights
-    spawn_table = scom.createSpawnTable( weights )
-
-    -- Calculate spawn data
-    spawn_data = scom.choose( spawn_table )
-
-    return scom.calcNextSpawn( 0, scom.presence(spawn_data), max )
-end
-
-
--- @brief Spawning hook
-function spawn ( presence, max )
-
-    --safety if create() was not called
-   --(can happen in border cases in Nox, unlike Naev)
-   if spawn_data==nil then
-      return 10000,nil
-    end
-
-    local pilots
-
-    -- Over limit
-    if presence > max then
-       return 5
-    end
-  
-    -- Actually spawn the pilots
-    pilots = scom.spawn( spawn_data )
-
-    -- Calculate spawn data
-    spawn_data = scom.choose( spawn_table )
-
-    return scom.calcNextSpawn( presence, scom.presence(spawn_data), max ), pilots
-end
+fleet_table[#fleet_table+1] = new_fleet(function() return spawn_variableFleet({"Independent Worlds Raptor",2,3},{"Independent Worlds Vendetta",2,4},{"Independent Worlds Shark",2,4},{"Independent Worlds Admonisher",2,4}) end,10,{presence={100,200,nil,nil}})

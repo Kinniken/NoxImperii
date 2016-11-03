@@ -1,115 +1,17 @@
 include("dat/factions/spawn/common.lua")
 
-
--- @brief Spawns a small patrol fleet.
-function spawn_patrol ()
-   local pilots = {}
-   local r = rnd.rnd()
-
-   if r < 0.5 then
-      scom.addPilot( pilots, "Royal Ixum Comet", 25 );
-   elseif r < 0.8 then
-      scom.addPilot( pilots, "Royal Ixum Meteor", 20 );
-      scom.addPilot( pilots, "Royal Ixum Comet", 25 );
-   else
-      scom.addPilot( pilots, "Royal Ixum Continent", 75 );
-   end
-
-   return pilots
-end
+fleet_table[#fleet_table+1] = new_fleet("Royal Ixum Meteor",10,{presence={nil,nil,50,nil}})
+fleet_table[#fleet_table+1] = new_fleet("Royal Ixum Comet",10,{presence={nil,nil,nil,nil}})
+fleet_table[#fleet_table+1] = new_fleet("Royal Ixum Continent",10,{presence={nil,50,200,nil}})
 
 
--- @brief Spawns a medium sized squadron.
-function spawn_squad ()
-   local pilots = {}
-   local r = rnd.rnd()
-
-   if r < 0.5 then
-      scom.addPilot( pilots, "Royal Ixum Meteor", 20 );
-      scom.addPilot( pilots, "Royal Ixum Comet", 25 );
-      scom.addPilot( pilots, "Royal Ixum Continent", 45 );
-   elseif r < 0.8 then
-      scom.addPilot( pilots, "Royal Ixum Comet", 25 );
-      scom.addPilot( pilots, "Royal Ixum Continent", 45 );
-   else
-      scom.addPilot( pilots, "Royal Ixum Meteor", 20 );
-      scom.addPilot( pilots, "Royal Ixum Comet", 25 );
-      scom.addPilot( pilots, "Royal Ixum Continent", 75 );
-   end
-
-   return pilots
-end
+fleet_table[#fleet_table+1] = new_fleet({"Royal Ixum Meteor","Royal Ixum Meteor","Royal Ixum Meteor"},10,{presence={nil,50,500,nil},formation="wedge"})
+fleet_table[#fleet_table+1] = new_fleet({"Royal Ixum Comet","Royal Ixum Meteor","Royal Ixum Meteor"},10,{presence={nil,50,500,nil},formation="wedge"})
+fleet_table[#fleet_table+1] = new_fleet({"Royal Ixum Continent","Royal Ixum Meteor","Royal Ixum Meteor"},10,{presence={nil,100,1000,nil},formation="wedge"})
 
 
--- @brief Spawns a capship with escorts.
-function spawn_capship ()
-   local pilots = {}
-   local r = rnd.rnd()
+fleet_table[#fleet_table+1] = new_fleet(function() return spawn_variableFleet({"Royal Ixum Planet",1,1},{"Royal Ixum Continent",0,1},{"Royal Ixum Meteor",2,4}) end,10,{presence={50,200,nil,nil}})
 
-   -- Generate the capship
-    scom.addPilot( pilots, "Royal Ixum Planet", 140 )
-    
+fleet_table[#fleet_table+1] = new_fleet(function() return spawn_variableFleet({"Royal Ixum Nova",1,1},{"Royal Ixum Continent",0,2},{"Royal Ixum Meteor",2,6}) end,10,{presence={100,400,nil,nil}})
 
-   -- Generate the escorts
-   r = rnd.rnd()
-   if r < 0.5 then
-      scom.addPilot( pilots, "Royal Ixum Meteor", 20 );
-      scom.addPilot( pilots, "Royal Ixum Comet", 25 );
-      scom.addPilot( pilots, "Royal Ixum Comet", 25 );
-   elseif r < 0.8 then
-      scom.addPilot( pilots, "Royal Ixum Comet", 25 );
-      scom.addPilot( pilots, "Royal Ixum Continent", 45 );
-   else
-      scom.addPilot( pilots, "Royal Ixum Comet", 25 );
-      scom.addPilot( pilots, "Royal Ixum Continent", 75 );
-   end
-
-   return pilots
-end
-
-
--- @brief Creation hook.
-function create ( max )
-   local weights = {}
-
-   -- Create weights for spawn table
-    weights[ spawn_patrol  ] = 100
-    weights[ spawn_squad   ] = math.max(1, -80 + 0.80 * max)
-    weights[ spawn_capship ] = math.max(1, -500 + 1.70 * max)
-   
-   -- Create spawn table base on weights
-   spawn_table = scom.createSpawnTable( weights )
-
-   -- Calculate spawn data
-   spawn_data = scom.choose( spawn_table )
-
-   return scom.calcNextSpawn( 0, scom.presence(spawn_data), max )
-end
-
-
--- @brief Spawning hook
-function spawn ( presence, max )
-
-   --safety if create() was not called
-   --(can happen in border cases in Nox, unlike Naev)
-   if spawn_data==nil then
-      return 10000,nil
-    end
-
-   local pilots
-
-   -- Over limit
-   if presence > max then
-      return 5
-   end
-  
-   -- Actually spawn the pilots
-   pilots = scom.spawn( spawn_data )
-
-   -- Calculate spawn data
-   spawn_data = scom.choose( spawn_table )
-
-   return scom.calcNextSpawn( presence, scom.presence(spawn_data), max ), pilots
-end
-
-
+fleet_table[#fleet_table+1] = new_fleet(function() return spawn_variableFleet({"Royal Ixum Nova",1,3},{"Royal Ixum Planet",0,4},{"Royal Ixum Continent",4,8},{"Royal Ixum Meteor",4,16}) end,10,{presence={500,1000,nil,nil}})

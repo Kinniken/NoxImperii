@@ -7,7 +7,7 @@ mem.armour_return = 70
 mem.aggressive = true
 
 formation_default_type = "imperial"
-formation_tightness = 50
+formation_tightness = 20
 formation_sticky = 5
 
 function create ()

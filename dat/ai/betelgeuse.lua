@@ -6,6 +6,9 @@ mem.armour_run = 40
 mem.armour_return = 70
 mem.aggressive = true
 
+formation_default_type = "circle"
+formation_tightness = 50
+formation_sticky = 4
 
 function create ()
 

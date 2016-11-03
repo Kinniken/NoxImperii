@@ -16,6 +16,9 @@ mem.atk_board      = true
 mem.atk_kill       = false
 mem.careful       = true
 
+formation_default_type = "blob"
+formation_tightness = 100
+formation_sticky = 2
 
 function create ()
 

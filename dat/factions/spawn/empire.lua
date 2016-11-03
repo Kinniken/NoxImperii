@@ -1,4 +1,4 @@
-include("dat/factions/spawn/common_new.lua")
+include("dat/factions/spawn/common.lua")
 
 fleet_table[#fleet_table+1] = new_fleet("Imperial Meteor",10,{presence={nil,nil,50,nil}})
 fleet_table[#fleet_table+1] = new_fleet("Imperial Comet",10,{presence={nil,nil,nil,nil}})

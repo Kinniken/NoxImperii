@@ -10,7 +10,7 @@ mem.distressmsgfunc = sos
 
 formation_default_type = "trade column"
 formation_tightness = 100
-formation_sticky = 1
+formation_sticky = 2
 
 -- Sends a distress signal which causes faction loss
 function sos ()

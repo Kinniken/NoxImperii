@@ -313,7 +313,7 @@ function Forma:assignCoords()
          if self.class_count[ship_class] == 1 then -- If there's only one ship in this specific class...
             angle = 0 --The angle needs to be zero.
          else -- If there's more than one ship in each class...
-            angle = ((count[ship_class]-1)*((math.pi*2)/(self.class_count[ship_class]-1)))-(math.pi/2) -- 360° cover
+            angle = ((count[ship_class]-1)*((math.pi*2)/(self.class_count[ship_class])))-(math.pi/2) -- 360° cover
             count[ship_class] = count[ship_class] + 1 --Update the count
          end
          radius = radii[ship_class] --Assign the radius, defined above.
@@ -441,12 +441,20 @@ function Forma:assignCoords()
          angle = ((math.pi / 8) * flip) / (radius / orig_radius)
       end
 
-   elseif self.formation == "circle" or self.formation == nil then
+   elseif self.formation == "circle" then
       -- Default to circle.
       angle = math.pi * 2 / numships -- The angle between each ship, in radians.
       radius = 80 + numships * 25 -- Pulling these numbers out of my ass. The point being that more ships mean a bigger circle.
       for i = 1, numships do
          posit[i] = {angle = angle * i, radius = radius} -- Store as polar coordinates.
+      end
+
+   elseif self.formation == "blob" then
+      -- Like circle but with random radius to look less coherent
+      angle = math.pi * 2 / numships -- The angle between each ship, in radians.
+      radius = 80 + numships * 25 -- Pulling these numbers out of my ass. The point being that more ships mean a bigger circle.
+      for i = 1, numships do
+         posit[i] = {angle = angle * i, radius = math.random(radius/2,radius)} -- Store as polar coordinates.
       end
    else
       warn("Trying to set unknown formation: "..self.formation)
@@ -513,8 +521,10 @@ function Forma:control()
       
    
    -- At this point we know we're not in combat (well, the leader isn't).
-   -- Assign the coordinates.
-   local posit = self:assignCoords()
+   -- Assign the coordinates if not done before or if ship number has changed
+   if not self.posit or #self.posit ~= #self.fleet then
+      self.posit = self:assignCoords()
+   end
 
    -- Remember, there is no need to check if a pilot exists, because we've already made sure all pilots exist.
    for i, p in ipairs(self.fleet) do
@@ -522,8 +532,8 @@ function Forma:control()
 
          --p:control() -- Clear orders.
 
-         p:memory("formation_static_radius",posit[i].radius)
-         p:memory("formation_static_angle",posit[i].angle * 180 / math.pi) --saved in degrees, the standard LUA-side
+         p:memory("formation_static_radius",self.posit[i].radius)
+         p:memory("formation_static_angle",self.posit[i].angle * 180 / math.pi) --saved in degrees, the standard LUA-side
          p:memory("formation_leader_id",self.fleader:id())
          
          --warn("Setting "..self.fleader:name().." as fleet leader for "..p:name())

@@ -22,7 +22,7 @@ DATA_ARCHIVE = ndata.zip
 if HAVE_UTILS
 MKSPR      = utils/mkspr/mkspr$(EXEEXT)
 endif
-NOXIMPERII	     = "noximperii"$(EXEEXT)
+NOXIMPERII	     = noximperii$(EXEEXT)
 
 EXTRA_DIST = LICENSE extras noximperii.desktop noximperii.appdata.xml
 CLEANFILES = $(DATA_ARCHIVE) $(NOXIMPERII)

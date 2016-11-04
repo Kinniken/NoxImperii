@@ -40,7 +40,7 @@ function create_fleet()
 		formation_sticky = 2--amount of cheat velocity matching; the higher, the more the formations stay accurate
 	end
 
-	warn("Creating fleet with "..#ships.." ships for "..ai.pilot():name()..", formation: "..fleet_formation..", ships: "..shipNames)
+	--warn("Creating fleet with "..#ships.." ships for "..ai.pilot():name()..", formation: "..fleet_formation..", ships: "..shipNames)
 
 	local fleet=Forma:new(ships, fleet_formation, 3000)
 

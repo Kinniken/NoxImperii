@@ -12,6 +12,9 @@ formation_default_type = "trade column"
 formation_tightness = 100
 formation_sticky = 2
 
+chatter_trade_perc = 25
+chatter_random_perc = 25
+
 -- Sends a distress signal which causes faction loss
 function sos ()
    msg = {
@@ -27,21 +30,9 @@ function sos ()
    ai.distress( msg[ rnd.int(1,#msg) ])
 end
 
-
 function create ()
 
-   p = player.pilot()
-
-   if p:exists() then
-      r = rnd.rnd(1,2)
-      if r == 1 then
-         local tradeChatter = getTradeDealChatter(system.cur(),ai.pilot())
-
-         if tradeChatter then
-           ai.pilot():comm(tradeChatter)
-         end
-      end
-   end
+   civilianChatter(system.cur(),ai.pilot())
 
    -- No bribe
    local bribe_msg = {
@@ -60,7 +51,11 @@ function create ()
             mem.refuel);
    end
 
-   mem.loiter = 3 -- This is the amount of waypoints the pilot will pass through before leaving the system
    create_post()
 end
 
+add_chatter("Trade's on the frontier isn't easy, but that's where the money is.")
+add_chatter("Imperial traders are coddled weaklings, sheltering behind the navy.")
+add_chatter("Barbarians, pirates... I've met them all in space, I'm still trading.")
+add_chatter("I escaped a barbarian fleet on my last run. Good thing their ships are not that fast.")
+add_chatter("Buy medicine in the Inner Worlds and sell on the edge, can't go wrong with that.")

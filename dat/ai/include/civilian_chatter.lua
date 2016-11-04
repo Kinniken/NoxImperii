@@ -1,6 +1,29 @@
 include "jumpdist.lua"
 include "general_helper.lua"
 
+local chatter_random = {}
+
+function add_chatter(chatter)
+	chatter_random[#chatter_random+1] = chatter
+end
+
+function civilianChatter(sys,callingShip)
+	p = player.pilot()
+   
+   if p:exists() then
+      r = rnd.rnd(1,100)
+      if r < chatter_trade_perc then
+         local tradeChatter = getTradeDealChatter(sys,callingShip)
+
+         if tradeChatter then
+           ai.pilot():comm(tradeChatter)
+         end
+      elseif r < chatter_trade_perc + chatter_random_perc and #chatter_random > 0 then
+      	ai.pilot():comm(chatter_random[math.random(#chatter_random)])
+      end
+   end
+end
+
 function getTradeDealChatter(sys,callingShip)
 
 	local deal = findGoodTradeDeal(sys,callingShip)

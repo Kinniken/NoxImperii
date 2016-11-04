@@ -2,6 +2,20 @@ include("dat/ai/tpl/generic.lua")
 include("dat/ai/personality/trader.lua")
 include("dat/ai/include/civilian_chatter.lua")
 
+formation_default_type = "trade column"
+formation_tightness = 50
+formation_sticky = 5
+
+
+mem.shield_run = 100
+mem.armour_run = 100
+mem.defensive  = false
+mem.enemyclose = 500
+mem.distressmsgfunc = sos
+mem.careful   = true
+
+chatter_trade_perc = 25
+chatter_random_perc = 25
 
 -- Sends a distress signal which causes faction loss
 function sos ()
@@ -15,36 +29,9 @@ function sos ()
    ai.distress( msg[ rnd.int(1,#msg) ])
 end
 
-formation_default_type = "trade column"
-formation_tightness = 50
-formation_sticky = 5
-
-
-mem.shield_run = 100
-mem.armour_run = 100
-mem.defensive  = false
-mem.enemyclose = 500
-mem.distressmsgfunc = sos
-mem.careful   = true
-
-
 function create ()
 
-   p = player.pilot()
-
-   -- Probably the ones with the most money
-   --ai.setcredits( rnd.int(ai.pilot():ship():price()/100, ai.pilot():ship():price()/25) )
-
-   if p:exists() then
-      r = rnd.rnd(1,2)
-      if r == 1 then
-         local tradeChatter = getTradeDealChatter(system.cur(),ai.pilot())
-
-         if tradeChatter then
-           ai.pilot():comm(tradeChatter)
-         end
-      end
-   end
+   civilianChatter(system.cur(),ai.pilot())
 
    -- Communication stuff
    mem.bribe_no = "\"Imperial Traders do not negotiate with criminals.\""
@@ -62,3 +49,8 @@ function create ()
    -- Finish up creation
    create_post()
 end
+
+add_chatter("Every year trade is getting harder.")
+add_chatter("I used to trade with independent worlds, but it's gotten too dangerous.")
+add_chatter("I can't believe how much of my profits disapears in taxes!")
+add_chatter("Aristocrats and officers get all the respect, but it's us traders that keep the Empire afloat.")

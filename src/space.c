@@ -1589,6 +1589,8 @@ Planet *planet_new (void)
    p->nextrapresences=0;
    p->ntradedatas=0;
 
+   p->tags=array_create(char*);
+
    /* Reconstruct the jumps. */
    if (!systems_loading && realloced)
       systems_reconstructPlanets();
@@ -2017,6 +2019,17 @@ static int planet_parse( Planet *planet, const xmlNodePtr parent )
                      WARN("Planet '%s' has unknown services tag '%s'", planet->name, ccur->name);
 
                } while (xml_nextNode(ccur));
+
+            } else if (xml_isNode(cur, "tags")) {
+            	ccur = cur->children;
+            	do {
+            		xml_onlyNodes(ccur);
+
+            		if (xml_isNode(ccur, "tag")) {
+            			planet_addTag(planet, xml_get(ccur));
+            		} else
+            			WARN("Planet '%s' has unknown tag '%s'", planet->name, ccur->name);
+            	} while (xml_nextNode(ccur));
             }
 
             else if (xml_isNode(cur, "tradedatas")) {
@@ -2270,6 +2283,26 @@ static int planet_parseCustom( Planet *planet, const xmlNodePtr parent )
 						else
 							WARN("Planet '%s' has unknown services tag '%s'", planet->name, ccur->name);
 
+					} while (xml_nextNode(ccur));
+				} else if (xml_isNode(cur, "tags")) {
+					planet_setSaveFlag(planet,PLANET_TAGS_SAVE);
+
+					if (planet->tags != NULL && array_size(planet->tags) > 0) {
+						for (i=0; i<array_size(planet->tags); i++)
+							free( planet->tags[i] );
+						array_free( planet->tags );
+					}
+
+					planet->tags=array_create(char*);
+
+					ccur = cur->children;
+					do {
+						xml_onlyNodes(ccur);
+
+						if (xml_isNode(ccur, "tag")) {
+							planet_addTag(planet, xml_get(ccur));
+						} else
+							WARN("Planet '%s' has unknown tag '%s'", planet->name, ccur->name);
 					} while (xml_nextNode(ccur));
 				} else if (xml_isNode(cur, "tradedatas")) {
 					planet_setSaveFlag(planet,PLANET_COMMODITIES_SAVE);
@@ -3916,6 +3949,9 @@ void space_exit (void)
 
       /* tradedatas */
       free(pnt->tradedatas);
+
+      /* tags */
+      array_free(pnt->tags);
    }
    free(planet_stack);
    planet_stack = NULL;
@@ -4789,6 +4825,15 @@ int planet_savePlanet( xmlTextWriterPtr writer, const Planet *p, int customDataO
 			 xmlw_elemEmpty( writer, "shipyard" );
 		  xmlw_endElem( writer ); /* "services" */
       }
+      if (!customDataOnly || planet_isSaveFlag(p,PLANET_TAGS_SAVE)) {
+    	  xmlw_startElem( writer, "tags" );
+
+    	  for (i=0; i < array_size(p->tags); i++) {
+    		  xmlw_elem( writer, "tag", "%s", p->tags[i] );
+    	  }
+
+    	  xmlw_endElem(writer);
+      }
       if (planet_hasService( p, PLANET_SERVICE_LAND )) {
     	  if ((!customDataOnly || planet_isSaveFlag(p,PLANET_COMMODITIES_SAVE)) && p->ntradedatas>0) {
 			 xmlw_startElem( writer, "tradedatas" );
@@ -5428,6 +5473,43 @@ void planet_refreshAllPlanetAdjustedPrices() {
 	int i;
 	for (i=0;i<planet_nstack;i++) {
 		planet_refreshPlanetPriceFactors(&planet_stack[i]);
+	}
+}
+
+/**
+ * @brief adds a new tag to the planet, if it did not exist yet
+ */
+void planet_addTag(Planet* p,const char* tag) {
+	char **new_tag;
+	int i;
+
+	/* if it's a static planet, tags are now custom and have to be saved */
+	planet_setSaveFlag(p,PLANET_TAGS_SAVE);
+
+	for (i=0;i<array_size(p->tags);i++) {
+		if (strcmp(p->tags[i],tag) == 0) {
+			return;
+		}
+	}
+
+	new_tag = &array_grow(&p->tags);
+	*new_tag = strdup(tag);
+}
+
+/**
+ * @brief clears a tag from the planet, if it existed
+ */
+void planet_clearTag(Planet* p,const char* tag) {
+	int i;
+
+	/* if it's a static planet, tags are now custom and have to be saved */
+	planet_setSaveFlag(p,PLANET_TAGS_SAVE);
+
+	for (i=0;i<array_size(p->tags);i++) {
+		if (strcmp(p->tags[i],tag) == 0) {
+			array_erase(p->tags,p->tags[i],p->tags[i+1]);
+			return;
+		}
 	}
 }
 

@@ -103,6 +103,59 @@ local planet_prototype = {
 		end
 		return false
 	end,
+	addSettlementTag=function(self,settlement,tag)
+		if (settlement == "natives" and self.lua.natives) then
+			self.lua.natives:addTag(tag)
+		elseif (self.lua.settlements[settlement]) then
+			self.lua.settlements[settlement]:addTag(tag)
+		end
+
+		if (self.c) then
+			self.c:addTag(tag)
+		end
+	end,
+	removeSettlementTag=function(self,settlement,tag)
+		if (settlement == "natives" and self.lua.natives) then
+			self.lua.natives:removeTag(tag)
+		elseif (self.lua.settlements[settlement]) then
+			self.lua.settlements[settlement]:removeTag(tag)
+		end
+
+		if (self.c) then
+			self.c:clearTag(tag)
+		end
+	end,
+	initTags=function(self)
+		--loop through settlements to copie tags to planet (for faster C-side references)
+		for _,v in pairs(self.lua.settlements) do
+			for _,tag in pairs(v.tags) do
+				self.c:addTag(tag)
+			end
+		end
+
+		if (self.lua.natives) then
+			for _,tag in pairs(self.lua.natives.tags) do
+				self.c:addTag(tag)
+			end
+		end
+	end,
+	addActiveEffect=function(self,settlement,desc,timeLimit,event_type)
+		local s
+		if (settlement == "natives" and self.lua.natives) then
+			s=self.lua.natives
+		elseif (self.lua.settlements[settlement]) then
+			s=self.lua.settlements[settlement]
+		end
+
+		if not s then
+			error("Unknown settlement "..settlement.." for world: "..self.c:name())
+		else
+			s:addActiveEffect(desc,timeLimit,event_type)
+			if event_type then
+				self.c:addTag("event_"..event_type)
+			end
+		end
+	end,
 	save=function (self)
 		setPlanetLuaData(self.c,self.lua)
 	end

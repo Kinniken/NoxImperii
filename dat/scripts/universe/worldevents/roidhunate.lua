@@ -8,8 +8,8 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	textData.casualties=gh.prettyLargeNumber(planet.lua.settlements.natives.population*0.05)
 	planet.lua.settlements.natives.population=planet.lua.settlements.natives.population*0.95
 	
-	local effectId=planet.lua.settlements.natives:addActiveEffect("Harsh repression of the native population is driving them to arms.",
-		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber() )
+	local effectId=planet:addActiveEffect("natives","Harsh repression of the native population is driving them to arms.",
+		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber(),"roidhunate_native_repression" )
 	planet.lua.settlements.natives:addGoodDemand(C.BASIC_WEAPONS,200,3,effectId)
 end
 event.eventMessage="NEWS ALERT: Native uprising on ${world} in response to Ardar repression, arm sales boom."
@@ -34,7 +34,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	textData.arrivals=gh.prettyLargeNumber(planet.lua.settlements.ardars.population*0.3)
 	planet.lua.settlements.ardars.population=planet.lua.settlements.ardars.population*1.3
 	
-	local effectId=planet.lua.settlements.ardars:addActiveEffect("Demand for industrial goods increase to accommodate new settlers.",
+	local effectId=planet:addActiveEffect("ardars","Demand for industrial goods increase to accommodate new settlers.",
 		(time.get() + self.duration):tonumber(),"ardar_settlers" )
 	planet.lua.settlements.ardars:addGoodDemand(C.INDUSTRIAL,200,2,effectId)
 	planet.lua.settlements.ardars:addGoodDemand(C.PRIMITIVE_INDUSTRIAL,200,2,effectId)
@@ -58,8 +58,8 @@ event.weight=20
 event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.ardars.industry=planet.lua.settlements.ardars.industry*1.1
 	
-	local effectId=planet.lua.settlements.ardars:addActiveEffect("Major ship-building program drives prices of armament.",
-		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber() )
+	local effectId=planet:addActiveEffect("ardars","Major ship-building program drives prices of armament.",
+		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber(), "roidhunate_navyshipbuilding" )
 	planet.lua.settlements.ardars:addGoodDemand(C.ARMAMENT,200,2,effectId)
 	planet.lua.settlements.ardars:addGoodDemand(C.MODERN_ARMAMENT,100,2,effectId)
 	
@@ -81,8 +81,8 @@ event.weight=50--high because so little world qualify
 event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.ardars.industry=planet.lua.settlements.ardars.industry*1.1
 	
-	local effectId=planet.lua.settlements.ardars:addActiveEffect("Pioneering industrial techniques is boosting the production of modern armament.",
-		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber() )
+	local effectId=planet:addActiveEffect("ardars","Pioneering industrial techniques is boosting the production of modern armament.",
+		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber(), "roidhunate_innovativearmament" )
 	planet.lua.settlements.ardars:addGoodSupply(C.MODERN_ARMAMENT,300,0.5,effectId)
 	
 end
@@ -104,7 +104,7 @@ event.weight=50--high because so little worlds qualify
 event.duration=time.create( 0,1,0, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 	
-	local effectId=planet.lua.settlements.ardars:addActiveEffect("The Great Hunt in progress is driving strong demand for native weapons and exotic food.",
+	local effectId=planet:addActiveEffect("ardars","The Great Hunt in progress is driving strong demand for native weapons and exotic food.",
 		(time.get() + self.duration):tonumber(),"ardar_greathunt" )
 	planet.lua.settlements.ardars:addGoodDemand(C.NATIVE_WEAPONS,300,5,effectId)
 	
@@ -131,8 +131,8 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	textData.poet=nameGenerator.generateNameArdarshir()
 	textData.hero=nameGenerator.generateNameArdarshir()
 	
-	local effectId=planet.lua.settlements.ardars:addActiveEffect("The recital of a great new epic tale is boosting demand for ancient weapons.",
-		(time.get() + self.duration):tonumber() )
+	local effectId=planet:addActiveEffect("ardars","The recital of a great new epic tale is boosting demand for ancient weapons.",
+		(time.get() + self.duration):tonumber(), "roidhunate_epicrecital" )
 	planet.lua.settlements.ardars:addGoodDemand(C.NATIVE_WEAPONS,300,5,effectId)
 	
 end
@@ -161,8 +161,8 @@ event.applyOnWorldCustom=function(self,planet,textData)
 
 	planet.lua.settlements.ardars.stability=planet.lua.settlements.ardars.stability*0.95
 	
-	local effectId=planet.lua.settlements.ardars:addActiveEffect("An anti-corruption drive is lowering demand and prices for luxury goods.",
-		(time.get() + self.duration):tonumber() )
+	local effectId=planet:addActiveEffect("ardars","An anti-corruption drive is lowering demand and prices for luxury goods.",
+		(time.get() + self.duration):tonumber(),"roidhunate_anticorruption" )
 	planet.lua.settlements.ardars:reduceGoodDemand(C.LUXURY_GOODS,300,0.5,effectId)
 	
 end
@@ -190,7 +190,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 
 	planet.lua.settlements.ardars.stability=planet.lua.settlements.ardars.stability*0.95
 	
-	local effectId=planet.lua.settlements.ardars:addActiveEffect("Protests are paralysing the local economy, leading to rising consumer good prices.",
+	local effectId=planet:addActiveEffect("ardars","Protests are paralysing the local economy, leading to rising consumer good prices.",
 		(time.get() + self.duration):tonumber() )
 	planet.lua.settlements.ardars:reduceGoodDemand(C.LUXURY_GOODS,300,0.5,effectId)
 	
@@ -217,7 +217,7 @@ event.weight=30--tag-specific
 event.duration=time.create( 0,2,0, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 	
-	local effectId=planet.lua.settlements.ardars:addActiveEffect("The celebration of the first settlement drives strong demand for food and luxury goods.",
+	local effectId=planet:addActiveEffect("ardars","The celebration of the first settlement drives strong demand for food and luxury goods.",
 		(time.get() + self.duration):tonumber() )
 	planet.lua.settlements.ardars:addGoodDemand(C.LUXURY_GOODS,300,5,effectId)
 	planet.lua.settlements.ardars:addGoodDemand(C.FOOD,800,5,effectId)
@@ -241,8 +241,8 @@ event.weight=50--tag-specific
 event.duration=time.create( 0,2,0, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 	
-	local effectId=planet.lua.settlements.ardars:addActiveEffect("The military parade is driving up the cost of food and other consumer goods.",
-		(time.get() + self.duration):tonumber() )
+	local effectId=planet:addActiveEffect("ardars","The military parade is driving up the cost of food and other consumer goods.",
+		(time.get() + self.duration):tonumber(),"roidhunate_militaryparade" )
 	planet.lua.settlements.ardars:addGoodDemand(C.CONSUMER_GOODS,500,5,effectId)
 	planet.lua.settlements.ardars:addGoodDemand(C.FOOD,800,5,effectId)
 	
@@ -266,7 +266,7 @@ event.weight=50--tag-specific
 event.duration=time.create( 0,2,0, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 	
-	local effectId=planet.lua.settlements.ardars:addActiveEffect("Ardar Traditional Food Festival features gourmet food and Telloch at promotional prices.",
+	local effectId=planet:addActiveEffect("ardars","Ardar Traditional Food Festival features gourmet food and Telloch at promotional prices.",
 		(time.get() + self.duration):tonumber(),"ardar_foodfestival" )
 	planet.lua.settlements.ardars:addGoodSupply(C.GOURMET_FOOD,500,0.5,effectId)
 	planet.lua.settlements.ardars:addGoodSupply(C.TELLOCH,300,0.5,effectId)
@@ -286,6 +286,7 @@ table.insert(world_events.events,event)
 
 
 --[[
+TODO
 
 Space: ${world}'s military production targets met a year in advance, excess available for export
 Effect: targets of military good production were met in advance, leading to availability of cheaper weapons.

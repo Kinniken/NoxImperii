@@ -98,7 +98,7 @@ settlement_class.settlement_prototype = {
 		end
 		return false
 	end,
-	clearObsoleteEffects=function(self)
+	clearObsoleteEffects=function(self,c_planet)
 		local nbCleared=0
 		if (self.activeEffects) then
 			local i
@@ -127,6 +127,9 @@ settlement_class.settlement_prototype = {
 			    		if (self.suppressGoodSupply[j].effectId==effectId) then
 			    			table.remove(self.suppressGoodSupply, j)
 			    		end
+			    	end
+			    	if activeEffects[i].type then
+			    		c_planet:clearTag("event_"..activeEffects[i].type)
 			    	end
 
 			        table.remove(self.activeEffects, i)

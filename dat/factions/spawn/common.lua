@@ -1,7 +1,7 @@
 include "general_helper.lua"
 
 local MAX_DELAY = 60
-local DELAY = 2000
+local DELAY = 200
 local MASS_PER_PRESENCE = 20
 
 fleet_table = {}

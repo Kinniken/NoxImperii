@@ -32,7 +32,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.humans.industry=planet.lua.settlements.humans.industry*0.9
 	
 	local effectId=planet:addActiveEffect("humans","Isolation from the Empire is causing a drop in industrial production.",
-		(time.get() + time.create( 0,1,0, 0, 0, 0 )):tonumber() )
+		(time.get() + time.create( 0,1,0, 0, 0, 0 )):tonumber(),"fringe_isolation" )
 	planet.lua.settlements.humans:reduceGoodSupply(C.INDUSTRIAL,200,1,effectId)
 	planet.lua.settlements.humans:reduceGoodSupply(C.MODERN_INDUSTRIAL,100,1,effectId)
 end
@@ -55,7 +55,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.humans.industry=planet.lua.settlements.humans.industry*1.2
 	
 	local effectId=planet:addActiveEffect("humans","A mining boom is fuelling industrial production.",
-		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber() )
+		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber(),"fringe_miningboom" )
 	planet.lua.settlements.humans:addGoodSupply(C.ORE,500,0.5,effectId)
 	planet.lua.settlements.humans:addGoodSupply(C.INDUSTRIAL,200,0.5,effectId)
 	planet.lua.settlements.humans:addGoodSupply(C.MODERN_INDUSTRIAL,100,0.5,effectId)
@@ -83,7 +83,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.humans.population=planet.lua.settlements.humans.population*0.99
 	
 	local effectId=planet:addActiveEffect("natives","Clashes between natives and human population lead to booming arm sales.",
-		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber() )
+		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber(),"fringe_nativeclashes" )
 	planet.lua.settlements.natives:addGoodDemand(C.BASIC_WEAPONS,200,3,effectId)
 end
 event.eventMessage="NEWS ALERT: Deadly clashes between natives and human settlers on ${world}, arm sales boom."

@@ -38,7 +38,7 @@ being disabled.
 See http://wiki.naev.org/wiki/Compiling_Nix for package lists for several
 distributions.
 
-Mac Dependencies are different, see [extras/macosx/COMPILE](/tree/master/extras/maxosx/COMPILE) for details.
+Mac Dependencies are different, see [extras/macosx/COMPILE](extras/maxosx/COMPILE) for details.
 
 ## COMPILING
 

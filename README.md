@@ -15,7 +15,7 @@ Nox Imperii follows the footstep of classics such as Elite, Freelancer or most c
 
    Hardware requirements can also be found on the website.
 
-## DEPENDENCIES
+## Dependencies
 
 Naev's dependencies are intended to be relatively common. In addition to
 an OpenGL-capable graphics card and driver, Naev requires the following:
@@ -40,7 +40,7 @@ distributions.
 
 Mac Dependencies are different, see [extras/macosx/COMPILE](extras/macosx/COMPILE) for details.
 
-## COMPILING
+## Compiling
 
 Run:
 
@@ -52,10 +52,10 @@ Run:
 If you need special settings you should pass flags to configure, using -h
 will tell you what it supports.
 
-On Mac OS X, see [extras/macosx/COMPILE](extras/maxosx/COMPILE) for details. Uses Xcode, not gcc.
+On Mac OS X, see [extras/macosx/COMPILE](extras/macosx/COMPILE) for details. Uses Xcode, not gcc.
 
 
-## INSTALLATION
+## Installation
 
 Naev currently supports make install which will install everything that
 is needed.
@@ -63,7 +63,7 @@ is needed.
 If you wish to create a .desktop for your desktop environment, logos
 from 16x16 to 256x256 can be found in [extras/logos](extras/logos)
 
-## CRASHES & PROBLEMS
+## Crashed & Problems
 
 Please take a look at the FAQ (linked below) before submitting a new
 bug report, as it covers a number of common gameplay questions and
@@ -72,7 +72,7 @@ common issues.
 If Naev is crashing during gameplay, please file a bug report after
 reading http://wiki.naev.org/wiki/Bugs
 
-## KEYBINDINGS
+## Keybindings
 
 As of 0.5.0, it's possible to set keybindings in-game which is generally
 more convenient than editing the configuration file.
@@ -98,6 +98,7 @@ joystick = "Precision" # in conf.lua
 ```
 
 ### Syntax
+```
 KEY_IDENTIFIER = { type = KEY_TYPE, key = KEY_NUMBER,
   [reverse = KEY_REVERSE, mod = MOD_IDENTIFIER] }
 KEY_IDENTIFIER is the identifier given below
@@ -109,5 +110,8 @@ KEY_REVERSE is whether it is reversed or not, which is only useful
 MOD_IDENTIFIER is the sodifier to take into account, can be one of:
   lctrl, rctrl, lshift, rshift, lmeta, rmeta, ralt, lalt
   It isn't used with joystick bindings.
+```
 #### Example
+```
 accel = { type = "jbutton", key = 0 }
+```

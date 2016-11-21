@@ -4,7 +4,7 @@ The Empire of Terra, dominant power of this sector of the Galaxy, is in decline 
 
 Nox Imperii follows the footstep of classics such as Elite, Freelancer or most closely Escape Velocity to put you in command of a spaceship with a Galaxy to explore. Trade, fight, perform missions, survey the wilderness, turn to piracy, it's all up to you - a huge, mostly random Galaxy awaits!
 
-![Nox Imperii Planets](/extras/webimages/1_1_planets.png "Nox Imperii Planets"
+![Nox Imperii Planets](/extras/webimages/1_1_planets.png "Nox Imperii Planets")
 
 
 ## Roots in Naev

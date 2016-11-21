@@ -1,8 +1,11 @@
-# Nox Imperii Overview
+# Nox Imperii
 
 The Empire of Terra, dominant power of this sector of the Galaxy, is in decline after centuries of expansion. As weak emperors and widespread corruption weaken the Terran realm, beyond the Imperial borders barbarian forces gather strength. Meanwhile, opposite Betelgeuse, the Empire's great rival prepares to challenge Imperial supremacy. Kicked out of Navy school but proud owner of a derelict shuttle, will you help the Empire recover, join force with its rival, or simply focus on surviving and prospering in a Galaxy that has seen better days?
 
 Nox Imperii follows the footstep of classics such as Elite, Freelancer or most closely Escape Velocity to put you in command of a spaceship with a Galaxy to explore. Trade, fight, perform missions, survey the wilderness, turn to piracy, it's all up to you - a huge, mostly random Galaxy awaits!
+
+![Nox Imperii Planets](/extras/webimages/1_1_planets.png "Nox Imperii Planets"
+
 
 ## Roots in Naev
 

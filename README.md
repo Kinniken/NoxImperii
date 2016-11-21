@@ -6,7 +6,7 @@ Nox Imperii follows the footstep of classics such as Elite, Freelancer or most c
 
 ## Roots in Naev
 
-   Nox Imperii is a fork of Naev. Most of the code and all the technical
+   Nox Imperii is a fork of [Naev](https://github.com/naev/naev). Most of the code and all the technical
    setup comes from it. For more information on Naev, please visit
    http://wiki.naev.org/wiki/Main_Page
    or view the man page (If you're on a Unix-like system).

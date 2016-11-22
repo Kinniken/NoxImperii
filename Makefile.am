@@ -16,7 +16,7 @@ appdata_DATA = noximperii.appdata.xml
 dist_pkgdata_DATA = noximperii-confupdate.sh
 
 dist_man6_MANS = noximperii.6
-dist_doc_DATA = AUTHORS README TODO LICENSE
+dist_doc_DATA = AUTHORS README.md TODO LICENSE
 
 DATA_ARCHIVE = ndata.zip
 if HAVE_UTILS

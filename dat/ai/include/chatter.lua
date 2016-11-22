@@ -28,7 +28,7 @@ end
 function chatter(sys,callingShip)
 	p = player.pilot()
    
-   if p:exists() then
+   if p:exists() and chatter_chance then
       r = rnd.rnd(100)
 
       if (r > chatter_chance) then

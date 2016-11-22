@@ -101,13 +101,9 @@ function taunt ( target, offense )
    if offense then
       taunts = {
             "Prepare to be boarded!",
-            "Yohoho!",
-            "Arr!",
-            "What's a ship like you doing in a place like this?",
             "Prepare to have your booty plundered!",
             "Give me your credits or die!",
             "Your ship's mine!",
-            "Oh ho ho, what do I see here?",
             "You may want to send that distress signal now.",
             "It's time to die.",
             "Back so soon?",
@@ -153,3 +149,20 @@ function taunt ( target, offense )
    ai.pilot():comm(target, taunts[ rnd.rnd(1,#taunts) ])
 end
 
+chatter_chance = 50
+chatter_trade_weight = 0
+chatter_random_weight = 10
+chatter_tag_weight = 10
+
+add_chatter("What's a ship like you doing in a place like this?")
+add_chatter("Oh ho ho, what do I see here?")
+add_chatter("Yohoho!")
+add_chatter("Arr!")
+add_chatter("You haven't lived till you've tried piracy!")
+add_chatter("Ma always said crime paid.")
+
+-- event chatter
+add_tag_chatter("event_empire_miningboom","You've heard of the mining boom on ${planet}, system ${system}? I can't wait to plunder the ships from there!")
+add_tag_chatter("event_fringe_miningboom","You've heard of the mining boom on ${planet}, system ${system}? I can't wait to plunder the ships from there!")
+add_tag_chatter("event_empire_newgovernor","The governor of ${planet} in system ${system} has been replaced... How annoying, he was so easy to bribe.")
+add_tag_chatter("event_empire_pirateattacks","My brother took part in the raid on ${planet} in system ${system}. It was great fun.")

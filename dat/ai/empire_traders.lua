@@ -1,6 +1,5 @@
 include("dat/ai/tpl/generic.lua")
 include("dat/ai/personality/trader.lua")
-include("dat/ai/include/chatter.lua")
 
 formation_default_type = "trade column"
 formation_tightness = 50
@@ -47,7 +46,7 @@ function create ()
    create_post()
 end
 
-chatter_chance = 100
+chatter_chance = 20
 chatter_trade_weight = 10
 chatter_random_weight = 10
 chatter_tag_weight = 10

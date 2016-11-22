@@ -1,7 +1,11 @@
 include "dat/ai/include/formation_ai.lua"
+include("dat/ai/include/chatter.lua")
 
 -- Default task to run when idle
 function idle ()
+
+  chatter(system.cur(),ai.pilot())
+
    if mem.is_fleet_leader == true and not mem.fleet then
       create_fleet(ai.pilot())
   elseif mem.formation_leader_id ~= nil then

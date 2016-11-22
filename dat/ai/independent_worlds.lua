@@ -1,6 +1,5 @@
 include("dat/ai/tpl/generic.lua")
 include("dat/ai/personality/patrol.lua")
-include("dat/ai/include/chatter.lua")
 
 -- Settings
 mem.armour_run = 40
@@ -62,7 +61,7 @@ function taunt ( target, offense )
    ai.pilot():comm( target, taunts[ rnd.int(1,#taunts) ] )
 end
 
-chatter_chance = 100
+chatter_chance = 20
 chatter_trade_weight = 0
 chatter_random_weight = 10
 chatter_tag_weight = 10

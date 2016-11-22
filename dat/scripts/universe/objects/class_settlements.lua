@@ -128,8 +128,8 @@ settlement_class.settlement_prototype = {
 			    			table.remove(self.suppressGoodSupply, j)
 			    		end
 			    	end
-			    	if activeEffects[i].type then
-			    		c_planet:clearTag("event_"..activeEffects[i].type)
+			    	if self.activeEffects[i].type then
+			    		c_planet:clearTag("event_"..self.activeEffects[i].type)
 			    	end
 
 			        table.remove(self.activeEffects, i)

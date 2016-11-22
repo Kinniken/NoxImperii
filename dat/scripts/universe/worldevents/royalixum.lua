@@ -9,7 +9,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	textData.casualties=gh.prettyLargeNumber(planet.lua.settlements.royalixumites.population*0.05)
 	planet.lua.settlements.royalixumites.population=planet.lua.settlements.royalixumites.population*0.95
 	
-	local effectId=planet.lua.settlements.royalixumites:addActiveEffect("The recent bombing is increasing demands for medicine and food.",
+	local effectId=planet:addActiveEffect("royalixumites","The recent bombing is increasing demands for medicine and food.",
 		(time.get() + self.duration):tonumber(), "royalixum_bombingraid" )
 	planet.lua.settlements.royalixumites:addGoodDemand(C.MEDICINE,200,3,effectId)
 	planet.lua.settlements.royalixumites:addGoodDemand(C.FOOD,200,3,effectId)
@@ -33,7 +33,7 @@ event.weightValidity=function(planet)
 	return (planet.c:faction()==faction.get(G.ROYAL_IXUM) and planet.lua.settlements.royalixumites and planet.lua.settlements.royalixumites:hasTag("slums") and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
-	local effectId=planet.lua.settlements.royalixumites:addActiveEffect("Ongoing riots are reducing consumer goods supply.",
+	local effectId=planet:addActiveEffect("royalixumites","Ongoing riots are reducing consumer goods supply.",
 		(time.get() + self.duration):tonumber(), "royalixum_riots" )
 	planet.lua.settlements.royalixumites:reduceGoodSupply(C.CONSUMER_GOODS,500,3,effectId)
 	planet.lua.settlements.royalixumites:reduceGoodSupply(C.PRIMITIVE_CONSUMER,500,3,effectId)
@@ -54,7 +54,7 @@ event.weightValidity=function(planet)
 	return (planet.c:faction()==faction.get(G.ROYAL_IXUM) and planet.lua.settlements.royalixumites and planet.lua.settlements.royalixumites:hasTag("weaponcentre") and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
-	local effectId=planet.lua.settlements.royalixumites:addActiveEffect("Important Imperial military help is flooding the market with weapons.",
+	local effectId=planet:addActiveEffect("royalixumites","Important Imperial military help is flooding the market with weapons.",
 		(time.get() + self.duration):tonumber(), "royalixum_imperialhelp" )
 	planet.lua.settlements.royalixumites:addGoodSupply(C.MODERN_ARMAMENT,300,0.5,effectId)
 	planet.lua.settlements.royalixumites:addGoodSupply(C.ARMAMENT,1000,0.5,effectId)

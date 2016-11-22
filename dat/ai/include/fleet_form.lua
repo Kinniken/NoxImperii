@@ -336,7 +336,7 @@ function Forma:assignCoords()
          if self.class_count[ship_group] == 1 then -- If there's only one ship in this specific class...
             angle = 0 --The angle needs to be zero.
          else -- If there's more than one ship in each class...
-            angle = ((count[ship_group]-1)*((math.pi*2)/(group_count[ship_group])))-(math.pi/2) -- 360° cover
+            angle = ((count[ship_group]-1)*((math.pi*2)/(group_count[ship_group])))-(math.pi/2) -- 360 cover
             count[ship_group] = count[ship_group] + 1 --Update the count
          end
          radius = group_radii[ship_group] --Assign the radius, defined above.

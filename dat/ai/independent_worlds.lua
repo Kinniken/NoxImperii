@@ -14,8 +14,7 @@ formation_sticky = 2
 -- Create function
 function create ()
 
-   -- Credits
-   --ai.setcredits( rnd.int(ai.pilot():ship():price()/300, ai.pilot():ship():price()/70) )
+   chatter(system.cur(),ai.pilot())
 
    -- Bribing
    bribe_no = {
@@ -62,3 +61,18 @@ function taunt ( target, offense )
    ai.pilot():comm( target, taunts[ rnd.int(1,#taunts) ] )
 end
 
+chatter_chance = 20
+chatter_trade_weight = 0
+chatter_random_weight = 10
+chatter_tag_weight = 10
+
+add_chatter("I am the law here, not the Emperor.")
+add_chatter("Disorder will not be tolerated.")
+add_chatter("We are Humanity's first line of defense.")
+add_chatter("Remember this is not the Empire anymore.")
+
+
+-- event chatter
+add_tag_chatter("event_fringe_barbarian_raid","Barbarian raids on ${planet}, system ${system}, will be stopped, no matter the cost!")
+add_tag_chatter("event_fringe_nativeclashes","Rest assured that the native uprising on ${planet} will be thoroughly crushed.")
+add_tag_chatter("event_fringe_alienfungus","The alien fungus threat on ${planet} in ${system} is being investigated. Please return to your normal activities.")

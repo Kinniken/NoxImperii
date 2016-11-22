@@ -13,7 +13,7 @@ function create()
 		local nbCleared=0
 
 		for k2,settlement in pairs(planet.lua.settlements) do
-			nbCleared=nbCleared+settlement:clearObsoleteEffects()
+			nbCleared=nbCleared+settlement:clearObsoleteEffects(c_planet)
 		end
 
 		if (nbCleared>0) then--things have changed, need to recalculate

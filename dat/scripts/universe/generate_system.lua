@@ -79,6 +79,7 @@ function starGenerator.createAroundStar(c_sys,nextlevel,level,visited)
 						p.c=planet.get(p.name)
 
 						generatePlanetServices(p)
+						p:initTags()
 
 						p.lua.initialized=true
 						p:save()

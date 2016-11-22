@@ -10,7 +10,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.holyflame.population=planet.lua.settlements.holyflame.population*0.99
 	planet.lua.settlements.holyflame.industry=planet.lua.settlements.holyflame.industry*0.95
 	
-	local effectId=planet.lua.settlements.holyflame:addActiveEffect("Reconstruction following the bombings is causing strong demand in industrial goods.",
+	local effectId=planet:addActiveEffect("holyflame","Reconstruction following the bombings is causing strong demand in industrial goods.",
 		(time.get() + self.duration):tonumber(), "holyflame_bombingraid" )
 	planet.lua.settlements.holyflame:addGoodDemand(C.INDUSTRIAL,50,3,effectId)
 	planet.lua.settlements.holyflame:addGoodDemand(C.PRIMITIVE_INDUSTRIAL,20,3,effectId)
@@ -35,7 +35,7 @@ event.weightValidity=function(planet)
 	return (planet.c:faction()==faction.get(G.HOLY_FLAME) and planet.lua.settlements.holyflame and planet.lua.settlements.holyflame:hasTag("slums") and planet.lua.planet==nil)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
-	local effectId=planet.lua.settlements.holyflame:addActiveEffect("Protests against the war paralyse consumer goods production.",
+	local effectId=planet:addActiveEffect("holyflame","Protests against the war paralyse consumer goods production.",
 		(time.get() + self.duration):tonumber(), "holyflame_protests" )
 	planet.lua.settlements.holyflame:reduceGoodSupply(C.CONSUMER_GOODS,500,3,effectId)
 	planet.lua.settlements.holyflame:reduceGoodSupply(C.PRIMITIVE_CONSUMER,500,3,effectId)
@@ -61,7 +61,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.holyflame.population=planet.lua.settlements.holyflame.population*0.95
 	textData.minorityReligion=planet.lua.settlements.holyflame.minorityReligion
 
-	local effectId=planet.lua.settlements.holyflame:addActiveEffect(gh.format("Departure of skilled ${minorityReligion} Ixumites is reducing industrial production.",textData),
+	local effectId=planet:addActiveEffect("holyflame",gh.format("Departure of skilled ${minorityReligion} Ixumites is reducing industrial production.",textData),
 		(time.get() + self.duration):tonumber(), "holyflame_minoritydeparture" )
 	planet.lua.settlements.holyflame:reduceGoodSupply(C.INDUSTRIAL,500,3,effectId)
 	planet.lua.settlements.holyflame:reduceGoodSupply(C.MODERN_INDUSTRIAL,500,3,effectId)
@@ -83,7 +83,7 @@ event.weightValidity=function(planet)
 end
 event.applyOnWorldCustom=function(self,planet,textData)
 
-	local effectId=planet.lua.settlements.holyflame:addActiveEffect("A major religious festival is driving up demand for consumer goods.",
+	local effectId=planet:addActiveEffect("holyflame","A major religious festival is driving up demand for consumer goods.",
 		(time.get() + self.duration):tonumber(), "holyflame_religiousfestival" )
 	planet.lua.settlements.holyflame:addGoodSupply(C.CONSUMER_GOODS,50,3,effectId)
 	planet.lua.settlements.holyflame:addGoodSupply(C.PRIMITIVE_CONSUMER,50,3,effectId)

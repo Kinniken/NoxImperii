@@ -34,6 +34,7 @@
 #include "tech.h"
 #include "space.h"
 #include "land.h"
+#include "array.h"
 
 
 /* Planet metatable methods */
@@ -83,6 +84,9 @@ static int planetL_addOrUpdateTradeData( lua_State *L );
 static int planetL_setTradeBuySellRation( lua_State *L );
 static int planetL_setFactionExtraPresence( lua_State *L );
 static int planetL_refreshAllTradeInfo( lua_State *L );
+static int planetL_addTag( lua_State *L);
+static int planetL_clearTag( lua_State *L);
+static int planetL_getTags( lua_State *L );
 static const luaL_reg planet_methods[] = {
    { "cur", planetL_cur },
    { "get", planetL_get },
@@ -131,6 +135,9 @@ static const luaL_reg planet_methods[] = {
    { "setTradeBuySellRation", planetL_setTradeBuySellRation },
    { "setFactionExtraPresence", planetL_setFactionExtraPresence },
    { "refreshAllTradeInfo", planetL_refreshAllTradeInfo },
+   { "addTag", planetL_addTag },
+   { "clearTag", planetL_clearTag },
+   { "tags", planetL_getTags },
    {0,0}
 }; /**< Planet metatable methods. */
 static const luaL_reg planet_cond_methods[] = {
@@ -177,6 +184,9 @@ static const luaL_reg planet_cond_methods[] = {
    { "setDescHistory", planetL_setDescHistory },
    { "addOrUpdateTradeData", planetL_addOrUpdateTradeData },
    { "setTradeBuySellRation", planetL_setTradeBuySellRation },
+   { "addTag", planetL_addTag },
+   { "clearTag", planetL_clearTag },
+   { "tags", planetL_getTags },
    {0,0}
 }; /**< Read only planet metatable methods. */
 
@@ -1548,6 +1558,11 @@ static int planetL_setTradeBuySellRation( lua_State *L )
 	return 0;
 }
 
+/**
+ * @brief refreshes all the trade info of all the planets (the adjusted prices)
+ *
+ * Intended for debug use.
+ */
 static int planetL_refreshAllTradeInfo( lua_State *L ) {
 
 	(void)L;
@@ -1555,4 +1570,72 @@ static int planetL_refreshAllTradeInfo( lua_State *L ) {
 	planet_refreshAllPlanetAdjustedPrices();
 
 	return 0;
+}
+
+/**
+ * @brief adds a tag to a the provided planet.
+ *
+ * @luafunc addTag( p, tag)
+ */
+static int planetL_addTag( lua_State *L) {
+
+	Planet *p;
+
+	p = luaL_validplanet(L,1);
+	const char* tag=lua_tostring(L, 2);
+
+	planet_addTag(p, tag);
+
+	return 0;
+}
+
+/**
+ * @brief clears a tag on the provided planet, if it was set.
+ *
+ * @luafunc clearTag( p, tag)
+ */
+static int planetL_clearTag( lua_State *L) {
+
+	Planet *p;
+
+	p = luaL_validplanet(L,1);
+
+	if (lua_gettop(L) < 2 || lua_isnil(L,2) ) {
+		NLUA_INVALID_PARAMETER(L);
+		return 0;
+	}
+
+	const char* tag=lua_tostring(L, 2);
+
+	planet_clearTag(p, tag);
+
+	return 0;
+}
+
+/**
+ * @brief get list of planet's tags
+ *
+ * @usage if p:tags()["some_event_tag"] then -- Planet has this tag.
+ *    @luatparam Planet p Planet to get the tags of.
+ *    @luatreturn table Table containing all the tags as {tag1=tag1, tag2=tag2]...
+ * @luafunc tags( p )
+ */
+static int planetL_getTags( lua_State *L )
+{
+   int i;
+   Planet *p;
+   char *tag;
+   p = luaL_validplanet(L,1);
+
+   /* Return result in table */
+   lua_newtable(L);
+
+   for (i=0; i<array_size(p->tags); i++) {
+	   tag = p->tags[i];
+
+	   lua_pushstring( L, tag );//key
+	   lua_pushstring( L, tag );//value
+	   lua_settable(   L, -3 );
+   }
+   return 1;
 }

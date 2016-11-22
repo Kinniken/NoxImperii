@@ -556,7 +556,7 @@ local function generatePresences(planet,sectorStability,planet,bestAgriculture,b
 		planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount/4,range)
 
 		if (bestStability<0.6) then
-			local amount=100*(1.2-bestStability*2)/sectorStability
+			local amount=50*(1.2-bestStability*2)/sectorStability
 			local range=2
 
 			if amount<5 then

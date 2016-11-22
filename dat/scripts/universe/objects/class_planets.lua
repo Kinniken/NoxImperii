@@ -53,19 +53,19 @@ planet_c_debug_prototype.__index = planet_c_debug_prototype
 
 local planet_prototype = {
 	isCivilized=function(self)
-	if (not self.lua or not self.lua.settlements) then
-		return false
-	end
-	return (gh.countMembers(self.lua.settlements)>0)
+		if (not self.lua or not self.lua.settlements) then
+			return false
+		end
+		return (gh.countMembers(self.lua.settlements)>0)
 	end,
 	civilizationName=function(self)
-	for k,v in pairs (self.lua.settlements) do
-		return k
-	end
-	return nil
+		for k,v in pairs (self.lua.settlements) do
+			return k
+		end
+		return nil
 	end,
 	areNativeCivilized=function(self)
-	return (self.star.populationTemplate.nativeCivilization>0.5)
+		return (self.star.populationTemplate.nativeCivilization>0.5)
 	end,
 	addHistory=function(self,msg,evttime)
 		if (not self.lua.worldHistory) then
@@ -77,10 +77,13 @@ local planet_prototype = {
 	self.lua.worldHistory[#self.lua.worldHistory+1]={time=evttime,msg=msg}
 	end,
 	addTag=function(self,tag)
-	for k,v in pairs(self.lua.tags) do
-		if v==tag then return end
-	end
-	self.lua.tags[#self.lua.tags+1]=tag
+		for k,v in pairs(self.lua.tags) do
+			if v==tag then return end
+		end
+		self.lua.tags[#self.lua.tags+1]=tag
+		if (self.c) then
+			self.c:addTag(tag)
+		end
 	end,
 	removeTag=function(self,tag)
 		for k,v in pairs(self.lua.tags) do--assumes tag present only once
@@ -88,16 +91,72 @@ local planet_prototype = {
 				table.remove(self.lua.tags, k)
 			end
 		end
-		end,
-		hasTag=function(self,tag)
+		if (self.c) then
+			self.c:clearTag(tag)
+		end
+	end,
+	hasTag=function(self,tag)
 		for k,v in pairs(self.lua.tags) do
 			if (v==tag) then
 				return true
 			end
 		end
 		return false
-		end,
-		save=function (self)
+	end,
+	addSettlementTag=function(self,settlement,tag)
+		if (settlement == "natives" and self.lua.natives) then
+			self.lua.natives:addTag(tag)
+		elseif (self.lua.settlements[settlement]) then
+			self.lua.settlements[settlement]:addTag(tag)
+		end
+
+		if (self.c) then
+			self.c:addTag(tag)
+		end
+	end,
+	removeSettlementTag=function(self,settlement,tag)
+		if (settlement == "natives" and self.lua.natives) then
+			self.lua.natives:removeTag(tag)
+		elseif (self.lua.settlements[settlement]) then
+			self.lua.settlements[settlement]:removeTag(tag)
+		end
+
+		if (self.c) then
+			self.c:clearTag(tag)
+		end
+	end,
+	initTags=function(self)
+		--loop through settlements to copie tags to planet (for faster C-side references)
+		for _,v in pairs(self.lua.settlements) do
+			for _,tag in pairs(v.tags) do
+				self.c:addTag(tag)
+			end
+		end
+
+		if (self.lua.natives) then
+			for _,tag in pairs(self.lua.natives.tags) do
+				self.c:addTag(tag)
+			end
+		end
+	end,
+	addActiveEffect=function(self,settlement,desc,timeLimit,event_type)
+		local s
+		if (settlement == "natives" and self.lua.natives) then
+			s=self.lua.natives
+		elseif (self.lua.settlements[settlement]) then
+			s=self.lua.settlements[settlement]
+		end
+
+		if not s then
+			error("Unknown settlement "..settlement.." for world: "..self.c:name())
+		else
+			s:addActiveEffect(desc,timeLimit,event_type)
+			if event_type then
+				self.c:addTag("event_"..event_type)
+			end
+		end
+	end,
+	save=function (self)
 		setPlanetLuaData(self.c,self.lua)
 	end
 }

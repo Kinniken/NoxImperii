@@ -132,6 +132,8 @@ local function dumpvalue(v, write, level)
 		return write('nil')
 	elseif t=='table' then
 		return dumptable(v, write, level)
+	elseif t=='userdata' then
+		return nil
 	else
 		return nil,"unsupported value type '"..t.."'".." for key: "..k
 	end

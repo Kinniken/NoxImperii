@@ -335,7 +335,9 @@ void planet_addOrUpdateExtraPresence(Planet *p,int factionId,double amount,int r
 	for (i=0;i<p->nextrapresences && !handled;i++) {
 		if (p->extraPresenceFactions[i]==factionId) {
 			p->extraPresenceAmounts[i]=amount;
-			p->extraPresenceRanges[i]=range;
+
+			if (p->extraPresenceRanges[i]<range)
+				p->extraPresenceRanges[i]=range;
 			handled=1;
 		}
 	}
@@ -1162,6 +1164,10 @@ static void system_scheduler( double dt, int init )
       /* Spawning is disabled for this faction. */
       if (p->disabled)
          continue;
+
+      /* influence must be strictly positive (can be nagetive if supressed by negative values) */
+      if (p->value < 1)
+    	  continue;
 
       /* Run the appropriate function. */
       if (init) {

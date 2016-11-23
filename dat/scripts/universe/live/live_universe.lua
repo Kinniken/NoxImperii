@@ -522,6 +522,10 @@ local function generatePresences(planet,sectorStability,planet,bestAgriculture,b
 	local f=planet.c:faction()
 	local factionName=""
 
+	local x,y = planet.c:system():coords()
+
+	local zone=get_zone({x=x,y=y})
+
 	if (f and not (f==faction.get(G.NATIVES))) then
 		factionName=f:name()
 	end
@@ -555,7 +559,7 @@ local function generatePresences(planet,sectorStability,planet,bestAgriculture,b
 		planet.c:setFactionExtraPresence(G.IMPERIAL_TRADERS,amount,range)
 		planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount/4,range)
 
-		if (bestStability<0.6) then
+		if (bestStability<0.6 and not zone.special.no_pirate) then
 			local amount=50*(1.2-bestStability*2)/sectorStability
 			local range=2
 
@@ -588,7 +592,7 @@ local function generatePresences(planet,sectorStability,planet,bestAgriculture,b
 		planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount,range)
 
 
-		if (bestStability<0.6) then
+		if (bestStability<0.6 and not zone.special.no_pirate) then
 			local amount=150*(1.2-bestStability*2)/sectorStability
 			local range=2
 
@@ -620,7 +624,7 @@ local function generatePresences(planet,sectorStability,planet,bestAgriculture,b
 
 		planet.c:setFactionExtraPresence(G.ARDAR_TRADERS,amount,range)
 
-		if (bestStability<0.5) then
+		if (bestStability<0.5 and not zone.special.no_pirate) then
 			local amount=50*(1-bestStability*2)/sectorStability
 			local range=2
 
@@ -652,7 +656,7 @@ local function generatePresences(planet,sectorStability,planet,bestAgriculture,b
 
 		planet.c:setFactionExtraPresence(G.BETELGIAN_TRADERS,amount*3,range)
 
-		if (bestStability<0.3) then
+		if (bestStability<0.3 and not zone.special.no_pirate) then
 			local amount=100*(1-bestStability*3)/sectorStability
 			local range=2
 
@@ -686,7 +690,7 @@ local function generatePresences(planet,sectorStability,planet,bestAgriculture,b
 		planet.c:setFactionExtraPresence(G.IMPERIAL_TRADERS,amount,range)
 		planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount/2,range)
 
-		if (bestStability<0.5) then
+		if (bestStability<0.5 and not zone.special.no_pirate) then
 			local amount=100*(1-bestStability*2)/sectorStability
 			local range=2
 
@@ -719,7 +723,7 @@ local function generatePresences(planet,sectorStability,planet,bestAgriculture,b
 		planet.c:setFactionExtraPresence(G.ARDAR_TRADERS,amount,range)
 		planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount/2,range)
 
-		if (bestStability<0.5) then
+		if (bestStability<0.5 and not zone.special.no_pirate) then
 			local amount=100*(1-bestStability*2)/sectorStability
 			local range=2
 
@@ -733,12 +737,15 @@ local function generatePresences(planet,sectorStability,planet,bestAgriculture,b
 
 
   	if (factionName==G.BARBARIANS) then
-  		range=range*3
+  		range=range*4
   		presence=math.pow(bestPop/10,1/3.4)*bestMilitary/sectorStability
 
   		planet.c:setFactionPresence(factionName,presence,range)
   	end
 
+  	if (zone.special.no_pirate) then
+  		planet.c:setFactionExtraPresence(G.PIRATES,-10000,0)
+  	end
 
 end
 

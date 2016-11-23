@@ -5505,7 +5505,7 @@ void planet_clearTag(Planet* p,const char* tag) {
 
 	for (i=0;i<array_size(p->tags);i++) {
 		if (strcmp(p->tags[i],tag) == 0) {
-			array_erase(p->tags,p->tags[i],p->tags[i+1]);
+			array_erase(&p->tags,&p->tags[i],&p->tags[i+1]);
 			return;
 		}
 	}

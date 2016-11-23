@@ -79,6 +79,17 @@ __inline__ static _private_container *_array_private_container(void *a)
    _private_container *c = (_private_container *)a - 1;
 
 #ifdef DEBUGGING
+
+   if (c->_sentinel != SENTINEL) {
+	   /* ugly, but unlike asserts gives you the stack when connected with a debugger. */
+	   /* convoluted /0 error to avoid warnings when compiling. */
+	   int i = 0;
+
+	   if (!i) {
+		   i=1/i;
+	   }
+   }
+
    assert("Sentinel not found. Use array_create() to create the array." && (c->_sentinel == SENTINEL));
 #endif
 

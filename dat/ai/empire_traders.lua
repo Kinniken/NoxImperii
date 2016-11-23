@@ -46,7 +46,7 @@ function create ()
    create_post()
 end
 
-chatter_chance = 20
+chatter_chance = 40
 chatter_trade_weight = 10
 chatter_random_weight = 10
 chatter_tag_weight = 10

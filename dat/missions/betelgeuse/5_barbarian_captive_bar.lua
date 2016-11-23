@@ -124,7 +124,6 @@ function land_target ()
 
        tk.msg( gh.format(title[4],stringData), gh.format(text[4],stringData) )
 
-       misn.markerRm(landmarker)
        landmarker = misn.markerAdd( returnPlanet:system(), "plot" )
        misn.osdActive(3)
 

@@ -166,3 +166,5 @@ add_tag_chatter("event_empire_miningboom","You've heard of the mining boom on ${
 add_tag_chatter("event_fringe_miningboom","You've heard of the mining boom on ${planet}, system ${system}? I can't wait to plunder the ships from there!")
 add_tag_chatter("event_empire_newgovernor","The governor of ${planet} in system ${system} has been replaced... How annoying, he was so easy to bribe.")
 add_tag_chatter("event_empire_pirateattacks","My brother took part in the raid on ${planet} in system ${system}. It was great fun.")
+add_tag_chatter("event_fringe_barbarian_raid","Barbarians have raided ${planet}, system ${system} again. This foreign competition is unacceptable! What is the Emperor doing?")
+add_tag_chatter("event_empire_barbarian_raid","Barbarians have raided ${planet}, system ${system} again. This foreign competition is unacceptable! What is the Emperor doing?")

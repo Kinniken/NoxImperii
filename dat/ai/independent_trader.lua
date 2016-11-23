@@ -50,7 +50,7 @@ function create ()
    create_post()
 end
 
-chatter_chance = 20
+chatter_chance = 40
 chatter_trade_weight = 10
 chatter_random_weight = 10
 chatter_tag_weight = 10
@@ -80,7 +80,6 @@ add_tag_chatter("event_fringe_isolation","${planet} is isolating itself even mor
 add_tag_chatter("event_fringe_miningboom","Last time I was on ${planet} in system ${system}, they were in the middle of an impressive mining boom! It's great to hear good economic news for a change.")
 add_tag_chatter("event_fringe_nativeclashes","I'd avoid ${planet} in system ${system} right now if I was you. There are reports of major clashes with the natives.")
 add_tag_chatter("event_fringe_alienfungus","Have you heard about the alien fungus ruining crops on ${planet} in system ${system}? It's horrible, but also a good way to sell food for good prices.")
-
 
 -- world tags chatter
 add_tag_chatter("buddhist","I'm from ${planet} in system ${system}. Yes, I'm Buddhist, but don't think I don't fight back when attacked.")

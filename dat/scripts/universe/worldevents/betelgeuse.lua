@@ -34,7 +34,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	textData.house=nameGenerator.generateNameBetelgeuse()
 
 	local effectId=planet:addActiveEffect("betelgeuse","The exploration fleet is selling all kinds of native goods.",
-		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber(), "betelgeuse_fleetleaving" )
+		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber(), "betelgeuse_fleetreturning" )
 
 	planet.lua.settlements.betelgeuse:addGoodSupply(C.NATIVE_ARTWORK,200,1,effectId)
 	if (math.random()<0.5) then planet.lua.settlements.betelgeuse:addGoodSupply(C.NATIVE_SCULPTURES,200,1,effectId) end

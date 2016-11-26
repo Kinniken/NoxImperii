@@ -657,7 +657,7 @@ int menu_askQuit (void)
 
    /* Ask if should quit. */
    menu_Open( MENU_ASKQUIT );
-   if (dialogue_YesNoRaw( "Quit Naev", "Are you sure you want to quit Naev?" )) {
+   if (dialogue_YesNoRaw( "Quit Nox Imperii", "Are you sure you want to quit Nox Imperii?" )) {
       exit_game();
       return 1;
    }
@@ -665,4 +665,3 @@ int menu_askQuit (void)
 
    return 0;
 }
-

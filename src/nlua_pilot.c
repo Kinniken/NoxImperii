@@ -113,6 +113,7 @@ static int pilotL_setTemp( lua_State *L );
 static int pilotL_setHealth( lua_State *L );
 static int pilotL_setEnergy( lua_State *L );
 static int pilotL_setNoboard( lua_State *L );
+static int pilotL_setNofightboard( lua_State *L );
 static int pilotL_setNodisable( lua_State *L );
 static int pilotL_setSpeedLimit( lua_State *L);
 static int pilotL_matchVelocity( lua_State *L );
@@ -187,6 +188,7 @@ static const luaL_reg pilotL_methods[] = {
    { "setHealth", pilotL_setHealth },
    { "setEnergy", pilotL_setEnergy },
    { "setNoboard", pilotL_setNoboard },
+   { "setNofightboard", pilotL_setNofightboard },
    { "setNodisable", pilotL_setNodisable },
    { "setSpeedLimit", pilotL_setSpeedLimit },
    { "matchVelocity", pilotL_matchVelocity },
@@ -2939,6 +2941,38 @@ static int pilotL_setNoboard( lua_State *L )
    return 0;
 }
 
+
+/**
+ * @brief Sets the ability to board the pilot without a fight.
+ *
+ * No parameter is equivalent to true.
+ *
+ * @usage p:setNofightboard( true ) -- Pilot can be board without a fight
+ *
+ *    @luatparam Pilot p Pilot to set free boarding.
+ *    @luatparam[opt=true] number nofight
+ * @luafunc setNofightboard( p, nofight )
+ */
+static int pilotL_setNofightboard( lua_State *L )
+{
+   Pilot *p;
+   int disable;
+
+   /* Handle parameters. */
+   p  = luaL_validpilot(L,1);
+   if (lua_gettop(L)==1)
+      disable = 1;
+   else
+      disable = lua_toboolean(L, 2);
+
+   /* See if should prevent boarding. */
+   if (disable)
+      pilot_setFlag(p, PILOT_BOARDED_SUCCESS);
+   else
+      pilot_rmFlag(p, PILOT_BOARDED_SUCCESS);
+
+   return 0;
+}
 
 /**
  * @brief Sets the ability of the pilot to be disabled.

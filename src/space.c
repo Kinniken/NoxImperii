@@ -104,6 +104,7 @@ StarSystem *cur_system = NULL; /**< Current star system. */
 glTexture *jumppoint_gfx = NULL; /**< Jump point graphics. */
 static glTexture *jumpbuoy_gfx = NULL; /**< Jump buoy graphics. */
 static lua_State *landing_lua = NULL; /**< Landing lua. */
+static lua_State *special_ships_lua = NULL; /** Special ships spawn */
 static int space_fchg = 0; /**< Faction change counter, to avoid unnecessary calls. */
 static int space_simulating = 0; /**< Are we simulating space? */
 
@@ -114,7 +115,7 @@ static int space_simulating = 0; /**< Are we simulating space? */
 int space_spawn = 1; /**< Spawn enabled by default. */
 extern int pilot_nstack;
 extern Pilot** pilot_stack;
-
+double special_ship_timer = 0;
 
 /*
  * Interference.
@@ -146,6 +147,7 @@ static void system_parseJumps( const xmlNodePtr parent , int transient);
 static int getPresenceIndex( StarSystem *sys, int faction );
 static void presenceCleanup( StarSystem *sys );
 static void system_scheduler( double dt, int init );
+static void space_loadSpecialShipSpawn(void);
 /* Render. */
 static void space_renderJumpPoint( JumpPoint *jp, int i );
 static void space_renderPlanet( Planet *p );
@@ -1290,6 +1292,101 @@ static void system_scheduler( double dt, int init )
    }
 }
 
+/**
+ * @brief Controls special ships spawning.
+ *
+ *    @param dt Current delta tick.
+ *    @param init Should be 1 to initialize the scheduler.
+ */
+static void system_special_scheduler( double dt, int init )
+{
+   int errf;
+   lua_State *L;
+
+
+   L = special_ships_lua;
+
+   /* Must have a valid scheduler. */
+   if (L==NULL)
+	   return;
+
+
+   /* Run the appropriate function. */
+   if (init) {
+
+	   special_ship_timer = 0;
+
+#if DEBUGGING
+	   lua_pushcfunction(L, nlua_errTrace);
+#endif /* DEBUGGING */
+	   lua_getglobal( L, "create" ); /* f */
+	   if (lua_isnil(L,-1)) {
+		   WARN("Lua Spawn script for special ships missing obligatory entry point 'create'." );
+#if DEBUGGING
+		   lua_pop(L,1);
+#else /* DEBUGGING */
+		   lua_pop(L,0);
+#endif /* DEBUGGING */
+		   return;
+	   }
+   }
+   else {
+	   /* Decrement dt, only continue  */
+	   special_ship_timer -= dt;
+	   if (special_ship_timer >= 0.)
+		   return;
+
+#if DEBUGGING
+	   lua_pushcfunction(L, nlua_errTrace);
+#endif /* DEBUGGING */
+	   lua_getglobal( L, "spawn" ); /* f */
+	   if (lua_isnil(L,-1)) {
+		   WARN("Lua Spawn script for special ships missing obligatory entry point 'spawn'." );
+#if DEBUGGING
+		   lua_pop(L,1);
+#else /* DEBUGGING */
+		   lua_pop(L,0);
+#endif /* DEBUGGING */
+		   return;
+	   }
+   }
+
+#if DEBUGGING
+   errf = -2;
+#else /* DEBUGGING */
+   errf = 0;
+#endif /* DEBUGGING */
+
+   /* Actually run the function. */
+   if (lua_pcall(L, 0, 1, errf)) { /* error has occurred */
+	   WARN("Lua Spawn script for special ships : %s", lua_tostring(L,-1));
+#if DEBUGGING
+	   lua_pop(L,1);
+#else /* DEBUGGING */
+	   lua_pop(L,0);
+#endif /* DEBUGGING */
+	   return;
+   }
+
+   /* Output is handled the same way. */
+   if (!lua_isnumber(L,-1)) {
+	   WARN("Lua spawn script for special ships failed to return timer value." );
+#if DEBUGGING
+	   lua_pop(L,2);
+#else /* DEBUGGING */
+	   lua_pop(L,1);
+#endif /* DEBUGGING */
+	   return;
+   }
+   special_ship_timer    += lua_tonumber(L,-1);
+
+#if DEBUGGING
+   lua_pop(L,2);
+#else /* DEBUGGING */
+   lua_pop(L,1);
+#endif /* DEBUGGING */
+}
+
 
 /**
  * @brief Mark when a faction changes.
@@ -1317,8 +1414,10 @@ void space_update( const double dt )
       return;
 
    /* If spawning is enabled, call the scheduler. */
-   if (space_spawn)
+   if (space_spawn) {
       system_scheduler( dt, 0 );
+      system_special_scheduler( dt, 0);
+   }
 
    /*
     * Volatile systems.
@@ -1526,6 +1625,7 @@ void space_init( const char* sysname )
 
    /* Call the scheduler. */
    system_scheduler( 0., 1 );
+   system_special_scheduler( 0., 1);
 
    /* we now know this system */
    sys_setFlag(cur_system,SYSTEM_KNOWN);
@@ -3623,6 +3723,8 @@ int space_load (void)
 
    space_refresh();
 
+   space_loadSpecialShipSpawn();
+
    return 0;
 }
 
@@ -5540,4 +5642,25 @@ void space_debugCheckDataIntegrity() {
 		}
 	}
 	WARN("Checked data integrity, value: %i",total);
+}
+
+
+static void space_loadSpecialShipSpawn(void) {
+	uint32_t bufsize;
+	char *buf;
+
+	lua_State *L;
+
+	special_ships_lua = nlua_newState();
+	nlua_loadStandard( special_ships_lua, 0 );
+	L           = special_ships_lua;
+	nlua_loadStandard(L, 1);
+	buf         = ndata_read( SPECIAL_SHIPS_DATA_PATH, &bufsize );
+	if (luaL_dobuffer(special_ships_lua, buf, bufsize, SPECIAL_SHIPS_DATA_PATH) != 0) {
+		WARN( "Failed to load special ship file: %s\n"
+				"%s\n"
+				"Most likely Lua file has improper syntax, please check",
+				SPECIAL_SHIPS_DATA_PATH, lua_tostring(L,-1));
+	}
+	free(buf);
 }

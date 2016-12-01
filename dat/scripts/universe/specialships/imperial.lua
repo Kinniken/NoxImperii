@@ -1,0 +1,2 @@
+
+special_ships[#special_ships+1] = {fleet="Imperial Traders Quicksilver",names={"Golden Wings","Fizzy Cocktail","Fine Bubble"},chatter={"How can you fly a ship without a swimming pool?","What do you think of my new yacht? A beauty, isn't she?","I don't understand how anybody can fly coach. Sharing a spaceship with strangers! Just imagine!"},locations={"empire_inner","hyades","empire_inner_sectors"},weight=10}

@@ -51,7 +51,9 @@
 #define LANDING_DATA_PATH        "dat/landing.lua" /**< Lua script containing landing data. */
 
 #define CREW_NAME_DATA_PATH      "dat/crew_names.lua" /**< Lua script containing name generators for crews. */
-#define FLEET_NAME_DATA_PATH      "dat/fleet_names.lua" /**< Lua script containing name generators for crews. */
+#define FLEET_NAME_DATA_PATH     "dat/fleet_names.lua" /**< Lua script containing name generators for crews. */
+
+#define SPECIAL_SHIPS_DATA_PATH  "dat/scripts/special_ships.lua" /**< Lua script containing the generation of special ships. */
 
 #define NEBULA_PATH              "nebula/" /**< Path to nebula files. */
 

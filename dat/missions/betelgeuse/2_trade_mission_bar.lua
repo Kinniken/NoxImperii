@@ -19,10 +19,10 @@ osd_msg["__save"] = true
 title = {}  --stage titles
 text = {}   --mission text
 
-title[1] = "Exotic Tastes"
+title[1] = "Gourmet Tastes"
 text[1] = [[He notices you approaching and turns toward you. "Ahah, the resourceful ${playerName}! You've come to sort out my problems for a very reasonable fee, have you? You are in luck! Lord Morizo is in dire need of exotic gourmet food for his banquet and I cannot locate enough of it."
 
-This time you are ready and negotiate a good deal: you'll fetch Rastapopoulos his twenty tonnes of exotic food, and he'll buy them for ${payment} credits total - 100% above the standard rate. Where you get them is up to you; you can steal them for all he cares.]]
+This time you are ready and negotiate a good deal: you'll fetch Rastapopoulos his twenty tonnes of gourmet food, and he'll buy them for ${payment} credits total - 100% above the standard rate. Where you get them is up to you; you can steal them for all he cares.]]
 
 title[2] = "A King's Ransom for a Lord's Banquet"
 text[2] = [[You meet Rastapopoulos at the spaceport with the requested food. He inspects it thoroughly, and makes an attempt at reducing your fee for imaginary defects. Faced with your refusal, he pays you your ${payment} credits and leaves angrily. You are quite sure you heard him mutter "treacherous two-bit turncoat!" as he left.]]
@@ -70,7 +70,7 @@ function accept()
 end
 
 function land ()
-   if planet.cur() == startPlanet and player.quantityCargo(C.GOURMET_FOOD) >= 50 then
+   if planet.cur() == startPlanet and player.quantityCargo(C.GOURMET_FOOD) >= 20 then
       local stringData=getStringData()
 
       tk.msg( gh.format(title[2],stringData), gh.format(text[2],stringData) )
@@ -78,7 +78,7 @@ function land ()
       misn.markerRm(landmarker)
 
       player.pay( payment )
-      player.pilot():cargoRm(C.GOURMET_FOOD,50)
+      player.pilot():cargoRm(C.GOURMET_FOOD,20)
 
       faction.modPlayerSingle( G.BETELGEUSE, 5 )
       player.addOutfit("Betelgian Trader",1)

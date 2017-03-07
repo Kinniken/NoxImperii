@@ -7,7 +7,7 @@
  <class>Corvette</class>
  <fabricator>Various</fabricator>
  <description>More agile than vendettas but with comparable offensive capacities, delta-based designs are a popular alternative in the frigate category. Pirates are known to make heavy use of an adapted version.</description>
- <price>1000000</price>
+ <price>2000000</price>
  <rating_military>3</rating_military>
  <rating_utility>2</rating_utility>
  <rating_agility>6</rating_agility>

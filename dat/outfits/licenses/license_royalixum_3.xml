@@ -3,7 +3,7 @@
  <general>
  	<license>Ixumite Honorary Lancer</license>
   <mass>0</mass>
-  <price>50000</price>
+  <price>500000</price>
   <gfx_store>license</gfx_store>
   <description>This license recognises you as an Ixumite Knight.</description>
   <faction_needed>Kingdom of Ixum</faction_needed>

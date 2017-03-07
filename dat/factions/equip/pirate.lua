@@ -17,7 +17,7 @@ function equip( p )
    -- all pirate ships are military!
    equip_military( p, shipsize )
    cargo_military(p)
-   p:setCredits( rnd.int(p:ship():price()/20 , p:ship():price()/10) )
+   p:setCredits( rnd.int(p:ship():price()*0.7, p:ship():price()*0.15) )
 end
 
 function cargo_military(p)

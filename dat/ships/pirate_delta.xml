@@ -8,7 +8,7 @@
  <class>Corvette</class>
  <fabricator>Pirate Shipyards</fabricator>
  <description>Delta designs used by pirates trade some cargo space for increased thrust and heavier armour, as they are intended primarily as strike ships against beefier merchant ships.</description>
- <price>1100000</price>
+ <price>2200000</price>
  <logo>pirates</logo>
  <rating_military>4</rating_military>
  <rating_utility>2</rating_utility>

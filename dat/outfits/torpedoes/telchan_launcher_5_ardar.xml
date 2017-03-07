@@ -4,7 +4,7 @@
   <slot>weapon</slot>
   <size>large</size>  
   <mass>35</mass>
-  <price>220000</price>
+  <price>360000</price>
   <description>This upgraded Telchan tube is intended for capital ships; it fires the swift and deadly torpedoes at much higher rate and with greater capacity.</description>
   <gfx_store>macelauncher</gfx_store>
   <cpu>-10</cpu>

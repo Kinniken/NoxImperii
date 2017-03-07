@@ -1,94 +1,19 @@
 include("dat/factions/spawn/common.lua")
 
+declare_fleet("Imperial Traders Endeavour",10,{presence={nil,nil,50,nil}})
+declare_fleet("Imperial Traders Schroedinger",10,{})
+declare_fleet("Imperial Traders Fish Bone",10,{presence={nil,nil,100,nil}})
+declare_fleet("Imperial Traders Quicksilver",5,{presence={nil,50,nil,nil}})
+declare_fleet("Imperial Traders Zheng He",5,{presence={nil,50,nil,nil}})
+declare_fleet("Imperial Traders Argosy",10,{enemies={nil,20,nil,nil}})
+declare_fleet("Imperial Traders Sunflower",5,{presence={nil,50,nil,nil},enemies={nil,nil,10,20}})
 
--- @brief Spawns a small trade fleet.
-function spawn_patrol ()
-    local pilots = {}
-    local r = rnd.rnd()
+declare_fleet(function() return spawn_variableFleet({"Imperial Traders Fish Bone",2,5}) end,10,{enemies={nil,nil,10,20}})
+declare_fleet(function() return spawn_variableFleet({"Imperial Traders Zheng He",2,4}) end,10,{enemies={nil,nil,10,20}})
+declare_fleet(function() return spawn_variableFleet({"Imperial Traders Zheng He",1,2},{"Imperial Traders Fish Bone",1,2}) end,10,{enemies={nil,nil,10,20}})
+declare_fleet(function() return spawn_variableFleet({"Imperial Traders Argosy",1,3}) end,10,{enemies={nil,20,nil,nil}})
 
-    if r < 0.5 then
-       scom.addPilot( pilots, "Imperial Traders Schroedinger", 20 );
-    elseif r < 0.8 then
-       scom.addPilot( pilots, "Imperial Traders Schroedinger", 20 );
-       scom.addPilot( pilots, "Imperial Traders Fish Bone", 40 );
-    else
-       scom.addPilot( pilots, "Imperial Traders Quicksilver", 20 );
-       scom.addPilot( pilots, "Imperial Traders Fish Bone", 40 );
-    end
+declare_fleet(function() return spawn_variableFleet({"Imperial Traders Sunflower",2,4}) end,10,{enemies={nil,nil,10,20},presence={50,200,nil,nil}})
+declare_fleet(function() return spawn_variableFleet({"Imperial Traders Sunflower",1,2},{"Imperial Traders Zheng He",1,2}) end,10,{enemies={nil,nil,10,20},presence={50,200,nil,nil}})
 
-    return pilots
-end
-
-
--- @brief Spawns a larger trade fleet.
-function spawn_squad ()
-    local pilots = {}
-    local r = rnd.rnd()
-
-    if r < 0.5 then
-       scom.addPilot( pilots, "Imperial Traders Quicksilver", 20 );
-       scom.addPilot( pilots, "Imperial Traders Schroedinger", 20 );
-       scom.addPilot( pilots, "Imperial Traders Fish Bone", 40 );
-    elseif r < 0.8 then
-       scom.addPilot( pilots, "Imperial Traders Schroedinger", 20 );
-       scom.addPilot( pilots, "Imperial Traders Fish Bone", 20 );
-       scom.addPilot( pilots, "Imperial Traders Fish Bone", 20 );
-       scom.addPilot( pilots, "Imperial Traders Zheng He", 100 );
-    else
-       scom.addPilot( pilots, "Imperial Traders Fish Bone", 20 );
-       scom.addPilot( pilots, "Imperial Traders Argosy", 100 );
-       scom.addPilot( pilots, "Imperial Traders Fish Bone", 20 );
-       scom.addPilot( pilots, "Imperial Traders Sunflower", 100 );
-       scom.addPilot( pilots, "Imperial Traders Zheng He", 100 );
-    end
-
-    return pilots
-end
-
-
--- @brief Creation hook.
-function create ( max )
-    local weights = {}
-
-    -- Create weights for spawn table
-    weights[ spawn_patrol  ] = 100
-    weights[ spawn_squad   ] = math.max(1, -80 + 0.80 * max) 
-   
-    -- Create spawn table base on weights
-    spawn_table = scom.createSpawnTable( weights )
-
-    -- Calculate spawn data
-    spawn_data = scom.choose( spawn_table )
-
-    return scom.calcNextSpawn( 0, scom.presence(spawn_data), max )
-end
-
-
--- @brief Spawning hook
-function spawn ( presence, max )
-
-  --safety if create() was not called
-   --(can happen in border cases in Nox, unlike Naev)
-   if spawn_data==nil then
-      return 10000,nil
-    end
-
-    if spawn_data==nil then
-      return presence
-    end
-
-    local pilots
-
-    -- Over limit
-    if presence > max then
-       return 5
-    end
-  
-    -- Actually spawn the pilots
-    pilots = scom.spawn( spawn_data )
-
-    -- Calculate spawn data
-    spawn_data = scom.choose( spawn_table )
-
-    return scom.calcNextSpawn( presence, scom.presence(spawn_data), max ), pilots
-end
+declare_fleet(function() return spawn_variableFleet({"Imperial Traders Sunflower",1,2},{"Imperial Traders Zheng He",1,2}) end,10,{enemies={nil,nil,10,20},presence={200,500,nil,nil}})

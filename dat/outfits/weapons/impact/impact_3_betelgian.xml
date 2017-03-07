@@ -4,7 +4,7 @@
   <slot>weapon</slot>
   <size>small</size>  
   <mass>7</mass>
-  <price>72000</price>
+  <price>95000</price>
   <description>Railguns are cannons that uses heavy magnetic pulses to accelerate pieces of debris to extremely high velocities. Lighter and with faster reload than mass drivers, they are particularly good against armour. Betelgeuse is known for them: they require less high-end technology than laser or ion guns, and they are a good match with the armour-heavy barbarian ships often faced by Betelgian exploration fleets.</description>
   <gfx_store>railgun</gfx_store>
   <cpu>-8</cpu>

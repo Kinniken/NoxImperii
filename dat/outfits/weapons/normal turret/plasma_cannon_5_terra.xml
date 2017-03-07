@@ -3,9 +3,8 @@
  <general>
   <slot prop="turret">weapon</slot>
   <size>large</size>
-  
   <mass>80</mass>
-  <price>450000</price>
+  <price>1300000</price>
   <description>Terra's heaviest energy turret, this massive weapon equips the largest human ships, typically Planet-class or above. Even more devastating that fixed plasma cannons, their heavy weight and huge energy requirements are the only limit on their devastating power.</description>
   <gfx_store>plasma2</gfx_store>
   <cpu>-80</cpu>

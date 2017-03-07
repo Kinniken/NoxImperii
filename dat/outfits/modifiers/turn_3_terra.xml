@@ -5,7 +5,7 @@
   <slot>structure</slot>
   <size>small</size>
   <mass>0</mass>
-  <price>130000</price>
+  <price>190000</price>
   <description>With the addition of several additional steering thrusters, ships' turning rates can be improved. The Terran Navy makes extensive use of this technology in its fighters.</description>
   <gfx_store>thruster</gfx_store>
   <level>3</level>
@@ -13,8 +13,7 @@
   <license>Reserve Ensign</license>
  </general>
  <specific type="modification">
-  <turn>5</turn>
-  <turn_mod>10</turn_mod>
+  <turn_mod>15</turn_mod>
   <energy_usage>1.5</energy_usage>
  </specific>
 </outfit>

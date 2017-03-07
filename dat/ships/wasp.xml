@@ -7,7 +7,7 @@
  <class>Fighter</class>
  <fabricator>Various</fabricator>
  <description>Very light fighters of wasp design are mostly used for training or sport purposes, as their defensive capabilities are too limited to make them effective in serious fights. They are still known to be used for piracy against lightly-defended traders.</description>
- <price>150000</price>
+ <price>225000</price>
  <rating_military>1</rating_military>
  <rating_utility>1</rating_utility>
  <rating_agility>8</rating_agility>

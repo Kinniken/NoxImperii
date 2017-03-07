@@ -4,7 +4,7 @@
   <slot>weapon</slot>
   <size>small</size>  
   <mass>12</mass>
-  <price>45000</price>
+  <price>65000</price>
   <description>Ardar technicians have taken a different approach to continuous beam weapons than human ones; they focused on smaller, lighter designs, to be used by fighters in short approach runs. The Ardar Lance is the most common version; while its power requirements are too high to be used long, it is devastating when used simultaneously by fighter squadrons.</description>
   <gfx_store>orion</gfx_store>
   <cpu>-8</cpu>

@@ -542,10 +542,11 @@
 	<tech name="Pirate Military 3">
 		<item>Powerful EMP Gun</item>
 		<item>EMP Turret</item>
+		<item>Powerful EMP Turret</item>
 		<item>EMP Grenade Launcher</item>
 	</tech>
 	<tech name="Pirate Military 4">
-		<item>Powerful EMP Turret</item>
+		
 	</tech>
 	<tech name="Pirate Military 5">
 
@@ -554,30 +555,25 @@
 
 	<tech name="Barbarian Military 1">
 		<item>Barbarian Looter</item>
+		<item>Barbarian Raider</item>
+		<item>Barbarian Slaver</item>
 
 		<item>Steel Plating</item>
-
-		<item>Shredder</item>
-	</tech>
-	<tech name="Barbarian Military 2">
-		<item>Barbarian Raider</item>
-
 		<item>Large Steel Plating</item>
 		<item>Improved Shredder</item>
 		<item>Improved Shredder Turret</item>
 
-	</tech>
-	<tech name="Barbarian Military 3">
-		<item>Barbarian Slaver</item>
-		
+		<item>Shredder</item>
 		<item>Heavy Shredder</item>
 		<item>Heavy Shredder Turret</item>
 	</tech>
+	<tech name="Barbarian Military 2">
+	</tech>
+	<tech name="Barbarian Military 3">
+	</tech>
 	<tech name="Barbarian Military 4">
-		
 	</tech>
 	<tech name="Barbarian Military 5">
-
 	</tech>
 
 

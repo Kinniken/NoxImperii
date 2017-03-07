@@ -4,7 +4,7 @@
   <slot>weapon</slot>
   <size>medium</size>  
   <mass>25</mass>
-  <price>90000</price>
+  <price>120000</price>
   <description>This Narval Torpedo Tube has been stripped down as much as the torpedo's large size allows; as a result, it has a low capacity and long launch times, but can fit on Continent or even Comet-class ships, turning them into deadly capital ship hunters.</description>
   <gfx_store>caesarlauncher</gfx_store>
   <cpu>-5</cpu>

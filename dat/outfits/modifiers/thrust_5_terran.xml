@@ -14,9 +14,8 @@
   <license>Reserve Admiral</license>
  </general>
  <specific type="modification">
-  <thrust>10</thrust>
-  <thrust_mod>20</thrust_mod>
+  <thrust_mod>30</thrust_mod>
   <speed_mod>15</speed_mod>
-  <energy_usage>5</energy_usage>
+  <energy_usage>15</energy_usage>
  </specific>
 </outfit>

@@ -15,7 +15,7 @@ function equip( p )
    local shiptype, shipsize = equip_getShipBroad( p:ship():class() )
 
    cargo_military(p)
-   p:setCredits( rnd.int(p:ship():price()/20 , p:ship():price()/10) )
+   p:setCredits( rnd.int(p:ship():price()*0.7, p:ship():price()*0.15) )
    equip_military( p, shipsize )
 end
 

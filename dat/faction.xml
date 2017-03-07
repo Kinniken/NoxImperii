@@ -166,6 +166,14 @@
    <enemy>Barbarians</enemy>
    <enemy>Roidhunate of Ardarshir Strike Forces</enemy>
   </enemies>
+  <forbidden>
+    <forbid>Roidhunate of Ardarshir</forbid>
+    <forbid>Kingdom of Ixum</forbid>    
+    <forbid>Holy Flame of Ixum</forbid>
+    <forbid>Oligarchy of Betelgeuse</forbid>
+    <forbid>Ardar Traders</forbid>
+    <forbid>Independent Worlds</forbid>
+  </forbidden>
  </faction>
 
  <faction name="Empire of Terra Strike Forces">
@@ -210,6 +218,14 @@
    <enemy>Barbarians</enemy>
    <enemy>Empire of Terra Strike Forces</enemy>
   </enemies>
+  <forbidden>
+    <forbid>Empire of Terra</forbid>
+    <forbid>Kingdom of Ixum</forbid>    
+    <forbid>Holy Flame of Ixum</forbid>
+    <forbid>Oligarchy of Betelgeuse</forbid>
+    <forbid>Imperial Traders</forbid>
+    <forbid>Independent Worlds</forbid>
+  </forbidden>
  </faction>
 
  <faction name="Roidhunate of Ardarshir Strike Forces">
@@ -251,6 +267,13 @@
    <enemy>Pirates</enemy>
    <enemy>Barbarians</enemy>
   </enemies>
+  <forbidden>
+    <forbid>Roidhunate of Ardarshir</forbid>
+    <forbid>Kingdom of Ixum</forbid>    
+    <forbid>Holy Flame of Ixum</forbid>
+    <forbid>Empire of Terra</forbid>
+    <forbid>Independent Worlds</forbid>
+  </forbidden>
  </faction>
 
   <faction name="Kingdom of Ixum">
@@ -271,6 +294,13 @@
    <enemy>Barbarians</enemy>
    <enemy>Holy Flame of Ixum</enemy>
   </enemies>
+  <forbidden>
+    <forbid>Roidhunate of Ardarshir</forbid>
+    <forbid>Empire of Terra</forbid>    
+    <forbid>Oligarchy of Betelgeuse</forbid>
+    <forbid>Ardar Traders</forbid>
+    <forbid>Independent Worlds</forbid>
+  </forbidden>
  </faction>
  
   <faction name="Holy Flame of Ixum">
@@ -291,6 +321,13 @@
    <enemy>Barbarians</enemy>
    <enemy>Kingdom of Ixum</enemy>
   </enemies>
+  <forbidden>
+    <forbid>Roidhunate of Ardarshir</forbid>
+    <forbid>Empire of Terra</forbid>
+    <forbid>Oligarchy of Betelgeuse</forbid>
+    <forbid>Imperial Traders</forbid>
+    <forbid>Independent Worlds</forbid>
+  </forbidden>
  </faction>
  
   <faction name="Barbarians">
@@ -319,6 +356,13 @@
    <enemy>Holy Flame of Ixum</enemy>
    <enemy>Pirates</enemy>
   </enemies>
-  </faction>
+  <forbidden>
+    <forbid>Imperial Traders</forbid>
+    <forbid>Independent Traders</forbid>    
+    <forbid>Betelgian Traders</forbid>
+    <forbid>Ardar Traders</forbid>
+    <forbid>Independent Worlds</forbid>
+  </forbidden>
+</faction>
   
 </Factions>

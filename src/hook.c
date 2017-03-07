@@ -65,6 +65,7 @@ typedef enum HookType_e {
    HOOK_TYPE_NULL,   /**< Invalid hook type. */
    HOOK_TYPE_MISN,   /**< Mission hook type. */
    HOOK_TYPE_EVENT,  /**< Event hook type. */
+   HOOK_TYPE_AI,  /**< AI hook type. */
    HOOK_TYPE_FUNC    /**< C function hook type. */
 } HookType_t;
 
@@ -103,6 +104,14 @@ typedef struct Hook_ {
          unsigned int parent; /**< Event it's connected to. */
          char *func; /**< Function it runs. */
       } event; /**< Event Lua function. */
+      struct {
+    	  unsigned int parent; /**< Pilot it's connected to. */
+    	  char *func; /**< Function it runs. */
+      } ai; /**< AI Lua function. */
+      struct {
+         int (*func)( void *data ); /**< C function to run. */
+         void *data; /**< Data to pass to C function. */
+      } func; /**< Normal C function hook. */
    } u; /**< Type specific data. */
 } Hook;
 
@@ -130,6 +139,7 @@ static unsigned int hook_genID (void);
 static Hook* hook_new( HookType_t type, const char *stack );
 static int hook_parseParam( lua_State *L, HookParam *param );
 static int hook_runMisn( Hook *hook, HookParam *param, int claims );
+static int hook_runAI( Hook *hook, HookParam *param );
 static int hook_runEvent( Hook *hook, HookParam *param, int claims );
 static int hook_run( Hook *hook, HookParam *param, int claims );
 static void hook_free( Hook *h );
@@ -349,6 +359,59 @@ static int hook_runMisn( Hook *hook, HookParam *param, int claims )
 
 
 /**
+ * @brief Runs an AI hook.
+ *
+ *    @param hook Hook to run.
+ *    @return 0 on success.
+ */
+static int hook_runAI( Hook *hook, HookParam *param )
+{
+   unsigned int id;
+   Pilot* pilot;
+   int n;
+
+   /* Simplicity. */
+   id = hook->id;
+
+   /* Make sure it's valid. */
+   if (hook->u.ai.parent == 0) {
+      WARN("Trying to run hook with inexistant parent: deleting");
+      hook->delete = 1; /* so we delete it */
+      return -1;
+   }
+
+   pilot = pilot_get(hook->u.ai.parent);
+
+   if (pilot == NULL) {
+	   WARN("Trying to run hook with parent not in pilot stack: deleting");
+	   hook->delete = 1; /* so we delete it */
+	   return -1;
+   }
+
+   /* Delete if only supposed to run once. */
+   if (hook->once)
+      hook_rmRaw( hook );
+
+   /* Set up hook parameters. */
+   ai_runStart( pilot, hook->u.ai.func );
+   n = hook_parseParam( naevL, param );
+
+   /* Add hook parameters. */
+   hookL_getarg( id );
+   n++;
+
+   /* Run mission code. */
+   hook->ran_once = 1;
+   if (ai_runFunc(  pilot, hook->u.ai.func, n ) < 0) { /* error has occurred */
+      WARN("Hook [%s] '%d' -> '%s' failed", hook->stack,
+            hook->id, hook->u.ai.func);
+      return -1;
+   }
+   return 0;
+}
+
+
+/**
  * @brief Runs a Event function hook.
  *
  *    @param hook Hook to run.
@@ -422,6 +485,10 @@ static int hook_run( Hook *hook, HookParam *param, int claims )
       case HOOK_TYPE_EVENT:
          ret = hook_runEvent(hook, param, claims);
          break;
+
+      case HOOK_TYPE_AI:
+    	  ret = hook_runAI(hook, param);
+    	  break;
 
       default:
          WARN("Invalid hook type '%d', deleting.", hook->type);
@@ -538,6 +605,29 @@ unsigned int hook_addEvent( unsigned int parent, const char *func, const char *s
 
 
 /**
+ * @brief Adds a new AI type hook.
+ *
+ *    @param parent Hook pilot parent.
+ *    @param func Function to run when hook is triggered.
+ *    @param stack Stack hook belongs to.
+ *    @return The new hook identifier.
+ */
+unsigned int hook_addAI( unsigned int parent, const char *func, const char *stack )
+{
+   Hook *new_hook;
+
+   /* Create the new hook. */
+   new_hook = hook_new( HOOK_TYPE_AI, stack );
+
+   /* Put event specific details. */
+   new_hook->u.ai.parent = parent;
+   new_hook->u.ai.func   = strdup(func);
+
+   return new_hook->id;
+}
+
+
+/**
  * @brief Adds a new mission type hook timer hook.
  *
  *    @param parent Hook mission parent.
@@ -582,6 +672,33 @@ unsigned int hook_addTimerEvt( unsigned int parent, const char *func, double ms 
    /* Put event specific details. */
    new_hook->u.event.parent = parent;
    new_hook->u.event.func   = strdup(func);
+
+   /* Timer information. */
+   new_hook->is_timer      = 1;
+   new_hook->ms            = ms;
+
+   return new_hook->id;
+}
+
+
+/**
+ * @brief Adds a new AI type hook timer.
+ *
+ *    @param parent Hook pilot parent.
+ *    @param func Function to run when hook is triggered.
+ *    @param ms Milliseconds to wait.
+ *    @return The new hook identifier.
+ */
+unsigned int hook_addTimerAI( unsigned int parent, const char *func, double ms )
+{
+   Hook *new_hook;
+
+   /* Create the new hook. */
+   new_hook = hook_new( HOOK_TYPE_AI, "timer" );
+
+   /* Put event specific details. */
+   new_hook->u.ai.parent = parent;
+   new_hook->u.ai.func   = strdup(func);
 
    /* Timer information. */
    new_hook->is_timer      = 1;
@@ -730,6 +847,26 @@ unsigned int hook_addDateEvt( unsigned int parent, const char *func, ntime_t res
 }
 
 
+unsigned int hook_addDateAI( unsigned int parent, const char *func, ntime_t resolution )
+{
+   Hook *new_hook;
+
+   /* Create the new hook. */
+   new_hook = hook_new( HOOK_TYPE_AI, "date" );
+
+   /* Put event specific details. */
+   new_hook->u.ai.parent = parent;
+   new_hook->u.ai.func   = strdup(func);
+
+   /* Timer information. */
+   new_hook->is_date       = 1;
+   new_hook->res           = resolution;
+   new_hook->acc           = 0;
+
+   return new_hook->id;
+}
+
+
 /**
  * @brief Updates all the hook timer related stuff.
  */
@@ -844,6 +981,19 @@ void hook_rmEventParent( unsigned int parent )
 
    for (h=hook_list; h!=NULL; h=h->next)
       if ((h->type==HOOK_TYPE_EVENT) && (parent == h->u.event.parent))
+         h->delete = 1;
+}
+
+
+/**
+ * @brief Removes all hooks belonging to a pilot's AI.
+ */
+void hook_rmAIParent( unsigned int parent )
+{
+   Hook *h;
+
+   for (h=hook_list; h!=NULL; h=h->next)
+	   if ((h->type==HOOK_TYPE_AI) && (parent == h->u.ai.parent))
          h->delete = 1;
 }
 
@@ -1021,9 +1171,13 @@ nlua_env hook_env( unsigned int hook )
          evt = event_get( h->u.event.parent );
          if (evt != NULL)
             return evt->env;
-	 break;
+         break;
+      case HOOK_TYPE_AI:
+    	  return pilot_get(h->u.ai.parent)->ai->env;
+    	  break;
       default:
-	 break;
+    	  WARN("No env for the requested hook type.");
+    	  break;
    }
 
    return LUA_NOREF;
@@ -1094,6 +1248,11 @@ static void hook_free( Hook *h )
             free(h->u.event.func);
          break;
 
+      case HOOK_TYPE_AI:
+    	  if (h->u.ai.func != NULL)
+    		  free(h->u.ai.func);
+    	  break;
+
       default:
          break;
    }
@@ -1143,6 +1302,10 @@ static int hook_needSave( Hook *h )
    /* Impossible to save functions. */
    if (h->type == HOOK_TYPE_FUNC)
       return 0;
+
+   /* Impossible to save AIs. */
+   if (h->type == HOOK_TYPE_AI)
+	   return 0;
 
    /* Events must need saving. */
    if ((h->type == HOOK_TYPE_EVENT) && !event_save(h->u.event.parent))

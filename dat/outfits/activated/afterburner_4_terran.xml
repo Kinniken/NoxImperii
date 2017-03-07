@@ -5,7 +5,7 @@
   <slot>utility</slot>
   <size>small</size>
   <mass>10</mass>
-  <price>95000</price>
+  <price>150000</price>
   <description>Designed by the Terran Navy, this afterburner is significantly more powerful than commonly available designs, providing a vital edge to Terran military crafts. Pity the Ardar model is even better!</description>
   <gfx_store>afterburner2</gfx_store>
   <limit>afterburner</limit>
@@ -18,7 +18,7 @@
   <sound>afterburner</sound>
   <sound_off>afb_disengage</sound_off>
   <thrust>300</thrust>
-  <speed>45</speed>
+  <speed>90</speed>
   <energy>65</energy>
   <mass_limit>250</mass_limit>
   <heatup>10</heatup>

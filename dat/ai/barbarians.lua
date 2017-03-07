@@ -16,6 +16,9 @@ mem.atk_board      = true
 mem.atk_kill       = false
 mem.careful       = true
 
+formation_default_type = "blob"
+formation_tightness = 100
+formation_sticky = 2
 
 function create ()
 
@@ -77,13 +80,8 @@ function taunt ( target, offense )
             "You folks are just plunder for us!",
             "Civilised ships are just moving plunder.",
             "You are weak, like all humans.",
-            "My King will soon rule your precious worlds!",
-            "The Emperor himself cowers before us!",
-            "There's not a single true warrior in your wretched Empire!",
-            "Our banners will fly above your burning cities!",
             "Our conquest of the Galaxy starts with you.",
             "The plunder from your ship will pay for ships for our warriors.",
-            "Terra itself will fall to our hordes.",
       }
    else
       taunts = {
@@ -100,3 +98,24 @@ function taunt ( target, offense )
    ai.pilot():comm(target, taunts[ rnd.rnd(1,#taunts) ])
 end
 
+chatter_chance = 50
+chatter_trade_weight = 0
+chatter_random_weight = 10
+chatter_tag_weight = 10
+
+
+add_chatter("Civilised ships are just moving plunder.")
+add_chatter("My King will soon rule your precious worlds!")
+add_chatter("The Emperor himself cowers before us!")
+add_chatter("There's not a single true warrior in your wretched Empire!")
+add_chatter("Our banners will fly above your burning cities!")
+add_chatter("Terra itself will fall to our hordes.")
+
+-- event chatter
+add_tag_chatter("event_fringe_barbarian_raid","Our fleets have left nothing but ruins on ${planet}, system ${system}!")
+add_tag_chatter("event_fringe_barbarian_raid","The loot from ${planet} in system ${system} will pay for many more fleets!")
+add_tag_chatter("event_fringe_barbarian_raid","Contemplate the smoking ruins of ${planet} in system ${system} and know fear.")
+
+add_tag_chatter("event_empire_barbarian_raid","We've raided ${planet} in system ${system} again, and what is your precious Emperor doing? Nothing!")
+add_tag_chatter("event_empire_barbarian_raid","Know that soon Terra's cities will be like those of ${planet} in system ${system}: looted ruins with our banners on top!")
+add_tag_chatter("event_empire_barbarian_raid","Ask Imperial citizens on ${planet} in system ${system} what Imperial protection is worth!")

@@ -33,6 +33,7 @@
 #include "tech.h"
 #include "space.h"
 #include "land.h"
+#include "array.h"
 
 
 /* Planet metatable methods */
@@ -58,6 +59,7 @@ static int planetL_gfxExterior( lua_State *L );
 static int planetL_shipsSold( lua_State *L );
 static int planetL_outfitsSold( lua_State *L );
 static int planetL_commoditiesSold( lua_State *L );
+static int planetL_tradeDatas( lua_State *L );
 static int planetL_isBlackMarket( lua_State *L );
 static int planetL_isKnown( lua_State *L );
 static int planetL_setKnown( lua_State *L );
@@ -76,10 +78,14 @@ static int planetL_setDescSettlements( lua_State *L );
 static int planetL_descHistory( lua_State *L );
 static int planetL_setDescHistory( lua_State *L );
 static int planetL_setFactionPresence( lua_State *L );
+static int planetL_getFactionPresence( lua_State *L );
 static int planetL_addOrUpdateTradeData( lua_State *L );
 static int planetL_setTradeBuySellRation( lua_State *L );
 static int planetL_setFactionExtraPresence( lua_State *L );
 static int planetL_refreshAllTradeInfo( lua_State *L );
+static int planetL_addTag( lua_State *L);
+static int planetL_clearTag( lua_State *L);
+static int planetL_getTags( lua_State *L );
 static const luaL_reg planet_methods[] = {
    { "cur", planetL_cur },
    { "get", planetL_get },
@@ -104,6 +110,7 @@ static const luaL_reg planet_methods[] = {
    { "shipsSold", planetL_shipsSold },
    { "outfitsSold", planetL_outfitsSold },
    { "commoditiesSold", planetL_commoditiesSold },
+   { "tradeDatas", planetL_tradeDatas },
    { "blackmarket", planetL_isBlackMarket },
    { "known", planetL_isKnown },
    { "setKnown", planetL_setKnown },
@@ -114,6 +121,7 @@ static const luaL_reg planet_methods[] = {
    { "addTechGroup", planetL_addTechGroup },
    { "removeTechGroup", planetL_removeTechGroup },
    { "setFactionPresence", planetL_setFactionPresence },
+   { "presence", planetL_getFactionPresence },
    { "desc", planetL_desc },
    { "setDesc", planetL_setDesc },
    { "shortInfo", planetL_shortInfo },
@@ -126,6 +134,9 @@ static const luaL_reg planet_methods[] = {
    { "setTradeBuySellRation", planetL_setTradeBuySellRation },
    { "setFactionExtraPresence", planetL_setFactionExtraPresence },
    { "refreshAllTradeInfo", planetL_refreshAllTradeInfo },
+   { "addTag", planetL_addTag },
+   { "clearTag", planetL_clearTag },
+   { "tags", planetL_getTags },
    {0,0}
 }; /**< Planet metatable methods. */
 
@@ -1021,6 +1032,59 @@ static int planetL_commoditiesSold( lua_State *L )
 }
 
 /**
+ * @brief Gets the trade datas of a planet.
+ *
+ * Does not include the adjusted price factor nor the remaining quantities,
+ * as these are not always up-to-date.
+ *
+ *    @luatparam Pilot p Planet to get trade data sold at.
+ *    @luatreturn {{commodity=<c1>,priceFactor=<p1>,buyingQuantity=<bq1>,sellingQuantity=<sq1>},...}
+ * @luafunc tradeDatas( p )
+ */
+static int planetL_tradeDatas( lua_State *L )
+{
+   Planet *p;
+   int i;
+   TradeData *td;
+
+   /* Get result and tech. */
+   p = luaL_validplanet(L,1);
+
+   /* Push results in a table. */
+   lua_newtable(L);
+
+   for (i=0; i<p->ntradedatas; i++) {
+	  td = &p->tradedatas[i];
+
+      lua_pushnumber(L,i+1); /* index, starts with 1 */
+
+      /* Set up for creation. */
+      lua_newtable(L);
+
+      lua_pushstring(L,"commodity");
+      lua_pushcommodity(L,td->commodity); /* value = LuaCommodity */
+      lua_rawset(L,-3); /* store the value in the table */
+
+      lua_pushstring(L,"priceFactor");
+      lua_pushnumber(L,td->priceFactor);
+      lua_rawset(L,-3); /* store the value in the table */
+
+      lua_pushstring(L,"buyingQuantity");
+      lua_pushnumber(L,td->buyingQuantity);
+      lua_rawset(L,-3); /* store the value in the table */
+
+      lua_pushstring(L,"sellingQuantity");
+      lua_pushnumber(L,td->sellingQuantity);
+      lua_rawset(L,-3); /* store the value in the table */
+
+      /* Set table in table. */
+      lua_rawset(L,-3);
+   }
+
+   return 1;
+}
+
+/**
  * @brief Checks to see if a planet is a black market.
  *
  * @usage b = p:blackmarket()
@@ -1315,6 +1379,41 @@ static int planetL_setFactionPresence( lua_State *L )
 }
 
 /**
+ * @brief Get a planet's presence for provided faction
+ *
+ * @usage p:presence(faction)
+ *    @luaparam p Planet to set faction & presence for
+ *    @luaparam faction faction|nil faction to test (if nil, planet's faction)
+ *    @return number|nil the presence, or nil if none
+ * @luafunc presence = presence(faction)
+ */
+static int planetL_getFactionPresence( lua_State *L )
+{
+	Planet *p;
+	int faction;
+	int ret;
+
+	p = luaL_validplanet(L,1);
+
+	if ((lua_gettop(L) < 2) || lua_isnil(L,2))
+		faction = p->faction;
+	else
+		faction = luaL_validfaction(L,2);
+
+	if (faction < 1)
+		return 0;
+
+	ret=planet_getFactionPresence(p,faction);
+
+	if (ret>0) {
+		lua_pushnumber(L,ret);
+		return 1;
+	}
+
+	return 0;
+}
+
+/**
  * @brief Sets a planet's extra presence for a faction
  *
  * @usage p:setFactionPresence( factionName, factionValue, factionRange)
@@ -1397,6 +1496,11 @@ static int planetL_setTradeBuySellRation( lua_State *L )
 	return 0;
 }
 
+/**
+ * @brief refreshes all the trade info of all the planets (the adjusted prices)
+ *
+ * Intended for debug use.
+ */
 static int planetL_refreshAllTradeInfo( lua_State *L ) {
 
 	(void)L;
@@ -1404,4 +1508,71 @@ static int planetL_refreshAllTradeInfo( lua_State *L ) {
 	planet_refreshAllPlanetAdjustedPrices();
 
 	return 0;
+}
+/**
+ * @brief adds a tag to a the provided planet.
+ *
+ * @luafunc addTag( p, tag)
+ */
+static int planetL_addTag( lua_State *L) {
+
+	Planet *p;
+
+	p = luaL_validplanet(L,1);
+	const char* tag=lua_tostring(L, 2);
+
+	planet_addTag(p, tag);
+
+	return 0;
+}
+
+/**
+ * @brief clears a tag on the provided planet, if it was set.
+ *
+ * @luafunc clearTag( p, tag)
+ */
+static int planetL_clearTag( lua_State *L) {
+
+	Planet *p;
+
+	p = luaL_validplanet(L,1);
+
+	if (lua_gettop(L) < 2 || lua_isnil(L,2) ) {
+		NLUA_INVALID_PARAMETER(L);
+		return 0;
+	}
+
+	const char* tag=lua_tostring(L, 2);
+
+	planet_clearTag(p, tag);
+
+	return 0;
+}
+
+/**
+ * @brief get list of planet's tags
+ *
+ * @usage if p:tags()["some_event_tag"] then -- Planet has this tag.
+ *    @luatparam Planet p Planet to get the tags of.
+ *    @luatreturn table Table containing all the tags as {tag1=tag1, tag2=tag2]...
+ * @luafunc tags( p )
+ */
+static int planetL_getTags( lua_State *L )
+{
+   int i;
+   Planet *p;
+   char *tag;
+   p = luaL_validplanet(L,1);
+
+   /* Return result in table */
+   lua_newtable(L);
+
+   for (i=0; i<array_size(p->tags); i++) {
+	   tag = p->tags[i];
+
+	   lua_pushstring( L, tag );//key
+	   lua_pushstring( L, tag );//value
+	   lua_settable(   L, -3 );
+   }
+   return 1;
 }

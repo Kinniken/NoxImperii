@@ -7,7 +7,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	textData.casualties=gh.prettyLargeNumber(planet.lua.settlements.humans.population*0.05)
 	planet.lua.settlements.humans.population=planet.lua.settlements.humans.population*0.9--5% dead, 5% captives
 	
-	local effectId=planet.lua.settlements.humans:addActiveEffect("The ravages of the recent barbarian raids is causing a humanitarian crisis.",
+	local effectId=planet:addActiveEffect("humans","The ravages of the recent barbarian raids is causing a humanitarian crisis.",
 		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber(), "fringe_barbarian_raid" )
 	planet.lua.settlements.humans:addGoodDemand(C.MEDICINE,200,3,effectId)
 	planet.lua.settlements.humans:addGoodDemand(C.FOOD,200,3,effectId)
@@ -31,8 +31,8 @@ event.weight=10
 event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.humans.industry=planet.lua.settlements.humans.industry*0.9
 	
-	local effectId=planet.lua.settlements.humans:addActiveEffect("Isolation from the Empire is causing a drop in industrial production.",
-		(time.get() + time.create( 0,1,0, 0, 0, 0 )):tonumber() )
+	local effectId=planet:addActiveEffect("humans","Isolation from the Empire is causing a drop in industrial production.",
+		(time.get() + time.create( 0,1,0, 0, 0, 0 )):tonumber(),"fringe_isolation" )
 	planet.lua.settlements.humans:reduceGoodSupply(C.INDUSTRIAL,200,1,effectId)
 	planet.lua.settlements.humans:reduceGoodSupply(C.MODERN_INDUSTRIAL,100,1,effectId)
 end
@@ -54,8 +54,8 @@ event.weight=20
 event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.humans.industry=planet.lua.settlements.humans.industry*1.2
 	
-	local effectId=planet.lua.settlements.humans:addActiveEffect("A mining boom is fuelling industrial production.",
-		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber() )
+	local effectId=planet:addActiveEffect("humans","A mining boom is fuelling industrial production.",
+		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber(),"fringe_miningboom" )
 	planet.lua.settlements.humans:addGoodSupply(C.ORE,500,0.5,effectId)
 	planet.lua.settlements.humans:addGoodSupply(C.INDUSTRIAL,200,0.5,effectId)
 	planet.lua.settlements.humans:addGoodSupply(C.MODERN_INDUSTRIAL,100,0.5,effectId)
@@ -82,8 +82,8 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	textData.humanCasualties=gh.prettyLargeNumber(planet.lua.settlements.humans.population*0.01)
 	planet.lua.settlements.humans.population=planet.lua.settlements.humans.population*0.99
 	
-	local effectId=planet.lua.settlements.natives:addActiveEffect("Clashes between natives and human population lead to booming arm sales.",
-		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber() )
+	local effectId=planet:addActiveEffect("natives","Clashes between natives and human population lead to booming arm sales.",
+		(time.get() + time.create( 0,2,0, 0, 0, 0 )):tonumber(),"fringe_nativeclashes" )
 	planet.lua.settlements.natives:addGoodDemand(C.BASIC_WEAPONS,200,3,effectId)
 end
 event.eventMessage="NEWS ALERT: Deadly clashes between natives and human settlers on ${world}, arm sales boom."
@@ -104,7 +104,7 @@ event.weight=20
 event.duration=time.create( 0,1, 0, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 
-	local effectId=planet.lua.settlements.humans:addActiveEffect("The fungus attack on crops is greatly reducing supplies.",
+	local effectId=planet:addActiveEffect("humans","The fungus attack on crops is greatly reducing supplies.",
 		(time.get() + self.duration):tonumber(),"fringe_alienfungus" )
 	planet.lua.settlements.humans:reduceGoodSupply(C.FOOD,1000,5,effectId)
 	planet.lua.settlements.humans:reduceGoodSupply(C.GOURMET_FOOD,200,5,effectId)

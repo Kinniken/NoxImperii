@@ -5,7 +5,7 @@
   <slot>utility</slot>
   <size>large</size>
   <mass>15</mass>
-  <price>260000</price>
+  <price>420000</price>
   <description>This large, energy-hungry mainframe provides CPU capacity to run complex weapon systems.</description>
   <gfx_store>cpu_iii</gfx_store>
   <level>3</level>

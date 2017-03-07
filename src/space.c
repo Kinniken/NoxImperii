@@ -273,7 +273,7 @@ float planet_commodityPriceSellingRatio( const Planet *p, const Commodity *c )
 	return 1;
 }
 
-void planet_addOrUpdateTradeData(Planet *p, const Commodity *c,float priceFactor,
+void planet_addOrUpdateTradeData(Planet *p, Commodity *c,float priceFactor,
 		int buyingQuantity,int sellingQuantity) {
 
 	//space_debugCheckDataIntegrity();
@@ -334,6 +334,8 @@ void planet_addOrUpdateExtraPresence(Planet *p,int factionId,double amount,int r
 	for (i=0;i<p->nextrapresences && !handled;i++) {
 		if (p->extraPresenceFactions[i]==factionId) {
 			p->extraPresenceAmounts[i]=amount;
+
+			if (p->extraPresenceRanges[i]<range)
 			p->extraPresenceRanges[i]=range;
 			handled=1;
 		}
@@ -363,6 +365,22 @@ void planet_addOrUpdateExtraPresence(Planet *p,int factionId,double amount,int r
 	planet_setSaveFlag(p,PLANET_PRESENCE_SAVE);//faction & presence are now custom and must be saved
 
 	//space_debugCheckDataIntegrity();
+}
+
+double planet_getFactionPresence(Planet *p,int factionId) {
+	int i;
+
+	if (p->faction == factionId) {
+		return p->presenceAmount;
+	}
+
+	for (i=0;i<p->nextrapresences;i++) {
+		if (p->extraPresenceFactions[i]==factionId) {
+			return p->extraPresenceAmounts[i];
+		}
+	}
+
+	return 0;
 }
 
 
@@ -1146,6 +1164,10 @@ static void system_scheduler( double dt, int init )
       if (p->disabled)
          continue;
 
+      /* influence must be strictly positive (can be nagetive if supressed by negative values) */
+      if (p->value < 1)
+    	  continue;
+
       /* Run the appropriate function. */
       if (init) {
          nlua_getenv( env, "create" ); /* f */
@@ -1174,6 +1196,9 @@ static void system_scheduler( double dt, int init )
          n = 1;
       }
       lua_pushnumber( naevL, p->value ); /* f, [arg,], max */
+      
+      lua_pushfaction(naevL, (LuaFaction)p->faction);
+      n++;
 
       /* Actually run the function. */
       if (nlua_pcall(env, n+1, 2)) { /* error has occurred */
@@ -1533,6 +1558,8 @@ Planet *planet_new (void)
    p->transient=0;
    p->nextrapresences=0;
    p->ntradedatas=0;
+
+   p->tags=array_create(char*);
 
    /* Reconstruct the jumps. */
    if (!systems_loading && realloced)
@@ -1942,6 +1969,17 @@ static int planet_parse( Planet *planet, const xmlNodePtr parent )
                      WARN("Planet '%s' has unknown services tag '%s'", planet->name, ccur->name);
 
                } while (xml_nextNode(ccur));
+
+            } else if (xml_isNode(cur, "tags")) {
+            	ccur = cur->children;
+            	do {
+            		xml_onlyNodes(ccur);
+
+            		if (xml_isNode(ccur, "tag")) {
+            			planet_addTag(planet, xml_get(ccur));
+            		} else
+            			WARN("Planet '%s' has unknown tag '%s'", planet->name, ccur->name);
+            	} while (xml_nextNode(ccur));
             }
 
             else if (xml_isNode(cur, "tradedatas")) {
@@ -2195,6 +2233,26 @@ static int planet_parseCustom( Planet *planet, const xmlNodePtr parent )
 						else
 							WARN("Planet '%s' has unknown services tag '%s'", planet->name, ccur->name);
 
+					} while (xml_nextNode(ccur));
+				} else if (xml_isNode(cur, "tags")) {
+					planet_setSaveFlag(planet,PLANET_TAGS_SAVE);
+
+					if (planet->tags != NULL && array_size(planet->tags) > 0) {
+						for (i=0; i<array_size(planet->tags); i++)
+							free( planet->tags[i] );
+						array_free( planet->tags );
+					}
+
+					planet->tags=array_create(char*);
+
+					ccur = cur->children;
+					do {
+						xml_onlyNodes(ccur);
+
+						if (xml_isNode(ccur, "tag")) {
+							planet_addTag(planet, xml_get(ccur));
+						} else
+							WARN("Planet '%s' has unknown tag '%s'", planet->name, ccur->name);
 					} while (xml_nextNode(ccur));
 				} else if (xml_isNode(cur, "tradedatas")) {
 					planet_setSaveFlag(planet,PLANET_COMMODITIES_SAVE);
@@ -3829,6 +3887,9 @@ void space_exit (void)
 
       /* tradedatas */
       free(pnt->tradedatas);
+
+      /* tags */
+      array_free(pnt->tags);
    }
    free(planet_stack);
    planet_stack = NULL;
@@ -4205,12 +4266,10 @@ static int getPresenceIndex( StarSystem *sys, int faction )
    if (sys->presence == NULL) {
       sys->npresence = 1;
       sys->presence  = malloc( sizeof(SystemPresence) );
+      memset( sys->presence, 0, sizeof(SystemPresence) );
 
       /* Set the defaults. */
       sys->presence[0].faction   = faction;
-      sys->presence[0].value     = 0 ;
-      sys->presence[0].curUsed   = 0 ;
-      sys->presence[0].timer     = 0.;
       return 0;
    }
 
@@ -4223,8 +4282,8 @@ static int getPresenceIndex( StarSystem *sys, int faction )
    i = sys->npresence;
    sys->npresence++;
    sys->presence = realloc(sys->presence, sizeof(SystemPresence) * sys->npresence);
+   memset( &sys->presence[i], 0, sizeof(SystemPresence) );
    sys->presence[i].faction = faction;
-   sys->presence[i].value = 0;
 
    return i;
 }
@@ -4339,6 +4398,10 @@ void system_addPresence( StarSystem *sys, int faction, double amount, int range 
    if (amount == 0)
       return;
 
+   /* Check whether the faction is forbidden by the system's owner */
+   if (sys->faction>0 && !faction_isAllowedBy(sys->faction,faction))
+	   return;
+
    /* Add the presence to the current system. */
    i = getPresenceIndex(sys, faction);
    sys->presence[i].value += amount;
@@ -4356,7 +4419,10 @@ void system_addPresence( StarSystem *sys, int faction, double amount, int range 
    /* Create the initial queue consisting of sys adjacencies. */
    for (i=0; i < sys->njumps; i++) {
       if (sys->jumps[i].target->spilled == 0 && !jp_isFlag( &sys->jumps[i], JP_HIDDEN ) && !jp_isFlag( &sys->jumps[i], JP_EXITONLY )) {
+    	  /* Check whether the faction is forbidden by the system's owner */
+    	  if (!(sys->jumps[i].target->faction>0 && !faction_isAllowedBy(sys->jumps[i].target->faction,faction))) {
          q_enqueue( q, sys->jumps[i].target );
+    	  }
          sys->jumps[i].target->spilled = 1;
       }
    }
@@ -4382,7 +4448,11 @@ void system_addPresence( StarSystem *sys, int faction, double amount, int range 
       /* Enqueue all its adjacencies to the next range queue. */
       for (i=0; i<cur->njumps; i++) {
          if (cur->jumps[i].target->spilled == 0 && !jp_isFlag( &cur->jumps[i], JP_HIDDEN ) && !jp_isFlag( &cur->jumps[i], JP_EXITONLY )) {
+
+    		  /* Check whether the faction is forbidden by the system's owner */
+    		  if (!(cur->jumps[i].target->faction>0 && !faction_isAllowedBy(cur->jumps[i].target->faction,faction))) {
             q_enqueue( qn, cur->jumps[i].target );
+    		  }
             cur->jumps[i].target->spilled = 1;
          }
       }
@@ -4667,6 +4737,15 @@ int planet_savePlanet( xmlTextWriterPtr writer, const Planet *p, int customDataO
 		  if (planet_hasService( p, PLANET_SERVICE_SHIPYARD ))
 			 xmlw_elemEmpty( writer, "shipyard" );
 		  xmlw_endElem( writer ); /* "services" */
+      }
+      if (!customDataOnly || planet_isSaveFlag(p,PLANET_TAGS_SAVE)) {
+    	  xmlw_startElem( writer, "tags" );
+
+    	  for (i=0; i < array_size(p->tags); i++) {
+    		  xmlw_elem( writer, "tag", "%s", p->tags[i] );
+    	  }
+
+    	  xmlw_endElem(writer);
       }
       if (planet_hasService( p, PLANET_SERVICE_LAND )) {
     	  if ((!customDataOnly || planet_isSaveFlag(p,PLANET_COMMODITIES_SAVE)) && p->ntradedatas>0) {
@@ -5307,6 +5386,43 @@ void planet_refreshAllPlanetAdjustedPrices() {
 	int i;
 	for (i=0;i<planet_nstack;i++) {
 		planet_refreshPlanetPriceFactors(&planet_stack[i]);
+	}
+}
+
+/**
+ * @brief adds a new tag to the planet, if it did not exist yet
+ */
+void planet_addTag(Planet* p,const char* tag) {
+	char **new_tag;
+	int i;
+
+	/* if it's a static planet, tags are now custom and have to be saved */
+	planet_setSaveFlag(p,PLANET_TAGS_SAVE);
+
+	for (i=0;i<array_size(p->tags);i++) {
+		if (strcmp(p->tags[i],tag) == 0) {
+			return;
+		}
+	}
+
+	new_tag = &array_grow(&p->tags);
+	*new_tag = strdup(tag);
+}
+
+/**
+ * @brief clears a tag from the planet, if it existed
+ */
+void planet_clearTag(Planet* p,const char* tag) {
+	int i;
+
+	/* if it's a static planet, tags are now custom and have to be saved */
+	planet_setSaveFlag(p,PLANET_TAGS_SAVE);
+
+	for (i=0;i<array_size(p->tags);i++) {
+		if (strcmp(p->tags[i],tag) == 0) {
+			array_erase(&p->tags,&p->tags[i],&p->tags[i+1]);
+			return;
+		}
 	}
 }
 

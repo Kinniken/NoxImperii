@@ -6,19 +6,11 @@ mem.armour_run = 40
 mem.armour_return = 70
 mem.aggressive = true
 
+formation_default_type = "imperial"
+formation_tightness = 20
+formation_sticky = 5
 
 function create ()
-
-   -- Not too many credits.
-   --ai.setcredits( rnd.rnd(ai.pilot():ship():price()/300, ai.pilot():ship():price()/70) )
-
-   -- Lines to annoy the player. Shouldn't be too common or Gamma Polaris and such get inundated.
-   r = rnd.rnd(0,20)
-   if r == 0 then
-     ai.pilot():broadcast("The Empire is watching you.")
-    elseif r == 1 then
-      ai.pilot():broadcast("The Emperor sees all.")
-   end
 
    -- Get refuel chance
    p = player.pilot()
@@ -92,4 +84,22 @@ function taunt ( target, offense )
    ai.pilot():comm(target, taunts[ rnd.rnd(1,#taunts) ])
 end
 
+
+
+chatter_chance = 20
+chatter_trade_weight = 0
+chatter_random_weight = 10
+chatter_tag_weight = 10
+
+add_chatter("The Empire is watching you.")
+add_chatter("Peace reigns throughout the Empire.")
+add_chatter("The Emperor sees all.")
+add_chatter("Long life to His Majesty.")
+
+
+-- event chatter
+add_tag_chatter("event_empire_barbarian_raid","The Navy will avenge ${planet}! Barbarian raids will not be tolerated!")
+add_tag_chatter("event_empire_newgovernor","We remind the loyal citizens of the Empire that criticizing the new or the former Governors of ${planet} is illegal and will not be tolerated.")
+add_tag_chatter("event_empire_pirateattacks","Traders are advised to stay clear of ${system} for now. The pirate threat is been tackled.")
+add_tag_chatter("event_empire_plague","Patriotic traders are encouraged to head to ${planet} in system ${system} with medical supplies in order to contribute to Imperial efforts against the ongoing plague.")
 

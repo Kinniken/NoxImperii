@@ -5,7 +5,7 @@ include "dat/missions/supportfiles/common.lua"
 include "dat/missions/supportfiles/traders.lua"
 include "pilot/pilots_ardarshir.lua"
 
-payment = 250000
+payment = 500000
 
 -- Whether mission starts when landing (if false, it starts in computer)
 mission_land=true

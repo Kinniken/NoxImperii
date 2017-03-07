@@ -59,6 +59,7 @@ static const luaL_reg news_methods[] = {
  */
 int nlua_loadNews( nlua_env env )
 {
+	//WARN("Loading News methods in env %d.",env);
    nlua_register(env, ARTICLE_METATABLE, news_methods, 1);
    return 0; /* No error */
 }

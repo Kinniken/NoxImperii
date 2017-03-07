@@ -1171,16 +1171,16 @@ static double weapon_aimTurret( const Outfit *outfit, const Pilot *parent,
       vect_cset( &relative_location, VX(pilot_target->solid->pos) - VX(parent->solid->pos),
             VY(pilot_target->solid->pos) - VY(parent->solid->pos) );
 
-         /* Try to predict where the enemy will be. */
+      /* Try to predict where the enemy will be. */
       t = time;
       if (t == INFINITY)  /*Postprocess (t = INFINITY means target is not hittable)*/
-         t = 0.;
+    	  t = 0.;
 
-         /* Position is calculated on where it should be */
-         x = (pilot_target->solid->pos.x + pilot_target->solid->vel.x*t)
-            - (pos->x + vel->x*t);
-         y = (pilot_target->solid->pos.y + pilot_target->solid->vel.y*t)
-            - (pos->y + vel->y*t);
+      /* Position is calculated on where it should be */
+      x = (pilot_target->solid->pos.x + pilot_target->solid->vel.x*t)
+            		- (pos->x + vel->x*t);
+      y = (pilot_target->solid->pos.y + pilot_target->solid->vel.y*t)
+            		- (pos->y + vel->y*t);
 
       /* Set angle to face. */
       rdir = ANGLE(x, y);

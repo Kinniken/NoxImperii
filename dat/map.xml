@@ -189,7 +189,7 @@
   <decorator>
     <pict>kaznor</pict>
     <x>-250</x>
-    <y>1050</y>
+    <y>1200</y>
     <detection_radius>10</detection_radius>
   </decorator>
   <decorator>

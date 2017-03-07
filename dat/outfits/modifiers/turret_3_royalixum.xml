@@ -5,7 +5,7 @@
   <slot>structure</slot>
   <size>medium</size>
   <mass>15</mass>
-  <price>125000</price>
+  <price>190000</price>
   <description>An improved targeting array allows your turrets to more quickly acquire targets, and minimizes accuracy losses at range. It requires a short period to compute an ideal vector, slightly slowing firing rates. This Ixumite model was developed with Terran help as part of a technology support program.</description>
   <gfx_store>accuracy_turret</gfx_store>
   <cpu>-2</cpu>
@@ -14,7 +14,7 @@
   <license>Ixumite Knight</license>
  </general>
  <specific type="modification">
-  <tur_heat>-25</tur_heat>
+  <tur_heat>-20</tur_heat>
   <tur_firerate>-10</tur_firerate>
  </specific>
 </outfit>

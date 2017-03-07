@@ -61,16 +61,23 @@ function gh.pickConditionalWeightedObject(table,obj)
   local totalWeight=0
 
   for k,v in pairs(table) do
+
+    if (v.dynamicWeight) then
+      weight = v:dynamicWeight(obj)
+    else
+      weight = v.weight
+    end
+
     if (v.weightValidity) then--filter method, only if valid
       if (v.weightValidity(obj)) then
-        totalWeight=totalWeight+v.weight
+        totalWeight=totalWeight+weight
       end
     elseif (v.weightValiditySelf) then--filter method, only if valid
       if (v:weightValiditySelf(obj)) then
-        totalWeight=totalWeight+v.weight
+        totalWeight=totalWeight+weight
       end
     else
-      totalWeight=totalWeight+v.weight
+      totalWeight=totalWeight+weight
     end
   end
 
@@ -84,22 +91,33 @@ function gh.pickConditionalWeightedObject(table,obj)
 
   for k,v in pairs(table) do
 
+    local weight
+
+    if (v.dynamicWeight) then
+      weight = v:dynamicWeight(obj)
+    else
+      weight = v.weight
+    end
+
     if (v.weightValidity) then--filter method, only if valid
       if (v.weightValidity(obj)) then
-        weightPassed=weightPassed+v.weight
+        weightPassed=weightPassed+weight
       end
     elseif (v.weightValiditySelf) then--filter method, only if valid
       if (v:weightValiditySelf(obj)) then
-        weightPassed=weightPassed+v.weight
+        weightPassed=weightPassed+weight
       end
     else
-      weightPassed=weightPassed+v.weight
+      weightPassed=weightPassed+weight
     end
 
     if (targetWeight<=weightPassed) then
       return v
     end
   end
+
+  warn("No value found. Target weight: "..targetWeight..", totalWeight: "..totalWeight..", weightPassed: "..weightPassed
+    )
 
   return nil
 

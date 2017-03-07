@@ -5,7 +5,7 @@
   <slot>structure</slot>
   <size>large</size>
   <mass>15</mass>
-  <price>230000</price>
+  <price>450000</price>
   <description>Betelgian Trading Houses are always looking at improving their ships' cargo capacities, and have thus invested important sums in improving the venerable cargo pods so common in the Galaxy. The result is the Trade Pod - slightly heavier than regular cargo pods, but with 50% extra capacity.</description>
   <gfx_store>cargo_pod</gfx_store>
   <level>5</level>

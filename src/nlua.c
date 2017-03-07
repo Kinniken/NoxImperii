@@ -31,6 +31,7 @@
 #include "nlua_outfit.h"
 #include "nlua_commodity.h"
 #include "nlua_cli.h"
+#include "nlua_hook.h"
 #include "nstring.h"
 
 

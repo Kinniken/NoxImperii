@@ -7,7 +7,7 @@
  <class>Armoured Transport</class>
  <fabricator>Various</fabricator>
  <description>Strengthened cargo ships have been around for a long time, and rhino derivatives are among the most popular. With decent fighting capacities and a generous cargo hold, it is a popular choice among people with precious cargo to ship - or planning to capture some.</description>
- <price>2000000</price>
+ <price>5000000</price>
  <rating_military>5</rating_military>
  <rating_utility>4</rating_utility>
  <rating_agility>4</rating_agility>

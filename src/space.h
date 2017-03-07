@@ -17,7 +17,7 @@
 #include "tech.h"
 
 
-#define SYSTEM_SIMULATE_TIME  15. /**< Time to simulate system before player is added. */
+#define SYSTEM_SIMULATE_TIME  30. /**< Time to simulate system before player is added. */
 
 #define MAX_HYPERSPACE_VEL    25 /**< Speed to brake to before jumping. */
 
@@ -30,7 +30,7 @@
  * @brief Represents a commodity traded on a world.
  */
 typedef struct TradeData_ {
-	const Commodity *commodity;
+	Commodity *commodity;
 	float priceFactor;//set in XML or Lua, represents world itself
 	float adjustedPriceFactor;//takes into account nearby worlds
 	int buyingQuantity,sellingQuantity;
@@ -69,10 +69,11 @@ typedef struct TradeData_ {
  * Planet saving flags.
  */
 #define PLANET_DESC_SAVE       (1<<0) /**< Save planet desc. */
-#define PLANET_SERVICES_SAVE   (1<<1) /**< Save planet desc. */
-#define PLANET_TECH_SAVE       (1<<2) /**< Save planet desc. */
-#define PLANET_PRESENCE_SAVE       (1<<3) /**< Save planet desc. */
-#define PLANET_COMMODITIES_SAVE       (1<<3) /**< Save planet desc. */
+#define PLANET_SERVICES_SAVE   (1<<1) /**< Save service list. */
+#define PLANET_TECH_SAVE       (1<<2) /**< Save tech list. */
+#define PLANET_PRESENCE_SAVE       (1<<3) /**< Save extra presences. */
+#define PLANET_COMMODITIES_SAVE       (1<<4) /**< Save commodities list. */
+#define PLANET_TAGS_SAVE       (1<<5) /**< Save tag list. */
 #define planet_isSaveFlag(p,f)    ((p)->saveFlags & (f)) /**< Checks planet flag. */
 #define planet_setSaveFlag(p,f)   ((p)->saveFlags |= (f)) /**< Sets a planet flag. */
 #define planet_rmSaveFlag(p,f)    ((p)->saveFlags &= ~(f)) /**< Removes a planet flag. */
@@ -138,9 +139,10 @@ typedef struct Planet_ {
 
    /* Misc. */
    unsigned int flags; /**< flags for planet properties */
-
-   /* Misc. */
    unsigned int saveFlags; /**< flags for planet saving properties */
+
+   /* Lua tags */
+   char** tags; /* managed array */
 
    int transient; /** whether the planet is transient (specific to the current player) **/
 
@@ -307,7 +309,7 @@ credits_t planet_commodityPriceBuying( const Planet *p, const Commodity *c );
 credits_t planet_commodityPriceSelling( const Planet *p, const Commodity *c );
 float planet_commodityPriceBuyingRatio( const Planet *p, const Commodity *c );
 float planet_commodityPriceSellingRatio( const Planet *p, const Commodity *c );
-void planet_addOrUpdateTradeData(Planet *p, const Commodity *c,float priceFactor,
+void planet_addOrUpdateTradeData(Planet *p, Commodity *c,float priceFactor,
 		int buyingQuantity,int sellingQuantity);
 /* Misc modification. */
 int planet_setFaction( Planet *p, int faction );
@@ -321,7 +323,9 @@ void planet_updateQuantities(Planet* p);
 void planet_refreshPlanetPriceFactors(Planet* p);
 void planet_refreshAllPlanetAdjustedPrices(void);
 void planet_addOrUpdateExtraPresence(Planet *p,int factionId,double amount,int range);
-
+double planet_getFactionPresence(Planet *p,int factionId);
+void planet_addTag(Planet* p,const char* tag);
+void planet_clearTag(Planet* p,const char* tag);
 
 /*
  * jump stuff

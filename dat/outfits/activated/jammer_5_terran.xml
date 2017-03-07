@@ -4,7 +4,7 @@
   <slot>utility</slot>
   <size>small</size>
   <mass>3</mass>
-  <price>150000</price>
+  <price>300000</price>
   <description>Generic jammers available on the free market are toys compared to this Terran Navy device; while its CPU and energy requirements are far beyond civilian devices, it is also massively more effective at keeping enemy crafts confused.</description>
   <gfx_store>jammer1</gfx_store>
   <limit>jammer</limit>

@@ -5,7 +5,7 @@
   <slot>structure</slot>
   <size>small</size>
   <mass>6</mass>
-  <price>80000</price>
+  <price>120000</price>
   <description>This small Terran-made battery pack holds significantly more power than generic variants.</description>
   <gfx_store>capacitor-g</gfx_store>
   <level>2</level>

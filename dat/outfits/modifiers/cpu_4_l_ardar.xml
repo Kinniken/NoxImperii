@@ -5,7 +5,7 @@
   <slot>utility</slot>
   <size>large</size>
   <mass>25</mass>
-  <price>380000</price>
+  <price>1100000</price>
   <description>Ardar scientists remain behind Terran efforts in electronics, and this mainframe is more energy-hungry and not quite as powerful as Terran equivalents. It is still far beyond civilian models.</description>
   <gfx_store>cpu_iii</gfx_store>
   <level>4</level>

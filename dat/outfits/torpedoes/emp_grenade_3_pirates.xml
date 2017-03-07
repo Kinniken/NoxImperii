@@ -2,7 +2,7 @@
 <outfit name="EMP Grenade">
  <general>
   <mass>0.5</mass>
-  <price>300</price>
+  <price>600</price>
   <gfx_store>empgrenade</gfx_store>
   <description>This is a grenade that can be launched to unleash an electromagnetic pulse, rapidly disabling the electronics of enemy ships. While it is occasionally used by law-enforcement forces to capture ships alive, it is famous mostly as a pirate weapon.</description>
   <level>3</level>
@@ -21,7 +21,7 @@
    <type>emp</type>
    <penetrate>50</penetrate>
    <physical>8</physical>
-   <disable>50</disable>
+   <disable>100</disable>
   </damage>
   <ai>dumb</ai>
  </specific>

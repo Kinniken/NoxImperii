@@ -183,8 +183,7 @@ void player_board (void)
 
    //If has not been boarded before, needs to fight for it
    if (!pilot_isFlag(p,PILOT_BOARDED_SUCCESS)) {
-	   chance=100-(0.5 * (10. + p->crew*p->boarding_skills)/(10. + player.p->crew*player.p->boarding_skills))*100;
-
+	   chance=100-(0.4 * (5. + p->crew*p->boarding_skills)/(5. + player.p->crew*player.p->boarding_skills))*100;
 	   chance=MAX(chance,0);
 	   chance=MIN(chance,100);
 
@@ -407,7 +406,7 @@ static void board_computeLoots(Pilot* p) {
 		loots[posNormal].type = LOOT_CREDITS;
 		loots[posNormal].totalValue = p->credits;
 		loots[posNormal].quantity = (int)p->credits;
-		loots[posNormal].timeNeeded = ntime_create(0,0,0,0,15,0);
+		loots[posNormal].timeNeeded = ntime_create(0,0,0,0,10,0);
 		loots[posNormal].ntexture = 1;
 		loots[posNormal].textures = malloc(sizeof(glTexture));
 
@@ -429,7 +428,7 @@ static void board_computeLoots(Pilot* p) {
 		loots[pos].type = LOOT_FUEL;
 		loots[pos].fuel = (int)p->fuel;
 		loots[pos].quantity = (int)p->fuel;
-		loots[pos].timeNeeded = ntime_create(0,0,0,0,p->fuel/50,0);
+		loots[pos].timeNeeded = ntime_create(0,0,0,0,p->fuel/80,0);
 
 		if (player.p->fuel >= player.p->fuel_max) {
 			loots[pos].impossible = 1;
@@ -465,7 +464,7 @@ static void board_computeLoots(Pilot* p) {
 		loots[pos].commodity = p->commodities[i].commodity;
 		loots[pos].quantity = p->commodities[i].quantity;
 		loots[pos].totalValue = p->commodities[i].quantity * p->commodities[i].commodity->price;
-		loots[pos].timeNeeded = ntime_create(0,0,0,0,15+p->commodities[i].quantity/crewSize,0);
+		loots[pos].timeNeeded = ntime_create(0,0,0,0,5+p->commodities[i].quantity/(crewSize*2),0);
 
 		if (player.p->cargo_free == 0) {
 			loots[pos].impossible = 1;
@@ -503,7 +502,7 @@ static void board_computeLoots(Pilot* p) {
 			loots[posNormal].type = LOOT_OUTFIT;
 			loots[posNormal].outfit = p->outfits[i]->outfit;
 			loots[posNormal].quantity = 1;
-			loots[posNormal].timeNeeded = ntime_create(0,0,0,0,15+slotSize*100/crewSize,0);
+			loots[posNormal].timeNeeded = ntime_create(0,0,0,0,5+slotSize*50/crewSize,0);
 			loots[posNormal].totalValue = p->outfits[i]->outfit->price;
 			loots[posNormal].ntexture = p->outfits[i]->outfit->gfx_store_nlayers;
 			loots[posNormal].textures = p->outfits[i]->outfit->gfx_store_layers;
@@ -702,7 +701,7 @@ static int board_trySteal( Pilot *p )
       return 1;
 
    /* See if was successful. */
-   if (RNGF() > (0.5 * (10. + target->crew*target->boarding_skills)/(10. + p->crew*p->boarding_skills)))
+   if (RNGF() > (0.4 * (5. + target->crew*target->boarding_skills)/(5. + p->crew*p->boarding_skills)))
       return 0;
 
    /* Triggered self destruct. */

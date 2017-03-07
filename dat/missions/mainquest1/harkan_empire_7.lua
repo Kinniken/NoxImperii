@@ -2,7 +2,7 @@ include "dat/scripts/general_helper.lua"
 include "dat/missions/supportfiles/common.lua"
 include "pilot/pilots_empire.lua"
 
-payment = 100000
+payment = 200000
 
 -- Mission Details
 misn_title = "Locate Colonel Syrnd"
@@ -152,6 +152,8 @@ function ship_hail()
 	osd_msg_3=gh.formatAll(osd_msg_3,stringData)
 	misn.osdCreate(gh.format(misn_title,stringData), osd_msg_3)
 	misn.osdActive(4)
+
+	misn.markerMove(landmarker,planet.get("Harkan"):system())
 
 	hook.rm(spacehook)
 	landhook = hook.land ("land_final")

@@ -292,36 +292,14 @@ local function empire_ardarshir_border_generate(star)
 end
 
 local function empire_outer_fringe_generate(star)
-	if (math.random()<0.5) then
-		for k,planet in pairs(star.planets) do
-			generate_human_population(star,planet,0.5,0.7,{50000,10000000},0.5,0.8,0.2,1.5,0.3,G.INDEPENDENT_WORLDS);
-		end
-	else
-		for k,planet in pairs(star.planets) do
-			if (math.random()<0.9) then-- barbarian colony
-				generate_barbarian_population(star,planet,0.5,0.4,{500000,2000000},0.3,0.5,0.2,3,0.8,G.BARBARIANS);
-			else-- barbarian "home world"
-				planet.lua.natives=nil
-				generate_barbarian_population(star,planet,0.5,0.4,{5000000,500000000},0.3,0.8,0.3,3,0.8,G.BARBARIANS);
-			end
-		end
+	for k,planet in pairs(star.planets) do
+		generate_human_population(star,planet,0.5,0.7,{50000,10000000},0.5,0.8,0.2,1.5,0.3,G.INDEPENDENT_WORLDS);
 	end
 end
 
 local function empire_orion_fringe_generate(star)
-	if (math.random()<0.3) then
-		for k,planet in pairs(star.planets) do
-			generate_human_population(star,planet,0.5,0.7,{50000,10000000},0.5,0.8,0.2,1.5,0.3,G.INDEPENDENT_WORLDS);
-		end
-	else
-		for k,planet in pairs(star.planets) do
-			if (math.random()<0.6) then-- barbarian colony
-				generate_barbarian_population(star,planet,0.5,0.4,{500000,2000000},0.3,0.5,0.2,3,0.8,G.BARBARIANS);
-			else-- barbarian "home world"
-				planet.lua.natives=nil
-				generate_barbarian_population(star,planet,0.5,0.4,{5000000,500000000},0.3,0.8,0.3,3,0.8,G.BARBARIANS);
-			end
-		end
+	for k,planet in pairs(star.planets) do
+		generate_human_population(star,planet,0.5,0.7,{50000,10000000},0.5,0.8,0.2,1.5,0.3,G.INDEPENDENT_WORLDS);
 	end
 end
 
@@ -400,11 +378,11 @@ population_templates.empire_ardarshir_border={name="empire_ardarshir_border",gen
 specialSettlement={},nativeCivilization=0.6,nativeFactors={agriculture=0.7,industry=0.5,services=0.3,technology=0.5,military=0.9,stability=0.7},nativeFaction=G.INDEPENDENT_WORLDS}
 
 population_templates.empire_fringe={name="empire_fringe",generate=empire_outer_fringe_generate,
-specialSettlement={["Earth-like"]=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Warm Earth-like"]=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Cold Earth-like"]=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},
+specialSettlement={["Earth-like"]=settlement_generator.fringeHumanIndependentSettlements,["Warm Earth-like"]=settlement_generator.fringeHumanIndependentSettlements,["Cold Earth-like"]=settlement_generator.fringeHumanIndependentSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},
 nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.5},nativeFaction=G.INDEPENDENT_WORLDS}
 
 population_templates.empire_orion_fringe={name="empire_orion_fringe",generate=empire_orion_fringe_generate,
-specialSettlement={["Earth-like"]=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Warm Earth-like"]=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Cold Earth-like"]=gh.concatLists({settlement_generator.barbarianSettlements,settlement_generator.fringeHumanIndependentSettlements}),["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},
+specialSettlement={["Earth-like"]=settlement_generator.fringeHumanIndependentSettlements,["Warm Earth-like"]=settlement_generator.fringeHumanIndependentSettlements,["Cold Earth-like"]=settlement_generator.fringeHumanIndependentSettlements,["Asteroid Moon"]=settlement_generator.asteroidMoonHumanSettlements,["Silicate Moon"]=settlement_generator.worldMoonHumanSettlements},
 nativeCivilization=0.3,nativeFactors={agriculture=0.5,industry=0.3,services=0.2,technology=0.3,military=1,stability=0.3},nativeFaction=G.INDEPENDENT_WORLDS}
 
 population_templates.barbarian_fringe={name="barbarian_fringe",generate=barbarian_fringe_generate,specialSettlement={["Earth-like"]=settlement_generator.barbarianSettlements,["Warm Earth-like"]=settlement_generator.barbarianSettlements,["Cold Earth-like"]=settlement_generator.barbarianSettlements},nativeCivilization=0,nativeFactors={agriculture=0.5,industry=0.3,services=0.1,technology=0.2,military=1.2,stability=0.3},nativeFaction=G.NATIVES}

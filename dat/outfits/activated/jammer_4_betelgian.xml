@@ -4,7 +4,7 @@
   <slot>utility</slot>
   <size>small</size>
   <mass>3</mass>
-  <price>120000</price>
+  <price>180000</price>
   <description>Betelgeuse is not know for its electronics, but it has developed some excellent devices with imported electronics. This is a shinning example: not quite the equal of Terran versions, but better than anything you'd find in the Roidhunate. Betelgian heavy freighters will sometime carry some, less to fight than to confuse the enemy long enough to escape.</description>
   <gfx_store>jammer1</gfx_store>
   <limit>jammer</limit>

@@ -5,7 +5,7 @@
   <slot>utility</slot>
   <size>large</size>
   <mass>130</mass>
-  <price>3500000</price>
+  <price>4100000</price>
   <gfx_store>reactor_iii</gfx_store>
   <description>For its largest, most power-hungry ships, the Terran Navy has developed massive anti-matter reactors that outclass the largest fusion designs. Their weight and cost limit them to the largest flagships.</description>
   <cpu>-30</cpu>

@@ -7,7 +7,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 
 	textData.house=nameGenerator.generateNameBetelgeuse()
 
-	local effectId=planet.lua.settlements.betelgeuse:addActiveEffect("The exploration fleet's purchases are driving up the price of basic goods.",
+	local effectId=planet:addActiveEffect("betelgeuse","The exploration fleet's purchases are driving up the price of basic goods.",
 		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber(), "betelgeuse_fleetleaving" )
 	planet.lua.settlements.betelgeuse:addGoodDemand(C.BASIC_TOOLS,500,3,effectId)
 	planet.lua.settlements.betelgeuse:addGoodDemand(C.BASIC_WEAPONS,500,3,effectId)
@@ -33,8 +33,8 @@ event.applyOnWorldCustom=function(self,planet,textData)
 
 	textData.house=nameGenerator.generateNameBetelgeuse()
 
-	local effectId=planet.lua.settlements.betelgeuse:addActiveEffect("The exploration fleet is selling all kinds of native goods.",
-		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber(), "betelgeuse_fleetleaving" )
+	local effectId=planet:addActiveEffect("betelgeuse","The exploration fleet is selling all kinds of native goods.",
+		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber(), "betelgeuse_fleetreturning" )
 
 	planet.lua.settlements.betelgeuse:addGoodSupply(C.NATIVE_ARTWORK,200,1,effectId)
 	if (math.random()<0.5) then planet.lua.settlements.betelgeuse:addGoodSupply(C.NATIVE_SCULPTURES,200,1,effectId) end
@@ -65,7 +65,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 
 	textData.house=nameGenerator.generateNameBetelgeuse()
 
-	local effectId=planet.lua.settlements.betelgeuse:addActiveEffect(gh.format("The sale of the ${house} estate makes cheap luxury goods available.",textData),
+	local effectId=planet:addActiveEffect("betelgeuse",gh.format("The sale of the ${house} estate makes cheap luxury goods available.",textData),
 		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber(), "betelgeuse_housecollapse" )
 	planet.lua.settlements.betelgeuse:addGoodSupply(C.LUXURY_GOODS,50,0.5,effectId)
 	if math.random()<0.5 then planet.lua.settlements.betelgeuse:addGoodSupply(C.BORDEAUX,100,0.5,effectId) end
@@ -93,7 +93,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 
 	textData.lord=nameGenerator.generateNameBetelgeuse()
 
-	local effectId=planet.lua.settlements.betelgeuse:addActiveEffect("The ongoing political crisis is undermining the economy, causing a collapse in trade good prices.",
+	local effectId=planet:addActiveEffect("betelgeuse","The ongoing political crisis is undermining the economy, causing a collapse in trade good prices.",
 		(time.get() + time.create(0,0,10, 0, 0, 0 )):tonumber(), "betelgeuse_noblemurder" )
 	planet.lua.settlements.betelgeuse:reduceGoodDemand(C.LUXURY_GOODS,300,0.5,effectId)
 	planet.lua.settlements.betelgeuse:reduceGoodDemand(C.GOURMET_FOOD,300,0.5,effectId)
@@ -121,7 +121,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 
 	textData.house=nameGenerator.generateNameBetelgeuse()
 
-	local effectId=planet.lua.settlements.betelgeuse:addActiveEffect("Ongoing political lobbying is driving up the price of luxury and other rare goods.",
+	local effectId=planet:addActiveEffect("betelgeuse","Ongoing political lobbying is driving up the price of luxury and other rare goods.",
 		(time.get() + self.duration):tonumber(), "betelgeuse_lobbying" )
 	planet.lua.settlements.betelgeuse:addGoodDemand(C.LUXURY_GOODS,300,3,effectId)
 	planet.lua.settlements.betelgeuse:addGoodDemand(C.GOURMET_FOOD,300,3,effectId)

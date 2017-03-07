@@ -8,7 +8,7 @@
  <class>Fighter</class>
  <fabricator>Gonder Shipyards</fabricator>
  <description>Copies of Ardar Roeth fighters such as this are made in great numbers in the former Royal Shipyards, now run by the clergy. The war and the purges that followed have however hollowed the ranks of Ixumite engineers, and quality is not up to Ardar standards.</description>
- <price>200000</price>
+ <price>300000</price>
  <license>Holy Flame Servant</license>
  <logo>holyflame</logo>
  <rating_military>2</rating_military>

@@ -8,7 +8,7 @@
  <class>Destroyer</class>
  <fabricator>Paoli Shipyards</fabricator>
  <description>The Libera is a bigger sister of the Alba (all Betelgian ships are considered female), stretched to near-frigate capacities. It remains weak by Terran standards, but is sufficient for its main role in the Betelgian Navy - protecting trade fleets from pirates.</description>
- <price>1000000</price>
+ <price>2000000</price>
  <license>Betelgian Trader</license>
  <logo>betelgeuse</logo>
  <rating_military>4</rating_military>

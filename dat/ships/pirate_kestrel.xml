@@ -8,7 +8,7 @@
  <class>Destroyer</class>
  <fabricator>Pirate Shipyards</fabricator>
  <description>Retrofitted from kestrels stolen, captured or bought via back-handed channels, the pirate version of the ship packs even more punch than the factory one. Truly a ship to strike fear in passing traders.</description>
- <price>5000000</price>
+ <price>10000000</price>
  <logo>pirates</logo>
  <rating_military>6</rating_military>
  <rating_utility>4</rating_utility>

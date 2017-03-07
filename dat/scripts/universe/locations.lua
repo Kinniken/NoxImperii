@@ -141,7 +141,7 @@ local function barbarian_fringes_names(star)
 end
 
 local function barbarian_priority(star)
-	if (gh.calculateDistance(earth_pos,star)<1500 or gh.calculateDistance(ardarshir_pos,star)<1200 or gh.calculateDistance(gonder_pos,star)<700) then
+	if (gh.calculateDistance(earth_pos,star)<1600 or gh.calculateDistance(ardarshir_pos,star)<1200 or gh.calculateDistance(gonder_pos,star)<700) then
 		return 5
 	end
 
@@ -188,7 +188,8 @@ locations.great_outer={
 		return 1 end,
 	zoneName=function(star) return "Great Outer" end,
 	star_template="default",
-	pop_template="great_outer"
+	pop_template="great_outer",
+	special={}
 }
 
 
@@ -198,7 +199,8 @@ locations.hyades={
 	end,
 	zoneName=function(star) return "Hyades Cluster" end,
 	star_template="hyades",
-	pop_template="empire_hyades"
+	pop_template="empire_hyades",
+	special={}
 }
 
 locations.pleiades={priority=function(star) 
@@ -206,7 +208,8 @@ locations.pleiades={priority=function(star)
 	end,
 	zoneName=function(star) return "The Pleiades" end,
 	star_template="pleiades",
-	pop_template="ardarshir_outer"
+	pop_template="ardarshir_outer",
+	special={}
 }
 
 locations.orion_outer={priority=function(star) 
@@ -218,7 +221,8 @@ locations.orion_outer={priority=function(star)
 	end,
 	zoneName=function(star) return "Outer Orion Nebula" end,
 	star_template="orion_outer",
-	pop_template="barbarian_heavy"
+	pop_template="barbarian_heavy",
+	special={}
 }
 
 
@@ -229,7 +233,8 @@ locations.orion_inner={priority=function(star)
 	end,
 	zoneName=function(star) return "Inner Orion Nebula" end,
 	star_template="orion_inner",
-	pop_template="barbarian_heavy"
+	pop_template="barbarian_heavy",
+	special={}
 }
 
 locations.eagle_outer={priority=function(star) 
@@ -240,7 +245,8 @@ locations.eagle_outer={priority=function(star)
 	end,
 	zoneName=function(star) return "Outer Eagle Nebula" end,
 	star_template="eagle_outer",
-	pop_template="barbarian_heavy"
+	pop_template="barbarian_heavy",
+	special={}
 }
 
 locations.eagle_inner={priority=function(star) 
@@ -250,7 +256,8 @@ locations.eagle_inner={priority=function(star)
 	end,
 	zoneName=function(star) return "Inner Eagle Nebula" end,
 	star_template="eagle_inner",
-	pop_template="barbarian_heavy"
+	pop_template="barbarian_heavy",
+	special={}
 }
 
 
@@ -265,7 +272,8 @@ locations.rift={priority=function(star)
 	end,
 	zoneName=function(star) return "The Rift" end,
 	star_template="rift",
-	pop_template="great_outer"
+	pop_template="great_outer",
+	special={}
 }
 
 locations.blessed={priority=function(star) 
@@ -278,7 +286,8 @@ locations.blessed={priority=function(star)
 	end,
 	zoneName=function(star) return "Blessed Worlds" end,
 	star_template="default",
-	pop_template="empire_blessed"
+	pop_template="empire_blessed",
+	special={no_pirate=true}
 }
 
 locations.devilclaw={priority=function(star) 
@@ -297,7 +306,8 @@ locations.devilclaw={priority=function(star)
 	end,
 	zoneName=function(star) return "The Devil's Claw" end,
 	star_template="rift",
-	pop_template="great_outer"
+	pop_template="great_outer",
+	special={}
 }
 
 locations.transclaw={priority=function(star) 
@@ -307,7 +317,8 @@ locations.transclaw={priority=function(star)
 	end,
 	zoneName=function(star) return "Trans-Claw Fringe" end,
 	star_template="default",
-	pop_template="ardarshir_outer"
+	pop_template="ardarshir_outer",
+	special={}
 }
 
 
@@ -318,14 +329,16 @@ locations.dead_suns={priority=function(star)
 	end,
 	zoneName=function(star) return "Sea of Dead Suns" end,
 	star_template="dead_suns",
-	pop_template="great_outer"
+	pop_template="great_outer",
+	special={}
 }
 
 locations.empire_inner={
 	priority=function(star) return priority_distance(earth_pos,star,250,100) end,
 	zoneName=function(star) return "Sector Sol" end,
 	star_template="default",
-	pop_template="empire_inner"
+	pop_template="empire_inner",
+	special={}
 }
 
 locations.empire_inner_sectors={
@@ -336,41 +349,45 @@ locations.empire_inner_sectors={
 		return sector.innerName
 	end,
 	star_template="default",
-	pop_template="empire_outer"
+	pop_template="empire_outer",
+	special={}
 }
 
 locations.empire_outer_sectors={
-	priority=function(star) return priority_distance(earth_pos,star,1000,20) end,
+	priority=function(star) return priority_distance(earth_pos,star,1050,20) end,
 	zoneName=function(star)
 		local sector=get_closest_imperial_sector(star)
 
 		return sector.outerName
 	end,
 	star_template="default",
-	pop_template="empire_outer"
+	pop_template="empire_outer",
+	special={}
 }
 
 locations.empire_fringe={
-	priority=function(star) return priority_distance(earth_pos,star,1400,10) end,
+	priority=function(star) return priority_distance(earth_pos,star,1300,10) end,
 	zoneName=function(star)
 		local sector=get_closest_imperial_sector(star)
 
 		return sector.fringeName
 	end,
 	star_template="default",
-	pop_template="empire_fringe"
+	pop_template="empire_fringe",
+	special={}
 }
 
 locations.orion_fringe={
 	priority=function(star)
 		if star.y>0 and star.y>star.x and star.y>-star.x then
-			return priority_distance(earth_pos,star,1400,15)--above normal fringe
+			return priority_distance(earth_pos,star,1300,15)--above normal fringe
 		end
 		return 0
 	end,
 	zoneName=function(star) return "Orion Fringe" end,
 	star_template="default",
-	pop_template="empire_orion_fringe"
+	pop_template="empire_orion_fringe",
+	special={}
 }
 
 locations.empire_ardarshir_border={
@@ -385,56 +402,64 @@ locations.empire_ardarshir_border={
 	end,
 	zoneName=function(star) return "Buffer Zone" end,
 	star_template="default",
-	pop_template="empire_ardarshir_border"
+	pop_template="empire_ardarshir_border",
+	special={}
 }
 
 locations.barbarian_fringe={
 	priority=barbarian_priority,
 	zoneName=barbarian_fringes_names,
 	star_template="default",
-	pop_template="barbarian_fringe"
+	pop_template="barbarian_fringe",
+	special={}
 }
 
 locations.ardarshir_inner={
 	priority=function(star) return priority_distance(ardarshir_pos,star,250,100) end,
 	zoneName=function(star) return "Inner Roidhunate" end,
 	star_template="default",
-	pop_template="ardarshir_inner"
+	pop_template="ardarshir_inner",
+	special={}
 }
 
 locations.ardarshir_outer={
 	priority=function(star) return priority_distance(ardarshir_pos,star,500,45) end,
 	zoneName=function(star) return "Outer Roidhunate" end,
 	star_template="default",
-	pop_template="ardarshir_outer"
+	pop_template="ardarshir_outer",
+	special={}
 }
 
 locations.ardarshir_fringe={
 	priority=function(star) return priority_distance(ardarshir_pos,star,900,18) end,
 	zoneName=function(star) return "Roidhunate Fringes" end,
 	star_template="default",
-	pop_template="ardarshir_fringe"
+	pop_template="ardarshir_fringe",
+	special={}
 }
 
 locations.betelgeuse={
 	priority=function(star) return priority_distance(betelgeuse_pos,star,200,100) end,
 	zoneName=function(star) return "Betelgeuse" end,
 	star_template="default",
-	pop_template="betelgeuse"
+	pop_template="betelgeuse",
+	special={}
 }
 
 locations.kingdom_of_ixum={
 	priority=function(star) return priority_distance(tigray_pos,star,200,1000) end,
 	zoneName=function(star) return "Ixum" end,
 	star_template="default",
-	pop_template="kingdom_of_ixum"
+	pop_template="kingdom_of_ixum",
+	special={}
 }
 
 locations.holy_flame_of_ixum={
 	priority=function(star) return priority_distance(gonder_pos,star,350,900) end,
 	zoneName=function(star) return "Ixum" end,
 	star_template="default",
-	pop_template="holy_flame_of_ixum"
+	pop_template="holy_flame_of_ixum",
+	special={}
 }
 
 for k,v in pairs(locations) do

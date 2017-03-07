@@ -103,9 +103,9 @@ function getMissionsDesc()
   if doneIndex["Empire"]<ipIndex["Empire"] then
     desc=desc.."\n\nYou are currently doing a mission that will raise your rank."
   elseif doneIndex["Empire"]==0 or doneIndex["Empire"]==2 or doneIndex["Empire"]==3 or doneIndex["Empire"]==4 then
-    desc=desc.."\n\nThe next mission is available from an officer in bars on Imperial planets bordering barbarian space. Try multiple planets if you cannot find it at first!"
+    desc=desc.."\n\nThe next mission is randomly available from an officer in bars on Imperial planets bordering barbarian space. Try multiple planets if you cannot find it at first!"
   elseif doneIndex["Empire"]==1 then
-    desc=desc.."\n\nThe next mission is available from an officer in bars on Imperial planets bordering Ardar space. Try multiple planets if you cannot find it at first!"
+    desc=desc.."\n\nThe next mission is randomly available from an officer in bars on Imperial planets bordering Ardar space. Try multiple planets if you cannot find it at first!"
   else
     desc=desc.."\n\nYou have done all the Imperial missions and have reached the highest rank."
   end
@@ -115,11 +115,11 @@ function getMissionsDesc()
   if doneIndex["Ardar"]<ipIndex["Ardar"] then
     desc=desc.."\n\nYou are currently doing a mission that will raise your rank."
   elseif doneIndex["Ardar"]==0 then
-    desc=desc.."\n\nThe next mission is available from an officer in bars on Ardar planets bordering Imperial space. Try multiple planets if you cannot find it at first!"
+    desc=desc.."\n\nThe next mission is randomly available from an officer in bars on Ardar planets bordering Imperial space. Try multiple planets if you cannot find it at first!"
   elseif doneIndex["Ardar"]==1 or doneIndex["Ardar"]==3 then
-    desc=desc.."\n\nThe next mission is available on Ardar planets bordering barbarian space. Try multiple planets if you cannot find it at first!"
+    desc=desc.."\n\nThe next mission is randomly available on Ardar planets bordering barbarian space. Try multiple planets if you cannot find it at first!"
   elseif doneIndex["Ardar"]==2 or doneIndex["Ardar"]==4 then
-    desc=desc.."\n\nThe next mission is available on Ardar planets bordering Imperial space. Try multiple planets if you cannot find it at first!"
+    desc=desc.."\n\nThe next mission is randomly available on Ardar planets bordering Imperial space. Try multiple planets if you cannot find it at first!"
   else
     desc=desc.."\n\nYou have done all the Roidhunate missions and have reached the highest rank."
   end
@@ -129,7 +129,7 @@ function getMissionsDesc()
   if doneIndex["Betelgeuse"]<ipIndex["Betelgeuse"] then
     desc=desc.."\n\nYou are currently doing a mission that will raise your rank."
   elseif doneIndex["Betelgeuse"]<5 then
-    desc=desc.."\n\nThe next mission is available from Rastapopoulos in the bar of any Betelgian world!"
+    desc=desc.."\n\nThe next mission is randomly available from Rastapopoulos in the bar of any Betelgian world!"
   else
     desc=desc.."\n\nYou have done all the Betelgian missions and have reached the highest rank."
   end

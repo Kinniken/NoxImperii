@@ -2,13 +2,13 @@
 <outfit name="EMP Gun">
  <general>
   <slot>weapon</slot>
-  <size>small</size>
-  <mass>7</mass>
-  <price>36000</price>
+  <size>medium</size>
+  <mass>10</mass>
+  <price>80000</price>
   <description>EMP guns such as these work by saturating a ship's electronics; they also have some effects on shields but none on armour. That makes them ideal non-lethal weapons, their original usage. It also makes them extremely useful to pirates, and for this reason they are banned by most authorities.</description>
   <gfx_store>weapon01</gfx_store>
-  <cpu>-7</cpu>
-  <level>2</level>
+  <cpu>-10</cpu>
+  <level>3</level>
   <logo>pirates</logo>
  </general>
  <specific type="bolt"  secondary="1">
@@ -21,15 +21,15 @@
   <range>700</range>
   <falloff>300</falloff>
   <gfx_end>razorS-end</gfx_end>
-  <energy>7</energy>
+  <energy>12</energy>
   <heatup>15</heatup>
   <track>2.25</track>
   <swivel>5</swivel>
   <damage>
    <type>emp</type>
    <penetrate>0</penetrate>
-   <physical>3</physical>
-   <disable>7</disable>
+   <physical>12</physical>
+   <disable>25</disable>
   </damage>
  </specific>
 </outfit>

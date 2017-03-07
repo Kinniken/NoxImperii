@@ -71,7 +71,7 @@
   </flags>
   <avail>
    <priority>50</priority>
-   <chance>100</chance>
+   <chance>20</chance>
    <location>Bar</location>
    <faction>Empire of Terra</faction>
   </avail>
@@ -93,7 +93,7 @@
   </flags>
   <avail>
    <priority>15</priority>
-   <chance>100</chance>
+   <chance>20</chance>
    <location>Bar</location>
    <faction>Empire of Terra</faction>
   </avail>
@@ -115,7 +115,7 @@
   </flags>
   <avail>
    <priority>15</priority>
-   <chance>100</chance>
+   <chance>20</chance>
    <done>Empire 1 Barbarian Scouting</done>
    <location>Bar</location>
    <faction>Empire of Terra</faction>
@@ -161,7 +161,7 @@
   </flags>
   <avail>
    <priority>50</priority>
-   <chance>100</chance>
+   <chance>20</chance>
    <done>Empire 3 Barbarian Elimination</done>
    <location>Bar</location>
    <faction>Empire of Terra</faction>
@@ -187,7 +187,7 @@
   </flags>
   <avail>
    <priority>50</priority>
-   <chance>100</chance>
+   <chance>20</chance>
    <done>Empire 4 Barbarian Strikes</done>
    <location>Land</location>
    <faction>Empire of Terra</faction>
@@ -216,7 +216,7 @@
   </flags>
   <avail>
    <priority>15</priority>
-   <chance>100</chance>
+   <chance>20</chance>
    <location>Bar</location>
    <faction>Roidhunate of Ardarshir</faction>
   </avail>
@@ -238,7 +238,7 @@
   </flags>
   <avail>
    <priority>15</priority>
-   <chance>100</chance>
+   <chance>20</chance>
    <done>Ardar 1 Frontier Scouting</done>
    <location>Land</location>
    <faction>Roidhunate of Ardarshir</faction>
@@ -261,7 +261,7 @@
   </flags>
   <avail>
    <priority>15</priority>
-   <chance>100</chance>
+   <chance>20</chance>
    <done>Ardar 2 Native Investigation</done>
    <location>Land</location>
    <faction>Roidhunate of Ardarshir</faction>
@@ -284,7 +284,7 @@
   </flags>
   <avail>
    <priority>15</priority>
-   <chance>100</chance>
+   <chance>20</chance>
    <done>Ardar 3 Imperial Scout Kill</done>
    <location>Land</location>
    <faction>Roidhunate of Ardarshir</faction>
@@ -307,7 +307,7 @@
   </flags>
   <avail>
    <priority>15</priority>
-   <chance>100</chance>
+   <chance>20</chance>
    <done>Ardar 4 Piracy Kill</done>
    <location>Land</location>
    <faction>Roidhunate of Ardarshir</faction>
@@ -333,7 +333,7 @@
   </flags>
   <avail>
    <priority>15</priority>
-   <chance>100</chance>
+   <chance>20</chance>
    <location>Bar</location>
    <faction>Oligarchy of Betelgeuse</faction>
   </avail>
@@ -345,7 +345,7 @@
   </flags>
   <avail>
    <priority>15</priority>
-   <chance>100</chance>
+   <chance>20</chance>
    <location>Bar</location>
    <done>Betelgeuse 1 Courier</done>
    <faction>Oligarchy of Betelgeuse</faction>
@@ -368,7 +368,7 @@
   </flags>
   <avail>
    <priority>15</priority>
-   <chance>100</chance>
+   <chance>20</chance>
    <location>Bar</location>
    <done>Betelgeuse 2 Trader</done>
    <faction>Oligarchy of Betelgeuse</faction>
@@ -391,7 +391,7 @@
   </flags>
   <avail>
    <priority>15</priority>
-   <chance>100</chance>
+   <chance>20</chance>
    <location>Bar</location>
    <done>Betelgeuse 3 Rescue</done>
    <faction>Oligarchy of Betelgeuse</faction>
@@ -414,7 +414,7 @@
   </flags>
   <avail>
    <priority>15</priority>
-   <chance>100</chance>
+   <chance>20</chance>
    <location>Bar</location>
    <done>Betelgeuse 4 Rival Fleet</done>
    <faction>Oligarchy of Betelgeuse</faction>
@@ -474,7 +474,7 @@
   </flags>
   <avail>
    <priority>50</priority>
-   <chance>10</chance>
+   <chance>100</chance>
    <done>Intro 3</done>
    <location>Space</location>
   </avail>

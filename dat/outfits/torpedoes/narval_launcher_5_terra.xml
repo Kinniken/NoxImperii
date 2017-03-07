@@ -4,7 +4,7 @@
   <slot>weapon</slot>
   <size>large</size>  
   <mass>45</mass>
-  <price>220000</price>
+  <price>400000</price>
   <description>Intended for capital ships, this heavy-duty Narval Torpedo tube is a formidable weapon in capital ship to capital ship engagements. Its decent firing rate and large ammo capacity enables it to sustain fire capable of destroying any known ship.</description>
   <gfx_store>caesarlauncher</gfx_store>
   <cpu>-10</cpu>

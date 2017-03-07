@@ -3,7 +3,7 @@ include "dat/scripts/general_helper.lua"
 include "dat/missions/supportfiles/common.lua"
 include "dat/missions/supportfiles/pirates.lua"
 
-payment = 100000
+payment = 200000
 
 -- Mission Details
 misn_title = "Deliver Weapons"

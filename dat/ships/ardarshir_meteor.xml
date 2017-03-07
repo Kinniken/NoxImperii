@@ -8,7 +8,7 @@
  <class>Fighter</class>
  <fabricator>Roidhunate Shipyards</fabricator>
  <description>Ardar Roeths are the most common fighters in the Roidhunate's navy. Smaller and lighter than the typical Terran meteor-class vessel, they are unusually fast and manoeuvrable.</description>
- <price>250000</price>
+ <price>375000</price>
  <license>Ardarshir Auxiliary, Class I</license>
  <logo>ardarshir</logo>
  <rating_military>2</rating_military>

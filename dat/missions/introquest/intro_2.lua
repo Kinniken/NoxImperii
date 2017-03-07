@@ -76,8 +76,8 @@ end
 function land ()
    if planet.cur() == targetPlanet then
 		hook.rm(landhook)
-		misn.finish( true )
 		player.pay(payment)
+		misn.finish( true )		
    end
 end
 

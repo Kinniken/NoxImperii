@@ -4,7 +4,7 @@
   <slot>weapon</slot>
   <size>large</size>  
   <mass>40</mass>
-  <price>150000</price>
+  <price>600000</price>
   <description>The heaviest plasma cannon used by the Imperial Navy can only be fitted on cruisers and above; its slow firing rate and the lack of mobility of ships it is generally fitted on makes it a poor choice again mobile targets. Larger enemy ships however will find its barrages devastating.</description>
   <gfx_store>plasma2</gfx_store>
   <cpu>-55</cpu>
@@ -29,7 +29,7 @@
   <damage>
    <type>normal</type>
    <penetrate>90</penetrate>
-   <physical>160</physical>
+   <physical>200</physical>
    <disable>10</disable>
   </damage>
  </specific>

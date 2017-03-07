@@ -1,118 +1,17 @@
-
 include("dat/factions/spawn/common.lua")
 
-
--- @brief Spawns a small patrol fleet.
-function spawn_patrol ()
-   local pilots = {}
-   local r = rnd.rnd()
-
-   if r < 0.5 then
-      scom.addPilot( pilots, "Ardar Meteor", 25 );
-   elseif r < 0.8 then
-      scom.addPilot( pilots, "Ardar Meteor", 20 );
-      scom.addPilot( pilots, "Ardar Comet", 25 );
-   else
-      scom.addPilot( pilots, "Ardar Comet", 75 );
-   end
-
-   return pilots
-end
+declare_fleet("Ardar Meteor",10,{presence={nil,nil,50,nil}})
+declare_fleet("Ardar Comet",10,{presence={nil,nil,nil,nil}})
+declare_fleet("Ardar Continent",10,{presence={nil,50,200,nil}})
 
 
--- @brief Spawns a medium sized squadron.
-function spawn_squad ()
-   local pilots = {}
-   local r = rnd.rnd()
-
-   if r < 0.5 then
-      scom.addPilot( pilots, "Ardar Meteor", 20 );
-      scom.addPilot( pilots, "Ardar Meteor", 25 );
-      scom.addPilot( pilots, "Ardar Comet", 45 );
-   elseif r < 0.8 then
-      scom.addPilot( pilots, "Ardar Meteor", 25 );
-      scom.addPilot( pilots, "Ardar Comet", 45 );
-   else
-      scom.addPilot( pilots, "Ardar Meteor", 20 );
-      scom.addPilot( pilots, "Ardar Comet", 25 );
-      scom.addPilot( pilots, "Ardar Continent", 75 );
-   end
-
-   return pilots
-end
+declare_fleet({"Ardar Meteor","Ardar Meteor"},10,{presence={nil,50,500,nil},formation="wedge"})
+declare_fleet({"Ardar Comet","Ardar Comet","Ardar Comet","Ardar Meteor","Ardar Meteor"},10,{presence={nil,50,500,nil}})
+declare_fleet({"Ardar Continent","Ardar Comet","Ardar Comet","Ardar Meteor","Ardar Meteor"},10,{presence={nil,100,1000,nil}})
 
 
--- @brief Spawns a capship with escorts.
-function spawn_capship ()
-   local pilots = {}
-   local r = rnd.rnd()
+declare_fleet(function() return spawn_variableFleet({"Ardar Planet",1,1},{"Ardar Continent",0,1},{"Ardar Comet",1,2},{"Ardar Meteor",2,4}) end,10,{presence={50,200,nil,nil}})
 
-   -- Generate the capship
-   if r < 0.7 then
-      scom.addPilot( pilots, "Ardar Planet", 140 )
-   else
-      scom.addPilot( pilots, "Ardar Nova", 165 )
-   end
+declare_fleet(function() return spawn_variableFleet({"Ardar Nova",1,1},{"Ardar Continent",0,2},{"Ardar Comet",1,2},{"Ardar Meteor",2,6}) end,10,{presence={100,400,nil,nil}})
 
-   -- Generate the escorts
-   r = rnd.rnd()
-   if r < 0.5 then
-      scom.addPilot( pilots, "Ardar Meteor", 20 );
-      scom.addPilot( pilots, "Ardar Comet", 25 );
-      scom.addPilot( pilots, "Ardar Comet", 25 );
-   elseif r < 0.8 then
-      scom.addPilot( pilots, "Ardar Meteor", 25 );
-      scom.addPilot( pilots, "Ardar Comet", 45 );
-   else
-      scom.addPilot( pilots, "Ardar Meteor", 25 );
-      scom.addPilot( pilots, "Ardar Meteor", 75 );
-   end
-
-   return pilots
-end
-
-
--- @brief Creation hook.
-function create ( max )
-   local weights = {}
-
-   -- Create weights for spawn table
-    weights[ spawn_patrol  ] = 100
-    weights[ spawn_squad   ] = math.max(1, -80 + 0.80 * max)
-    weights[ spawn_capship ] = math.max(1, -500 + 1.70 * max)
-   
-   -- Create spawn table base on weights
-   spawn_table = scom.createSpawnTable( weights )
-
-   -- Calculate spawn data
-   spawn_data = scom.choose( spawn_table )
-
-   return scom.calcNextSpawn( 0, scom.presence(spawn_data), max )
-end
-
-
--- @brief Spawning hook
-function spawn ( presence, max )
-
-   --safety if create() was not called
-   --(can happen in border cases in Nox, unlike Naev)
-   if spawn_data==nil then
-      return 10000,nil
-    end
-   
-   local pilots
-
-   -- Over limit
-   if presence > max then
-      return 5
-   end
-  
-   -- Actually spawn the pilots
-   pilots = scom.spawn( spawn_data )
-
-   -- Calculate spawn data
-   spawn_data = scom.choose( spawn_table )
-
-   return scom.calcNextSpawn( presence, scom.presence(spawn_data), max ), pilots
-end
-
+declare_fleet(function() return spawn_variableFleet({"Ardar Nova",1,3},{"Ardar Planet",0,4},{"Ardar Continent",2,4},{"Ardar Comet",3,6},{"Ardar Meteor",4,16}) end,10,{presence={500,1000,nil,nil}})

@@ -568,7 +568,7 @@ void loadscreen_load (void)
    double screen_ratio=(double)SCREEN_W/SCREEN_H;
 
    if (screen_ratio >= 1.77 ) {
-	   if (SCREEN_H<=1366) {
+	   if (SCREEN_H>1366) {
 	   	   snprintf(loadingDir, sizeof loadingDir, "%s%s", GFX_PATH, "loading_2560_1440/");
 	   } else {
 		   snprintf(loadingDir, sizeof loadingDir, "%s%s", GFX_PATH, "loading_1366_768/");

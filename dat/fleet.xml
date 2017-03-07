@@ -1,502 +1,489 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Fleets>
- 
- <!-- Independent Traders -->
- <fleet name="Independent Traders Endeavour">
-  <ai>independent_trader</ai>
-  <faction>Independent Traders</faction>
-  <pilots>
-   <pilot name_generator="human_civilian" ship="Endeavour"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Independent Traders Scarab">
-  <ai>independent_trader</ai>
-  <faction>Independent Traders</faction>
-  <pilots>
-   <pilot name_generator="human_civilian" ship="Scarab"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Independent Traders Fish Bone">
-  <ai>independent_trader</ai>
-  <faction>Independent Traders</faction>
-  <pilots>
-   <pilot name_generator="human_civilian" ship="Fish Bone"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Independent Traders Voyager Cargo">
-  <ai>independent_trader</ai>
-  <faction>Independent Traders</faction>
-  <pilots>
-   <pilot name_generator="human_civilian" ship="Voyager Cargo"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Independent Traders Hauler">
-  <ai>independent_trader</ai>
-  <faction>Independent Traders</faction>
-  <pilots>
-   <pilot name_generator="human_civilian" ship="Hauler"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Independent Traders Whale">
-  <ai>independent_trader</ai>
-  <faction>Independent Traders</faction>
-  <pilots>
-   <pilot name_generator="human_civilian" ship="Whale"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Independent Traders Rhino">
-  <ai>independent_trader</ai>
-  <faction>Independent Traders</faction>
-  <pilots>
-   <pilot name_generator="human_civilian" ship="Rhino"></pilot>
-  </pilots>
- </fleet>
- 
- <!-- Independent Military -->
- 
- <fleet name="Independent Worlds Shark">
-  <ai>independent_worlds</ai>
-  <faction>Independent Worlds</faction>
-  <pilots>
-   <pilot name_generator="independent_militia" ship="Shark"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Independent Worlds Admonisher">
-  <ai>independent_worlds</ai>
-  <faction>Independent Worlds</faction>
-  <pilots>
-   <pilot name_generator="independent_militia" ship="Admonisher"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Independent Worlds Wasp">
-  <ai>independent_worlds</ai>
-  <faction>Independent Worlds</faction>
-  <pilots>
-   <pilot name_generator="independent_militia" ship="Wasp"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Independent Worlds Voyager Frigate">
-  <ai>independent_worlds</ai>
-  <faction>Independent Worlds</faction>
-  <pilots>
-   <pilot name_generator="independent_militia" ship="Voyager Frigate"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Independent Worlds Delta">
-  <ai>independent_worlds</ai>
-  <faction>Independent Worlds</faction>
-  <pilots>
-   <pilot name_generator="independent_militia" ship="Delta"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Independent Worlds Vendetta">
-  <ai>independent_worlds</ai>
-  <faction>Independent Worlds</faction>
-  <pilots>
-   <pilot name_generator="independent_militia" ship="Vendetta"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Independent Worlds Raptor">
-  <ai>independent_worlds</ai>
-  <faction>Independent Worlds</faction>
-  <pilots>
-   <pilot name_generator="independent_militia" ship="Raptor"></pilot>
-  </pilots>
- </fleet>
- 
- <!-- Natives -->
- <fleet name="Natives Endeavour">
-  <ai>natives</ai>
-  <faction>Natives</faction>
-  <pilots>
-   <pilot name="Natives Endeavour" ship="Endeavour"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Natives Scarab">
-  <ai>natives</ai>
-  <faction>Natives</faction>
-  <pilots>
-   <pilot name="Natives Scarab" ship="Scarab"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Natives Wasp">
-  <ai>natives</ai>
-  <faction>Natives</faction>
-  <pilots>
-   <pilot name="Natives Wasp" ship="Wasp"></pilot>
-  </pilots>
- </fleet>
- 
-
-<!-- Imperial Traders -->
- <fleet name="Imperial Traders Schroedinger">
-  <ai>empire_traders</ai>
-  <faction>Imperial Traders</faction>
-  <pilots>
-   <pilot name_generator="human_civilian" ship="Schroedinger"></pilot>
-  </pilots>
- </fleet> 
- <fleet name="Imperial Traders Quicksilver">
-  <ai>empire_traders</ai>
-  <faction>Imperial Traders</faction>
-  <pilots>
-   <pilot name_generator="human_civilian" ship="Quicksilver"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Imperial Traders Fish Bone">
-  <ai>empire_traders</ai>
-  <faction>Imperial Traders</faction>
-  <pilots>
-   <pilot name_generator="human_civilian" ship="Fish Bone"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Imperial Traders Zheng He">
-  <ai>empire_traders</ai>
-  <faction>Imperial Traders</faction>
-  <pilots>
-   <pilot name_generator="human_civilian" ship="Zheng He"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Imperial Traders Sunflower">
-  <ai>empire_traders</ai>
-  <faction>Imperial Traders</faction>
-  <pilots>
-   <pilot name_generator="human_civilian" ship="Sunflower"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Imperial Traders Argosy">
-  <ai>empire_traders</ai>
-  <faction>Imperial Traders</faction>
-  <pilots>
-   <pilot name_generator="human_civilian" ship="Argosy"></pilot>
-  </pilots>
- </fleet>
- 
- 
- <!-- Ardar Traders --> 
- <fleet name="Ardar Traders Endeavour">
-  <ai>roidhunate_trader</ai>
-  <faction>Ardar Traders</faction>
-  <pilots>
-   <pilot name_generator="ardar_civilian" ship="Endeavour"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Ardar Traders Fish Bone">
-  <ai>roidhunate_trader</ai>
-  <faction>Ardar Traders</faction>
-  <pilots>
-   <pilot name_generator="ardar_civilian" ship="Fish Bone"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Ardar Traders Meryoch">
-  <ai>roidhunate_trader</ai>
-  <faction>Ardar Traders</faction>
-  <pilots>
-   <pilot name_generator="ardar_civilian" ship="Meryoch"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Ardar Traders Rioloch">
-  <ai>roidhunate_trader</ai>
-  <faction>Ardar Traders</faction>
-  <pilots>
-   <pilot name_generator="ardar_civilian" ship="Rioloch"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Ardar Traders Geldoch">
-  <ai>roidhunate_trader</ai>
-  <faction>Ardar Traders</faction>
-  <pilots>
-   <pilot name_generator="ardar_civilian" ship="Geldoch"></pilot>
-  </pilots>
- </fleet>
- 
- 
-<!-- Betelgian Traders -->
- <fleet name="Betelgian Traders Pelegrina">
-  <ai>betelgeuse_trader</ai>
-  <faction>Betelgian Traders</faction>
-  <pilots>
-   <pilot name_generator="betelgeuse_civilian" ship="Pelegrina"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Betelgian Traders Carvela">
-  <ai>betelgeuse_trader</ai>
-  <faction>Betelgian Traders</faction>
-  <pilots>
-   <pilot name_generator="betelgeuse_civilian" ship="Carvela"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Betelgian Traders Veniera">
-  <ai>betelgeuse_trader</ai>
-  <faction>Betelgian Traders</faction>
-  <pilots>
-   <pilot name_generator="betelgeuse_civilian" ship="Veniera"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Betelgian Traders Impresa">
-  <ai>betelgeuse_trader</ai>
-  <faction>Betelgian Traders</faction>
-  <pilots>
-   <pilot name_generator="betelgeuse_civilian" ship="Impresa"></pilot>
-  </pilots>
- </fleet>
- 
- <!-- Pirates -->
- <fleet name="Pirate Shark">
-  <ai>pirate</ai>
-  <faction>Pirates</faction>
-  <pilots>
-   <pilot name_generator="pirate" ship="Pirate Shark"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Pirate Admonisher">
-  <ai>pirate</ai>
-  <faction>Pirates</faction>
-  <pilots>
-   <pilot name_generator="pirate" ship="Pirate Admonisher"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Pirate Vendetta">
-  <ai>pirate</ai>
-  <faction>Pirates</faction>
-  <pilots>
-   <pilot name_generator="pirate" ship="Pirate Vendetta"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Pirate Rhino">
-  <ai>pirate</ai>
-  <faction>Pirates</faction>
-  <pilots>
-   <pilot name_generator="pirate" ship="Pirate Rhino"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Pirate Kestrel">
-  <ai>pirate</ai>
-  <faction>Pirates</faction>
-  <pilots>
-   <pilot name_generator="pirate" ship="Pirate Kestrel"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Pirate Delta">
-  <ai>pirate</ai>
-  <faction>Pirates</faction>
-  <pilots>
-   <pilot name_generator="pirate" ship="Pirate Delta"></pilot>
-  </pilots>
- </fleet>
- 
- 
- 
- <!-- Navies -->
- 
- <!-- Terra -->
- <fleet name="Imperial Meteor">
-  <ai>empire</ai>
-  <faction>Empire of Terra</faction>
-  <pilots>
-   <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Imperial Comet">
-  <ai>empire</ai>
-  <faction>Empire of Terra</faction>
-  <pilots>
-   <pilot name_generator="imperial_navy_comet" ship="Imperial Halley"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Imperial Continent">
-  <ai>empire</ai>
-  <faction>Empire of Terra</faction>
-  <pilots>
-   <pilot name_generator="imperial_navy_continent" ship="Imperial Asieneuve"></pilot>
-  </pilots>
- </fleet>
+  <!-- Independent Traders -->
+  <fleet name="Independent Traders Endeavour">
+    <ai>independent_trader</ai>
+    <faction>Independent Traders</faction>
+    <pilots>
+      <pilot name_generator="human_civilian" ship="Endeavour"/>
+    </pilots>
+  </fleet>
+  <fleet name="Independent Traders Scarab">
+    <ai>independent_trader</ai>
+    <faction>Independent Traders</faction>
+    <pilots>
+      <pilot name_generator="human_civilian" ship="Scarab"/>
+    </pilots>
+  </fleet>
+  <fleet name="Independent Traders Fish Bone">
+    <ai>independent_trader</ai>
+    <faction>Independent Traders</faction>
+    <pilots>
+      <pilot name_generator="human_civilian" ship="Fish Bone"/>
+    </pilots>
+  </fleet>
+  <fleet name="Independent Traders Voyager Cargo">
+    <ai>independent_trader</ai>
+    <faction>Independent Traders</faction>
+    <pilots>
+      <pilot name_generator="human_civilian" ship="Voyager Cargo"/>
+    </pilots>
+  </fleet>
+  <fleet name="Independent Traders Hauler">
+    <ai>independent_trader</ai>
+    <faction>Independent Traders</faction>
+    <pilots>
+      <pilot name_generator="human_civilian" ship="Hauler"/>
+    </pilots>
+  </fleet>
+  <fleet name="Independent Traders Whale">
+    <ai>independent_trader</ai>
+    <faction>Independent Traders</faction>
+    <pilots>
+      <pilot name_generator="human_civilian" ship="Whale"/>
+    </pilots>
+  </fleet>
+  <fleet name="Independent Traders Rhino">
+    <ai>independent_trader</ai>
+    <faction>Independent Traders</faction>
+    <pilots>
+      <pilot name_generator="human_civilian" ship="Rhino"/>
+    </pilots>
+  </fleet>
+  <!-- Independent Military -->
+  <fleet name="Independent Worlds Shark">
+    <ai>independent_worlds</ai>
+    <faction>Independent Worlds</faction>
+    <pilots>
+      <pilot name_generator="independent_militia" ship="Shark"/>
+    </pilots>
+  </fleet>
+  <fleet name="Independent Worlds Admonisher">
+    <ai>independent_worlds</ai>
+    <faction>Independent Worlds</faction>
+    <pilots>
+      <pilot name_generator="independent_militia" ship="Admonisher"/>
+    </pilots>
+  </fleet>
+  <fleet name="Independent Worlds Wasp">
+    <ai>independent_worlds</ai>
+    <faction>Independent Worlds</faction>
+    <pilots>
+      <pilot name_generator="independent_militia" ship="Wasp"/>
+    </pilots>
+  </fleet>
+  <fleet name="Independent Worlds Voyager Frigate">
+    <ai>independent_worlds</ai>
+    <faction>Independent Worlds</faction>
+    <pilots>
+      <pilot name_generator="independent_militia" ship="Voyager Frigate"/>
+    </pilots>
+  </fleet>
+  <fleet name="Independent Worlds Delta">
+    <ai>independent_worlds</ai>
+    <faction>Independent Worlds</faction>
+    <pilots>
+      <pilot name_generator="independent_militia" ship="Delta"/>
+    </pilots>
+  </fleet>
+  <fleet name="Independent Worlds Vendetta">
+    <ai>independent_worlds</ai>
+    <faction>Independent Worlds</faction>
+    <pilots>
+      <pilot name_generator="independent_militia" ship="Vendetta"/>
+    </pilots>
+  </fleet>
+  <fleet name="Independent Worlds Raptor">
+    <ai>independent_worlds</ai>
+    <faction>Independent Worlds</faction>
+    <pilots>
+      <pilot name_generator="independent_militia" ship="Raptor"/>
+    </pilots>
+  </fleet>
+  <!-- Natives -->
+  <fleet name="Natives Endeavour">
+    <ai>natives</ai>
+    <faction>Natives</faction>
+    <pilots>
+      <pilot name="Natives Endeavour" ship="Endeavour"/>
+    </pilots>
+  </fleet>
+  <fleet name="Natives Scarab">
+    <ai>natives</ai>
+    <faction>Natives</faction>
+    <pilots>
+      <pilot name="Natives Scarab" ship="Scarab"/>
+    </pilots>
+  </fleet>
+  <fleet name="Natives Wasp">
+    <ai>natives</ai>
+    <faction>Natives</faction>
+    <pilots>
+      <pilot name="Natives Wasp" ship="Wasp"/>
+    </pilots>
+  </fleet>
+  <!-- Imperial Traders -->
+  <fleet name="Imperial Traders Endeavour">
+    <ai>empire_traders</ai>
+    <faction>Imperial Traders</faction>
+    <pilots>
+      <pilot name_generator="human_civilian" ship="Endeavour"/>
+    </pilots>
+  </fleet>
+  <fleet name="Imperial Traders Schroedinger">
+    <ai>empire_traders</ai>
+    <faction>Imperial Traders</faction>
+    <pilots>
+      <pilot name_generator="human_civilian" ship="Schroedinger"/>
+    </pilots>
+  </fleet>
+  <fleet name="Imperial Traders Quicksilver">
+    <ai>empire_traders</ai>
+    <faction>Imperial Traders</faction>
+    <pilots>
+      <pilot name_generator="human_civilian" ship="Quicksilver"/>
+    </pilots>
+  </fleet>
+  <fleet name="Imperial Traders Fish Bone">
+    <ai>empire_traders</ai>
+    <faction>Imperial Traders</faction>
+    <pilots>
+      <pilot name_generator="human_civilian" ship="Fish Bone"/>
+    </pilots>
+  </fleet>
+  <fleet name="Imperial Traders Zheng He">
+    <ai>empire_traders</ai>
+    <faction>Imperial Traders</faction>
+    <pilots>
+      <pilot name_generator="human_civilian" ship="Zheng He"/>
+    </pilots>
+  </fleet>
+  <fleet name="Imperial Traders Sunflower">
+    <ai>empire_traders</ai>
+    <faction>Imperial Traders</faction>
+    <pilots>
+      <pilot name_generator="human_civilian" ship="Sunflower"/>
+    </pilots>
+  </fleet>
+  <fleet name="Imperial Traders Argosy">
+    <ai>empire_traders</ai>
+    <faction>Imperial Traders</faction>
+    <pilots>
+      <pilot name_generator="human_civilian" ship="Argosy"/>
+    </pilots>
+  </fleet>
+  <!-- Ardar Traders -->
+  <fleet name="Ardar Traders Endeavour">
+    <ai>roidhunate_trader</ai>
+    <faction>Ardar Traders</faction>
+    <pilots>
+      <pilot name_generator="ardar_civilian" ship="Endeavour"/>
+    </pilots>
+  </fleet>
+  <fleet name="Ardar Traders Fish Bone">
+    <ai>roidhunate_trader</ai>
+    <faction>Ardar Traders</faction>
+    <pilots>
+      <pilot name_generator="ardar_civilian" ship="Fish Bone"/>
+    </pilots>
+  </fleet>
+  <fleet name="Ardar Traders Meryoch">
+    <ai>roidhunate_trader</ai>
+    <faction>Ardar Traders</faction>
+    <pilots>
+      <pilot name_generator="ardar_civilian" ship="Meryoch"/>
+    </pilots>
+  </fleet>
+  <fleet name="Ardar Traders Rioloch">
+    <ai>roidhunate_trader</ai>
+    <faction>Ardar Traders</faction>
+    <pilots>
+      <pilot name_generator="ardar_civilian" ship="Rioloch"/>
+    </pilots>
+  </fleet>
+  <fleet name="Ardar Traders Geldoch">
+    <ai>roidhunate_trader</ai>
+    <faction>Ardar Traders</faction>
+    <pilots>
+      <pilot name_generator="ardar_civilian" ship="Geldoch"/>
+    </pilots>
+  </fleet>
+  <!-- Betelgian Traders -->
+  <fleet name="Betelgian Traders Pelegrina">
+    <ai>betelgeuse_trader</ai>
+    <faction>Betelgian Traders</faction>
+    <pilots>
+      <pilot name_generator="betelgeuse_civilian" ship="Pelegrina"/>
+    </pilots>
+  </fleet>
+  <fleet name="Betelgian Traders Carvela">
+    <ai>betelgeuse_trader</ai>
+    <faction>Betelgian Traders</faction>
+    <pilots>
+      <pilot name_generator="betelgeuse_civilian" ship="Carvela"/>
+    </pilots>
+  </fleet>
+  <fleet name="Betelgian Traders Veniera">
+    <ai>betelgeuse_trader</ai>
+    <faction>Betelgian Traders</faction>
+    <pilots>
+      <pilot name_generator="betelgeuse_civilian" ship="Veniera"/>
+    </pilots>
+  </fleet>
+  <fleet name="Betelgian Traders Impresa">
+    <ai>betelgeuse_trader</ai>
+    <faction>Betelgian Traders</faction>
+    <pilots>
+      <pilot name_generator="betelgeuse_civilian" ship="Impresa"/>
+    </pilots>
+  </fleet>
+  <!-- Pirates -->
+  <fleet name="Pirate Shark">
+    <ai>pirate</ai>
+    <faction>Pirates</faction>
+    <pilots>
+      <pilot name_generator="pirate" ship="Pirate Shark"/>
+    </pilots>
+  </fleet>
+  <fleet name="Pirate Admonisher">
+    <ai>pirate</ai>
+    <faction>Pirates</faction>
+    <pilots>
+      <pilot name_generator="pirate" ship="Pirate Admonisher"/>
+    </pilots>
+  </fleet>
+  <fleet name="Pirate Vendetta">
+    <ai>pirate</ai>
+    <faction>Pirates</faction>
+    <pilots>
+      <pilot name_generator="pirate" ship="Pirate Vendetta"/>
+    </pilots>
+  </fleet>
+  <fleet name="Pirate Rhino">
+    <ai>pirate</ai>
+    <faction>Pirates</faction>
+    <pilots>
+      <pilot name_generator="pirate" ship="Pirate Rhino"/>
+    </pilots>
+  </fleet>
+  <fleet name="Pirate Kestrel">
+    <ai>pirate</ai>
+    <faction>Pirates</faction>
+    <pilots>
+      <pilot name_generator="pirate" ship="Pirate Kestrel"/>
+    </pilots>
+  </fleet>
+  <fleet name="Pirate Delta">
+    <ai>pirate</ai>
+    <faction>Pirates</faction>
+    <pilots>
+      <pilot name_generator="pirate" ship="Pirate Delta"/>
+    </pilots>
+  </fleet>
+  <!-- Navies -->
+  <!-- Terra -->
+  <fleet name="Imperial Meteor">
+    <ai>empire</ai>
+    <faction>Empire of Terra</faction>
+    <pilots>
+      <pilot name_generator="imperial_navy_meteor" ship="Imperial Tunguska"/>
+    </pilots>
+  </fleet>
+  <fleet name="Imperial Comet">
+    <ai>empire</ai>
+    <faction>Empire of Terra</faction>
+    <pilots>
+      <pilot name_generator="imperial_navy_comet" ship="Imperial Halley"/>
+    </pilots>
+  </fleet>
+  <fleet name="Imperial Continent">
+    <ai>empire</ai>
+    <faction>Empire of Terra</faction>
+    <pilots>
+      <pilot name_generator="imperial_navy_continent" ship="Imperial Asieneuve"/>
+    </pilots>
+  </fleet>
   <fleet name="Imperial Planet">
-  <ai>empire</ai>
-  <faction>Empire of Terra</faction>
-  <pilots>
-   <pilot name_generator="imperial_navy_planet" ship="Imperial Jupiter"></pilot>
-  </pilots>
- </fleet>
-<fleet name="Imperial Nova">
-  <ai>empire</ai>
-  <faction>Empire of Terra</faction>
-  <pilots>
-   <pilot name_generator="imperial_navy_nova" ship="Imperial Valenderay"></pilot>
-  </pilots>
- </fleet>
- 
- <!-- Ardarshir -->
- <fleet name="Ardar Meteor">
-  <ai>roidhunate</ai>
-  <faction>Roidhunate of Ardarshir</faction>
-  <pilots>
-   <pilot name_generator="ardar_military" ship="Ardar Roeth"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Ardar Comet">
-  <ai>roidhunate</ai>
-  <faction>Roidhunate of Ardarshir</faction>
-  <pilots>
-   <pilot name_generator="ardar_military" ship="Ardar Vach Rueth"></pilot>
-  </pilots>
+    <ai>empire</ai>
+    <faction>Empire of Terra</faction>
+    <pilots>
+      <pilot name_generator="imperial_navy_planet" ship="Imperial Jupiter"/>
+    </pilots>
   </fleet>
- <fleet name="Ardar Continent">
-  <ai>roidhunate</ai>
-  <faction>Roidhunate of Ardarshir</faction>
-  <pilots>
-   <pilot name_generator="ardar_military" ship="Ardar Brythioch"></pilot>
-  </pilots>
- </fleet>
+  <fleet name="Imperial Nova">
+    <ai>empire</ai>
+    <faction>Empire of Terra</faction>
+    <pilots>
+      <pilot name_generator="imperial_navy_nova" ship="Imperial Valenderay"/>
+    </pilots>
+  </fleet>
+  <!-- Ardarshir -->
+  <fleet name="Ardar Meteor">
+    <ai>roidhunate</ai>
+    <faction>Roidhunate of Ardarshir</faction>
+    <pilots>
+      <pilot name_generator="ardar_military" ship="Ardar Roeth"/>
+    </pilots>
+  </fleet>
+  <fleet name="Ardar Comet">
+    <ai>roidhunate</ai>
+    <faction>Roidhunate of Ardarshir</faction>
+    <pilots>
+      <pilot name_generator="ardar_military" ship="Ardar Vach Rueth"/>
+    </pilots>
+  </fleet>
+  <fleet name="Ardar Continent">
+    <ai>roidhunate</ai>
+    <faction>Roidhunate of Ardarshir</faction>
+    <pilots>
+      <pilot name_generator="ardar_military" ship="Ardar Brythioch"/>
+    </pilots>
+  </fleet>
   <fleet name="Ardar Planet">
-  <ai>roidhunate</ai>
-  <faction>Roidhunate of Ardarshir</faction>
-  <pilots>
-   <pilot name_generator="ardar_military" ship="Ardar Mowyr"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Ardar Nova">
-  <ai>roidhunate</ai>
-  <faction>Roidhunate of Ardarshir</faction>
-  <pilots>
-   <pilot name_generator="ardar_nova" ship="Ardar Moloch"></pilot>
-  </pilots>
- </fleet>
- 
- 
- <!-- Betelgeuse -->
- <fleet name="Betelgian Meteor">
-  <ai>betelgeuse</ai>
-  <faction>Oligarchy of Betelgeuse</faction>
-  <pilots>
-   <pilot name_generator="betelgeuse_military" ship="Betelgian Alba"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Betelgian Comet">
-  <ai>betelgeuse</ai>
-  <faction>Oligarchy of Betelgeuse</faction>
-  <pilots>
-   <pilot name_generator="betelgeuse_military" ship="Betelgian Libera"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Betelgian Continent">
-  <ai>betelgeuse</ai>
-  <faction>Oligarchy of Betelgeuse</faction>
-  <pilots>
-   <pilot name_generator="betelgeuse_military" ship="Betelgian Cassandra"></pilot>
-  </pilots>
- </fleet>
-  <fleet name="Betelgian Planet">
-  <ai>betelgeuse</ai>
-  <faction>Oligarchy of Betelgeuse</faction>
-  <pilots>
-   <pilot name_generator="betelgeuse_military" ship="Betelgian Orsa"></pilot>
-  </pilots>
- </fleet>
-<fleet name="Betelgian Nova">
-  <ai>betelgeuse</ai>
-  <faction>Oligarchy of Betelgeuse</faction>
-  <pilots>
-   <pilot name_generator="betelgeuse_military" ship="Betelgian Stella"></pilot>
-  </pilots>
- </fleet>
-
-<!-- Barbarians -->
-   
- <fleet name="Barbarian Raider">
-  <ai>barbarians</ai>
-  <faction>Barbarians</faction>
-  <pilots>
-   <pilot name_generator="barbarians" ship="Barbarian Raider"></pilot>
-  </pilots>
- </fleet>
-  <fleet name="Barbarian Looter">
-  <ai>barbarians</ai>
-  <faction>Barbarians</faction>
-  <pilots>
-   <pilot name_generator="barbarians" ship="Barbarian Looter"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Barbarian Slaver">
-  <ai>barbarians</ai>
-  <faction>Barbarians</faction>
-  <pilots>
-   <pilot name_generator="barbarians" ship="Barbarian Slaver"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Barbarian Vendetta">
-  <ai>barbarians</ai>
-  <faction>Barbarians</faction>
-  <pilots>
-   <pilot name_generator="barbarians" ship="Vendetta"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Barbarian Raptor">
-  <ai>barbarians</ai>
-  <faction>Barbarians</faction>
-  <pilots>
-   <pilot name_generator="barbarians" ship="Raptor"></pilot>
-  </pilots>
- </fleet>
- 
- <!-- Kingdom of Ixum -->
- <fleet name="Royal Ixum Meteor">
-  <ai>ixum_kingdom</ai>
-  <faction>Kingdom of Ixum</faction>
-  <pilots>
-   <pilot name_generator="royal_ixum" ship="Royal Ixum Tunguska"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Royal Ixum Comet">
-  <ai>ixum_kingdom</ai>
-  <faction>Kingdom of Ixum</faction>
-  <pilots>
-   <pilot name_generator="royal_ixum" ship="Royal Ixum Halley"></pilot>
-  </pilots>
- </fleet>
- <fleet name="Royal Ixum Continent">
-  <ai>ixum_kingdom</ai>
-  <faction>Kingdom of Ixum</faction>
-  <pilots>
-   <pilot name_generator="royal_ixum" ship="Royal Ixum Asieneuve"></pilot>
-  </pilots>
- </fleet>
-  <fleet name="Royal Ixum Planet">
-  <ai>ixum_kingdom</ai>
-  <faction>Kingdom of Ixum</faction>
-  <pilots>
-   <pilot name_generator="royal_ixum" ship="Royal Ixum Jupiter"></pilot>
-  </pilots>
- </fleet>
- 
- <!-- Holy Flame of Ixum -->
- <fleet name="Holy Flame Meteor">
-  <ai>holyflame</ai>
-  <faction>Holy Flame of Ixum</faction>
-  <pilots>
-   <pilot name_generator="holy_flame" ship="Holy Flame Roeth"></pilot>
-  </pilots>
- </fleet>
-  <fleet name="Holy Flame Comet">
-  <ai>holyflame</ai>
-  <faction>Holy Flame of Ixum</faction>
-  <pilots>
-   <pilot name_generator="holy_flame" ship="Holy Flame Vach Rueth"></pilot>
-  </pilots>
+    <ai>roidhunate</ai>
+    <faction>Roidhunate of Ardarshir</faction>
+    <pilots>
+      <pilot name_generator="ardar_military" ship="Ardar Mowyr"/>
+    </pilots>
   </fleet>
-   <fleet name="Holy Flame Continent">
-  <ai>holyflame</ai>
-  <faction>Holy Flame of Ixum</faction>
-  <pilots>
-   <pilot name_generator="holy_flame" ship="Holy Flame Brythioch"></pilot>
-  </pilots>
- </fleet>
+  <fleet name="Ardar Nova">
+    <ai>roidhunate</ai>
+    <faction>Roidhunate of Ardarshir</faction>
+    <pilots>
+      <pilot name_generator="ardar_nova" ship="Ardar Moloch"/>
+    </pilots>
+  </fleet>
+  <!-- Betelgeuse -->
+  <fleet name="Betelgian Meteor">
+    <ai>betelgeuse</ai>
+    <faction>Oligarchy of Betelgeuse</faction>
+    <pilots>
+      <pilot name_generator="betelgeuse_military" ship="Betelgian Alba"/>
+    </pilots>
+  </fleet>
+  <fleet name="Betelgian Comet">
+    <ai>betelgeuse</ai>
+    <faction>Oligarchy of Betelgeuse</faction>
+    <pilots>
+      <pilot name_generator="betelgeuse_military" ship="Betelgian Libera"/>
+    </pilots>
+  </fleet>
+  <fleet name="Betelgian Continent">
+    <ai>betelgeuse</ai>
+    <faction>Oligarchy of Betelgeuse</faction>
+    <pilots>
+      <pilot name_generator="betelgeuse_military" ship="Betelgian Cassandra"/>
+    </pilots>
+  </fleet>
+  <fleet name="Betelgian Planet">
+    <ai>betelgeuse</ai>
+    <faction>Oligarchy of Betelgeuse</faction>
+    <pilots>
+      <pilot name_generator="betelgeuse_military" ship="Betelgian Orsa"/>
+    </pilots>
+  </fleet>
+  <fleet name="Betelgian Nova">
+    <ai>betelgeuse</ai>
+    <faction>Oligarchy of Betelgeuse</faction>
+    <pilots>
+      <pilot name_generator="betelgeuse_military" ship="Betelgian Stella"/>
+    </pilots>
+  </fleet>
+  <!-- Barbarians -->
+  <fleet name="Barbarian Raider">
+    <ai>barbarians</ai>
+    <faction>Barbarians</faction>
+    <pilots>
+      <pilot name_generator="barbarians" ship="Barbarian Raider"/>
+    </pilots>
+  </fleet>
+  <fleet name="Barbarian Looter">
+    <ai>barbarians</ai>
+    <faction>Barbarians</faction>
+    <pilots>
+      <pilot name_generator="barbarians" ship="Barbarian Looter"/>
+    </pilots>
+  </fleet>
+  <fleet name="Barbarian Slaver">
+    <ai>barbarians</ai>
+    <faction>Barbarians</faction>
+    <pilots>
+      <pilot name_generator="barbarians" ship="Barbarian Slaver"/>
+    </pilots>
+  </fleet>
+  <fleet name="Barbarian Vendetta">
+    <ai>barbarians</ai>
+    <faction>Barbarians</faction>
+    <pilots>
+      <pilot name_generator="barbarians" ship="Vendetta"/>
+    </pilots>
+  </fleet>
+  <fleet name="Barbarian Raptor">
+    <ai>barbarians</ai>
+    <faction>Barbarians</faction>
+    <pilots>
+      <pilot name_generator="barbarians" ship="Raptor"/>
+    </pilots>
+  </fleet>
+
+
+
+  <!-- Kingdom of Ixum -->
+  <fleet name="Royal Ixum Meteor">
+    <ai>ixum_kingdom</ai>
+    <faction>Kingdom of Ixum</faction>
+    <pilots>
+      <pilot name_generator="royal_ixum" ship="Royal Ixum Tunguska"/>
+    </pilots>
+  </fleet>
+  <fleet name="Royal Ixum Comet">
+    <ai>ixum_kingdom</ai>
+    <faction>Kingdom of Ixum</faction>
+    <pilots>
+      <pilot name_generator="royal_ixum" ship="Royal Ixum Halley"/>
+    </pilots>
+  </fleet>
+  <fleet name="Royal Ixum Continent">
+    <ai>ixum_kingdom</ai>
+    <faction>Kingdom of Ixum</faction>
+    <pilots>
+      <pilot name_generator="royal_ixum" ship="Royal Ixum Asieneuve"/>
+    </pilots>
+  </fleet>
+  <fleet name="Royal Ixum Planet">
+    <ai>ixum_kingdom</ai>
+    <faction>Kingdom of Ixum</faction>
+    <pilots>
+      <pilot name_generator="royal_ixum" ship="Royal Ixum Jupiter"/>
+    </pilots>
+  </fleet>
+  <!-- Holy Flame of Ixum -->
+  <fleet name="Holy Flame Meteor">
+    <ai>holyflame</ai>
+    <faction>Holy Flame of Ixum</faction>
+    <pilots>
+      <pilot name_generator="holy_flame" ship="Holy Flame Roeth"/>
+    </pilots>
+  </fleet>
+  <fleet name="Holy Flame Comet">
+    <ai>holyflame</ai>
+    <faction>Holy Flame of Ixum</faction>
+    <pilots>
+      <pilot name_generator="holy_flame" ship="Holy Flame Vach Rueth"/>
+    </pilots>
+  </fleet>
+  <fleet name="Holy Flame Continent">
+    <ai>holyflame</ai>
+    <faction>Holy Flame of Ixum</faction>
+    <pilots>
+      <pilot name_generator="holy_flame" ship="Holy Flame Brythioch"/>
+    </pilots>
+  </fleet>
   <fleet name="Holy Flame Planet">
-  <ai>holyflame</ai>
-  <faction>Holy Flame of Ixum</faction>
-  <pilots>
-   <pilot name_generator="holy_flame" ship="Holy Flame Mowyr"></pilot>
-  </pilots>
- </fleet>
- 
+    <ai>holyflame</ai>
+    <faction>Holy Flame of Ixum</faction>
+    <pilots>
+      <pilot name_generator="holy_flame" ship="Holy Flame Mowyr"/>
+    </pilots>
+  </fleet>
 </Fleets>

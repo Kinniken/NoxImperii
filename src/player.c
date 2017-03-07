@@ -687,6 +687,7 @@ void player_rmShip( char* shipname )
 			continue;
 
 		/* Free player ship and location. */
+		pilot_freeHooks(player_stack[i].p);
 		pilot_free(player_stack[i].p);
 		free(player_stack[i].loc);
 
@@ -757,6 +758,7 @@ void player_cleanup (void)
 
 	/* clean up the stack */
 	for (i=0; i<player_nstack; i++) {
+		pilot_freeHooks(player_stack[i].p);
 		pilot_free(player_stack[i].p);
 		free(player_stack[i].loc);
 	}

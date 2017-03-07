@@ -41,6 +41,10 @@ function create ()
    -- Get target system
    target_planet,target_system = get_independent_planet( system.cur() )
 
+   if (target_planet == nil) then
+      misn.finish(false)
+   end
+
    target_ship_pos = target_planet:pos()
 
    -- Get credits

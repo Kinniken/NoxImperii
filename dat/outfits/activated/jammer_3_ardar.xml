@@ -4,7 +4,7 @@
   <slot>utility</slot>
   <size>small</size>
   <mass>2</mass>
-  <price>40000</price>
+  <price>60000</price>
   <description>This Ardar-improved jammer is much more effective than publicly-available versions, though the Roidhunate's still limited expertise in top-end electronics limits its effectiveness compared to Terran devices.</description>
   <gfx_store>jammer0</gfx_store>
   <limit>jammer</limit>

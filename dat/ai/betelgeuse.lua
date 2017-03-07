@@ -6,19 +6,11 @@ mem.armour_run = 40
 mem.armour_return = 70
 mem.aggressive = true
 
+formation_default_type = "circle"
+formation_tightness = 50
+formation_sticky = 4
 
 function create ()
-
-   -- Not too many credits.
-   ----ai.setcredits( rnd.rnd(ai.pilot():ship():price()/300, ai.pilot():ship():price()/70) )
-
-   -- Lines to annoy the player. Shouldn't be too common or Gamma Polaris and such get inundated.
-   r = rnd.rnd(0,20)
-   if r == 0 then
-     ai.pilot():broadcast("Peaceful traders are always welcome in Betelgian space.")
-    elseif r == 1 then
-      ai.pilot():broadcast("Trade is the lifeblood of the Galaxy, and I protect it.")
-   end
 
    -- Get refuel chance
    p = player.pilot()
@@ -80,7 +72,7 @@ function taunt ( target, offense )
    else
       taunts = {
             "You dare attack me!",
-            "You are no match for the Empire!",
+            "You are no match for the Oligarchy!",
             "The Doge will have your head!",
             "You'll regret that!",
             "That was a fatal mistake!"
@@ -91,3 +83,17 @@ function taunt ( target, offense )
 end
 
 
+chatter_chance = 20
+chatter_trade_weight = 0
+chatter_random_weight = 10
+chatter_tag_weight = 10
+
+
+add_chatter("Peaceful traders are always welcome in Betelgian space.")
+add_chatter("Trade is the lifeblood of the Galaxy, and I protect it.")
+add_chatter("Enemies of Free Trade will face the wrath of the Oligarchy.")
+
+-- event chatter
+add_tag_chatter("event_betelgeuse_fleetleaving","We are assembling a great fleet on ${planet}, system ${system}. Soon they will explore more worlds in the name of the Doge!")
+add_tag_chatter("event_betelgeuse_fleetreturning","A great fleet has returned to ${planet}, system ${system}, showing the Galaxy the might of Betelgian ships.")
+add_tag_chatter("event_betelgeuse_noblemurder","Rest assured that the murder of His Lordship on ${planet} will be punished.")

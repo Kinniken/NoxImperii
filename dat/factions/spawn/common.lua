@@ -1,140 +1,246 @@
-include('dat/scripts/general_helper.lua')
+include "general_helper.lua"
 
+local MAX_DELAY = 60
+local DELAY = 200
+local MASS_PER_PRESENCE = 20
 
-scom = {}
+fleet_table = {}
 
+-- return 0 if not suitable, 1 is fine, something in-between if not so good
+local function test_range(range,value)
+  local validity=1
 
--- @brief Calculates when next spawn should occur
-scom.calcNextSpawn = function( cur, new, max )
-    if cur == 0 then return rnd.rnd(0, 10) end -- Kickstart spawning.
-    
-    local stddelay = 10 -- seconds
-    local maxdelay = 60 -- seconds. No fleet can ever take more than this to show up.
-    local stdfleetsize = 1/4 -- The fraction of "max" that gets the full standard delay. Fleets bigger than this portion of max will have longer delays, fleets smaller, shorter.
-    local delayweight = 1. -- A scalar for tweaking the delay differences. A bigger number means bigger differences.
-    local percent = (cur + new) / max
-    local penaltyweight = 1. -- Further delays fleets that go over the presence limit.
-    if percent > 1. then
-        penaltyweight = 1. + 10. * (percent - 1.)
+  --first value is minimum required
+  if range[1] and range[1]>value then
+    return 0
+  end
+  --second value is minimum wanted
+  if range[2] and range[2]>value then
+      validity = validity * value/range[2]
+  end
+  --third value is maximum wanted
+  if range[3] and range[3]<value then
+    validity = validity * range[3]/value
+  end
+  --fourth value is maximum required
+  if range[4] and range[4]<value then
+    return 0
+  end
+
+  return validity
+end
+
+local fleet_prototype = {
+	weightValiditySelf=function(self,values)
+
+    if (self.params.presence) then
+      local ret=test_range(self.params.presence,values.max)
+      
+      if ret == 0 then
+        --warn("Refused fleet "..self.id.." with presence of "..values.max)
+        return false
+      end
     end
-        
-    local fleetratio = (new/max)/stdfleetsize -- This turns into the base delay multiplier for the next fleet.
-    
-    return math.min(stddelay * fleetratio * delayweight * penaltyweight, maxdelay)
+
+		if (self.params.enemies) then
+      local ret=test_range(self.params.enemies,values.danger)
+      
+      if ret == 0 then
+        --warn("Refused fleet "..self.id.." with danger of "..values.danger)
+        return false
+      end
+    end
+
+    --warn("Fleet "..self.id.." ok")
+		return true
+	end,
+  dynamicWeight=function(self,values)
+    local weight = self.weight
+
+    if (self.params.presence) then
+      weight = weight * test_range(self.params.presence,values.max)
+    end
+
+    if (self.params.enemies) then      
+      weight = weight * test_range(self.params.enemies,values.danger)
+    end
+
+    return weight
+  end
+}
+
+fleet_prototype.__index = fleet_prototype
+
+function declare_fleet(fleetNames,weight,params)
+  local o={}
+  setmetatable(o, fleet_prototype)
+
+  if (type(fleetNames) == "string") then
+    o.fleetNames={fleetNames}
+  else
+    o.fleetNames=fleetNames
+  end  
+  o.weight=weight
+  if params then
+    o.params=params
+  else
+    o.params={}
+  end
+  fleet_table[#fleet_table+1] = o
+  o.id = #fleet_table
 end
 
 
---[[
-   @brief Creates the spawn table based on a weighted spawn function table.
-      @param weights Weighted spawn function table to use to generate the spawn table.
-      @return The matching spawn table.
---]]
-scom.createSpawnTable = function( weights )
-   local spawn_table = {}
-   local max = 0
+function chooseSpawn(used, max_presence, cur_faction)
 
-   -- Create spawn table
-   for k,v in pairs(weights) do
-      max = max + v
-      spawn_table[ #spawn_table+1 ] = { chance = max, func = k }
-   end
+  local danger = 0
+  local presences = system.cur():presences()
 
-   -- Sanity check
-   if max == 0 then
-      error("No weight specified")
-   end
+  -- danger is the total presence of enemie factions
+  for _,f in pairs(cur_faction:enemies()) do
+    if presences[f] then
+      danger = danger + presences[f]
+    end
+  end
 
-   -- Normalize
-   for k,v in ipairs(spawn_table) do
-      v["chance"] = v["chance"] / max
-   end
+	local fleet = gh.pickConditionalWeightedObject(fleet_table,{max=max_presence,danger=danger})
 
-   --error("Created spawn table with items: "..(#spawn_table))
+	if fleet == nil then
+		warn("No suitable fleet for "..cur_faction:name().."! Max presence: "..max_presence..", danger: "..danger)
+		return nil
+	end
 
-   -- Job done
-   return spawn_table
+	return fleet
 end
 
 
--- @brief Chooses what to spawn
-scom.choose = function( stable )
-   local r = rnd.rnd()
-   for k,v in ipairs( stable ) do
-      if r < v["chance"] then
-        if (v["func"]()==nil) then
-          error("Null spawn function from table")
-          gh.tprint(stable)
+-- @brief Creation hook.
+-- return is just delay before first spawn
+function create ( max_presence )
+  return math.random(0,math.min(MAX_DELAY,DELAY/max_presence))
+end
+
+
+-- @brief Spawning hook
+-- presence: presence used by pilots of that faction currently
+-- max_presence: maximum presence allowed
+-- cur_faction: faction we are generating for
+-- return:
+--  - delay before next spawn (calculated from the next fleet size)
+--  - table of pilots as a series of { pilot = pilot, presence = presence }
+
+function spawn ( used, max_presence, cur_faction )
+
+	-- Over limit
+  if used > max_presence then
+     return 5--retry in 5 seconds
+  end
+
+  local fleet=chooseSpawn(used,max_presence,cur_faction)
+
+  if (fleet == nil) then
+  	return 10000--retry in a long time, probably won't work ever
+  end
+
+  origin = spawn_findOrigin(cur_faction)
+
+  if not origin then
+    warn("Could find no valid origin for faction "..cur_faction:name().." in system "..system.cur():name())
+    return 10000
+  end
+
+  local ps={}
+
+  local fleetList
+
+  if (type(fleet.fleetNames)=="function") then
+    fleetList = fleet.fleetNames()
+  else
+    fleetList = fleet.fleetNames
+  end
+
+  for _,f in ipairs(fleetList) do
+    local addedPilots=pilot.add( f, nil, origin )
+
+    for _,p in ipairs(addedPilots) do
+      ps[#ps+1] = p
+    end
+  end
+
+  local pilots={}
+
+	for i,p in ipairs(ps) do
+
+    if #ps > 1 then
+      local mem = p:memory()
+      if i == 1 then        
+        --warn(p:name().." is fleet leader.")
+        mem.is_fleet_leader = true
+        if fleet.params.formation then
+          mem.fleet_formation = fleet.params.formation
         end
-
-         return v["func"]()
-      end
-   end
-   error("No spawn function found")
-end
-
-
--- @brief Actually spawns the pilots
-scom.spawn = function( pilots )
-   local spawned = {}
-
-   if pilots==nil then
-    return spawned
-   end
-
-   for k,v in ipairs(pilots) do
-      local p
-      if type(v["pilot"])=='function' then
-         p = v["pilot"]() -- Call function
-      elseif not v["pilot"][1] then
-         p = pilot.add( v["pilot"] )
       else
-         p = scom.spawnRaw( v["pilot"][1], v["pilot"][2], v["pilot"][3], v["pilot"][4], v["pilot"][5])
+        --warn(p:name().." is in the fleet of "..ps[1]:name())
+        mem.fleet_leader_id = ps[1]:id()
       end
-      if #p == 0 then
-         error("No pilots added")
+    end
+
+		local presence
+
+  	if (fleet.presence == nil) then
+  		--by default, calculated from ship mass
+  		presence = math.ceil(p:stats().mass/MASS_PER_PRESENCE)
+  	else
+  		--split between pilots if more than one ship
+  		presence = fleet.presence / #ps
+  	end
+
+  	pilots[#pilots+1] = {pilot=p, presence=presence}
+  end
+
+  return math.random(0,math.min(MAX_DELAY,DELAY/max_presence)), pilots
+end
+
+function spawn_findOrigin(cur_faction)
+
+  local dest = {}
+
+  for _,v in ipairs(system.cur():jumps()) do
+    if v:dest():presence(cur_faction) then
+      dest[#dest+1]={dest=v:dest(),weight=v:dest():presence(cur_faction)}
+    end
+  end
+
+  for _,v in ipairs(system.cur():planets()) do
+    if v:services()["inhabited"] and (v:faction() == nil or not v:faction():areEnemies(cur_faction)) then
+      if v:presence(cur_faction) then
+        dest[#dest+1]={dest=v,weight=10+v:presence(cur_faction)}
+      else
+        dest[#dest+1]={dest=v,weight=10}
       end
-      local presence = v["presence"] / #p
-      for _,vv in ipairs(p) do
-         spawned[ #spawned+1 ] = { pilot = vv, presence = presence }
-      end
-   end
-   return spawned
+    end
+  end
+
+  local choice=gh.pickWeightedObject(dest)
+
+  if choice then
+    return choice.dest
+  end
 end
 
+--@brief returns a list of ships of provided types with random quantities
+--@param list of types in the following format, as seperate arguments: {"Fish Bone",1,4},{"Zheng He",2,4}
+--First number for each type is the minimum quantity, second the max
+function spawn_variableFleet(...)
+  local ships = {}
 
--- @brief spawn a pilot with addRaw
-scom.spawnRaw = function( ship, name, ai, equip, faction)
-   local p = pilot.addRaw( ship, ai, nil, equip )
-   p[1]:rename(name)
-   p[1]:setFaction(faction)
-   return p
+  for _,v in ipairs(arg) do
+    local nb=math.random(v[2],v[3])
+
+    for i=1,nb do
+      ships[#ships+1] = v[1]
+    end
+  end
+
+  return ships
 end
-
-
--- @brief adds a pilot to the table
-scom.addPilot = function( pilots, name, presence )
-   pilots[ #pilots+1 ] = { pilot = name, presence = presence }
-   if pilots[ "__presence" ] then
-      pilots[ "__presence" ] = pilots[ "__presence" ] + presence
-   else
-      pilots[ "__presence" ] = presence
-   end
-end
-
-
--- @brief Gets the presence value of a group of pilots
-scom.presence = function( pilots )
-   if pilots[ "__presence" ] then
-      return pilots[ "__presence" ]
-   else
-      return 0
-   end
-end
-
-
--- @brief Default decrease function
-scom.decrease = function( cur, max, timer )
-   return timer
-end
-
-

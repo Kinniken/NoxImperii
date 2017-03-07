@@ -5,7 +5,7 @@
   <size>small</size>
   
   <mass>7</mass>
-  <price>25000</price>
+  <price>35000</price>
   <description>The mark 2 plasma blaster improves on its predecessor in many ways, maintaining good energy efficiency while augmenting range and fire-power.</description>
   <gfx_store>plasma2</gfx_store>
   <cpu>-5</cpu>

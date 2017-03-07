@@ -11,7 +11,7 @@ betelgeuse_specialities.specialityUniversity={
 		return (planet.lua.settlements.betelgeuse.technology>0.7)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.settlements.betelgeuse:addTag("hightechcenter")
+		planet.lua.settlements.betelgeuse:addTag("betelgian_hightechcenter")
 		planet.lua.settlements.betelgeuse.technology=planet.lua.settlements.betelgeuse.technology+0.5
 		planet.lua.settlements.betelgeuse:addGoodSupply(C.MODERN_INDUSTRIAL,300,1)
 	end,
@@ -26,7 +26,7 @@ betelgeuse_specialities.specialityNavalBase={
 		return (planet.lua.settlements.betelgeuse.military>0.7)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.settlements.betelgeuse:addTag("navalbase")
+		planet.lua.settlements.betelgeuse:addTag("betelgian_navalbase")
 		planet.lua.settlements.betelgeuse.military=planet.lua.settlements.betelgeuse.military+0.5
 		planet.lua.settlements.betelgeuse:addGoodDemand(C.ARMAMENT,200,1.2)
     planet.lua.settlements.betelgeuse:addGoodDemand(C.MODERN_ARMAMENT,100,1.5)
@@ -42,7 +42,7 @@ betelgeuse_specialities.specialityHeavyIndustry={
 		return (planet.lua.settlements.betelgeuse.industry>0.7)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.settlements.betelgeuse:addTag("industrialcenter")
+		planet.lua.settlements.betelgeuse:addTag("betelgian_industrialcenter")
 		planet.lua.settlements.betelgeuse.industry=planet.lua.settlements.betelgeuse.industry+0.5
 		planet.lua.settlements.betelgeuse:addGoodSupply(C.INDUSTRIAL,100,0.8)
     planet.lua.settlements.betelgeuse:addGoodSupply(C.CONSUMER_GOODS,100,0.8)
@@ -58,7 +58,7 @@ betelgeuse_specialities.specialityLuxuryResort={
 		return (planet.lua.humanFertility>0.9)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.settlements.betelgeuse:addTag("greatpalace")
+		planet.lua.settlements.betelgeuse:addTag("betelgian_greatpalace")
 		planet.lua.settlements.betelgeuse.services=planet.lua.settlements.betelgeuse.services+0.5
 		planet.lua.settlements.betelgeuse:addGoodDemand(C.LUXURY_GOODS,300,2)
 		planet.lua.settlements.betelgeuse:addGoodDemand(C.EXOTIC_FURS,100,2)
@@ -75,7 +75,7 @@ betelgeuse_specialities.specialityOre={
 		return (planet.lua.minerals>0.7)
 	end,
 	applyOnPlanet=function(planet)
-		planet.lua.settlements.betelgeuse:addTag("richores")
+		planet.lua.settlements.betelgeuse:addTag("betelgian_richores")
 		planet.lua.settlements.betelgeuse:addGoodSupply(C.ORE,500,0.9)
 		planet.lua.settlements.betelgeuse.industry=planet.lua.settlements.betelgeuse.industry*1.5
 	end,

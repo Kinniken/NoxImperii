@@ -516,25 +516,38 @@ end
 --uses the extra presence mechanism to add presence from other factions
 --than the asset's owners. This includes "good" ones like traders but also
 --pirates
-local function generateExtraPresences(planet,sectorStability)
+local function generatePresences(planet,sectorStability,planet,bestAgriculture,bestIndustry,bestServices,bestTechnology,bestMilitary,bestPop,bestStability)
 
 	local f=planet.c:faction()
 	local factionName=""
+
+	local x,y = planet.c:system():coords()
+
+	local zone=get_zone({x=x,y=y})
 
 	if (f and not (f==faction.get(G.NATIVES))) then
 		factionName=f:name()
 	end
 
+	if (bestTechnology<0.5) then
+  		range=1
+  	elseif (bestTechnology<1) then
+  		range=2
+  	else
+  		range=3
+  	end
 
-	if (planet.lua.settlements.humans) then
-		local settlement=planet.lua.settlements.humans
+	if (factionName==G.EMPIRE) then
 
-		local amount=100*(settlement.services+settlement.industry+settlement.agriculture/2)*sectorStability
+		presence=math.pow(bestPop/10,1/3.4)*bestMilitary*sectorStability
+  		planet.c:setFactionPresence(factionName,presence,range)
+
+		local amount=100*(bestServices+bestIndustry+bestAgriculture/2)*sectorStability
 		local range=1
-		if (settlement.technology>0.8) then
+		if (bestTechnology>0.8) then
 			range=2
 		end
-		if (settlement.technology>1.2) then
+		if (bestTechnology>1.2) then
 			range=3
 		end
 
@@ -542,15 +555,11 @@ local function generateExtraPresences(planet,sectorStability)
 			amount=5
 		end
 
-		if (factionName==G.EMPIRE) then
 			planet.c:setFactionExtraPresence(G.IMPERIAL_TRADERS,amount,range)
-			planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount/2,range)
-		else
-			planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount,range)
-		end
+		planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount/4,range)
 
-		if (settlement.stability<0.6) then
-			local amount=100*(1.2-settlement.stability*2)/sectorStability
+		if (bestStability<0.6 and not zone.special.no_pirate) then
+			local amount=50*(1.2-bestStability*2)/sectorStability
 			local range=2
 
 			if amount<5 then
@@ -561,15 +570,50 @@ local function generateExtraPresences(planet,sectorStability)
 		end
 	end
 
-	if (planet.lua.settlements.ardars) then
-		local settlement=planet.lua.settlements.ardars
+	if (factionName==G.INDEPENDENT_WORLDS) then
 
-		local amount=100*(settlement.services+settlement.industry+settlement.agriculture/2)*sectorStability
+		presence=math.pow(bestPop/10,1/3.4)*bestMilitary*sectorStability
+  		planet.c:setFactionPresence(factionName,presence,range)
+
+		local amount=100*(bestServices+bestIndustry+bestAgriculture/2)*sectorStability
 		local range=1
-		if (settlement.technology>0.8) then
+		if (bestTechnology>0.8) then
 			range=2
 		end
-		if (settlement.technology>1.2) then
+		if (bestTechnology>1.2) then
+			range=3
+		end
+
+		if amount<5 then
+			amount=5
+		end
+
+			planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount,range)
+
+
+		if (bestStability<0.6 and not zone.special.no_pirate) then
+			local amount=150*(1.2-bestStability*2)/sectorStability
+			local range=2
+
+			if amount<5 then
+				amount=5
+			end
+
+			planet.c:setFactionExtraPresence(G.PIRATES,amount,range)
+		end
+	end
+
+	if (factionName==G.ROIDHUNATE) then
+
+		presence=math.pow(bestPop/10,1/3.4)*bestMilitary*sectorStability
+  		planet.c:setFactionPresence(factionName,presence,range)
+
+		local amount=100*(bestServices+bestIndustry+bestAgriculture/2)*sectorStability
+		local range=1
+		if (bestTechnology>0.8) then
+			range=2
+		end
+		if (bestTechnology>1.2) then
 			range=3
 		end
 
@@ -579,8 +623,8 @@ local function generateExtraPresences(planet,sectorStability)
 
 		planet.c:setFactionExtraPresence(G.ARDAR_TRADERS,amount,range)
 
-		if (settlement.stability<0.5) then
-			local amount=30*(1-settlement.stability*2)/sectorStability
+		if (bestStability<0.5 and not zone.special.no_pirate) then
+			local amount=50*(1-bestStability*2)/sectorStability
 			local range=2
 
 			if amount<5 then
@@ -591,15 +635,17 @@ local function generateExtraPresences(planet,sectorStability)
 		end
 	end
 
-	if (planet.lua.settlements.betelgeuse) then
-		local settlement=planet.lua.settlements.betelgeuse
+	if (factionName==G.BETELGEUSE) then
 
-		local amount=100*(settlement.services+settlement.industry+settlement.agriculture/2)*sectorStability
+		presence=math.pow(bestPop/10,1/3.4)*bestMilitary*sectorStability/2
+  		planet.c:setFactionPresence(factionName,presence,range)
+
+		local amount=50*(bestServices+bestIndustry+bestAgriculture/2)*sectorStability
 		local range=1
-		if (settlement.technology>0.8) then
+		if (bestTechnology>0.8) then
 			range=2
 		end
-		if (settlement.technology>1.2) then
+		if (bestTechnology>1.2) then
 			range=3
 		end
 
@@ -607,10 +653,10 @@ local function generateExtraPresences(planet,sectorStability)
 			amount=5
 		end
 
-		planet.c:setFactionExtraPresence(G.BETELGIAN_TRADERS,amount,range)
+		planet.c:setFactionExtraPresence(G.BETELGIAN_TRADERS,amount*3,range)
 
-		if (settlement.stability<0.3) then
-			local amount=40*(1-settlement.stability*3)/sectorStability
+		if (bestStability<0.3 and not zone.special.no_pirate) then
+			local amount=100*(1-bestStability*3)/sectorStability
 			local range=2
 
 			if amount<5 then
@@ -622,15 +668,17 @@ local function generateExtraPresences(planet,sectorStability)
 	end
 
 
-	if (planet.lua.settlements.royalixumites) then
-		local settlement=planet.lua.settlements.royalixumites
+	if (factionName==G.ROYAL_IXUM) then
 
-		local amount=100*(settlement.services+settlement.industry+settlement.agriculture/2)*sectorStability
+		presence=math.pow(bestPop/10,1/3.4)*bestMilitary*sectorStability*3
+  		planet.c:setFactionPresence(factionName,presence,range)
+
+		local amount=100*(bestServices+bestIndustry+bestAgriculture/2)*sectorStability
 		local range=1
-		if (settlement.technology>0.8) then
+		if (bestTechnology>0.8) then
 			range=2
 		end
-		if (settlement.technology>1.2) then
+		if (bestTechnology>1.2) then
 			range=3
 		end
 
@@ -640,10 +688,9 @@ local function generateExtraPresences(planet,sectorStability)
 
 		planet.c:setFactionExtraPresence(G.IMPERIAL_TRADERS,amount,range)
 		planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount/2,range)
-		planet.c:setFactionExtraPresence(G.ARDAR_TRADERS,-1000,1)
 
-		if (settlement.stability<0.5) then
-			local amount=100*(1-settlement.stability*2)/sectorStability
+		if (bestStability<0.5 and not zone.special.no_pirate) then
+			local amount=100*(1-bestStability*2)/sectorStability
 			local range=2
 
 			if amount<5 then
@@ -654,15 +701,17 @@ local function generateExtraPresences(planet,sectorStability)
 		end
 	end
 
-	if (planet.lua.settlements.holyflame) then
-		local settlement=planet.lua.settlements.holyflame
+	if (factionName==G.HOLY_FLAME) then
 
-		local amount=100*(settlement.services+settlement.industry+settlement.agriculture/2)*sectorStability
+		presence=math.pow(bestPop/10,1/3.4)*bestMilitary*sectorStability*3
+  		planet.c:setFactionPresence(factionName,presence,range)
+
+		local amount=100*(bestServices+bestIndustry+bestAgriculture/2)*sectorStability
 		local range=1
-		if (settlement.technology>0.8) then
+		if (bestTechnology>0.8) then
 			range=2
 		end
-		if (settlement.technology>1.2) then
+		if (bestTechnology>1.2) then
 			range=3
 		end
 
@@ -673,8 +722,8 @@ local function generateExtraPresences(planet,sectorStability)
 		planet.c:setFactionExtraPresence(G.ARDAR_TRADERS,amount,range)
 		planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount/2,range)
 
-		if (settlement.stability<0.5) then
-			local amount=100*(1-settlement.stability*2)/sectorStability
+		if (bestStability<0.5 and not zone.special.no_pirate) then
+			local amount=100*(1-bestStability*2)/sectorStability
 			local range=2
 
 			if amount<5 then
@@ -685,6 +734,17 @@ local function generateExtraPresences(planet,sectorStability)
 		end
 	end
 
+
+  	if (factionName==G.BARBARIANS) then
+  		range=range*4
+  		presence=math.pow(bestPop/10,1/3.4)*bestMilitary/sectorStability
+
+  		planet.c:setFactionPresence(factionName,presence,range)
+  	end
+
+  	if (zone.special.no_pirate) then
+  		planet.c:setFactionExtraPresence(G.PIRATES,-10000,0)
+  	end
 
 end
 
@@ -740,17 +800,27 @@ end
 local function generateCivilizedPlanetServices(planet)
 
 	local bestPop=0
+	local bestAgriculture=0
 	local bestIndustry=0
+	local bestServices=0
 	local bestTechnology=0
 	local bestMilitary=0
 	local bestStability=0
+
+	local f=planet.c:faction()
 
 	for k,settlement in pairs(planet.lua.settlements) do
 		if (settlement.population>bestPop) then
 			bestPop=settlement.population
 		end
+		if (settlement.agriculture>bestAgriculture) then
+			bestAgriculture=settlement.agriculture
+		end
 		if (settlement.industry>bestIndustry) then
 			bestIndustry=settlement.industry
+		end
+		if (settlement.services>bestServices) then
+			bestServices=settlement.services
 		end
 		if (settlement.technology>bestTechnology) then
 			bestTechnology=settlement.technology
@@ -790,21 +860,31 @@ local function generateCivilizedPlanetServices(planet)
   	planet.c:removeService("c")
   end
 
-  if (bestIndustry>0.5) then
+  local threshholdOutfits = 0.5
+  local threshholdShipyard = 0.9
+
+  if (f) then
+  	--special barbarian thresholds, otherwise they never spawn those services
+  	if f==faction.get(G.BARBARIANS) then
+  		threshholdOutfits = 0.2
+  		threshholdShipyard = 0.3
+  	end
+  end
+
+
+  if (bestIndustry>threshholdOutfits) then
   	planet.c:addService("o")
   else
   	planet.c:removeService("o")
   end
 
-  if (bestIndustry>0.9) then
+  if (bestIndustry>threshholdShipyard) then
   	planet.c:addService("s")
   else
   	planet.c:removeService("s")
   end
 
   removeAllTechGroups(planet)
-
-  local f=planet.c:faction()
 
   if (f and not (f==faction.get(G.NATIVES))) then
   	factionName=f:name()
@@ -857,26 +937,9 @@ local function generateCivilizedPlanetServices(planet)
 	if bestStability<0.6 and bestTechnology>1 then
 		planet.c:addTechGroup("Pirate Military 5")
 	end
-
-  	if (bestTechnology<0.5) then
-  		range=1
-  	elseif (bestTechnology<1) then
-  		range=2
-  	else
-  		range=3
   	end
 
-  	if (factionName==G.BARBARIANS) then
-  		range=range*3
-  		presence=math.pow(bestPop/10,1/3.4)*bestTechnology/sectorStability
-  	else
-  		presence=math.pow(bestPop/10,1/3.4)*bestTechnology*sectorStability
-  	end
-
-  	planet.c:setFactionPresence(factionName,presence,range)
-  end
-
-  generateExtraPresences(planet,sectorStability)
+  generatePresences(planet,sectorStability,planet,bestAgriculture,bestIndustry,bestServices,bestTechnology,bestMilitary,bestPop,bestStability)
 
 
   if debugMode and planet.c:name()=="Luna" then

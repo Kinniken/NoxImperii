@@ -4,7 +4,7 @@
   <slot prop="turret">weapon</slot>
   <size>large</size>  
   <mass>45</mass>
-  <price>270000</price>
+  <price>700000</price>
   <description>Unlike their patron the Imperial Navy, the Royal Ixumite Navy prefers to use lasers as their primary weapons - though much improved from civilian models. Their characteristic double-gun design ensures a high rate of fire that compensate for their weaker punch.</description>
   <gfx_store>ripperturret</gfx_store>
   <cpu>-30</cpu>
@@ -27,9 +27,9 @@
   <track>2</track>
   <damage>
    <type>normal</type>
-   <penetrate>10</penetrate>
-   <physical>15</physical>
-   <disable>3</disable>
+   <penetrate>15</penetrate>
+   <physical>30</physical>
+   <disable>5</disable>
   </damage>
  </specific>
 </outfit>

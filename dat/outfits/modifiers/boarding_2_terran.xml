@@ -5,7 +5,7 @@
   <slot>utility</slot>
   <size>medium</size>
   <mass>1</mass>
-  <price>30000</price>
+  <price>45000</price>
   <description>The Terran Navy makes little use of droids, preferring to rely on live soldiers equipped with specially-designed side-arms such as these. Deadly if you have a large crew to arm!</description>
   <gfx_store>cargo_pod</gfx_store>
   <level>2</level>

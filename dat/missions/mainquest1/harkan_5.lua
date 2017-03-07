@@ -149,7 +149,7 @@ function land_target ()
 		misn.finish( true )
     elseif  planet.cur():faction()==faction.get(G.ROIDHUNATE) then
 
-		payment = 250000
+		payment = 500000
 
 		stringData.payment = payment
 

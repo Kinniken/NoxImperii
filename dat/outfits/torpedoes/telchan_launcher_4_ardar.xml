@@ -4,7 +4,7 @@
   <slot>weapon</slot>
   <size>medium</size>  
   <mass>15</mass>
-  <price>80000</price>
+  <price>110000</price>
   <description>With its reasonable mass for a torpedo tube launcher, this model enables even medium-sized vessels such as destroyers to equip the dangerous Telchan torpedoes.</description>
   <gfx_store>macelauncher</gfx_store>
   <cpu>-5</cpu>

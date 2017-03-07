@@ -30,6 +30,7 @@
 #include "log.h"
 #include "event.h"
 #include "mission.h"
+#include "ai.h"
 
 
 /* Hook methods. */
@@ -92,6 +93,8 @@ static unsigned int hook_generic( lua_State *L, const char* stack, double ms, in
  */
 int nlua_loadHook( nlua_env env )
 {
+	//WARN("Loading Hook methods in env");
+	//logprintf(stderr,"Loading Hook methods in env");
    nlua_register(env, "hook", hook_methods, 0);
    return 0;
 }
@@ -248,6 +251,7 @@ static unsigned int hook_generic( lua_State *L, const char* stack, double ms, in
    unsigned int h;
    Event_t *running_event;
    Mission *running_mission;
+   Pilot *running_pilot;
 
    /* Last parameter must be function to hook */
    func = luaL_checkstring(L,pos);
@@ -255,6 +259,7 @@ static unsigned int hook_generic( lua_State *L, const char* stack, double ms, in
    /* Get stuff. */
    running_event = event_getFromLua(L);
    running_mission = misn_getFromLua(L);
+   running_pilot = ai_getFromLua();
 
    h = 0;
    if (running_mission != NULL) {
@@ -282,6 +287,14 @@ static unsigned int hook_generic( lua_State *L, const char* stack, double ms, in
       else
          h = hook_addTimerEvt( running_event->id, func, ms );
    }
+   else if (running_pilot != NULL) {
+         if (stack != NULL)
+            h = hook_addAI( running_pilot->id, func, stack );
+         else if (date != 0)
+            h = hook_addDateAI( running_pilot->id, func, date );
+         else
+            h = hook_addTimerAI( running_pilot->id, func, ms );
+      }
    else {
       NLUA_ERROR(L,"Attempting to set a hook outside of a mission or event.");
       return 0;
@@ -697,6 +710,7 @@ static int hook_pilot( lua_State *L )
    int type;
    const char *hook_type;
    char buf[ PATH_MAX ];
+   Pilot* pilot;
 
    /* Parameters. */
    if (lua_ispilot(L,1))
@@ -732,8 +746,17 @@ static int hook_pilot( lua_State *L )
    h = hook_generic( L, buf, 0., 3, 0 );
    if (p==0)
       pilots_addGlobalHook( type, h );
-   else
-      pilot_addHook( pilot_get(p), type, h );
+   else {
+	   pilot = pilot_get(p);
+
+	   if (pilot == NULL) {
+		   /* if pilot == 1 (the player), fail silently : happens for AI hooks called from the menu screen */
+		   if (p > 1)
+			   NLUA_ERROR(L, "Attempting to add hook to a nonexisting pilot: '%d'", p);
+	   } else {
+		   pilot_addHook( pilot_get(p), type, h );
+	   }
+   }
 
    lua_pushnumber( L, h );
    return 1;

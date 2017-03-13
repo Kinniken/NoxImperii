@@ -10,7 +10,7 @@ function create_fleet()
 	local shipNames = ""
 
 	for _,v in ipairs(faction_ships) do
-		if v:memory().fleet_leader_id== ai.pilot():id() and v ~= ai.pilot() then
+		if v:leader()== ai.pilot() and v ~= ai.pilot() then
 			ships[#ships+1]=v
 			shipNames=shipNames.."'"..v:name().."' "
 		end
@@ -40,11 +40,9 @@ function create_fleet()
 		formation_sticky = 2--amount of cheat velocity matching; the higher, the more the formations stay accurate
 	end
 
-	warn("Creating fleet with "..#ships.." ships for "..ai.pilot():name()..", formation: "..fleet_formation..", ships: "..shipNames)
+	--warn("Creating fleet with "..#ships.." ships for "..ai.pilot():name()..", formation: "..fleet_formation..", ships: "..shipNames)
 
 	local fleet=Forma:new(ships, fleet_formation, 3000)
-
-	warn("Fleet created")
 
 	mem.fleet = fleet
 end

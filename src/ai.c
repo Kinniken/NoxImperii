@@ -424,7 +424,7 @@ void ai_setPilot( Pilot *p )
  */
 void ai_runStart( Pilot *pilot, const char *func )
 {
-	lua_pushlightuserdata( naevL, pilot );
+	//lua_pushlightuserdata( naevL, pilot );
 
    /* Set environment. */
    ai_setPilot(pilot);

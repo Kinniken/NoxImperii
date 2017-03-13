@@ -14,4 +14,4 @@ declare_fleet(function() return spawn_variableFleet({"Imperial Planet",1,1},{"Im
 
 declare_fleet(function() return spawn_variableFleet({"Imperial Nova",1,1},{"Imperial Continent",0,2},{"Imperial Meteor",2,6}) end,10,{presence={100,400,nil,nil}})
 
-declare_fleet(function() return spawn_variableFleet({"Imperial Nova",1,3},{"Imperial Planet",0,4},{"Imperial Continent",4,8},{"Imperial Meteor",4,16}) end,10000,{presence={500,1000,nil,nil}})
+declare_fleet(function() return spawn_variableFleet({"Imperial Nova",1,3},{"Imperial Planet",0,4},{"Imperial Continent",4,8},{"Imperial Meteor",4,16}) end,10,{presence={500,1000,nil,nil}})

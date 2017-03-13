@@ -1156,6 +1156,7 @@ nlua_env hook_env( unsigned int hook )
 {
    Mission *misn;
    Event_t *evt;
+   Pilot *pilot;
 
    Hook *h = hook_get(hook);
    if (h == NULL)
@@ -1173,7 +1174,9 @@ nlua_env hook_env( unsigned int hook )
             return evt->env;
          break;
       case HOOK_TYPE_AI:
-    	  return pilot_get(h->u.ai.parent)->ai->env;
+    	  pilot = pilot_get(h->u.ai.parent);
+    	  if (pilot != NULL)
+    		  return pilot->ai->env;
     	  break;
       default:
     	  WARN("No env for the requested hook type.");

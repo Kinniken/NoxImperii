@@ -188,55 +188,19 @@ function follow_accurate ()
    end
 end
 
-function formation_old ()
-   local target = ai.target()
-   local p = ai.pilot()
-
-   -- Will just float without a target to escort.
-   if not target:exists() then
-      ai.poptask()
-      return
-   end
-
-   local goal,formation_position,velocity_delta = ai.follow_formation(target, mem.radius, 
-         mem.angle, mem.Kp, mem.Kd)
-
-   local distance = vec2.mod(formation_position - p:pos())
-
-   local vel_delta_mod = vec2.mod(velocity_delta)
-
-   if ((distance < 60 and mem.in_formation) or (distance < 5 and vel_delta_mod < 10)) then
-      ai.faceSameDir(target)
-      ai.matchVelocity(target,5)
-
-      mem.in_formation = true
-      p:setSpeedLimit(target:stats().speed_max)
-   else
-      local mod = vec2.mod(goal - p:pos())
-
-      p:setSpeedLimit( 0 )
-
-      --  Always face the goal
-      local dir   = ai.face(goal, nil, false)
-
-      if dir < 10 and mod > mem.radius then
-         ai.accel()
-      end
-
-      mem.in_formation = false
-   end
-end
-
 function formation ()
 
    local p = ai.pilot()
-   local target = pilot.byId(mem.formation_leader_id)
 
-   if not target then
+   if not p:leader() or not p:leader():exists() then
       return-- lead ship must be gone, normally the formation should find a new one after a short while
    end
 
-   local goal,formation_position,velocity_delta = ai.follow_formation(target, mem.formation_static_radius,
+   if not mem.formation_static_radius then
+      return-- lead ship has not run the formation code, so unknown position
+   end
+
+   local goal,formation_position,velocity_delta = ai.follow_formation(p:leader(), mem.formation_static_radius,
       mem.formation_static_angle, mem.Kp, mem.Kd)
 
    local distance = vec2.mod(formation_position - p:pos())
@@ -244,11 +208,29 @@ function formation ()
    local vel_delta_mod = vec2.mod(velocity_delta)
 
    if ((distance < formation_tightness and mem.in_formation) or (distance < formation_tightness/5 and vel_delta_mod < formation_tightness/5)) then
-      ai.faceSameDir(target)
-      p:matchVelocity(target,5)
+      
+      local dir_delta = math.abs (p:dir() - p:leader():dir())
+
+      if dir_delta > 2 then
+         ai.faceSameDir(p:leader())
+      end
+
+      p:matchVelocity(p:leader(),formation_sticky)
 
       mem.in_formation = true
-      p:setSpeedLimit(target:stats().speed_max)
+      --p:setSpeedLimit(p:leader():stats().speed_max)
+
+      if mem.logging_on then
+
+         local _,_,velocity_delta2 = ai.follow_formation(p:leader(), mem.formation_static_radius,
+            mem.formation_static_angle, mem.Kp, mem.Kd)
+
+         local vel_delta_mod2 = vec2.mod(velocity_delta2)
+
+         warn(p:name().." in formation. Distance: "..distance..", delta_mod: "..vel_delta_mod..", delta2: "..vel_delta_mod2)
+
+      end
+
    else
       local mod = vec2.mod(goal - p:pos())
 
@@ -257,39 +239,22 @@ function formation ()
       --  Always face the goal
       local dir   = ai.face(goal, nil, false)
 
+      if mem.logging_on then
+         warn(p:name().." not in formation. Distance: "..distance..", delta_mod: "..vel_delta_mod..", dir: "..dir)
+      end
+
       if dir < 10 and mod > formation_tightness/5 then
          ai.accel()
+
+         if mem.logging_on then
+            warn(p:name().." accelerating.")
+         end
       end
 
       mem.in_formation = false
    end
 end
 
--- Default action for non-leader pilot in fleet
-function follow_fleet ()
-   local leader = ai.pilot():leader()
- 
-   if leader == nil or not leader:exists() then
-      ai.poptask()
-      return
-   end
-
-   local goal = leader
-   if mem.form_pos ~= nil then
-      local angle, radius, method = unpack(mem.form_pos)
-      goal = ai.follow_accurate(leader, radius, angle, mem.Kp, mem.Kd, method)
-   end
-
-   
-   local dir   = ai.face(goal)
-   local dist  = ai.dist(goal)
- 
-   -- Must approach
-   if dir < 10 and dist > 300 then
-      ai.accel()
- 
-   end
-end
 
 --[[
 -- Tries to runaway and jump asap.
@@ -407,7 +372,7 @@ function __landstop ()
       if not ai.land() then
          ai.popsubtask()
       else
-         ai.pilot():msg(ai.pilot():followers(), "land")
+         --ai.pilot():msg(ai.pilot():followers(), "land")
          ai.poptask() -- Done, pop task
       end
    end
@@ -558,7 +523,7 @@ function __hyp_brake ()
 end
 function __hyp_jump ()
    if ai.hyperspace() == nil then
-      ai.pilot():msg(ai.pilot():followers(), "hyperspace", ai.nearhyptarget())
+      --ai.pilot():msg(ai.pilot():followers(), "hyperspace", ai.nearhyptarget())
       ai.poptask()
    else
       ai.popsubtask()

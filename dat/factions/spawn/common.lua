@@ -181,7 +181,7 @@ function spawn ( used, max_presence, cur_faction )
         end
       else
         --warn(p:name().." is in the fleet of "..ps[1]:name())
-        mem.fleet_leader_id = ps[1]:id()
+        p:setLeader(ps[1])
       end
     end
 

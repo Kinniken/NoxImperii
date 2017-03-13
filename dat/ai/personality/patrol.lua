@@ -8,7 +8,7 @@ function idle ()
 
   if mem.is_fleet_leader == true and not mem.fleet then
     create_fleet()
-  elseif mem.formation_leader_id ~= nil then
+  elseif ai.pilot():leader() ~= nil then
     ai.pushtask("formation")
     return
   end

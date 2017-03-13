@@ -16,14 +16,6 @@ function create ()
    -- Not too many credits.
    --ai.setcredits( rnd.rnd(ai.pilot():ship():price()/300, ai.pilot():ship():price()/70) )
 
-   -- Lines to annoy the player. Shouldn't be too common or Gamma Polaris and such get inundated.
-   r = rnd.rnd(0,20)
-   if r == 0 then
-     ai.pilot():broadcast("You are in the Roidhunate. Disorder will not be tolerated!")
-    elseif r == 1 then
-      ai.pilot():broadcast("The Laws of the Roidhunate are backed by the Ardar Navy.")
-   end
-
    -- Get refuel chance
    p = player.pilot()
    if p:exists() then
@@ -86,3 +78,20 @@ function taunt ( target, offense )
 end
 
 
+chatter_chance = 20
+chatter_trade_weight = 0
+chatter_random_weight = 10
+chatter_tag_weight = 10
+
+add_chatter("You are in the Roidhunate. Disorder will not be tolerated!")
+add_chatter("The Laws of the Roidhunate are backed by the Ardar Navy.")
+add_chatter("The Ardar Race stands united behind our great Roidhun.")
+add_chatter("Order reigns in the Roidhunate.")
+
+
+-- event chatter
+add_tag_chatter("roidhunate_native_repression","Ardar citizens should rest assured that the natives of ${planet} in ${system} system will be severely punished for their resistance against the mighty Roidhunate.")
+add_tag_chatter("roidhunate_navyshipbuilding","Be informed that the shipbuilding effort on ${planet} is proceeding at full speed. Glory to the Roidhun!")
+add_tag_chatter("roidhunate_anticorruption","Any citizen in the possession of informations related to anti-Ardar activities on ${planet} is encouraged to immediately report it to the closest Navy Intelligence officer.")
+add_tag_chatter("roidhunate_minorityprotests","Law-abiding citizens on ${planet} will be protected from rioters by all means necessary.")
+add_tag_chatter("roidhunate_militaryparade","Patriotic Ardars and citizens of minor Races are expected to show their loyalty to the Roidhunate by witnessing the military parade on ${planet}, in person or on the appropriate Navy channels.")

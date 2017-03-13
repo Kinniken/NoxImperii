@@ -74,7 +74,6 @@ function Forma:new(fleet, formation, combat_dist, lead_ship)
    self.__index = self -- This means the object will look for its functions in "Forma" if it doesn't have them itself.
 
    -- Set up stuff and start control loop.
-   warn("Creating hooks")
    for _, p in ipairs(forma.fleet) do
       -- We pass the Forma object itself to the hooks.
       self.d1[p] = hook.pilot(p, "death", "dead", forma)
@@ -85,8 +84,6 @@ function Forma:new(fleet, formation, combat_dist, lead_ship)
    hook.pilot(player.pilot(),"jump","jumper",forma)
    hook.pilot(player.pilot(),"land","lander",forma)
 
-   warn("hooks done")
-
    forma:reorganize()
    forma:control() -- This is sadly the only time we can do this.
    return forma, self.fleader --return the fleader so control of the fleet can be handled in a script.
@@ -94,7 +91,6 @@ end
 
 -- Cleans up a forma object.
 function Forma:destroy()
-   warn("destroy start")
    if self.thook then
       hook.rm(self.thook)
    end
@@ -106,11 +102,9 @@ function Forma:destroy()
 
    -- Finally, remove the object itself.
    self = nil
-   warn("destroy end")
 end
 
 function Forma:disband()
-   warn("disband start")
    if self.thook then
       hook.rm(self.thook)
    end
@@ -123,13 +117,11 @@ function Forma:disband()
    end
    
    self = nil
-   warn("disband end")
 end
 
 -- Reorganizes a formation.
 -- Finds the slowest ship in a fleet and assigns it the leader role.
 function Forma:reorganize()
-   warn("entering reorganize")
    local minspeed = nil -- Holds the LOWEST speed we know.
    local pspeed = nil -- Holds the speed for the current pilot.
    local fleader = nil -- Holds the pilot with the lowest speed.
@@ -156,12 +148,10 @@ function Forma:reorganize()
    self.fleader = fleader
    self.fleetspeed = minspeed * 0.9
    self.incombat = false --Combat flag, used in the controlling function.
-   warn("done with reorganize")
 end
 
 -- Death function. Removes a pilot from a fleet and reorganizes the fleet if necessary.
 function Forma:dead(victim)
-   warn("dead start")
    for i, p in ipairs(self.fleet) do
       if p == victim then
          table.remove(self.fleet, i) -- This will automatically reorganize the table, so there won't be any entries for pilots that have been removed.
@@ -172,14 +162,12 @@ function Forma:dead(victim)
    --can't have a fleet with one ship.
    if #self.fleet == 1 then
       self:disband()
-      warn("dead end")
       return
    end
    
    -- Now, if our fleet has been completely wiped out, we need to clean up.
    if #self.fleet == 0 then
       self:destroy()
-      warn("dead end")
       return
    end
 
@@ -197,7 +185,6 @@ function Forma:dead(victim)
    if self.formation == "buffer" or self.formation == "imperial" then
       self:shipCount()
    end
-   warn("dead end")
 end
 
 function Forma:shipCount()
@@ -215,14 +202,13 @@ end
 -- Jump hook. Ensures the entire fleet jumps if the fleader jumps.
 -- Takes an ID that tells this function which formation the pilot belonged to.
 function Forma:jumper(jumper, jumpoint)
-   warn("jump start")
    if jumper == self.fleader then
       self:dead(jumper) -- Jumping out is the same as dying, for our purpose; we need to not run this before the if statement.
       self.fleader:setSpeedLimit(0)
       for _, p in ipairs(self.fleet) do
          --Make the whole fleet use the jump.
          p:control() -- control pilots or clear their orders.
-         p:hyperspace(jumpoint:dest())
+         p:hyperspace(jumpoint)
       end
 
       -- Stop the control loop, or it will override our hyperspace() order.
@@ -234,13 +220,11 @@ function Forma:jumper(jumper, jumpoint)
    else
       self:dead(jumper) --we need to not run this before the if statement.
    end
-   warn("jump end")
 end
 
 -- Land hook. Ensures the entire fleet lands if the fleader lands.
 -- Takes an ID that tells this function which formation the pilot belonged to.
 function Forma:lander(lander, planet)
-   warn("land start")
    if lander == self.fleader then
       self:dead(lander) -- Landing is the same as dying, for our purpose.
       self.fleader:setSpeedLimit(0)
@@ -259,34 +243,26 @@ function Forma:lander(lander, planet)
    else
       self:dead(lander)
    end
-   warn("land end")
 end
 
 -- Hooks. The hook functions are just wrappers for the Forma functions.
 -- We need these because hooks can't reference table elements as their callbacks.
 function dead(victim, killer, forma)
-   warn("Entering hook dead")
    forma:dead(victim)
-   warn("Hook over")
 end
 
 function jumper(jumper, jumpoint, forma)
-   warn("Entering hook jumper")
    forma:jumper(jumper, jumpoint)
-   warn("Hook over")
 end
 
 function lander(lander, planet, forma)
-   warn("Entering hook lander")
    forma:lander(lander, planet)
-   warn("Hook over")
 end
 
 --Used in formation creation, this creates vec2s for each ship to follow.
 -- Defined on a formation table.
 -- This is where formations will ultimately be defined.
 function Forma:assignCoords()
-   warn("entering assignCoords")
    --setup
 
    local posit = {} --position array. I'm using this twice, once for polar coordinates and once for absolute vec2s.
@@ -515,7 +491,6 @@ function Forma:assignCoords()
    --    y = position.radius * math.sin(position.angle + offset) --y coordinate assignment.
    --    posit[i] = self.fleader:pos() + vec2.new(x, y) -- You can add and subtract vec2s as you would expect to, no need to bend over backwards.
    -- end
-   warn("end assignCoords")
 
    return posit
 end
@@ -526,7 +501,6 @@ function toRepeat (forma)
 end
 
 function Forma:control()
-   warn("entering control")
    local inrange = false --Using false instead of nil for readability.
 
    -- A little unconventional, re-set the timer hook at the start of the function. This is because execution might not reach the end.
@@ -582,14 +556,9 @@ function Forma:control()
 
          --p:control() -- Clear orders.
 
-         warn("starting mem update")
-
          p:memory().formation_static_radius=self.posit[i].radius
          p:memory().formation_static_angle=self.posit[i].angle * 180 / math.pi --saved in degrees, the standard LUA-side
-         p:memory().formation_leader_id=self.fleader:id()
-
-         warn("ending mem update")
-         
+        
          --warn("Setting "..self.fleader:name().." as fleet leader for "..p:name())
          
          -- local cons = (posit[i]-p:pos())*10 + (self.fleader:vel()-p:vel())*20  --Computing the direction using a pd controller
@@ -619,12 +588,10 @@ function Forma:control()
       end
    end
 
-   warn("end control")
 end
 
 --Task management
 function Forma:manageTask()
-   warn("manageTask start")
    if self.task and self.task[1] then 
       self.fleader:control()
       if self.task[1] == "goto" then
@@ -651,7 +618,6 @@ function Forma:manageTask()
          error "task unknown"
       end
    end
-   warn("manageTask end")
 end
 
 function Forma:setTask(title, arg)

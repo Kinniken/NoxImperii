@@ -549,7 +549,7 @@ static Pilot* player_newShipMake( const char* name )
 
 		/* Create the player. */
 		id = pilot_create( player_ship, name, faction_get("Player"), "player",
-				dir, &vp, &vv, flags, -1 );
+            dir, &vp, &vv, flags );
 		cam_setTargetPilot( id, 0 );
 		new_pilot = pilot_get( id );
 	}
@@ -1067,9 +1067,10 @@ void player_think( Pilot* pplayer, const double dt )
 		return;
 	}
 
+   ai_think( pplayer, dt );
+
 	/* Under manual control is special. */
 	if (pilot_isFlag( pplayer, PILOT_MANUAL_CONTROL )) {
-		ai_think( pplayer, dt );
 		return;
 	}
 
@@ -1734,6 +1735,10 @@ int player_jump (void)
 		/* Stop possible shooting. */
 		pilot_shootStop( player.p, 0 );
 		pilot_shootStop( player.p, 1 );
+
+      /* Order escorts to jump; just for aesthetics (for now) */
+      escorts_jump( player.p );
+
 		return 1;
 	}
 	return 0;
@@ -2980,6 +2985,12 @@ int player_addEscorts (void)
 	player_clearEscorts();
 
 	for (i=0; i<player.p->nescorts; i++) {
+      if (!player.p->escorts[i].persist) {
+         escort_rmList(player.p, player.p->escorts[i].id);
+         i--;
+         continue;
+      }
+
 		a = RNGF() * 2 * M_PI;
 		vect_cset( &v, player.p->solid->pos.x + 50.*cos(a),
 				player.p->solid->pos.y + 50.*sin(a) );
@@ -3032,11 +3043,13 @@ static int player_saveEscorts( xmlTextWriterPtr writer )
 	int i;
 
 	for (i=0; i<player.p->nescorts; i++) {
+      if (player.p->escorts[i].persist) {
 		xmlw_startElem(writer, "escort");
 		xmlw_attr(writer,"type","bay"); /**< @todo other types. */
 		xmlw_str(writer, "%s", player.p->escorts[i].ship);
 		xmlw_endElem(writer); /* "escort" */
 	}
+   }
 
 	return 0;
 }
@@ -3483,14 +3496,14 @@ static Planet* player_parse( xmlNodePtr parent )
 		if (player_nstack == 0) {
 			WARN("Player has no other ships, giving starting ship.");
 			pilot_create( ship_get(start_ship()), "MIA",
-					faction_get("Player"), "player", 0., NULL, NULL, flags, -1 );
+               faction_get("Player"), "player", 0., NULL, NULL, flags );
 		}
 		else {
 
 			/* Just give player.p a random ship in the stack. */
 			old_ship = player_stack[player_nstack-1].p;
 			pilot_create( old_ship->ship, old_ship->name,
-					faction_get("Player"), "player", 0., NULL, NULL, flags, -1 );
+               faction_get("Player"), "player", 0., NULL, NULL, flags );
 			player_rmShip( old_ship->name );
 			WARN("Giving player ship '%s'.", player.p->name );
 		}
@@ -3689,7 +3702,7 @@ static int player_parseEscorts( xmlNodePtr parent )
 			ship = xml_get(node);
 
 			/* Add escort to the list. */
-			escort_addList( player.p, ship, type, 0 );
+         escort_addList( player.p, ship, type, 0, 1 );
 		}
 	} while (xml_nextNode(node));
 
@@ -3825,7 +3838,7 @@ static int player_parseShip( xmlNodePtr parent, int is_player, char *planet )
 
 	/* player is currently on this ship */
 	if (is_player != 0) {
-		pid = pilot_create( ship_parsed, name, faction_get("Player"), "player", 0., NULL, NULL, flags, -1 );
+      pid = pilot_create( ship_parsed, name, faction_get("Player"), "player", 0., NULL, NULL, flags );
 		ship = player.p;
 		cam_setTargetPilot( pid, 0 );
 	}

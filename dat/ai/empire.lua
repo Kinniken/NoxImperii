@@ -8,7 +8,7 @@ mem.aggressive = true
 
 formation_default_type = "imperial"
 formation_tightness = 20
-formation_sticky = 5
+formation_sticky = 10
 
 function create ()
 

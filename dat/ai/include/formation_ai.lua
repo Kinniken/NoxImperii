@@ -10,7 +10,7 @@ function create_fleet()
 	local shipNames = ""
 
 	for _,v in ipairs(faction_ships) do
-		if v:memoryCheck("fleet_leader_id") == ai.pilot():id() and v ~= ai.pilot() then
+		if v:leader()== ai.pilot() and v ~= ai.pilot() then
 			ships[#ships+1]=v
 			shipNames=shipNames.."'"..v:name().."' "
 		end

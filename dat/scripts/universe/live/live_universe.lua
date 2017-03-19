@@ -1,7 +1,6 @@
 include('dat/scripts/general_helper.lua')
 include('universe/objects/class_planets.lua')
 include('universe/live/live_desc.lua')
-include('universe/live/live_info.lua')
 include("universe/locations.lua")
 
 --[[
@@ -556,7 +555,7 @@ local function generatePresences(planet,sectorStability,planet,bestAgriculture,b
 			amount=5
 		end
 
-		planet.c:setFactionExtraPresence(G.IMPERIAL_TRADERS,amount,range)
+			planet.c:setFactionExtraPresence(G.IMPERIAL_TRADERS,amount,range)
 		planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount/4,range)
 
 		if (bestStability<0.6 and not zone.special.no_pirate) then
@@ -589,7 +588,7 @@ local function generatePresences(planet,sectorStability,planet,bestAgriculture,b
 			amount=5
 		end
 
-		planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount,range)
+			planet.c:setFactionExtraPresence(G.INDEPENDENT_TRADERS,amount,range)
 
 
 		if (bestStability<0.6 and not zone.special.no_pirate) then
@@ -937,8 +936,8 @@ local function generateCivilizedPlanetServices(planet)
 	end
 	if bestStability<0.6 and bestTechnology>1 then
 		planet.c:addTechGroup("Pirate Military 5")
-	end  	
-  end
+	end
+  	end
 
   generatePresences(planet,sectorStability,planet,bestAgriculture,bestIndustry,bestServices,bestTechnology,bestMilitary,bestPop,bestStability)
 

@@ -1,6 +1,6 @@
 include('universe/objects/class_planets.lua')
 include("universe/worldevents/worldevents_main.lua")
-include "eneral_helper.lua"
+include "general_helper.lua"
 
 function create()
 

@@ -172,13 +172,16 @@ function spawn ( used, max_presence, cur_faction )
 	for i,p in ipairs(ps) do
 
     if #ps > 1 then
-      if i == 1 then
-        p:memory("is_fleet_leader",true)
+      local mem = p:memory()
+      if i == 1 then        
+        --warn(p:name().." is fleet leader.")
+        mem.is_fleet_leader = true
         if fleet.params.formation then
-          p:memory("fleet_formation",fleet.params.formation)
+          mem.fleet_formation = fleet.params.formation
         end
       else
-        p:memory("fleet_leader_id",ps[1]:id())
+        --warn(p:name().." is in the fleet of "..ps[1]:name())
+        p:setLeader(ps[1])
       end
     end
 

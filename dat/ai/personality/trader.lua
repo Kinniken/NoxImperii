@@ -8,9 +8,9 @@ function idle ()
 
    if mem.is_fleet_leader == true and not mem.fleet then
       create_fleet(ai.pilot())
-  elseif mem.formation_leader_id ~= nil then
-    ai.pushtask("formation")
-    return
+  elseif ai.pilot():leader() ~= nil then
+      ai.pushtask("formation")
+      return
   end
 
 -- The pilot has no boss, he chooses his target

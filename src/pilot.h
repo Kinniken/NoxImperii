@@ -80,7 +80,6 @@ enum {
 enum {
    /* creation */
    PILOT_PLAYER,       /**< Pilot is a player. */
-   PILOT_ESCORT,       /**< Pilot is an escort. */
    PILOT_CARRIED,      /**< Pilot usually resides in a fighter bay. */
    PILOT_CREATED_AI,   /** Pilot has already created AI. */
    PILOT_EMPTY,        /**< Do not add pilot to stack. */
@@ -261,6 +260,8 @@ typedef struct Escort_s {
    char *ship;          /**< Type of the ship escort is flying. */
    EscortType_t type;   /**< Type of escort. */
    unsigned int id;     /**< ID of in-game pilot. */
+   /* TODO: something better than this */
+   int persist;         /**< True if escort should respawn on takeoff/landing */
 } Escort_t;
 
 /* types of loot */
@@ -301,7 +302,6 @@ typedef struct Pilot_ {
 
    /* Fleet/faction management. */
    int faction;      /**< Pilot's faction. */
-   int systemFleet;  /**< The system fleet the pilot belongs to. NOT IMPLEMENTED */
    int presence;     /**< Presence being used by the pilot. */
 
    /* Object characteristics */
@@ -454,7 +454,8 @@ typedef struct Pilot_ {
    double player_damage; /**< Accumulates damage done by player for hostileness.
                               In per one of max shield + armour. */
    double engine_glow; /**< Amount of engine glow to display. */
-
+	int messages;       /**< Queued messages (Lua ref). */
+	
    /* Loot data (from boarding). Player only for now. */
    Loot* loots;
    int nloots;
@@ -526,10 +527,10 @@ ntime_t pilot_hyperspaceDelay( Pilot *p );
  */
 void pilot_init( Pilot* dest, Ship* ship, const char* name, int faction, const char *ai,
       const double dir, const Vector2d* pos, const Vector2d* vel,
-      const PilotFlags flags, const int systemFleet );
+      const PilotFlags flags );
 unsigned int pilot_create( Ship* ship, const char* name, int faction, const char *ai,
       const double dir, const Vector2d* pos, const Vector2d* vel,
-      const PilotFlags flags, const int systemFleet );
+      const PilotFlags flags );
 Pilot* pilot_createEmpty( Ship* ship, const char* name,
       int faction, const char *ai, PilotFlags flags );
 Pilot* pilot_copy( Pilot* src );
@@ -547,6 +548,7 @@ void pilots_cleanAll (void);
 void pilot_free( Pilot* p );
 void pilot_freeHooks( Pilot* p);
 
+
 /*
  * Movement.
  */
@@ -562,7 +564,6 @@ void pilots_render( double dt );
 void pilots_renderOverlay( double dt );
 void pilot_render( Pilot* pilot, const double dt );
 void pilot_renderOverlay( Pilot* p, const double dt );
-void pilots_updateSystemFleet( const int deletedIndex );
 
 
 /*
@@ -590,6 +591,7 @@ char pilot_getFactionColourChar( const Pilot *p );
  * Misc details.
  */
 credits_t pilot_worth( const Pilot *p );
+void pilot_msg(Pilot *p, Pilot *reciever, const char *type, unsigned int index);
 
 void pilot_startLoot(Pilot *p, Pilot *target,Loot* loots,int nloot );
 void pilot_updateLoot(Pilot *p, const double dt);

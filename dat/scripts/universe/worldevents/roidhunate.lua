@@ -191,7 +191,7 @@ event.applyOnWorldCustom=function(self,planet,textData)
 	planet.lua.settlements.ardars.stability=planet.lua.settlements.ardars.stability*0.95
 	
 	local effectId=planet:addActiveEffect("ardars","Protests are paralysing the local economy, leading to rising consumer good prices.",
-		(time.get() + self.duration):tonumber() )
+		(time.get() + self.duration):tonumber(),"roidhunate_minorityprotests" )
 	planet.lua.settlements.ardars:reduceGoodDemand(C.LUXURY_GOODS,300,0.5,effectId)
 	
 end
@@ -218,7 +218,7 @@ event.duration=time.create( 0,2,0, 0, 0, 0 )
 event.applyOnWorldCustom=function(self,planet,textData)
 	
 	local effectId=planet:addActiveEffect("ardars","The celebration of the first settlement drives strong demand for food and luxury goods.",
-		(time.get() + self.duration):tonumber() )
+		(time.get() + self.duration):tonumber(),"roidhunate_fondationcelebration" )
 	planet.lua.settlements.ardars:addGoodDemand(C.LUXURY_GOODS,300,5,effectId)
 	planet.lua.settlements.ardars:addGoodDemand(C.FOOD,800,5,effectId)
 	

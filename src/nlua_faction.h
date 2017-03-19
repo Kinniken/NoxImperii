@@ -9,6 +9,7 @@
 
 #include <lua.h>
 
+#include "nlua.h"
 
 #define FACTION_METATABLE  "faction" /**< Faction metatable identifier. */
 
@@ -22,7 +23,7 @@ typedef int LuaFaction;
 /*
  * Load the space library.
  */
-int nlua_loadFaction( lua_State *L, int readonly );
+int nlua_loadFaction( nlua_env env );
 
 /*
  * Faction operations

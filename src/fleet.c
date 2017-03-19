@@ -34,7 +34,7 @@
 static Fleet* fleet_stack = NULL; /**< Fleet stack. */
 static int nfleets = 0; /**< Number of fleets. */
 
-static lua_State *fleet_name_lua = NULL; /** Fleet name generators */
+static nlua_env fleet_name_env = LUA_NOREF; /** Fleet name generators */
 
 /*
  * Prototypes.
@@ -72,14 +72,12 @@ Fleet* fleet_get( const char* name )
  *    @param vel Initial velocity.
  *    @param ai AI to use (NULL is default).
  *    @param flags Flags to create with.
- *    @param systemFleet System fleet the pilot belongs to.
  *    @return The ID of the pilot created.
  *
  * @sa pilot_create
  */
 unsigned int fleet_createPilot( Fleet *flt, FleetPilot *plt, double dir,
-      Vector2d *pos, Vector2d *vel, const char* ai, PilotFlags flags,
-      const int systemFleet )
+      Vector2d *pos, Vector2d *vel, const char* ai, PilotFlags flags )
 {
    unsigned int p;
    char* name;
@@ -99,9 +97,7 @@ unsigned int fleet_createPilot( Fleet *flt, FleetPilot *plt, double dir,
          dir,
          pos,
          vel,
-         flags,
-         systemFleet );
-
+         flags );
    return p;
 }
 
@@ -193,7 +189,6 @@ static int fleet_parse( Fleet *temp, const xmlNodePtr parent )
                   WARN("Pilot %s in Fleet %s has invalid ship", pilot->name, temp->name);
                if (c!=NULL)
                   free(c);
-
                continue;
             }
 
@@ -323,51 +318,44 @@ static void fleet_load_name_generators(void) {
 	uint32_t bufsize;
 	char *buf;
 
-	lua_State *L;
+	fleet_name_env = nlua_newEnv(1);
+	nlua_loadStandard(fleet_name_env);
 
-	fleet_name_lua = nlua_newState();
-	L           = fleet_name_lua;
-	nlua_loadStandard(L, 1);
 	buf         = ndata_read( FLEET_NAME_DATA_PATH, &bufsize );
-	if (luaL_dobuffer(fleet_name_lua, buf, bufsize, FLEET_NAME_DATA_PATH) != 0) {
+	if (nlua_dobufenv(fleet_name_env, buf, bufsize, FLEET_NAME_DATA_PATH) != 0) {
 		WARN( "Failed to load fleet name file: %s\n"
 				"%s\n"
 				"Most likely Lua file has improper syntax, please check",
-				FLEET_NAME_DATA_PATH, lua_tostring(L,-1));
+				FLEET_NAME_DATA_PATH, lua_tostring(naevL,-1));
 	}
 	free(buf);
 }
 
 static char* fleet_findName( char* nameGenerator )
 {
-	int ret,errf;
+	int ret;
 	char* name;
 	const char *err;
-	lua_State *L;
-
-	L = fleet_name_lua;
-
-	errf = 0;
 
 	/* Set up function. */
 
-	lua_getglobal( L, nameGenerator );
+	nlua_getenv(fleet_name_env,nameGenerator);
+	ret = nlua_pcall(fleet_name_env, 0, 1);
 
-	ret = lua_pcall(L, 0, 1, errf);
 	if (ret != 0) { /* error has occurred */
-		err = (lua_isstring(L,-1)) ? lua_tostring(L,-1) : NULL;
+		err = (lua_isstring(naevL,-1)) ? lua_tostring(naevL,-1) : NULL;
 		WARN("Fleet getName -> '%s' : %s",nameGenerator,
 				(err) ? err : "unknown error");
-		lua_pop(L, 1);
+		lua_pop(naevL, 1);
 	}
 
-	if (lua_isstring(L,-1))
-		name = strdup( lua_tostring(L,-1) );
+	if (lua_isstring(naevL,-1))
+		name = strdup( lua_tostring(naevL,-1) );
 	else {
 		WARN( "Fleet name generator: %s -> return parameter 1 is not a string!", nameGenerator );
 	}
 
-	lua_pop(L,1);
+	lua_pop(naevL,1);
 
 	return name;
 }

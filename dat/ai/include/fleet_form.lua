@@ -491,6 +491,7 @@ function Forma:assignCoords()
    --    y = position.radius * math.sin(position.angle + offset) --y coordinate assignment.
    --    posit[i] = self.fleader:pos() + vec2.new(x, y) -- You can add and subtract vec2s as you would expect to, no need to bend over backwards.
    -- end
+
    return posit
 end
 
@@ -555,10 +556,9 @@ function Forma:control()
 
          --p:control() -- Clear orders.
 
-         p:memory("formation_static_radius",self.posit[i].radius)
-         p:memory("formation_static_angle",self.posit[i].angle * 180 / math.pi) --saved in degrees, the standard LUA-side
-         p:memory("formation_leader_id",self.fleader:id())
-         
+         p:memory().formation_static_radius=self.posit[i].radius
+         p:memory().formation_static_angle=self.posit[i].angle * 180 / math.pi --saved in degrees, the standard LUA-side
+        
          --warn("Setting "..self.fleader:name().." as fleet leader for "..p:name())
          
          -- local cons = (posit[i]-p:pos())*10 + (self.fleader:vel()-p:vel())*20  --Computing the direction using a pd controller
@@ -587,6 +587,7 @@ function Forma:control()
          -- Logic for fleet leader goes here. For now, let's allow the fleader to act according to the regular AI.
       end
    end
+
 end
 
 --Task management

@@ -1,7 +1,6 @@
 include "dat/scripts/general_helper.lua"
 include "dat/scripts/jumpdist.lua"
 include "dat/scripts/nextjump.lua"
-include "dat/scripts/numstring.lua"
 include "dat/scripts/universe/objects/class_cargomissions.lua"
 include "dat/scripts/universe/objects/class_planets.lua"
 include "dat/scripts/universe/objects/class_settlements.lua"

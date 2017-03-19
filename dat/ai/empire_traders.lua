@@ -53,7 +53,7 @@ chatter_tag_weight = 10
 
 add_chatter("Every year trade is getting harder.")
 add_chatter("I used to trade with independent worlds, but it's gotten too dangerous.")
-add_chatter("I can't believe how much of my profits disapears in taxes!")
+add_chatter("I can't believe how much of my profits disappears in taxes!")
 add_chatter("Aristocrats and officers get all the respect, but it's us traders that keep the Empire afloat.")
 
 add_trade_chatter("cheap","I'm back from ${planet}, system ${system}, they basically give away ${commodity} there!")
@@ -74,7 +74,7 @@ add_tag_chatter("event_empire_bankcollapse","I've heard the Industrial Bank of $
 add_tag_chatter("event_empire_miningboom","I have a cousin that went into mining on ${planet}, system ${system}. With the recent boom he's earned more in a month than me in a year.")
 add_tag_chatter("event_empire_newgovernor","The governor of ${planet} in system ${system} was really horribly corrupt. I hope the new one is better.")
 add_tag_chatter("event_empire_pirateattacks","Avoid system ${system} for now! There are reports that ${planet} has been hit hard by pirate raids.")
-add_tag_chatter("event_empire_departingcolonists","My brother was settled on ${planet} in system ${system}, but he's leaving. It's not safe so far from the centre anymore.")
+add_tag_chatter("event_empire_departingcolonists","My brother was settled on ${planet} in system ${system}, but he's leaving. It's not safe so far from the centre any more.")
 add_tag_chatter("event_empire_plague","Have you heard of the plague on ${planet} in system ${system}? They are in urgent need of medical supplies. I'm not risking my life going there though.")
 add_tag_chatter("event_winefair","The wine fair of ${planet} in system ${system} has started! I'm finishing my deliveries and heading there.")
 add_tag_chatter("event_mela","The mela of ${planet} in system ${system} has just started. It's really an incredible festival.")
@@ -89,4 +89,4 @@ add_tag_chatter("hindu","Whenever I visit ${planet} in system ${system}, I leave
 add_tag_chatter("penal","You don't need to be a convict to settle on ${planet} in system ${system}, but it does help to blend in.")
 add_tag_chatter("amish","I'm originally from ${planet} in system ${system}. Everybody think there are only Amish there, but it's not true!")
 add_tag_chatter("serbian","I don't care much for their food, but the Serbs on ${planet} in system ${system} make one mean rakia.")
-add_tag_chatter("buddhist","Don't believe what people say, people on ${planet}, system ${system} may be Buddhists, but you get steacks and beer.")
+add_tag_chatter("buddhist","Don't believe what people say, people on ${planet}, system ${system} may be Buddhists, but you get steaks and beer.")

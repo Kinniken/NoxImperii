@@ -312,9 +312,17 @@ end
 --]]
 function land ()
 
+   if mem.logging_on then
+      warn(ai.pilot():name()..": entering land()")
+   end
+
    -- Only want to land once, prevents guys from never leaving.
    if mem.landed then
       ai.poptask()
+
+      if mem.logging_on then
+         warn(ai.pilot():name()..": landed before")
+      end
       return
    end
 
@@ -322,6 +330,10 @@ function land ()
    local target = ai.target()
    if target ~= nil then
       mem.land = target
+
+      if mem.logging_on then
+         warn(ai.pilot():name()..": targeting existing target")
+      end
    end
 
    -- Make sure mem.land is valid target
@@ -329,6 +341,10 @@ function land ()
       local landplanet = ai.landplanet()
       if landplanet ~= nil then
          mem.land = landplanet
+
+         if mem.logging_on then
+            warn(ai.pilot():name()..": new target "..landplanet:name())
+         end
 
       -- Bail out if no valid planet could be found.
       else
@@ -347,6 +363,10 @@ function __landgo ()
    local dist     = ai.dist( target )
    local bdist    = ai.minbrakedist()
 
+   if mem.logging_on then
+      warn(ai.pilot():name()..": landgo. Dist : "..dist..", bdist: "..bdist)
+   end
+
    -- 2 methods depending on mem.careful
    local dir
    if not mem.careful or dist < 3*bdist then
@@ -359,8 +379,17 @@ function __landgo ()
    if dir < 10 and dist > bdist then
       ai.accel()
 
+      if mem.logging_on then
+         warn(ai.pilot():name()..": accelerating.")
+      end
+
    -- Need to start braking
    elseif dist < bdist then
+
+      if mem.logging_on then
+         warn(ai.pilot():name()..": stopping.")
+      end
+
       ai.pushsubtask( "__landstop" )
    end
 

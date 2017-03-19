@@ -208,7 +208,7 @@ function Forma:jumper(jumper, jumpoint)
       for _, p in ipairs(self.fleet) do
          --Make the whole fleet use the jump.
          p:control() -- control pilots or clear their orders.
-         p:hyperspace(jumpoint)
+         p:hyperspace(jumpoint:dest())
       end
 
       -- Stop the control loop, or it will override our hyperspace() order.

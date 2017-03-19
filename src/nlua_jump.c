@@ -431,6 +431,8 @@ static int jumpL_setKnown( lua_State *L )
    int b, offset, changed;
    JumpPoint *jp;
 
+   NLUA_CHECKRW(L);
+
    jp = luaL_validjumpSystem(L, 1, &offset, NULL);
 
    /* True if boolean isn't supplied. */

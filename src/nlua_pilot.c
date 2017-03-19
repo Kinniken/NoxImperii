@@ -24,6 +24,7 @@
 #include "nlua_system.h"
 #include "nlua_planet.h"
 #include "nlua_outfit.h"
+#include "nlua_jump.h"
 #include "log.h"
 #include "rng.h"
 #include "pilot.h"
@@ -4056,7 +4057,7 @@ static int pilotL_hyperspace( lua_State *L )
    StarSystem *ss;
    int i;
    JumpPoint *jp;
-   double a, rad;
+   LuaJump lj;
    int shoot;
 
    NLUA_CHECKRW(L);
@@ -4093,17 +4094,11 @@ static int pilotL_hyperspace( lua_State *L )
          return 0;
       }
 
-      /* Set nav target. */
-      p->nav_hyperspace = i;
-
-      /* Copy vector. */
-      lua_pushvector(L, jp->pos);
+      /* Push jump. */
+      lj.srcid  = cur_system->id;
+      lj.destid = jp->targetid;
+      lua_pushjump(L, lj);
       t->dat = luaL_ref(L, LUA_REGISTRYINDEX);;
-
-      /* Introduce some error. */
-      a     = RNGF() * M_PI * 2.;
-      rad   = RNGF() * 0.5 * jp->radius;
-      vect_cadd( &jp->pos, rad*cos(a), rad*sin(a) );
    }
 
    return 0;
@@ -4127,6 +4122,7 @@ static int pilotL_land( lua_State *L )
    Planet *pnt;
    int i;
    double a, r;
+   Vector2d v;
 
    NLUA_CHECKRW(L);
 
@@ -4151,17 +4147,20 @@ static int pilotL_land( lua_State *L )
          return 0;
       }
 
-      /* Copy vector. */
       p->nav_planet = i;
-      lua_pushvector(L, pnt->pos);
-      t->dat = luaL_ref(L, LUA_REGISTRYINDEX);
       if (p->id == PLAYER_ID)
          gui_setNav();
+
+      /* Copy vector. */
+      v = pnt->pos;
 
       /* Introduce some error. */
       a = RNGF() * 2. * M_PI;
       r = RNGF() * pnt->radius;
-      vect_cadd( &pnt->pos, r*cos(a), r*sin(a) );
+      vect_cadd( &v, r*cos(a), r*sin(a) );
+
+      lua_pushvector(L, v);
+      t->dat = luaL_ref(L, LUA_REGISTRYINDEX);
    }
 
    return 0;

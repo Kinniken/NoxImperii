@@ -383,7 +383,6 @@ static int hook_runAI( Hook *hook, HookParam *param )
    pilot = pilot_get(hook->u.ai.parent);
 
    if (pilot == NULL) {
-	   WARN("Trying to run hook with parent not in pilot stack: deleting");
 	   hook->delete = 1; /* so we delete it */
 	   return -1;
    }
